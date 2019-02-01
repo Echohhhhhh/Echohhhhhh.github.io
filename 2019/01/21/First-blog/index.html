@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/01/21/First-blog/图片地址">
 <meta property="og:image" content="http://pic6.huitu.com/res/20130116/84481_20130116142820494200_1.jpg">
 <meta property="og:image" content="https://images0.cnblogs.com/blog/404392/201501/122257231047591.jpg">
-<meta property="og:updated_time" content="2019-02-01T13:23:55.751Z">
+<meta property="og:updated_time" content="2019-02-01T13:27:26.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习Markdown">
 <meta name="twitter:description" content="学习使用Markdown">
@@ -199,14 +199,15 @@
 <p> 这是引用的代码块形式  // 在&gt;后面有5个空格</p>
 </li>
 </ol>
-<p>代码例子：<br> protected void onCreate(Bundle savedInstanceState) {<br>        super.onCreate(savedInstanceState);<br>        setContentView(R.layout.activity_main);<br>    }<br>一级引用</p>
+<p>代码例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);  </span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>一级引用</p>
 <blockquote>
 <p>二级引用</p>
 <blockquote>
 <p>三级引用</p>
 <ol>
 <li>这是第一行列表项</li>
-<li>这是第二行列表项<h2 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h2>两个<em>或_代表加粗，一个 </em>或者_代表斜体，<del>代表删除<br><strong>加粗文本</strong> 或者<br><strong>加粗文本</strong><br><em>斜体文本</em> 或者<br>_斜体文本_<br>~~删除文本</del>  <h2 id="图像与链接"><a href="#图像与链接" class="headerlink" title="图像与链接"></a>图像与链接</h2>图片与链接的语法很像，区别在于一个!,二者格式：<br>图片：<img src="/2019/01/21/First-blog/" alt=""> <img src="/2019/01/21/First-blog/图片地址" alt="图像文本(可忽略)"><br><img src="http://pic6.huitu.com/res/20130116/84481_20130116142820494200_1.jpg" alt=""><br><img src="https://images0.cnblogs.com/blog/404392/201501/122257231047591.jpg" alt="Markdown"><br>在博客中插入本地图片<br>1.修改配置文件_config.yml 里的post_asset_folder:这个选项设置为true<br>2.在你的hexo目录下执行这样一句话npm install hexo-asset-image —save，这是下载安装一个可以上传本地图片的插件，来自dalao：dalao的git（未验证有什么用）<br>3.等待一小段时间后，再运行hexo n “xxxx”来生成md博文时，/source/_posts文件夹内除了xxxx.md文件还有一个同名的文件夹<br>4.最后在xxxx.md中想引入图片时，先把图片复制到xxxx这个文件夹中，然后只需要在xxxx.md中按照markdown的格式引入图片：<br>输入![你想输入的替代文字]和(xxxx/图片名.jpg)</li>
+<li>这是第二行列表项<h2 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h2>两个<em>或_代表加粗，一个 </em>或者_代表斜体，<del>代表删除<br><strong>加粗文本</strong> 或者<br><strong>加粗文本</strong><br><em>斜体文本</em> 或者<br>_斜体文本_<br>~~删除文本</del>  <h2 id="图像与链接"><a href="#图像与链接" class="headerlink" title="图像与链接"></a>图像与链接</h2>图片与链接的语法很像，区别在于一个!,二者格式：<br>图片：<img src="/2019/01/21/First-blog/" alt=""> <img src="/2019/01/21/First-blog/图片地址" alt="图像文本(可忽略)"><br><img src="http://pic6.huitu.com/res/20130116/84481_20130116142820494200_1.jpg" alt=""><br><img src="https://images0.cnblogs.com/blog/404392/201501/122257231047591.jpg" alt="Markdown"><br><strong>在博客中插入本地图片</strong><br>1.修改配置文件_config.yml 里的post_asset_folder:这个选项设置为true<br>2.在你的hexo目录下执行这样一句话npm install hexo-asset-image —save，这是下载安装一个可以上传本地图片的插件，来自dalao：dalao的git（未验证有什么用）<br>3.等待一小段时间后，再运行hexo n “xxxx”来生成md博文时，/source/_posts文件夹内除了xxxx.md文件还有一个同名的文件夹<br>4.最后在xxxx.md中想引入图片时，先把图片复制到xxxx这个文件夹中，然后只需要在xxxx.md中按照markdown的格式引入图片：<br>输入![你想输入的替代文字]和(xxxx/图片名.jpg)</li>
 </ol>
 </blockquote>
 </blockquote>
@@ -618,22 +619,6 @@ MathJax.Hub.Queue(function() {
     </div>
 
 </div>
-  </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
