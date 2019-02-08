@@ -188,10 +188,10 @@
 </li>
 </ul>
 <!-- /TOC -->
-<h1><span id="1-卷积">1. 卷积</span></h1><p>卷积操作需要有1一个数组和一个卷积核，假设卷积核的形状为p<em>q，代表卷积核的高和宽。二维卷积层的输入输出用4维表示，格式为(样本，通道，高，宽)<br>假设输入的形状为$n_h</em>n_w$,卷积核的形状为$k_h*k_w$，那么输出的形状为  </p>
+<h1><span id="1-卷积">1. 卷积</span></h1><p>卷积操作需要有1一个数组和一个卷积核，假设卷积核的形状为pxq，代表卷积核的高和宽。二维卷积层的输入输出用4维表示，格式为(样本，通道，高，宽)<br>假设输入的形状为$n_hxn_w$,卷积核的形状为$k_hxk_w$，那么输出的形状为  </p>
 <script type="math/tex; mode=display">(n_h-k_h+1)*(n_w-k_w+1)</script><p>卷积层的输出形状由输入形状和卷积核窗口形状决定，下面介绍卷积层的两个超参数，填充和步幅。  </p>
 <h2><span id="11-填充">1.1. 填充</span></h2><p>填充通常在输入的高和宽填充0元素，如果在高的<strong>两侧一共</strong>填充$p_h$行，在宽的<strong>两侧一共</strong>填充$p_w$列，那么输出形状为</p>
-<script type="math/tex; mode=display">(n_h-k_h+p_h+1)*(n_w-k_w+p_w+1)</script><h2><span id="12-步幅">1.2. 步幅</span></h2><p>步幅表示卷积核一次移动的个数，当高的步幅为$s_h$,宽的步幅为$s_w$，输出形状为\left \lfloor \frac{a}{b} \right \rfloor    </p>
+<script type="math/tex; mode=display">(n_h-k_h+p_h+1)*(n_w-k_w+p_w+1)</script><h2><span id="12-步幅">1.2. 步幅</span></h2><p>步幅表示卷积核一次移动的个数，当高的步幅为$s_h$,宽的步幅为$s_w$，输出形状为</p>
 <script type="math/tex; mode=display">\left\lfloor(n_h-k_h+p_h+s_h)/s_h\right\rfloor*\left\lfloor(n_w-k_w+p_w+s_w)/s_w\right\rfloor</script><h2><span id="13-小结">1.3. 小结</span></h2><ul>
 <li><strong>填充可以增加输出的高和宽，常用来使输出与输入具有相同的高和宽</strong></li>
 <li><strong>步幅可以减小输出的高和宽，使得输出的高和宽为输入的$1/n$</strong>  <h2><span id="14-通道channel">1.4. 通道channel</span></h2>通道(channel)：每个卷积层中卷积核的数量。<a href="https://blog.csdn.net/sscc_learning/article/details/79814146" target="_blank" rel="noopener">这篇文章</a>关于channel讲的很好<br>下面X(x_in,h,w)<br>K(k_out,k_in,h,w)<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X = nd.random.uniform(shape=(<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line">K = nd.random.uniform(shape=(<span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
@@ -519,6 +519,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">gluon</a>
               </li>
              
@@ -528,10 +532,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">卷积</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
             
             <div class="clearfix"></div>
