@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>gluon_卷积 | Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 卷积 1.1. 填充 1.2. 步幅 1.3. 小结 1.4. 通道channel 1.5. 池化层   2. CNN五大经典模型 2.1. LeNet 2.2. AlexNet 2.3. GoogleNet 2.4. VGG 2.5. NiN 批量归一化层">
+  <meta name="description" content="1. 卷积卷积操作需要有1一个数组和一个卷积核，假设卷积核的形状为pxq，代表卷积核的高和宽。二维卷积层的输入输出用4维表示，格式为(样本，通道，高，宽)  1. 卷积 1.1. 填充 1.2. 步幅 1.3. 小结 1.4. 通道channel 1.5. 池化层   2. CNN五大经典模型 2.1. LeNet 2.2. AlexNet 2.3. GoogleNet 2.4. VGG 2.5">
 <meta name="keywords" content="gluon,Deep Learning,卷积">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gluon_卷积">
 <meta property="og:url" content="http://yoursite.com/2019/02/05/gluon-卷积/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="1. 卷积 1.1. 填充 1.2. 步幅 1.3. 小结 1.4. 通道channel 1.5. 池化层   2. CNN五大经典模型 2.1. LeNet 2.2. AlexNet 2.3. GoogleNet 2.4. VGG 2.5. NiN 批量归一化层">
+<meta property="og:description" content="1. 卷积卷积操作需要有1一个数组和一个卷积核，假设卷积核的形状为pxq，代表卷积核的高和宽。二维卷积层的输入输出用4维表示，格式为(样本，通道，高，宽)  1. 卷积 1.1. 填充 1.2. 步幅 1.3. 小结 1.4. 通道channel 1.5. 池化层   2. CNN五大经典模型 2.1. LeNet 2.2. AlexNet 2.3. GoogleNet 2.4. VGG 2.5">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/02/05/gluon-卷积/LeNet.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/05/gluon-卷积/Inception.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/05/gluon-卷积/NiN.png">
-<meta property="og:updated_time" content="2019-02-08T16:01:13.498Z">
+<meta property="og:updated_time" content="2019-02-08T16:05:29.324Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gluon_卷积">
-<meta name="twitter:description" content="1. 卷积 1.1. 填充 1.2. 步幅 1.3. 小结 1.4. 通道channel 1.5. 池化层   2. CNN五大经典模型 2.1. LeNet 2.2. AlexNet 2.3. GoogleNet 2.4. VGG 2.5. NiN 批量归一化层">
+<meta name="twitter:description" content="1. 卷积卷积操作需要有1一个数组和一个卷积核，假设卷积核的形状为pxq，代表卷积核的高和宽。二维卷积层的输入输出用4维表示，格式为(样本，通道，高，宽)  1. 卷积 1.1. 填充 1.2. 步幅 1.3. 小结 1.4. 通道channel 1.5. 池化层   2. CNN五大经典模型 2.1. LeNet 2.2. AlexNet 2.3. GoogleNet 2.4. VGG 2.5">
 <meta name="twitter:image" content="http://yoursite.com/2019/02/05/gluon-卷积/LeNet.png">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
@@ -171,7 +171,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!-- TOC -->
+        <a id="more"></a>
+<h1><span id="1-卷积">1. 卷积</span></h1><p>卷积操作需要有1一个数组和一个卷积核，假设卷积核的形状为pxq，代表卷积核的高和宽。二维卷积层的输入输出用4维表示，格式为(样本，通道，高，宽)<br><!-- TOC --></p>
 <ul>
 <li><a href="#1-%E5%8D%B7%E7%A7%AF">1. 卷积</a><ul>
 <li><a href="#11-%E5%A1%AB%E5%85%85">1.1. 填充</a></li>
@@ -192,8 +193,7 @@
 </li>
 </ul>
 <!-- /TOC -->
- <a id="more"></a>
-<h1><span id="1-卷积">1. 卷积</span></h1><p>卷积操作需要有1一个数组和一个卷积核，假设卷积核的形状为pxq，代表卷积核的高和宽。二维卷积层的输入输出用4维表示，格式为(样本，通道，高，宽)<br>假设输入的形状为$n_h,n_w$,卷积核的形状为$k_hxk_w$，那么输出的形状为  </p>
+<p>假设输入的形状为$n_h,n_w$,卷积核的形状为$k_hxk_w$，那么输出的形状为  </p>
 <script type="math/tex; mode=display">(n_h-k_h+1)*(n_w-k_w+1)</script><p>卷积层的输出形状由输入形状和卷积核窗口形状决定，下面介绍卷积层的两个超参数，填充和步幅。  </p>
 <h2><span id="11-填充">1.1. 填充</span></h2><p>填充通常在输入的高和宽填充0元素，如果在高的<strong>两侧一共</strong>填充$p_h$行，在宽的<strong>两侧一共</strong>填充$p_w$列，那么输出形状为</p>
 <script type="math/tex; mode=display">(n_h-k_h+p_h+1)*(n_w-k_w+p_w+1)</script><h2><span id="12-步幅">1.2. 步幅</span></h2><p>步幅表示卷积核一次移动的个数，当高的步幅为$s_h$,宽的步幅为$s_w$，输出形状为</p>
@@ -482,6 +482,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">gluon</a>
               </li>
              
@@ -491,10 +495,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">卷积</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
             
             <div class="clearfix"></div>

@@ -167,7 +167,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <!-- TOC -->
+        <a id="more"></a>
+<h1><span id="1-卷积">1. 卷积</span></h1><p>卷积操作需要有1一个数组和一个卷积核，假设卷积核的形状为pxq，代表卷积核的高和宽。二维卷积层的输入输出用4维表示，格式为(样本，通道，高，宽)<br><!-- TOC --></p>
 <ul>
 <li><a href="#1-%E5%8D%B7%E7%A7%AF">1. 卷积</a><ul>
 <li><a href="#11-%E5%A1%AB%E5%85%85">1.1. 填充</a></li>
@@ -188,9 +189,29 @@
 </li>
 </ul>
 <!-- /TOC -->
-        
-          <a class="article-more-a" href="/2019/02/05/gluon-卷积/#more">more >></a>
-        
+<p>假设输入的形状为$n_h,n_w$,卷积核的形状为$k_hxk_w$，那么输出的形状为  </p>
+<script type="math/tex; mode=display">(n_h-k_h+1)*(n_w-k_w+1)</script><p>卷积层的输出形状由输入形状和卷积核窗口形状决定，下面介绍卷积层的两个超参数，填充和步幅。  </p>
+<h2><span id="11-填充">1.1. 填充</span></h2><p>填充通常在输入的高和宽填充0元素，如果在高的<strong>两侧一共</strong>填充$p_h$行，在宽的<strong>两侧一共</strong>填充$p_w$列，那么输出形状为</p>
+<script type="math/tex; mode=display">(n_h-k_h+p_h+1)*(n_w-k_w+p_w+1)</script><h2><span id="12-步幅">1.2. 步幅</span></h2><p>步幅表示卷积核一次移动的个数，当高的步幅为$s_h$,宽的步幅为$s_w$，输出形状为</p>
+<script type="math/tex; mode=display">\left\lfloor(n_h-k_h+p_h+s_h)/s_h\right\rfloor*\left\lfloor(n_w-k_w+p_w+s_w)/s_w\right\rfloor</script><h2><span id="13-小结">1.3. 小结</span></h2><ul>
+<li><strong>填充可以增加输出的高和宽，常用来使输出与输入具有相同的高和宽</strong></li>
+<li><strong>步幅可以减小输出的高和宽，使得输出的高和宽为输入的$1/n$</strong>  <h2><span id="14-通道channel">1.4. 通道channel</span></h2>通道(channel)：每个卷积层中卷积核的数量。<a href="https://blog.csdn.net/sscc_learning/article/details/79814146" target="_blank" rel="noopener">这篇文章</a>关于channel讲的很好<br>下面X(x_in,h,w)<br>K(k_out,k_in,h,w)<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X = nd.random.uniform(shape=(<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line">K = nd.random.uniform(shape=(<span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2><span id="15-池化层">1.5. 池化层</span></h2><p>pooling层(池化层)的输入一般是上一个卷积层，主要有以下2个作用：  </p>
+<ol>
+<li>保留主要的特征，同时减少下一层的参数和计算量，防止过拟合</li>
+<li>保持某种不变性，包括平移，旋转，常用的平均池化和最大池化<br><strong>池化层的输出通道数和输入通道数相同</strong>     <h1><span id="2-cnn五大经典模型">2. CNN五大经典模型</span></h1></li>
+<li>Lenet：1986年</li>
+<li>Alexnet：2012年</li>
+<li>GoogleNet：2014年</li>
+<li>VGG：2014年</li>
+<li>Deep Residual Learning：2015年<h2><span id="21-lenet">2.1. LeNet</span></h2>LeNet交替使用卷积层和最大池化层后接全连接层进行图像分类。网络结构如下所示<br><img src="/2019/02/05/gluon-卷积/LeNet.png" alt="LeNet"> <h2><span id="22-alexnet">2.2. AlexNet</span></h2>2012年，ImageNet比赛冠军的model—AlexNet，以第一作者alex命名。这个model的意义比后面的那些model都大很多。首先它证明了CNN在复杂模型下的有效性，然后GPU实现使得训练在可接受的时间范围内得到结果，让CNN和GPU都火了一把。<br>AlexNet包含8层变换，其中5层卷积和2层全连接层隐藏层，1个全连接输出层。<br>AlexNet将sigmoid激活函数改成了简单的ReLu激活函数。一方面，ReLu激活函数更简单，例如它没有sigmoid激活函数中的求幂运算。另一方面，ReLu激活函数在不同的参数初始化方法下使得模型更容易训练。这是由于当sigmoid激活函数输出极接近0或1时，这些区域的梯度为0，从而造成反向传播无法继续更新部分模型参数；而ReLu激活函数在正区间的梯度恒为1.因为，若模型参数初始化不当，sigmoid函数可能在正区间得到几乎为0的梯度，从而令模型无法得到有效训练。<h2><span id="23-googlenet">2.3. GoogleNet</span></h2>2014年的ImageNet图像s识别挑战赛的冠军。<br>GoogleNet中的基础卷积块叫做Inception块。<br><img src="/2019/02/05/gluon-卷积/Inception.png" alt="">  </li>
+</ol>
+<h2><span id="24-vgg">2.4. VGG</span></h2><p><strong>VGG卷积块</strong>的组成规律是：连续使用数个相同的填充为1，窗口形状为3x3的卷积层后接一个步幅为2，窗口形状为2x2的最大池化层。卷积层保持输入的高和宽不变，而池化层则对其减半。<br>VGG网络=VGG卷积块+n个全连接层<br>VGG卷积块=n个相同的卷积层+1个最大池化层    </p>
+<h2><span id="25-nin">2.5. NiN</span></h2><p>前面介绍的LeNet、AlexNet和VGG在设计上的共同之处是：先以卷积层构成的模块充分抽取空间特征，再以全连接层构成的模块来输出分类结果。其中AlexNet和VGG对LeNet的改进主要在于如何对这两个模块加宽（增加通道数）和加深。本节介绍网络中的网络（NiN），即串联多个由卷积层和全连接层构成的小网络来构建一个深层网络。<br><img src="/2019/02/05/gluon-卷积/NiN.png" alt=""><br><strong>全连接层可以由1x1卷积层充当</strong><br>NiN块是NiN中的基本块。它由一个卷积层加两个充当全连接层的1x1卷积层串联而成。其中第一个卷积层的超参数可以自行设置，而第二个和第三个卷积层的超参数一般是固定的。</p>
+<h2><span id="批量归一化层">批量归一化层</span></h2><p>标准化处理：处理后的任意一个特征在数据集中所有样本上的均值为0，标准差为1.标准化处理输入数据使各个特征的分布相近：这样往往更容易训练处有效的模型。<br>通常来说，数据标准化预处理对于浅层模型就足够有效了。随着模型训练的进行，当每层中参数更新时，靠近输出层的输出较难出现剧烈变化但对深层神经网络来说，即使输入数据已经做了标准化，训练中模型参数的更新依然很容易造成靠近输出层的输出剧烈变化。这种计算数值的不稳定性通常令我们难以训练处有效的深度模型。<br>标准归一化的提出正是为了应对深度模型训练的挑战。在模型训练时，批量归一化利用小批量上的均值和标准差，不断调整神经网络中间输出，从而使整个神经网络在各层的中间输出的数值更稳定。</p>
+
       
 
       
@@ -499,6 +520,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">gluon</a>
               </li>
              
@@ -508,10 +533,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">卷积</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
             
             <div class="clearfix"></div>
