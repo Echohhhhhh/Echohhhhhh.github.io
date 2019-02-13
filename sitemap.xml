@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/01/31/%E5%86%8D%E7%9C%8Bgluon%E6%96%B0%E6%94%B6%E8%8E%B7/</loc>
+    
+    <lastmod>2019-02-13T05:38:01.204Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/02/12/RNN/</loc>
     
     <lastmod>2019-02-12T17:19:39.690Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://yoursite.com/2019/02/05/gluon-%E5%8D%B7%E7%A7%AF/</loc>
     
     <lastmod>2019-02-10T12:53:21.761Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/01/31/%E5%86%8D%E7%9C%8Bgluon%E6%96%B0%E6%94%B6%E8%8E%B7/</loc>
-    
-    <lastmod>2019-02-10T12:53:18.603Z</lastmod>
     
   </url>
   
