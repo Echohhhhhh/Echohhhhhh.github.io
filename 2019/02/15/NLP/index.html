@@ -8,17 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>NLP | Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="远方到底有多远">
+  <meta name="description" content="1. 词嵌入&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;词向量就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫词嵌入。">
+<meta name="keywords" content="Deep Learning,NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NLP">
 <meta property="og:url" content="http://yoursite.com/2019/02/15/NLP/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="远方到底有多远">
+<meta property="og:description" content="1. 词嵌入&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;词向量就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫词嵌入。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-15T14:36:12.688Z">
+<meta property="og:updated_time" content="2019-02-17T06:22:40.928Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP">
-<meta name="twitter:description" content="远方到底有多远">
+<meta name="twitter:description" content="1. 词嵌入&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;词向量就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫词嵌入。">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
   
@@ -158,7 +159,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1><span id="1-词嵌入">1. 词嵌入</span></h1><p>&ensp;&ensp;&ensp;&ensp;<strong>词向量</strong>就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫<strong>词嵌入</strong>。<br> <a id="more"></a><br> <!-- TOC --></p>
+<ul>
+<li><a href="#1-%E8%AF%8D%E5%B5%8C%E5%85%A5">1. 词嵌入</a></li>
+</ul>
+<!-- /TOC -->       
+<p>&ensp;&ensp;&ensp;&ensp;一种最简单的词嵌入是one-hot向量，每个词使用非0即1的向量表示。这样构造虽然简单，但不是一个好的选择。因为one-hot词向量无法准确表达不同词之间的相似度，如我们常常使用的余弦相似度，因为任何两个不同词的one-hot向量的余弦相似度都为0，多个不同词之间的相似度很难通过one-hot向量准确表示出来。<br>&ensp;&ensp;&ensp;&ensp;word2vec工具的提出正是为了解决上面的问题。2013年Google团队发表了word2vec工具。它将每个词表示成一个<strong>定长的向量，并使得这些向量可以较好地表达不同词之间的相似和类比关系。</strong>word2vev包含了2个模型：跳字模型(skip-gram)和连续词袋模型(continuous bag of words CBOW)。以及2中高效训练的方法：负采样(negative sampling)和层序softmax(hierarchical softmax)<br>&ensp;&ensp;&ensp;&ensp;skip-gram是给定一个中心词，计算周围词出现的概率。训练skip-gram模型就是为了得到每个词的中心词向量和背景词向量，这就skip-gram的模型参数，在自然语言处理应用中，一般使用skip-gram的中心词向量作为词的表征向量。<br>&ensp;&ensp;&ensp;&ensp;连续词袋模型基于背景词来生成中心词。<br>&ensp;&ensp;&ensp;&ensp;但是skip-gram和CBOW的计算开销都比较大，下面介绍2个近似训练法：负采样和层序softmax.通过这2种方法可以减小训练开销</p>
+
       
 
       
@@ -187,6 +194,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -280,7 +302,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 词嵌入</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -418,10 +440,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">生活</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">gluon</a>
               </li>
              
@@ -431,6 +449,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">生活</a>
               </li>
              
               <li class="article-tag-list-item">

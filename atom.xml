@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-15T14:36:12.688Z</updated>
+  <updated>2019-02-17T06:22:40.928Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,12 +21,20 @@
     <link href="http://yoursite.com/2019/02/15/NLP/"/>
     <id>http://yoursite.com/2019/02/15/NLP/</id>
     <published>2019-02-15T14:36:12.000Z</published>
-    <updated>2019-02-15T14:36:12.688Z</updated>
+    <updated>2019-02-17T06:22:40.928Z</updated>
+    
+    <content type="html"><![CDATA[<h1><span id="1-词嵌入">1. 词嵌入</span></h1><p>&ensp;&ensp;&ensp;&ensp;<strong>词向量</strong>就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫<strong>词嵌入</strong>。<br> <a id="more"></a><br> <!-- TOC --></p><ul><li><a href="#1-%E8%AF%8D%E5%B5%8C%E5%85%A5">1. 词嵌入</a></li></ul><!-- /TOC -->       <p>&ensp;&ensp;&ensp;&ensp;一种最简单的词嵌入是one-hot向量，每个词使用非0即1的向量表示。这样构造虽然简单，但不是一个好的选择。因为one-hot词向量无法准确表达不同词之间的相似度，如我们常常使用的余弦相似度，因为任何两个不同词的one-hot向量的余弦相似度都为0，多个不同词之间的相似度很难通过one-hot向量准确表示出来。<br>&ensp;&ensp;&ensp;&ensp;word2vec工具的提出正是为了解决上面的问题。2013年Google团队发表了word2vec工具。它将每个词表示成一个<strong>定长的向量，并使得这些向量可以较好地表达不同词之间的相似和类比关系。</strong>word2vev包含了2个模型：跳字模型(skip-gram)和连续词袋模型(continuous bag of words CBOW)。以及2中高效训练的方法：负采样(negative sampling)和层序softmax(hierarchical softmax)<br>&ensp;&ensp;&ensp;&ensp;skip-gram是给定一个中心词，计算周围词出现的概率。训练skip-gram模型就是为了得到每个词的中心词向量和背景词向量，这就skip-gram的模型参数，在自然语言处理应用中，一般使用skip-gram的中心词向量作为词的表征向量。<br>&ensp;&ensp;&ensp;&ensp;连续词袋模型基于背景词来生成中心词。<br>&ensp;&ensp;&ensp;&ensp;但是skip-gram和CBOW的计算开销都比较大，下面介绍2个近似训练法：负采样和层序softmax.通过这2种方法可以减小训练开销</p>]]></content>
     
     <summary type="html">
     
+      &lt;h1 id=&quot;1-词嵌入&quot;&gt;&lt;a href=&quot;#1-词嵌入&quot; class=&quot;headerlink&quot; title=&quot;1. 词嵌入&quot;&gt;&lt;/a&gt;1. 词嵌入&lt;/h1&gt;&lt;p&gt;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&lt;strong&gt;词向量&lt;/strong&gt;就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫&lt;strong&gt;词嵌入&lt;/strong&gt;。&lt;br&gt;&lt;/p&gt;
+    
     </summary>
     
+    
+      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
+    
+      <category term="NLP" scheme="http://yoursite.com/tags/NLP/"/>
     
   </entry>
   
