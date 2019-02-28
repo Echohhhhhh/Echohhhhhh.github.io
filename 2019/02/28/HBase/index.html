@@ -6,25 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>学习Markdown | Echo&#39;s blog</title>
+  <title>HBase | Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="学习使用Markdown">
-<meta name="keywords" content="Markdown">
+  <meta name="description" content="简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在做项目的过程中用到了HBase，遇到了一些问题，当数据过大的时候，向HBase中会出现热点问题。">
+<meta name="keywords" content="HBase,预分区">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习Markdown">
-<meta property="og:url" content="http://yoursite.com/2019/01/21/First-blog/index.html">
+<meta property="og:title" content="HBase">
+<meta property="og:url" content="http://yoursite.com/2019/02/28/HBase/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="学习使用Markdown">
+<meta property="og:description" content="简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在做项目的过程中用到了HBase，遇到了一些问题，当数据过大的时候，向HBase中会出现热点问题。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/01/21/First-blog/">
-<meta property="og:image" content="http://yoursite.com/2019/01/21/First-blog/图片地址">
-<meta property="og:image" content="http://pic6.huitu.com/res/20130116/84481_20130116142820494200_1.jpg">
-<meta property="og:image" content="https://images0.cnblogs.com/blog/404392/201501/122257231047591.jpg">
-<meta property="og:updated_time" content="2019-02-01T13:30:53.674Z">
+<meta property="og:updated_time" content="2019-02-28T02:03:09.687Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习Markdown">
-<meta name="twitter:description" content="学习使用Markdown">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/21/First-blog/">
+<meta name="twitter:title" content="HBase">
+<meta name="twitter:description" content="简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在做项目的过程中用到了HBase，遇到了一些问题，当数据过大的时候，向HBase中会出现热点问题。">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
   
@@ -144,105 +139,32 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-			<article id="post-First-blog" class="article article-type-post " itemscope="" itemprop="blogPost">
+			<article id="post-HBase" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      学习Markdown
+      HBase
     </h1>
   
 
         
-        <a href="/2019/01/21/First-blog/" class="archive-article-date">
-  	<time datetime="2019-01-20T16:28:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-21</time>
+        <a href="/2019/02/28/HBase/" class="archive-article-date">
+  	<time datetime="2019-02-28T01:03:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="简介">简介</span></h1><p>Markdown是一种轻量级标记语言，它用简洁的语法代替排版，使我们专心码字。它的目的是实现易读易写，成为一种适用于网络的书写语言。同时，Markdown支持嵌入html标签。<br> <a id="more"></a><br>注意：Markdown使用#、+、*等符号来标记，符号后面必须跟上至少一个空格才有效！  </p>
-<h2><span id="标题">标题</span></h2><p>在标题前面加上1~6个#，依次表示一级标题，二级标题…六级标题</p>
-<blockquote>
-<h1><span id="一级标题">一级标题</span></h1><h2><span id="二级标题">二级标题</span></h2><h3><span id="三级标题">三级标题</span></h3><h6><span id="六级标题">六级标题</span></h6><h2><span id="列表">列表</span></h2><p>Markdown支持有序列表和无序列表<br>无序列表使用-、+、和*作为列表标记<br>使用-作为列表标记</p>
-<ul>
-<li>Red</li>
-<li>Green</li>
-<li>Blue<br>使用+作为列表标记</li>
-</ul>
-<ul>
-<li>Red</li>
-<li>Green</li>
-<li>Blue<br>使用*作为列表标记</li>
-</ul>
-<ul>
-<li>Red</li>
-<li>Green</li>
-<li>Blue<br>有序列表使用数组加英文句点.来表示</li>
-</ul>
+        <h1><span id="简介">简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;在做项目的过程中用到了HBase，遇到了一些问题，当数据过大的时候，向HBase中会出现热点问题。<br> <a id="more"></a> </p>
+<h1><span id="问题描述">问题描述</span></h1><p>&ensp;&ensp;&ensp;&ensp;HBase默认建表时有一个分区（region），这个region的rowkey是没有边界的，即没有startkey和endkey，<strong>hbase的中的数据是按照字典序排序的</strong>，在数据写入时，所有数据都会写入这个默认的region，随着数据量的不断增加，此region已经不能承受不断增长的数据量，当一个region过大（达到hbase.hregion.max.filesize属性中定义的阈值，默认10GB）时，会进行split，分成2个region。在此过程中，会产生两个问题：</p>
 <ol>
-<li>Red</li>
-<li>Green</li>
-<li><p>Blue  </p>
-<h2><span id="引用">引用</span></h2><p>引用用&gt;来表示，引用支持多级引用，标题，列表，代码块，分割线等常规语法。<br>常见的引用写法：<br>这是一段应用    //在&gt;后面有1个空格</p>
-<p> 这是引用的代码块形式  // 在&gt;后面有5个空格</p>
-</li>
+<li>数据往一个region上写,会有写热点问题。</li>
+<li>region split会消耗宝贵的集群I/O资源。<h1><span id="解决方案">解决方案</span></h1>&ensp;&ensp;&ensp;&ensp;基于此我们可以控制在建表的时候，创建多个空region，并确定每个region的起始和终止rowky，这样只要我们的rowkey设计能均匀的命中各个region，就不会存在写热点问题。自然split的几率也会大大降低。当然随着数据量的不断增长，该split的还是要进行split。像这样预先创建hbase表分区的方式，称之为预分区，下面给出一种预分区的实现方式:<br>&ensp;&ensp;&ensp;&ensp;解决这个问题，关键是要设计出可以让数据分布均匀的rowkey，与关系型数据库一样,rowkey是用来检索记录的主键。访问hbase table中的行，rowkey 可以是任意字符串(最大长度 是 64KB，实际应用中长度一般为 10-100bytes)，在hbase内部，rowkey保存为字节数组，存储时，数据按照rowkey的字典序排序存储。<br>预分区的时候首先需要指定按什么来划分rowkey，<br>&ensp;&ensp;&ensp;&ensp;设计的rowkey应该由regionNo+messageId组成。设计rowkey方式：随机数+messageId，如果想让最近的数据快速get到，可以将时间戳加上，原先我们设计的行键是数据产生的时间，格式为2018-01-21 12:23:06,没有设置预分区，这样数据就会出现热点问题。后来采用预分区的方式，按照秒进行预分区，splitKeys={“01|”,”02|”,…”59|”},在设计行键的时候在原先的时间上再添加当前的秒数，例如原先的行键是2018-01-21 12:23:06，现在的行键是062018-01-21 12:23:06，这样在存储的时候行键的前2个字符06，我这里的region是01|到59|开头的，因为hbase的数据是字典序排序的,则当前这条数据就会保存到05|~06|这个region里。rowkey组成：秒数+messageId，因为我的messageId都是字母+数字，“|”的ASCII值大于字母、数字。<br>&ensp;&ensp;&ensp;&ensp;需要注意的是，行键分配值按照rowkey的前几个字符进行匹配的，并不是按照数的大小。例如分区是 -10,10-20,20-30,30-40,40-50,50-60,60-70,70-80,80-90,90-，如果插入的数据rowkey是80 60 22这种两位数，肯定会落到某个分区，如果rowkey是100 333 9955 555544 66910 这种大于两位值，都会落在最后一个分区，还是只取rowkey的前两位与startkey/endkey对应？答案是：是按前两位匹配rowkey的。</li>
 </ol>
-<p>代码例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);  </span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>一级引用</p>
-<blockquote>
-<p>二级引用</p>
-<blockquote>
-<p>三级引用</p>
-<ol>
-<li>这是第一行列表项</li>
-<li>这是第二行列表项<h2><span id="强调">强调</span></h2>两个<em>或_代表加粗，一个 </em>或者_代表斜体，<del>代表删除<br><strong>加粗文本</strong> 或者<br><strong>加粗文本</strong><br><em>斜体文本</em> 或者<br>_斜体文本_<br>~~删除文本</del>  <h2><span id="图像与链接">图像与链接</span></h2>图片与链接的语法很像，区别在于一个!,二者格式：<br>图片：<img src="/2019/01/21/First-blog/" alt=""> <img src="/2019/01/21/First-blog/图片地址" alt="图像文本(可忽略)"><br><img src="http://pic6.huitu.com/res/20130116/84481_20130116142820494200_1.jpg" alt=""><br><img src="https://images0.cnblogs.com/blog/404392/201501/122257231047591.jpg" alt="Markdown"><br><strong>在博客中插入本地图片</strong><br>1.修改配置文件_config.yml 里的post_asset_folder:这个选项设置为true<br>2.在你的hexo目录下执行这样一句话npm install hexo-asset-image —save，这是下载安装一个可以上传本地图片的插件，来自dalao：dalao的git（未验证有什么用）<br>3.等待一小段时间后，再运行hexo n “xxxx”来生成md博文时，/source/_posts文件夹内除了xxxx.md文件还有一个同名的文件夹<br>4.最后在xxxx.md中想引入图片时，先把图片复制到xxxx这个文件夹中，然后只需要在xxxx.md中按照markdown的格式引入图片：<br>输入![你想输入的替代文字]和(xxxx/图片名.jpg)</li>
-</ol>
-</blockquote>
-</blockquote>
-</blockquote>
-<p> <strong>注意</strong></p>
-<ul>
-<li>导入的图片路径可以使用绝对路径也可以使用相对路径，建议使用相对路径。  </li>
-<li>通常的做法是Markdown文档的同级目录下建立一个pictures文件夹，里面放置所有所需的图片，如果图片多的话，你也可以在pictures文件夹里建立子文件夹归类。</li>
-<li>如果你的markdown在一个文件目录下，需要添加另一个目录下的图片，绝对路径是不可行的。需要 “迂回”<br>所谓 迂回，即需要先用../../命令返回上一文件目录，直至可以顺利找到要添加图片的目录。<br>举个栗子:<br>比如你的markdown在~/Document/mymarkdown/test下，需要添加~/Downloads/Pic/background目录下的sunlight.jpg<br>你需要做的是:先写![]，再加上(../../../Downloads/Pic/background/sunlight.jpg)</li>
-</ul>
-<blockquote>
-<p>链接：<a href=""></a>  <a href="链接地址">链接文本</a><br><a href="http://www.baidu.com" target="_blank" rel="noopener">百度</a> </p>
-<h2><span id="代码">代码</span></h2><p>代码分为行内代码和代码块</p>
-<ul>
-<li>行内代码使用<code>代码</code>标识，可嵌入文本中</li>
-<li>代码块使用4个空格，或者<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">这里是代码</span><br></pre></td></tr></table></figure></li>
-</ul>
-</blockquote>
-<ul>
-<li>代码语法高亮在<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">``` java</span><br><span class="line">protected void onCreate(Bundle savedInstanceState) &#123;  </span><br><span class="line">        super.onCreate(savedInstanceState);  </span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h1><span id="表格">表格</span></h1><p>表格对齐方式</p>
-<ul>
-<li>居左：:——</li>
-<li>居中：:——:或——-</li>
-<li>居右：——:<br>例子  <blockquote>
-<p>|标题1|标题2|标题3|<br>|:—-|:—-:|—-:|<br>|居左文本1|居中文本1|居右文本1|<br>|居左文本2|居中文本2|居右文本2|<br>|居左文本3|居中文本3|居右文本3|<br>表头1   | 表头2<br>————|———<br>内容1    | 内容2<br>内容3    | 内容3</p>
-</blockquote>
-</li>
-</ul>
-<h2><span id="分割线">分割线</span></h2><p>在一行中用三个以上的*、-、_、来建立一个分割线，行内不能有东西，也可以在行内插入空格</p>
-<blockquote>
-<h2><span id=""><em>*</em></span></h2><hr>
-<hr>
-<h2><span id="换行">换行</span></h2><p>在行尾添加两个空格加回车表示换行</p>
-<h1><span id="常用弥补markdown的html标签">常用弥补Markdown的html标签</span></h1><h2><span id="字体">字体</span></h2><p><font face="微软雅黑" color="red" size="3">字体及字体颜色和大小</font></p>
-<p><font color="#0000ff">字体颜色</font></p>
-<h2><span id="换行">换行</span></h2><p>使用html标签<code>&lt;br/&gt;</code><br>换行</p>
-<h2><span id="文本对其方式">文本对其方式</span></h2><p></p><p align="left">居左文本</p><p></p>
-<p></p><p align="center">居中文本</p><p></p>
-<p></p><p align="right">居右文本</p><p></p>
-<h2><span id="下划线">下划线</span></h2><p><u>下划线文本</u></p>
-</blockquote>
 
       
 
@@ -277,7 +199,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Markdown</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">预分区</a>
         		</li>
       		
 		</ul>
@@ -333,7 +259,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/21/First-blog/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/28/HBase/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -347,15 +273,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/01/31/再看gluon新收获/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          再看gluon新收获
-        
-      </div>
-    </a>
   
+    <a href="/2019/02/15/NLP/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">NLP</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -380,7 +302,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">标题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">一级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">二级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.1.</span> <span class="toc-text">三级标题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.1.0.0.1.</span> <span class="toc-text">六级标题</span></a></li></ol></li></ol></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.4.</span> <span class="toc-text">强调</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.5.</span> <span class="toc-text">图像与链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.6.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">表格</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">分割线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">*</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">换行</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">常用弥补Markdown的html标签</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.1.</span> <span class="toc-text">字体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.2.</span> <span class="toc-text">换行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.3.</span> <span class="toc-text">文本对其方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.4.</span> <span class="toc-text">下划线</span></a></li></ol></li>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">解决方案</span></a></li></ol>
                     </div>
                 </span>
             </div>

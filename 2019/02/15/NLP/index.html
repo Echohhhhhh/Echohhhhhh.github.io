@@ -9,17 +9,19 @@
   <title>NLP | Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1. 词嵌入&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;词向量就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫词嵌入。">
-<meta name="keywords" content="Deep Learning,NLP">
+<meta name="keywords" content="NLP,Deep Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NLP">
 <meta property="og:url" content="http://yoursite.com/2019/02/15/NLP/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="1. 词嵌入&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;词向量就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫词嵌入。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-17T06:22:40.928Z">
+<meta property="og:image" content="http://yoursite.com/2019/02/15/NLP/负采样.png">
+<meta property="og:updated_time" content="2019-02-27T13:06:51.159Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP">
 <meta name="twitter:description" content="1. 词嵌入&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;词向量就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫词嵌入。">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/15/NLP/负采样.png">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
   
@@ -159,12 +161,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="1-词嵌入">1. 词嵌入</span></h1><p>&ensp;&ensp;&ensp;&ensp;<strong>词向量</strong>就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫<strong>词嵌入</strong>。<br> <a id="more"></a><br> <!-- TOC --></p>
+        <h1><span id="1-词嵌入">1. 词嵌入</span></h1><p>&ensp;&ensp;&ensp;&ensp;<strong>词向量</strong>就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫<strong>词嵌入</strong>。<br> <a id="more"></a><br><!-- TOC --></p>
 <ul>
-<li><a href="#1-%E8%AF%8D%E5%B5%8C%E5%85%A5">1. 词嵌入</a></li>
+<li><a href="#1-%E8%AF%8D%E5%B5%8C%E5%85%A5">1. 词嵌入</a><ul>
+<li><a href="#%E8%B4%9F%E9%87%87%E6%A0%B7">负采样</a></li>
+<li><a href="#%E5%B1%82%E5%BA%8Fsoftmax">层序Softmax</a></li>
 </ul>
-<!-- /TOC -->       
-<p>&ensp;&ensp;&ensp;&ensp;一种最简单的词嵌入是one-hot向量，每个词使用非0即1的向量表示。这样构造虽然简单，但不是一个好的选择。因为one-hot词向量无法准确表达不同词之间的相似度，如我们常常使用的余弦相似度，因为任何两个不同词的one-hot向量的余弦相似度都为0，多个不同词之间的相似度很难通过one-hot向量准确表示出来。<br>&ensp;&ensp;&ensp;&ensp;word2vec工具的提出正是为了解决上面的问题。2013年Google团队发表了word2vec工具。它将每个词表示成一个<strong>定长的向量，并使得这些向量可以较好地表达不同词之间的相似和类比关系。</strong>word2vev包含了2个模型：跳字模型(skip-gram)和连续词袋模型(continuous bag of words CBOW)。以及2中高效训练的方法：负采样(negative sampling)和层序softmax(hierarchical softmax)<br>&ensp;&ensp;&ensp;&ensp;skip-gram是给定一个中心词，计算周围词出现的概率。训练skip-gram模型就是为了得到每个词的中心词向量和背景词向量，这就skip-gram的模型参数，在自然语言处理应用中，一般使用skip-gram的中心词向量作为词的表征向量。<br>&ensp;&ensp;&ensp;&ensp;连续词袋模型基于背景词来生成中心词。<br>&ensp;&ensp;&ensp;&ensp;但是skip-gram和CBOW的计算开销都比较大，下面介绍2个近似训练法：负采样和层序softmax.通过这2种方法可以减小训练开销</p>
+</li>
+</ul>
+<!-- /TOC -->
+<p>&ensp;&ensp;&ensp;&ensp;一种最简单的词嵌入是one-hot向量，每个词使用非0即1的向量表示。这样构造虽然简单，但不是一个好的选择。因为one-hot词向量无法准确表达不同词之间的相似度，如我们常常使用的余弦相似度，因为任何两个不同词的one-hot向量的余弦相似度都为0，多个不同词之间的相似度很难通过one-hot向量准确表示出来。<br>&ensp;&ensp;&ensp;&ensp;word2vec工具的提出正是为了解决上面的问题。2013年Google团队发表了word2vec工具。它将每个词表示成一个<strong>定长的向量，并使得这些向量可以较好地表达不同词之间的相似和类比关系。</strong>word2vev包含了2个模型：跳字模型(skip-gram)和连续词袋模型(continuous bag of words CBOW)。以及2中高效训练的方法：负采样(negative sampling)和层序softmax(hierarchical softmax)<br>&ensp;&ensp;&ensp;&ensp;skip-gram是给定一个中心词，计算周围词出现的概率。训练skip-gram模型就是为了得到每个词的中心词向量和背景词向量，这就skip-gram的模型参数，在自然语言处理应用中，一般使用skip-gram的中心词向量作为词的表征向量。<br>&ensp;&ensp;&ensp;&ensp;连续词袋模型基于背景词来生成中心词。<br>&ensp;&ensp;&ensp;&ensp;但是skip-gram和CBOW的计算开销都比较大，下面介绍2个近似训练法：负采样和层序softmax.通过这2种方法可以减小训练开销。    </p>
+<h2><span id="负采样">负采样</span></h2><p>&ensp;&ensp;&ensp;&ensp;在CBOW模型中，已知词$w$的上下文$Context(w)$,需要预测$w$，因此对于$Context(w)$，词$w$就是一个正样本，其他词就是一个负样本。从所有的负样本中选择一个负样本子集。训练的目标就是增大当上下文为$Context(w)$时，中心词$w$出现的概率，并且同时降低负样本的概率。<br>&ensp;&ensp;&ensp;&ensp;对于一个给定的词$w$，怎么生成这个词的负采样子集$NEG(W)$?<br>词典中的词出现的次数有高有低，对于那些高频词，被选为负样本的概率就比较大，对于那些低频词，被选中负样本的概率就小，本质上就是一个<strong>带权采样问题</strong>。对于一对中心词和背景词，随机采样K个负样本，论文中的建议K=5，负样本采样的概率$P(w)$设为$w$词频与总词频之比的$3/4$次方。<br><img src="/2019/02/15/NLP/负采样.png" alt="负采样"><br>对于skip-gram模型负采样，给定一个中心词预测周围的词。首先把语料分割成(context(w),w)样本，对于每一个中心词，找出这个中心词的背景词（周围词）,并且找出这个中心词的负样本（非背景词），一个中心词的负样本论文建议个数为5。对语料进行预处理形成以下数据集：一个样本包括一个中心词，它所对应的n个背景词，m个噪声词（负样本）。每个样本的背景词窗口大小可能不一样，即每个中心词的背景词和噪声词的个数可能不一样。</p>
+<h2><span id="层序softmax">层序Softmax</span></h2><p>使用哈夫曼二叉树来存储词典，叶子节点就是词，非叶子节点就是一些隐藏向量。</p>
 
       
 
@@ -199,11 +207,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
         		</li>
       		
 		</ul>
@@ -273,6 +281,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/02/28/HBase/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          HBase
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/02/12/RNN/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">RNN</div>
@@ -302,7 +319,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 词嵌入</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 词嵌入</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">负采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">层序Softmax</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -436,6 +453,22 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">预分区</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
@@ -445,14 +478,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
               </li>
              
               <li class="article-tag-list-item">
