@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在做项目的过程中用到了HBase，遇到了一些问题，当数据过大的时候，向HBase中会出现热点问题。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-28T02:08:21.092Z">
+<meta property="og:updated_time" content="2019-02-28T02:16:15.738Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HBase">
 <meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在做项目的过程中用到了HBase，遇到了一些问题，当数据过大的时候，向HBase中会出现热点问题。">
@@ -167,10 +167,10 @@
 </ul>
 <!-- /TOC -->
 <h1><span id="2-问题描述">2. 问题描述</span></h1><p>&ensp;&ensp;&ensp;&ensp;HBase默认建表时有一个分区（region），这个region的rowkey是没有边界的，即没有startkey和endkey，<strong>hbase的中的数据是按照字典序排序的</strong>，在数据写入时，所有数据都会写入这个默认的region，随着数据量的不断增加，此region已经不能承受不断增长的数据量，当一个region过大（达到hbase.hregion.max.filesize属性中定义的阈值，默认10GB）时，会进行split，分成2个region。在此过程中，会产生两个问题：</p>
-<ol>
+<ul>
 <li>数据往一个region上写,会有写热点问题。</li>
 <li>region split会消耗宝贵的集群I/O资源。     <h1><span id="3-解决方案">3. 解决方案</span></h1>&ensp;&ensp;&ensp;&ensp;基于此我们可以控制在建表的时候，创建多个空region，并确定每个region的起始和终止rowky，这样只要我们的rowkey设计能均匀的命中各个region，就不会存在写热点问题。自然split的几率也会大大降低。当然随着数据量的不断增长，该split的还是要进行split。像这样预先创建hbase表分区的方式，称之为预分区，下面给出一种预分区的实现方式:<br>&ensp;&ensp;&ensp;&ensp;解决这个问题，关键是要设计出可以让数据分布均匀的rowkey，与关系型数据库一样,rowkey是用来检索记录的主键。访问hbase table中的行，rowkey 可以是任意字符串(最大长度 是 64KB，实际应用中长度一般为 10-100bytes)，在hbase内部，rowkey保存为字节数组，存储时，数据按照rowkey的字典序排序存储。<br>预分区的时候首先需要指定按什么来划分rowkey，<br>&ensp;&ensp;&ensp;&ensp;设计的rowkey应该由regionNo+messageId组成。设计rowkey方式：随机数+messageId，如果想让最近的数据快速get到，可以将时间戳加上，原先我们设计的行键是数据产生的时间，格式为2018-01-21 12:23:06,没有设置预分区，这样数据就会出现热点问题。后来采用预分区的方式，按照秒进行预分区，splitKeys={“01|”,”02|”,…”59|”},在设计行键的时候在原先的时间上再添加当前的秒数，例如原先的行键是2018-01-21 12:23:06，现在的行键是062018-01-21 12:23:06，这样在存储的时候行键的前2个字符06，我这里的region是01|到59|开头的，因为hbase的数据是字典序排序的,则当前这条数据就会保存到05|~06|这个region里。rowkey组成：秒数+messageId，因为我的messageId都是字母+数字，“|”的ASCII值大于字母、数字。<br>&ensp;&ensp;&ensp;&ensp;需要注意的是，行键分配值按照rowkey的前几个字符进行匹配的，并不是按照数的大小。例如分区是 -10,10-20,20-30,30-40,40-50,50-60,60-70,70-80,80-90,90-，如果插入的数据rowkey是80 60 22这种两位数，肯定会落到某个分区，如果rowkey是100 333 9955 555544 66910 这种大于两位值，都会落在最后一个分区，还是只取rowkey的前两位与startkey/endkey对应？答案是：是按前两位匹配rowkey的。</li>
-</ol>
+</ul>
 
       
 
@@ -442,11 +442,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -462,11 +462,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
               </li>
              
               <li class="article-tag-list-item">
