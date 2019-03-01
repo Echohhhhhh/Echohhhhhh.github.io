@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/03/01/%E6%8B%A6%E6%88%AA%E5%99%A8/</loc>
+    
+    <lastmod>2019-03-01T13:03:44.712Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/02/28/HBase/</loc>
     
-    <lastmod>2019-02-28T02:25:23.248Z</lastmod>
+    <lastmod>2019-03-01T06:49:58.882Z</lastmod>
     
   </url>
   
