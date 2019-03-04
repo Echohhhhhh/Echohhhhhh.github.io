@@ -6,18 +6,46 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | Echo&#39;s blog</title>
+  <title>图卷积 | Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="远方到底有多远">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Echo&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="description" content="1. 图卷积&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;看了很久关于图卷积的内容，但总觉得自己理解不深刻，在这里把自己的一些想法写出来，也算把图卷积的内容梳理一下。">
+<meta name="keywords" content="Deep Learning,图卷积">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图卷积">
+<meta property="og:url" content="http://yoursite.com/2019/03/03/图卷积/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="远方到底有多远">
+<meta property="og:description" content="1. 图卷积&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;看了很久关于图卷积的内容，但总觉得自己理解不深刻，在这里把自己的一些想法写出来，也算把图卷积的内容梳理一下。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/多个卷积核.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/CNN实例.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/CNN训练.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/欧式结构.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/非欧式结构.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/2个node.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/选邻居.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/normalize.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/卷积操作.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/算法1.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/算法2.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/算法3-1.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/算法3-2.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/谱图1.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/谱图2.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/谱图3.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/谱图4.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/谱图5.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/谱图6.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/SCNN.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/第一代.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/ChebNet.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/改进1.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/图卷积3.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/图卷积4.png">
+<meta property="og:updated_time" content="2019-03-04T08:55:51.575Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Echo&#39;s blog">
-<meta name="twitter:description" content="远方到底有多远">
+<meta name="twitter:title" content="图卷积">
+<meta name="twitter:description" content="1. 图卷积&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;看了很久关于图卷积的内容，但总觉得自己理解不深刻，在这里把自己的一些想法写出来，也算把图卷积的内容梳理一下。">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/03/图卷积/多个卷积核.png">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
   
@@ -137,36 +165,144 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-			
-  
-  
+			<article id="post-图卷积" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/03/图卷积/" class="archive-article-date">
-  	<time datetime="2019-03-03T04:25:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/03/图卷积/">图卷积</a>
+    <h1 class="article-title" itemprop="name">
+      图卷积
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/03/03/图卷积/" class="archive-article-date">
+  	<time datetime="2019-03-03T04:25:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="1-图卷积">1. 图卷积</span></h1><p>&ensp;&ensp;&ensp;&ensp;看了很久关于图卷积的内容，但总觉得自己理解不深刻，在这里把自己的一些想法写出来，也算把图卷积的内容梳理一下。<br> <a id="more"></a><br><!-- TOC --></p>
+<ul>
+<li><a href="#1-%E5%9B%BE%E5%8D%B7%E7%A7%AF">1. 图卷积</a></li>
+<li><a href="#2-%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C">2. 卷积神经网络</a></li>
+<li><a href="#3-%E5%9B%BE%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C">3. 图卷积神经网络</a><ul>
+<li><a href="#31-%E9%A1%B6%E7%82%B9%E5%9F%9Fvertex-domain">3.1. 顶点域(Vertex Domain)</a><ul>
+<li><a href="#311-%E5%9B%BE%E4%B8%AD%E9%A1%B6%E7%82%B9%E7%9A%84%E9%80%89%E6%8B%A9node-sequence-selection">3.1.1. 图中顶点的选择Node Sequence Selection</a></li>
+<li><a href="#312-%E6%89%BE%E5%88%B0%E4%B8%AD%E5%BF%83%E7%BB%93%E7%82%B9%E7%9A%84%E9%82%BB%E5%9F%9Fneighborhood-assembly">3.1.2. 找到中心结点的邻域Neighborhood Assembly</a></li>
+<li><a href="#313-%E5%9B%BE%E8%A7%84%E8%8C%83%E5%8C%96%E8%BF%87%E7%A8%8Bgraph-normalization">3.1.3. 图规范化过程Graph Normalization</a></li>
+<li><a href="#314-%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84convolutional-architecture">3.1.4. 卷积网络结构Convolutional Architecture</a></li>
+<li><a href="#315-%E4%BC%AA%E4%BB%A3%E7%A0%81">3.1.5. 伪代码</a></li>
+<li><a href="#316-%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B">3.1.6. 算法流程</a></li>
+</ul>
+</li>
+<li><a href="#32-%E8%B0%B1%E5%9F%9Fspectral-domain">3.2. 谱域Spectral Domain</a><ul>
+<li><a href="#321-%E5%9B%BE%E5%8D%B7%E7%A7%AF%E8%BF%90%E7%AE%97">3.2.1. 图卷积运算</a></li>
+<li><a href="#322-%E7%AC%AC%E4%B8%80%E4%BB%A3%E5%9B%BE%E5%8D%B7%E7%A7%AFscnn">3.2.2. 第一代图卷积SCNN</a></li>
+<li><a href="#323-%E7%AC%AC%E4%BA%8C%E4%BB%A3%E5%9B%BE%E5%8D%B7%E7%A7%AFchebnet">3.2.3. 第二代图卷积ChebNet</a></li>
+<li><a href="#324-%E7%AC%AC%E4%B8%89%E4%BB%A3%E5%9B%BE%E5%8D%B7%E7%A7%AF">3.2.4. 第三代图卷积</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<p>&ensp;&ensp;&ensp;&ensp;在介绍图卷积之前，先介绍一下卷积神经网络。</p>
+<h1><span id="2-卷积神经网络">2. 卷积神经网络</span></h1><p>&ensp;&ensp;&ensp;&ensp;卷积神经网络在图像上用的比较多。因为图像的一些重要的性质是：(1)局部性；(2)稳定性；即平移不变性和有大量相似的碎片；(3)多尺度性，简单的结构组合形成复杂的抽象结构。<br>&ensp;&ensp;&ensp;&ensp;图像本来就是一个规范的形状，可以形式化成一个规则的矩阵，再定义一个卷积核，卷积核在图像矩阵上滑动，把周围的几个像素值整合成一个值，获取了图像的局部性。可能会有多个卷积核，用来识别图像中不同的特征，比如下面例子所示，第一个卷积核用来识别左右的边缘，第二个卷积核用来识别上下的边缘。   </p>
+<p><img src="/2019/03/03/图卷积/多个卷积核.png" alt="">    </p>
+<ul>
+<li>在卷积神经网络中，需要训练的参数是卷积核。</li>
+<li>在卷积神经网络中，卷积层后面通常跟一个池化层，防止参数越来越多。</li>
+<li>卷积核的大小通常是3x3和5x5</li>
+<li>池化层如果是3x3，步长为2，那么图像大小会变成原来的一半，变成原先图像的多少和步长有关。</li>
+<li>在图卷积层的最后一层是全连接层，可以使用1x1的卷积核来代表全连接，比如最后池化层输出是5x5x16，表示一层是5x5，一共有16层(通道)，经过全连接变成一个400x1的向量。    </li>
+</ul>
+<p><img src="/2019/03/03/图卷积/CNN实例.png" alt="">     </p>
+<p>&ensp;&ensp;&ensp;&ensp;使用卷积神经网络对一张图片进行分类时，首先给定这张图片的特征，比如是32x32x3和这样图片的实际类别，如果是10个类，这张图片是第2个类，那么就是一个[0,1,0,…]的向量。将图片输入卷积层中，卷积核刚开始是随机初始化的，输入X和卷积核做卷积操作，经过池化层，再经过一个卷积层和池化层，然后是一个全连接层，最后一个全连接层的输出结点个数是10，表示10个类别，如果输出的结果和实际的类别有偏差，然后通过误差反向传播，更新卷积核，直到误差最小，得到模型参数：卷积核。卷积核的参数通过优化求出才能实现特征提取的作用   </p>
+<p><img src="/2019/03/03/图卷积/CNN训练.png" alt="">      </p>
+<h1><span id="3-图卷积神经网络">3. 图卷积神经网络</span></h1><p>&ensp;&ensp;&ensp;&ensp;有了卷积神经网络，为什么还要引入图卷积神经网络？<br>&ensp;&ensp;&ensp;&ensp;因为卷积神经网络处理的是规则的矩阵，像图像和视频中的像素点都是排列整齐的矩阵，也是论文中提到的欧式结构(Euclidean Structure)。  </p>
+<p><img src="/2019/03/03/图卷积/欧式结构.png" alt="">   </p>
+<p>&ensp;&ensp;&ensp;&ensp;但在科学研究中，还有很多非欧式结构(Non Euclidean Structure)的数据,例如社交网络、信息网络。    </p>
+<p><img src="/2019/03/03/图卷积/非欧式结构.png" alt="">    </p>
+<p>&ensp;&ensp;&ensp;&ensp;实际上，这样的网络结构就是图论中抽象意义上的拓扑图。<br>&ensp;&ensp;&ensp;&ensp;为什么要研究GCN，原因如下三个：</p>
+<ol>
+<li>卷积神经网络CNN无法处理非欧式结构的数据，在非欧式结构数据中，图中每个顶点的相邻顶点个数可能不同，无法用一个同样尺寸的卷积核进行卷积运算。</li>
+<li>由于卷积神经网络CNN无法处理非欧式结构的数据，但是又希望在这样的数据结构上有效地提取空间特征来进行机器学习，所以GCN成为了研究的重点。</li>
+<li>拓扑结构的数据在生活中很常见，社交网络、交通领域都涉及到非欧式结构的数据。<br>&ensp;&ensp;&ensp;&ensp;图卷积网络GCN的本质目的是提取拓扑图的空间特征。图卷积神经网络中有2种：顶点域和谱域。这是提取拓扑图空间特征的两种方式，就是给定非欧式结构数据，从中构建图的两种方法。   <h2><span id="31-顶点域vertex-domain">3.1. 顶点域(Vertex Domain)</span></h2>&ensp;&ensp;&ensp;&ensp;提取拓扑图上的空间特征，就是把每个顶点的邻居找出来。这里的问题是:(1)按照什么条件去找中心顶点的邻居，也就是如何确定感受野？(2)确定了邻居，按照什么方式处理包含不同数据邻居的特征？<br>&ensp;&ensp;&ensp;&ensp;<a href="https://arxiv.org/abs/1605.05273" target="_blank" rel="noopener">Learning Convolutional Neural Networks for Graphs</a>是2016年在ICML中发表的一篇论文，这是<a href="http://www.matlog.net/icml2016_slides.pdf" target="_blank" rel="noopener">PPT讲解</a>。由于CNN并不能有效的处理非欧式结构数据，这篇paper的motivation就是想将CNN在图像上的应用generalize到一般的graph上面。<br>&ensp;&ensp;&ensp;&ensp;本文提到的算法思想是：将一个图结构的数据转化为CNN能够高效处理的结构。处理的过程主要分为三个步骤：(1)从图结构中选出一个固定长度具有代表性的结点序列；(2)对于选出的每一个结点，收集固定大小的邻居集合。(3)对由当前节点及其对应的邻居构成的子图进行规范化，作为卷积结构的输入。算法具体分为4个步骤。<h3><span id="311-图中顶点的选择node-sequence-selection">3.1.1. 图中顶点的选择Node Sequence Selection</span></h3>&ensp;&ensp;&ensp;&ensp;首先对于输入的一个Graph，指定中心顶点的个数，然后确定确定图中的中心结点，确定中心结点主要采取的方法是：centrality，也就是中心化的方法，就是越处于中心位置的点越重要。这里的中心位置不是空间上的概念，应该是度量一个点的关系中的重要性的概念，简单的举例说明。如图5当中的两个图实际上表示的是同一个图，对其中红色标明的两个不同的nodes我们来比较他们的中心位置关系。比较的过程当中，我们计算该node和其余所有nodes的距离关系。我们假设相邻的两个node之间的距离都是1。    </li>
+</ol>
+<p><img src="/2019/03/03/图卷积/2个node.png" alt="">   </p>
+<p>&ensp;&ensp;&ensp;&ensp;那么对于左图的红色node，和它直接相连的node有4个，因此距离+4；再稍微远一点的也就是和它相邻点相邻的有3个，距离+6;依次再相邻的有3个+9；最后还剩下一个最远的+4；因此我们知道该node的总的距离为23。同理我们得到右边的node的距离为3+8+6+8=25。那么很明显node的选择的时候左边的node会被先选出来。<br>&ensp;&ensp;&ensp;&ensp;当然，这只是一种node的排序和选择的方法，其存在的问题也是非常明显的。Paper并没有在这次的工作当中做详细的说明。   </p>
+<h3><span id="312-找到中心结点的邻域neighborhood-assembly">3.1.2. 找到中心结点的邻域Neighborhood Assembly</span></h3><p>&ensp;&ensp;&ensp;&ensp;选出目标node之后，我们之后就要为目标node确定感受野大小。但是在确定之前，我们先构建一个candidate set，然后在从这个candidate set中选择感受野的node。这些感受野的candidate set，称为目标node的neighborhood。如下图所示，为每个目标node选择至少4个node（包括自己，k即为感受野node的个数）。接下来对选出来的每一个中心结点确定一个感受野receptive filed，以便进行卷积操作。但是在这之前，首先找到每个结点的邻域区域（neighborhood filed），然后再从当中确定感受野当中的结点。假设感受野的大小为k，那么对于每个结点会有2种情况：邻域结点的个数不够k个，或者邻域结点个数大于k个。      </p>
+<p><img src="/2019/03/03/图卷积/选邻居.png" alt="">   </p>
+<p>&ensp;&ensp;&ensp;&ensp;如上图所示，选出6个中心结点，对于每个中心结点，首先找到与其直接相邻的结点(被称为1阶邻居)，如果还不够再增加2阶邻居，那么对于1阶邻居已经足够的情况下，先全部放在候选 的区域中，在下一步中通过规范化做最终的选择。   </p>
+<h3><span id="313-图规范化过程graph-normalization">3.1.3. 图规范化过程Graph Normalization</span></h3><p>&ensp;&ensp;&ensp;&ensp;这一步的目的在于将从candidate中选择感受野的node，并确定感受野中node的顺序。最终的结果如下图所示：假设上一步选择邻域过程中一个中心结点的邻居(一阶或者二阶)有N个，那么N可能和感受野大小K不相等。因此，normalize的过程就是要对N个邻居打上排序标签并进行选择，并且按照该顺序映射到向量中。    </p>
+<p><img src="/2019/03/03/图卷积/normalize.png" alt="">     </p>
+<p>&ensp;&ensp;&ensp;&ensp;如果这个中心结点的邻居个数不够k个的话，直接把所有的邻居全部选上，不够补上哑结点(dummy nodes),但还是需要排序的。如果中心结点的邻居个数N大于感受野k，则需要按照排序截断后面的结点。如上图所示，表示从中心结点到选邻居的整个过程。Normalize进行排序之后就能够映射到一个vector中，因此这一步最重要的是对结点进行排序。  </p>
+<p>&ensp;&ensp;&ensp;&ensp;对于任意一个中心结点求解它的感受野的过程。这里的卷积核的大小为4(2x2的卷积核)，因此最终要选出4个邻居，包括中心结点本身。因此，需要给这些结点打标签(排序)。怎样打标签才是最好的？如上图要在7个结点中选出4个结点组成一个含有4个结点的图集合。作者认为，在一种标签下，就是已经给图中的节点排好序了，随机从集合中选出2个图，计算它们在向量空间的图距离和在图空间的图距离的差异的期望，如果这个期望越小那么就表示标签越好。得到最好的标签之后，就能够按着顺序将结点映射到一个有序的向量中，也就得到了感受野。    </p>
+<h3><span id="314-卷积网络结构convolutional-architecture">3.1.4. 卷积网络结构Convolutional Architecture</span></h3><p>&ensp;&ensp;&ensp;&ensp;文章使用的是一个2层的卷积神经网络，将输入转化为一个向量vector之后便可以用来进行卷积操作了。具体的操作所示。     </p>
+<p><img src="/2019/03/03/图卷积/卷积操作.png" alt="">    </p>
+<p>&ensp;&ensp;&ensp;&ensp;首先最底层的灰色块为网络的输入，每一个块表示的是一个node的感知野（receptive field）区域，也是前面求解得到的4个nodes。其中an表示的是每一个node的数据中的一个维度（node如果是彩色图像那就是3维；如果是文字，可能是一个词向量……这里表明数据的维度为n）。粉色的表示卷积核，核的大小为4，但是宽度要和数据维度一样。因此，和每一个node卷季后得到一个值。卷积的步长（stride）为4，表明每一次卷积1个node，stride=4下一次刚好跨到下一个node。（备注：paper 中Figure1 当中，（a）当中的stride=1，但是转化为（b）当中的结构后stride=9）。卷积核的个数为M，表明卷积后得到的特征图的通道数为M，因此最终得到的结果为V1……VM，也就是图的特征表示。有了它便可以进行分类或者是回归的任务了。    </p>
+<h3><span id="315-伪代码">3.1.5. 伪代码</span></h3><p><img src="/2019/03/03/图卷积/算法1.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;这个算法用来选择要进行卷积操作的node，其中w为要选择的node的个数。s为stride的大小。其中一个关键在于graph labeling procedure l。labeling算法用来确定一个graph中node的次序。这个算法可以根据node degree来确定，或者根据其他确定centrality的测量方式，比如：between centrality， WL algorithm等。或者其他你认为可行的算法。  </p>
+<p><img src="/2019/03/03/图卷积/算法2.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;这个算法非常简单，就是一个BFS算法，对每个目标node，寻找离node最近的至少k个node。   </p>
+<p>&ensp;&ensp;&ensp;&ensp;这是整个论文的重点，这个步骤的目的在于将目标node无序的neighbors映射为一个有序的vector。这个label要实现一个目的：assign nodes of two different graphs to a similar relative position in the respective adjacency matrices if and only if their structural roles within the graph are similar. 也就是说，对于两个不同的graphs， 来自这两个graph的子结构g1和g2，它们在各自的graph中有相似的结构，那么他们label应该相似。为了解决这个问题，论文中定义了一个optimal graph normalization问题，定义如下：    </p>
+<p><img src="/2019/03/03/图卷积/算法3-1.png" alt="">         </p>
+<p>&ensp;&ensp;&ensp;&ensp;这个等式的解在于寻找一个一个labeling L， 使得从图的集合中任意选取两个图G1和G2，它们在vector space距离差距和它们在graph space的距离差距最小化。但是这个问题是NP-hard的问题，所以作者选择找一个近似解。即它比较了各种labeling方法，并从其中找出最优解。具体如下：   </p>
+<p><img src="/2019/03/03/图卷积/算法3-2.png" alt="">    </p>
+<p>&ensp;&ensp;&ensp;&ensp;在特征选择阶段，只有第一层和传统的CNN有区别，之后的卷积层和传统的一样。下面来举例来说明PATCHY-SAN如何提取顶点特征和边特征。我们假设a_v为顶点特征的个数，a_e为边特征的个数。w为目标node的个数，k为感受野中node的个数。对于每个输入图结构，运用上面的一系列normalization算法，我们可以得到两个tensor（w,k,a_v）和（w,k,k,a_e）,分别对应于顶点特征和边特征。这两个tensor可以被reshape成(wk, a_v)和(wk^2, a_e)，其中a_v和a_e可以分别看成是CNN中channel的个数。现在我们可以对它们做一维度的卷积操作，其中第一个的感受野大小为k，第二个感受野大小为k^2。而之后的卷积层的构造和传统的CNN一样了。     </p>
+<h3><span id="316-算法流程">3.1.6. 算法流程</span></h3><p>输入：任意一张图<br>输出：每个channel输出w个receptive field</p>
+<p>Step1： graph labeling（对图的节点做标记，比如可以用节点的度做标记，做图的划分，也 可以叫做color refinement or vertex classification）<br>文中采用The Weisfeiler-Lehman algorithm做图的划分。由此可以得到每个节点的rank 值（为了不同的图能够有一个规范化的组织方式）</p>
+<p>Step2：对labeling好的节点排序，取前w个节点，作为处理的节点序列。（这样就可以把不 同size的graph，变成同一个size）若不足w个节点，则，在输出中加全零的receptive field，相当于padding</p>
+<p>Step3：采用stride=s来遍历这w个节点。文中s=1（若s）1，为了输出有w个receptive field， 也用step2的方式补全）</p>
+<p>Step4：对遍历到的每个节点v（称作root），采用bfs的方式获得此节点的k个1-neighborhood， 如果不k个，再遍历1-neighborhood的1-neighborhood。直到满足k个，或者所有的 邻居节点都遍历完。此节点和他的k个邻居节点就生成了neighborhood graph。</p>
+<p>Step5： step4就生成了w个（s=1）neighborhood graph。需要对着w个graph 进行labeling， 根据离root节点v的远近来计算每个节点的rank，根据算法4是离v越近，r越小。 如果每个neighborhood graph不足k个节点，用0节点补充</p>
+<p>Step6：规范化step5得到了已经label好的graph，因为需要把它变成injective，使每个节点 的标签唯一，采用nauty的算法通过这w个receptive field就能得到一个w(k+1)维的向量。    </p>
+<h2><span id="32-谱域spectral-domain">3.2. 谱域Spectral Domain</span></h2><p>&ensp;&ensp;&ensp;&ensp;谱域就是GCN的理论基础了。这种思路就是借助图谱的理论来实现卷积操作。<br>&ensp;&ensp;&ensp;&ensp;谱图理论就是借助图的拉普拉斯矩阵的特征值和特征向量来研究图的性质。<br>&ensp;&ensp;&ensp;&ensp;<strong>在这里需要明确一点：谱图和顶点域的本质完全不一样。顶点域其实还是先对图进行处理，然后像类似卷积核在图上滑动来计算。这里谱域就没有卷积核在图上滑动的这个概念了。里面的卷积运算就理解成矩阵之间的运算，不要再去想卷积核滑动的思想了。</strong></p>
+<h3><span id="321-图卷积运算">3.2.1. 图卷积运算</span></h3><p><img src="/2019/03/03/图卷积/谱图1.png" alt="">   </p>
+<p><img src="/2019/03/03/图卷积/谱图2.png" alt="">  </p>
+<p><img src="/2019/03/03/图卷积/谱图3.png" alt="">  </p>
+<p><img src="/2019/03/03/图卷积/谱图4.png" alt="">  </p>
+<p><img src="/2019/03/03/图卷积/谱图5.png" alt="">  </p>
+<p><img src="/2019/03/03/图卷积/谱图6.png" alt="">      </p>
+<h3><span id="322-第一代图卷积scnn">3.2.2. 第一代图卷积SCNN</span></h3><p>&ensp;&ensp;&ensp;&ensp;第一代图卷积模型SCNN是在2014年发表在NIPS中的<a href="https://arxiv.org/abs/1312.6203" target="_blank" rel="noopener">Spectral Networks and Deep Locally Connected Networks On Graph</a>提出来的。<br><img src="/2019/03/03/图卷积/SCNN.png" alt="">  </p>
+<p><img src="/2019/03/03/图卷积/第一代.png" alt=""></p>
+<p>&ensp;&ensp;&ensp;&ensp;第一代卷积。谱图卷积就是给定一个图信号，和一个卷积核。图信号就是假设有一个图，如果有200个节点，每个节点有3个特征，x就是一个200*3的矩阵，这个矩阵就是图信号。卷积核就是一个参数𝜃，谱图卷积的定义就是对归一化的拉普拉斯矩阵特征分解，得到特征值组成的矩阵$\Lambda$和特征向量组成的矩阵U，由于L是对称矩阵，所以U-1等于UT。谱图卷积的定义：在欧式空间内卷积的定义是傅里叶变换乘积的逆变换，研究图上的傅里叶变换是怎么来的，将图上的信号做一个图傅里叶变换，将卷积核做一个图傅里叶变换，将这两个做一个内积，然后再做一个图上的逆傅里叶变换。所以一个卷积核在图信号的谱图卷积就定义出来了。这个式子的卷积核就是算出L的特征值，组成一个对角矩阵nxn。直接把对角线变成参数，这种方式太简单，这个卷积核不具有局部性，不能捕获局部关系。但是这个式子的时间复杂度很高，是n的立方，第二个是参数过多。所以后人对其进行改进。</p>
+<h3><span id="323-第二代图卷积chebnet">3.2.3. 第二代图卷积ChebNet</span></h3><p><img src="/2019/03/03/图卷积/ChebNet.png" alt="">  </p>
+<p><img src="/2019/03/03/图卷积/改进1.png" alt=""> </p>
+<p>&ensp;&ensp;&ensp;&ensp;第二代图卷积。$g_\theta$是关于特征值的一个函数，以前是直接把特征值变成卷积核，现在把每一个特征值上都乘上一个特征值矩阵的k次幂，然后把0到k-1次幂加到一起，构造成一个新的卷积核。把这个卷积核代入，得到右侧这个式子，右边这个式子不需要做特征值分解，直接把L连乘k次就可以了。所以这个一个改进，这个式子比前面那个式子的时间复杂度低。但是右边的这个时间复杂度也不低，因为涉及到L的k次幂，现在就想办法把右边这个式子的时间复杂度降低。   </p>
+<h3><span id="324-第三代图卷积">3.2.4. 第三代图卷积</span></h3><p><img src="/2019/03/03/图卷积/图卷积3.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;ICLR2017<a href="https://arxiv.org/pdf/1609.02907.pdf" target="_blank" rel="noopener">Semi-supervised Classification with Graph Convolutional Networks</a>这篇论文就对上面那个式子进行改进，让K=1，最大特征值=2，这个式子就变成了右边这个式子，继续化简，让$\theta_0$和$\theta_1$互为相反数，称为一个权重，为什么能这么变呢，因为他相信训练的时候卷积核就可以学出互为相反数的参数。这样只考虑一阶邻居，如果堆叠2个卷积层的话，就可以考虑2阶邻居了。    </p>
+<p><img src="/2019/03/03/图卷积/图卷积4.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;然后这篇论文又对刚刚的那个式子作一个归一化的trick，就是把邻接矩阵A加上一个单位矩阵，原先A是一个邻接矩阵，对角线上全为0，现在加上一个1，就是说节点自己到自己是没有边的，现在是自己有一条边又到达了自己，也就是增加一个自连接，然后重新计算一个度矩阵，然后就得到重新归一化的拉普拉斯矩阵，然后代入化成矩阵相乘的形式就是右边这个式子。这样卷积就定义完了，其中输入就是图信号X，卷积核就是Θ，前面的东西就是一个常量，只要拥有这三部分就可以得到GCN的卷积。卷积定义完了，然后加一个relu激活函数，这样一层图卷积就定义完了，如果要叠加一层，就是把上一层图卷积输出后的表示作为图卷积的输入，再做一次卷积。因为这篇论文做的是分类任务，所以要输出每个节点属于某个类的概率，所以用一个softmax就可以输出概率。<br>&ensp;&ensp;&ensp;&ensp;这就是现在谱图卷积计算的式子，实际上就是几个矩阵连乘，并没有卷积核滑动的概念。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -182,355 +318,119 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/03/图卷积/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/01/拦截器/" class="archive-article-date">
-  	<time datetime="2019-03-01T06:53:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-01</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/03/01/拦截器/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">拦截器</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/01/拦截器/">拦截器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SpringMVC</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">拦截器</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 图卷积</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 卷积神经网络</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. 图卷积神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">3.1. 顶点域(Vertex Domain)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.1.</span> <span class="toc-text">3.1.1. 图中顶点的选择Node Sequence Selection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.2.</span> <span class="toc-text">3.1.2. 找到中心结点的邻域Neighborhood Assembly</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.3.</span> <span class="toc-text">3.1.3. 图规范化过程Graph Normalization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.4.</span> <span class="toc-text">3.1.4. 卷积网络结构Convolutional Architecture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.5.</span> <span class="toc-text">3.1.5. 伪代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.6.</span> <span class="toc-text">3.1.6. 算法流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">3.2. 谱域Spectral Domain</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.1.</span> <span class="toc-text">3.2.1. 图卷积运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.2.</span> <span class="toc-text">3.2.2. 第一代图卷积SCNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.3.</span> <span class="toc-text">3.2.3. 第二代图卷积ChebNet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.4.</span> <span class="toc-text">3.2.4. 第三代图卷积</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/28/HBase/" class="archive-article-date">
-  	<time datetime="2019-02-28T01:03:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/28/HBase/">HBase</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">预分区</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/15/NLP/" class="archive-article-date">
-  	<time datetime="2019-02-15T14:36:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/15/NLP/">NLP</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/12/RNN/" class="archive-article-date">
-  	<time datetime="2019-02-12T12:55:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/12/RNN/">RNN</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">gluon</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RNN</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/12/lovely-dog/" class="archive-article-date">
-  	<time datetime="2019-02-12T08:37:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/12/lovely-dog/">lovely dog</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">生活</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/05/gluon-卷积/" class="archive-article-date">
-  	<time datetime="2019-02-05T07:44:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/05/gluon-卷积/">gluon_卷积</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">gluon</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">卷积</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/31/再看gluon新收获/" class="archive-article-date">
-  	<time datetime="2019-01-31T09:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-31</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/31/再看gluon新收获/">再看gluon新收获</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">gluon</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/21/First-blog/" class="archive-article-date">
-  	<time datetime="2019-01-20T16:28:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/21/First-blog/">学习Markdown</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -562,8 +462,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
