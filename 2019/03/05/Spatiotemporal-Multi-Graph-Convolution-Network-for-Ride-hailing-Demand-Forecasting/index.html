@@ -6,18 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: HBase | Echo&#39;s blog</title>
+  <title>Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting | Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="远方到底有多远">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Echo&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/tags/HBase/index.html">
+  <meta name="description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;今天实验室分享了一篇2019年AAAI的论文：Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand。讲的是通过时空多图卷积来进行打车需求的预测。">
+<meta name="keywords" content="论文,Multi-Graph Convolutional,Spatiotemporal">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting">
+<meta property="og:url" content="http://yoursite.com/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="远方到底有多远">
+<meta property="og:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;今天实验室分享了一篇2019年AAAI的论文：Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand。讲的是通过时空多图卷积来进行打车需求的预测。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/道路图.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/邻居图.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/功能图.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/可达图.png">
+<meta property="og:updated_time" content="2019-03-05T05:55:48.298Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Echo&#39;s blog">
-<meta name="twitter:description" content="远方到底有多远">
+<meta name="twitter:title" content="Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting">
+<meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;今天实验室分享了一篇2019年AAAI的论文：Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand。讲的是通过时空多图卷积来进行打车需求的预测。">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/道路图.png">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
   
@@ -137,64 +144,211 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-			
-  
-  
+			<article id="post-Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/28/HBase/" class="archive-article-date">
-  	<time datetime="2019-02-28T01:03:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/28/HBase/">HBase</a>
+    <h1 class="article-title" itemprop="name">
+      Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/" class="archive-article-date">
+  	<time datetime="2019-03-05T02:51:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;今天实验室分享了一篇2019年AAAI的论文：<a href="http://www-scf.usc.edu/~yaguang/papers/aaai19_multi_graph_convolution.pdf" target="_blank" rel="noopener">Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand</a>。讲的是通过时空多图卷积来进行打车需求的预测。<br> <a id="more"></a><br> <!-- TOC --></p>
+<ul>
+<li><a href="#1-%E7%AE%80%E4%BB%8B">1. 简介</a></li>
+<li><a href="#2-%E4%BB%BB%E5%8A%A1">2. 任务</a></li>
+<li><a href="#3-%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86">3. 数据处理</a><ul>
+<li><a href="#31-neighborhood">3.1. Neighborhood</a></li>
+<li><a href="#32-functional-similarity">3.2. Functional similarity</a></li>
+<li><a href="#33-transportation-connectivity">3.3. Transportation connectivity</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<p>&ensp;&ensp;&ensp;&ensp;上学期实验室也分享论文，但是分享之后就忘了。所以决定从这学期开始，对一些我觉得对我有帮助的论文记录下来。<br>&ensp;&ensp;&ensp;&ensp;这篇论文和以前读到的图卷积的论文的不同是：这篇论文构建了多个图。</p>
+<h1><span id="2-任务">2. 任务</span></h1><p>&ensp;&ensp;&ensp;&ensp;这篇论文的任务就是一个区域$T$个时间段的特征(可能有1个特征即打车订单数，也可有多个特征)预测第$T+1$时刻的特征值。     </p>
+<h1><span id="3-数据处理">3. 数据处理</span></h1><p>&ensp;&ensp;&ensp;&ensp;首先这篇论文将一个城市进行网格划分，一个网格表示一个区域region。然后对这些网格构建图。<strong>多图就体现在构建图上，原先的论文是构建一个图，这篇论文构建了3个图。</strong>论文的任务是打车需求量预测。论文中说一个region的打车需求可能和以下3个方面有关系：邻近区域neighborhood，和该区域功能相近的区域，和该区域道路可达的区域。所以论文根据以上3种关系分别构建了3个图。  </p>
+<p><img src="/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/道路图.png" alt="">  </p>
+<p>&ensp;&ensp;&ensp;&ensp;例如上图所示，那region1距离，和region相邻的区域是region2，和region1功能相似的是region3，和region1交通可达的是region4。</p>
+<h2><span id="31-neighborhood">3.1. Neighborhood</span></h2><p>&ensp;&ensp;&ensp;&ensp;构建的邻居图用$\mathcal{G}_N=(V,A_N)$表示，其中V表示所有的区域，$A_N$表示区域与区域之间的邻居关系。构建的图一个节点表示一个region，2个区域有边表示这2个区域是邻居，没有边相连表示不是邻居。     </p>
+<p><img src="/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/邻居图.png" alt="">     </p>
+<p>&ensp;&ensp;&ensp;&ensp;怎么判断两个区域是否相邻？首先把一个city划分成grid，一个区域周围的8个区域就是这个区域相邻，那么$A_{N,ij}=1$,否则为0。这样就构建了一个大小为$\mathbb{R}^{|V|\times|V|}$的矩阵$A$。</p>
+<h2><span id="32-functional-similarity">3.2. Functional similarity</span></h2><p>&ensp;&ensp;&ensp;&ensp;构建的功能相似图用$\mathcal{G}_N=(V,A_S)$表示，其中V表示所有的区域，$A_S$表示区域与区域之间的功能相似关系。构建的图一个节点表示一个region，2个区域有边表示这2个区域之间的相似关系，是一个[0,1]之间的数。计算两个区域之间的相似关系：首先需要知道每个区域的POI向量。POI向量是这个区域在某个类别的POI的个数，例如POI有5类，分别是：学校、公园、医院、商场、居民区，这种区域有1个学校，2个公园、0个医院、3个商场、1个居民区，则POI向量为[1,2,0,3,1]，计算两个region的功能相似性即计算两个POI向量的相似性。</p>
+<p><img src="/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/功能图.png" alt="">   </p>
+<h2><span id="33-transportation-connectivity">3.3. Transportation connectivity</span></h2><p>&ensp;&ensp;&ensp;&ensp;构建的交通可达图用$\mathcal{G}_N=(V,A_C)$表示，其中V表示所有的区域，$A_C$表示区域与区域之间的可达关系。构建的图一个节点表示一个region，2个区域可达判断的依据是通过OpenStreetMap，看两个区域之间是否有highway，subway，motorway，如果有的话就表示这两个区域交通可达。如果两个<br>region交通可达，则conn($v_i,v_j$)=1,否则为0。然后需要注意的是这里减去了邻居关系。因为考虑了交通可达，不想再次考虑邻居关系。取max为了保证没有负值。</p>
+<p><img src="/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/可达图.png" alt=""></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">预分区</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Multi-Graph Convolutional</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Spatiotemporal</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/03/03/图卷积/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">图卷积</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 任务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. 数据处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">3.1. Neighborhood</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">3.2. Functional similarity</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">3.3. Transportation connectivity</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -226,9 +380,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
