@@ -20,7 +20,9 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/邻居图.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/功能图.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/可达图.png">
-<meta property="og:updated_time" content="2019-03-05T05:55:48.298Z">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/模型图.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/模型图解释.png">
+<meta property="og:updated_time" content="2019-03-09T15:33:18.024Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting">
 <meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;今天实验室分享了一篇2019年AAAI的论文：Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand。讲的是通过时空多图卷积来进行打车需求的预测。">
@@ -164,7 +166,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;今天实验室分享了一篇2019年AAAI的论文：<a href="http://www-scf.usc.edu/~yaguang/papers/aaai19_multi_graph_convolution.pdf" target="_blank" rel="noopener">Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand</a>。讲的是通过时空多图卷积来进行打车需求的预测。<br> <a id="more"></a><br> <!-- TOC --></p>
+        <h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;今天实验室分享了一篇2019年AAAI的论文：<a href="http://www-scf.usc.edu/~yaguang/papers/aaai19_multi_graph_convolution.pdf" target="_blank" rel="noopener">Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand</a>。讲的是通过时空多图卷积来进行打车需求的预测。<br> <a id="more"></a><br><!-- TOC --></p>
 <ul>
 <li><a href="#1-%E7%AE%80%E4%BB%8B">1. 简介</a></li>
 <li><a href="#2-%E4%BB%BB%E5%8A%A1">2. 任务</a></li>
@@ -174,6 +176,7 @@
 <li><a href="#33-transportation-connectivity">3.3. Transportation connectivity</a></li>
 </ul>
 </li>
+<li><a href="#st-mgcn%E6%A8%A1%E5%9E%8B">ST-MGCN模型</a></li>
 </ul>
 <!-- /TOC -->
 <p>&ensp;&ensp;&ensp;&ensp;上学期实验室也分享论文，但是分享之后就忘了。所以决定从这学期开始，对一些我觉得对我有帮助的论文记录下来。<br>&ensp;&ensp;&ensp;&ensp;这篇论文和以前读到的图卷积的论文的不同是：这篇论文构建了多个图。</p>
@@ -187,7 +190,9 @@
 <h2><span id="32-functional-similarity">3.2. Functional similarity</span></h2><p>&ensp;&ensp;&ensp;&ensp;构建的功能相似图用$\mathcal{G}_N=(V,A_S)$表示，其中V表示所有的区域，$A_S$表示区域与区域之间的功能相似关系。构建的图一个节点表示一个region，2个区域有边表示这2个区域之间的相似关系，是一个[0,1]之间的数。计算两个区域之间的相似关系：首先需要知道每个区域的POI向量。POI向量是这个区域在某个类别的POI的个数，例如POI有5类，分别是：学校、公园、医院、商场、居民区，这种区域有1个学校，2个公园、0个医院、3个商场、1个居民区，则POI向量为[1,2,0,3,1]，计算两个region的功能相似性即计算两个POI向量的相似性。</p>
 <p><img src="/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/功能图.png" alt="">   </p>
 <h2><span id="33-transportation-connectivity">3.3. Transportation connectivity</span></h2><p>&ensp;&ensp;&ensp;&ensp;构建的交通可达图用$\mathcal{G}_N=(V,A_C)$表示，其中V表示所有的区域，$A_C$表示区域与区域之间的可达关系。构建的图一个节点表示一个region，2个区域可达判断的依据是通过OpenStreetMap，看两个区域之间是否有highway，subway，motorway，如果有的话就表示这两个区域交通可达。如果两个<br>region交通可达，则conn($v_i,v_j$)=1,否则为0。然后需要注意的是这里减去了邻居关系。因为考虑了交通可达，不想再次考虑邻居关系。取max为了保证没有负值。</p>
-<p><img src="/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/可达图.png" alt=""></p>
+<p><img src="/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/可达图.png" alt="">      </p>
+<h1><span id="st-mgcn模型">ST-MGCN模型</span></h1><p>&ensp;&ensp;&ensp;&ensp;这篇论文提出的模型是$spatiotemporal \quad   multi-graph \quad convolution \quad network\quad(ST-MGCN)$。首先输入是原始数据，一个城市所有区域的特征，不同的层表示不同的时间，那么输入$X\in\mathbb{R}^{T\times|V|\times{P}}$，然后从原始数据中提取出3张图，分别表示region之间的邻居图、功能相似图、交通可达图。同样每个图</p>
+<p><img src="/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/模型图.png" alt=""><br><img src="/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/模型图解释.png" alt=""></p>
 
       
 
@@ -329,7 +334,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 任务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. 数据处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">3.1. Neighborhood</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">3.2. Functional similarity</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">3.3. Transportation connectivity</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 任务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. 数据处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">3.1. Neighborhood</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">3.2. Functional similarity</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">3.3. Transportation connectivity</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">ST-MGCN模型</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -463,14 +468,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">预分区</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
@@ -483,11 +480,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
+                <a href="javascript:void(0)" class="js-tag color4">预分区</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -500,6 +497,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -519,11 +524,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
+                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
+                <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
               </li>
             
             <div class="clearfix"></div>
