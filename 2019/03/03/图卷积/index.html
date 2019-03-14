@@ -43,7 +43,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/改进1.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/图卷积3.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/图卷积4.png">
-<meta property="og:updated_time" content="2019-03-09T15:46:01.880Z">
+<meta property="og:updated_time" content="2019-03-12T02:35:32.219Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图卷积">
 <meta name="twitter:description" content="1. 图卷积&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;看了很久关于图卷积的内容，但总觉得自己理解不深刻，在这里把自己的一些想法写出来，也算把图卷积的内容梳理一下。">
@@ -262,7 +262,7 @@
 <p>Step5： step4就生成了w个（s=1）neighborhood graph。需要对着w个graph 进行labeling， 根据离root节点v的远近来计算每个节点的rank，根据算法4是离v越近，r越小。 如果每个neighborhood graph不足k个节点，用0节点补充</p>
 <p>Step6：规范化step5得到了已经label好的graph，因为需要把它变成injective，使每个节点 的标签唯一，采用nauty的算法通过这w个receptive field就能得到一个w(k+1)维的向量。    </p>
 <h2><span id="32-谱域spectral-domain">3.2. 谱域Spectral Domain</span></h2><p>&ensp;&ensp;&ensp;&ensp;谱域就是GCN的理论基础了。这种思路就是借助图谱的理论来实现卷积操作。<br>&ensp;&ensp;&ensp;&ensp;谱图理论就是借助图的拉普拉斯矩阵的特征值和特征向量来研究图的性质。<br>&ensp;&ensp;&ensp;&ensp;<strong>在这里需要明确一点：谱图和顶点域的本质完全不一样。顶点域其实还是先对图进行处理，然后像类似卷积核在图上滑动来计算。这里谱域就没有卷积核在图上滑动的这个概念了。里面的卷积运算就理解成矩阵之间的运算，不要再去想卷积核滑动的思想了。</strong></p>
-<h3><span id="321-图卷积运算">3.2.1. 图卷积运算</span></h3><p>&ensp;&ensp;&ensp;&ensp;由传统的傅里叶变换得到图上的傅里叶变换，我们不需要知道怎么由传统的傅里叶变换得到图上的傅里叶变换，只需要知道图上的傅里叶变换是$F(f)=U^Tf$，其中f是待变换的函数，$F(f)$是$f$傅里叶变换之后的函数。傅里叶的逆变换为$F^{-1}(f)=Uf$。<br>&ensp;&ensp;&ensp;&ensp;由传统的卷积定理得到图上的卷积，因为在计算传统的卷积时需要用到傅里叶变换，所以在计算图上的卷积时也需要用到图上的傅里叶变换。下图中的$F$表示的是傅里叶变换，$g*f$表示卷积运算，可以看到$g和f$的卷积等于$g$的傅里叶变换和$f$的傅里叶变换乘积的逆傅里叶变换。其中$f$是待卷积的函数,就是一个待卷积的图，$g$就是卷积核。 把图上的傅里叶变换代入到下面中，就可以得到图上的卷积运算。<br>&ensp;&ensp;&ensp;&ensp;首先计算$f$的傅里叶变换为$U^Tf$，卷积核的傅里叶变换写成对角矩阵的形式为     </p>
+<h3><span id="321-图卷积运算">3.2.1. 图卷积运算</span></h3><p>&ensp;&ensp;&ensp;&ensp;由传统的傅里叶变换得到图上的傅里叶变换，我们不需要知道怎么由传统的傅里叶变换得到图上的傅里叶变换，只需要知道图上的傅里叶变换是$F(f)=U^Tf$，其中f是待变换的函数，$F(f)$是$f$傅里叶变换之后的函数。傅里叶的逆变换为$F^{-1}(f)=Uf$。<br>&ensp;&ensp;&ensp;&ensp;由传统的卷积定理得到图上的卷积，因为在计算传统的卷积时需要用到傅里叶变换，所以在计算图上的卷积时也需要用到图上的傅里叶变换。下图中的$F$表示的是傅里叶变换，$g*f$表示卷积运算，可以看到$g和f$的卷积等于$g$的傅里叶变换和$f$的傅里叶变换乘积的逆傅里叶变换。其中$f$是待卷积的函数,就是一个待卷积的图，$g$就是卷积核。 把图上的傅里叶变换代入到下面中，就可以得到图上的卷积运算。<br>&ensp;&ensp;&ensp;&ensp;首先计算$f$的傅里叶变换为$U^Tf$，卷积核的傅里叶变换写成对角矩阵的形式为:是L的特征值的函数     </p>
 <script type="math/tex; mode=display">\left(
 \begin{matrix}
   \hat{g}(\lambda_1) & &  \\
@@ -284,7 +284,7 @@
   & &  \hat{g}(\lambda_n)\\
 \end{matrix}
 \right)U^Tf</script><p><strong>很多论文中会把上式写成$(f*g)_G=U((U^Tg)\odot(U^Tf))$</strong>       </p>
-<p>可以看出    $U$为特征向量组成的特征矩阵，$f$为待卷积函数，在图中就是图信号矩阵，重点在于设计可训练、共享参数的卷积核$g$。</p>
+<p>可以看出$U$为特征向量组成的特征矩阵，$f$为待卷积函数，在图中就是图信号矩阵，重点在于设计可训练、共享参数的卷积核$g$。</p>
 <p><img src="/2019/03/03/图卷积/谱图1.png" alt="">   </p>
 <p><img src="/2019/03/03/图卷积/谱图2.png" alt="">  </p>
 <p><img src="/2019/03/03/图卷积/谱图3.png" alt="">  </p>
@@ -296,10 +296,10 @@
 <p><img src="/2019/03/03/图卷积/矩阵.png" alt=""></p>
 <h3><span id="322-第一代图卷积scnn">3.2.2. 第一代图卷积SCNN</span></h3><p>&ensp;&ensp;&ensp;&ensp;第一代图卷积模型SCNN是在2014年发表在NIPS中的<a href="https://arxiv.org/abs/1312.6203" target="_blank" rel="noopener">Spectral Networks and Deep Locally Connected Networks On Graph</a>提出来的。<br><img src="/2019/03/03/图卷积/SCNN.png" alt="">  </p>
 <p><img src="/2019/03/03/图卷积/第一代.png" alt=""></p>
-<p>&ensp;&ensp;&ensp;&ensp;第一代卷积。谱图卷积就是给定一个图信号，和一个卷积核。图信号就是假设有一个图，如果有200个节点，每个节点有3个特征，x就是一个200*3的矩阵，这个矩阵就是图信号矩阵。卷积核就是一个参数𝜃，谱图卷积的定义就是对归一化的拉普拉斯矩阵特征分解，得到特征值组成的矩阵$\Lambda$和特征向量组成的矩阵U，由于L是对称矩阵，所以U-1等于UT。谱图卷积的定义：在欧式空间内卷积的定义是傅里叶变换乘积的逆变换，研究图上的卷积是怎么来的，将图上的信号做一个图傅里叶变换，将卷积核做一个图傅里叶变换，将这两个做一个内积，然后再做一个图上的逆傅里叶变换。所以一个卷积核在图信号的谱图卷积就定义出来了。这个式子的卷积核就是算出L的特征值，组成一个对角矩阵nxn。直接把对角线变成参数，这种方式太简单，这个卷积核不具有局部性，不能捕获局部关系。并且这个式子的时间复杂度很高，是n的立方，第二个是参数过多。所以后人对其进行改进。</p>
+<p>&ensp;&ensp;&ensp;&ensp;第一代卷积。谱图卷积就是给定一个图信号，和一个卷积核。图信号就是假设有一个图，如果有200个节点，每个节点有3个特征，x就是一个200<em>3的矩阵，这个矩阵就是图信号矩阵。卷积核就是一个参数𝜃，谱图卷积的定义就是对归一化的拉普拉斯矩阵特征分解，得到特征值组成的矩阵$\Lambda$和特征向量组成的矩阵U，由于L是对称矩阵，所以U-1等于UT。谱图卷积的定义：在欧式空间内卷积的定义是傅里叶变换乘积的逆变换，研究图上的卷积是怎么来的，将图上的信号做一个图傅里叶变换，将卷积核做一个图傅里叶变换，将这两个做一个内积，然后再做一个图上的逆傅里叶变换。所以一个卷积核在图信号的谱图卷积就定义出来了。这个式子直接把卷积核g的傅里叶变换的对角矩阵当做参数，<strong>此时的卷积核不需要训练，因为右式中的所有值都是已知的。U已知，中间的对角矩阵的值</strong> $\theta$ <em>*就是傅里叶算子，也是已知的，图信号矩阵x也是已知的</em></em>。这种方式太简单，这个卷积核不具有局部性，不能捕获局部关系。并且这个式子的时间复杂度很高，是n的立方，第二个是参数过多。所以后人对其进行改进。</p>
 <h3><span id="323-第二代图卷积chebnet">3.2.3. 第二代图卷积ChebNet</span></h3><p><img src="/2019/03/03/图卷积/ChebNet.png" alt="">  </p>
 <p><img src="/2019/03/03/图卷积/改进1.png" alt=""> </p>
-<p>&ensp;&ensp;&ensp;&ensp;第二代图卷积。$g_\theta$是关于特征值的一个函数，以前是直接把特征值变成卷积核，现在把每一个特征值上都乘上一个特征值矩阵的k次幂，然后把0到k-1次幂加到一起，构造成一个新的卷积核。把这个卷积核代入，得到右侧这个式子，右边这个式子不需要做特征值分解，直接把L连乘k次就可以了。所以这个一个改进，这个式子比前面那个式子的时间复杂度低。但是右边的这个时间复杂度也不低，因为涉及到L的k次幂，现在就想办法把右边这个式子的时间复杂度降低。   </p>
+<p>&ensp;&ensp;&ensp;&ensp;第二代图卷积。$g_\theta$是关于特征值的一个函数，以前是直接把特征值变成卷积核，现在把每一个特征值上都乘上一个特征值矩阵的k次幂，然后把0到k-1次幂加到一起，构造成一个新的卷积核。把这个卷积核代入，得到右侧这个式子，右边这个式子不需要做特征值分解，直接把L连乘k次就可以了。<strong>这个卷积核是需要训练的，其中的参数是</strong>$\theta_k$<strong>通过初始化赋值再通过反向传播进行调整</strong>。所以这个一个改进，这个式子比前面那个式子的时间复杂度低。但是右边的这个时间复杂度也不低，因为涉及到L的k次幂，现在就想办法把右边这个式子的时间复杂度降低。   </p>
 <h3><span id="324-第三代图卷积">3.2.4. 第三代图卷积</span></h3><p><img src="/2019/03/03/图卷积/图卷积3.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;ICLR2017<a href="https://arxiv.org/pdf/1609.02907.pdf" target="_blank" rel="noopener">Semi-supervised Classification with Graph Convolutional Networks</a>这篇论文就对上面那个式子进行改进，让K=1，最大特征值=2，这个式子就变成了右边这个式子，继续化简，让$\theta_0$和$\theta_1$互为相反数，称为一个权重，为什么能这么变呢，因为他相信训练的时候卷积核就可以学出互为相反数的参数。这样只考虑一阶邻居，如果堆叠2个卷积层的话，就可以考虑2阶邻居了。    </p>
 <p><img src="/2019/03/03/图卷积/图卷积4.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;然后这篇论文又对刚刚的那个式子作一个归一化的trick，就是把邻接矩阵A加上一个单位矩阵，原先A是一个邻接矩阵，对角线上全为0，现在加上一个1，就是说节点自己到自己是没有边的，现在是自己有一条边又到达了自己，也就是增加一个自连接，然后重新计算一个度矩阵，然后就得到重新归一化的拉普拉斯矩阵，然后代入化成矩阵相乘的形式就是右边这个式子。这样卷积就定义完了，其中输入就是图信号X，卷积核就是Θ，前面的东西就是一个常量，只要拥有这三部分就可以得到GCN的卷积。卷积定义完了，然后加一个relu激活函数，这样一层图卷积就定义完了，如果要叠加一层，就是把上一层图卷积输出后的表示作为图卷积的输入，再做一次卷积。因为这篇论文做的是分类任务，所以要输出每个节点属于某个类的概率，所以用一个softmax就可以输出概率。<br>&ensp;&ensp;&ensp;&ensp;这就是现在谱图卷积计算的式子，实际上就是几个矩阵连乘，并没有卷积核滑动的概念。</p>
 
@@ -582,10 +582,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">gluon</a>
               </li>
              
@@ -598,7 +594,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -610,7 +606,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">生活</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,15 +630,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">卷积</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">卷积</a>
               </li>
              
               <li class="article-tag-list-item">
