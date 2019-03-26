@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/2 | Echo&#39;s blog</title>
+  <title>Spark-RDD | Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="远方到底有多远">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Echo&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/archives/2019/02/index.html">
+  <meta name="description" content="简介解释RDD&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;RDD从表现形式上类似数据库的视图。可以理解为Java中的一个lis或者数据库中的一张表（或者视图）。Spark对RDD的操作，类似于对SQL中的一张表进行操作。但是RDD类似于数据库中的视图，而不是表，因为RDD是弹性的，就是一个RDD的数据并不一定是物理真实存在的。把一个超大的数据集，切切分分成N个小堆，找M个执行器(M&amp;lt;N)">
+<meta name="keywords" content="Spark,RDD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark-RDD">
+<meta property="og:url" content="http://yoursite.com/2019/03/26/Spark-RDD/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="远方到底有多远">
+<meta property="og:description" content="简介解释RDD&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;RDD从表现形式上类似数据库的视图。可以理解为Java中的一个lis或者数据库中的一张表（或者视图）。Spark对RDD的操作，类似于对SQL中的一张表进行操作。但是RDD类似于数据库中的视图，而不是表，因为RDD是弹性的，就是一个RDD的数据并不一定是物理真实存在的。把一个超大的数据集，切切分分成N个小堆，找M个执行器(M&amp;lt;N)">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-26T05:17:50.224Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Echo&#39;s blog">
-<meta name="twitter:description" content="远方到底有多远">
+<meta name="twitter:title" content="Spark-RDD">
+<meta name="twitter:description" content="简介解释RDD&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;RDD从表现形式上类似数据库的视图。可以理解为Java中的一个lis或者数据库中的一张表（或者视图）。Spark对RDD的操作，类似于对SQL中的一张表进行操作。但是RDD类似于数据库中的视图，而不是表，因为RDD是弹性的，就是一个RDD的数据并不一定是物理真实存在的。把一个超大的数据集，切切分分成N个小堆，找M个执行器(M&amp;lt;N)">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
   
@@ -137,236 +139,189 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-			
-  
-  
+			<article id="post-Spark-RDD" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Spark-RDD
+    </h1>
+  
+
+        
+        <a href="/2019/03/26/Spark-RDD/" class="archive-article-date">
+  	<time datetime="2019-03-26T03:38:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-26</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="简介">简介</span></h1><h1><span id="解释rdd">解释RDD</span></h1><p>&ensp;&ensp;&ensp;&ensp;RDD从表现形式上类似数据库的视图。可以理解为Java中的一个lis或者数据库中的一张表（或者视图）。Spark对RDD的操作，类似于对SQL中的一张表进行操作。但是RDD类似于数据库中的视图，而不是表，因为RDD是弹性的，就是一个RDD的数据并不一定是物理真实存在的。把一个超大的数据集，切切分分成N个小堆，找M个执行器(M&lt;N)，每一个执行器各自拿一块或者多块数据慢慢计算，等到计算出结果再收集在一起，这就算执行完了。那么Spark做了一项工作就是：凡是能够被我计算的，都要符合我的要求，所以spark无论处理什么数据，都要先整理成一个拥有多个分块的数据集，这个数据集就是RDD。<br>&ensp;&ensp;&ensp;&ensp;当你写一个spark程序时，比如下面的程序，在代码上获取了一个RDD，叫做lines，但是这个RDD不包含任何待处理的数据，真正的数据在执行时才会被加载，加载时数据要么来自spark外，例如hdfs，要么来自spark内部，前提是你已经对它做了cache。</p>
+<pre><code class="lang-java">SparkConf conf = new SparkConf().setAppName(&quot;wordcount&quot;).setMaster(&quot;local&quot;);
+JavaSparkContext sc = new JavaSparkContext(conf);
+JavaRDD&lt;String&gt; lines = sc.textFile(&quot;/Users/jianhong1/testfile&quot;);
+</code></pre>
+<p>&ensp;&ensp;&ensp;&ensp;Spark的计算执行可以认为是这样一个过程：在代码中创建一个RDD，但是这个RDD并不包含数据，只有等到Action算子的时候，开始计算，RDD才会加载数据。从一个RDD中读取数据，然后处理数据</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/28/HBase/" class="archive-article-date">
-  	<time datetime="2019-02-28T01:03:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/28/HBase/">HBase</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spark</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">预分区</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RDD</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/26/Spark-RDD/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/15/NLP/" class="archive-article-date">
-  	<time datetime="2019-02-15T14:36:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-15</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/03/14/Learning/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Learning</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/15/NLP/">NLP</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">解释RDD</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/12/RNN/" class="archive-article-date">
-  	<time datetime="2019-02-12T12:55:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-12</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/12/RNN/">RNN</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">gluon</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RNN</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/12/lovely-dog/" class="archive-article-date">
-  	<time datetime="2019-02-12T08:37:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/12/lovely-dog/">lovely dog</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">生活</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/02/05/gluon-卷积/" class="archive-article-date">
-  	<time datetime="2019-02-05T07:44:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/02/05/gluon-卷积/">gluon_卷积</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">gluon</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">卷积</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -398,8 +353,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
