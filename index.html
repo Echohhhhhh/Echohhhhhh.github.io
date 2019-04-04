@@ -139,6 +139,82 @@
           <div id="js-content" class="content-ll">
 			
   
+    <article id="post-CDH集群" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/04/CDH集群/">CDH集群</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/04/CDH集群/" class="archive-article-date">
+  	<time datetime="2019-04-04T14:11:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;最近去给甲方安装CDH集群，对于集群的搭建和测试在这里总结一下。<br></p>
+        
+          <a class="article-more-a" href="/2019/04/04/CDH集群/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CDH集群、Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/04/CDH集群/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Spark-RDD" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -159,40 +235,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="简介">简介</span></h1><h1><span id="解释rdd">解释RDD</span></h1><p>&ensp;&ensp;&ensp;&ensp;RDD从表现形式上类似数据库的视图。可以理解为Java中的一个lis或者数据库中的一张表（或者视图）。Spark对RDD的操作，类似于对SQL中的一张表进行操作。但是RDD类似于数据库中的视图，而不是表，因为RDD是弹性的，就是一个RDD的数据并不一定是物理真实存在的。把一个超大的数据集，切切分分成N个小堆，找M个执行器(M&lt;N)，每一个执行器各自拿一块或者多块数据慢慢计算，等到计算出结果再收集在一起，这就算执行完了。那么Spark做了一项工作就是：凡是能够被我计算的，都要符合我的要求，所以spark无论处理什么数据，都要先整理成一个拥有多个分块的数据集，这个数据集就是RDD。<br>&ensp;&ensp;&ensp;&ensp;当你写一个spark程序时，比如下面的程序，在代码上获取了一个RDD，叫做lines，但是这个RDD不包含任何待处理的数据，真正的数据在执行时才会被加载，加载时数据要么来自spark外，例如hdfs，要么来自spark内部，前提是你已经对它做了cache。</p>
-<pre><code class="lang-java">SparkConf conf = new SparkConf().setAppName(&quot;wordcount&quot;).setMaster(&quot;local&quot;);
-JavaSparkContext sc = new JavaSparkContext(conf);
-JavaRDD&lt;String&gt; lines = sc.textFile(&quot;/Users/jianhong1/testfile&quot;);
-</code></pre>
-<p>&ensp;&ensp;&ensp;&ensp;Spark的计算执行可以认为是这样一个过程：在代码中创建一个RDD，但是这个RDD并不包含数据，只有等到Action算子的时候，开始计算，RDD才会加载数据。从一个RDD中读取数据，然后处理数据    </p>
-<h1><span id="hdfs">HDFS</span></h1><p>&ensp;&ensp;&ensp;&ensp;HDFS分布式文件系统把文件分布存储到多个计算机节点上，成千上万的计算机节点构成了一个集群。这些节点分为主节点和从节点。HDFS以Master-Slave模式运行。主节点也可叫做名称节点(NameNode)，从节点也可叫做数据节点(DataNode)。其中有一个NameNode和多个DataNode。<br>&ensp;&ensp;&ensp;&ensp;NameNode有2个职责：（1）负责客户端请求的响应。（2）用于保存HDFS的元数据信息，比如文件系统的命名空间，块信息。维护着文件系统树以及整棵树所有的文件和目录。这些信息以两个文件形式永久保存在本地磁盘上：命名空间镜像文件(Namespace image)和编辑日志文件(edit log)。FsImage用于维护文件系统的目录结构以及元数据信息，文件与数据块(block)列表的对应关系。操作日志文件EditLog中记录了所有针对文件的创建、删除、重命名等操作。元数据存放在fsimage中，在运行时加载到内存中（读写比较快）。操作日志写到edits中。<br>&ensp;&ensp;&ensp;&ensp;DataNode的职责是：HDFS有多个DataNode。（1）存储管理用户的文件块数据。（2）定期（默认1h）向NameNode汇报自身所持有的block信息(通过心跳信息上报)。当NameNode长时间没有收到DataNode-n的心跳信息，则认为DataNode-n不可用。DataNode提供真实文件数据的存储服务。    </p>
-<ul>
-<li>文件块(block)：最基本的存储单位。对于文件内容而言，一个文件的长度大小是size，那么从文件的0偏移开始，按照固定的大小，顺序对文件进行划分并编号，划分好的每一个块称为一个Block。</li>
-<li><p>Hdfs块大小如何设定？在hdfs-default.xml中设置。</p>
-<pre><code class="lang-xml">&lt;property&gt;
-&lt;name&gt;dfs.blocksize&lt;/name&gt;   #block块存储的配置信息
-&lt;value&gt;134217728&lt;/value&gt;   #这里的块的容量最大是128M，请注意
-&lt;description&gt;
-    The default block size for new files, in bytes.
-    You can use the following suffix (case insensitive):
-    k(kilo), m(mega), g(giga), t(tera), p(peta), e(exa) to specify the size (such as 128k, 512m, 1g, etc.),
-    Or provide complete size in bytes (such as 134217728 for 128 MB).
-&lt;/description&gt;
-&lt;/property&gt;
-</code></pre>
-</li>
-<li><p>HDFS默认Block大小是128MB，以一个256MB的文件为例，一共需要2个Block。不同于普通文件系统的是，HDFS中，如果一个文件小于数据块的大小，并不占用整个数据块存储空间。</p>
-</li>
-<li>Replication，默认是3，在hdfs-site.xml的dfs.replication属性。<br>vi hdfs-site.xml,可以修改，配置文件对全局生效。<pre><code class="lang-xml">&lt;configuration&gt;
- &lt;property&gt;
-   &lt;name&gt;dfs.replication&lt;/name&gt;
-   &lt;value&gt;3&lt;/value&gt;
- &lt;/property&gt;
-&lt;/configuration&gt;
-</code></pre>
-</li>
-</ul>
-
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1>
+        
+          <a class="article-more-a" href="/2019/03/26/Spark-RDD/#more">more >></a>
+        
       
 
       
@@ -875,82 +921,6 @@ JavaRDD&lt;String&gt; lines = sc.textFile(&quot;/Users/jianhong1/testfile&quot;)
 
 
   
-    <article id="post-lovely-dog" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/12/lovely-dog/">lovely dog</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/12/lovely-dog/" class="archive-article-date">
-  	<time datetime="2019-02-12T08:37:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&ensp;&ensp;&ensp;&ensp;记得第一次养小狗狗，还是我上小学的时候，是一个白色的小狗，超级好看，我用香皂给它洗澡，后来家里种小麦的时候我爸用农药拌小麦，小狗吃了一些，就死了(((m-__-)m))。从那之后家里也没养过狗。<br></p>
-        
-          <a class="article-more-a" href="/2019/02/12/lovely-dog/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">生活</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/12/lovely-dog/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1070,23 +1040,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">预分区</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1102,15 +1060,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">生活</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">生活</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1126,6 +1092,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">卷积</a>
               </li>
              
@@ -1138,11 +1108,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
+                <a href="javascript:void(0)" class="js-tag color2">CDH集群、Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
               </li>
             
             <div class="clearfix"></div>

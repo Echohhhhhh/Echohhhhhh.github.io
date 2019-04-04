@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/04/04/CDH%E9%9B%86%E7%BE%A4/</loc>
+    
+    <lastmod>2019-04-04T16:15:08.293Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/03/14/Learning/</loc>
+    
+    <lastmod>2019-04-03T06:59:35.414Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/03/26/Spark-RDD/</loc>
     
-    <lastmod>2019-03-26T07:37:52.156Z</lastmod>
+    <lastmod>2019-03-28T03:11:32.731Z</lastmod>
     
   </url>
   
@@ -12,13 +26,6 @@
     <loc>http://yoursite.com/2019/02/15/NLP/</loc>
     
     <lastmod>2019-03-18T10:58:23.309Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/03/14/Learning/</loc>
-    
-    <lastmod>2019-03-14T16:03:27.886Z</lastmod>
     
   </url>
   
