@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: pysparkdate: 2019-04-20T12:40:56.000Ztag:  python spark  —-1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序  1. 简介 2. 创建sc 3. 创建RDD 3.1. 通过paralize创建RDD 3.2. 读文本文件创建RDD   4. map和flatMap 5. flatM">
+  <meta name="description" content="title: pysparkdate: 2019-04-20T12:40:56.000Ztag:  python spark  —-1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Echo&#39;s blog">
 <meta property="og:url" content="http://yoursite.com/2019/04/20/pyspark/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="title: pysparkdate: 2019-04-20T12:40:56.000Ztag:  python spark  —-1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序  1. 简介 2. 创建sc 3. 创建RDD 3.1. 通过paralize创建RDD 3.2. 读文本文件创建RDD   4. map和flatMap 5. flatM">
+<meta property="og:description" content="title: pysparkdate: 2019-04-20T12:40:56.000Ztag:  python spark  —-1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-20T09:39:08.376Z">
+<meta property="og:updated_time" content="2019-04-20T09:45:11.748Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
-<meta name="twitter:description" content="title: pysparkdate: 2019-04-20T12:40:56.000Ztag:  python spark  —-1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序  1. 简介 2. 创建sc 3. 创建RDD 3.1. 通过paralize创建RDD 3.2. 读文本文件创建RDD   4. map和flatMap 5. flatM">
+<meta name="twitter:description" content="title: pysparkdate: 2019-04-20T12:40:56.000Ztag:  python spark  —-1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
   
@@ -149,7 +149,7 @@
 <li>python</li>
 <li>spark</li>
 </ul>
-<h2><span id="-">—-</span></h2><h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;使用Python编写Spark程序<br><!-- TOC --></p>
+<h2><span id="-">—-</span></h2><h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;使用Python编写Spark程序<br><a id="more"></a><br><!-- TOC --></p>
 <ul>
 <li><a href="#1-%E7%AE%80%E4%BB%8B">1. 简介</a></li>
 <li><a href="#2-%E5%88%9B%E5%BB%BAsc">2. 创建sc</a></li>
@@ -194,7 +194,7 @@ sc.parallelize(b)
 </code></pre>
 <h1><span id="4-map和flatmap">4. map和flatMap</span></h1><p>&ensp;&ensp;&ensp;&ensp;map是对RDD中的每个元素执行一个函数，每个元素返回一个list，然后把每个元素的list再组成一个大的list，例如[[a,a],[b,b]]，然后flatMap就是先对每个元素执行一个函数，每个元素返回一个list，然后把每个元素的list的内容取出来，组成一个大的list，例如[a,a,b,b]。   </p>
 <p>&ensp;&ensp;&ensp;&ensp;<a href="https://www.jianshu.com/p/c76ba3091a21" target="_blank" rel="noopener">这篇博客</a>讲解的比较好。说明flatMap中的函数返回类型一定是一个可迭代的类型，先把元素生成一个列表，然后再把每个列表中的元素取出来拼接成一个大的列表。<br><a href="https://www.4spaces.org/spark-map-flatmap/" target="_blank" rel="noopener">这篇也讲的很好</a>    </p>
-<h1><span id="5-flatmap和flatmapvalues">5. flatMap和flatMapValues</span></h1><p>&ensp;&ensp;&ensp;&ensp;flatMap针对的RDD中的每个元素先做map操作，再做flatten操作，最后形成超大的list返回。flatMapValues只针对元素是<k,v>格式的RDD，原RDD中的key保持不变，只对value进行变换，变换之后的value和原来的key组成新的<k,v1>，作为RDD中的一个元素。</k,v1></k,v></p>
+<h1><span id="5-flatmap和flatmapvalues">5. flatMap和flatMapValues</span></h1><p>&ensp;&ensp;&ensp;&ensp;flatMap针对的RDD中的每个元素先做map操作，再做flatten操作，最后形成超大的list返回。flatMapValues只针对元素是<k,v>格式的RDD，原RDD中的key保持不变，只对value进行变换，变换之后的value和原来的key组成新的<k,v1>，作为RDD中的一个元素。参考<a href="http://blog.cheyo.net/172.html" target="_blank" rel="noopener">这篇博客</a></k,v1></k,v></p>
 <h1><span id="6-reducebykey和groupbykey">6. reduceByKey和groupByKey</span></h1><p>&ensp;&ensp;&ensp;&ensp;推荐使用reduceByKey，<a href="https://blog.csdn.net/zongzhiyuan/article/details/49965021" target="_blank" rel="noopener">这篇博客</a>对于两者的区别进行了解释。<br>groupByKey涉及数据的shuffle操作，shuffle是spark重建数据的机制，将来自不同分区的数据进行分组，开销很大。    </p>
 <h1><span id="7-sortby和sortbykey">7. sortBy和SortByKey</span></h1><p>&ensp;&ensp;&ensp;&ensp;sortByKey针对(key,value)对中的key进行排序。<br>&ensp;&ensp;&ensp;&ensp;sortBy可以根据我们需要的值进行排序，不一定是key，比如统计单词出现的次数，然后按照次数进行排序(key,value)，我们就是对value进行排序，可以使用sortBy函数。<br>sortBy()中有3个参数，第一个参数是一个函数，第二个参数是ascending，表示升序还是降序，默认是True(升序)。第三个参数是numPartitions，该参数决定排序后的RDD的分区个数，默认排序后的分区个数和排序之前的个数相等。</p>
 <h1><span id="8-将spark计算的结果存储在文件中">8. 将Spark计算的结果存储在文件中</span></h1><h2><span id="81-写入到服务器本地文件中">8.1. 写入到服务器本地文件中</span></h2><p>&ensp;&ensp;&ensp;&ensp;假设pyspark计算的结果存储在results变量中，然后将<code>results</code>的内容存储在文件中。</p>
@@ -462,31 +462,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">预分区</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -502,11 +486,31 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">生活</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -523,10 +527,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -670,22 +670,6 @@ MathJax.Hub.Queue(function() {
     </div>
 
 </div>
-  </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
