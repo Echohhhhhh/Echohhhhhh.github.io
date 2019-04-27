@@ -16,10 +16,15 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;学习Python！！！！">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-15T00:57:11.905Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/range.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/print.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/list.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/arr.png">
+<meta property="og:updated_time" content="2019-04-25T10:39:37.687Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python学习">
 <meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;学习Python！！！！">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/15/Python学习/range.png">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
   
@@ -159,14 +164,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;学习Python！！！！<br><a id="more"></a><br> <!-- TOC --></p>
+        <h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;学习Python！！！！<br><a id="more"></a><br><!-- TOC --></p>
 <ul>
 <li><a href="#1-%E7%AE%80%E4%BB%8B">1. 简介</a></li>
 <li><a href="#2-%E8%A7%84%E8%8C%83">2. 规范</a></li>
 <li><a href="#3-%E5%BA%8F%E5%88%97">3. 序列</a></li>
 <li><a href="#4-%E8%AF%8D%E5%85%B8">4. 词典</a></li>
+<li><a href="#5-ndarray%E5%92%8Clist">5. ndarray和list</a><ul>
+<li><a href="#51-%E5%88%9B%E5%BB%BAndarray">5.1. 创建ndarray</a><ul>
+<li><a href="#511-%E9%80%9A%E8%BF%87nparray">5.1.1. 通过np.array</a></li>
+<li><a href="#512-%E9%80%9A%E8%BF%87nparange">5.1.2. 通过np.arange</a></li>
+<li><a href="#513-list%E5%92%8Cndarray%E7%9A%84%E7%B4%A2%E5%BC%95">5.1.3. list和ndarray的索引</a></li>
 </ul>
-<!-- /TOC -->     
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
 <h1><span id="2-规范">2. 规范</span></h1><p>&ensp;&ensp;&ensp;&ensp;</p>
 <ul>
 <li>运算符的左右加空格，例如a + b</li>
@@ -174,7 +188,17 @@
 <li>变量的所有字母小写，单词之间用下划线连接，table_name=’test’</li>
 </ul>
 <h1><span id="3-序列">3. 序列</span></h1><p>&ensp;&ensp;&ensp;&ensp;序列是一种容器，是有顺序的数据集合。序列有两种：元组（Tuple）和列表（List）。列表是可变的，元组是不可变的。所以经常会创建空的列表，a=[],而不会创建一个空的元组。<br>&ensp;&ensp;&ensp;&ensp;对序列(元组和列表)范围引用，a[起始,结束,步长]，包含起始，不包含结束。循环获取序列的值：for i in list，这里的a就是值，而不是下标      </p>
-<h1><span id="4-词典">4. 词典</span></h1><p>&ensp;&ensp;&ensp;&ensp;词典中的数据是无序的，不能通过位置下标来获取，</p>
+<h1><span id="4-词典">4. 词典</span></h1><p>&ensp;&ensp;&ensp;&ensp;词典中的数据是无序的，不能通过位置下标来获取，   </p>
+<h1><span id="5-ndarray和list">5. ndarray和list</span></h1><p>&ensp;&ensp;&ensp;&ensp;list是Python的内置数据类型，list中的数据类型不必相同。例如：<code>[1,2,&#39;a&#39;,3.9]</code><br>&ensp;&ensp;&ensp;&ensp;首先需要明确的一点是array和ndarray是什么。ndarray是一种类型，array不是一种数据类型，可以通过np.array()来创建一个ndarray的对象。ndarray是numpy的一种数据类型，ndarray中的元素类型必须相同，例如：<code>[1,2,3,4]</code>    </p>
+<h2><span id="51-创建ndarray">5.1. 创建ndarray</span></h2><h3><span id="511-通过nparray">5.1.1. 通过np.array</span></h3><p>&ensp;&ensp;&ensp;&ensp;通过np.array()来创建，传入的参数可以是list，也可以是tuple，使用ndarray的shape属性来获取ndarray的形状。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">b = np.array((<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>))</span><br><span class="line">c = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]])</span><br></pre></td></tr></table></figure></p>
+<p>使用reshape改变ndarray的形状<br><code>c.reshape((3,-1))</code>,reshape传入的形状是可以是<br>reshape((3,-1)),<br>reshape([3,1]),<br>reshape(3,-1)</p>
+<h3><span id="512-通过nparange">5.1.2. 通过np.arange</span></h3><p>numpy提供了很多方法直接创建一个ndarray对象.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">arr1=np.arange(<span class="number">1</span>,<span class="number">10</span>,<span class="number">1</span>) <span class="comment">#   </span></span><br><span class="line">arr2=np.linspace(<span class="number">1</span>,<span class="number">10</span>,<span class="number">10</span>)  </span><br><span class="line"><span class="keyword">print</span> (arr1,arr1.dtype)  </span><br><span class="line"><span class="keyword">print</span> (arr2,arr2.dtype)</span><br><span class="line">```  </span><br><span class="line">结果</span><br></pre></td></tr></table></figure></p>
+<p>[1 2 3 4 5 6 7 8 9] int32<br>[ 1.  2.  3.  4.  5.  6.  7.  8.  9. 10.] float64<br><code>``   
+np.arange(a,b,c)表示产生从a~b，不包括b，间隔为c的一个ndarray，数据类型默认是int32。   
+np.linspace(a,b,c)表示把a~b（包括b），平均分成c份。    
+np.arange()和range都可以用来生成序列。注意arange是numpy的函数，range可以直接调用。arange和range不同的是：range只能生成int类型，写</code>rang(1,10,0.1)<code>是错误的，arange可以生成float类型，可以写成</code>np.arange(1,10,0.1)`<br><img src="/2019/04/15/Python学习/range.png" alt=""><br><strong>使用print输出时，list中的元素之间有逗号分开，ndarray元素之间没有逗号</strong>。<br><img src="/2019/04/15/Python学习/print.png" alt=""><br><strong>虽然有很多产生ndarray类型的方法，但是大部分情况下我们都是从list进行转换生成ndarray。因为我们从文件中读取数据存储在list中，然后转换成ndarray</strong><br>比如定义一个list,a = [1,2,3,4],然后使用np.array(a)将list转换成ndarray类型。   </p>
+<h3><span id="513-list和ndarray的索引">5.1.3. list和ndarray的索引</span></h3><p>定义一个list<br><code>list1=[[1,2,3],[4,5,6],[7,8,9]]</code><br>定义一个ndarray<br><code>arr1 = np.array(list1)</code>   </p>
+<p><img src="/2019/04/15/Python学习/list.png" alt=""><br><img src="/2019/04/15/Python学习/arr.png" alt=""><br>ndarray比list的索引方式更多，这也是两者经常遇到的区别。<br><strong>因为list可以存储任意类型的数据，因为list中存储数据存放的地址，简单说就是指针，并非数据，这样保存一个list就太麻烦了，例如list1=[1,2,3,’a’]就需要4个指针和4个数据，增加了存储和CPU消耗</strong></p>
 
       
 
@@ -321,7 +345,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 规范</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. 序列</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">4. 词典</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 规范</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. 序列</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">4. 词典</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">5. ndarray和list</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.</span> <span class="toc-text">5.1. 创建ndarray</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.1.</span> <span class="toc-text">5.1.1. 通过np.array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.2.</span> <span class="toc-text">5.1.2. 通过np.arange</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.3.</span> <span class="toc-text">5.1.3. list和ndarray的索引</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -467,6 +491,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Spark</a>
               </li>
              
@@ -487,11 +519,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+                <a href="javascript:void(0)" class="js-tag color3">gluon、jupyter notebook</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -539,11 +567,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
+                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
+                <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
               </li>
             
             <div class="clearfix"></div>
