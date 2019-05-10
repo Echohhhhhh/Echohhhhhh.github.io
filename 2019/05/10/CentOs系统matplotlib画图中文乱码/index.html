@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="title: CentOs系统matplotlib画图中文乱码date: 2019-05-10T17:15:52.000Ztags:   - Centos、matplotlib、中文乱码1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在集群上使用Python中的matplotlib库画图出现中文乱码，记录一下解决方案。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-10T09:44:35.102Z">
+<meta property="og:updated_time" content="2019-05-10T09:47:51.513Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
 <meta name="twitter:description" content="title: CentOs系统matplotlib画图中文乱码date: 2019-05-10T17:15:52.000Ztags:   - Centos、matplotlib、中文乱码1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在集群上使用Python中的matplotlib库画图出现中文乱码，记录一下解决方案。">
@@ -158,7 +158,7 @@
 </li>
 </ul>
 <!-- /TOC -->
-<h1><span id="2-解决方案">2. 解决方案</span></h1><h2><span id="21-步骤一">2.1. 步骤一</span></h2><p>&ensp;&ensp;&ensp;&ensp;获取matplotlibrc文件所在的路径，使用jupyter notebook写代码获取路径。我的文件路径在<br>/data/WangBeibei/anaconda3/lib/python3.6/site-packages/matplotlib/mpl-data/matplotlibrc<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line">matplotlib.matplotlib_fname()</span><br><span class="line">```     </span><br><span class="line"><span class="comment">## 2.2. 步骤二    </span></span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;</span><br><span class="line">- 到 anaconda 的 matplotlib 中查看是否有 simhei.ttf 字体   </span><br><span class="line">```  </span><br><span class="line">cd /data/WangBeibei/anaconda3/lib/python3<span class="number">.6</span>/site-packages/matplotlib/mpl-data/fonts/ttf    </span><br><span class="line">ls -al | grep simhei </span><br><span class="line">```    </span><br><span class="line">- 如果没有输出任何内容，说明没有simhei字体，下载simhei.ttf文件，并上传到/data/WangBeibei/anaconda3/lib/python3<span class="number">.6</span>/site-packages/matplotlib/mpl-data/fonts/ttf目录下。    </span><br><span class="line">- 修改/data/WangBeibei/anaconda3/lib/python3<span class="number">.6</span>/site-packages/matplotlib/mpl-data/matplotlibrc文件，找到以下<span class="number">3</span>行，改为：  </span><br><span class="line">``` </span><br><span class="line">font.family: sans-serif   </span><br><span class="line">font.sans-serif: simhei,DejaVu Sans, Bitstream Vera Sans, Computer Modern Sans Serif, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif   </span><br><span class="line">axes.unicode_minus: <span class="keyword">False</span><span class="comment">#解决负号'-'显示为方块的问题   </span></span><br><span class="line">```   </span><br><span class="line">- 删除/data/WangBeibei/.cache/matplotlib</span><br></pre></td></tr></table></figure></p>
+<h1><span id="2-解决方案">2. 解决方案</span></h1><h2><span id="21-步骤一">2.1. 步骤一</span></h2><p>&ensp;&ensp;&ensp;&ensp;获取matplotlibrc文件所在的路径，使用jupyter notebook写代码获取路径。我的文件路径在<br>/data/WangBeibei/anaconda3/lib/python3.6/site-packages/matplotlib/mpl-data/matplotlibrc<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line">matplotlib.matplotlib_fname()</span><br><span class="line">```      </span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">       </span><br><span class="line"><span class="comment">## 2.2. 步骤二    </span></span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;</span><br><span class="line">- 到 anaconda 的 matplotlib 中查看是否有 simhei.ttf 字体   </span><br><span class="line">```  </span><br><span class="line">cd /data/WangBeibei/anaconda3/lib/python3<span class="number">.6</span>/site-packages/matplotlib/mpl-data/fonts/ttf    </span><br><span class="line">ls -al | grep simhei </span><br><span class="line">```    </span><br><span class="line">- 如果没有输出任何内容，说明没有simhei字体，下载simhei.ttf文件，并上传到/data/WangBeibei/anaconda3/lib/python3<span class="number">.6</span>/site-packages/matplotlib/mpl-data/fonts/ttf目录下。    </span><br><span class="line">- 修改/data/WangBeibei/anaconda3/lib/python3<span class="number">.6</span>/site-packages/matplotlib/mpl-data/matplotlibrc文件，找到以下<span class="number">3</span>行，改为：  </span><br><span class="line">``` </span><br><span class="line">font.family: sans-serif   </span><br><span class="line">font.sans-serif: simhei,DejaVu Sans, Bitstream Vera Sans, Computer Modern Sans Serif, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif   </span><br><span class="line">axes.unicode_minus: <span class="keyword">False</span><span class="comment">#解决负号'-'显示为方块的问题   </span></span><br><span class="line">```   </span><br><span class="line">- 删除/data/WangBeibei/.cache/matplotlib</span><br></pre></td></tr></table></figure></p>
 <p>rm -r /data/WangBeibei/.cache/matplotlib</p>
 <pre><code>## 2.3. 步骤三   
 经过以上步骤，再次运行jupyter notebook程序，中文就不会出现乱码。如果还是出现乱码，添加以下两行代码  
@@ -443,6 +443,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">gluon</a>
               </li>
              
@@ -452,14 +460,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -511,11 +511,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
+                <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
+                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
               </li>
             
             <div class="clearfix"></div>
