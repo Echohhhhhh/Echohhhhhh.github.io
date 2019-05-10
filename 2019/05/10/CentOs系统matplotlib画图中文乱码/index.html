@@ -8,16 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="远方到底有多远">
-<meta property="og:type" content="website">
+  <meta name="description" content="title: CentOs系统matplotlib画图中文乱码date: 2019-05-10T17:15:52.000Ztags:  Centos matplotlib 中文乱码   1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在集群上使用Python中的matplotlib库画图出现中文乱码，记录一下解决方案。">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Echo&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/05/10/CentOs系统matplotlib画图中文乱码/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="远方到底有多远">
+<meta property="og:description" content="title: CentOs系统matplotlib画图中文乱码date: 2019-05-10T17:15:52.000Ztags:  Centos matplotlib 中文乱码   1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在集群上使用Python中的matplotlib库画图出现中文乱码，记录一下解决方案。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-10T09:36:54.778Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
-<meta name="twitter:description" content="远方到底有多远">
+<meta name="twitter:description" content="title: CentOs系统matplotlib画图中文乱码date: 2019-05-10T17:15:52.000Ztags:  Centos matplotlib 中文乱码   1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在集群上使用Python中的matplotlib库画图出现中文乱码，记录一下解决方案。">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
   
@@ -137,67 +138,142 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-			
-  
-    <article id="post-图卷积" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+			<article id="post-CentOs系统matplotlib画图中文乱码" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/03/图卷积/">图卷积</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/03/图卷积/" class="archive-article-date">
-  	<time datetime="2019-03-03T04:25:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-03</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-图卷积"><a href="#1-图卷积" class="headerlink" title="1. 图卷积"></a>1. 图卷积</h1><p>&ensp;&ensp;&ensp;&ensp;看了很久关于图卷积的内容，但总觉得自己理解不深刻，在这里把自己的一些想法写出来，也算把图卷积的内容梳理一下。<br></p>
-        
-          <a class="article-more-a" href="/2019/03/03/图卷积/#more">more >></a>
-        
+        <hr>
+<p>title: CentOs系统matplotlib画图中文乱码<br>date: 2019-05-10T17:15:52.000Z<br>tags:</p>
+<ul>
+<li>Centos</li>
+<li>matplotlib</li>
+<li>中文乱码</li>
+</ul>
+<hr>
+<h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;在集群上使用Python中的matplotlib库画图出现中文乱码，记录一下解决方案。   </p>
+ <a id="more"></a> 
+<!-- TOC -->
+<ul>
+<li><a href="#1-%E7%AE%80%E4%BB%8B">1. 简介</a></li>
+<li><a href="#2-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">2. 解决方案</a><ul>
+<li><a href="#21-%E6%AD%A5%E9%AA%A4%E4%B8%80">2.1. 步骤一</a></li>
+<li><a href="#22-%E6%AD%A5%E9%AA%A4%E4%BA%8C">2.2. 步骤二</a></li>
+<li><a href="#23-%E6%AD%A5%E9%AA%A4%E4%B8%89">2.3. 步骤三</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1><span id="2-解决方案">2. 解决方案</span></h1><h2><span id="21-步骤一">2.1. 步骤一</span></h2><p>&ensp;&ensp;&ensp;&ensp;获取matplotlibrc文件所在的路径，使用jupyter notebook写代码获取路径。我的文件路径在<br>/data/WangBeibei/anaconda3/lib/python3.6/site-packages/matplotlib/mpl-data/matplotlibrc<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line">matplotlib.matplotlib_fname()</span><br><span class="line">```     </span><br><span class="line"><span class="comment">## 2.2. 步骤二    </span></span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;</span><br><span class="line">- 到 anaconda 的 matplotlib 中查看是否有 simhei.ttf 字体   </span><br><span class="line">```  </span><br><span class="line">cd /data/WangBeibei/anaconda3/lib/python3<span class="number">.6</span>/site-packages/matplotlib/mpl-data/fonts/ttf    </span><br><span class="line">ls -al | grep simhei </span><br><span class="line">```    </span><br><span class="line">- 如果没有输出任何内容，说明没有simhei字体，下载simhei.ttf文件，并上传到/data/WangBeibei/anaconda3/lib/python3<span class="number">.6</span>/site-packages/matplotlib/mpl-data/fonts/ttf目录下。    </span><br><span class="line">- 修改/data/WangBeibei/anaconda3/lib/python3<span class="number">.6</span>/site-packages/matplotlib/mpl-data/matplotlibrc文件，找到以下<span class="number">3</span>行，改为：  </span><br><span class="line">``` </span><br><span class="line">font.family: sans-serif   </span><br><span class="line">font.sans-serif: simhei,DejaVu Sans, Bitstream Vera Sans, Computer Modern Sans Serif, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif   </span><br><span class="line">axes.unicode_minus: <span class="keyword">False</span><span class="comment">#解决负号'-'显示为方块的问题   </span></span><br><span class="line">```   </span><br><span class="line">- 删除/data/WangBeibei/.cache/matplotlib</span><br></pre></td></tr></table></figure></p>
+<p>rm -r /data/WangBeibei/.cache/matplotlib</p>
+<pre><code>## 2.3. 步骤三   
+经过以上步骤，再次运行jupyter notebook程序，中文就不会出现乱码。如果还是出现乱码，添加以下两行代码  
+```python    
+import matplotlib.pyplot as plt
+%matplotlib inline
+plt.rcParams[&#39;font.sans-serif&#39;] = [&#39;simhei&#39;]  # 用来正常显示中文标签
+plt.rcParams[&#39;axes.unicode_minus&#39;] = False  # 用来正常显示负号#显示所有列
+</code></pre>
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">图卷积</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/03/图卷积/">展开全文 >></a>
-        </p>
-      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
 
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/05/10/CentOs系统matplotlib画图中文乱码/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/04/27/gluon环境安装/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">gluon环境安装</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -212,657 +288,32 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-拦截器" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/01/拦截器/">拦截器</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/01/拦截器/" class="archive-article-date">
-  	<time datetime="2019-03-01T06:53:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;拦截器是SpringMVC中的一个核心应用组件,主要用于处理多个Controller的共性问题.当我们的请求由DispatcherServlet<strong>派发到具体Controller之前</strong>首先要执行拦截器中一些相关方法,在这些方法中可以对请求进行相应预处理(例如权限检测,参数验证),这些方法可以决定对这个请求进行拦截还是放行。<br></p>
-        
-          <a class="article-more-a" href="/2019/03/01/拦截器/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SpringMVC</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">拦截器</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/01/拦截器/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">2.1. 步骤一</span></a></li></ol></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
-  
-    <article id="post-HBase" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/28/HBase/">HBase</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/28/HBase/" class="archive-article-date">
-  	<time datetime="2019-02-28T01:03:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;在做项目的过程中用到了HBase，遇到了一些问题，当数据过大的时候，向HBase中会出现热点问题。<br></p>
-        
-          <a class="article-more-a" href="/2019/02/28/HBase/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HBase</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">预分区</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/28/HBase/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-NLP" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/15/NLP/">NLP</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/15/NLP/" class="archive-article-date">
-  	<time datetime="2019-02-15T14:36:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-词嵌入"><a href="#1-词嵌入" class="headerlink" title="1. 词嵌入"></a>1. 词嵌入</h1><p>&ensp;&ensp;&ensp;&ensp;<strong>词向量</strong>就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫<strong>词嵌入</strong>。<br>前几天看到了一篇<a href="https://mp.weixin.qq.com/s/thUjPlkqpu6H_t92SUDtLg" target="_blank" rel="noopener">讲解Word2Vec的推送</a>，讲的超级好，通俗易懂。</p>
-        
-          <a class="article-more-a" href="/2019/02/15/NLP/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">NLP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/15/NLP/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-RNN" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/12/RNN/">RNN</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/12/RNN/" class="archive-article-date">
-  	<time datetime="2019-02-12T12:55:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-门控循环单元GRU"><a href="#1-门控循环单元GRU" class="headerlink" title="1. 门控循环单元GRU"></a>1. 门控循环单元GRU</h1><p>&ensp;&ensp;&ensp;&ensp;梯度裁剪可以应对梯度爆炸，但无法解决梯度衰减的问题。通常由于这个原因，循环神经网络在实际中较难捕捉时间序列中时间步距离较大的依赖关系。<br></p>
-        
-          <a class="article-more-a" href="/2019/02/12/RNN/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">gluon</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RNN</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/12/RNN/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-lovely-dog" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/12/lovely-dog/">lovely dog</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/12/lovely-dog/" class="archive-article-date">
-  	<time datetime="2019-02-12T08:37:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&ensp;&ensp;&ensp;&ensp;记得第一次养小狗狗，还是我上小学的时候，是一个白色的小狗，超级好看，我用香皂给它洗澡，后来家里种小麦的时候我爸用农药拌小麦，小狗吃了一些，就死了(((m-__-)m))。从那之后家里也没养过狗。<br></p>
-        
-          <a class="article-more-a" href="/2019/02/12/lovely-dog/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">生活</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/12/lovely-dog/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gluon-卷积" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/05/gluon-卷积/">gluon_卷积</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/05/gluon-卷积/" class="archive-article-date">
-  	<time datetime="2019-02-05T07:44:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-卷积"><a href="#1-卷积" class="headerlink" title="1. 卷积"></a>1. 卷积</h1><p>卷积操作需要有1一个数组和一个卷积核，假设卷积核的形状为pxq，代表卷积核的高和宽。二维卷积层的输入输出用4维表示，格式为(样本，通道，高，宽)<br></p>
-        
-          <a class="article-more-a" href="/2019/02/05/gluon-卷积/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">gluon</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">卷积</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/05/gluon-卷积/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-再看gluon新收获" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/31/再看gluon新收获/">再看gluon新收获</a>
-    </h1>
-  
-
-        
-        <a href="/2019/01/31/再看gluon新收获/" class="archive-article-date">
-  	<time datetime="2019-01-31T09:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>以前看了一些《动手学深度学习》的教程，但是没有看完，寒假在家觉得时间还多，所以把以前看过的内容再看一遍，下面是第二次看的一些收获，记录下来，以备后需。<br></p>
-        
-          <a class="article-more-a" href="/2019/01/31/再看gluon新收获/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">gluon</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Machine Learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/31/再看gluon新收获/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-First-blog" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/21/First-blog/">学习Markdown</a>
-    </h1>
-  
-
-        
-        <a href="/2019/01/21/First-blog/" class="archive-article-date">
-  	<time datetime="2019-01-20T16:28:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Markdown是一种轻量级标记语言，它用简洁的语法代替排版，使我们专心码字。它的目的是实现易读易写，成为一种适用于网络的书写语言。同时，Markdown支持嵌入html标签。<br></p>
-        
-          <a class="article-more-a" href="/2019/01/21/First-blog/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/21/First-blog/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -894,8 +345,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

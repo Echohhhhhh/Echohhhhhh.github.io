@@ -139,6 +139,64 @@
           <div id="js-content" class="content-ll">
 			
   
+    <article id="post-CentOs系统matplotlib画图中文乱码" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: CentOs系统matplotlib画图中文乱码<br>date: 2019-05-10T17:15:52.000Z<br>tags:</p>
+<ul>
+<li>Centos</li>
+<li>matplotlib</li>
+<li>中文乱码</li>
+</ul>
+<hr>
+<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;在集群上使用Python中的matplotlib库画图出现中文乱码，记录一下解决方案。   </p>
+        
+          <a class="article-more-a" href="/2019/05/10/CentOs系统matplotlib画图中文乱码/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/10/CentOs系统matplotlib画图中文乱码/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-gluon环境安装" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -159,30 +217,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="简介">简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;在服务器上安装gluon环境。</p>
-<h1><span id="介绍">介绍</span></h1><p>&ensp;&ensp;&ensp;&ensp;在服务器上可以安装不同的虚拟环境，这些虚拟环境之间互不影响，不同的虚拟环境可以安装不同的python版本，不同的框架。 </p>
-<ol>
-<li>安装Anaconda<br>下载Anaconda3-5.2.0-Linux-x86_64.sh上传到服务器中，使用<code>sh xxxxxx.sh</code>安装即可。</li>
-<li>配置清华镜像<br>使用conda创建虚拟（运行）环境。conda和pip默认使用国外站点来下载软件，我们可以配置国内镜像来加速下载（国外用户无须此操作）。<pre><code># 配置清华conda镜像
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
-# 配置清华PyPI镜像（如无法运行，将pip版本升级到&gt;=10.0.0）
-pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-</code></pre></li>
-<li><code>conda env create -f environment.yml</code><br>创建虚拟环境gluon，安装mxnet框架和一些依赖包。</li>
-<li><p><code>conda info -e</code><br>查看当前服务器上都有哪些虚拟环境,下面截图中显示，当前存在2个虚拟环境，其中带*的是当前正在使用的虚拟环境。<br><img src="/2019/04/27/gluon环境安装/conda-info.png" alt=""></p>
-</li>
-<li><p><code>screen -S WBB</code>（超级有用！！！）<br>因为是外网服务器，所以网络连接经常断开，连接一断开，运行在上面的程序就不能运行了，所以创建虚拟窗口，在这个虚拟窗口内运行程序，就算网络断开了，程序依然会继续运行</p>
-</li>
-<li><p><code>source activate gluon</code><br>激活虚拟环境gluon</p>
-</li>
-<li><p>使用jupyter notebook<br>第一次使用jupyter notebook，需要映射端口号，默认jupyter notebook的端口号是8888，但是在这个集群上，如果别人已经把8888端口占用了，集群会自动给你分配一个端口号，然后在putty中映射一下这个端口，具体操作参考<a href="http://211.71.75.57:5000/GPU_instruction" target="_blank" rel="noopener">教程</a>   </p>
-</li>
-<li><p><code>ctrl+A+D</code>退出虚拟窗口<br>当把程序运行之后，使用以上按钮退出虚拟窗口，这样程序就在后台运行，就算把电脑换机了，程序还是会运行。   </p>
-</li>
-<li><code>screen -r WBB</code><br>使用以上命令进入到虚拟窗口中，查看程序运行的结果</li>
-</ol>
-
+        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;在服务器上安装gluon环境。<br></p>
+        
+          <a class="article-more-a" href="/2019/04/27/gluon环境安装/#more">more >></a>
+        
       
 
       
@@ -821,86 +859,6 @@ pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 
   
-    <article id="post-图卷积" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/03/图卷积/">图卷积</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/03/图卷积/" class="archive-article-date">
-  	<time datetime="2019-03-03T04:25:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-图卷积"><a href="#1-图卷积" class="headerlink" title="1. 图卷积"></a>1. 图卷积</h1><p>&ensp;&ensp;&ensp;&ensp;看了很久关于图卷积的内容，但总觉得自己理解不深刻，在这里把自己的一些想法写出来，也算把图卷积的内容梳理一下。<br></p>
-        
-          <a class="article-more-a" href="/2019/03/03/图卷积/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">图卷积</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/03/图卷积/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1024,11 +982,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">gluon、jupyter notebook</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">预分区</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1048,27 +1022,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gluon、jupyter notebook</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">生活</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
+                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1076,7 +1034,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
+                <a href="javascript:void(0)" class="js-tag color3">卷积</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1092,10 +1050,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">卷积</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
               </li>
              
@@ -1105,6 +1059,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">CDH集群、Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1236,22 +1194,6 @@ MathJax.Hub.Queue(function() {
     </div>
 
 </div>
-  </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!--<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
