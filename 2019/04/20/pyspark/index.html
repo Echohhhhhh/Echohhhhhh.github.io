@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-16T09:11:36.324Z">
+<meta property="og:updated_time" content="2019-05-16T09:14:19.113Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pyspark">
 <meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序">
@@ -166,7 +166,7 @@
 <li><a href="#3-%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%BC%8F">3. 执行模式</a><ul>
 <li><a href="#31-standalone%E6%A8%A1%E5%BC%8F">3.1. standalone模式</a></li>
 <li><a href="#32-yarn%E6%A8%A1%E5%BC%8F">3.2. Yarn模式</a></li>
-<li><a href="#%E5%8F%82%E6%95%B0%E8%B0%83%E4%BC%98">参数调优</a></li>
+<li><a href="#33-%E5%8F%82%E6%95%B0%E8%B0%83%E4%BC%98">3.3. 参数调优</a></li>
 </ul>
 </li>
 <li><a href="#4-%E5%88%9B%E5%BB%BAsc">4. 创建sc</a></li>
@@ -217,7 +217,7 @@
 <li>—executor-core NUM，每个executor的核数。在yarn或者standalone下使用</li>
 <li>—executor-memory MEM 每个executor的内存，默认是1G</li>
 <li>—total-executor-cores NUM,所有executor总共的核数，仅仅在mesos或standalone中使用</li>
-<li>driver-cores NUM Driver的核数，默认是1，这个参数只在standalone模式下使用   <h2><span id="31-standalone模式">3.1. standalone模式</span></h2>&ensp;&ensp;&ensp;&ensp;运行一个pyspark程序，使用standalone模式来提交程序，需要使用的参数有：<br>—master spark://hz4:7077<br>—jars xxx1.jar,xxx2.jar<br>不使用—num-executors,这个在yarn中使用<br>—executor-memory MEM,每个executor占用的内存，如果一个executor占用4G，有5个executor，那这个程序占用20G<br>—executor-core NUM，表示每个executor的核数<br><strong>—total-executor-cores NUM</strong>,所有的executor占用的核数。使用total-executor-cores / executor-core得到executor的个数，假设total-executor-cores设置为30，executor-core为6，则表示运行这个程序一共有5个executor，分别在不同worker上。一个worker可以有多个executor。 假设有5个executor，2个worker，那么一个worker上有多个executor。如果不指定—total-executor-cores，程序会把worker上的核全都占用，这样别人提交程序的时候就没有办法运行。<br>&ensp;&ensp;&ensp;&ensp;运行一个程序的命令：spark-submit —master spark://hz4:7077  —executor-memory 4G —executor-cores 6 —total-executor-cores 30 —jars ../jars/spark-examples_2.10_my_converters-1.6.0.jar spark_streaming.py   <h2><span id="32-yarn模式">3.2. Yarn模式</span></h2>&ensp;&ensp;&ensp;&ensp;yarn模式可以用的参数有：<br>—master yarn<br>—jars xxx1.jar,xxx2.jar<br><strong>—num-executors NUM</strong>, 启动的executor的个数，默认为2，不要使用默认，会很慢。在yarn中使用。yarn资源管理器会在不同的worker上分配executor给程序。<br>—executor-memory MEM,每个executor占用的内存，如果一个executor占用4G，有5个executor，那这个程序占用20G<br>—executor-core NUM，表示每个executor的核数，如果有5个executor，每个executor占用4G，那这个程序运行时占用20G内存。<br>&ensp;&ensp;&ensp;&ensp;运行一个程序的命令：spark-submit —master yarn —num-executors 20 —executor-memory 4G —executor-cores 4 —jars ../jars/spark-examples_2.10_my_converters-1.6.0.jar spark_streaming.py <h2><span id="参数调优">参数调优</span></h2>&ensp;&ensp;&ensp;&ensp;</li>
+<li>driver-cores NUM Driver的核数，默认是1，这个参数只在standalone模式下使用   <h2><span id="31-standalone模式">3.1. standalone模式</span></h2>&ensp;&ensp;&ensp;&ensp;运行一个pyspark程序，使用standalone模式来提交程序，需要使用的参数有：<br>—master spark://hz4:7077<br>—jars xxx1.jar,xxx2.jar<br>不使用—num-executors,这个在yarn中使用<br>—executor-memory MEM,每个executor占用的内存，如果一个executor占用4G，有5个executor，那这个程序占用20G<br>—executor-core NUM，表示每个executor的核数<br><strong>—total-executor-cores NUM</strong>,所有的executor占用的核数。使用total-executor-cores / executor-core得到executor的个数，假设total-executor-cores设置为30，executor-core为6，则表示运行这个程序一共有5个executor，分别在不同worker上。一个worker可以有多个executor。 假设有5个executor，2个worker，那么一个worker上有多个executor。如果不指定—total-executor-cores，程序会把worker上的核全都占用，这样别人提交程序的时候就没有办法运行。<br>&ensp;&ensp;&ensp;&ensp;运行一个程序的命令：spark-submit —master spark://hz4:7077  —executor-memory 4G —executor-cores 6 —total-executor-cores 30 —jars ../jars/spark-examples_2.10_my_converters-1.6.0.jar spark_streaming.py   <h2><span id="32-yarn模式">3.2. Yarn模式</span></h2>&ensp;&ensp;&ensp;&ensp;yarn模式可以用的参数有：<br>—master yarn<br>—jars xxx1.jar,xxx2.jar<br><strong>—num-executors NUM</strong>, 启动的executor的个数，默认为2，不要使用默认，会很慢。在yarn中使用。yarn资源管理器会在不同的worker上分配executor给程序。<br>—executor-memory MEM,每个executor占用的内存，如果一个executor占用4G，有5个executor，那这个程序占用20G<br>—executor-core NUM，表示每个executor的核数，如果有5个executor，每个executor占用4G，那这个程序运行时占用20G内存。<br>&ensp;&ensp;&ensp;&ensp;运行一个程序的命令：spark-submit —master yarn —num-executors 20 —executor-memory 4G —executor-cores 4 —jars ../jars/spark-examples_2.10_my_converters-1.6.0.jar spark_streaming.py <h2><span id="33-参数调优">3.3. 参数调优</span></h2>&ensp;&ensp;&ensp;&ensp;</li>
 <li>num-executors：该参数用于设置Spark作业总共要用多少个Executor进程来执行,Driver在向YARN集群管理器申请资源时，YARN集群管理器会尽可能按照你的设置来在<br>集群的各个工作节点上，启动相应数量的Executor进程。<br><strong>参数调优建议</strong>：<br>每个Spark作业的运行一般设置50~100个左右的Executor进程比较合适，设置太少或太多的Executor进程都不好。设置的太少，无法充分利用集群资源；<br>设置的太多的话，大部分队列可能无法给予充分的资源。  </li>
 <li>executor-memory：该参数用于设置每个Executor进程的内存。Executor内存的大小，很多时候直接决定了Spark作业的性能，而且跟常见的JVM OOM异常，也有直接的关联。<br><strong>参数调优建议</strong>：<br>每个Executor进程的内存设置4G~8G较为合适。但是这只是一个参考值，具体的设置还是得根据不同部门的资源队列来定。可以看看自己团队的资源队列<br>的最大内存限制是多少，num-executors乘以executor-memory，是不能超过队列的最大内存量的。此外，如果你是跟团队里其他人共享这个资源队列，<br>那么申请的内存量最好不要超过资源队列最大总内存的1/3~1/2，避免你自己的Spark作业占用了队列所有的资源，导致别的同学的作业无法运行。   </li>
 <li>executor-cores：该参数用于设置每个Executor进程的CPU core数量。这个参数决定了每个Executor进程并行执行task线程的能力。因为每个CPU core同一时间只能执行一个<br>task线程，因此每个Executor进程的CPU core数量越多，越能够快速地执行完分配给自己的所有task线程。<br><strong>参数调优建议</strong>：<br>Executor的CPU core数量设置为2~4个较为合适。同样得根据不同部门的资源队列来定，可以看看自己的资源队列的最大CPU core限制是多少，再依据设置的<br>Executor数量，来决定每个Executor进程可以分配到几个CPU core。同样建议，如果是跟他人共享这个队列，那么num-executors * executor-cores不要超过<br>队列总CPU core的1/3~1/2左右比较合适，也是避免影响其他同学的作业运行。  </li>
@@ -455,7 +455,7 @@ with open(filename,&#39;w&#39;) as f:
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 重要概念和术语</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. 执行模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">3.1. standalone模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">3.2. Yarn模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">参数调优</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">4. 创建sc</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">5. RDD转换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.</span> <span class="toc-text">5.1. 转换操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.2.</span> <span class="toc-text">5.2. 行动操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.3.</span> <span class="toc-text">5.3. 持久化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">6. 分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">7.</span> <span class="toc-text">7. 创建RDD</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">7.1.</span> <span class="toc-text">7.1. 通过paralize创建RDD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">7.2.</span> <span class="toc-text">7.2. 读文本文件创建RDD</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">8.</span> <span class="toc-text">8. map和flatMap</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">9.</span> <span class="toc-text">9. flatMap和flatMapValues</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">10.</span> <span class="toc-text">10. reduceByKey和groupByKey</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">11.</span> <span class="toc-text">11. sortBy和SortByKey</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">12.</span> <span class="toc-text">12. 将Spark计算的结果存储在文件中</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">12.1.</span> <span class="toc-text">12.1. 写入到服务器本地文件中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">12.2.</span> <span class="toc-text">12.2. 写入到HDFS文件中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">12.3.</span> <span class="toc-text">12.3. 打印RDD元素</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 重要概念和术语</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. 执行模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">3.1. standalone模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">3.2. Yarn模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">3.3. 参数调优</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">4. 创建sc</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">5. RDD转换</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.</span> <span class="toc-text">5.1. 转换操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.2.</span> <span class="toc-text">5.2. 行动操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.3.</span> <span class="toc-text">5.3. 持久化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">6. 分区</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">7.</span> <span class="toc-text">7. 创建RDD</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">7.1.</span> <span class="toc-text">7.1. 通过paralize创建RDD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">7.2.</span> <span class="toc-text">7.2. 读文本文件创建RDD</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">8.</span> <span class="toc-text">8. map和flatMap</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">9.</span> <span class="toc-text">9. flatMap和flatMapValues</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">10.</span> <span class="toc-text">10. reduceByKey和groupByKey</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">11.</span> <span class="toc-text">11. sortBy和SortByKey</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">12.</span> <span class="toc-text">12. 将Spark计算的结果存储在文件中</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">12.1.</span> <span class="toc-text">12.1. 写入到服务器本地文件中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">12.2.</span> <span class="toc-text">12.2. 写入到HDFS文件中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">12.3.</span> <span class="toc-text">12.3. 打印RDD元素</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -601,6 +601,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">gluon</a>
               </li>
              
@@ -613,14 +621,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Spark</a>
               </li>
              
@@ -629,11 +629,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">生活</a>
+                <a href="javascript:void(0)" class="js-tag color3">gluon、jupyter notebook</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gluon、jupyter notebook</a>
+                <a href="javascript:void(0)" class="js-tag color3">生活</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,10 +642,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NLP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">卷积</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -658,6 +654,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">卷积</a>
               </li>
              
               <li class="article-tag-list-item">
