@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/04/CDH集群/spark3.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/04/CDH集群/spark4.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/04/CDH集群/kafka1.png">
-<meta property="og:updated_time" content="2019-05-07T11:45:38.126Z">
+<meta property="og:updated_time" content="2019-05-24T15:52:19.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH集群">
 <meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近去给甲方安装CDH集群，对于集群的搭建和测试在这里总结一下。">
@@ -193,6 +193,7 @@
 <li><a href="#615-%E4%BF%AE%E6%94%B9hdfs%E6%9D%83%E9%99%90">6.15. 修改hdfs权限</a></li>
 <li><a href="#616-%E5%AE%89%E8%A3%85python%E4%B8%89%E6%96%B9%E5%BA%93">6.16. 安装python三方库</a></li>
 <li><a href="#617-%E5%AE%89%E8%A3%85kafka">6.17. 安装kafka</a></li>
+<li><a href="#yarn">yarn</a></li>
 </ul>
 </li>
 </ul>
@@ -352,7 +353,7 @@
 <p><font color="red">注意：只设置kafka broker，不设置Kafka MirrorMaker<br>安装的时候会配置kafka，配置完后会启动kafka，kafka一定启动不了，右下角有个重试按钮，这时候需要再开一个管理界面，像上面配置spark一样，配置kafka，如下图 </font><br><img src="/2019/04/04/CDH集群/kafka1.png" alt=""><br>分别点进三个超链接，选择左上角的配置，针对每个broker进行配置。<br>需要配置的是两项：</p>
 <ol>
 <li>Broker ID：可以机器顺序分别改成1，2，3</li>
-<li>Java Heap Size of Broker：改成1G<br>然后回到刚才安装的那个界面，点击重试。</li>
+<li>Java Heap Size of Broker：改成1G<br>然后回到刚才安装的那个界面，点击重试。<h2><span id="yarn">yarn</span></h2>CDH 5.9 以前的版本，如果使用 python3 且使用 yarn 作为master，需手动修复CDH 集群的bug。CDH 5.9 以前的版本在使用 yarn 作为 spark master 的时候，如果使用 python3，会出现 yarn 內部 topology.py 这个文件引发的 bug。这个文件是 python2 的语法，我们使用 python3 运行任务的时候，python3 的解释器在处理这个文件时会出错。<br>解决方案是：将这个文件重写为 python3 的版本，每次在重启 yarn 之后，将这个文件复制到所有机器<br>的 /etc/hadoop/conf.cloudera.yarn/ 目录下。<br><strong>以下操作在所有机器上都要操作，并使用root用户，不可以使用普通用户。如果/etc/hadoop/conf.cloudera.yarn目录不存在，先创建一个同名目录，然后将topology.py复制到该目录下</strong>。</li>
 </ol>
 
       
@@ -496,7 +497,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 版本控制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. Linux目录介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">4. 安装前说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">5. 小常识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">6. 安装CDH集群</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.1.</span> <span class="toc-text">6.1. 关闭所有机器的防火墙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.2.</span> <span class="toc-text">6.2. 修改机器的hosts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.3.</span> <span class="toc-text">6.3. 查看网络是否连通</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.4.</span> <span class="toc-text">6.4. 生成主节点的ssh密钥并分发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.5.</span> <span class="toc-text">6.5. 安装ntp服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.6.</span> <span class="toc-text">6.6. 卸载机器自带的openjdk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.7.</span> <span class="toc-text">6.7. 安装JDK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.8.</span> <span class="toc-text">6.8. 安装MySQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.9.</span> <span class="toc-text">6.9. 创建MySQL数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.10.</span> <span class="toc-text">6.10. 安装Cloudera Manager Server和Agent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.11.</span> <span class="toc-text">6.11. 打开网页配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.12.</span> <span class="toc-text">6.12. HDFS的HA安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.13.</span> <span class="toc-text">6.13. 安装Anaconda</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.14.</span> <span class="toc-text">6.14. 安装Spark（standalone）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.15.</span> <span class="toc-text">6.15. 修改hdfs权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.16.</span> <span class="toc-text">6.16. 安装python三方库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.17.</span> <span class="toc-text">6.17. 安装kafka</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 版本控制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. Linux目录介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">4. 安装前说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">5. 小常识</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">6. 安装CDH集群</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.1.</span> <span class="toc-text">6.1. 关闭所有机器的防火墙</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.2.</span> <span class="toc-text">6.2. 修改机器的hosts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.3.</span> <span class="toc-text">6.3. 查看网络是否连通</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.4.</span> <span class="toc-text">6.4. 生成主节点的ssh密钥并分发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.5.</span> <span class="toc-text">6.5. 安装ntp服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.6.</span> <span class="toc-text">6.6. 卸载机器自带的openjdk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.7.</span> <span class="toc-text">6.7. 安装JDK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.8.</span> <span class="toc-text">6.8. 安装MySQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.9.</span> <span class="toc-text">6.9. 创建MySQL数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.10.</span> <span class="toc-text">6.10. 安装Cloudera Manager Server和Agent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.11.</span> <span class="toc-text">6.11. 打开网页配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.12.</span> <span class="toc-text">6.12. HDFS的HA安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.13.</span> <span class="toc-text">6.13. 安装Anaconda</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.14.</span> <span class="toc-text">6.14. 安装Spark（standalone）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.15.</span> <span class="toc-text">6.15. 修改hdfs权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.16.</span> <span class="toc-text">6.16. 安装python三方库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.17.</span> <span class="toc-text">6.17. 安装kafka</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.18.</span> <span class="toc-text">yarn</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -642,14 +643,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">gluon</a>
               </li>
              
@@ -686,6 +679,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
@@ -714,15 +715,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
               </li>
             
             <div class="clearfix"></div>

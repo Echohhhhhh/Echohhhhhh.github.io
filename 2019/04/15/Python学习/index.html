@@ -16,15 +16,12 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;学习Python！！！！">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/range.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/print.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/list.png">
-<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/arr.png">
-<meta property="og:updated_time" content="2019-04-25T10:39:37.687Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/dict.png">
+<meta property="og:updated_time" content="2019-05-28T03:13:04.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python学习">
 <meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;学习Python！！！！">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/15/Python学习/range.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/15/Python学习/dict.png">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
   
@@ -179,6 +176,10 @@
 </li>
 </ul>
 </li>
+<li><a href="#6-pandas">6. Pandas</a><ul>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+</li>
 </ul>
 <!-- /TOC -->
 <h1><span id="2-规范">2. 规范</span></h1><p>&ensp;&ensp;&ensp;&ensp;</p>
@@ -193,12 +194,79 @@
 <h2><span id="51-创建ndarray">5.1. 创建ndarray</span></h2><h3><span id="511-通过nparray">5.1.1. 通过np.array</span></h3><p>&ensp;&ensp;&ensp;&ensp;通过np.array()来创建，传入的参数可以是list，也可以是tuple，使用ndarray的shape属性来获取ndarray的形状。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">b = np.array((<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>))</span><br><span class="line">c = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]])</span><br></pre></td></tr></table></figure></p>
 <p>使用reshape改变ndarray的形状<br><code>c.reshape((3,-1))</code>,reshape传入的形状是可以是<br>reshape((3,-1)),<br>reshape([3,1]),<br>reshape(3,-1)</p>
 <h3><span id="512-通过nparange">5.1.2. 通过np.arange</span></h3><p>numpy提供了很多方法直接创建一个ndarray对象.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">arr1=np.arange(<span class="number">1</span>,<span class="number">10</span>,<span class="number">1</span>) <span class="comment">#   </span></span><br><span class="line">arr2=np.linspace(<span class="number">1</span>,<span class="number">10</span>,<span class="number">10</span>)  </span><br><span class="line"><span class="keyword">print</span> (arr1,arr1.dtype)  </span><br><span class="line"><span class="keyword">print</span> (arr2,arr2.dtype)</span><br><span class="line">```  </span><br><span class="line">结果</span><br></pre></td></tr></table></figure></p>
-<p>[1 2 3 4 5 6 7 8 9] int32<br>[ 1.  2.  3.  4.  5.  6.  7.  8.  9. 10.] float64<br><code>``   
-np.arange(a,b,c)表示产生从a~b，不包括b，间隔为c的一个ndarray，数据类型默认是int32。   
-np.linspace(a,b,c)表示把a~b（包括b），平均分成c份。    
-np.arange()和range都可以用来生成序列。注意arange是numpy的函数，range可以直接调用。arange和range不同的是：range只能生成int类型，写</code>rang(1,10,0.1)<code>是错误的，arange可以生成float类型，可以写成</code>np.arange(1,10,0.1)`<br><img src="/2019/04/15/Python学习/range.png" alt=""><br><strong>使用print输出时，list中的元素之间有逗号分开，ndarray元素之间没有逗号</strong>。<br><img src="/2019/04/15/Python学习/print.png" alt=""><br><strong>虽然有很多产生ndarray类型的方法，但是大部分情况下我们都是从list进行转换生成ndarray。因为我们从文件中读取数据存储在list中，然后转换成ndarray</strong><br>比如定义一个list,a = [1,2,3,4],然后使用np.array(a)将list转换成ndarray类型。   </p>
-<h3><span id="513-list和ndarray的索引">5.1.3. list和ndarray的索引</span></h3><p>定义一个list<br><code>list1=[[1,2,3],[4,5,6],[7,8,9]]</code><br>定义一个ndarray<br><code>arr1 = np.array(list1)</code>   </p>
-<p><img src="/2019/04/15/Python学习/list.png" alt=""><br><img src="/2019/04/15/Python学习/arr.png" alt=""><br>ndarray比list的索引方式更多，这也是两者经常遇到的区别。<br><strong>因为list可以存储任意类型的数据，因为list中存储数据存放的地址，简单说就是指针，并非数据，这样保存一个list就太麻烦了，例如list1=[1,2,3,’a’]就需要4个指针和4个数据，增加了存储和CPU消耗</strong></p>
+<p>[1 2 3 4 5 6 7 8 9] int32<br>[ 1.  2.  3.  4.  5.  6.  7.  8.  9. 10.] float64<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">np.arange(a,b,c)表示产生从a~b，不包括b，间隔为c的一个ndarray，数据类型默认是int32。   </span><br><span class="line">np.linspace(a,b,c)表示把a~b（包括b），平均分成c份。    </span><br><span class="line">np.arange()和range都可以用来生成序列。注意arange是numpy的函数，range可以直接调用。arange和range不同的是：range只能生成int类型，写`rang(1,10,0.1)`是错误的，arange可以生成float类型，可以写成`np.arange(1,10,0.1)`  </span><br><span class="line">![](Python学习/range.png)        </span><br><span class="line">**使用print输出时，list中的元素之间有逗号分开，ndarray元素之间没有逗号**。   </span><br><span class="line">![](Python学习/print.png)  </span><br><span class="line">**虽然有很多产生ndarray类型的方法，但是大部分情况下我们都是从list进行转换生成ndarray。因为我们从文件中读取数据存储在list中，然后转换成ndarray**    </span><br><span class="line">比如定义一个list,a = [1,2,3,4],然后使用np.array(a)将list转换成ndarray类型。   </span><br><span class="line">### 5.1.3. list和ndarray的索引 </span><br><span class="line">定义一个list  </span><br><span class="line">`list1=[[1,2,3],[4,5,6],[7,8,9]]`  </span><br><span class="line">定义一个ndarray   </span><br><span class="line">`arr1 = np.array(list1)`   </span><br><span class="line"></span><br><span class="line">![](Python学习/list.png)</span><br><span class="line">![](Python学习/arr.png)    </span><br><span class="line">ndarray比list的索引方式更多，这也是两者经常遇到的区别。   </span><br><span class="line">**因为list可以存储任意类型的数据，因为list中存储数据存放的地址，简单说就是指针，并非数据，这样保存一个list就太麻烦了，例如list1=[1,2,3,&apos;a&apos;]就需要4个指针和4个数据，增加了存储和CPU消耗**         </span><br><span class="line"># 6. Pandas      </span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp; DataFrame根据某一列排序，其中inplace=True表示修改df的值，默认是false，表示不修改df的值，会返回一个排好序的DataFrame。  </span><br><span class="line">```df.sort_values(&quot;数据时间&quot;,inplace=True)```   </span><br><span class="line">排好序的dataframe的index列还是原先dataframe的index。比如下面的图是排序之间的dataframe。   </span><br><span class="line">![](Python学习/排序前.png)    </span><br><span class="line">使用```df.sort_values(&quot;数据时间&quot;,inplace=True)```  按照时间排序，但是index还是原先的index，我想让排序后的dataframe的index从0开始。</span><br><span class="line">![](Python学习/排序后.png)      </span><br><span class="line">```df[2:4]```表示返回第3和4行的数据，即索引为3731，512这2行的数据，而不是返回索引为2和3的数据。 </span><br><span class="line">使用```sort_df.reset_index(drop=True, inplace=True)``` 重新定义索引，使其从0开始。</span><br><span class="line">![](Python学习/reindex.png)      </span><br><span class="line">获取dataframe中的索引  </span><br><span class="line">```firstIndex = df.index.tolist() ```  返回一个list，存储的是dataframe中的索引列表。</span><br><span class="line">```firstIndex = df.index.tolist()[0] ``` 返回的是第一行数据的索引   </span><br><span class="line">```firstIndex = df.index.tolist()[-1] ``` 返回的是最后一行数据的索引</span><br><span class="line">## 获取dataframe中的数据      </span><br><span class="line">![](Python学习/1.png) </span><br><span class="line">1. ```df[1:4]```表示获取表的第2至4行   </span><br><span class="line">![](Python学习/2.png)   </span><br><span class="line">2. df.head()默认返回dataframe中的前5行，如果返回前10行，使用head(10).    </span><br><span class="line">![](Python学习/3.png) </span><br><span class="line">3. 使用```df.iloc[]```和```df.loc[]```获取数据。     </span><br><span class="line">![](Python学习/4.png)   </span><br><span class="line">![](Python学习/5.png) </span><br><span class="line">通过  ```df.iloc[]```传入的参数是数据，而```df.loc[]```传入的参数是字符串索引，除非索引是数字，这时loc[]可以传入数字。  </span><br><span class="line">比如df1.loc[2]表示获取索引为&apos;2&apos;的那一行，而df.iloc[2]表示获取df1的第3行数据，是一个相对位置。  </span><br><span class="line">参考资料：  </span><br><span class="line">[https://www.jb51.net/article/141665.htm](https://www.jb51.net/article/141665.htm)  </span><br><span class="line">## DateFrame常用方法    </span><br><span class="line">- 获取df中某一列特征值的个数   </span><br><span class="line">`credit_df[&apos;Class&apos;].value_counts()`或   </span><br><span class="line">`credit_df[&apos;Class&apos;].value_counts()[0]`   </span><br><span class="line">- 显示df中的详细信息</span><br><span class="line">`df.info()`   </span><br><span class="line">`df.describe()`</span><br><span class="line">- 获取df中的所有列名   </span><br><span class="line">`col_names = list(df.columns.values)`     </span><br><span class="line">- 将df按照某一特征进行分组    </span><br><span class="line">`df.groupby([&apos;total_vol&apos;]).size()`获取每个组中元素的个数   </span><br><span class="line">`df.groupby([&apos;total_vol&apos;,&apos;soc&apos;]).size()`按照多个属性分组   </span><br><span class="line">- 从df中获取样本的特征和标签   </span><br><span class="line">```python   </span><br><span class="line">获取特征</span><br><span class="line">X = df.drop(&quot;误报&quot;,axis = 1)</span><br><span class="line">获取标签</span><br><span class="line">Y = df[&quot;误报&quot;]</span><br><span class="line">```   </span><br><span class="line">- 获取df中的一列或多列     </span><br><span class="line">```python </span><br><span class="line">one_col = df[&apos;total_vol&apos;]</span><br><span class="line">multi_cols_name = [&apos;total_vol&apos;,&apos;soc&apos;,&apos;cur&apos;]   </span><br><span class="line">multi_cols = df[multi_cols_name]   </span><br><span class="line">```   </span><br><span class="line">- 查看df中为空的个数,输出每一列为nan的个数 </span><br><span class="line">`df.isna().sum()`</span><br><span class="line"># Dict   </span><br><span class="line">python创建一个字典有3中方式   </span><br><span class="line">```python</span><br><span class="line">class dict(**kwarg)</span><br><span class="line">class dict(mapping,**kwarg)</span><br><span class="line">class dict(iterable,**kwarg)</span><br><span class="line">```   </span><br><span class="line">其中```**kwarg```是python中可变参数，代表关键字参数，允许你传入0个或任意多个含参数名的参数，这个关键字参数在函数内部自动组装成一个dict。</span><br><span class="line">- class dict(**kwarg)  </span><br><span class="line">通过关键字参数创建一个字典，例如   </span><br><span class="line">```python</span><br><span class="line">d = dict(name=&apos;Tom&apos;,age=23)     </span><br><span class="line">out: &#123;&apos;age&apos;: 23, &apos;name&apos;: &apos;Tom&apos;&#125;</span><br><span class="line"></span><br><span class="line">d = dict(a = 12, b = 13, c = 15)  </span><br><span class="line">out: &#123;&apos;a&apos;: 12, &apos;b&apos;: 13, &apos;c&apos;: 15&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>class dict(mapping,<strong>kwarg)<br>通过从一个映射函数对象中构造一个新字典，与dict(</strong>kwarg)函数不一样的地方是参数输入是一个映射类型的函数对象，比如zip函数，map函数<pre><code class="lang-python">以映射函数方式来构造字典
+d2 = dict(zip([&#39;one&#39;, &#39;two&#39;, &#39;three&#39;], [1, 2, 3]))  
+out: {&#39;one&#39;: 1, &#39;three&#39;: 3, &#39;two&#39;: 2}
+</code></pre>
+</li>
+<li>class dict(iterable,**kwarg)<br>其中iterable表示可迭代对象，可迭代对象可以使用for…in…来遍历，在Pytohn中list，tuple，str，dict，set等都是可迭代对象。创建dict时如果传入的是可迭代对象，则可迭代对象中每一项自身必须是可迭代的，并且每一项只能由有2个对象，第一个对象称为字典的key，第二个对象为key对应的value。如果key有重复，其value为最后重复项的值<br><img src="/2019/04/15/Python学习/dict.png" alt="">     <h1><span id="函数参数">函数参数</span></h1>&ensp;&ensp;&ensp;&ensp;在python中定义一个函数，可以传入4种参数：<br>位置参数，默认参数，关键字参数，可变参数   <h2><span id="位置参数">位置参数</span></h2>普通的参数，参数之间是有顺序的， 顺序不能写错 <pre><code class="lang-python">def power(x, n):
+  s = 1
+  while n &gt; 0:
+      n = n - 1
+      s = s * x
+  return s
+</code></pre>
+<h2><span id="关键字参数">关键字参数</span></h2>函数调用时使用关键字参数来确定传入的参数值，使用关键字参数允许函数调用时参数的顺序和声明的顺序不一致，因为python解释器会根据参数名来匹配参数值。使用key=value格式来指定参数。<pre><code class="lang-python">def power(x, n):
+  s = 1
+  while n &gt; 0:
+      n = n - 1
+      s = s * x
+  return s    
+power(5,2)会得到25
+power(2,5)会得到32
+power(n=2,x=5)会得到25
+</code></pre>
+```python<br>可写函数说明<br>def printinfo( name, age ):<br> “打印任何传入的字符串”<br> print (“名字: “, name)<br> print (“年龄: “, age)<br> return</li>
+</ul>
+<p>调用printinfo函数<br>printinfo( age=50, name=”runoob” )</p>
+<pre><code>**注意：关键字参数必须写在位置参数之后，否则会报错**
+## 默认参数    
+在定义函数时，使用赋值运算符=就为参数设置了一个默认值，默认参数是可选的，就是说可以指定，也可以不指定。当不指定时就使用默认值，如果指定，会覆盖默认值。有了一个默认参数，这样即使传入调用`power(5)`,这样就默认n=2，如果要计算的幂次大于2，就需要明确的指定n的值，`power(5,3)`,这是n=3  
+```python
+def power(x, n=2):
+    s = 1
+    while n &gt; 0:
+        n = n - 1
+        s = s * x
+    return s
+</code></pre><p><strong>设置默认参数时，需要注意以下几点：</strong>  </p>
+<ol>
+<li>必选参数在前面，默认参数在后面，否则Python的解释器会报错<br>使用默认参数的好处是：比如学生注册的时候，需要传入的参数为：姓名，性别，年龄。把年龄设置为默认参数19，这样大部分学生注册时不需要提供年龄，只需要提供2个必须的参数，只有与默认参数不符的学生才提供额外的信息。可见，使用默认参数降低了函数调用的难度，<pre><code class="lang-python">def enroll(name, gender,age=19):
+ print &#39;name:&#39;, name
+ print &#39;gender:&#39;, gender
+</code></pre>
+</li>
+</ol>
+<h2><span id="可变参数">可变参数</span></h2><p>可变参数就是传入的参数个数是可变的，可以是1个、2个到任意个，还可以是0个。  当函数中有位置参数和可变参数时，位置参数始终在可变参数之前。通常情况下，可变参数会出现在形参的最后，因为它们会把传递给函数的所有剩余参数都收集起来。可变参数之后出现的任何参数都是“强制关键字”参数，也就是说，可变参数之后的参数必须是关键字参数，而不能是位置参数。</p>
+<h3><span id="args">*args</span></h3><p>我们以数学题为例子，给定一组数字a，b，c……，请计算a2 + b2 + c2 + ……。   </p>
+<pre><code class="lang-python">def calc(*numbers):
+    sum = 0
+    for n in numbers:
+        sum = sum + n * n
+    return sum
+</code></pre>
+<p>在函数内部，参数number接收到的是一个tuple，例如<code>calc(1,2)</code>得出来的结果是5，也可以直接传入一个list或者tuple,在list或tuple前面加上一个*，把list或tuple的元素变成可变参数传进去。   </p>
+<pre><code class="lang-python">nums1 = [1, 2, 3]
+calc(*nums1)
+14
+
+nums2 = (1, 2, 3)
+calc(*nums1,*nums2)
+28
+</code></pre>
+<h3><span id="args">**args</span></h3><p>可变参数允许传入0个或任意个参数，这些可变参数在函数调用时自动组装为一个tuple。而关键字参数允许你传入0个或任意个含参数名称的参数，这些关键字参数函数内部自动组装成一个dict     </p>
+<pre><code class="lang-python"> def person(name, age, **kw):
+    print( &#39;name:&#39;, name)
+    print( &#39;age:&#39;, str(name))
+    print( &#39;other:&#39;, kw)
+person(&#39;Michael&#39;, 30)  
+person(&#39;Bob&#39;, 35, city=&#39;Beijing&#39;)
+kw = {&#39;city&#39;: &#39;Beijing&#39;, &#39;job&#39;: &#39;Engineer&#39;}
+person(&#39;Jack&#39;, 24, **kw)
+</code></pre>
+<h2><span id="总结">总结</span></h2><p><strong>在函数定义时，参数的顺序为：位置参数，默认参数，<em>args，\</em>*args</strong><br><strong>在函数调用时，参数的顺序为位置参数、关键字参数/默认参数，<em>args，\</em>*args</strong></p>
 
       
 
@@ -345,7 +413,7 @@ np.arange()和range都可以用来生成序列。注意arange是numpy的函数�
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 规范</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. 序列</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">4. 词典</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">5. ndarray和list</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.</span> <span class="toc-text">5.1. 创建ndarray</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.1.</span> <span class="toc-text">5.1.1. 通过np.array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.2.</span> <span class="toc-text">5.1.2. 通过np.arange</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.3.</span> <span class="toc-text">5.1.3. list和ndarray的索引</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 规范</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. 序列</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">4. 词典</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">5. ndarray和list</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.</span> <span class="toc-text">5.1. 创建ndarray</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.1.</span> <span class="toc-text">5.1.1. 通过np.array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.2.</span> <span class="toc-text">5.1.2. 通过np.arange</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">函数参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.1.</span> <span class="toc-text">位置参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.2.</span> <span class="toc-text">关键字参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.3.</span> <span class="toc-text">可变参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">6.3.1.</span> <span class="toc-text">*args</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">6.3.2.</span> <span class="toc-text">**args</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.4.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -491,14 +559,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">gluon</a>
               </li>
              
@@ -535,6 +595,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
@@ -563,15 +631,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
               </li>
             
             <div class="clearfix"></div>

@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/04/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2019-06-06T06:32:42.524Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/04/15/Python%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2019-05-28T03:13:04.537Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/04/04/CDH%E9%9B%86%E7%BE%A4/</loc>
+    
+    <lastmod>2019-05-24T15:52:19.674Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/04/20/pyspark/</loc>
     
-    <lastmod>2019-05-16T09:14:19.113Z</lastmod>
+    <lastmod>2019-05-21T12:14:49.501Z</lastmod>
     
   </url>
   
@@ -26,27 +47,6 @@
     <loc>http://yoursite.com/2019/04/27/gluon%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2019-05-10T09:39:54.814Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/04/04/CDH%E9%9B%86%E7%BE%A4/</loc>
-    
-    <lastmod>2019-05-07T11:45:38.126Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/04/15/Python%E5%AD%A6%E4%B9%A0/</loc>
-    
-    <lastmod>2019-04-25T10:39:37.687Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/04/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-    
-    <lastmod>2019-04-25T05:00:10.484Z</lastmod>
     
   </url>
   
