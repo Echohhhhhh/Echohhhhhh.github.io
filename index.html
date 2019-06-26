@@ -139,6 +139,164 @@
           <div id="js-content" class="content-ll">
 			
   
+    <article id="post-MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id=""><a href="#" class="headerlink" title="{}"></a>{}</h2><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p><a href="http://delivery.acm.org/10.1145/3320000/3313730/p717-huang.pdf?ip=218.247.253.153&amp;id=3313730&amp;acc=ACTIVE%20SERVICE&amp;key=BF85BBA5741FDC6E%2EB8E1436BD1CE5062%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&amp;__acm__=1561380383_40e3bd8d678088e9b04173b89f85c49c" target="_blank" rel="noopener">论文出处</a><br></p>
+        
+          <a class="article-more-a" href="/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Docker" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: Docker<br>date: 2019-06-12T18:48:24.000Z<br>tags:</p>
+<h2><span id="-docker-镜像">  - Docker、镜像</span></h2><h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖到一个可移植的镜像中，然后发布到Linux或Window系统中，也可以实现虚拟化。容器是完全使用沙箱机制，相互之前不会有任何接口。<br><!-- TOC --></p>
+<ul>
+<li><a href="#1-%E7%AE%80%E4%BB%8B">1. 简介</a></li>
+<li><a href="#2-Docker">2. Docker</a></li>
+<li><a href="#3-%E9%95%9C%E5%83%8F%E5%AE%B9%E5%99%A8">3. 镜像&amp;容器</a><ul>
+<li><a href="#31-%E9%95%9C%E5%83%8F">3.1. 镜像</a></li>
+<li><a href="#32-%E9%95%9C%E5%83%8F%E5%91%BD%E4%BB%A4">3.2. 镜像命令</a></li>
+<li><a href="#33-%E5%AE%B9%E5%99%A8">3.3. 容器</a></li>
+<li><a href="#34-%E5%AE%B9%E5%99%A8%E5%91%BD%E4%BB%A4">3.4. 容器命令</a></li>
+</ul>
+</li>
+<li><a href="#4-Dockerfile">4. Dockerfile</a><ul>
+<li><a href="#41-%E7%9B%B8%E5%85%B3%E6%8C%87%E4%BB%A4">4.1. 相关指令</a></li>
+<li><a href="#42-%E6%9E%84%E5%BB%BA">4.2. 构建</a></li>
+</ul>
+</li>
+<li><a href="#5-%E4%BD%BF%E7%94%A8Docker%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F">5. 使用Docker运行程序</a></li>
+<li><a href="#6-%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E9%95%9C%E5%83%8F">6. 构建自己的镜像</a><ul>
+<li><a href="#61-%E5%88%9B%E5%BB%BADockerfile">6.1. 创建Dockerfile</a></li>
+<li><a href="#%E6%9E%84%E5%BB%BA">构建</a></li>
+<li><a href="#%E8%BF%90%E8%A1%8C">运行</a></li>
+</ul>
+</li>
+<li><a href="#Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">Docker常用命令</a></li>
+</ul>
+<!-- /TOC -->
+<h1><span id="2-docker">2. Docker</span></h1><p>参考资料：<br><a href="https://mp.weixin.qq.com/s?__biz=MjM5ODI5Njc2MA==&amp;mid=2655824742&amp;idx=1&amp;sn=43dcbd8cd3b3e0dc5f06c83a50983420&amp;chksm=bd74e6b18a036fa7e5fe2229b3fa08f5a4d11c6d201deba29c63e61c47ed37b5aa7f22e441d6&amp;scene=0&amp;xtrack=1&amp;key=1873ed4ed1cb893ec82026059f24db129748acc346da2d85cea356373d0c0fd919da6e704f47695c7743b64ff520c46fb51d245dacff68136d667c05e73d963d768ee11171e66dedea24d39bb3d67ced&amp;ascene=1&amp;uin=MTM1ODU4OTIwOA%3D%3D&amp;devicetype=Windows+10&amp;version=62060833&amp;lang=zh_CN&amp;pass_ticket=84krGCWgmUm73hPCIwVp8NE9B3dpOiU5R1bRm3jvlvv%2FygbqWRm4O%2BYabIzyFhbf" target="_blank" rel="noopener">资料1</a>    </p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MjM5ODI5Njc2MA==&amp;mid=2655817429&amp;idx=1&amp;sn=f82daff5e9fad66a0e11cdb92c12715e&amp;chksm=bd74c3028a034a14cadf884d97f2a0fc3372d3baa97fb5ae6724e6d1926520eada090c0ffb16&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">资料2</a><br>&ensp;&ensp;&ensp;&ensp;Docker就是一个运行在操作系统上的软件。这个软件上运行很多容器，这些容器相互独立，相互隔离。容器中可以安装很多应用程序。<br>&ensp;&ensp;&ensp;&ensp;我们平时要在Windows上安装Linux系统，都需要先安装一个VMWare，然后在上面安装Linux系统。原理就是虚拟出一套硬件资源，然后在上面运行一个完整的操作系统，再在操作系统上运行所需要的应用程序。在安装虚拟机时，需要先提前给虚拟机分配硬盘，内存等资源。一旦分配，这些资源就被虚拟机全部占用。Docker也可以实现虚拟化。但是Docker没有自己的内核，Docker容器内的应用程序是直接运行在宿主的内核，Docker比传统的虚拟机更轻便。Docker就是一个软件。如果以后再Windows上安装Linux系统，可以先在本地电脑上安装一个Windows版本的Docker，然后</p>
+<h1><span id="3-镜像amp容器">3. 镜像&amp;容器</span></h1><h2><span id="31-镜像">3.1. 镜像</span></h2><p>&ensp;&ensp;&ensp;&ensp;官方定义：Docker镜像是一个只读模板，可以用来创建Docker容器。镜像是一种轻量级的，可执行的独立软件包，软件和依赖的环境可以打包成一个镜像。这个镜像包含某个软件需要的所有内容，包括代码、库、环境变量、配置文件等。<br>&ensp;&ensp;&ensp;&ensp;比如我们开发的Web应用需要JDK，Tomcat，环境变量等。那我们就可以把这些都打包成一个镜像，包括代码+JDK+Tomcat+CentOS系统+各种配置文件等。打包后的镜像如果可以运行，那么这个镜像就可以在任何安装有Docker的电脑上运行。<br>&ensp;&ensp;&ensp;&ensp;任何镜像的创建会基于其他的父镜像，也就是说镜像是一层套一层的。比如一个Tomcat镜像需要运行在CentOS上面，那我们的Tomcat镜像就会基于CentOS镜像创建。</p>
+<h2><span id="32-镜像命令">3.2. 镜像命令</span></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. docker images：查看本地主机上所有的镜像。注意是本地主机的！这里能看到镜像的名称、版本、id、大小等基本信息，注意这里的 imageID 是镜像的唯一标识！   </span><br><span class="line"></span><br><span class="line">2. docker rmi：删除本地的镜像，如下图所示，可以加上 -f 参数进行强制删除。</span><br><span class="line">这里的 rmi 命令跟 Linux 中的删除命令就很像啦，只是这里加了一个 i 代表 image！   </span><br><span class="line"></span><br><span class="line">3. docker search：根据镜像名称搜索远程仓库中的镜像！   </span><br><span class="line"></span><br><span class="line">4. docker pull：搜索到某个镜像之后就可以从远程拉取镜像啦，有点类似咱们 Git 中的 Pull 命令，当然对应的还有个 dockerpush 的命令。</span><br></pre></td></tr></table></figure>
+<h2><span id="33-容器">3.3. 容器</span></h2><p>&ensp;&ensp;&ensp;&ensp;Docker的容器是<strong>用镜像创建的运行实例</strong>，Docker可以利用容器独立运行一个或一组应用。我们可以使用客户端或API控制容器的启动、开始、停止、删除。每个容器都是相互独立的。上一步创建的镜像是一个静态的文件，这个文件想要运行的话，就要先变成容器。我们可以把容器看做是一个简易版的Linux系统和运行在上面的程序。<br><strong>镜像和容器的关系</strong><br>类似于Java中的类和对象的关系。镜像可以看做一个类，容器是镜像的一个实例。可以根据一个类new很多个实例，new出来的实例就相当于一个个容器。镜像是静态的文件，容器是有生命的个体。   </p>
+<h2><span id="34-容器命令">3.4. 容器命令</span></h2><ul>
+<li>docker pull<br>从远程仓库中拉取镜像</li>
+<li><p>通过镜像创建容器<br><code>docker run [OPTIONS] IMAGE</code>可以基于某个镜像运行一个容器，如果本地有指定的镜像则使用本地的镜像，如果没有则远程拉取然后启动<br><code>docker run -v $PWD:/root -ti --runtime=nvidia --rm mxnet/python:1.4.1_gpu_cu90_mkl_py3</code>   </p>
+<h1><span id="4-dockerfile">4. Dockerfile</span></h1><h2><span id="41-相关指令">4.1. 相关指令</span></h2><p>镜像可以从远程仓库中拉取，也可以自己创建一个镜像。Dockerfile是一个包含用户能够构建镜像的所有命令的文本文档，它有自己的语法和命令。Docker能够从Dockerfile中读取指令并自动构建镜像。<br>如果想构建自己的镜像，就要自己写Dockerfile。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">FROM nvidia/cuda:9.0-cudnn7-devel</span><br><span class="line"></span><br><span class="line">LABEL SongChao chaosong@bjtu.edu.cn</span><br><span class="line"></span><br><span class="line">RUN apt-get update</span><br><span class="line"></span><br><span class="line">RUN apt-get install -y gcc make build-essential libssl-dev wget curl vim --allow-unauthenticated</span><br><span class="line"></span><br><span class="line">RUN mkdir /root/python3.6</span><br><span class="line"></span><br><span class="line">COPY Python-3.6.8 /root/python3.6/</span><br><span class="line"></span><br><span class="line">WORKDIR /root/python3.6</span><br><span class="line"></span><br><span class="line">RUN ./configure &amp;&amp; make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">RUN wget https://bootstrap.pypa.io/get-pip.py</span><br><span class="line"></span><br><span class="line">RUN python3 get-pip.py</span><br><span class="line"></span><br><span class="line">ENV PYTHONIOENCODING=utf-8</span><br><span class="line"></span><br><span class="line">RUN pip3 install numpy scipy pandas tensorflow-gpu==1.9.0 -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line"></span><br><span class="line">RUN mkdir /workdir</span><br><span class="line"></span><br><span class="line">WORKDIR /workdir</span><br><span class="line">```  </span><br><span class="line">`FROM`指定基础镜像，当前镜像是基于哪个镜像创建的，有点类似Java中类继承，FROM指令必须是Dockerfile必须是Dockerfile文件的首条命令。  </span><br><span class="line">`LABEL`给镜像添加元数据，指定作者，邮箱等信息。</span><br><span class="line">## 4.2. 构建</span><br><span class="line">Dockerfile的执行顺序从上到下顺序执行，编写好Dockerfile文件后，就需要使用docker build命令对镜像进行构建了。   </span><br><span class="line">`docker build [OPTIONS] PATH | URL | -`  </span><br><span class="line">`docker build -t chaosong/cuda-10.1-cudnn7-devel:with_cuda_samples .</span><br><span class="line">`</span><br><span class="line">-f：指定要使用的 Dockerfile 路径，如果不指定，则在当前工作目录寻找 Dockerfile 文件！   </span><br><span class="line">-t：镜像的名字及标签，通常 name:tag 或者 name 格式；可以在一次构建中为一个镜像设置多个标签。 注意后面的 . , 用于指定镜像构建过程中的上下文环境的目录。 </span><br><span class="line"></span><br><span class="line"># 5. 使用Docker运行程序   </span><br><span class="line">1. 登录上网  </span><br><span class="line">   `links 10.1.61.1/a30.htm`   </span><br><span class="line">   登录之后按`Ctrl+C`退出  </span><br><span class="line">2. 在dockerhub上查询镜像</span><br><span class="line">   浏览器进入[docker hub](https://hub.docker.com/)，找到自己需要的镜像，gpu28号服务器Cuda的版本是9.0，下载的镜像需要和服务器上Cuda版本一致。  </span><br><span class="line">3. 拉取镜像</span><br><span class="line">   例如镜像的全称为：</span><br><span class="line">   `mxnet/python:1.4.1_gpu_cu90_mkl_py3`   </span><br><span class="line">   `docker pull mxnet/python:1.4.1_gpu_cu90_mkl_py3`</span><br><span class="line">   这条命令会把镜像下载到服务器上，如果本地已经存在该镜像，docker会在佛那个使用本地的镜像，不再下载。   </span><br><span class="line">4. 启动镜像</span><br><span class="line">   `docker run -v $PWD:/root -ti --runtime=nvidia --rm &lt;镜像名:标签&gt;`   </span><br><span class="line">   例如  </span><br><span class="line">   `docker run -v $PWD:/root -ti --runtime=nvidia --rm mxnet/python:1.4.1_gpu_cu90_mkl_py3`   </span><br><span class="line">   使用上面的命令可以启动镜像，这里的参数-v通过将宿主机的目录映射到容器内，\$PWD是当前目录，映射目标是容器内的/root目录，这时\$PWD中的目录会全部映射到容器中的/root目录下。</span><br><span class="line">   启动容器后执行</span><br><span class="line">   `cd /root`  </span><br><span class="line">   `ls`  </span><br><span class="line">   可以看到服务器中的目录都映射到容器内，当在容器内创建一个目录时，然后创建一个文件，exit退出容器，可以看到本地服务器也有刚才那个文件。</span><br></pre></td></tr></table></figure>
+<p> mkdir docker_test<br> touch docker_test.txt<br> exit<br> ls<br> ls docker_test</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">5. 运行GPU程序  </span><br><span class="line">   先不启动容器，在宿主机上使用  </span><br><span class="line">   `nvidia-smi`查看当前空闲的GPU，使用空闲的GPU运行程序。</span><br><span class="line">   把py程序上传到服务器上，然后启动容器。</span><br></pre></td></tr></table></figure>
+<p> docker run -v $PWD:/root -ti —runtime=nvidia —rm mxnet/python:1.4.1_gpu_cu90_mkl_py3<br> cd 进入py程序所在的目录<br> python3 xxx.py</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 6. 构建自己的镜像     </span><br><span class="line">## 6.1. 创建Dockerfile   </span><br><span class="line">通过Dockerfile构建自己的镜像。镜像构建时，会一层层的构建，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。比如删除前一层文件的操作，实际不是真的删除前一层的文件，而是仅在当前层标记为该文件已删除。在最终容器运行的时候，虽然不会看到这个文件，但是该文件一直跟随镜像。因此在创建镜像的时候，需要小心，每一层尽量只添加该层需要的东西，任何额外的东西应该在该层构建结束前清理掉。  </span><br><span class="line">Docker能够从Dockerfile中读取指令自动的构建镜像。   </span><br><span class="line"></span><br><span class="line">在服务器上创建一个目录  </span><br><span class="line">`mkdir wbb_docker_gcn`   </span><br><span class="line">`cd wbb_docker_gcn`   </span><br><span class="line">可以在这个目录下下载一些创建镜像需要的文件</span><br><span class="line">`git clone https://github.com/NVIDIA/cuda-samples.git`    </span><br><span class="line">然后编写用于构建镜像的Dockerfile</span><br><span class="line">`vi Dockerfile`   </span><br><span class="line">内容如下：</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1><span id="指定镜像要构建在哪个镜像之上">指定镜像要构建在哪个镜像之上</span></h1><h1><span id="如果程序需要用到gpu那就一定要构建在nvidiacuda这个镜像上">如果程序需要用到GPU，那就一定要构建在nvidia/cuda这个镜像上</span></h1><p>FROM nvidia/cuda:9.0-cudnn7-devel</p>
+<h1><span id="给镜像添加元数据指定作者邮箱等信息">给镜像添加元数据，指定作者邮箱等信息</span></h1><p>LABEL WangBeibei 18120408@bjtu.edu.cn    </p>
+<h1><span id="run会在当前镜像的最上面创建一个新层并且能执行任何的命令">RUN会在当前镜像的最上面创建一个新层，并且能执行任何的命令，</span></h1><h1><span id="然后对执行的结果进行提交提交后的结果镜像在dockerfile的后续步骤中使用">然后对执行的结果进行提交，提交后的结果镜像在Dockerfile的后续步骤中使用</span></h1><h1><span id="更新ubuntu的索引">更新Ubuntu的索引</span></h1><p>RUN apt-get update        </p>
+<h1><span id="安装gcc工具">安装gcc工具</span></h1><p>RUN apt-get install -y wget python3-dev gcc git vim &amp;&amp; \<br>    wget <a href="https://bootstrap.pypa.io/get-pip.py" target="_blank" rel="noopener">https://bootstrap.pypa.io/get-pip.py</a> &amp;&amp; \<br>    python3 get-pip.py   </p>
+<h1><span id="在容器上创建一个目录镜像就安装在该目录下">在容器上创建一个目录，镜像就安装在该目录下</span></h1><p>RUN mkdir /root/docker_gcn    </p>
+<h1><span id="关于copy命令如果要复制目录的话copy命令会把目录里面所有文件赋值到另一个目录下">关于COPY命令，如果要复制目录的话，COPY命令会把目录里面所有文件赋值到另一个目录下，</span></h1><h1><span id="而不是把这个目录直接复制过去所以上面先在容器中创建了一个docker_gcn的目录然后copy命令将服务器本地的wbb_docker_gcn里面的文件都复制到了rootdocker_gcn里面">而不是把这个目录直接复制过去，所以上面先在容器中创建了一个docker_gcn的目录，然后COPY命令将服务器本地的wbb_docker_gcn里面的文件都复制到了/root/docker_gcn/里面</span></h1><h1><span id="将服务器本地的文件拷贝到容器中的目录上">将服务器本地的文件拷贝到容器中的目录上</span></h1><p>COPY wbb_docker_gcn /root/docker_gcn/      </p>
+<h1><span id="切换到那个目录如果该目不存在则创建-workdir是切换当前工作路径下面的run命令都会在这个workdir下面执行">切换到那个目录，如果该目不存在，则创建。WORKDIR是切换当前工作路径，下面的RUN命令都会在这个WORKDIR下面执行</span></h1><p>WORKDIR /root/docker_gcn      </p>
+<h1><span id="下载">下载</span></h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 构建   </span><br><span class="line">Dockerfile是执行是从上到下顺序执行的，每条执行都会创建一个新的镜像层，并对镜像进行提交。编写好Dockerfile文件后，就需要使用dockerbuild命令对镜像进行构建了。   </span><br><span class="line">`docker build [OPTIONS] PATH | URL | -`  </span><br><span class="line">`docker build -t chaosong/cuda-10.1-cudnn7-devel:with_cuda_samples .</span><br><span class="line">`</span><br><span class="line">-f：指定要使用的 Dockerfile 路径，如果不指定，则在当前工作目录寻找 Dockerfile 文件！   </span><br><span class="line">-t：镜像的名字及标签，通常 name:tag 或者 name 格式；可以在一次构建中为一个镜像设置多个标签。 注意后面的 . , 用于指定镜像构建过程中的上下文环境的目录。    </span><br><span class="line"></span><br><span class="line">## 运行   </span><br><span class="line">构建完镜像就可以启动这个容器了，启动完之后就可以运行py脚本   </span><br><span class="line">`docker run -itd --rm --runtime=nvidia -v $PWD:/workdir/ songchao/tensorflow:1.9.0_py36_cu90_cudnn7 /bin/bash</span><br><span class="line">`</span><br><span class="line">由于这个命令非常重要，所以下面列出几个比较重要的参数：</span><br><span class="line"></span><br><span class="line">-d：启动容器，并且后台运行（Docker 容器后台运行，就必须要有一个前台进程，容器运行的命令如果不是一直挂起的命令，容器启动后就会自动退出）。</span><br><span class="line"></span><br><span class="line">-i：以交互模式运行容器，通常与 -t 同时使用。</span><br><span class="line"></span><br><span class="line">-t：为容器重新分配一个伪输入终端，通常与 -i 同时使用（容器启动后进入到容器内部的命令窗口）。</span><br><span class="line"></span><br><span class="line">-P：随机端口映射，容器内部端口随机映射到主机的高端口。</span><br><span class="line"></span><br><span class="line">-p：指定端口映射，格式为：主机(宿主)端口：容器端口。</span><br><span class="line"></span><br><span class="line">-v：建立宿主机与容器目录的同步。</span><br><span class="line"></span><br><span class="line">--name=&quot;myTomcat&quot;：为容器指定一个名称（如果不指定，则有个随机的名字）。</span><br><span class="line">其中--rm表示程序运行完，这个容器就删掉了。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Docker常用命令   </span><br><span class="line">1. 列出机器上的镜像</span><br><span class="line">   docker images </span><br><span class="line">   ![](Docker/images.png)</span><br><span class="line">2. 拉取镜像  </span><br><span class="line">   docker pull mxnet/python:1.4.1_gpu_cu90_mkl_py3</span><br><span class="line">3. 查看容器信息</span><br><span class="line">   （1）docker ps：显示当前正在运行的容器，在 PORTS 一列，如果暴露的端口是连续的，还会被合并在一起，例如一个容器暴露了3个 TCP 端口：100，101，102，则会显示为 100-102/tcp。</span><br><span class="line"></span><br><span class="line">   （2）docker ps -a：显示所有的容器，</span><br><span class="line">   容器的状态共有 7 种：created|restarting|running|removing|paused|exited|dead。</span><br><span class="line">   （3）docker ps -n 3：显示最后被创建的n个容器</span><br><span class="line">   （4）docker ps -q：只显示正在运行容器的id，在清理容器时非常好用。</span><br><span class="line">   （5）docker ps -s：显示容器文件大小，该命令很实用，可以获得 2 个数值：一个是容器真实增加的大小，一个是整个容器的虚拟大小。</span><br><span class="line">4. 以交互式方式启动容器</span><br></pre></td></tr></table></figure>
+<p>   [root@localhost ~]# docker run -it —name centos-test centos:7.4.1708<br>   [root@ebd974405f42 /]#<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   以交互式方式启动容器后，docker会随机分配一个容器名，并为容器分配一个短id。</span><br><span class="line">5. 后台运行容器</span><br></pre></td></tr></table></figure></p>
+<p>   [root@localhost ~]# docker run —name centos-deamon -d centos:7.4.1708<br>   63e5555c9ed35deb7e32c2a16896e0f806dbcf471d0484bdd904724a3cce542d<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   其中d表示容器在后台运行，使用run命令之后，会把容器挂到后台运行，并且会输出一个长的container id，通过docker ps查看容器的信息，这里输出的是容器id的前12位。</span><br><span class="line">6. 进入到后台运行的容器</span><br><span class="line">   通过docker attach ae60c4b64205连接到正在运行的终端，此时使用exit命令退出容器。  </span><br><span class="line">   </span><br><span class="line">7. 容器的状态</span><br><span class="line">   docker容器有几种状态，分别是created、up、exited、paused。</span><br><span class="line">   （1）我们通过run命令运行容器时，其实是将容器从created到up状态的过程。</span><br><span class="line">   （2）当通过stop命令停止容器时，容器进入exited状态。容器退出后，系统仍然保存该容器实例，即退出的容器仍然会占用系统的硬盘资源，需要使用rm删除该容器才能完全清楚容器的资源占用。容器stop或Ctrl+D时，会保存当前容器的状态之后退出，下次start时会保存上次的关闭时更改，而且每次attach进去的界面是一样的，和第一次run启动一样。</span><br></pre></td></tr></table></figure></p>
+<p>   [root@localhost ~]# docker stop e83cf32fbc22<br>   e83cf32fbc22<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">（3）重新启动退出的容器  </span><br><span class="line">处于exited状态的容器，可以通过start命令重新启动。</span><br></pre></td></tr></table></figure></p>
+<p>   [root@localhost ~]# docker start e83cf32fbc22<br>   e83cf32fbc22<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">（4）重启容器</span><br></pre></td></tr></table></figure></p>
+<p>   [root@localhost ~]# docker restart e83cf32fbc22<br>   e83cf32fbc22<br>   ```</p>
+<ol>
+<li>删除容器<br>从上面可以看出，通过stop命令停止容器，容器的相关文件仍然存储在宿主主机中，为了释放这部分空间，需要删除这些容器。<br>（1）<code>docker rm id</code>可以删除对应id的容器<br>（2）批量删除除了运行以外的程序<br><code>docker rm $(docker ps -a -q)</code><br>（3）如果要批量删除指定状态的容器<br><code>docker rm $(docker ps -a -q  status=exited)</code></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/12/Docker/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CentOs系统matplotlib画图中文乱码" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -146,7 +304,7 @@
       
         <hr>
 <p>title: CentOs系统matplotlib画图中文乱码<br>date: 2019-05-10T17:15:52.000Z<br>tag:</p>
-<h2 id="CentOs、matplotlib、中文乱码"><a href="#CentOs、matplotlib、中文乱码" class="headerlink" title="  - CentOs、matplotlib、中文乱码"></a>  - CentOs、matplotlib、中文乱码</h2><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;在集群上使用Python中的matplotlib库画图出现中文乱码，记录一下解决方案。   </p>
+<h2 id="Centos、matplotlib、中文乱码"><a href="#Centos、matplotlib、中文乱码" class="headerlink" title="  - Centos、matplotlib、中文乱码"></a>  - Centos、matplotlib、中文乱码</h2><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;在集群上使用Python中的matplotlib库画图出现中文乱码，记录一下解决方案。   </p>
         
           <a class="article-more-a" href="/2019/05/10/CentOs系统matplotlib画图中文乱码/#more">more >></a>
         
@@ -707,155 +865,9 @@
 
 
   
-    <article id="post-Attention" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/12/Attention/">Attention</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/12/Attention/" class="archive-article-date">
-  	<time datetime="2019-03-12T02:34:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/12/Attention/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/">Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/" class="archive-article-date">
-  	<time datetime="2019-03-05T02:51:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;今天实验室分享了一篇2019年AAAI的论文：<a href="http://www-scf.usc.edu/~yaguang/papers/aaai19_multi_graph_convolution.pdf" target="_blank" rel="noopener">Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand</a>。讲的是通过时空多图卷积来进行打车需求的预测。<br></p>
-        
-          <a class="article-more-a" href="/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">论文</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Multi-Graph Convolutional</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Spatiotemporal</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -972,15 +984,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">预分区</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1012,10 +1024,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">NLP</a>
               </li>
              
@@ -1025,6 +1033,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
               </li>
              
               <li class="article-tag-list-item">
