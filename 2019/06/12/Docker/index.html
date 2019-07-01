@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="title: Dockerdate: 2019-06-12T18:48:24.000Ztags:   - Docker、镜像1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖到一个可移植的镜像中，然后发布到Linux或Window系统中，也可以实现虚拟化。容器是完全使用沙箱机制，相互之前不会有任何接口。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-26T06:39:22.126Z">
+<meta property="og:updated_time" content="2019-06-28T07:04:47.255Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
 <meta name="twitter:description" content="title: Dockerdate: 2019-06-12T18:48:24.000Ztags:   - Docker、镜像1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖到一个可移植的镜像中，然后发布到Linux或Window系统中，也可以实现虚拟化。容器是完全使用沙箱机制，相互之前不会有任何接口。">
@@ -198,6 +198,7 @@
 </ul>
 <ol>
 <li>删除容器<br>从上面可以看出，通过stop命令停止容器，容器的相关文件仍然存储在宿主主机中，为了释放这部分空间，需要删除这些容器。<br>（1）<code>docker rm id</code>可以删除对应id的容器<br>（2）批量删除除了运行以外的程序<br><code>docker rm $(docker ps -a -q)</code><br>（3）如果要批量删除指定状态的容器<br><code>docker rm $(docker ps -a -q  status=exited)</code></li>
+<li>运行jupyter notebook<br> （1）先启动容器<br> <code>docker run -it -p 7000:7000 -v $PWD:/root --runtime=nvidia --rm --name wbbJupyter ufoym/deepo:all-jupyter-py36</code><br> （2）然后会进入到容器中，<br> <code>cd /root</code><br> 会看到服务器本地的目录<br> （3）在容器中运行jupyter notebook<br> <code>jupyter notebook --no-browser --ip 0.0.0.0 --port=7000 --allow-root</code><br> （4）在putty中添加7000的端口号<br> 然后再浏览器中输入<a href="http://localhost:7000/tree" target="_blank" rel="noopener">http://localhost:7000/tree</a><br> （5）如果想要jupyter notebook在后台运行，按Ctrl+P+Q，会退回到服务器<br> （6）使用docker ps会看到你的容器正在后台运行<br> （7）使用docker attach 容器的名字/id再次进入到容器中，按Ctrl+C会看到当前正在有jupyter notebook运行<br> （8）发现这个容器中有一个库没有安装，可以在容器中使用pip install在这个容器中安装使用，但是这个容器删除了之后<br> 里面安装的东西也没有了。<br> 有2中方法：一是使用commit从容器生成镜像，但是这种方式不推荐，二是写Dockerfile重新build一个镜像<br> （9）在容器中使用exit退出该容器，再次使用docker ps该容器也消失了</li>
 </ol>
 
       
@@ -472,14 +473,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
@@ -493,6 +486,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -552,11 +553,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
+                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
+                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
               </li>
             
             <div class="clearfix"></div>

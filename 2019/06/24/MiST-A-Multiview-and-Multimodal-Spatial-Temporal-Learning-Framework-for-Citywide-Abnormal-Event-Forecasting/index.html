@@ -33,7 +33,13 @@
 <meta property="og:image" content="http://yoursite.com/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/figure7.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/figure8.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/figure9.png">
-<meta property="og:updated_time" content="2019-06-26T06:33:49.481Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/hun.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/f1.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/micro.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/precison-mi.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/recall-mi.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/f1-mi.png">
+<meta property="og:updated_time" content="2019-06-30T11:44:14.914Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
 <meta name="twitter:description" content="{}1. 简介论文出处">
@@ -206,6 +212,11 @@
 </li>
 <li><a href="#Conclusion">Conclusion</a></li>
 <li><a href="#%E5%85%B6%E4%BB%96%E8%AE%BA%E6%96%87">其他论文</a></li>
+<li><a href="#Marco-F1">Marco-F1</a><ul>
+<li><a href="#Micro-F1">Micro-F1</a></li>
+<li><a href="#Macro-F1">Macro-F1</a></li>
+</ul>
+</li>
 </ul>
 <!-- /TOC -->
 <h1><span id="2-keywords">2. Keywords</span></h1><p><strong>异常事件预测、深度神经网络、时空数据挖掘</strong> </p>
@@ -214,7 +225,10 @@
 <ul>
 <li>我们引入了一个新的多视角和多模态时空学习框架MiST来预测一个城市每个区域不同类型的异常事件。MiST映射所有的空间时间和语义单元到一个潜在空间来保留它们跨模态的相关性。</li>
 <li>我们提出了一个多模态融合模型，和分层循环框架，学习共享在多视角数据中潜在的区域-时间-类别关系，并且自动地调整每个视角中的相关性，以协助预测任务。</li>
-<li>在三个真实世界异常事件数据集，从NYC和Chicago收集的数据集进行试验，MiST一直比其他state-of-the-art方法效果好。<h1><span id="5-problem-formulation">5. Problem Formulation</span></h1>&ensp;&ensp;&ensp;&ensp;在这一节，首先引出preliminary和problem。<h2><span id="51-preliminaries">5.1. Preliminaries</span></h2></li>
+<li>在三个真实世界异常事件数据集，从NYC和Chicago收集的数据集进行试验，MiST一直比其他state-of-the-art方法效果好。     </li>
+</ul>
+<h1><span id="5-problem-formulation">5. Problem Formulation</span></h1><p>&ensp;&ensp;&ensp;&ensp;在这一节，首先引出preliminary和problem。</p>
+<h2><span id="51-preliminaries">5.1. Preliminaries</span></h2><ul>
 <li>定义1 Geographical Region(地理区域)<br>把城市进行网格分区。划分成$I \times J$,有$I$行$J$列，带有经纬度信息。每一个网格被视为一个地理区域，表示为$r_{i,j}$，其中$i和j$是分别是行和列的索引。在这篇论文中，我们使用区域作为最小单元来研究异常事件预测问题。<br>&ensp;&ensp;&ensp;&ensp;我们定义地理区域集合$R=(r_{1,1},…,r_{i,j},…,r_{I,J})$,并且假设有$L$个异常事件类别，$C=(c_1,…,c_l,…,c_L)$,其中$C$表示异常事件类别集合，下标为$l$。给定一个时间窗口$T$,我们分割$T$为不重叠且连续的时间槽$(T=(t_1,…,t_k,…,t_K))$,其中$K$表示时间槽的个数，索引是$k$.<br><strong><script type="math/tex">区域R是I \times J;
 异常事件类别C，有L个值;     
 时间T，有K个时间槽</script></strong></li>
@@ -270,7 +284,7 @@
 <li>[2015 CIKM] 《Profiling pedestrian distribution and anomaly detection in a dynamic environment》<br>数据集：没有说</li>
 <li>[2015 SIGSPATIAL] 郑宇《Detecting collective anomalies from multiple spatio-temporal datasets across different domains》<br>提供了数据集和代码<a href="https://www.microsoft.com/en-us/research/publication/detecting-collective-anomalies-from-multiple-spatio-temporal-datasets-across-different-domains/?from=http%3A%2F%2Fresearch.microsoft.com%2Fapps%2Fpubs%2F%3Fid%3D255670" target="_blank" rel="noopener">链接</a><br>数据描述：<br>（1）POI数据：NYC有24031个POI，共14中类别<br>（2）Road network data：在NYC的862个区域中的路段，每个路段有2个终点和一些中间点，还有一些属性，比如级别，速度限制等<br>（3）311data：NYC<br>（4）Taxicab data：在NYC的14000个出租车产生的数据，包括费用和行程数据，行程数据包括：上下车地点和时间，行程的距离和持续时间，出租车ID，乘客个数等。<br>（5）Bike tenting data：自行车租赁数据，NYC的340个自行车站点，大约7000辆车，每一条记录包括时间，车辆ID，站点ID，返还记录。</li>
 <li>[2017 CIKM] 《Spatiotemporal event forecasting from incomplete hyper-local price data》<br>数据集：有6个数据集，来自6个不同的城市，其中2个是商品价格数据，数据从<a href="https://www.premise.com/" target="_blank" rel="noopener">https://www.premise.com/</a>获取。其中4个是美国4个城市房地产短租的价格数据，数据从Airbnb获取</li>
-<li>[2017 KDD] 《Contextual spatial outlier detection with metric learning》<br>一部分数据来源：<a href="http://archive.ics.uci.edu/ml/index.php" target="_blank" rel="noopener">http://archive.ics.uci.edu/ml/index.php</a></li>
+<li>[2017 KDD] 《Contextual spatial outlier detection with metric learning》<br>一部分数据来源：<a href="http://archive.ics.uci.edu/ml/index.php" target="_blank" rel="noopener">http://archive.ics.uci.edu/ml/index.php</a><h1><span id="marco-f1">Marco-F1</span></h1>在二分类任务中，使用Precison，Recall和F1值来评价分类的效果。<br><img src="/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/hun.png" alt=""><br><img src="/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/f1.png" alt=""><br>F1是针对二分类的，对于多分类，有2个常用的指标，Marco-F1和Micro-F1.   <h2><span id="micro-f1">Micro-F1</span></h2><img src="/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/micro.png" alt=""><br>假设对于一个多分类问题，有三个类，分别是1，2，3<br>$TP_i$表示分类$i$的TP<br>$FP_i$表示分类$i$的FP<br>$TN_i$表示分类$i$的TN<br>$FN_i$表示分类$i$的FN<br>接下来，我们来计算Micro的Precison<br><img src="/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/precison-mi.png" alt=""><br>以及Micro的Recall<br><img src="/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/recall-mi.png" alt=""><br>然后计算Micro-F1<br><img src="/2019/06/24/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/f1-mi.png" alt="">   <h2><span id="macro-f1">Macro-F1</span></h2>先计算每个类的Precison和Rcall，从而计算出每个类的F1，然后将所有类的F1值平均得到Macro-F1。<br>如果数据集中各个类的分布不均衡的话，建议使用Micro-F1。<br>Macro-F1平等的看待各个类别，它的值更容易受少类别的影响Micro则更容易受常见类别的影响。</li>
 </ul>
 
       
@@ -365,6 +379,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/06/26/gluon编程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          gluon编程
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/06/12/Docker/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title"></div>
@@ -394,7 +417,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">{}</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">2. Keywords</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">3. Abstract</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">4. Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">5. Problem Formulation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">5.1. Preliminaries</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">5.2. Framework Overview</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">6. Methodology</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">6.1. Context-aware Recurrent Framework</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">6.2. Multi-Modal Pattern Fusion Module</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">6.3. Conclusive Recurrent Network</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">6.4. Forecasting and Model Inference</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">7. Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">7.1. Data Description</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">7.1.1. Data Statistics</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">7.2. Experimental Setting</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">7.2.1. Parameter Setting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">7.2.2. Baseline Methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">7.2.3. Evaluation Protocols</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">7.3. Performance Comparison</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">7.3.1. Overall Comparison(Q1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">7.3.2. Forecasting Accuracy v.s Time Period(Q2)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">7.3.3. Forecasting Accuracy v.s Categories(Q3)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">7.4. Component-Wise Evaluation of MiST(Q4)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">7.5. Effect of Spatial and Temporal Scale(Q5)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">7.6. Hyperparameters Studies(Q6)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">7.</span> <span class="toc-text">Case Study(Q7)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">其他论文</span></a>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">{}</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">2. Keywords</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">3. Abstract</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">4. Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">5. Problem Formulation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">5.1. Preliminaries</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">5.2. Framework Overview</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">6. Methodology</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">6.1. Context-aware Recurrent Framework</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">6.2. Multi-Modal Pattern Fusion Module</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">6.3. Conclusive Recurrent Network</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">6.4. Forecasting and Model Inference</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">7. Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">7.1. Data Description</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">7.1.1. Data Statistics</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">7.2. Experimental Setting</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">7.2.1. Parameter Setting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">7.2.2. Baseline Methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">7.2.3. Evaluation Protocols</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">7.3. Performance Comparison</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">7.3.1. Overall Comparison(Q1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">7.3.2. Forecasting Accuracy v.s Time Period(Q2)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">7.3.3. Forecasting Accuracy v.s Categories(Q3)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">7.4. Component-Wise Evaluation of MiST(Q4)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">7.5. Effect of Spatial and Temporal Scale(Q5)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">7.6. Hyperparameters Studies(Q6)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">7.</span> <span class="toc-text">Case Study(Q7)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">其他论文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">Marco-F1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">Micro-F1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">Macro-F1</span></a></li></ol>
                     </li></div>
                 </span>
             </div>
@@ -536,14 +559,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
@@ -557,6 +572,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -616,11 +639,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
+                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
+                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
               </li>
             
             <div class="clearfix"></div>
