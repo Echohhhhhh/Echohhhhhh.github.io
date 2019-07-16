@@ -139,6 +139,260 @@
           <div id="js-content" class="content-ll">
 			
   
+    <article id="post-梯度爆炸和衰减" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: 梯度爆炸和衰减<br>date: 2019-07-16T11:14:49.000Z<br>tags:</p>
+<h2><span id="-反向传播-梯度爆炸-梯度衰减">  - 反向传播、梯度爆炸、梯度衰减</span></h2><p>参考资料：<a href="https://zhuanlan.zhihu.com/p/33006526" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/33006526</a><br><a href="http://wangxin123.com/2019/01/01/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#什么是梯度消失和梯度爆炸，分别会引发什么问题" target="_blank" rel="noopener">http://wangxin123.com/2019/01/01/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#什么是梯度消失和梯度爆炸，分别会引发什么问题</a></p>
+<h1><span id="为什么使用梯度更新规则">为什么使用梯度更新规则</span></h1><p>&ensp;&ensp;&ensp;&ensp;现在，神经网络的参数都是通过反向传播更新的。深层神经网络由很多分线性层堆叠，每一个非线性层都可以看做是一个非线性函数。神经网络就是一个复合的非线性函数，将输入映射成输出。损失函数就是使关于真实值与预测值之间的误差。通过损失函数对参数求导，得到梯度，梯度的含义就是这个参数对整个网络的影响程度大小。使用梯度下降更新参数。<br>梯度决定了网络（参数）的学习速率。如果梯度出现异常，参数更新出现异常，即神经元失去了学习的能力。<br>如果权重的值都小于1，最终的输出很小，<br>如果权重的值都大于1，最终的输出很大，</p>
+<ul>
+<li>在反向求导时，假设对$W^1$求梯度，如果其他的权重都小于1，求得的梯度很小，出现梯度消失，使用$W-\alpha \Delta W$，权重更新的很慢，训练的难度大大增加。<strong>梯度消失比梯度爆炸更常见</strong>   </li>
+<li>在反向求导时，如果权重大于1，梯度大幅度更新，网络变得很不稳定。较好的情况是网络无法利用训练数据学习，最差的情况是梯度或权重增大溢出，变成网络无法更新的Nan值。<br>不用层的参数更新速率不一样，一般靠近网络输出层的参数更新速度加快，学习的情况较好。靠近网络输入层的参数更新速度慢，学习的很慢，有时候训练了很久，前几层的权重参数值和刚开始初始化的值差不多。因此，梯度消失和爆炸的根本原因在于反向传播法则。<br><img src="/2019/07/16/梯度爆炸和衰减/1.png" alt="">       <h1><span id="激活函数">激活函数</span></h1>（1）在权重更新的时候，需要计算前层的偏导信息，因此如果激活函数选择的不合适，比如sigmoid，梯度消失的很明显。因为sigmoid的导数不会超过0.25，经过链式求导，很容易出现梯度消失。<br><img src="/2019/07/16/梯度爆炸和衰减/sigmoid.png" alt=""><br>（2）tanh比sigmoid好一些，但是它的导数仍然小于1<br><img src="/2019/07/16/梯度爆炸和衰减/tanh.png" alt="">    <h1><span id="初始化缓解梯度消失和爆炸">初始化缓解梯度消失和爆炸</span></h1>使用Xavier初始化：基本思想是通过网络层时，输出和输出的方差相同。Xavier在tanh中表现很好，但在Relu激活函数中表现很差。<br>何凯明提出了针对Relu的初始化方法<br>Delving deep into rectifiers: Surpassing human-level performance on ImageNet classification He, K. et al. (2015)<br>该方法集合He initialization，简单思想是：在Relu网络中，假定每一层有一半的神经元被激活，另一半为0，所有，要保持方差不变，只需要在Xavier的基础上再除以2。<br>针对Relu的激活函数，基本使用He initialization。   </li>
+<li>Xavier初始化：tanh，sigmoid激活函数</li>
+<li>He初始化：Relu激活函数<h1><span id="如何判断出现梯度爆炸">如何判断出现梯度爆炸</span></h1>当出现以下信号时，说明出现了梯度爆炸：</li>
+</ul>
+<ol>
+<li>训练过程中，每个节点和层的权重梯度连续大于1</li>
+<li>模型不稳定，梯度显著变化，快速变大</li>
+<li>训练过程中，权重变成了Nan</li>
+<li>权重无法从训练数据中更新</li>
+</ol>
+<h1><span id="如何解决梯度爆炸">如何解决梯度爆炸</span></h1><ol>
+<li>梯度剪切<br>此方法针对梯度爆炸提出来的，基本思想是设置一个梯度剪切阈值，然后更新梯度的时候，如果梯度超过了这个阈值，就强制限制在这个范围之，这可以防止梯度爆炸。</li>
+<li>权重正则化<br>比较常见的是L1正则化和L2正则化。正则化是通过对网络权重做正则化限制过拟合<br><img src="/2019/07/16/梯度爆炸和衰减/reg.png" alt="">    </li>
+<li>Relu，LeakRelu激活函数<br>如果激活函数的导数为1，就不存在梯度爆炸的问题了。每层网络都可以得到相同的更新速度。在深层网络中使用relu激活函数不会导致梯度消失和爆炸的情况。<br><img src="/2019/07/16/梯度爆炸和衰减/relu.png" alt=""><br>relu的主要贡献在于：<ul>
+<li>解决了梯度消失、爆炸的问题</li>
+<li>计算方便，计算速度快</li>
+<li>加速了网络的训练<br>同时也存在一些缺点：由于负数部分恒为0，会导致一些神经元无法激活（可通过设置小学习率部分解决）；输出不是以0为中心的</li>
+</ul>
+</li>
+<li>BatchNorm </li>
+<li>RestNet</li>
+<li>LSTM，可以解决梯度消失的问题</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/16/梯度爆炸和衰减/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Dataset" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/12/Dataset/">Dataset</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/12/Dataset/" class="archive-article-date">
+  	<time datetime="2019-07-12T06:22:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h1>
+        
+          <a class="article-more-a" href="/2019/07/12/Dataset/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">交通领域数据源</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/12/Dataset/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Identity-Mappings-in-Deep-Residual-Networks" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: Identity Mappings in Deep Residual Networks<br>date: 2019-07-03T09:46:08.000Z<br>tags:</p>
+<h2><span id="-resnet">  - ResNet</span></h2><h1><span id="简介">简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;论文地址：<a href="https://arxiv.org/abs/1603.05027" target="_blank" rel="noopener">https://arxiv.org/abs/1603.05027</a><br>&ensp;&ensp;&ensp;&ensp;代码地址： <a href="https://github.com/KaimingHe/resnet-1k-layers" target="_blank" rel="noopener">https://github.com/KaimingHe/resnet-1k-layers</a><br>&ensp;&ensp;&ensp;&ensp;参考资料：<a href="https://www.cnblogs.com/gczr/p/10127723.html" target="_blank" rel="noopener">https://www.cnblogs.com/gczr/p/10127723.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/03/Identity-Mappings-in-Deep-Residual-Networks/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Deep-Spatio-Temporal-Residual-Networks-for-Citywide-Crowd-Flows-Prediction" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction<br>date: 2019-07-01T21:02:12.000Z<br>tags:</p>
+<h2 id="spatial-temporal、ResNet、Crowd-Flows-Prediction"><a href="#spatial-temporal、ResNet、Crowd-Flows-Prediction" class="headerlink" title="  - spatial-temporal、ResNet、Crowd Flows Prediction"></a>  - spatial-temporal、ResNet、Crowd Flows Prediction</h2><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>参考资料<br><a href="https://www.microsoft.com/en-us/research/publication/deep-spatio-temporal-residual-networks-for-citywide-crowd-flows-prediction/" target="_blank" rel="noopener">https://www.microsoft.com/en-us/research/publication/deep-spatio-temporal-residual-networks-for-citywide-crowd-flows-prediction/</a><br>城市计算，郑宇发表的论文：<br><a href="https://www.microsoft.com/en-us/research/project/urban-computing/#!publications" target="_blank" rel="noopener">https://www.microsoft.com/en-us/research/project/urban-computing/#!publications</a><br></p>
+        
+          <a class="article-more-a" href="/2019/07/01/Deep-Spatio-Temporal-Residual-Networks-for-Citywide-Crowd-Flows-Prediction/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/01/Deep-Spatio-Temporal-Residual-Networks-for-Citywide-Crowd-Flows-Prediction/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Tomcat" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -484,290 +738,6 @@
 
 
   
-    <article id="post-机器学习" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: 机器学习<br>date: 2019-04-24T23:52:10.000Z<br>tags:</p>
-<h2 id="特征预处理、模型评估、分类"><a href="#特征预处理、模型评估、分类" class="headerlink" title="  - 特征预处理、模型评估、分类"></a>  - 特征预处理、模型评估、分类</h2><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;最近在做一个分类任务，根据电池的充放电数据，预测电池绝缘报警是否为虚报，就是一个二分类任务。这里使用逻辑回归进行分类。<br></p>
-        
-          <a class="article-more-a" href="/2019/04/24/机器学习/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/24/机器学习/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-pyspark" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/20/pyspark/">pyspark</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/20/pyspark/" class="archive-article-date">
-  	<time datetime="2019-04-20T04:40:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;使用Python编写Spark程序<br></p>
-        
-          <a class="article-more-a" href="/2019/04/20/pyspark/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">python、spark</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/20/pyspark/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Python学习" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/15/Python学习/">Python学习</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/15/Python学习/" class="archive-article-date">
-  	<time datetime="2019-04-15T00:25:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;学习Python！！！！<br></p>
-        
-          <a class="article-more-a" href="/2019/04/15/Python学习/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">编程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/15/Python学习/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CDH集群" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/04/CDH集群/">CDH集群</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/04/CDH集群/" class="archive-article-date">
-  	<time datetime="2019-04-04T14:11:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;最近去给甲方安装CDH集群，对于集群的搭建和测试在这里总结一下。<br></p>
-        
-          <a class="article-more-a" href="/2019/04/04/CDH集群/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CDH集群、Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/04/CDH集群/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -887,6 +857,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">交通领域数据源</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
@@ -927,6 +901,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
               </li>
              
@@ -936,10 +914,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
               </li>
              
               <li class="article-tag-list-item">
