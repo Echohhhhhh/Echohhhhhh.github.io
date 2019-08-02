@@ -139,6 +139,319 @@
           <div id="js-content" class="content-ll">
 			
   
+    <article id="post-论文总结" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: 论文总结<br>date: 2019-08-02T10:52:51.000Z<br>tags:</p>
+<h2><span id="-spatial-temporal-图卷积-flow-predicting">  - Spatial-Temporal、图卷积、flow predicting</span></h2><h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;这学期看了很多论文，下面把看过的论文总结一下。<br><!-- TOC --></p>
+<ul>
+<li><a href="#1-%e7%ae%80%e4%bb%8b">1. 简介</a></li>
+<li><a href="#2-poi%e6%8e%a8%e8%8d%90">2. POI推荐</a><ul>
+<li><a href="#21-point-of-interest-recommendation-exploiting-self-attentive-autoencoders-with-neighbor-aware-influence-cikm2018">2.1. Point-of-Interest Recommendation Exploiting Self-Attentive Autoencoders with Neighbor-Aware Influence (CIKM2018)</a></li>
+<li><a href="#22-hst-lstm-a-hierarchical-spatial-temporal-long-short-term-memory-network-for-location-prediction2018ijcai">2.2. HST-LSTM: A Hierarchical Spatial-Temporal Long-Short Term Memory Network for Location Prediction（2018IJCAI）</a></li>
+<li><a href="#hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting（2019AAAI）</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1><span id="2-poi推荐">2. POI推荐</span></h1><h2><span id="21-point-of-interest-recommendation-exploiting-self-attentive-autoencoders-with-neighbor-aware-influence-cikm2018">2.1. Point-of-Interest Recommendation Exploiting Self-Attentive Autoencoders with Neighbor-Aware Influence   (CIKM2018)</span></h2><p><a href="http://delivery.acm.org/10.1145/3280000/3271733/p697-ma.pdf?ip=218.247.253.241&amp;id=3271733&amp;acc=ACTIVE%20SERVICE&amp;key=BF85BBA5741FDC6E%2EB8E1436BD1CE5062%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&amp;__acm__=1564715146_1e8dd5a9fd9356658c3d093a628ac7c5" target="_blank" rel="noopener">论文地址</a><br>论文题目：邻居感知的自注意自编码器的POI推荐  </p>
+<ul>
+<li>挑战<br>（1）建模用户POI之间的非线性关系，原先都是所有的POI权重一样；<br>（2）结合上下文信息，例如POI地理坐标。<br>（3）用户去过的POI是一小部分，而所有的POI非常多，使得POI矩阵变得非常稀疏</li>
+<li>模型<br><strong>self-attentive encoder and a neighbor-aware decoder（SAE-NAD）</strong><br>&ensp;&ensp;&ensp;&ensp;通过self-attentive encoder区分用户对访问过的POI的喜好程度，用户的访问POI向量中每个POI的权重不同，这样可以学到更好的user hidden representation。<br>&ensp;&ensp;&ensp;&ensp;通过neighbor-aware decoder结合地理上下文信息，使得用户之前到达区域的附近或相似的区域可达性变大。将访问的POI嵌入和未访问的POI嵌入做内积，基于RBF（2个POI的点对点距离） kernel，来计算访问过的POI对未访问POI的影响。<br>&ensp;&ensp;&ensp;&ensp;为了建模稀疏矩阵，我们给未访问的POI分配相同的小权重，给访问过的POI通过访问频率分配不同的大权重。这样对于每个用户就可以区分未访问，少访问，经常访问的POI   </li>
+<li>贡献<br>第一篇使用基于attention的自编码器在POI推荐上</li>
+<li><strong>目标</strong><br><strong>根据用户check-in的记录，向用户推荐一系列从未去过的POIS</strong></li>
+<li><p>Definitoin<br>POI(类型，经纬度)<br>Check-in(用户id，POI ID，时间)     </p>
+<p><img src="/2019/08/02/论文总结/1.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;使用stack autoencoder（堆叠自编码器）学习用户隐藏表示。输出是一个用户去过和没去过的POI，一个n维的0/1向量，其中的$l_2,l_4,l_6$表示去过的POI下标，根据去过POI的下标在POI嵌入矩阵$W^{(1)}$中取出对应的POI向量组成矩阵$W^{(1)_{[L_u]}}$，得到用户已经去过区域的POI嵌入，这n个POI有些POI更能表示用户的喜好，用到self-attentive机制，为$W^{(1)_{[L_u]}}$中的每个POI嵌入学习不同的权重，来构成user hidden representation。一般的attention给每个POI嵌入学习一个分数，这个分数只能反映POI在一方面的重要性。例如饭店，在味道方面这个用户喜欢这家饭店，但是在环境方面用户不喜欢，为了从不同方面捕获用户的喜好，使用multiple-dimension attention，分别对不同方面进行打分。</p>
+</li>
+</ul>
+<p><img src="/2019/08/02/论文总结/2.png" alt=""><br><img src="/2019/08/02/论文总结/3.png" alt=""><br>这n个POI嵌入向量，从$d_a$个方面进行打分，得到的$A_u \in R^{d_a \times n}$ ,然后把n个POI嵌入乘上分数再相加，得到第u个用户隐藏表示$Z^{(1)}_u \in R^{d_a  times H_1}$，从$d_a$个方面来表示这个用户，为了让这个矩阵输入到encoder中，通过全连接将$d_a$个方面整合成一个方面，从一个矩阵变成一个向量。 然后经过2个encoder得到$z^{(3)}_u$<br><img src="/2019/08/02/论文总结/4.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;用户访问过的POI会对没访问过的POI有影响，影响程度有着2个POI的相似性和距离决定。和已访问过的POI相似或邻近的POI用户访问的概率比较大。使用内积的方式求2个POI的相似性，但是这没有考虑到2个POI之间的距离，我们采用RBF kernel根据2个POI之间的距离计算2个POI之间的相关性，得到一个N*N的矩阵。然后把相似性和距离相关性相乘，得到2个POI的最终区域相关性，<br><img src="/2019/08/02/论文总结/6.png" alt=""><br>解码器阶段：将用户隐藏进行解码。其中$z^{(3)}_u$表示根据用户去过的POI得到的用户表示，$p_u$表示去过的POI对未去过的POI的影响。<br><img src="/2019/08/02/论文总结/7.png" alt="">   </p>
+<ul>
+<li>总结<br>根据一个用户之前去过的POI对这个用户进行表示，不同的POI有不同的权重，同一个POI在不同的方面也有不同的权重，得到一个user hidden representation，将用户表示经过2层encoder，然后在解码的时候，用到邻居信息，去过的POI对未去过的POI有影响，影响大小根据这2个POI之间的相似性和距离决定。    </li>
+</ul>
+<h2><span id="22-hst-lstm-a-hierarchical-spatial-temporal-long-short-term-memory-network-for-location-prediction2018ijcai">2.2. HST-LSTM: A Hierarchical Spatial-Temporal Long-Short Term Memory Network for Location Prediction（2018IJCAI）</span></h2><p>这篇论文没怎么看懂<br>弱实时预测，向用户推荐下一分钟或小时要去的地点。 在LSTM中使用时空信息。<br><img src="/2019/08/02/论文总结/8.png" alt="">   </p>
+<ul>
+<li>贡献<br>提出HST-LSTM结合时空影响到LSTM中，来解决位置预测中数据稀疏的问题。<br>HST-LSTM建模用户的历史访问序列，使用encoder-decoder的方式来提高预测性能。</li>
+<li>模型<br><strong>HST-LSTM model</strong><br>AOI:具有一种功能的区域，例如购物中心，工作区<br>Visit Record：用户在一段时间内（几周或几个月）访问的所有AOIS<br>Visit Session：一个用户在在一个时间段（一天）访问的AOI序列，在一个session中的AOI有强烈的相关性，揭示了用户的运动模式。<br>Visit Session Sequence：一个用户连续的visit sessions，可以作为上下文信息预测下一个AOI。<br>多个AOI组成一个visit session，多个visit session组成visit record，</li>
+<li>目标<br>用户在一段时间内访问了N个AOI，这N个AOI按照时间排序（AOI可能有重复），给定前j个用户去过的AOI，预测接下来用户要去的N-j个AOI，是一个多对多的预测。</li>
+</ul>
+<p><img src="/2019/08/02/论文总结/9.png" alt=""><br>在LSTM中3个门控机制中，输入门，遗忘门，输出门加入时空因素。其中s和q都是d维的向量，分别表示空间和时间的影响因素。<br><img src="/2019/08/02/论文总结/10.png" alt=""><br>基于提出的ST-LSTM，对每个visit session建模。使用STLSTM，每一个时间步输入的信息是一个visit session中的AOI嵌入，使用一个STLSTM对一个session进行建模，输出最后一个时间步的隐藏状态$h^i_e$作为第$i$个session的表示。对$n-1$个session进行建模得到n-1个隐藏状态，将这n-1个隐藏状态使用Contextual LSTM建模长期的visit sequence，在global context encoding阶段，每个时间步输入的是上一个STLSTM中session的表示。<br><img src="/2019/08/02/论文总结/11.png" alt=""><br><img src="/2019/08/02/论文总结/12.png" alt=""><br>在Decoding阶段，使用前i-1个session的推断接下来要去的AOI。</p>
+<ul>
+<li>总结<br>在LSTM阶段加入时空信息，提出STLSTM。<br>使用encoder-decoder来实现POI推荐，encoder和decoder都是LSTM</li>
+</ul>
+<h2><span id="hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting（2019AAAI）</span></h2><p>题目：超时空网络预测</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/02/论文总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-traffic-accident" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: traffic accident<br>date: 2019-07-21T18:35:32.000Z<br>tags:</p>
+<h2><span id="-spatial-temporal-forecasting-traffic-accident-event-prediction">  - spatial-temporal、forecasting traffic accident、event prediction</span></h2><h1><span id="简介">简介</span></h1><p>以下是关于event prediction的相关论文，主要是traffic accident这一类的事件预测。   </p>
+<h1><span id="论文">论文</span></h1><h2><span id="learning-deep-representation-from-big-and-heterogeneous-data-for-traffic-accident-inference2016aaai">Learning Deep Representation from Big and Heterogeneous Data for Traffic Accident Inference(2016AAAI)</span></h2><p>论文地址：<br><a href="https://shiba.iis.u-tokyo.ac.jp/song/wp-content/uploads/2017/02/AAAI2016.pdf" target="_blank" rel="noopener">Learning Deep Representation from Big and Heterogeneous Data for Traffic Accident Inference</a><br>目标：使用real-time GPS data 预测所有区域的traffic risk level，回归问题，预测risk的大小，而不是accident会不会发生 。<br><strong>数据集：</strong><br>Traffic accident data和Human mobility data throughout Japan from 2013.1.1~2013.7.31。<br><strong>模型：</strong><br><img src="/2019/07/21/traffic-accident/1.png" alt="traffic-accident/1.png"><br>对Japan的区域进行网格划分，获取每个网格的risk和mobility。使用Denoise Autoencoder模型对mobility进行编码representation，然后输入到Logistic regression层作为预测。<br><strong>总结：</strong></p>
+<ul>
+<li>第一个使用深度学习来预测traffic accident的模型，使用real-time GPS data作为输入。 </li>
+<li>没有考虑到时间和空间的关系；</li>
+<li>特征单一。只考虑了human mobility，可以考虑weather，POI，population，land use等信息。</li>
+</ul>
+<h2><span id="combining-satellite-imagery-and-open-data-to-map-road-safety2017aaai">Combining Satellite Imagery and Open Data to Map Road Safety(2017AAAI)</span></h2><p>论文地址：<br><a href="https://pdfs.semanticscholar.org/ef28/efaa43a05be548ed61d52a6bd590b88e7782.pdf" target="_blank" rel="noopener">Combining Satellite Imagery and Open Data to Map Road Safety</a>   </p>
+<p>直接从原始的satellie image来预测road safety。相同的safety在图像视觉上有一些相同的特点，比如颜色(grey/greed)，路段等。所以图像的特点是road safety的一种体现。<br><img src="/2019/07/21/traffic-accident/2.png" alt="traffic-accident/1.png"><br>traffic accident被分为3类：slight，heavy，fatal。<br><strong>数据集：</strong><br>NYC：收集了14000张卫星图像，每个图像图片的标签是3类accident中的一类<br>Denver：收集了21406张卫星图像，标签是3类中的一类。<br>每张图片是256*256，使用ConvNet来对图像进行分类。使用NYC的卫星图像训练模型，使用训练好的模型对NYC的测试卫星图像进行测试。<br>使用Denver的traffic accident映射到地图上，形成traffic 热力图。使用从NYC训练得到的模型，输入是Denver的卫星图片，输出区域的traffic accident severity。即可以生成地图来表示区域的risk。</p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>第一个使用satellite image来预测city-scale road safety的模型</li>
+<li>仅仅使用satellite image来预测traffic accident，没有考虑时间和空间信息，外部信息。    </li>
+</ul>
+<h2><span id="a-deep-learning-approach-to-the-prediction-of-short-term-traffic-accident-risk未中">A Deep Learning Approach to the Prediction of Short-term Traffic Accident Risk(未中)</span></h2><p>论文地址：<br><a href="https://www.researchgate.net/publication/320627131_A_Deep_Learning_Approach_to_the_Prediction_of_Short-term_Traffic_Accident_Risk" target="_blank" rel="noopener">A Deep Learning Approach to the Prediction of Short-term Traffic Accident Risk</a></p>
+<p>这篇论文首先指出了《Learning Deep Representation from Big and Heterogeneous Data for Traffic Accident Inference》AAAI2016的缺点：（1）只考虑了human mobility data，像traffic flow，weather，air quality，regional characteristic这些重要的信息没有考虑。（2）没有考虑traffic的周期pattern。<br>本篇论文收集了big and heterogeneous data related traffic accident。<br><strong>数据集：</strong><br>traffic accident：北京2016年的accident数据，每条记录包含时间，地点，严重程度，分为三类，slight、heavy、fatal<br>traffic flow data：北京2016.8所有的taxi的GPS信息和speed信息。<br>air quality：北京的daily PM2.5信息。<br>weather information：cloudy，sunny…<br>每个区域的risk level是这个区域所有的accident severity的总和。<br>将traffic accident按照时间和空间划分，时间1h为一个slot，空间每个gird大小为1000m<em>1000m。<br>在给定时间t，定义所有区域的时间相关性，<br>从以上这些数据集提取出6个矩阵，分别是<br><img src="/2019/07/21/traffic-accident/4.png" alt="traffic-accident/1.png"><br>将这6个矩阵进行整合成一个矩阵，每个区域每个时间得到一个多源数据的表示。<br><em>*模型：Traffic Accident Risk Prediction Method based on LSTM (TARPML)</em></em><br><img src="/2019/07/21/traffic-accident/5.png" alt="traffic-accident/1.png"><br>有2个input layer，隐藏层有4个LSTM layer和3个fully connected layer，1个output layer，输出risk level。<br>使用LSTM是因为LSTM可以捕捉periodic信息。<br>输入层中的Short-term features是预测时间槽t的前几个小时的特征I，Periodic feature是预测时间槽t的daily和weekly特征。将这三种特征拼接起来，输入到first input layer中。区域的经纬度信息输入到second input layer中， 直接和fully connected layer相连。<br>输入的短期特征是预测时间t前n个小时的特征，n=4.输入的周期特征是预测时间t昨天和上周该时间段前后3个小时的特征。所以输入的特征维度为$(n+2n_d+2n_w+2,6)$。对于一个区域预测时间t的risk level，需要输入的数据是$(n+2n_d+2n_w+2,6)$<br><img src="/2019/07/21/traffic-accident/7.png" alt="traffic-accident/1.png"></p>
+<p><strong>整体架构</strong><br><img src="/2019/07/21/traffic-accident/3.png" alt="traffic-accident/1.png"><br><strong>总结</strong></p>
+<ul>
+<li>使用到的数据集是北京：traffic accident，traffic flow，weather，holiday，air quality数据</li>
+<li>分三种时间模式，recent，daily，weekly，直接concatenate输入到LSTM中。并且把region的经纬度输入到全连接中，相当于位置embedding。</li>
+<li>没有考虑不同区域之间的关系</li>
+<li>想法：（1）回归问题，预测区域的risk level，但是是一个区域还是所有区域，没有想好（2）考虑recent，daily，weekly，使用Attention机制计算三种之间的重要性.（3）对区域进行embedding，（4）考虑不同区域之间的关系.   </li>
+</ul>
+<h2><span id="a-deep-learning-approach-to-the-citywide-traffic-accident-risk-prediction2018ieee-itsc">A Deep Learning Approach to the Citywide Traffic Accident Risk Prediction(2018IEEE-ITSC)</span></h2><p>论文地址：<br><a href="https://arxiv.org/pdf/1710.09543.pdf" target="_blank" rel="noopener">A Deep Learning Approach to the Citywide Traffic<br>Accident Risk Prediction</a><br>这篇论文是上篇论文的修改版本。<br>和上文的改进之处是加入了很多图表对现象进行解释。解释了为什么预测traffic accident分类比回归要难的原因。<br>这里只使用了北京Traffic accident数据，没有使用其他外部数据。<br>在给定时间t，计算所有区域的空间相关性，然后再计算时空相关性。 计算下面2个公式，主要是为了说明traffic accident具有day周期性。所以在本论文中一个time slot=24h。<strong>计算一个区域每天的traffic accident发生的频率作为risk。</strong><br><img src="/2019/07/21/traffic-accident/8.png" alt="traffic-accident/1.png"><br><img src="/2019/07/21/traffic-accident/9.png" alt="traffic-accident/1.png"><br><img src="/2019/07/21/traffic-accident/10.png" alt="traffic-accident/1.png"></p>
+<p>输入序列长度为100，输入每个区域100h的traffic accident frequency，输出是每个区域未来3天的mean frequency，使用所有的区域样本进行训练。测试时，输入是所有区域100h的traffic accident frequency，输出所有区域未来3天的平均frequency。<br><img src="/2019/07/21/traffic-accident/11.png" alt="traffic-accident/1.png"><br><strong>总结：</strong></p>
+<ul>
+<li>只使用了traffic accident数据，没有使用traffic flow，weather，road network等外部信息</li>
+<li>没有考虑空间信息</li>
+</ul>
+<p>路网之间的关系，</p>
+<ul>
+<li>输入：爬取POI数据，关性建模，<strong>区域中的路口和路段之间的关系</strong>，先直观上看事故发生的原因，因素，出租车流量，事故多发，周期性，位置表示，时空融合，时空相关性(图/网格)，</li>
+</ul>
+<h2><span id="其他问题交通上的其他事件定义">其他问题：(交通上的其他事件定义)</span></h2><ul>
+<li>乘客下单未出现的概率</li>
+<li>共享单车，违章停车事件(郑宇KDD)</li>
+<li>共享单车调度</li>
+<li>闯红灯频率，</li>
+<li>滴滴拼车数量，</li>
+<li>危险系数：急刹车</li>
+</ul>
+<ol>
+<li>原来的问题，在输入上POI，路段关系，丰富输入信息</li>
+<li>模型创新</li>
+<li>定义新问题</li>
+</ol>
+<h2><span id="自己的数据集">自己的数据集：</span></h2><ul>
+<li>高速公路阻塞数据(计划性/恶劣天气/堵车)  </li>
+<li>高速公路收费数据</li>
+<li>手机信令数据，怎么定义事件，</li>
+<li>滴滴数据</li>
+</ul>
+<h2><span id="公开数据集">公开数据集：</span></h2><ul>
+<li>共享单车</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/21/traffic-accident/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-神经网络踩坑" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: 神经网络踩坑<br>date: 2019-07-17T16:08:20.000Z<br>tags:</p>
+<h2><span id="-deep-learning-训练经验-踩坑">  - Deep Learning、训练经验、踩坑</span></h2><p>参考资料:<br><a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650729285&amp;idx=1&amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e6f79daaeed&amp;mpshare=1&amp;scene=1&amp;srcid=07263lmMeeAcHLPSZpJXJI3L#rd" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650729285&amp;idx=1&amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e6f79daaeed&amp;mpshare=1&amp;scene=1&amp;srcid=07263lmMeeAcHLPSZpJXJI3L#rd</a>   </p>
+<ol>
+<li><strong>Suffle数据集</strong><br>先划分数据集再shuffle。先将数据集划分成训练集、验证集、测试集。然后在DataLoader划分mini-batch时对训练集进行shuffle得到batch。对验证集和测试集不需要shuffle。不对训练集进行shuffle容易造成过拟合。</li>
+<li><p><strong>归一化</strong><br>先划分数据集，再归一化。将数据划分成训练集，验证集，测试集，然后计算训练集的平均值和标准差。使用训练集的平均值和标准差对验证集和测试集进行归一化。模型不应该知道关于测试集的任何信息，所以要用训练集的均值和标准差对训练集归一化。<br>划分数据集—&gt;归一化—&gt;对训练集shuffle   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, train_size = <span class="number">0.7</span>) <span class="comment">#train 70%, test 30%</span></span><br><span class="line">ss = StandardScaler()</span><br><span class="line">ss.fit(X_train)</span><br><span class="line">X_train_std = ss.transform(X_train)</span><br><span class="line">X_test_std = ss.transform(X_test)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>batch_size</strong><br>当数据量较大时，向网络中传入所有的数据来计算loss和梯度，更新参数会造成内存溢出。所以每次向网络中值传入一个batch的数据，说过这一个batch的数据来更新权重，输出这个batch里面所有样本的平均loss。下次再使用另一个batch，更新网络参数，直到所有的数据全都输入，完成一个epoch。</p>
+</li>
+<li><p><strong>划分数据集</strong><br>如果数据充足的情况下，通常采用均匀随机抽样的方法将数据集划分为3部分，训练集，验证集和测试集，这三个集合不能有交集，常见的比例是8:1:1，6:2:2。需要注意的是，通常都会给定训练集和测试集，而不会给验证集，一般的做法是从训练集中抽取一部分数据作为验证集。<br>在训练时，仅适用训练集的数据进行训练，使用验证集评价模型。当选中最好的模型超参数之后，再使用训练集+验证集来训练模型，以充分利用所有的标注数据，然后再测试集上测试</p>
+<p>训练模型时，使用一个bacth来训练模型更新模型参数，记录下batch的loss。当训练完一个epcoh时，记录下模型的参数和梯度。并在验证集上计算验证集的误差，在测试集上计算测试集的MAE和MSE。</p>
+<pre><code class="lang-python">global_step = 1
+ for epoch in range(1, epochs + 1):
+
+     for train_w, train_d, train_r, train_t in train_loader:
+
+         start_time = time()
+
+         with autograd.record():
+             output = net([train_w, train_d, train_r])
+             l = loss_function(output, train_t)
+         l.backward()
+         trainer.step(train_t.shape[0])
+         training_loss = l.mean().asscalar()
+
+         sw.add_scalar(tag=&#39;training_loss&#39;,
+                       value=training_loss,
+                       global_step=global_step)
+
+         print(&#39;global step: %s, training loss: %.2f, time: %.2fs&#39;
+               % (global_step, training_loss, time() - start_time))
+         global_step += 1
+
+     # logging the gradients of parameters for checking convergence
+     for name, param in net.collect_params().items():
+         try:
+             sw.add_histogram(tag=name + &quot;_grad&quot;,
+                              values=param.grad(),
+                              global_step=global_step,
+                              bins=1000)
+         except:
+             print(&quot;can&#39;t plot histogram of {}_grad&quot;.format(name))
+
+     # compute validation loss
+     compute_val_loss(net, val_loader, loss_function, sw, epoch)
+
+     # evaluate the model on testing set
+     evaluate(net, test_loader, true_value, num_of_vertices, sw, epoch)
+
+     params_filename = os.path.join(params_path,
+                                    &#39;%s_epoch_%s.params&#39; % (model_name,
+                                                            epoch))
+     net.save_parameters(params_filename)
+     print(&#39;save parameters to file: %s&#39; % (params_filename))
+
+ # close SummaryWriter
+ sw.close()
+
+ if &#39;prediction_filename&#39; in training_config:
+     prediction_path = training_config[&#39;prediction_filename&#39;]
+
+     prediction = predict(net, test_loader)
+
+     np.savez_compressed(
+         os.path.normpath(prediction_path),
+         prediction=prediction,
+         ground_truth=all_data[&#39;test&#39;][&#39;target&#39;]
+     )
+</code></pre>
+</li>
+<li>交叉验证<br>原先对交叉验证使用的数据集一直都理解错了。<br><a href="https://blog.csdn.net/qq_24753293/article/details/79970997" target="_blank" rel="noopener">参考资料</a><br>交叉验证使用的数据集是训练集，而不是全部的数据集。在交叉验证的时候把训练集分成K个集合，其中K-1份用来训练，1份用来验证。<br><img src="/2019/07/17/神经网络踩坑/cross.png" alt=""><br>比如使用5折交叉验证，使用不同的5个训练集和测试集，训练得到5个模型，但是我们最后使用的模型并不是这5个模型中的一个。我们仍然认为这5个模型是一个模型，虽然参数不同，只是它们的输入不同而已。交叉验证只是为了验证这个模型的性能，交叉验证的目的并不是为了得到最终的模型。<br>假设我们有2个模型：线性回归和MLP。怎么说哪个模型更好呢？我们可以使用K折交叉验证来证明哪个模型更好，一旦我们选择了更好模型，例如MLP,那我们就用全部的数据来训练这个模型。<br>先使用网格搜索选择超参数，然后使用交叉验证输出这个模型的预测结果。<br>交叉验证有2个用处：<ul>
+<li>准确的调整模型的超参数。超参数不同模型就不同。使用交叉验证来选出最好的超参数。</li>
+<li>比如分类问题，有多个算法，逻辑回归，决策树，聚类等方法，不确定使用哪个方法时，可以使用交叉验证。</li>
+</ul>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/17/神经网络踩坑/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-梯度爆炸和衰减" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -558,186 +871,6 @@
 
 
   
-    <article id="post-Docker" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: Docker<br>date: 2019-06-12T18:48:24.000Z<br>tags:</p>
-<h2 id="Docker、镜像"><a href="#Docker、镜像" class="headerlink" title="  - Docker、镜像"></a>  - Docker、镜像</h2><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖到一个可移植的镜像中，然后发布到Linux或Window系统中，也可以实现虚拟化。容器是完全使用沙箱机制，相互之前不会有任何接口。<br></p>
-        
-          <a class="article-more-a" href="/2019/06/12/Docker/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/12/Docker/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CentOs系统matplotlib画图中文乱码" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: CentOs系统matplotlib画图中文乱码<br>date: 2019-05-10T17:15:52.000Z<br>tag:</p>
-<h2 id="Centos、matplotlib、中文乱码"><a href="#Centos、matplotlib、中文乱码" class="headerlink" title="  - Centos、matplotlib、中文乱码"></a>  - Centos、matplotlib、中文乱码</h2><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;在集群上使用Python中的matplotlib库画图出现中文乱码，记录一下解决方案。   </p>
-        
-          <a class="article-more-a" href="/2019/05/10/CentOs系统matplotlib画图中文乱码/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/10/CentOs系统matplotlib画图中文乱码/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-gluon环境安装" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/27/gluon环境安装/">gluon环境安装</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/27/gluon环境安装/" class="archive-article-date">
-  	<time datetime="2019-04-27T11:59:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;在服务器上安装gluon环境。<br></p>
-        
-          <a class="article-more-a" href="/2019/04/27/gluon环境安装/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">gluon、jupyter notebook</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/27/gluon环境安装/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -857,7 +990,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">交通领域数据源</a>
+                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">预分区</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -865,11 +1002,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">HBase</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">预分区</a>
+                <a href="javascript:void(0)" class="js-tag color3">交通领域数据源</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -901,10 +1034,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
               </li>
              
@@ -914,6 +1043,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NLP</a>
               </li>
              
               <li class="article-tag-list-item">
