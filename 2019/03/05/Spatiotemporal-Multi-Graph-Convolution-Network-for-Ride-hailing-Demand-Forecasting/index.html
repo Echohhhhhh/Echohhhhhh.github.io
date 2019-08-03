@@ -24,7 +24,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/模型图解释.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/temporal.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/chebnet.png">
-<meta property="og:updated_time" content="2019-03-10T08:25:31.847Z">
+<meta property="og:updated_time" content="2019-08-03T12:46:40.234Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting">
 <meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;今天实验室分享了一篇2019年AAAI的论文：Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand。讲的是通过时空多图卷积来进行打车需求的预测。">
@@ -170,15 +170,15 @@
       
         <h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;今天实验室分享了一篇2019年AAAI的论文：<a href="http://www-scf.usc.edu/~yaguang/papers/aaai19_multi_graph_convolution.pdf" target="_blank" rel="noopener">Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand</a>。讲的是通过时空多图卷积来进行打车需求的预测。<br> <a id="more"></a><br><!-- TOC --></p>
 <ul>
-<li><a href="#1-%E7%AE%80%E4%BB%8B">1. 简介</a></li>
-<li><a href="#2-%E4%BB%BB%E5%8A%A1">2. 任务</a></li>
-<li><a href="#3-%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86">3. 数据处理</a><ul>
+<li><a href="#1-%e7%ae%80%e4%bb%8b">1. 简介</a></li>
+<li><a href="#2-%e4%bb%bb%e5%8a%a1">2. 任务</a></li>
+<li><a href="#3-%e6%95%b0%e6%8d%ae%e5%a4%84%e7%90%86">3. 数据处理</a><ul>
 <li><a href="#31-neighborhood">3.1. Neighborhood</a></li>
 <li><a href="#32-functional-similarity">3.2. Functional similarity</a></li>
 <li><a href="#33-transportation-connectivity">3.3. Transportation connectivity</a></li>
 </ul>
 </li>
-<li><a href="#4-st-mgcn%E6%A8%A1%E5%9E%8B">4. ST-MGCN模型</a><ul>
+<li><a href="#4-st-mgcn%e6%a8%a1%e5%9e%8b">4. ST-MGCN模型</a><ul>
 <li><a href="#41-temporal-correlation-modeling">4.1. Temporal correlation modeling</a></li>
 <li><a href="#42-multi-graph-convolution">4.2. Multi-Graph Convolution</a></li>
 </ul>
@@ -495,6 +495,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">交通领域数据源</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
@@ -507,7 +511,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">交通领域数据源</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -523,14 +531,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">gluon、jupyter notebook</a>
               </li>
              
@@ -540,14 +540,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -564,6 +556,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
               </li>
              
               <li class="article-tag-list-item">
