@@ -15,12 +15,10 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="title: 神经网络踩坑date: 2019-07-17T16:08:20.000Ztags:   - Deep Learning、训练经验、踩坑参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;a">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/cross.png">
-<meta property="og:updated_time" content="2019-08-02T13:31:08.636Z">
+<meta property="og:updated_time" content="2019-08-28T07:07:15.041Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
 <meta name="twitter:description" content="title: 神经网络踩坑date: 2019-07-17T16:08:20.000Ztags:   - Deep Learning、训练经验、踩坑参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;a">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/cross.png">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
   
@@ -151,75 +149,30 @@
 <a id="more"></a>   
 <ol>
 <li><strong>Suffle数据集</strong><br>先划分数据集再shuffle。先将数据集划分成训练集、验证集、测试集。然后在DataLoader划分mini-batch时对训练集进行shuffle得到batch。对验证集和测试集不需要shuffle。不对训练集进行shuffle容易造成过拟合。</li>
-<li><p><strong>归一化</strong><br>先划分数据集，再归一化。将数据划分成训练集，验证集，测试集，然后计算训练集的平均值和标准差。使用训练集的平均值和标准差对验证集和测试集进行归一化。模型不应该知道关于测试集的任何信息，所以要用训练集的均值和标准差对训练集归一化。<br>划分数据集—&gt;归一化—&gt;对训练集shuffle   </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, train_size = <span class="number">0.7</span>) <span class="comment">#train 70%, test 30%</span></span><br><span class="line">ss = StandardScaler()</span><br><span class="line">ss.fit(X_train)</span><br><span class="line">X_train_std = ss.transform(X_train)</span><br><span class="line">X_test_std = ss.transform(X_test)</span><br></pre></td></tr></table></figure>
+<li><strong>归一化</strong><br>先划分数据集，再归一化。将数据划分成训练集，验证集，测试集，然后计算训练集的平均值和标准差。使用训练集的平均值和标准差对验证集和测试集进行归一化。模型不应该知道关于测试集的任何信息，所以要用训练集的均值和标准差对训练集归一化。<br>划分数据集—&gt;归一化—&gt;对训练集shuffle   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">   X_train, X_test, y_train, y_test = train_test_split(X, y, train_size = <span class="number">0.7</span>) <span class="comment">#train 70%, test 30%</span></span><br><span class="line">   ss = StandardScaler()</span><br><span class="line">   ss.fit(X_train)</span><br><span class="line">   X_train_std = ss.transform(X_train)</span><br><span class="line">   X_test_std = ss.transform(X_test)</span><br><span class="line">   ```       </span><br><span class="line">   一般都是把数据归一化成[<span class="number">0</span>,<span class="number">1</span>]或者减去均值除以标准化。默认是对每一列进行归一化，即axis=<span class="number">0</span>。很少用sklearn的标准化方法，都是自己写一个方法用来标准化。</span><br><span class="line">   ![](神经网络踩坑/norm.png)   </span><br><span class="line">   ```python</span><br><span class="line">   </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">normalize</span><span class="params">(x)</span>:</span></span><br><span class="line">        mean = x.mean(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line">        std = x.std(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line">        <span class="keyword">return</span> (x - mean) / std</span><br><span class="line">   ``` </span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> **batch_size**   </span><br><span class="line">   当数据量较大时，向网络中传入所有的数据来计算loss和梯度，更新参数会造成内存溢出。所以每次向网络中值传入一个batch的数据，说过这一个batch的数据来更新权重，输出这个batch里面所有样本的平均loss。下次再使用另一个batch，更新网络参数，直到所有的数据全都输入，完成一个epoch。</span><br><span class="line"><span class="number">4.</span> **划分数据集**</span><br><span class="line">   如果数据充足的情况下，通常采用均匀随机抽样的方法将数据集划分为<span class="number">3</span>部分，训练集，验证集和测试集，这三个集合不能有交集，常见的比例是<span class="number">8</span>:<span class="number">1</span>:<span class="number">1</span>，<span class="number">6</span>:<span class="number">2</span>:<span class="number">2</span>。需要注意的是，通常都会给定训练集和测试集，而不会给验证集，一般的做法是从训练集中抽取一部分数据作为验证集。   </span><br><span class="line">   在训练时，仅适用训练集的数据进行训练，使用验证集评价模型。当选中最好的模型超参数之后，再使用训练集+验证集来训练模型，以充分利用所有的标注数据，然后再测试集上测试</span><br><span class="line"></span><br><span class="line">   训练模型时，使用一个bacth来训练模型更新模型参数，记录下batch的loss。当训练完一个epcoh时，记录下模型的参数和梯度。并在验证集上计算验证集的误差，在测试集上计算测试集的MAE和MSE。</span><br><span class="line">   ```python</span><br><span class="line">   global_step = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">1</span>, epochs + <span class="number">1</span>):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> train_w, train_d, train_r, train_t <span class="keyword">in</span> train_loader:</span><br><span class="line"></span><br><span class="line">            start_time = time()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">with</span> autograd.record():</span><br><span class="line">                output = net([train_w, train_d, train_r])</span><br><span class="line">                l = loss_function(output, train_t)</span><br><span class="line">            l.backward()</span><br><span class="line">            trainer.step(train_t.shape[<span class="number">0</span>])</span><br><span class="line">            training_loss = l.mean().asscalar()</span><br><span class="line"></span><br><span class="line">            sw.add_scalar(tag=<span class="string">'training_loss'</span>,</span><br><span class="line">                          value=training_loss,</span><br><span class="line">                          global_step=global_step)</span><br><span class="line"></span><br><span class="line">            print(<span class="string">'global step: %s, training loss: %.2f, time: %.2fs'</span></span><br><span class="line">                  % (global_step, training_loss, time() - start_time))</span><br><span class="line">            global_step += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># logging the gradients of parameters for checking convergence</span></span><br><span class="line">        <span class="keyword">for</span> name, param <span class="keyword">in</span> net.collect_params().items():</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                sw.add_histogram(tag=name + <span class="string">"_grad"</span>,</span><br><span class="line">                                 values=param.grad(),</span><br><span class="line">                                 global_step=global_step,</span><br><span class="line">                                 bins=<span class="number">1000</span>)</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                print(<span class="string">"can't plot histogram of &#123;&#125;_grad"</span>.format(name))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># compute validation loss</span></span><br><span class="line">        compute_val_loss(net, val_loader, loss_function, sw, epoch)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># evaluate the model on testing set</span></span><br><span class="line">        evaluate(net, test_loader, true_value, num_of_vertices, sw, epoch)</span><br><span class="line"></span><br><span class="line">        params_filename = os.path.join(params_path,</span><br><span class="line">                                       <span class="string">'%s_epoch_%s.params'</span> % (model_name,</span><br><span class="line">                                                               epoch))</span><br><span class="line">        net.save_parameters(params_filename)</span><br><span class="line">        print(<span class="string">'save parameters to file: %s'</span> % (params_filename))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># close SummaryWriter</span></span><br><span class="line">    sw.close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="string">'prediction_filename'</span> <span class="keyword">in</span> training_config:</span><br><span class="line">        prediction_path = training_config[<span class="string">'prediction_filename'</span>]</span><br><span class="line"></span><br><span class="line">        prediction = predict(net, test_loader)</span><br><span class="line"></span><br><span class="line">        np.savez_compressed(</span><br><span class="line">            os.path.normpath(prediction_path),</span><br><span class="line">            prediction=prediction,</span><br><span class="line">            ground_truth=all_data[<span class="string">'test'</span>][<span class="string">'target'</span>]</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">   ```    </span><br><span class="line"><span class="number">5.</span> 交叉验证</span><br><span class="line">   原先对交叉验证使用的数据集一直都理解错了。  </span><br><span class="line">   [参考资料](https://blog.csdn.net/qq_24753293/article/details/<span class="number">79970997</span>)</span><br><span class="line">   交叉验证使用的数据集是训练集，而不是全部的数据集。在交叉验证的时候把训练集分成K个集合，其中K<span class="number">-1</span>份用来训练，<span class="number">1</span>份用来验证。    </span><br><span class="line">   ![](神经网络踩坑/cross.png)</span><br><span class="line">   比如使用<span class="number">5</span>折交叉验证，使用不同的<span class="number">5</span>个训练集和测试集，训练得到<span class="number">5</span>个模型，但是我们最后使用的模型并不是这<span class="number">5</span>个模型中的一个。我们仍然认为这<span class="number">5</span>个模型是一个模型，虽然参数不同，只是它们的输入不同而已。交叉验证只是为了验证这个模型的性能，交叉验证的目的并不是为了得到最终的模型。</span><br><span class="line">   假设我们有<span class="number">2</span>个模型：线性回归和MLP。怎么说哪个模型更好呢？我们可以使用K折交叉验证来证明哪个模型更好，一旦我们选择了更好模型，例如MLP,那我们就用全部的数据来训练这个模型。</span><br><span class="line">   先使用网格搜索选择超参数，然后使用交叉验证输出这个模型的预测结果。</span><br><span class="line">   交叉验证有<span class="number">2</span>个用处：</span><br><span class="line">   - 准确的调整模型的超参数。超参数不同模型就不同。使用交叉验证来选出最好的超参数。</span><br><span class="line">   - 比如分类问题，有多个算法，逻辑回归，决策树，聚类等方法，不确定使用哪个方法时，可以使用交叉验证。  </span><br><span class="line"><span class="number">6.</span> 数据输入</span><br><span class="line">   （<span class="number">1</span>）在gloun中Dense的输入是二维的，(batch_size,feature)，比如输入是(<span class="number">64</span>,<span class="number">120</span>)表示一个batch有<span class="number">64</span>个样本，每个样本有<span class="number">120</span>个特征。如果训练集中的X不是二维的，可以使用reshape()将X变换成(<span class="number">-1</span>,全连接输入单元个数)</span><br><span class="line">   （<span class="number">2</span>）卷积神经网络，卷积的输入和输出形状是(batch_size,通道,高,宽)，如果后面接的是全连接，就要转换成二维(batch_size,每个样本特征=通道\*高*宽)，但是不需要人去手动转换形状，Dense会自动转换。  </span><br><span class="line">   ![](神经网络踩坑/conv.png)  </span><br><span class="line">   （<span class="number">3</span>）循环神经网络的输入形状为(时间步数，batch_size，特征个数)   </span><br><span class="line">   [通俗易懂的RNN图解](https://www.zhihu.com/question/<span class="number">41949741</span>)</span><br><span class="line"><span class="number">7.</span> 激活函数，在使用激活函数的时候，一般都是</span><br><span class="line">   net.add(nn.Dense(<span class="number">10</span>,activation=<span class="string">'relu'</span>)),在定义层的时候直接加上activation，</span><br><span class="line">   应该可以可以使用,但是不常用</span><br><span class="line">   net.add(nn.Dense(<span class="number">10</span>),</span><br><span class="line">           nn.Activation(<span class="string">'relu'</span>) </span><br><span class="line">    )</span><br><span class="line">    或者net.add(nn.Conv2D(channels=<span class="number">6</span>, kernel_size=<span class="number">5</span>, activation=<span class="string">'sigmoid'</span>))</span><br><span class="line">    只有当在该层和激活函数之间有其余的操作时，才会分开写，例如在卷积计算之后，激活函数之前加上批量归一化层，写成</span><br><span class="line">    ```python   </span><br><span class="line">    net.add(nn.Conv2D(<span class="number">6</span>, kernel_size=<span class="number">5</span>),</span><br><span class="line">        BatchNorm(),</span><br><span class="line">        nn.Activation(<span class="string">'sigmoid'</span>))  </span><br><span class="line">        或者  </span><br><span class="line">        n.Dense(<span class="number">120</span>),</span><br><span class="line">        BatchNorm(),</span><br><span class="line">        nn.Activation(<span class="string">'sigmoid'</span>)</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>batch_size</strong><br>当数据量较大时，向网络中传入所有的数据来计算loss和梯度，更新参数会造成内存溢出。所以每次向网络中值传入一个batch的数据，说过这一个batch的数据来更新权重，输出这个batch里面所有样本的平均loss。下次再使用另一个batch，更新网络参数，直到所有的数据全都输入，完成一个epoch。</p>
+</ol>
+<ol>
+<li><p>GPU运行程序<br>ctx=mx.gpu(2)，下标从0开始<br><strong>需要用到ctx的地方：</strong></p>
+<ul>
+<li>数据集需要放到gpu上。有2种方法。<br>（1）在创建数据的时候，指定ctx，在gpu上创建数据。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">train_loader = gluon.data.DataLoader(</span><br><span class="line">                     gluon.data.ArrayDataset(</span><br><span class="line">                         nd.array(all_data[<span class="string">'train'</span>][<span class="string">'week'</span>], ctx=ctx),</span><br><span class="line">                         nd.array(all_data[<span class="string">'train'</span>][<span class="string">'day'</span>], ctx=ctx),</span><br><span class="line">                         nd.array(all_data[<span class="string">'train'</span>][<span class="string">'recent'</span>], ctx=ctx),</span><br><span class="line">                         nd.array(all_data[<span class="string">'train'</span>][<span class="string">'target'</span>], ctx=ctx)</span><br><span class="line">                     ),</span><br><span class="line">                     batch_size=batch_size,</span><br><span class="line">                     shuffle=<span class="keyword">True</span></span><br><span class="line"> )</span><br><span class="line">```   </span><br><span class="line">（<span class="number">2</span>）在训练的时候，使用as_in_context()将train_loader,val_loader,test_loader,数据拷贝到gpu上   </span><br><span class="line">![](神经网络踩坑/gpu.png)         </span><br><span class="line">- 模型初始化的时候，通过ctx指定gpu设备，将模型参数初始化在gpu上。</span><br><span class="line">```python  </span><br><span class="line"> net = nn.Sequential()</span><br><span class="line"> net.add(nn.Dense(<span class="number">1</span>))</span><br><span class="line"> net.initialize(ctx=mx.gpu())</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>划分数据集</strong><br>如果数据充足的情况下，通常采用均匀随机抽样的方法将数据集划分为3部分，训练集，验证集和测试集，这三个集合不能有交集，常见的比例是8:1:1，6:2:2。需要注意的是，通常都会给定训练集和测试集，而不会给验证集，一般的做法是从训练集中抽取一部分数据作为验证集。<br>在训练时，仅适用训练集的数据进行训练，使用验证集评价模型。当选中最好的模型超参数之后，再使用训练集+验证集来训练模型，以充分利用所有的标注数据，然后再测试集上测试</p>
-<p>训练模型时，使用一个bacth来训练模型更新模型参数，记录下batch的loss。当训练完一个epcoh时，记录下模型的参数和梯度。并在验证集上计算验证集的误差，在测试集上计算测试集的MAE和MSE。</p>
-<pre><code class="lang-python">global_step = 1
- for epoch in range(1, epochs + 1):
-
-     for train_w, train_d, train_r, train_t in train_loader:
-
-         start_time = time()
-
-         with autograd.record():
-             output = net([train_w, train_d, train_r])
-             l = loss_function(output, train_t)
-         l.backward()
-         trainer.step(train_t.shape[0])
-         training_loss = l.mean().asscalar()
-
-         sw.add_scalar(tag=&#39;training_loss&#39;,
-                       value=training_loss,
-                       global_step=global_step)
-
-         print(&#39;global step: %s, training loss: %.2f, time: %.2fs&#39;
-               % (global_step, training_loss, time() - start_time))
-         global_step += 1
-
-     # logging the gradients of parameters for checking convergence
-     for name, param in net.collect_params().items():
-         try:
-             sw.add_histogram(tag=name + &quot;_grad&quot;,
-                              values=param.grad(),
-                              global_step=global_step,
-                              bins=1000)
-         except:
-             print(&quot;can&#39;t plot histogram of {}_grad&quot;.format(name))
-
-     # compute validation loss
-     compute_val_loss(net, val_loader, loss_function, sw, epoch)
-
-     # evaluate the model on testing set
-     evaluate(net, test_loader, true_value, num_of_vertices, sw, epoch)
-
-     params_filename = os.path.join(params_path,
-                                    &#39;%s_epoch_%s.params&#39; % (model_name,
-                                                            epoch))
-     net.save_parameters(params_filename)
-     print(&#39;save parameters to file: %s&#39; % (params_filename))
-
- # close SummaryWriter
- sw.close()
-
- if &#39;prediction_filename&#39; in training_config:
-     prediction_path = training_config[&#39;prediction_filename&#39;]
-
-     prediction = predict(net, test_loader)
-
-     np.savez_compressed(
-         os.path.normpath(prediction_path),
-         prediction=prediction,
-         ground_truth=all_data[&#39;test&#39;][&#39;target&#39;]
-     )
+</ul>
+</li>
+<li><p>NDArray和numpy<br>使用gluon运行程序，gluon中的数据结构是NDArray，普通的python程序中的数据是numpy。什么时候用nd.array？什么时候用np.array?</p>
+<ul>
+<li><strong>nd.array</strong><br>（1）在模型内部的运算，使用的都是nd。比如模型的数据输入，在创建DataLoader时，数据需要转换成nd.array()类型。<br>（2）自定义的compute_val_loss()计算验证集的loss时，传入的数据是val_loader，是nd.array类型，但是在返回loss的时候，需要转换成np.array()，<br>（3）自定义的evaluate计算数据，返回的值是np.array()</li>
+<li><strong>np.array</strong><br>（1）在metrics.py中计算MSE，RMSE，MAE等指标时，输出和输出都是np.array类型。</li>
+<li><strong>nd.array和np.array转换</strong><br>（1）nd.array—&gt;np.array:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = np.arange(<span class="number">10</span>)</span><br><span class="line">b = a.asnumpy()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>（2）np.array—&gt;nd.array</p>
+<pre><code class="lang-python">c = nd.array(b)
 </code></pre>
 </li>
-<li>交叉验证<br>原先对交叉验证使用的数据集一直都理解错了。<br><a href="https://blog.csdn.net/qq_24753293/article/details/79970997" target="_blank" rel="noopener">参考资料</a><br>交叉验证使用的数据集是训练集，而不是全部的数据集。在交叉验证的时候把训练集分成K个集合，其中K-1份用来训练，1份用来验证。<br><img src="/2019/07/17/神经网络踩坑/cross.png" alt=""><br>比如使用5折交叉验证，使用不同的5个训练集和测试集，训练得到5个模型，但是我们最后使用的模型并不是这5个模型中的一个。我们仍然认为这5个模型是一个模型，虽然参数不同，只是它们的输入不同而已。交叉验证只是为了验证这个模型的性能，交叉验证的目的并不是为了得到最终的模型。<br>假设我们有2个模型：线性回归和MLP。怎么说哪个模型更好呢？我们可以使用K折交叉验证来证明哪个模型更好，一旦我们选择了更好模型，例如MLP,那我们就用全部的数据来训练这个模型。<br>先使用网格搜索选择超参数，然后使用交叉验证输出这个模型的预测结果。<br>交叉验证有2个用处：<ul>
-<li>准确的调整模型的超参数。超参数不同模型就不同。使用交叉验证来选出最好的超参数。</li>
-<li>比如分类问题，有多个算法，逻辑回归，决策树，聚类等方法，不确定使用哪个方法时，可以使用交叉验证。</li>
+<li>tensorboard使用   <ul>
+<li>在训练集上每次epoch之后，验证模型在验证集上的平均loss，对验证集上的每个batch中的每个样本都求出一个loss，将所有样本的loss放在list中，最后求list的平均值得到验证集的平均loss。</li>
+<li>在训练集上每次epoch之后，写一个evaluate函数，验证模型在测试集上的RMSE或MSE等指标。<br>tensorboard中tag相同的会被显示在同一张图中。为了显示训练集，验证集和测试集的loss，tag都被设置为loss，但是SummaWriter的logdir不同。</li>
 </ul>
 </li>
 </ol>
@@ -540,18 +493,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
@@ -561,6 +502,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">卷积</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
               </li>
              
               <li class="article-tag-list-item">

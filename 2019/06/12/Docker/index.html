@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="title: Dockerdate: 2019-06-12T18:48:24.000Ztags:   - Docker、镜像1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖到一个可移植的镜像中，然后发布到Linux或Window系统中，也可以实现虚拟化。容器是完全使用沙箱机制，相互之前不会有任何接口。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-30T11:55:22.185Z">
+<meta property="og:updated_time" content="2019-08-27T12:03:20.175Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
 <meta name="twitter:description" content="title: Dockerdate: 2019-06-12T18:48:24.000Ztags:   - Docker、镜像1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖到一个可移植的镜像中，然后发布到Linux或Window系统中，也可以实现虚拟化。容器是完全使用沙箱机制，相互之前不会有任何接口。">
@@ -197,12 +197,12 @@
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">（3）重新启动退出的容器  </span><br><span class="line">处于exited状态的容器，可以通过start命令重新启动。</span><br></pre></td></tr></table></figure>
 <p> [root@localhost ~]# docker start e83cf32fbc22<br> e83cf32fbc22</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">（4）重启容器</span><br></pre></td></tr></table></figure>
-<p> [root@localhost ~]# docker restart e83cf32fbc22<br> e83cf32fbc22<br> ```</p>
+<p> [root@localhost ~]# docker restart e83cf32fbc22<br> e83cf32fbc22</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">8. 删除容器  </span><br><span class="line">   从上面可以看出，通过stop命令停止容器，容器的相关文件仍然存储在宿主主机中，为了释放这部分空间，需要删除这些容器。</span><br><span class="line">   （1）`docker rm id`可以删除对应id的容器</span><br><span class="line">   （2）批量删除除了运行以外的程序</span><br><span class="line">   `docker rm $(docker ps -a -q)`</span><br><span class="line">   （3）如果要批量删除指定状态的容器  </span><br><span class="line">   `docker rm $(docker ps -a -q  status=exited)`</span><br><span class="line">9. **运行jupyter notebook**  </span><br><span class="line">    （1）在启动容器之前先查看自己在这台服务器上的id，在服务上直接输入```id```就可以查看。在启动容器的时候需要加上```-u 1042```表示哪个这个容器是属于哪个用户的。  </span><br><span class="line">    ![](Docker/uid.png)   </span><br><span class="line">    如果不指定用户，使用```gpustat```查看就会看到当前镜像是属于root用户。容器所挂载的目录所属用户也是root用户。那么你在服务器中去操作操作这个目录就会提示permission denied。例如在使用dicker run命令创建一个容器时，将服务器的deepst这个目录挂在在容器的/root目录下，那么容器中/root目录下面的内容就是服务器中/deepst这个目录下面的内容，并且容器中/root中下面的文件和目录使用-ls -l查看，所属的用户是root用户，那么在服务器中的/deepst目录下面，就没有权限操作当前目录，比如mkdir dira，就会出现permission denied。所以在启动容器的时候，一定要指定```-u 1042```  </span><br><span class="line">    ![](Docker/gpustat.png)   </span><br><span class="line"></span><br><span class="line">    （2）先启动容器</span><br><span class="line">    前面的7000是服务器的端口，后面的7000是容器的端口。这个服务器是共用的，需要找一个没有被占用的端口。容器的端口因为只有自己一个人用，所有没有被占用。</span><br><span class="line">    `docker run -it -p 7000:7000 -v $PWD:/root --runtime=nvidia --rm -u 1042 --name wbbJupyter ufoym/deepo:all-jupyter-py36` </span><br><span class="line">    后面的--rm表示这个退出这个容器时，容器就自动删除了。这个参数可以不指定。</span><br><span class="line">    （2）然后会进入到容器中，</span><br><span class="line">    `cd /root`</span><br><span class="line">    会看到服务器本地的目录   </span><br><span class="line">    （3）在容器中运行jupyter notebook</span><br><span class="line">    `jupyter notebook --no-browser --ip 0.0.0.0 --port=7000 --allow-root`   </span><br><span class="line">    （4）在putty中添加7000的端口号   </span><br><span class="line">    然后再浏览器中输入[http://localhost:7000/tree](http://localhost:7000/tree)  </span><br><span class="line">    或者不用在putty中添加端口映射，直接在浏览器中输入http://gpu28:7000，这里的7000指的是服务器的端口。 </span><br><span class="line">    （5）如果想要jupyter notebook在后台运行，按Ctrl+P+Q，会退回到服务器</span><br><span class="line">    （6）在网页中查看tensorboard。在上面那个容器中，因为使用了jupyter notebook，不能运行命令。所以需要使用上面那个镜像再开一个容器。tensorboard的端口默认是：6286，使用下面的命令</span><br><span class="line">    ```docker run -it -p 6688:6286 -v $PWD:/root --runtime=nvidia --rm -u 1042 --name wbbtensorboard ufoym/deepo:all-jupyter-py36 bash</span><br></pre></td></tr></table></figure>
+<p>  进入到容器之后，然后使用下面的命令启动tensorboard<br>  <code>tensorboard --logdir=.</code><br>  然后在浏览器上<a href="http://gpu28:6688，就可以看到在网页上看到" target="_blank" rel="noopener">http://gpu28:6688，就可以看到在网页上看到</a><br>  （6）使用docker ps会看到你的容器正在后台运行<br>  （7）使用docker attach 容器的名字/id再次进入到容器中，按Ctrl+C会看到当前正在有jupyter notebook运行<br>  （8）发现这个容器中有一个库没有安装，可以在容器中使用pip install在这个容器中安装使用，但是这个容器删除了之后<br>  里面安装的东西也没有了。<br>  有2中方法：一是使用commit从容器生成镜像，但是这种方式不推荐，二是写Dockerfile重新build一个镜像<br>  （9）在容器中使用exit退出该容器，再次使用docker ps该容器也消失了</p>
 </li>
 </ul>
 <ol>
-<li>删除容器<br>从上面可以看出，通过stop命令停止容器，容器的相关文件仍然存储在宿主主机中，为了释放这部分空间，需要删除这些容器。<br>（1）<code>docker rm id</code>可以删除对应id的容器<br>（2）批量删除除了运行以外的程序<br><code>docker rm $(docker ps -a -q)</code><br>（3）如果要批量删除指定状态的容器<br><code>docker rm $(docker ps -a -q  status=exited)</code></li>
-<li>运行jupyter notebook<br> （1）先启动容器<br> <code>docker run -it -p 7000:7000 -v $PWD:/root --runtime=nvidia --rm --name wbbJupyter ufoym/deepo:all-jupyter-py36</code><br> （2）然后会进入到容器中，<br> <code>cd /root</code><br> 会看到服务器本地的目录<br> （3）在容器中运行jupyter notebook<br> <code>jupyter notebook --no-browser --ip 0.0.0.0 --port=7000 --allow-root</code><br> （4）在putty中添加7000的端口号<br> 然后再浏览器中输入<a href="http://localhost:7000/tree" target="_blank" rel="noopener">http://localhost:7000/tree</a><br> （5）如果想要jupyter notebook在后台运行，按Ctrl+P+Q，会退回到服务器<br> （6）使用docker ps会看到你的容器正在后台运行<br> （7）使用docker attach 容器的名字/id再次进入到容器中，按Ctrl+C会看到当前正在有jupyter notebook运行<br> （8）发现这个容器中有一个库没有安装，可以在容器中使用pip install在这个容器中安装使用，但是这个容器删除了之后<br> 里面安装的东西也没有了。<br> 有2中方法：一是使用commit从容器生成镜像，但是这种方式不推荐，二是写Dockerfile重新build一个镜像<br> （9）在容器中使用exit退出该容器，再次使用docker ps该容器也消失了</li>
 <li>docker commit制作镜像（强烈不建议操作）<br>启动一个容器—》在容器中安装环境—》退出容器—》docker commit制作镜像</li>
 </ol>
 <p>Docker的cuda和服务器的cuda是不冲突的。</p>
@@ -530,18 +530,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
@@ -551,6 +539,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">卷积</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
               </li>
              
               <li class="article-tag-list-item">

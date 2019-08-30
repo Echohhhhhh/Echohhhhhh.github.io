@@ -30,7 +30,27 @@
 <meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/14.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/15.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/16.png">
-<meta property="og:updated_time" content="2019-08-03T13:26:43.962Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/STDN.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/volume.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/short-term.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/cnn.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/gate.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/shifting.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/lstm.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/attention.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/periodic.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/output.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/inflow.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/X.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/problem.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/ST-ResNet.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/conv-resnet.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/closeness.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/resnet.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/external.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/fusion.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/fusion-external.png">
+<meta property="og:updated_time" content="2019-08-30T02:36:25.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
 <meta name="twitter:description" content="title: 论文总结date: 2019-08-02T10:52:51.000Ztags:   - Spatial-Temporal、图卷积、flow predicting1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;这学期看了很多论文，下面把看过的论文总结一下。">
@@ -163,20 +183,22 @@
 <p>title: 论文总结<br>date: 2019-08-02T10:52:51.000Z<br>tags:</p>
 <h2><span id="-spatial-temporal-图卷积-flow-predicting">  - Spatial-Temporal、图卷积、flow predicting</span></h2><h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;这学期看了很多论文，下面把看过的论文总结一下。<br><a id="more"></a><br><!-- TOC --></p>
 <ul>
-<li><a href="#1-简介">1. 简介</a></li>
-<li><a href="#2-总结">2. 总结</a></li>
-<li><a href="#3-poi推荐">3. POI推荐</a><ul>
-<li><a href="#31-point-of-interest-recommendation-exploiting-self-attentive-autoencoders-with-neighbor-aware-influence---cikm2018">3.1. Point-of-Interest Recommendation Exploiting Self-Attentive Autoencoders with Neighbor-Aware Influence   (CIKM2018)</a></li>
+<li><a href="#1-%e7%ae%80%e4%bb%8b">1. 简介</a></li>
+<li><a href="#2-%e6%80%bb%e7%bb%93">2. 总结</a></li>
+<li><a href="#3-poi%e6%8e%a8%e8%8d%90">3. POI推荐</a><ul>
+<li><a href="#31-point-of-interest-recommendation-exploiting-self-attentive-autoencoders-with-neighbor-aware-influence-cikm2018">3.1. Point-of-Interest Recommendation Exploiting Self-Attentive Autoencoders with Neighbor-Aware Influence (CIKM2018)</a></li>
 <li><a href="#32-hst-lstm-a-hierarchical-spatial-temporal-long-short-term-memory-network-for-location-prediction2018ijcai">3.2. HST-LSTM: A Hierarchical Spatial-Temporal Long-Short Term Memory Network for Location Prediction（2018IJCAI）</a></li>
 </ul>
 </li>
-<li><a href="#4-时空数据预测">4. 时空数据预测</a><ul>
+<li><a href="#4-%e6%97%b6%e7%a9%ba%e6%95%b0%e6%8d%ae%e9%a2%84%e6%b5%8b">4. 时空数据预测</a><ul>
 <li><a href="#41-hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">4.1. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting（2019AAAI）</a></li>
 <li><a href="#42-restful-resolution-aware-forecasting-of-behavioral-time-series-data2018cikm">4.2. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data（2018CIKM）</a></li>
 <li><a href="#43-spatiotemporal-multi-graph-convolution-network-for-ride-hailing-demand2019aaai">4.3. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand（2019AAAI）</a></li>
+<li><a href="#44-revisiting-spatial-temporal-similarity-a-deep-learning-framework-for-traffic-predictionaaai2019">4.4. Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction（AAAI2019）</a></li>
+<li><a href="#45-deep-spatio-temporal-residual-networks-for-citywide-crowd-flows-predictionaaai2017">4.5. Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction（AAAI2017）</a></li>
 </ul>
 </li>
-<li><a href="#5-图卷积">5. 图卷积</a><ul>
+<li><a href="#5-%e5%9b%be%e5%8d%b7%e7%a7%af">5. 图卷积</a><ul>
 <li><a href="#51-semi-supervised-classification-with-graph-convolutional-networks2017iclr">5.1. Semi-Supervised Classification with Graph Convolutional Networks（2017ICLR）</a></li>
 <li><a href="#52-diffusion-convolutional-recurrent-neural-network-data-driven-traffic-forecasting2018iclr">5.2. Diffusion Convolutional Recurrent Neural Network Data-Driven Traffic Forecasting（2018ICLR）</a></li>
 <li><a href="#53-graph-attention-networks2018iclr">5.3. Graph Attention Networks（2018ICLR）</a></li>
@@ -225,7 +247,24 @@
 </ol>
 </li>
 <li>模型<br>RESTFul有2个阶段，第一个阶段，使用循环神经网络来编码不同时间粒度的时间模式。第2个阶段，使用卷积融合模块来融合不同时间粒度的表示。<br><img src="/2019/08/02/论文总结/16.png" alt=""><br>$\alpha,\beta \in {day:1,week:7},这样&lt;\alpha,\beta&gt;就有3种组合，分别是<1,1>,<7,1>,<7,7>$，对于每种组合都有一组行为时间序列数据，对于每组时间序列数据，都使用GRU来这个序列进行时间建模，得到最后一个时间步的隐藏状态向量。将每种组合得到的隐藏状态拼接起来，最终得到一个张量，维度是$R^{|\alpha|\times|\beta|\times d_s}$。然后使用卷积操作，先使用2次2*2的卷积，同时使用padding保证得到的结果大小不变，只改变通道的大小，最终得到的结果是$R^{|\alpha|\times|\beta|\times d_s/4}$,然后展开得到一个$|\alpha|\times|\beta|\times d_s/4$的向量，输入到MLP中，最终可以用来预测回归任务和分类任务。回归任务的损失函数是均方差，分类任务的损失函数是交叉熵。</7,7></7,1></1,1></li>
-<li>总结：<br>考虑不同时间粒度，对不同时间粒度的序列使用GRU建模，将最后一个时间步的隐藏状态拼接起来使用CNN。使用2维卷积对时间数据进行建模，不太合适，可以考虑时间3维卷积。   <h2><span id="43-spatiotemporal-multi-graph-convolution-network-for-ride-hailing-demand2019aaai">4.3. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand（2019AAAI）</span></h2><a href="https://echohhhhhh.github.io/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/" target="_blank" rel="noopener">论文总结</a><br>预测出租车流量，对一个区域在空间上考虑neighbor，function similarity，road connectivity。</li>
+<li>总结：<br>考虑不同时间粒度，对不同时间粒度的序列使用GRU建模，将最后一个时间步的隐藏状态拼接起来使用CNN。使用2维卷积对时间数据进行建模，不太合适，可以考虑时间3维卷积。   <h2><span id="43-spatiotemporal-multi-graph-convolution-network-for-ride-hailing-demand2019aaai">4.3. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand（2019AAAI）</span></h2><a href="https://echohhhhhh.github.io/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/" target="_blank" rel="noopener">论文总结</a><br>预测出租车流量，对一个区域在空间上考虑neighbor，function similarity，road connectivity。   <h2><span id="44-revisiting-spatial-temporal-similarity-a-deep-learning-framework-for-traffic-predictionaaai2019">4.4. Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction（AAAI2019）</span></h2>&ensp;&ensp;&ensp;&ensp;</li>
+<li>挑战：空间依赖性时动态的，随着时间变化，比如早上居住区和工作区的联系强烈，晚上联系较弱。时间上不是严格的周期性，存在dynamic temporal shifting。比如早高峰在7点值9点，每天可能不一样。</li>
+<li>模型：Spatial-Temporal Dynamic Network（STDN），流量门控机制学习location之间动态相似性，periodically shifting attention机制捕获长期周期时间shifting。</li>
+<li>将一个城市划分成a*b=n个网格，将一个时间段（eg.一个月）划分成m个长度相等的时间段。<br>traffic volume：区域$i$的start流量$y^s_{i,t}$：在第$t$个时间段离开这个区域的trip个数，区域$i$的end流量$y^e_{i,t}$：在第$t$个时间段到达这个区域的trip个数。<br>traffic flow：从在第$t$个时间段从区域$i$出发，在第$\tau$个时间段到达$j$区域的traffic flow使用$f^{j,\tau}_{i,t}$表示。</li>
+<li>目标：给定时间段t及其之前的traffic volume和traffic flow，预测第$t+1$个时间段的start and end traffic volume。</li>
+<li>模型：使用Local CNN和LSTM捕获时间和空间关系。<br><img src="/2019/08/02/论文总结/STDN.png" alt=""><br>在提出本文的组件之前，先介绍一下2个base model。</li>
+<li>空间 Local CNN<br>使用traffic volume来获取空间相关性，使用local CNN得到区域表示。<br><img src="/2019/08/02/论文总结/volume.png" alt=""></li>
+<li>Short-term 时间依赖，短期比如说预测今天9:00~9:30的traffic volume，输入是今天7:00~8:30。<br>使用LSTM来获取短期时间依赖。<br><img src="/2019/08/02/论文总结/short-term.png" alt="">  </li>
+<li>下面提取本文的改进，<br><strong>Local CNN—》Flow Gate Mechanism<br>Short-term temporal—》Periodically Shifted Attention Mechanism</strong></li>
+</ul>
+<p><strong>Spatial Dynamic Similarity: Flow Gating Mechanism(空间动态相似性)</strong><br>在local CNN中，local spatial dependency主要是traffic volume。Y表示traffic volume。  但是traffic volume是静态的，不能完全反映目标区域和周围邻居的关系，traffic flow可以更加直接的反应区域之间的联系。两个区域之间的flow越多表示2个区域联系越强（eg.这2个区域越相似）。设计Flow Gating Mechanism(FGM)捕获区域间的dynamic spatial dependency。<br>traffic flow分为2种：inflow和outflow。<br>给定一个目标区域$i$，获取该区域历史$l$个时间段的traffic flow(从$t-l+1到t$),将历史$l$个时间段的inflow和outflow拼接在一起，形成一个三维张量$F_{i,t} \in \mathbb{R}^{S \times S \times 2l}$，其中$S$表示邻近区域，使用CNN建模区域之间的空间相关性。其中$F_{i,j}$作为第一层的输入。  </p>
+<p><img src="/2019/08/02/论文总结/cnn.png" alt=""><br>在每一个卷积层，<strong>使用traffic flow信息来捕获区域之间的动态相似性</strong>，通过一个流量门来限制空间信息。每一层的输出是空间表示$Y^{i,k}_t$，受流量门调整。<br>即对上式的traffic volume，通过traffic flow来控制。 $\sigma$的取值是[0,1]，对traffic volume起到门控机制。  </p>
+<p><img src="/2019/08/02/论文总结/gate.png" alt=""><br><strong>Temporal Dynamic Similarity：Periodically Shifted Attention Mechanism(时间动态相似性)</strong><br>以前的LSTM没有考虑长期依赖(例如：周期)，比如预测第$t$天9点的volume，考虑昨天或前天这个时间段的数据。但是traffic volume并不是严格周期的，在时间上会有平移，图a显示了在天之间的时间平移，图b显示了在周之间的时间平移。<br><img src="/2019/08/02/论文总结/shifting.png" alt=""><br>因为时间具有shifting，因此设计了Periodically Shifted Attention Mechanism（PSAM），这里只考虑天周期性，不考虑周周期。从前P天对应时间段的数据来预测，为了解决time shifting，获取每一天的$Q$个时间段,假设预测的时间段是9:00~9:30，$Q=5$,则获取该时间段前后1个小时的数据8:00~10:30。<br>即获取前P天的数据，并且从每天中获取Q个时间段。如模型图所示，对于每一天都有Q个时间段，可以获取每个时间段的traffic volume和traffic flow，然后使用图卷积，即可以得到一个区域每个时间段的表示。每一天都有一个自己的LSTM，每个LSTM都有Q个时间步，每个时间步都会得到一个隐藏状态向量，即会得到Q个隐藏状态，使用Attention，将Q个隐藏状态整合成一个隐藏状态，用$h^p_{i,t}$表示。其中attention中的$\alpha^{p,q}_{i,t}$表示在第$p$天，第$q$个时间段的重要性。$\alpha^{p,q}_{i,t}$根据长期的隐藏状态和被预测天的短期隐藏状态$h_{i,t}$计算得到。 </p>
+<p><img src="/2019/08/02/论文总结/lstm.png" alt=""><br><img src="/2019/08/02/论文总结/attention.png" alt=""><br>经过attention之后，P天会得到P个隐藏状态，然后再经过一个LSTM来保存周期的序列信息，最终得到长期依赖表示$\hat{h}^p_{i,t}$。  </p>
+<p><img src="/2019/08/02/论文总结/periodic.png" alt=""><br><strong>Joint Traning</strong><br>将短期表示$h_{i,t}$和长期依赖$\hat{h}^p_{i,t}$拼接得到$h^c_{i,t}$，送到一个全连接神经网络中，得到最终的输出，表示为$y^i_{s,t+1}$$y^i_{e,t+1}$作为start volume和end volume。<br><img src="/2019/08/02/论文总结/output.png" alt=""></p>
+<h2><span id="45-deep-spatio-temporal-residual-networks-for-citywide-crowd-flows-predictionaaai2017">4.5. Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction（AAAI2017）</span></h2><p>预测flow of crowd，提出ST-ResNet，使用残差网络来建模traffic crowd的时间邻近，周期，区域属性，对每一种属性，设计一个残差卷积单元，建模traffic crowd的空间属性。ST-ResNet对3个残差神经网络的输出分配不同的权重，动态地结合3个输出，在整合3个输出的时候同时考虑外部因素，例如天气，day of week。在这篇论文中，预测2种crowd flow：inflow和outflow。inflow是在一个时间段内从其他区域进行到目标区域的crowds。outflow是在一个时间段内离开目标区域的corwds。inflow和outflow是行人数量、车的数据、公共交通系统上的人数量或者3个的总和。</p>
+<ul>
+<li>gloal：给定历史t个时间段所有区域的inflow和outflow，预测第t+1个时间段所有区域的inflow和outflow。<br>将一个city网格划分成$I<em>J$，下面定义inflow和outflow<br><img src="/2019/08/02/论文总结/inflow.png" alt=""><br>inflow：从其他区域进入到(i,j)<br>outflow：从(i,j)出发到其他区域<br>其中$Tr:g1—&gt;g2…—&gt;g_{|Tr|}$<br><img src="/2019/08/02/论文总结/X.png" alt=""><br>其中X是所有区域的inflow和outflow矩阵。<br><img src="/2019/08/02/论文总结/problem.png" alt=""><br><img src="/2019/08/02/论文总结/ST-ResNet.png" alt=""><br>这个模型由4个组件构成：temporal closeness，period，trend和external。<br>每个时间段内都有一个网格图，2通道，表示所有区域的inflow和outflow。多个时间段按照时间排列会有多个图。在时间段上划分为3部分：recnet、near、distant，分别送到3个模块中：closeness，period，trend，然后对三个模块的输出分配不同的权重融合，再和external信息融合送到Tanh中。<br><strong>Conv-ResNet</strong><br>前3个模块内部是相同的结构，由2部分组成：卷积和残差单元<br><img src="/2019/08/02/论文总结/conv-resnet.png" alt=""><br>拿closeness模块举例，首先使用Conv来捕获near和distant区域的关系。  将closeness的图拼接在一起，closeness一共有$l_c$个时间段，每个时间段有2个通道，将这$l_c$时间段的图拼接在一起，变成$2</em>l_c <em> I </em> J$的数据送入到第一层卷积层。<br><img src="/2019/08/02/论文总结/closeness.png" alt=""><br><img src="/2019/08/02/论文总结/resnet.png" alt=""><br>根据上述结构分别对period和trend进行编码<br><strong>External Component</strong><br>主要考虑以下的外部因素，使用2层全连接提取外部因素。第一层是嵌入层，第二层是转换低维到高维，和$X_t$的维度一样。<br><img src="/2019/08/02/论文总结/external.png" alt=""><br><strong>Fusion</strong><br>所有的区域都被closeness，period，trend影响，但是不同的区域影响程度不同，<br><img src="/2019/08/02/论文总结/fusion.png" alt=""><br><strong>Fusion the external component</strong><br>将3个closeness，period，trend的输出融合，然后再和被预测时间段t的外部因素融合。<br><img src="/2019/08/02/论文总结/fusion-external.png" alt=""> </li>
 </ul>
 <h1><span id="5-图卷积">5. 图卷积</span></h1><p><a href="https://echohhhhhh.github.io/2019/03/03/%E5%9B%BE%E5%8D%B7%E7%A7%AF/" target="_blank" rel="noopener">图卷积总结</a>   </p>
 <h2><span id="51-semi-supervised-classification-with-graph-convolutional-networks2017iclr">5.1. Semi-Supervised Classification with Graph Convolutional Networks（2017ICLR）</span></h2><h2><span id="52-diffusion-convolutional-recurrent-neural-network-data-driven-traffic-forecasting2018iclr">5.2. Diffusion Convolutional Recurrent Neural Network Data-Driven Traffic Forecasting（2018ICLR）</span></h2><h2><span id="53-graph-attention-networks2018iclr">5.3. Graph Attention Networks（2018ICLR）</span></h2><h2><span id="54-deeper-insights-into-graph-convolutional-networks-for-semi-supervised-learning2018aaai">5.4. Deeper Insights into Graph Convolutional Networks for Semi-Supervised Learning（2018AAAI）</span></h2>
@@ -321,6 +360,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/08/21/正则表达式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/07/21/traffic-accident/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title"></div>
@@ -350,7 +398,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">  - Spatial-Temporal、图卷积、flow predicting</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">2. 总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">3. POI推荐</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">3.1. Point-of-Interest Recommendation Exploiting Self-Attentive Autoencoders with Neighbor-Aware Influence   (CIKM2018)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">3.2. HST-LSTM: A Hierarchical Spatial-Temporal Long-Short Term Memory Network for Location Prediction（2018IJCAI）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">4. 时空数据预测</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">4.1. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting（2019AAAI）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">4.2. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data（2018CIKM）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">4.3. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand（2019AAAI）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">5. 图卷积</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">5.1. Semi-Supervised Classification with Graph Convolutional Networks（2017ICLR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">5.2. Diffusion Convolutional Recurrent Neural Network Data-Driven Traffic Forecasting（2018ICLR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">5.3. Graph Attention Networks（2018ICLR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">5.4. Deeper Insights into Graph Convolutional Networks for Semi-Supervised Learning（2018AAAI）</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">  - Spatial-Temporal、图卷积、flow predicting</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">2. 总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">3. POI推荐</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">3.1. Point-of-Interest Recommendation Exploiting Self-Attentive Autoencoders with Neighbor-Aware Influence   (CIKM2018)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">3.2. HST-LSTM: A Hierarchical Spatial-Temporal Long-Short Term Memory Network for Location Prediction（2018IJCAI）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">4. 时空数据预测</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">4.1. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting（2019AAAI）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">4.2. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data（2018CIKM）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">4.3. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand（2019AAAI）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">4.4. Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction（AAAI2019）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">4.5. Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction（AAAI2017）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">5. 图卷积</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">5.1. Semi-Supervised Classification with Graph Convolutional Networks（2017ICLR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">5.2. Diffusion Convolutional Recurrent Neural Network Data-Driven Traffic Forecasting（2018ICLR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">5.3. Graph Attention Networks（2018ICLR）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">5.4. Deeper Insights into Graph Convolutional Networks for Semi-Supervised Learning（2018AAAI）</span></a></li></ol>
                     </li></div>
                 </span>
             </div>
@@ -536,18 +584,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
@@ -557,6 +593,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">卷积</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">论文</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
               </li>
              
               <li class="article-tag-list-item">
