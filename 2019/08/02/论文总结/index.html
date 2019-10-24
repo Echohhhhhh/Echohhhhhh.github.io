@@ -58,7 +58,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/loss.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/DMVST-Net.png">
 <meta property="og:image" content="http://yoursite.com/2019/08/02/论文总结/Urban-Traffic-Prediction-from-Spatio-Temporal-Data-Using-Deep-Meta-Learning-1.png">
-<meta property="og:updated_time" content="2019-10-23T13:55:06.561Z">
+<meta property="og:updated_time" content="2019-10-24T01:20:04.499Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
 <meta name="twitter:description" content="title: 论文总结date: 2019-08-02T10:52:51.000Ztags:   - Spatial-Temporal、图卷积、flow predicting1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;这学期看了很多论文，下面把看过的论文总结一下。">
@@ -322,7 +322,23 @@
 	</div>
 
 
-  
+     
+<object data="./论文总结/1.pdf" type="application/pdf" width="100%" height="100%">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <h1><span id="5-图卷积">5. 图卷积</span></h1><p><a href="https://echohhhhhh.github.io/2019/03/03/%E5%9B%BE%E5%8D%B7%E7%A7%AF/" target="_blank" rel="noopener">图卷积总结</a>   </p>
 <h2><span id="51-semi-supervised-classification-with-graph-convolutional-networks2017iclr">5.1. Semi-Supervised Classification with Graph Convolutional Networks（2017ICLR）</span></h2><h2><span id="52-diffusion-convolutional-recurrent-neural-network-data-driven-traffic-forecasting2018iclr">5.2. Diffusion Convolutional Recurrent Neural Network Data-Driven Traffic Forecasting（2018ICLR）</span></h2><h2><span id="53-graph-attention-networks2018iclr">5.3. Graph Attention Networks（2018ICLR）</span></h2><h2><span id="54-deeper-insights-into-graph-convolutional-networks-for-semi-supervised-learning2018aaai">5.4. Deeper Insights into Graph Convolutional Networks for Semi-Supervised Learning（2018AAAI）</span></h2><h1><span id="6-traffic-accident预测">6. traffic accident预测</span></h1><h2><span id="61-learning-deep-representation-from-big-and-heterogeneous-data-for-traffic-accident-inference2016aaai">6.1. Learning Deep Representation from Big and Heterogeneous Data for Traffic Accident Inference（2016AAAI）</span></h2><p>&ensp;&ensp;&ensp;&ensp;在这篇论文中，使用数据：7个月的accident数据和1.6 million的用户GPS数据。使用堆叠降噪自编码器SDA来学习用户GPS的层次特征。这些特征被用来accidentrisk level的预测。这个模型一旦训练好，给定用户的移动轨迹，就可以模拟对应的accident risk地图。但是导致accident的因素很多。例如司机行为，天气，道路情况等。其他的研究尽管考虑到这些因素，但是没有揭示accidentrisk随着这些因素的变化。这篇论文的问题就是：能否通过实时的位置数据来评accident risk。商业和娱乐区有较高的accident risk，因为这些区域有较高的人流密度和人流量。<strong>accident因为受到很多因素的影响使得仅仅给定人类的移动情况，变得不好预测。因此我们推断一个accident的risk，而不是这次accident会不会发生。因为这是一个回归问题，而不是分类问题。</strong><br>&ensp;&ensp;&ensp;&ensp;我们的模型利用降噪自编码器来学习人类移动的层次特征表示。在预测accident risk任务中，经过自编码器学出来的人类移动特征比原始数据更有效。最终，根据人类移动数据的实时输入，我们的模型可以仿真大规模的accident risk地图。有high risk的区域会高亮显示。    </p>
 <p>这篇论文的贡献有3个：  </p>
@@ -344,7 +360,7 @@
 </ul>
 <h2><span id="62-a-deep-learning-approach-to-the-citywide-traffic-accident-risk-prediction2018ieee-itsc">6.2. A Deep Learning Approach to the Citywide Traffic Accident Risk Prediction（2018IEEE-ITSC）</span></h2><p>traffic risk受很多因素的影响。例如不同的区域有不同的accident rate，天气因素，交通量，时间因素。本文结合<br>accident，traffic flow，天气，空气质量的历史短期和周期特征本文提出的模型用来预测短期的accident risk。和AAAI2016一样，本文是回归问题，预测accident risk。将accident分为3级。模型输入的特征是最近的traffic accident，traffic flow，weather，和air quality。最近指的是前几个小时或者昨天或者上星期。<br>将城市网格划分，每个网格区域1000m*1000m，每个时间段是30min或者60min。  </p>
 <p>这篇文章是预测一个区域未来n天的accident平均发生频率。输入有2个，第1个是这个区域历史n个时间段发生的accident的次数，第2个是这个区域的经纬度坐标。<br>这篇论文的前身《A Deep Learning Approach to the Prediction of Short-term Traffic Accident Risk》比这篇传入的特征更多，但是不明白为啥没中。<br>这篇文章说traffic accident具有day和week周期性。所以考虑了hour，day，week共3个级别的数据。这篇文章是预测1个区域的risk level，和上一篇不同，上一篇是预测frequency。这篇文章使用的特征有，accident risk，traffic flow，holiday，time period（处于1天的哪个时段，论文中将1天分为7个时段），weather，air quality。将这个区域的以上这6个特征拼接在一起，表示为$I_r(t)$。分别获取这个区域hour，day，week共3个级别的$I_r$,作为LSTM的时间步，每个时间步的特征个数是6个特征拼接起来形成的$I_r$。</p>
-
+</object>
       
 
       
@@ -665,6 +681,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">卷积</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">论文</a>
               </li>
              
@@ -674,10 +694,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">卷积</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,11 +717,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
+                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
+                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
               </li>
             
             <div class="clearfix"></div>
