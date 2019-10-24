@@ -46,7 +46,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/02/15/NLP/a6.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/15/NLP/a7.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/15/NLP/a8.png">
-<meta property="og:updated_time" content="2019-10-14T14:20:58.086Z">
+<meta property="og:updated_time" content="2019-10-24T01:37:42.387Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP">
 <meta name="twitter:description" content="1. 词嵌入&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;词向量就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫词嵌入。前几天看到了一篇讲解Word2Vec的推送，讲的超级好，通俗易懂。">
@@ -198,6 +198,7 @@
 <li><a href="#11-%e8%b4%9f%e9%87%87%e6%a0%b7">1.1. 负采样</a></li>
 <li><a href="#12-%e5%b1%82%e5%ba%8fsoftmax">1.2. 层序Softmax</a></li>
 <li><a href="#13-%e5%ae%9e%e7%8e%b0%e6%ad%a5%e9%aa%a4">1.3. 实现步骤</a></li>
+<li><a href="#%e5%8f%91%e5%b1%95">发展</a></li>
 </ul>
 </li>
 <li><a href="#2-seq2seq">2. Seq2Seq</a><ul>
@@ -268,8 +269,37 @@ $e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏
 </ol>
 <p><img src="/2019/02/15/NLP/a5.png" alt=""><br>self-attention的输入看做矩阵$I$,经过self-attention layer变成矩阵$O$。<br><img src="/2019/02/15/NLP/a6.png" alt="">    </p>
 <h3><span id="321-multi-head">3.2.1. multi-head</span></h3><p>如果head=2，生成2个$q,k,v$，维度也是原来的一半。经过self-attention操作得到$b^{i,1}和b^{i,2}$,将$b^{i,1}和b^{i,2}进行concat，得到b^i，或者concat之后乘上矩阵W得到b^i.$  </p>
-<p><img src="/2019/02/15/NLP/a7.png" alt=""><br><img src="/2019/02/15/NLP/a8.png" alt=""></p>
+<p><img src="/2019/02/15/NLP/a7.png" alt=""><br><img src="/2019/02/15/NLP/a8.png" alt="">     </p>
+<center><embed src="/论文总结/1.pdf" width="850" height="600"></center>
 
+
+
+	<div class="row">
+    <embed src="./论文总结/1.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+      
+
+
+	<div class="row">
+    <embed src="论文总结/1.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+   
+
+
+	<div class="row">
+    <embed src="/论文总结/1.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+   
+<object data="./论文总结/1.pdf" type="application/pdf" width="100%" height="100%">     
+
+<a href="/2019/02/15/NLP/1.pdf" title="My Resume">My Resume</a>
+</object>
       
 
       
@@ -549,6 +579,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">交通领域数据源</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
@@ -558,10 +592,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">预分区</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">交通领域数据源</a>
               </li>
              
               <li class="article-tag-list-item">
