@@ -9,7 +9,7 @@
   <title>图卷积 | Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1. 图卷积&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;看了很久关于图卷积的内容，但总觉得自己理解不深刻，在这里把自己的一些想法写出来，也算把图卷积的内容梳理一下。">
-<meta name="keywords" content="Deep Learning,图卷积">
+<meta name="keywords" content="GCN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图卷积">
 <meta property="og:url" content="http://yoursite.com/2019/03/03/图卷积/index.html">
@@ -43,7 +43,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/改进1.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/图卷积3.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/图卷积4.png">
-<meta property="og:updated_time" content="2019-03-12T02:35:32.219Z">
+<meta property="og:updated_time" content="2019-11-02T08:23:54.672Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图卷积">
 <meta name="twitter:description" content="1. 图卷积&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;看了很久关于图卷积的内容，但总觉得自己理解不深刻，在这里把自己的一些想法写出来，也算把图卷积的内容梳理一下。">
@@ -92,6 +92,10 @@
 	        
 				<li><a href="/archives">archives</a></li>
 	        
+				<li><a href="/categories">categories</a></li>
+	        
+				<li><a href="/tags">tags</a></li>
+	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -138,6 +142,10 @@
 			
 				
 			
+				
+			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -147,12 +155,16 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">Home</a></li>
+					<li style="width: 25%"><a href="/">Home</a></li>
 		        
-					<li style="width: 50%"><a href="/archives">archives</a></li>
+					<li style="width: 25%"><a href="/archives">archives</a></li>
+		        
+					<li style="width: 25%"><a href="/categories">categories</a></li>
+		        
+					<li style="width: 25%"><a href="/tags">tags</a></li>
 		        
 				</ul>
 			</nav>
@@ -189,23 +201,23 @@
       
         <h1><span id="1-图卷积">1. 图卷积</span></h1><p>&ensp;&ensp;&ensp;&ensp;看了很久关于图卷积的内容，但总觉得自己理解不深刻，在这里把自己的一些想法写出来，也算把图卷积的内容梳理一下。<br> <a id="more"></a><br><!-- TOC --></p>
 <ul>
-<li><a href="#1-%E5%9B%BE%E5%8D%B7%E7%A7%AF">1. 图卷积</a></li>
-<li><a href="#2-%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C">2. 卷积神经网络</a></li>
-<li><a href="#3-%E5%9B%BE%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C">3. 图卷积神经网络</a><ul>
-<li><a href="#31-%E9%A1%B6%E7%82%B9%E5%9F%9Fvertex-domain">3.1. 顶点域(Vertex Domain)</a><ul>
-<li><a href="#311-%E5%9B%BE%E4%B8%AD%E9%A1%B6%E7%82%B9%E7%9A%84%E9%80%89%E6%8B%A9node-sequence-selection">3.1.1. 图中顶点的选择Node Sequence Selection</a></li>
-<li><a href="#312-%E6%89%BE%E5%88%B0%E4%B8%AD%E5%BF%83%E7%BB%93%E7%82%B9%E7%9A%84%E9%82%BB%E5%9F%9Fneighborhood-assembly">3.1.2. 找到中心结点的邻域Neighborhood Assembly</a></li>
-<li><a href="#313-%E5%9B%BE%E8%A7%84%E8%8C%83%E5%8C%96%E8%BF%87%E7%A8%8Bgraph-normalization">3.1.3. 图规范化过程Graph Normalization</a></li>
-<li><a href="#314-%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84convolutional-architecture">3.1.4. 卷积网络结构Convolutional Architecture</a></li>
-<li><a href="#315-%E4%BC%AA%E4%BB%A3%E7%A0%81">3.1.5. 伪代码</a></li>
-<li><a href="#316-%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B">3.1.6. 算法流程</a></li>
+<li><a href="#1-%e5%9b%be%e5%8d%b7%e7%a7%af">1. 图卷积</a></li>
+<li><a href="#2-%e5%8d%b7%e7%a7%af%e7%a5%9e%e7%bb%8f%e7%bd%91%e7%bb%9c">2. 卷积神经网络</a></li>
+<li><a href="#3-%e5%9b%be%e5%8d%b7%e7%a7%af%e7%a5%9e%e7%bb%8f%e7%bd%91%e7%bb%9c">3. 图卷积神经网络</a><ul>
+<li><a href="#31-%e9%a1%b6%e7%82%b9%e5%9f%9fvertex-domain">3.1. 顶点域(Vertex Domain)</a><ul>
+<li><a href="#311-%e5%9b%be%e4%b8%ad%e9%a1%b6%e7%82%b9%e7%9a%84%e9%80%89%e6%8b%a9node-sequence-selection">3.1.1. 图中顶点的选择Node Sequence Selection</a></li>
+<li><a href="#312-%e6%89%be%e5%88%b0%e4%b8%ad%e5%bf%83%e7%bb%93%e7%82%b9%e7%9a%84%e9%82%bb%e5%9f%9fneighborhood-assembly">3.1.2. 找到中心结点的邻域Neighborhood Assembly</a></li>
+<li><a href="#313-%e5%9b%be%e8%a7%84%e8%8c%83%e5%8c%96%e8%bf%87%e7%a8%8bgraph-normalization">3.1.3. 图规范化过程Graph Normalization</a></li>
+<li><a href="#314-%e5%8d%b7%e7%a7%af%e7%bd%91%e7%bb%9c%e7%bb%93%e6%9e%84convolutional-architecture">3.1.4. 卷积网络结构Convolutional Architecture</a></li>
+<li><a href="#315-%e4%bc%aa%e4%bb%a3%e7%a0%81">3.1.5. 伪代码</a></li>
+<li><a href="#316-%e7%ae%97%e6%b3%95%e6%b5%81%e7%a8%8b">3.1.6. 算法流程</a></li>
 </ul>
 </li>
-<li><a href="#32-%E8%B0%B1%E5%9F%9Fspectral-domain">3.2. 谱域Spectral Domain</a><ul>
-<li><a href="#321-%E5%9B%BE%E5%8D%B7%E7%A7%AF%E8%BF%90%E7%AE%97">3.2.1. 图卷积运算</a></li>
-<li><a href="#322-%E7%AC%AC%E4%B8%80%E4%BB%A3%E5%9B%BE%E5%8D%B7%E7%A7%AFscnn">3.2.2. 第一代图卷积SCNN</a></li>
-<li><a href="#323-%E7%AC%AC%E4%BA%8C%E4%BB%A3%E5%9B%BE%E5%8D%B7%E7%A7%AFchebnet">3.2.3. 第二代图卷积ChebNet</a></li>
-<li><a href="#324-%E7%AC%AC%E4%B8%89%E4%BB%A3%E5%9B%BE%E5%8D%B7%E7%A7%AF">3.2.4. 第三代图卷积</a></li>
+<li><a href="#32-%e8%b0%b1%e5%9f%9fspectral-domain">3.2. 谱域Spectral Domain</a><ul>
+<li><a href="#321-%e5%9b%be%e5%8d%b7%e7%a7%af%e8%bf%90%e7%ae%97">3.2.1. 图卷积运算</a></li>
+<li><a href="#322-%e7%ac%ac%e4%b8%80%e4%bb%a3%e5%9b%be%e5%8d%b7%e7%a7%afscnn">3.2.2. 第一代图卷积SCNN</a></li>
+<li><a href="#323-%e7%ac%ac%e4%ba%8c%e4%bb%a3%e5%9b%be%e5%8d%b7%e7%a7%afchebnet">3.2.3. 第二代图卷积ChebNet</a></li>
+<li><a href="#324-%e7%ac%ac%e4%b8%89%e4%bb%a3%e5%9b%be%e5%8d%b7%e7%a7%af">3.2.4. 第三代图卷积</a></li>
 </ul>
 </li>
 </ul>
@@ -336,17 +348,24 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">图卷积</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GCN</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Deep-Learning//" class="article-tag-list-link color4">Deep Learning</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -594,11 +613,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">热点问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,19 +625,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
+                <a href="javascript:void(0)" class="js-tag color5">LSTM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gluon、jupyter notebook</a>
+                <a href="javascript:void(0)" class="js-tag color4">GRU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -626,7 +637,31 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HDFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ResNet</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">BN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,23 +669,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
+                <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">卷积</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">GPU服务器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -662,7 +697,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">CDH集群、Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">CDH集群</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -670,15 +709,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
+                <a href="javascript:void(0)" class="js-tag color3">Seq2Seq</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
+                <a href="javascript:void(0)" class="js-tag color5">Attention</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
+                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分布式调优</a>
               </li>
             
             <div class="clearfix"></div>

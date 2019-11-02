@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>pyspark | Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序">
-<meta name="keywords" content="python、spark">
+  <meta name="description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序，一些常用的操作。">
+<meta name="keywords" content="Spark,Python,分布式调优">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pyspark">
 <meta property="og:url" content="http://yoursite.com/2019/04/20/pyspark/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序">
+<meta property="og:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序，一些常用的操作。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/04/20/pyspark/executor.png">
-<meta property="og:updated_time" content="2019-05-21T12:14:49.501Z">
+<meta property="og:updated_time" content="2019-11-02T06:39:49.682Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pyspark">
-<meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序">
+<meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序，一些常用的操作。">
 <meta name="twitter:image" content="http://yoursite.com/2019/04/20/pyspark/executor.png">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
@@ -65,6 +65,10 @@
 				<li><a href="/">Home</a></li>
 	        
 				<li><a href="/archives">archives</a></li>
+	        
+				<li><a href="/categories">categories</a></li>
+	        
+				<li><a href="/tags">tags</a></li>
 	        
 			</ul>
 		</nav>
@@ -112,6 +116,10 @@
 			
 				
 			
+				
+			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -121,12 +129,16 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">Home</a></li>
+					<li style="width: 25%"><a href="/">Home</a></li>
 		        
-					<li style="width: 50%"><a href="/archives">archives</a></li>
+					<li style="width: 25%"><a href="/archives">archives</a></li>
+		        
+					<li style="width: 25%"><a href="/categories">categories</a></li>
+		        
+					<li style="width: 25%"><a href="/tags">tags</a></li>
 		        
 				</ul>
 			</nav>
@@ -161,38 +173,38 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;使用Python编写Spark程序<br><a id="more"></a><br><!-- TOC --></p>
+        <h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;使用Python编写Spark程序，一些常用的操作。<br><a id="more"></a><br><!-- TOC --></p>
 <ul>
-<li><a href="#1-%E7%AE%80%E4%BB%8B">1. 简介</a></li>
-<li><a href="#2-%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5%E5%92%8C%E6%9C%AF%E8%AF%AD">2. 重要概念和术语</a></li>
-<li><a href="#3-%E6%89%A7%E8%A1%8C%E6%A8%A1%E5%BC%8F">3. 执行模式</a><ul>
-<li><a href="#31-standalone%E6%A8%A1%E5%BC%8F">3.1. standalone模式</a></li>
-<li><a href="#32-yarn%E6%A8%A1%E5%BC%8F">3.2. Yarn模式</a></li>
-<li><a href="#33-%E5%8F%82%E6%95%B0%E8%B0%83%E4%BC%98">3.3. 参数调优</a></li>
+<li><a href="#1-%e7%ae%80%e4%bb%8b">1. 简介</a></li>
+<li><a href="#2-%e9%87%8d%e8%a6%81%e6%a6%82%e5%bf%b5%e5%92%8c%e6%9c%af%e8%af%ad">2. 重要概念和术语</a></li>
+<li><a href="#3-%e6%89%a7%e8%a1%8c%e6%a8%a1%e5%bc%8f">3. 执行模式</a><ul>
+<li><a href="#31-standalone%e6%a8%a1%e5%bc%8f">3.1. standalone模式</a></li>
+<li><a href="#32-yarn%e6%a8%a1%e5%bc%8f">3.2. Yarn模式</a></li>
+<li><a href="#33-%e5%8f%82%e6%95%b0%e8%b0%83%e4%bc%98">3.3. 参数调优</a></li>
 <li><a href="#executor">Executor</a></li>
 </ul>
 </li>
-<li><a href="#4-%E5%88%9B%E5%BB%BAsc">4. 创建sc</a></li>
-<li><a href="#5-rdd%E8%BD%AC%E6%8D%A2">5. RDD转换</a><ul>
-<li><a href="#51-%E8%BD%AC%E6%8D%A2%E6%93%8D%E4%BD%9C">5.1. 转换操作</a></li>
-<li><a href="#52-%E8%A1%8C%E5%8A%A8%E6%93%8D%E4%BD%9C">5.2. 行动操作</a></li>
-<li><a href="#53-%E6%8C%81%E4%B9%85%E5%8C%96">5.3. 持久化</a></li>
+<li><a href="#4-%e5%88%9b%e5%bb%basc">4. 创建sc</a></li>
+<li><a href="#5-rdd%e8%bd%ac%e6%8d%a2">5. RDD转换</a><ul>
+<li><a href="#51-%e8%bd%ac%e6%8d%a2%e6%93%8d%e4%bd%9c">5.1. 转换操作</a></li>
+<li><a href="#52-%e8%a1%8c%e5%8a%a8%e6%93%8d%e4%bd%9c">5.2. 行动操作</a></li>
+<li><a href="#53-%e6%8c%81%e4%b9%85%e5%8c%96">5.3. 持久化</a></li>
 </ul>
 </li>
-<li><a href="#6-%E5%88%86%E5%8C%BA">6. 分区</a></li>
-<li><a href="#7-%E5%88%9B%E5%BB%BArdd">7. 创建RDD</a><ul>
-<li><a href="#71-%E9%80%9A%E8%BF%87paralize%E5%88%9B%E5%BB%BArdd">7.1. 通过paralize创建RDD</a></li>
-<li><a href="#72-%E8%AF%BB%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BArdd">7.2. 读文本文件创建RDD</a></li>
+<li><a href="#6-%e5%88%86%e5%8c%ba">6. 分区</a></li>
+<li><a href="#7-%e5%88%9b%e5%bb%bardd">7. 创建RDD</a><ul>
+<li><a href="#71-%e9%80%9a%e8%bf%87paralize%e5%88%9b%e5%bb%bardd">7.1. 通过paralize创建RDD</a></li>
+<li><a href="#72-%e8%af%bb%e6%96%87%e6%9c%ac%e6%96%87%e4%bb%b6%e5%88%9b%e5%bb%bardd">7.2. 读文本文件创建RDD</a></li>
 </ul>
 </li>
-<li><a href="#8-map%E5%92%8Cflatmap">8. map和flatMap</a></li>
-<li><a href="#9-flatmap%E5%92%8Cflatmapvalues">9. flatMap和flatMapValues</a></li>
-<li><a href="#10-reducebykey%E5%92%8Cgroupbykey">10. reduceByKey和groupByKey</a></li>
-<li><a href="#11-sortby%E5%92%8Csortbykey">11. sortBy和SortByKey</a></li>
-<li><a href="#12-%E5%B0%86spark%E8%AE%A1%E7%AE%97%E7%9A%84%E7%BB%93%E6%9E%9C%E5%AD%98%E5%82%A8%E5%9C%A8%E6%96%87%E4%BB%B6%E4%B8%AD">12. 将Spark计算的结果存储在文件中</a><ul>
-<li><a href="#121-%E5%86%99%E5%85%A5%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E4%B8%AD">12.1. 写入到服务器本地文件中</a></li>
-<li><a href="#122-%E5%86%99%E5%85%A5%E5%88%B0hdfs%E6%96%87%E4%BB%B6%E4%B8%AD">12.2. 写入到HDFS文件中</a></li>
-<li><a href="#123-%E6%89%93%E5%8D%B0rdd%E5%85%83%E7%B4%A0">12.3. 打印RDD元素</a></li>
+<li><a href="#8-map%e5%92%8cflatmap">8. map和flatMap</a></li>
+<li><a href="#9-flatmap%e5%92%8cflatmapvalues">9. flatMap和flatMapValues</a></li>
+<li><a href="#10-reducebykey%e5%92%8cgroupbykey">10. reduceByKey和groupByKey</a></li>
+<li><a href="#11-sortby%e5%92%8csortbykey">11. sortBy和SortByKey</a></li>
+<li><a href="#12-%e5%b0%86spark%e8%ae%a1%e7%ae%97%e7%9a%84%e7%bb%93%e6%9e%9c%e5%ad%98%e5%82%a8%e5%9c%a8%e6%96%87%e4%bb%b6%e4%b8%ad">12. 将Spark计算的结果存储在文件中</a><ul>
+<li><a href="#121-%e5%86%99%e5%85%a5%e5%88%b0%e6%9c%8d%e5%8a%a1%e5%99%a8%e6%9c%ac%e5%9c%b0%e6%96%87%e4%bb%b6%e4%b8%ad">12.1. 写入到服务器本地文件中</a></li>
+<li><a href="#122-%e5%86%99%e5%85%a5%e5%88%b0hdfs%e6%96%87%e4%bb%b6%e4%b8%ad">12.2. 写入到HDFS文件中</a></li>
+<li><a href="#123-%e6%89%93%e5%8d%b0rdd%e5%85%83%e7%b4%a0">12.3. 打印RDD元素</a></li>
 </ul>
 </li>
 </ul>
@@ -369,13 +381,32 @@ with open(filename,&#39;w&#39;) as f:
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">python、spark</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spark</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">分布式调优</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/分布式平台//" class="article-tag-list-link color1">分布式平台</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -623,11 +654,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">热点问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -635,19 +666,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
+                <a href="javascript:void(0)" class="js-tag color5">LSTM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gluon、jupyter notebook</a>
+                <a href="javascript:void(0)" class="js-tag color4">GRU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -655,7 +678,31 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HDFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ResNet</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">BN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -663,23 +710,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
+                <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">卷积</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">GPU服务器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -691,7 +738,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">CDH集群、Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">CDH集群</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -699,15 +750,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
+                <a href="javascript:void(0)" class="js-tag color3">Seq2Seq</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
+                <a href="javascript:void(0)" class="js-tag color5">Attention</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
+                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分布式调优</a>
               </li>
             
             <div class="clearfix"></div>

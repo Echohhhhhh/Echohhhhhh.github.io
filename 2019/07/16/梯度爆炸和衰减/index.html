@@ -8,22 +8,22 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: 梯度爆炸和衰减date: 2019-07-16T11:14:49.000Ztags:   - 反向传播、梯度爆炸、梯度衰减">
+  <meta name="description" content="title: 梯度爆炸和衰减date: 2019-07-16T11:14:49.000Zcategories: Deep Learningtags:  反向传播 梯度爆炸 梯度衰减">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Echo&#39;s blog">
 <meta property="og:url" content="http://yoursite.com/2019/07/16/梯度爆炸和衰减/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="title: 梯度爆炸和衰减date: 2019-07-16T11:14:49.000Ztags:   - 反向传播、梯度爆炸、梯度衰减">
+<meta property="og:description" content="title: 梯度爆炸和衰减date: 2019-07-16T11:14:49.000Zcategories: Deep Learningtags:  反向传播 梯度爆炸 梯度衰减">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/07/16/梯度爆炸和衰减/1.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/16/梯度爆炸和衰减/sigmoid.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/16/梯度爆炸和衰减/tanh.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/16/梯度爆炸和衰减/reg.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/16/梯度爆炸和衰减/relu.png">
-<meta property="og:updated_time" content="2019-10-23T13:37:05.128Z">
+<meta property="og:updated_time" content="2019-11-02T08:23:40.279Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
-<meta name="twitter:description" content="title: 梯度爆炸和衰减date: 2019-07-16T11:14:49.000Ztags:   - 反向传播、梯度爆炸、梯度衰减">
+<meta name="twitter:description" content="title: 梯度爆炸和衰减date: 2019-07-16T11:14:49.000Zcategories: Deep Learningtags:  反向传播 梯度爆炸 梯度衰减">
 <meta name="twitter:image" content="http://yoursite.com/2019/07/16/梯度爆炸和衰减/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
@@ -68,6 +68,10 @@
 				<li><a href="/">Home</a></li>
 	        
 				<li><a href="/archives">archives</a></li>
+	        
+				<li><a href="/categories">categories</a></li>
+	        
+				<li><a href="/tags">tags</a></li>
 	        
 			</ul>
 		</nav>
@@ -115,6 +119,10 @@
 			
 				
 			
+				
+			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -124,12 +132,16 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">Home</a></li>
+					<li style="width: 25%"><a href="/">Home</a></li>
 		        
-					<li style="width: 50%"><a href="/archives">archives</a></li>
+					<li style="width: 25%"><a href="/archives">archives</a></li>
+		        
+					<li style="width: 25%"><a href="/categories">categories</a></li>
+		        
+					<li style="width: 25%"><a href="/tags">tags</a></li>
 		        
 				</ul>
 			</nav>
@@ -150,8 +162,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>title: 梯度爆炸和衰减<br>date: 2019-07-16T11:14:49.000Z<br>tags:</p>
-<h2><span id="-反向传播-梯度爆炸-梯度衰减">  - 反向传播、梯度爆炸、梯度衰减</span></h2><a id="more"></a>    
+<p>title: 梯度爆炸和衰减<br>date: 2019-07-16T11:14:49.000Z<br>categories: Deep Learning<br>tags:</p>
+<ul>
+<li>反向传播</li>
+<li>梯度爆炸</li>
+<li>梯度衰减</li>
+</ul>
+<hr>
+<a id="more"></a>    
 <p>参考资料：<a href="https://zhuanlan.zhihu.com/p/33006526" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/33006526</a><br><a href="http://wangxin123.com/2019/01/01/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#什么是梯度消失和梯度爆炸，分别会引发什么问题" target="_blank" rel="noopener">http://wangxin123.com/2019/01/01/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#什么是梯度消失和梯度爆炸，分别会引发什么问题</a></p>
 <h1><span id="为什么使用梯度更新规则">为什么使用梯度更新规则</span></h1><p>&ensp;&ensp;&ensp;&ensp;现在，神经网络的参数都是通过反向传播更新的。深层神经网络由很多分线性层堆叠，每一个非线性层都可以看做是一个非线性函数。神经网络就是一个复合的非线性函数，将输入映射成输出。损失函数就是使关于真实值与预测值之间的误差。通过损失函数对参数求导，得到梯度，梯度的含义就是这个参数对整个网络的影响程度大小。使用梯度下降更新参数。<br>梯度决定了网络（参数）的学习速率。如果梯度出现异常，参数更新出现异常，即神经元失去了学习的能力。<br>如果权重的值都小于1，最终的输出很小，<br>如果权重的值都大于1，最终的输出很大，</p>
 <ul>
@@ -310,8 +328,8 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">  - 反向传播、梯度爆炸、梯度衰减</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">为什么使用梯度更新规则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">激活函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">初始化缓解梯度消失和爆炸</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">如何判断出现梯度爆炸</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">如何解决梯度爆炸</span></a>
-                    </li></div>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">为什么使用梯度更新规则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">激活函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">初始化缓解梯度消失和爆炸</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">如何判断出现梯度爆炸</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">如何解决梯度爆炸</span></a></li></ol>
+                    </div>
                 </span>
             </div>
         </div>
@@ -456,11 +474,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">热点问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -468,19 +486,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
+                <a href="javascript:void(0)" class="js-tag color5">LSTM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gluon、jupyter notebook</a>
+                <a href="javascript:void(0)" class="js-tag color4">GRU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -488,7 +498,31 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HDFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ResNet</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">BN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -496,23 +530,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
+                <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">卷积</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">GPU服务器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -524,7 +558,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">CDH集群、Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">CDH集群</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,15 +570,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
+                <a href="javascript:void(0)" class="js-tag color3">Seq2Seq</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
+                <a href="javascript:void(0)" class="js-tag color5">Attention</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
+                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分布式调优</a>
               </li>
             
             <div class="clearfix"></div>

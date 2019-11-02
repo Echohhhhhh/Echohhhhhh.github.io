@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: keras基础知识date: 2019-09-07T16:21:04.000Ztags:   - keras、深度学习1. 简介最近看到keras容易上手，封装比较好，学习一下">
+  <meta name="description" content="title: keras基础知识date: 2019-09-07T16:21:04.000Zcategories: Deep Learningtags:   - keras1. 简介最近看到keras容易上手，封装比较好，学习一下">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Echo&#39;s blog">
 <meta property="og:url" content="http://yoursite.com/2019/09/07/keras基础知识/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="title: keras基础知识date: 2019-09-07T16:21:04.000Ztags:   - keras、深度学习1. 简介最近看到keras容易上手，封装比较好，学习一下">
+<meta property="og:description" content="title: keras基础知识date: 2019-09-07T16:21:04.000Zcategories: Deep Learningtags:   - keras1. 简介最近看到keras容易上手，封装比较好，学习一下">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/09/07/keras基础知识/dense.png">
-<meta property="og:updated_time" content="2019-09-18T03:23:18.841Z">
+<meta property="og:updated_time" content="2019-11-02T07:43:24.060Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
-<meta name="twitter:description" content="title: keras基础知识date: 2019-09-07T16:21:04.000Ztags:   - keras、深度学习1. 简介最近看到keras容易上手，封装比较好，学习一下">
+<meta name="twitter:description" content="title: keras基础知识date: 2019-09-07T16:21:04.000Zcategories: Deep Learningtags:   - keras1. 简介最近看到keras容易上手，封装比较好，学习一下">
 <meta name="twitter:image" content="http://yoursite.com/2019/09/07/keras基础知识/dense.png">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
@@ -64,6 +64,10 @@
 				<li><a href="/">Home</a></li>
 	        
 				<li><a href="/archives">archives</a></li>
+	        
+				<li><a href="/categories">categories</a></li>
+	        
+				<li><a href="/tags">tags</a></li>
 	        
 			</ul>
 		</nav>
@@ -111,6 +115,10 @@
 			
 				
 			
+				
+			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -120,12 +128,16 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">Home</a></li>
+					<li style="width: 25%"><a href="/">Home</a></li>
 		        
-					<li style="width: 50%"><a href="/archives">archives</a></li>
+					<li style="width: 25%"><a href="/archives">archives</a></li>
+		        
+					<li style="width: 25%"><a href="/categories">categories</a></li>
+		        
+					<li style="width: 25%"><a href="/tags">tags</a></li>
 		        
 				</ul>
 			</nav>
@@ -146,8 +158,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>title: keras基础知识<br>date: 2019-09-07T16:21:04.000Z<br>tags:</p>
-<h2><span id="-keras-深度学习">  - keras、深度学习</span></h2><h1><span id="1-简介">1. 简介</span></h1><p>最近看到keras容易上手，封装比较好，学习一下<br><a id="more"></a>    </p>
+<p>title: keras基础知识<br>date: 2019-09-07T16:21:04.000Z<br>categories: Deep Learning<br>tags:</p>
+<h2><span id="-keras">  - keras</span></h2><h1><span id="1-简介">1. 简介</span></h1><p>最近看到keras容易上手，封装比较好，学习一下<br><a id="more"></a>    </p>
 <h2><span id="11-基础层的介绍">1.1. 基础层的介绍</span></h2><h3><span id="111-flatten">1.1.1. Flatten</span></h3><p>&ensp;&ensp;&ensp;&ensp;Flatten用来将输入“压平”，把多维的输入变成一维。常用在从卷积层到全连接层的过渡，特征全都变成1维就可以输入到全连接层中。Flatten不影响batch的大小。<br>通过<code>keras.layers.Flatten</code>来引入。<br>比如通过卷积层的输出形状为(batch_size,output_channel,width,height),例如(16,64,32,32),通过<code>Flatten</code>层之后变换成(16,64<em>32\</em>32)=(16,65536)，不改变batch_size的大小。</p>
 <h3><span id="112-dense">1.1.2. Dense</span></h3><p>Dense全连接层。<br>如果Dense是在第一层的话，需要指定output_dim和input_dim，即<code>Dense(output_dim=64,input_dim=44)</code>。在Dense中的API中，看到其实没有input_dim或者input_shape这个参数，查看源码看到，input_dim和input_shape是在<strong>kwargs中，因为并不是所有的Dense层都需要传入输入的形状，只有第一层需要。可以输入<code>input_dim=44</code>,也可以是<code>input_shape=(44,)</code>。一般都是用input_shape     
 </strong>注意：在input_shape中不包含batch的大小**<br><img src="/2019/09/07/keras基础知识/dense.png" alt=""><br>如果Dense不是在第一层，则只需要指定output_dim，而input_dim则默认为上一层的输出维度。即<code>Dense(output_dim=64)</code><br>如果需要激活函数，则需要再指定激活函数，例如<br><code>Dense(64,avtivation=&#39;relu&#39;)</code></p>
@@ -307,7 +319,7 @@ model.predict(test_x)
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">  - keras、深度学习</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">1. 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1.1. 基础层的介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">1.1.1. Flatten</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">1.1.2. Dense</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">1.1.3. Embedding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.4.</span> <span class="toc-text">1.1.4. LSTM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.5.</span> <span class="toc-text">1.1.5. Merge层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">1.2. 训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">1.3. 模型构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">1.4. Callbacks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.1.</span> <span class="toc-text">1.4.1. ModelCheckpoint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.2.</span> <span class="toc-text">1.4.2. EarlyStopping</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">  - keras</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">1. 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1.1. 基础层的介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">1.1.1. Flatten</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">1.1.2. Dense</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">1.1.3. Embedding</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.4.</span> <span class="toc-text">1.1.4. LSTM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.5.</span> <span class="toc-text">1.1.5. Merge层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">1.2. 训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">1.3. 模型构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">1.4. Callbacks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.1.</span> <span class="toc-text">1.4.1. ModelCheckpoint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.2.</span> <span class="toc-text">1.4.2. EarlyStopping</span></a></li></ol></li></ol>
                     </li></div>
                 </span>
             </div>
@@ -453,11 +465,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">热点问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -465,19 +477,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
+                <a href="javascript:void(0)" class="js-tag color5">LSTM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gluon、jupyter notebook</a>
+                <a href="javascript:void(0)" class="js-tag color4">GRU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -485,7 +489,31 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HDFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ResNet</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">BN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -493,23 +521,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
+                <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">卷积</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">GPU服务器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -521,7 +549,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">CDH集群、Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">CDH集群</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -529,15 +561,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
+                <a href="javascript:void(0)" class="js-tag color3">Seq2Seq</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
+                <a href="javascript:void(0)" class="js-tag color5">Attention</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
+                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分布式调优</a>
               </li>
             
             <div class="clearfix"></div>

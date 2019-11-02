@@ -9,14 +9,14 @@
   <title>RNN | Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1. 门控循环单元GRU&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;梯度裁剪可以应对梯度爆炸，但无法解决梯度衰减的问题。通常由于这个原因，循环神经网络在实际中较难捕捉时间序列中时间步距离较大的依赖关系。">
-<meta name="keywords" content="gluon,RNN,Deep Learning">
+<meta name="keywords" content="RNN,LSTM,GRU">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RNN">
 <meta property="og:url" content="http://yoursite.com/2019/02/12/RNN/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="1. 门控循环单元GRU&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;梯度裁剪可以应对梯度爆炸，但无法解决梯度衰减的问题。通常由于这个原因，循环神经网络在实际中较难捕捉时间序列中时间步距离较大的依赖关系。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-22T11:46:29.842Z">
+<meta property="og:updated_time" content="2019-11-02T06:54:13.881Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RNN">
 <meta name="twitter:description" content="1. 门控循环单元GRU&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;梯度裁剪可以应对梯度爆炸，但无法解决梯度衰减的问题。通常由于这个原因，循环神经网络在实际中较难捕捉时间序列中时间步距离较大的依赖关系。">
@@ -64,6 +64,10 @@
 	        
 				<li><a href="/archives">archives</a></li>
 	        
+				<li><a href="/categories">categories</a></li>
+	        
+				<li><a href="/tags">tags</a></li>
+	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -110,6 +114,10 @@
 			
 				
 			
+				
+			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -119,12 +127,16 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">Home</a></li>
+					<li style="width: 25%"><a href="/">Home</a></li>
 		        
-					<li style="width: 50%"><a href="/archives">archives</a></li>
+					<li style="width: 25%"><a href="/archives">archives</a></li>
+		        
+					<li style="width: 25%"><a href="/categories">categories</a></li>
+		        
+					<li style="width: 25%"><a href="/tags">tags</a></li>
 		        
 				</ul>
 			</nav>
@@ -161,13 +173,13 @@
       
         <h1><span id="1-门控循环单元gru">1. 门控循环单元GRU</span></h1><p>&ensp;&ensp;&ensp;&ensp;梯度裁剪可以应对梯度爆炸，但无法解决梯度衰减的问题。通常由于这个原因，循环神经网络在实际中较难捕捉时间序列中时间步距离较大的依赖关系。<br><a id="more"></a><br><!-- TOC --></p>
 <ul>
-<li><a href="#1-%E9%97%A8%E6%8E%A7%E5%BE%AA%E7%8E%AF%E5%8D%95%E5%85%83gru">1. 门控循环单元GRU</a><ul>
-<li><a href="#11-%E5%80%99%E9%80%89%E9%9A%90%E8%97%8F%E7%8A%B6%E6%80%81">1.1. 候选隐藏状态</a></li>
-<li><a href="#12-%E9%9A%90%E8%97%8F%E7%8A%B6%E6%80%81">1.2. 隐藏状态</a></li>
-<li><a href="#13-%E6%80%BB%E7%BB%93">1.3. 总结</a></li>
+<li><a href="#1-%e9%97%a8%e6%8e%a7%e5%be%aa%e7%8e%af%e5%8d%95%e5%85%83gru">1. 门控循环单元GRU</a><ul>
+<li><a href="#11-%e5%80%99%e9%80%89%e9%9a%90%e8%97%8f%e7%8a%b6%e6%80%81">1.1. 候选隐藏状态</a></li>
+<li><a href="#12-%e9%9a%90%e8%97%8f%e7%8a%b6%e6%80%81">1.2. 隐藏状态</a></li>
+<li><a href="#13-%e6%80%bb%e7%bb%93">1.3. 总结</a></li>
 </ul>
 </li>
-<li><a href="#2-%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86lstm">2. 长短期记忆LSTM</a></li>
+<li><a href="#2-%e9%95%bf%e7%9f%ad%e6%9c%9f%e8%ae%b0%e5%bf%86lstm">2. 长短期记忆LSTM</a></li>
 </ul>
 <!-- /TOC -->
 <p>&ensp;&ensp;&ensp;&ensp;门控循环神经网络的提出(2014年提出)正是为了更好地捕捉时间序列中时间步距离较大的依赖关系。它通过可以学习的门来控制信息的流动。其中，门控循环单元是一种常用的门控循环神经网络。门控循环神经单元引入了重置门和更新门的概念，从而修改了循环神经网络中隐藏状态的计算方式。重置门和更新门的激活函数是sigmoid函数，可以将元素的值变换到0到1之间，因为重置门$R_t$和更新们$Z_t$中每个元素的值域都是[0,1]。   </p>
@@ -213,21 +225,32 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">gluon</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RNN</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Deep Learning</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">LSTM</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GRU</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Deep-Learning//" class="article-tag-list-link color4">Deep Learning</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -291,11 +314,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/02/15/NLP/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/02/15/NLP和Attention/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          NLP
+          NLP和Attention
         
       </div>
     </a>
@@ -475,11 +498,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">热点问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -487,19 +510,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
+                <a href="javascript:void(0)" class="js-tag color5">LSTM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gluon、jupyter notebook</a>
+                <a href="javascript:void(0)" class="js-tag color4">GRU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -507,7 +522,31 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HDFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ResNet</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">BN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -515,23 +554,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
+                <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">卷积</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">GPU服务器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -543,7 +582,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">CDH集群、Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">CDH集群</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -551,15 +594,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
+                <a href="javascript:void(0)" class="js-tag color3">Seq2Seq</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
+                <a href="javascript:void(0)" class="js-tag color5">Attention</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
+                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分布式调优</a>
               </li>
             
             <div class="clearfix"></div>

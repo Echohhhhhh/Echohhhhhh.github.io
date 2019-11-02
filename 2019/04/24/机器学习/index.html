@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: 机器学习date: 2019-04-24T23:52:10.000Ztags:   - 特征预处理、模型评估、分类1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近在做一个分类任务，根据电池的充放电数据，预测电池绝缘报警是否为虚报，就是一个二分类任务。这里使用逻辑回归进行分类。">
+  <meta name="description" content="title: 特征预处理和评价指标date: 2019-04-24T23:52:10.000Zcategories: Machine Learningtags:  特征预处理 模型评估   1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近在做一个分类任务，根据电池的充放电数据，预测电池绝缘报警是否为虚报，就是一个二分类任务。这里使用逻辑回归进行分类。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Echo&#39;s blog">
 <meta property="og:url" content="http://yoursite.com/2019/04/24/机器学习/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="title: 机器学习date: 2019-04-24T23:52:10.000Ztags:   - 特征预处理、模型评估、分类1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近在做一个分类任务，根据电池的充放电数据，预测电池绝缘报警是否为虚报，就是一个二分类任务。这里使用逻辑回归进行分类。">
+<meta property="og:description" content="title: 特征预处理和评价指标date: 2019-04-24T23:52:10.000Zcategories: Machine Learningtags:  特征预处理 模型评估   1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近在做一个分类任务，根据电池的充放电数据，预测电池绝缘报警是否为虚报，就是一个二分类任务。这里使用逻辑回归进行分类。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/04/24/机器学习/表格.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/24/机器学习/归一化.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/24/机器学习/标准化.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/24/机器学习/resample.png">
-<meta property="og:updated_time" content="2019-06-26T14:12:34.617Z">
+<meta property="og:updated_time" content="2019-11-02T07:38:48.030Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
-<meta name="twitter:description" content="title: 机器学习date: 2019-04-24T23:52:10.000Ztags:   - 特征预处理、模型评估、分类1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近在做一个分类任务，根据电池的充放电数据，预测电池绝缘报警是否为虚报，就是一个二分类任务。这里使用逻辑回归进行分类。">
+<meta name="twitter:description" content="title: 特征预处理和评价指标date: 2019-04-24T23:52:10.000Zcategories: Machine Learningtags:  特征预处理 模型评估   1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近在做一个分类任务，根据电池的充放电数据，预测电池绝缘报警是否为虚报，就是一个二分类任务。这里使用逻辑回归进行分类。">
 <meta name="twitter:image" content="http://yoursite.com/2019/04/24/机器学习/表格.png">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
@@ -67,6 +67,10 @@
 				<li><a href="/">Home</a></li>
 	        
 				<li><a href="/archives">archives</a></li>
+	        
+				<li><a href="/categories">categories</a></li>
+	        
+				<li><a href="/tags">tags</a></li>
 	        
 			</ul>
 		</nav>
@@ -114,6 +118,10 @@
 			
 				
 			
+				
+			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -123,12 +131,16 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">Home</a></li>
+					<li style="width: 25%"><a href="/">Home</a></li>
 		        
-					<li style="width: 50%"><a href="/archives">archives</a></li>
+					<li style="width: 25%"><a href="/archives">archives</a></li>
+		        
+					<li style="width: 25%"><a href="/categories">categories</a></li>
+		        
+					<li style="width: 25%"><a href="/tags">tags</a></li>
 		        
 				</ul>
 			</nav>
@@ -149,35 +161,31 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>title: 机器学习<br>date: 2019-04-24T23:52:10.000Z<br>tags:</p>
-<h2><span id="-特征预处理-模型评估-分类">  - 特征预处理、模型评估、分类</span></h2><h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;最近在做一个分类任务，根据电池的充放电数据，预测电池绝缘报警是否为虚报，就是一个二分类任务。这里使用逻辑回归进行分类。<br> <a id="more"></a><br><!-- TOC --></p>
+<p>title: 特征预处理和评价指标<br>date: 2019-04-24T23:52:10.000Z<br>categories: Machine Learning<br>tags:</p>
 <ul>
-<li><a href="#1-%E7%AE%80%E4%BB%8B">1. 简介</a></li>
-<li><a href="#2-%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86">2. 数据预处理</a><ul>
-<li><a href="#21-%E7%89%B9%E5%BE%81%E5%80%BC%E8%BF%9E%E7%BB%AD">2.1. 特征值连续</a><ul>
-<li><a href="#211-%E5%BD%92%E4%B8%80%E5%8C%96normalization">2.1.1. 归一化(normalization)</a></li>
-<li><a href="#212-%E6%A0%87%E5%87%86%E5%8C%96standardization">2.1.2. 标准化(standardization)</a></li>
-<li><a href="#213-RobustScaler">2.1.3. RobustScaler</a></li>
+<li>特征预处理</li>
+<li>模型评估</li>
+</ul>
+<hr>
+<h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;最近在做一个分类任务，根据电池的充放电数据，预测电池绝缘报警是否为虚报，就是一个二分类任务。这里使用逻辑回归进行分类。<br> <a id="more"></a><br><!-- TOC --></p>
+<ul>
+<li><a href="#1-简介">1. 简介</a></li>
+<li><a href="#2-数据预处理">2. 数据预处理</a><ul>
+<li><a href="#21-特征值连续">2.1. 特征值连续</a><ul>
+<li><a href="#211-归一化normalization">2.1.1. 归一化(normalization)</a></li>
+<li><a href="#212-标准化standardization">2.1.2. 标准化(standardization)</a></li>
+<li><a href="#213-robustscaler">2.1.3. RobustScaler</a></li>
 </ul>
 </li>
-<li><a href="#22-%E7%89%B9%E5%BE%81%E5%80%BC%E7%A6%BB%E6%95%A3">2.2. 特征值离散</a></li>
-<li><a href="#23-%E9%A2%84%E5%A4%84%E7%90%86%E6%AD%A5%E9%AA%A4">2.3. 预处理步骤</a></li>
-<li><a href="#24-%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81">2.4. 交叉验证</a></li>
-<li><a href="#25-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BB%B7">2.5. 模型评价</a></li>
+<li><a href="#22-特征值离散">2.2. 特征值离散</a></li>
+<li><a href="#23-预处理步骤">2.3. 预处理步骤</a></li>
+<li><a href="#24-交叉验证">2.4. 交叉验证</a></li>
+<li><a href="#25-特征工程">2.5. 特征工程</a></li>
 </ul>
 </li>
-<li><a href="#3-XGBoost">3. XGBoost</a><ul>
-<li><a href="#31-XGBoost%E7%9A%84%E4%BC%98%E5%8A%BF">3.1. XGBoost的优势</a></li>
-<li><a href="#32-%E5%8F%82%E6%95%B0">3.2. 参数</a></li>
-<li><a href="#33-%E8%B0%83%E5%8F%82">3.3. 调参</a></li>
-</ul>
-</li>
-<li><a href="#4-GridSearchCV">4. GridSearchCV</a></li>
-<li><a href="#5-%E6%A0%B7%E6%9C%AC%E4%B8%8D%E5%9D%87%E8%A1%A1%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98">5. 样本不均衡分类问题</a><ul>
-<li><a href="#51-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B">5.1. 特征工程</a></li>
-</ul>
-</li>
-<li><a href="#6-%E8%BF%87%E9%87%87%E6%A0%B7">6. 过采样</a></li>
+<li><a href="#3-模型评价指标">3. 模型评价指标</a></li>
+<li><a href="#4-gridsearchcv">4. GridSearchCV</a></li>
+<li><a href="#5-样本不均衡问题">5. 样本不均衡问题</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="2-数据预处理">2. 数据预处理</span></h1><p>&ensp;&ensp;&ensp;&ensp;在进行模型训练之前，需要对数据进行预处理。因为多个特征之间的量纲不同，在训练的时候收敛会很慢，所以需要将不同特征值转换为同一量纲。这里将离散特征和连续特征分别处理。   </p>
@@ -191,10 +199,17 @@
 <h3><span id="212-标准化standardization">2.1.2. 标准化(standardization)</span></h3><p>&ensp;&ensp;&ensp;&ensp; 标准化又叫做Z-score。将所有的数据映射到均值为0，方差为1的正态分布中。  要求原始数据的分布可以近似为正态分布，否则标准化的结果会很差。 标准化表示的是原始值与均值之间差几个标准差，是一个相对值，也有去除量纲的作用，同时还有2个附加好处：均值为0，标准差为1。均值为0的好处是使得数据以0为中心左右分布。</p>
 <ul>
 <li>适用范围：在分类和聚类算法中，需要使用距离来度量相似性时，例如支持向量机，逻辑回归，或者使用PCA进行降维时，Z-score表现更好。 </li>
-<li>推荐先使用标准化。<br><img src="/2019/04/24/机器学习/标准化.png" alt="归一化">         <h3><span id="213-robustscaler">2.1.3. RobustScaler</span></h3>&ensp;&ensp;&ensp;&ensp;在某些情况下，加入数据中有离群点，可以使用standardization进行标准化，但是标准化后的数据并不理想，因为异常点的特征往往在标准化后容易失去离群特征，此时就要使用RobustScaler针对离群点进行标准化处理   。此方法对数据中心化和缩放健壮性有更强的参数控制能力。     <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#RobustScaler标准化</span></span><br><span class="line">robustscaler = preprocessing.RobustScaler()</span><br><span class="line">df_r = robustscaler.fit_transform(df)</span><br><span class="line">df_r = pd.DataFrame(df_r,columns=[<span class="string">'value1_r'</span>,<span class="string">'value2_r'</span>])</span><br><span class="line">df_r.head()</span><br><span class="line">```   </span><br><span class="line"></span><br><span class="line"><span class="comment">## 2.2. 特征值离散   </span></span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;离散值就是特征值是离散的，不是连续的，例如性别是离散值，只有female和male，颜色是离散的。机器学习算法不能直接处理离散值，需要对其进行一些转换。离散值可以是文本(red，black)或者数值（<span class="number">1</span>，<span class="number">2</span>）。</span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp; 离散数据有<span class="number">2</span>大类：定序(Ordinal)和定类(Nominal)。定序的数据存在一定的顺序意义，例如衣服的尺寸按大小分类(xs,s,m,l),在定类的数据中，属性值之间没有顺序的要求。</span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;对于定序的数据，没有统一的模块将这些顺序自动转换成映射，可以自定义一些映射规则，比如xs对应<span class="number">1</span>，s对应<span class="number">2</span>，自定义的规则。</span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;对于文本的定类数据，可以先把文本分类至转换为数字，比如red转换为<span class="number">1</span>，black转换为<span class="number">2</span>，然后对这些数据使用one-hot编码。   </span><br><span class="line">主要是使用LabelEncoder和OneHotEncoder这<span class="number">2</span>个模块。</span><br><span class="line">```python</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line">gle = LabelEncoder()</span><br><span class="line">genre_labels = gle.fit_transform(vg_df[<span class="string">'Genre'</span>])</span><br><span class="line"><span class="comment">#将每个风格属性映射到一个数值(0,1,2,3…)。</span></span><br><span class="line">enc = OneHotEncoder(categories=<span class="string">'auto'</span>)</span><br><span class="line"><span class="comment"># OneHotEncoder的transform方法默认返回系数矩阵，调用toarray()方法将系数矩阵转为一般矩阵</span></span><br><span class="line">dis_feature_data = enc.fit_transform(dis_feature_data).toarray()</span><br><span class="line">print(dis_feature_data)</span><br><span class="line">print(dis_feature_data.shape)</span><br><span class="line">```    </span><br><span class="line">除了sklearn中的OneHotEncoder，还可以使用pandas中的get_dummies对离散值进行one-hot编码，比OneHotEncoder好的一点是:转换之后可以直观的看出当前列对应哪个属性。</span><br><span class="line">参考博客：    </span><br><span class="line">[https://blog.csdn.net/wotui1842/article/details/<span class="number">80697444</span>](https://blog.csdn.net/wotui1842/article/details/<span class="number">80697444</span>)      </span><br><span class="line">[https://blog.csdn.net/cymy001/article/details/<span class="number">79154135</span>](https://blog.csdn.net/cymy001/article/details/<span class="number">79154135</span>)   </span><br><span class="line">[https://blog.csdn.net/m0_37324740/article/details/<span class="number">77169771</span>](https://blog.csdn.net/m0_37324740/article/details/<span class="number">77169771</span>)    </span><br><span class="line">[https://blog.csdn.net/wxyangid/article/details/<span class="number">80209156</span>](https://blog.csdn.net/wxyangid/article/details/<span class="number">80209156</span>)   </span><br><span class="line"><span class="comment">## 2.3. 预处理步骤   </span></span><br><span class="line">- 首先使用pandas从csv中读取数据，从数据中取出特征值和目标值，分别存储在X和Y中。</span><br><span class="line">- 从X中取出离散特征值dis_feature，剩下的是连续特征值con_feature。</span><br><span class="line">- 对离散特征值dis_feature进行one-hot编码，形成新的特征值new_dis_feature。然后将新的特征值new_dis_feature和原先的连续特征值con_feature进行拼接形成新的特征值new_X</span><br><span class="line">- 然后对new_X和Y划分为训练集和测试集，然后对训练集进行标准化，使用训练集的均值和标准差再对测试集进行标准化。</span><br><span class="line">- 使用训练集对模型进行训练，对测试集进行验证。       </span><br><span class="line"><span class="comment">## 2.4. 交叉验证   </span></span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;sklearn中有<span class="number">2</span>中交叉验证方法，KFold，StratifiedKFold  </span><br><span class="line">```python</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> KFold,StratifiedKFold</span><br><span class="line">X=np.array([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">    [<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>],</span><br><span class="line">    [<span class="number">21</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">24</span>],</span><br><span class="line">    [<span class="number">31</span>,<span class="number">32</span>,<span class="number">33</span>,<span class="number">34</span>],</span><br><span class="line">    [<span class="number">41</span>,<span class="number">42</span>,<span class="number">43</span>,<span class="number">44</span>],</span><br><span class="line">    [<span class="number">51</span>,<span class="number">52</span>,<span class="number">53</span>,<span class="number">54</span>],</span><br><span class="line">    [<span class="number">61</span>,<span class="number">62</span>,<span class="number">63</span>,<span class="number">64</span>],</span><br><span class="line">    [<span class="number">71</span>,<span class="number">72</span>,<span class="number">73</span>,<span class="number">74</span>]</span><br><span class="line">])</span><br><span class="line"> </span><br><span class="line">y=np.array([<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>])</span><br><span class="line">floder = KFold(n_splits=<span class="number">4</span>,random_state=<span class="number">0</span>,shuffle=<span class="keyword">False</span>)</span><br><span class="line">sfolder = StratifiedKFold(n_splits=<span class="number">4</span>,random_state=<span class="number">0</span>,shuffle=<span class="keyword">False</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> train, test <span class="keyword">in</span> sfolder.split(X,y):</span><br><span class="line">    print(<span class="string">'Train: %s | test: %s'</span> % (train, test))</span><br><span class="line">    print(<span class="string">" "</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> train, test <span class="keyword">in</span> floder.split(X,y):</span><br><span class="line">    print(<span class="string">'Train: %s | test: %s'</span> % (train, test))</span><br><span class="line">    print(<span class="string">" "</span>)</span><br><span class="line"></span><br><span class="line">```   </span><br><span class="line">StratifiedKFold和KFold类似，但是StratifiedKFold是分层采样，确保训练集、测试集各类样本的比例与原始数据集中相同。比如原始数据集中正例:负例=<span class="number">2</span>:<span class="number">1</span>,则训练集和测试集中正例:负例=<span class="number">2</span>:<span class="number">1</span>。   </span><br><span class="line">KFold和enumerate联合使用   </span><br><span class="line">enumerate()函数用于将一个可遍历的数据对象(如列表，元组或str)组合成一个序列索引，同时列出数据和数据下标。一般在<span class="keyword">for</span>循环中使用。   </span><br><span class="line">语法：`enumerate(sequence,[start=<span class="number">0</span>])`   </span><br><span class="line">其中`sequence`表示一个序列，迭代器或可遍历对象，`start`表示下标起始位置   </span><br><span class="line">```python</span><br><span class="line"><span class="keyword">for</span> fold_, (train_, test_) <span class="keyword">in</span> enumerate(kfold.split(X_array, y_array):</span><br><span class="line"><span class="comment">#其中train和test是数据的下标</span></span><br></pre></td></tr></table></figure>
+<li>推荐先使用标准化。<br><img src="/2019/04/24/机器学习/标准化.png" alt="归一化">         <h3><span id="213-robustscaler">2.1.3. RobustScaler</span></h3>&ensp;&ensp;&ensp;&ensp;在某些情况下，加入数据中有离群点，可以使用standardization进行标准化，但是标准化后的数据并不理想，因为异常点的特征往往在标准化后容易失去离群特征，此时就要使用RobustScaler针对离群点进行标准化处理   。此方法对数据中心化和缩放健壮性有更强的参数控制能力。     <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#RobustScaler标准化</span></span><br><span class="line">robustscaler = preprocessing.RobustScaler()</span><br><span class="line">df_r = robustscaler.fit_transform(df)</span><br><span class="line">df_r = pd.DataFrame(df_r,columns=[<span class="string">'value1_r'</span>,<span class="string">'value2_r'</span>])</span><br><span class="line">df_r.head()</span><br><span class="line">```   </span><br><span class="line"></span><br><span class="line"><span class="comment">## 2.2. 特征值离散   </span></span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;离散值就是特征值是离散的，不是连续的，例如性别是离散值，只有female和male，颜色是离散的。机器学习算法不能直接处理离散值，需要对其进行一些转换。离散值可以是文本(red，black)或者数值（<span class="number">1</span>，<span class="number">2</span>）。</span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp; 离散数据有<span class="number">2</span>大类：定序(Ordinal)和定类(Nominal)。定序的数据存在一定的顺序意义，例如衣服的尺寸按大小分类(xs,s,m,l),在定类的数据中，属性值之间没有顺序的要求。</span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;对于定序的数据，没有统一的模块将这些顺序自动转换成映射，可以自定义一些映射规则，比如xs对应<span class="number">1</span>，s对应<span class="number">2</span>，自定义的规则。</span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;对于文本的定类数据，可以先把文本分类至转换为数字，比如red转换为<span class="number">1</span>，black转换为<span class="number">2</span>，然后对这些数据使用one-hot编码。   </span><br><span class="line">主要是使用LabelEncoder和OneHotEncoder这<span class="number">2</span>个模块。</span><br><span class="line">```python</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line">gle = LabelEncoder()</span><br><span class="line">genre_labels = gle.fit_transform(vg_df[<span class="string">'Genre'</span>])</span><br><span class="line"><span class="comment">#将每个风格属性映射到一个数值(0,1,2,3…)。</span></span><br><span class="line">enc = OneHotEncoder(categories=<span class="string">'auto'</span>)</span><br><span class="line"><span class="comment"># OneHotEncoder的transform方法默认返回系数矩阵，调用toarray()方法将系数矩阵转为一般矩阵</span></span><br><span class="line">dis_feature_data = enc.fit_transform(dis_feature_data).toarray()</span><br><span class="line">print(dis_feature_data)</span><br><span class="line">print(dis_feature_data.shape)</span><br><span class="line">```    </span><br><span class="line">除了sklearn中的OneHotEncoder，还可以使用pandas中的get_dummies对离散值进行one-hot编码，比OneHotEncoder好的一点是:转换之后可以直观的看出当前列对应哪个属性。</span><br><span class="line">参考博客：    </span><br><span class="line">[https://blog.csdn.net/wotui1842/article/details/<span class="number">80697444</span>](https://blog.csdn.net/wotui1842/article/details/<span class="number">80697444</span>)      </span><br><span class="line">[https://blog.csdn.net/cymy001/article/details/<span class="number">79154135</span>](https://blog.csdn.net/cymy001/article/details/<span class="number">79154135</span>)   </span><br><span class="line">[https://blog.csdn.net/m0_37324740/article/details/<span class="number">77169771</span>](https://blog.csdn.net/m0_37324740/article/details/<span class="number">77169771</span>)    </span><br><span class="line">[https://blog.csdn.net/wxyangid/article/details/<span class="number">80209156</span>](https://blog.csdn.net/wxyangid/article/details/<span class="number">80209156</span>)   </span><br><span class="line"><span class="comment">## 2.3. 预处理步骤   </span></span><br><span class="line">- 首先使用pandas从csv中读取数据，从数据中取出特征值和目标值，分别存储在X和Y中。</span><br><span class="line">- 从X中取出离散特征值dis_feature，剩下的是连续特征值con_feature。</span><br><span class="line">- 对离散特征值dis_feature进行one-hot编码，形成新的特征值new_dis_feature。然后将新的特征值new_dis_feature和原先的连续特征值con_feature进行拼接形成新的特征值new_X</span><br><span class="line">- 然后对new_X和Y划分为训练集和测试集，然后对训练集进行标准化，使用训练集的均值和标准差再对测试集进行标准化。</span><br><span class="line">- 使用训练集对模型进行训练，对测试集进行验证。       </span><br><span class="line"><span class="comment">## 2.4. 交叉验证   </span></span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;sklearn中有<span class="number">2</span>中交叉验证方法，KFold，StratifiedKFold  </span><br><span class="line">```python</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> KFold,StratifiedKFold</span><br><span class="line">X=np.array([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">    [<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>],</span><br><span class="line">    [<span class="number">21</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">24</span>],</span><br><span class="line">    [<span class="number">31</span>,<span class="number">32</span>,<span class="number">33</span>,<span class="number">34</span>],</span><br><span class="line">    [<span class="number">41</span>,<span class="number">42</span>,<span class="number">43</span>,<span class="number">44</span>],</span><br><span class="line">    [<span class="number">51</span>,<span class="number">52</span>,<span class="number">53</span>,<span class="number">54</span>],</span><br><span class="line">    [<span class="number">61</span>,<span class="number">62</span>,<span class="number">63</span>,<span class="number">64</span>],</span><br><span class="line">    [<span class="number">71</span>,<span class="number">72</span>,<span class="number">73</span>,<span class="number">74</span>]</span><br><span class="line">])</span><br><span class="line"> </span><br><span class="line">y=np.array([<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>])</span><br><span class="line">floder = KFold(n_splits=<span class="number">4</span>,random_state=<span class="number">0</span>,shuffle=<span class="keyword">False</span>)</span><br><span class="line">sfolder = StratifiedKFold(n_splits=<span class="number">4</span>,random_state=<span class="number">0</span>,shuffle=<span class="keyword">False</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> train, test <span class="keyword">in</span> sfolder.split(X,y):</span><br><span class="line">    print(<span class="string">'Train: %s | test: %s'</span> % (train, test))</span><br><span class="line">    print(<span class="string">" "</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> train, test <span class="keyword">in</span> floder.split(X,y):</span><br><span class="line">    print(<span class="string">'Train: %s | test: %s'</span> % (train, test))</span><br><span class="line">    print(<span class="string">" "</span>)</span><br><span class="line"></span><br><span class="line">```   </span><br><span class="line">StratifiedKFold和KFold类似，但是StratifiedKFold是分层采样，确保训练集、测试集各类样本的比例与原始数据集中相同。比如原始数据集中正例:负例=<span class="number">2</span>:<span class="number">1</span>,则训练集和测试集中正例:负例=<span class="number">2</span>:<span class="number">1</span>。   </span><br><span class="line">KFold和enumerate联合使用   </span><br><span class="line">enumerate()函数用于将一个可遍历的数据对象(如列表，元组或str)组合成一个序列索引，同时列出数据和数据下标。一般在<span class="keyword">for</span>循环中使用。   </span><br><span class="line">语法：`enumerate(sequence,[start=<span class="number">0</span>])`   </span><br><span class="line">其中`sequence`表示一个序列，迭代器或可遍历对象，`start`表示下标起始位置   </span><br><span class="line">```python</span><br><span class="line"><span class="keyword">for</span> fold_, (train_, test_) <span class="keyword">in</span> enumerate(kfold.split(X_array, y_array):</span><br><span class="line"><span class="comment">#其中train和test是数据的下标</span></span><br><span class="line">```    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 2.5. 特征工程   </span></span><br><span class="line"><span class="number">1.</span> 特征缩放   </span><br><span class="line">使用归一化或标准化对特征进行缩放，使得不同特征值在同一量纲，   </span><br><span class="line"></span><br><span class="line">```python  </span><br><span class="line"><span class="comment">#使用 sklearn中的 scale 函数</span></span><br><span class="line">minmax_scaler = preprocessing.MinMaxScaler()   <span class="comment">#创建 MinMaxScaler对象</span></span><br><span class="line">df_m1 = minmax_scaler.fit_transform(df)    <span class="comment"># 标准化处理</span></span><br><span class="line">df_m1 = pd.DataFrame(df_m1,columns=[<span class="string">'value1_m'</span>,<span class="string">'value2_m'</span>])</span><br><span class="line">df_m1.head()</span><br><span class="line">```   </span><br><span class="line">```python</span><br><span class="line"><span class="comment">#Since most of our data has already been scaled we should scale the columns that are left to scale (Amount and Time)</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> RobustScaler</span><br><span class="line"></span><br><span class="line"><span class="comment">#RobustScaler is robust to outliers.</span></span><br><span class="line">credit_df[<span class="string">'amount_after_scaling'</span>] = RobustScaler().fit_transform(credit_df[<span class="string">'Amount'</span>].values.reshape(<span class="number">-1</span>,<span class="number">1</span>))</span><br><span class="line">credit_df[<span class="string">'time_after_scaling'</span>] = RobustScaler().fit_transform(credit_df[<span class="string">'Time'</span>].values.reshape(<span class="number">-1</span>,<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">credit_df.drop([<span class="string">'Time'</span>,<span class="string">'Amount'</span>], axis=<span class="number">1</span>, inplace=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#Place the class in the begining of the dataframe</span></span><br><span class="line">Class = credit_df[<span class="string">'Class'</span>]</span><br><span class="line">credit_df.drop([<span class="string">'Class'</span>], axis=<span class="number">1</span>, inplace=<span class="keyword">True</span>)</span><br><span class="line">credit_df.insert(<span class="number">0</span>, <span class="string">'Class'</span>, Class)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2><span id="25-模型评价">2.5. 模型评价</span></h2><ul>
+<ol>
+<li>解决样本不均衡问题<br>欠采样或过采样<br><img src="/2019/04/24/机器学习/resample.png" alt="样本不平衡">    </li>
+<li><p>检测和删除异常点   </p>
+</li>
+<li><p>划分数据集<br>划分数据集：训练集，验证集，测试集  </p>
+</li>
+</ol>
+<h1><span id="3-模型评价指标">3. 模型评价指标</span></h1><ul>
 <li>拟合模型<br>model.fit(X_train, y_train)    </li>
 <li>模型预测，对于分类任务，输出最大可能的类别<br>model.predict(X_train)<br>model.predict(X_test)</li>
 <li>对于分类任务，输出所属每个类别的概率，返回的是一个二维数组，每一行加起来为1<br>prob = model.predict_proba(X_train)<br>model.predict_proba(X_test)<br>获取样本属于正例的概率prob[:,1]   </li>
@@ -206,60 +221,6 @@
 <li>AUC&amp;&amp;ROC<br>只针对二分类。通过model.predict_proba(X_test)[:,1]可以获取测试集属于正例的概率，将预测概率从大到小排序，然后以每个预测概率作为阈值，即可得到属于2类的样本数。对应计算每个阈值下的”False Positive Rate”(FPR)和”True Positive Rate”(TPR)，以”False Positive Rate”为横轴，以”True Positive Rate”为纵轴，画出ROC曲线，ROC曲线下的面积就是AUC值。<br>“False Positive Rate”(FPR)=负例被划分为正例个数/真正负例个数（负例被分错的个数/真正负例）<br>“True Positive Rate”(TPR)=正例被划分为正例/真正正例个数（正例被分对的个数/真正正例）<br>当阈值取最大时，所有的样本被分为负样本，对应（0,0），当阈值取最小时，所有的样本被分为正样本，对应于（1,1），随着阈值从最大到最小变化，横坐标和纵坐标都在变大，表示被划分为正例的个数越来越多。<br>AUC用来衡量ROC曲线的好坏。如果分类器能完美的将样本分对，那么AUC=1，如果模型是随机猜测的，那么AUC=0.5，对应着y=x直线。分类器越好，则AUC越大。<br>sklearn给了画ROC曲线的函数。  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fpr, tpr, thresholds=sklearn.metrics.roc_curve(y_true_label,y_prob,pos_label=<span class="keyword">None</span>,sample_weight=<span class="keyword">None</span>,drop_intermediate=<span class="keyword">True</span>)</span><br><span class="line"><span class="comment">#其中test_true_label表示数据集真实的标签，&#123;0,1&#125;或&#123;-1,1&#125;</span></span><br><span class="line"><span class="comment">#y_prob表示数据集被分为正例的概率</span></span><br><span class="line"><span class="comment"># 返回值</span></span><br><span class="line"><span class="comment">#thresholds: array, shape = [n_thresholds]所选取的不同的阈值，按照从大到小的排序，阈值越大，横纵坐标越小。</span></span><br><span class="line"><span class="comment">#fpr,tpt：根据 thresholds算出来的横坐标和纵坐标。在此基础上可以画ROC曲线，</span></span><br><span class="line"><span class="comment">#通过auc(fpr,tpr)可以求出AUC的值</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h1><span id="3-xgboost">3. XGBoost</span></h1><p>&ensp;&ensp;&ensp;&ensp;XGBoost是一种十分精致的算法，可以处理各种不规则的数据。<br>构造一个使用XGBoost的模型十分简单。但是，提高这个模型的表现就有些困难，因为涉及到很多参数。所以为了提高模型的表现，参数的调整十分必要。</p>
-<h2><span id="31-xgboost的优势">3.1. XGBoost的优势</span></h2><ul>
-<li>正则化<br>正则化防止过拟合，实际上，XGBoost以“正则化提升(regularized boosting)”技术而闻名。</li>
-<li>缺失值处理<br>XGBoost内置处理缺失值的规则。XGBoost在不同节点遇到缺失值时采用不同的处理方法，并且会学习未来遇到缺失值的处理方法。<h2><span id="32-参数">3.2. 参数</span></h2></li>
-</ul>
-<p>&ensp;&ensp;&ensp;&ensp;XGBoost实际上是很多CART树堆叠起来。传入的特征可以含有None值。XGBoost有很多参数，使用GridSearchCV进行网格搜索时比较耗时。  </p>
-<p>使用pip install xgboost安装<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">XGBClassifier(</span><br><span class="line">        base_score=<span class="number">0.5</span>, </span><br><span class="line">        booster=<span class="string">'gbtree'</span>, </span><br><span class="line">        colsample_bylevel=<span class="number">1</span>,</span><br><span class="line">        colsample_bytree=<span class="number">1</span>, </span><br><span class="line">        gamma=<span class="number">0</span>, </span><br><span class="line">        learning_rate=<span class="number">1</span>, </span><br><span class="line">        max_delta_step=<span class="number">0</span>,</span><br><span class="line">        max_depth=<span class="number">2</span>, </span><br><span class="line">        min_child_weight=<span class="number">1</span>, </span><br><span class="line">        missing=<span class="keyword">None</span>, </span><br><span class="line">        n_estimators=<span class="number">2</span>,</span><br><span class="line">        n_jobs=<span class="number">1</span>, </span><br><span class="line">        nthread=<span class="keyword">None</span>, objective=<span class="string">'binary:logistic'</span>, random_state=<span class="number">0</span>,</span><br><span class="line">        reg_alpha=<span class="number">0</span>, </span><br><span class="line">        reg_lambda=<span class="number">1</span>, </span><br><span class="line">        scale_pos_weight=<span class="number">1</span>, </span><br><span class="line">        seed=<span class="keyword">None</span>,</span><br><span class="line">        silent=<span class="keyword">True</span>, </span><br><span class="line">        subsample=<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
-<p>XGBoost参数有3类：<br><a href="https://www.cnblogs.com/wanglei5205/p/8579244.html" target="_blank" rel="noopener">https://www.cnblogs.com/wanglei5205/p/8579244.html</a><br>（1）通用类别：不需要调整，默认就好：</p>
-<ul>
-<li>booster：[默认gbtree]<br>选择每次迭代的模型，有两种选择：<br>gbtree：基于树的模型<br>gbliner：线性模型</li>
-<li>silent[默认0]<br>当这个参数值为1时，静默模式开启，不会输出任何信息。<br>一般这个参数就保持默认的0，因为这样能帮我们更好地理解模型。</li>
-<li>nthread[默认值为最大可能的线程数]<br>这个参数用来进行多线程控制，应当输入系统的核数。<br>如果你希望使用CPU全部的核，那就不要输入这个参数，算法会自动检测它。</li>
-</ul>
-<p>（2）学习目标参数：与任务有关</p>
-<ul>
-<li>objective:损失函数，支持分类/回归<br>[默认reg:linear]，这个参数定义需要被最小化的损失函数。最常用的值有：<br>binary:logistic 二分类的逻辑回归，返回预测的概率(不是类别)。<br>multi:softmax 使用softmax的多分类器，返回预测的类别(不是概率)。<br>在这种情况下，你还需要多设一个参数：num_class(类别数目)。<br>multi:softprob 和multi:softmax参数一样，但是返回的是每个数据属于各个类别的概率。</li>
-<li><p>eval_metric：评价函数，对于回归问题，默认值是rmse，对于分类问题，默认值是error。<br>典型值有：<br>rmse 均方根误差<br>logloss 负对数似然函数值<br>error 二分类错误率(阈值为0.5)<br>merror 多分类错误率<br>mlogloss 多分类logloss损失函数<br>auc 曲线下面积</p>
-</li>
-<li><p>seed：随机数的种子，默认为0<br>设置它可以复现随机数据的结果，也可以用于调整参数</p>
-</li>
-</ul>
-<p>（3）booster参数：弱学习器参数，需要仔细调整，会影响模型性能<br>学习率和n_estimators具有相反的关系，建议学习率设小，通过交叉验证确定n_estimators</p>
-<ul>
-<li>eta[默认0.3]，和GBM中的 learning rate 参数类似。 通过减少每一步的权重，可以提高模型的鲁棒性。 典型值为0.01-0.2。     </li>
-</ul>
-<p><strong>和树有关的参数</strong></p>
-<ul>
-<li>min_child_weight[默认1]，最小样本权重的和，用于避免过拟合。但是如果这个值过高，会导致欠拟合。这个参数需要使用CV来调整。</li>
-<li>max_depth[默认6]，树的最大深度。 用来避免过拟合的。max_depth越大，模型越复杂，学到更具体更局部的样本。 需要使用CV函数来进行调优。 典型值：3-10      </li>
-<li>gamma[默认0]，Gamma指定了节点分裂所需的最小损失函数下降值。这个参数的值越大，算法越保守。这个参数的值和损失函数息息相关，所以是需要调整的。   </li>
-<li>subsample[默认1]<br>和GBM中的subsample参数一模一样。这个参数控制对于每棵树，随机采样的比例。减小这个参数的值，算法会更加保守，避免过拟合。但是，如果这个值设置得过小，它可能会导致欠拟合。<br>典型值：0.5-1  </li>
-<li>colsample_bytree[默认1]<br>和GBM里面的max_features参数类似。用来控制每棵随机采样的列数的占比(每一列是一个特征)。<br>典型值：0.5-1  </li>
-</ul>
-<p><strong>和正则化有关的参数</strong></p>
-<ul>
-<li>lambda[默认1]<br>权重的L2正则化项。(和Ridge regression类似)。<br>这个参数是用来控制XGBoost的正则化部分的。虽然大部分数据科学家很少用到这个参数，但是这个参数在减少过拟合上还是可以挖掘出更多用处的。  </li>
-<li>alpha[默认1]<br>权重的L1正则化项。(和Lasso regression类似)。<br>可以应用在很高维度的情况下，使得算法的速度更快。<br><strong>样本不均衡</strong> </li>
-<li>scale_pos_weight[默认1]<br>正样本占的比重，为1时表示正负样例比重是一样的。当正样本较少时，正样本:负样本=1:9，将scale_pos_weight设置为9，scale_pos_weight=负样本个数/正样本个数。在各类别样本十分不平衡时，把这个参数设定为一个正值，可以使算法更快收敛。   <h2><span id="33-调参">3.3. 调参</span></h2></li>
-</ul>
-<ol>
-<li><p>先给定一个较高的学习率(learning rate)，一般情况下，学习率为0.1，但是对于不同的问题，理想的学习率在0.05~0.3之间波动。先调节决策树的数量n_estimators</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.display <span class="keyword">import</span> display</span><br><span class="line"></span><br><span class="line">cv_params = &#123;<span class="string">'n_estimators'</span>: [<span class="number">20</span>,<span class="number">40</span>, <span class="number">60</span>, <span class="number">80</span>]&#125;</span><br><span class="line">other_params = &#123;<span class="string">'learning_rate'</span>: <span class="number">0.1</span>, <span class="string">'n_estimators'</span>: <span class="number">500</span>, <span class="string">'max_depth'</span>: <span class="number">5</span>, <span class="string">'min_child_weight'</span>: <span class="number">1</span>, </span><br><span class="line">                <span class="string">'seed'</span>: <span class="number">0</span>,<span class="string">'subsample'</span>: <span class="number">0.8</span>, <span class="string">'colsample_bytree'</span>: <span class="number">0.8</span>, <span class="string">'gamma'</span>: <span class="number">0</span>, <span class="string">'reg_alpha'</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="string">'reg_lambda'</span>: <span class="number">1</span>,<span class="string">'scale_pos_weight'</span>:<span class="number">1</span>,<span class="string">'objective'</span>:<span class="string">'binary:logistic'</span>&#125;</span><br><span class="line">model = XGBClassifier(**other_params)</span><br><span class="line">optimized_GBM = GridSearchCV(estimator=model, param_grid=cv_params, scoring=<span class="string">'accuracy'</span>, cv=<span class="number">5</span>,verbose=<span class="number">1</span>, n_jobs=<span class="number">4</span>)</span><br><span class="line">optimized_GBM.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'参数的最佳取值：&#123;0&#125;'</span>.format(optimized_GBM.best_params_))</span><br><span class="line">print(<span class="string">'最佳模型得分:&#123;0&#125;'</span>.format(optimized_GBM.best_score_))</span><br><span class="line">display(pd.DataFrame(optimized_GBM.cv_results_).T)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在给定的learning rate和n_eatimators情况下，对决策树特定参数调优(max_depth,min_child_weight,gamma,subsample,colsample_bytree) </p>
-</li>
-<li><p>max_depth和min_child_weight参数调优</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">cv_params = &#123;<span class="string">'max_depth'</span>: list(range(<span class="number">3</span>,<span class="number">10</span>,<span class="number">2</span>)), <span class="string">'min_child_weight'</span>: list(range(<span class="number">1</span>,<span class="number">7</span>,<span class="number">1</span>))&#125;</span><br><span class="line">other_params = &#123;<span class="string">'learning_rate'</span>: <span class="number">0.1</span>, <span class="string">'n_estimators'</span>: <span class="number">60</span>, <span class="string">'max_depth'</span>: <span class="number">5</span>, <span class="string">'min_child_weight'</span>: <span class="number">1</span>, </span><br><span class="line">                <span class="string">'seed'</span>: <span class="number">0</span>,<span class="string">'subsample'</span>: <span class="number">0.8</span>, <span class="string">'colsample_bytree'</span>: <span class="number">0.8</span>, <span class="string">'gamma'</span>: <span class="number">0</span>, <span class="string">'reg_alpha'</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="string">'reg_lambda'</span>: <span class="number">1</span>,<span class="string">'scale_pos_weight'</span>:<span class="number">1</span>,<span class="string">'objective'</span>:<span class="string">'binary:logistic'</span>&#125;</span><br><span class="line">```   </span><br><span class="line"><span class="number">4.</span> gamma参数调优   </span><br><span class="line">Gamma参数取值范围可以很大，我这里把取值范围设置为<span class="number">5</span>了。你其实也可以取更精确的gamma值。  </span><br><span class="line">  ```python</span><br><span class="line">  cv_params = &#123;<span class="string">'gamma'</span>: [<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.4</span>, <span class="number">0.5</span>, <span class="number">0.6</span>]&#125;</span><br><span class="line">  other_params = &#123;<span class="string">'learning_rate'</span>: <span class="number">0.1</span>, <span class="string">'n_estimators'</span>: <span class="number">350</span>, <span class="string">'max_depth'</span>: <span class="number">3</span>, <span class="string">'min_child_weight'</span>: <span class="number">5</span>, </span><br><span class="line">                <span class="string">'seed'</span>: <span class="number">0</span>,<span class="string">'subsample'</span>: <span class="number">0.8</span>, <span class="string">'colsample_bytree'</span>: <span class="number">0.8</span>, <span class="string">'gamma'</span>: <span class="number">0</span>, <span class="string">'reg_alpha'</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="string">'reg_lambda'</span>: <span class="number">1</span>,<span class="string">'objective'</span>:<span class="string">'binary:logistic'</span>&#125;</span><br><span class="line">  ```   </span><br><span class="line"><span class="number">5.</span> subsamplehe colsample_bytree参数   </span><br><span class="line">   这链各个参数相当于每个树的样本和特征个数。</span><br><span class="line">  ```python</span><br><span class="line">   cv_params = &#123;  </span><br><span class="line">    <span class="string">'subsample'</span>: [i / <span class="number">10.0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>, <span class="number">10</span>)],  </span><br><span class="line">    <span class="string">'colsample_bytree'</span>: [i / <span class="number">10.0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>, <span class="number">10</span>)]  </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>正则化参数调优<br>下一步应用正则化来降低过拟合。  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv_params = &#123;<span class="string">'reg_alpha'</span>: [<span class="number">0.05</span>, <span class="number">0.1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="string">'reg_lambda'</span>: [<span class="number">0.05</span>, <span class="number">0.1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>学习率调优<br>最后使用较低的学习率</p>
-</li>
-</ol>
 <h1><span id="4-gridsearchcv">4. GridSearchCV</span></h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class sklearn.model_selection.GridSearchCV(estimator, param_grid, scoring=None, fit_params=None, n_jobs=1, iid=True, refit=True, cv=None, verbose=0, pre_dispatch=‘2*n_jobs’, error_score=’raise’, return_train_score=’warn’)</span><br></pre></td></tr></table></figure>
 <p>GridSearchCV参数介绍：</p>
 <ul>
@@ -281,17 +242,35 @@
 <li><p>cv_results_：旧版本是“grid_scores_”，cv_results_是详尽、升级版。内容较好理解，包含了’mean_test_score’(验证集平均得分)，’rank_test_score’(验证集得分排名)，’params’(dict形式存储所有待选params的组合)，甚至还有在每次划分的交叉验证中的得分（’split0_test_score’、 ‘split1_test_score’等），就是输出的内容稍显臃肿。内容以dict形式输出，我们可以转成DataFrame形式，看起来稍微养眼一点。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv_result = pd.DataFrame.from_dict(clf.cv_results_)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">means = grid_result.cv_results_[<span class="string">'mean_test_score'</span>]</span><br><span class="line">params = grid_result.cv_results_[<span class="string">'params'</span>]</span><br><span class="line"><span class="keyword">for</span> mean,param <span class="keyword">in</span> zip(means,params):</span><br><span class="line">    print(<span class="string">"%f  with:   %r"</span> % (mean,param))</span><br></pre></td></tr></table></figure>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">from</span> IPython.display <span class="keyword">import</span> display</span><br><span class="line">    display(pd.DataFrame(grid.cv_results_).T)</span><br><span class="line">    ```   </span><br><span class="line">    参考资料：[https://blog.csdn.net/sinat_32547403/article/details/<span class="number">73008127</span>](https://blog.csdn.net/sinat_32547403/article/details/<span class="number">73008127</span>)</span><br><span class="line">- best_estimator_ : estimator或dict；由搜索选择的估算器，即在左侧数据上给出最高分数（或者如果指定最小损失）的估算器。 如果refit = <span class="keyword">False</span>，则不可用。</span><br><span class="line">- best_params_ : dict；在保持数据上给出最佳结果的参数设置。对于多度量评估，只有在指定了重新指定的情况下才会出现。</span><br><span class="line">- best_score_ : float；best_estimator的平均交叉验证分数，对于多度量评估，只有在指定了重新指定的情况下才会出现。</span><br><span class="line">- get_params（[deep]）：这个和‘best_estimator_ ’这个属性相似，但可以得到这个模型更多的参数</span><br><span class="line">- inverse_transform（Xt）使用找到的最佳参数在分类器上调用inverse_transform。</span><br><span class="line">- predict（X）调用使用最佳找到的参数对估计量进行预测，X：可索引，长度为n_samples；</span><br><span class="line">- score（X, y=<span class="keyword">None</span>）返回给定数据上的分数，X： [n_samples，n_features]输入数据，其中n_samples是样本的数量，n_features是要素的数量。y： [n_samples]或[n_samples，n_output]，可选，相对于X进行分类或回归; 无无监督学习。</span><br><span class="line">  </span><br><span class="line">```python    </span><br><span class="line">cv_params = &#123;<span class="string">'n_estimators'</span>: [<span class="number">100</span>, <span class="number">125</span>, <span class="number">150</span>, <span class="number">175</span>, <span class="number">200</span>]&#125;</span><br><span class="line">other_params = &#123;<span class="string">'learning_rate'</span>: <span class="number">0.1</span>, <span class="string">'n_estimators'</span>: <span class="number">500</span>, <span class="string">'max_depth'</span>: <span class="number">5</span>, <span class="string">'min_child_weight'</span>: <span class="number">1</span>, </span><br><span class="line">                <span class="string">'seed'</span>: <span class="number">0</span>,<span class="string">'subsample'</span>: <span class="number">0.8</span>, <span class="string">'colsample_bytree'</span>: <span class="number">0.8</span>, <span class="string">'gamma'</span>: <span class="number">0</span>, <span class="string">'reg_alpha'</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="string">'reg_lambda'</span>: <span class="number">1</span>,<span class="string">'objective'</span>:<span class="string">'binary:logistic'</span>&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">model = XGBClassifier(**other_params)</span><br><span class="line">optimized_GBM = GridSearchCV(estimator=model, param_grid=cv_params, scoring=<span class="string">'accuracy'</span>, cv=<span class="number">5</span>,verbose=<span class="number">1</span>, n_jobs=<span class="number">4</span>)</span><br><span class="line">optimized_GBM.fit(X_train, y_train)</span><br><span class="line">evalute_result = optimized_GBM.cv_results_</span><br><span class="line"></span><br><span class="line"><span class="comment"># print('每轮迭代运行结果:&#123;0&#125;'.format(evalute_result))</span></span><br><span class="line">print(<span class="string">'参数的最佳取值：&#123;0&#125;'</span>.format(optimized_GBM.best_params_))</span><br><span class="line">print(<span class="string">'最佳模型得分:&#123;0&#125;'</span>.format(optimized_GBM.best_score_))</span><br><span class="line">```      </span><br><span class="line">网格搜索建立在交叉验证的基础上。交叉验证将训练集分成N份，其中N<span class="number">-1</span>份做训练，<span class="number">1</span>份做测试。先选定一个待验证的参数，然后做N次训练和测试，得到平均值，然后再选定下一个参数，做N次训练和测试。     </span><br><span class="line"><span class="comment"># 5. 样本不均衡分类问题      </span></span><br><span class="line">参考资料：[https://github.com/wmlba/innovate2019/blob/master/Credit_Card_Fraud_Detection.ipynb](https://github.com/wmlba/innovate2019/blob/master/Credit_Card_Fraud_Detection.ipynb)   </span><br><span class="line"><span class="comment">## 5.1. 特征工程   </span></span><br><span class="line"><span class="number">1.</span> 特征缩放   </span><br><span class="line">使用归一化或标准化对特征进行缩放，使得不同特征值在同一量纲，   </span><br><span class="line"></span><br><span class="line">```python  </span><br><span class="line"><span class="comment">#使用 sklearn中的 scale 函数</span></span><br><span class="line">minmax_scaler = preprocessing.MinMaxScaler()   <span class="comment">#创建 MinMaxScaler对象</span></span><br><span class="line">df_m1 = minmax_scaler.fit_transform(df)    <span class="comment"># 标准化处理</span></span><br><span class="line">df_m1 = pd.DataFrame(df_m1,columns=[<span class="string">'value1_m'</span>,<span class="string">'value2_m'</span>])</span><br><span class="line">df_m1.head()</span><br><span class="line">```   </span><br><span class="line">```python</span><br><span class="line"><span class="comment">#Since most of our data has already been scaled we should scale the columns that are left to scale (Amount and Time)</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> RobustScaler</span><br><span class="line"></span><br><span class="line"><span class="comment">#RobustScaler is robust to outliers.</span></span><br><span class="line">credit_df[<span class="string">'amount_after_scaling'</span>] = RobustScaler().fit_transform(credit_df[<span class="string">'Amount'</span>].values.reshape(<span class="number">-1</span>,<span class="number">1</span>))</span><br><span class="line">credit_df[<span class="string">'time_after_scaling'</span>] = RobustScaler().fit_transform(credit_df[<span class="string">'Time'</span>].values.reshape(<span class="number">-1</span>,<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">credit_df.drop([<span class="string">'Time'</span>,<span class="string">'Amount'</span>], axis=<span class="number">1</span>, inplace=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#Place the class in the begining of the dataframe</span></span><br><span class="line">Class = credit_df[<span class="string">'Class'</span>]</span><br><span class="line">credit_df.drop([<span class="string">'Class'</span>], axis=<span class="number">1</span>, inplace=<span class="keyword">True</span>)</span><br><span class="line">credit_df.insert(<span class="number">0</span>, <span class="string">'Class'</span>, Class)</span><br></pre></td></tr></table></figure>
+<pre><code class="lang-python">  from IPython.display import display
+  display(pd.DataFrame(grid.cv_results_).T)
+</code></pre>
+<p>  参考资料：<a href="https://blog.csdn.net/sinat_32547403/article/details/73008127" target="_blank" rel="noopener">https://blog.csdn.net/sinat_32547403/article/details/73008127</a></p>
 </li>
+<li>best_estimator_ : estimator或dict；由搜索选择的估算器，即在左侧数据上给出最高分数（或者如果指定最小损失）的估算器。 如果refit = False，则不可用。</li>
+<li>best_params_ : dict；在保持数据上给出最佳结果的参数设置。对于多度量评估，只有在指定了重新指定的情况下才会出现。</li>
+<li>best_score_ : float；best_estimator的平均交叉验证分数，对于多度量评估，只有在指定了重新指定的情况下才会出现。</li>
+<li>get_params（[deep]）：这个和‘best_estimator_ ’这个属性相似，但可以得到这个模型更多的参数</li>
+<li>inverse_transform（Xt）使用找到的最佳参数在分类器上调用inverse_transform。</li>
+<li>predict（X）调用使用最佳找到的参数对估计量进行预测，X：可索引，长度为n_samples；</li>
+<li>score（X, y=None）返回给定数据上的分数，X： [n_samples，n_features]输入数据，其中n_samples是样本的数量，n_features是要素的数量。y： [n_samples]或[n_samples，n_output]，可选，相对于X进行分类或回归; 无无监督学习。</li>
 </ul>
-<ol>
-<li>解决样本不均衡问题<br>欠采样或过采样<br><img src="/2019/04/24/机器学习/resample.png" alt="样本不平衡">    </li>
-<li><p>检测和删除异常点   </p>
-</li>
-<li><p>划分数据集<br>划分数据集：训练集，验证集，测试集   </p>
-</li>
-</ol>
-<h1><span id="6-过采样">6. 过采样</span></h1><p>&ensp;&ensp;&ensp;&ensp;分类问题时，样本不均衡，正例和负例的样本数不均衡，为了实现样本均衡，需要对样本比较少的那类数据进行过采样。</p>
+<pre><code class="lang-python">cv_params = {&#39;n_estimators&#39;: [100, 125, 150, 175, 200]}
+other_params = {&#39;learning_rate&#39;: 0.1, &#39;n_estimators&#39;: 500, &#39;max_depth&#39;: 5, &#39;min_child_weight&#39;: 1, 
+                &#39;seed&#39;: 0,&#39;subsample&#39;: 0.8, &#39;colsample_bytree&#39;: 0.8, &#39;gamma&#39;: 0, &#39;reg_alpha&#39;: 0,
+                &#39;reg_lambda&#39;: 1,&#39;objective&#39;:&#39;binary:logistic&#39;}
+
+
+model = XGBClassifier(**other_params)
+optimized_GBM = GridSearchCV(estimator=model, param_grid=cv_params, scoring=&#39;accuracy&#39;, cv=5,verbose=1, n_jobs=4)
+optimized_GBM.fit(X_train, y_train)
+evalute_result = optimized_GBM.cv_results_
+
+print(&#39;参数的最佳取值：{0}&#39;.format(optimized_GBM.best_params_))
+print(&#39;最佳模型得分:{0}&#39;.format(optimized_GBM.best_score_))
+</code></pre>
+<p>网格搜索建立在交叉验证的基础上。交叉验证将训练集分成N份，其中N-1份做训练，1份做测试。先选定一个待验证的参数，然后做N次训练和测试，得到平均值，然后再选定下一个参数，做N次训练和测试。      </p>
+<h1><span id="5-样本不均衡问题">5. 样本不均衡问题</span></h1><p>&ensp;&ensp;&ensp;&ensp;分类问题时，样本不均衡，正例和负例的样本数不均衡，为了实现样本均衡，需要对样本比较少的那类数据进行过采样。<br><a href="https://mp.weixin.qq.com/s/Xxhf_LH0fjLAQHD5cHGcYA" target="_blank" rel="noopener">一文教你如何处理不平衡数据集</a></p>
 
       
 
@@ -385,7 +364,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/04/27/gluon环境安装/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/04/27/虚拟环境安装/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -423,8 +402,8 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">  - 特征预处理、模型评估、分类</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">2. 数据预处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">2.1. 特征值连续</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">2.1.1. 归一化(normalization)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">2.1.2. 标准化(standardization)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">2.1.3. RobustScaler</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2.5. 模型评价</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">3. XGBoost</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">3.1. XGBoost的优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">3.2. 参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3.3. 调参</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">4. GridSearchCV</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">6. 过采样</span></a>
-                    </li></div>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 数据预处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">2.1. 特征值连续</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.1.</span> <span class="toc-text">2.1.1. 归一化(normalization)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.1.2. 标准化(standardization)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.3.</span> <span class="toc-text">2.1.3. RobustScaler</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. 模型评价指标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">4. GridSearchCV</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">5. 样本不均衡问题</span></a></li></ol>
+                    </div>
                 </span>
             </div>
         </div>
@@ -569,11 +548,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">热点问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -581,19 +560,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
+                <a href="javascript:void(0)" class="js-tag color5">LSTM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gluon、jupyter notebook</a>
+                <a href="javascript:void(0)" class="js-tag color4">GRU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -601,7 +572,31 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HDFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ResNet</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">BN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -609,23 +604,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
+                <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">卷积</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">GPU服务器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -637,7 +632,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">CDH集群、Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">CDH集群</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -645,15 +644,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
+                <a href="javascript:void(0)" class="js-tag color3">Seq2Seq</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
+                <a href="javascript:void(0)" class="js-tag color5">Attention</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
+                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分布式调优</a>
               </li>
             
             <div class="clearfix"></div>

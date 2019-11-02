@@ -9,7 +9,7 @@
   <title>CDH集群 | Echo&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近去给甲方安装CDH集群，对于集群的搭建和测试在这里总结一下。">
-<meta name="keywords" content="CDH集群、Linux">
+<meta name="keywords" content="CDH集群,Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CDH集群">
 <meta property="og:url" content="http://yoursite.com/2019/04/04/CDH集群/index.html">
@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/04/CDH集群/spark3.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/04/CDH集群/spark4.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/04/CDH集群/kafka1.png">
-<meta property="og:updated_time" content="2019-05-24T15:52:19.674Z">
+<meta property="og:updated_time" content="2019-11-02T06:51:25.574Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH集群">
 <meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近去给甲方安装CDH集群，对于集群的搭建和测试在这里总结一下。">
@@ -72,6 +72,10 @@
 	        
 				<li><a href="/archives">archives</a></li>
 	        
+				<li><a href="/categories">categories</a></li>
+	        
+				<li><a href="/tags">tags</a></li>
+	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -118,6 +122,10 @@
 			
 				
 			
+				
+			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -127,12 +135,16 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">Home</a></li>
+					<li style="width: 25%"><a href="/">Home</a></li>
 		        
-					<li style="width: 50%"><a href="/archives">archives</a></li>
+					<li style="width: 25%"><a href="/archives">archives</a></li>
+		        
+					<li style="width: 25%"><a href="/categories">categories</a></li>
+		        
+					<li style="width: 25%"><a href="/tags">tags</a></li>
 		        
 				</ul>
 			</nav>
@@ -170,29 +182,29 @@
         <h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;最近去给甲方安装CDH集群，对于集群的搭建和测试在这里总结一下。<br><a id="more"></a>   </p>
 <!-- TOC -->
 <ul>
-<li><a href="#1-%E7%AE%80%E4%BB%8B">1. 简介</a></li>
-<li><a href="#2-%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6">2. 版本控制</a></li>
-<li><a href="#3-linux%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D">3. Linux目录介绍</a></li>
-<li><a href="#4-%E5%AE%89%E8%A3%85%E5%89%8D%E8%AF%B4%E6%98%8E">4. 安装前说明</a></li>
-<li><a href="#5-%E5%B0%8F%E5%B8%B8%E8%AF%86">5. 小常识</a></li>
-<li><a href="#6-%E5%AE%89%E8%A3%85cdh%E9%9B%86%E7%BE%A4">6. 安装CDH集群</a><ul>
-<li><a href="#61-%E5%85%B3%E9%97%AD%E6%89%80%E6%9C%89%E6%9C%BA%E5%99%A8%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99">6.1. 关闭所有机器的防火墙</a></li>
-<li><a href="#62-%E4%BF%AE%E6%94%B9%E6%9C%BA%E5%99%A8%E7%9A%84hosts">6.2. 修改机器的hosts</a></li>
-<li><a href="#63-%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C%E6%98%AF%E5%90%A6%E8%BF%9E%E9%80%9A">6.3. 查看网络是否连通</a></li>
-<li><a href="#64-%E7%94%9F%E6%88%90%E4%B8%BB%E8%8A%82%E7%82%B9%E7%9A%84ssh%E5%AF%86%E9%92%A5%E5%B9%B6%E5%88%86%E5%8F%91">6.4. 生成主节点的ssh密钥并分发</a></li>
-<li><a href="#65-%E5%AE%89%E8%A3%85ntp%E6%9C%8D%E5%8A%A1">6.5. 安装ntp服务</a></li>
-<li><a href="#66-%E5%8D%B8%E8%BD%BD%E6%9C%BA%E5%99%A8%E8%87%AA%E5%B8%A6%E7%9A%84openjdk">6.6. 卸载机器自带的openjdk</a></li>
-<li><a href="#67-%E5%AE%89%E8%A3%85jdk">6.7. 安装JDK</a></li>
-<li><a href="#68-%E5%AE%89%E8%A3%85mysql">6.8. 安装MySQL</a></li>
-<li><a href="#69-%E5%88%9B%E5%BB%BAmysql%E6%95%B0%E6%8D%AE%E5%BA%93">6.9. 创建MySQL数据库</a></li>
-<li><a href="#610-%E5%AE%89%E8%A3%85cloudera-manager-server%E5%92%8Cagent">6.10. 安装Cloudera Manager Server和Agent</a></li>
-<li><a href="#611-%E6%89%93%E5%BC%80%E7%BD%91%E9%A1%B5%E9%85%8D%E7%BD%AE">6.11. 打开网页配置</a></li>
-<li><a href="#612-hdfs%E7%9A%84ha%E5%AE%89%E8%A3%85">6.12. HDFS的HA安装</a></li>
-<li><a href="#613-%E5%AE%89%E8%A3%85anaconda">6.13. 安装Anaconda</a></li>
-<li><a href="#614-%E5%AE%89%E8%A3%85sparkstandalone">6.14. 安装Spark（standalone）</a></li>
-<li><a href="#615-%E4%BF%AE%E6%94%B9hdfs%E6%9D%83%E9%99%90">6.15. 修改hdfs权限</a></li>
-<li><a href="#616-%E5%AE%89%E8%A3%85python%E4%B8%89%E6%96%B9%E5%BA%93">6.16. 安装python三方库</a></li>
-<li><a href="#617-%E5%AE%89%E8%A3%85kafka">6.17. 安装kafka</a></li>
+<li><a href="#1-%e7%ae%80%e4%bb%8b">1. 简介</a></li>
+<li><a href="#2-%e7%89%88%e6%9c%ac%e6%8e%a7%e5%88%b6">2. 版本控制</a></li>
+<li><a href="#3-linux%e7%9b%ae%e5%bd%95%e4%bb%8b%e7%bb%8d">3. Linux目录介绍</a></li>
+<li><a href="#4-%e5%ae%89%e8%a3%85%e5%89%8d%e8%af%b4%e6%98%8e">4. 安装前说明</a></li>
+<li><a href="#5-%e5%b0%8f%e5%b8%b8%e8%af%86">5. 小常识</a></li>
+<li><a href="#6-%e5%ae%89%e8%a3%85cdh%e9%9b%86%e7%be%a4">6. 安装CDH集群</a><ul>
+<li><a href="#61-%e5%85%b3%e9%97%ad%e6%89%80%e6%9c%89%e6%9c%ba%e5%99%a8%e7%9a%84%e9%98%b2%e7%81%ab%e5%a2%99">6.1. 关闭所有机器的防火墙</a></li>
+<li><a href="#62-%e4%bf%ae%e6%94%b9%e6%9c%ba%e5%99%a8%e7%9a%84hosts">6.2. 修改机器的hosts</a></li>
+<li><a href="#63-%e6%9f%a5%e7%9c%8b%e7%bd%91%e7%bb%9c%e6%98%af%e5%90%a6%e8%bf%9e%e9%80%9a">6.3. 查看网络是否连通</a></li>
+<li><a href="#64-%e7%94%9f%e6%88%90%e4%b8%bb%e8%8a%82%e7%82%b9%e7%9a%84ssh%e5%af%86%e9%92%a5%e5%b9%b6%e5%88%86%e5%8f%91">6.4. 生成主节点的ssh密钥并分发</a></li>
+<li><a href="#65-%e5%ae%89%e8%a3%85ntp%e6%9c%8d%e5%8a%a1">6.5. 安装ntp服务</a></li>
+<li><a href="#66-%e5%8d%b8%e8%bd%bd%e6%9c%ba%e5%99%a8%e8%87%aa%e5%b8%a6%e7%9a%84openjdk">6.6. 卸载机器自带的openjdk</a></li>
+<li><a href="#67-%e5%ae%89%e8%a3%85jdk">6.7. 安装JDK</a></li>
+<li><a href="#68-%e5%ae%89%e8%a3%85mysql">6.8. 安装MySQL</a></li>
+<li><a href="#69-%e5%88%9b%e5%bb%bamysql%e6%95%b0%e6%8d%ae%e5%ba%93">6.9. 创建MySQL数据库</a></li>
+<li><a href="#610-%e5%ae%89%e8%a3%85cloudera-manager-server%e5%92%8cagent">6.10. 安装Cloudera Manager Server和Agent</a></li>
+<li><a href="#611-%e6%89%93%e5%bc%80%e7%bd%91%e9%a1%b5%e9%85%8d%e7%bd%ae">6.11. 打开网页配置</a></li>
+<li><a href="#612-hdfs%e7%9a%84ha%e5%ae%89%e8%a3%85">6.12. HDFS的HA安装</a></li>
+<li><a href="#613-%e5%ae%89%e8%a3%85anaconda">6.13. 安装Anaconda</a></li>
+<li><a href="#614-%e5%ae%89%e8%a3%85sparkstandalone">6.14. 安装Spark（standalone）</a></li>
+<li><a href="#615-%e4%bf%ae%e6%94%b9hdfs%e6%9d%83%e9%99%90">6.15. 修改hdfs权限</a></li>
+<li><a href="#616-%e5%ae%89%e8%a3%85python%e4%b8%89%e6%96%b9%e5%ba%93">6.16. 安装python三方库</a></li>
+<li><a href="#617-%e5%ae%89%e8%a3%85kafka">6.17. 安装kafka</a></li>
 <li><a href="#yarn">yarn</a></li>
 </ul>
 </li>
@@ -389,13 +401,28 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CDH集群、Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">CDH集群</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/分布式平台//" class="article-tag-list-link color1">分布式平台</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -469,8 +496,8 @@
     </a>
   
   
-    <a href="/2019/03/26/Spark-RDD/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Spark-RDD</div>
+    <a href="/2019/03/26/分布式组件/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">分布式组件介绍</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -643,11 +670,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">热点问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -655,19 +682,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Deep Learning</a>
+                <a href="javascript:void(0)" class="js-tag color5">LSTM</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RDD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">gluon、jupyter notebook</a>
+                <a href="javascript:void(0)" class="js-tag color4">GRU</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -675,7 +694,31 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">集群、python、常识</a>
+                <a href="javascript:void(0)" class="js-tag color1">Spark</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HDFS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ResNet</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">BN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -683,23 +726,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">论文</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Spatiotemporal</a>
+                <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">卷积</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">GPU服务器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -711,7 +754,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">CDH集群、Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">CDH集群</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -719,15 +766,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">图卷积</a>
+                <a href="javascript:void(0)" class="js-tag color3">Seq2Seq</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
+                <a href="javascript:void(0)" class="js-tag color5">Attention</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
+                <a href="javascript:void(0)" class="js-tag color2">Transformer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">gluon</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">分布式调优</a>
               </li>
             
             <div class="clearfix"></div>
