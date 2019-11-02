@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/01/31/再看gluon新收获/多层感知机.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/31/再看gluon新收获/丢弃感知机.png">
 <meta property="og:image" content="http://yoursite.com/2019/01/31/再看gluon新收获/params.png">
-<meta property="og:updated_time" content="2019-07-18T09:32:16.337Z">
+<meta property="og:updated_time" content="2019-10-28T12:26:51.685Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="再看gluon新收获">
 <meta name="twitter:description" content="1. 简介以前看了一些《动手学深度学习》的教程，但是没有看完，寒假在家觉得时间还多，所以把以前看过的内容再看一遍，下面是第二次看的一些收获，记录下来，以备后需。">
@@ -204,24 +204,25 @@
 </ul>
 </li>
 <li><a href="#10-gpu计算">10. GPU计算</a></li>
-<li><a href="#block">Block</a><ul>
-<li><a href="#sequential和block的关系">Sequential和Block的关系</a></li>
-<li><a href="#使用block自定义层">使用Block自定义层</a></li>
-<li><a href="#不含模型参数的自定义层">不含模型参数的自定义层</a></li>
-<li><a href="#含模型参数的自定义层">含模型参数的自定义层</a></li>
+<li><a href="#11-block">11. Block</a><ul>
+<li><a href="#111-sequential和block的关系">11.1. Sequential和Block的关系</a></li>
+<li><a href="#112-使用block自定义层">11.2. 使用Block自定义层</a></li>
+<li><a href="#113-不含模型参数的自定义层">11.3. 不含模型参数的自定义层</a></li>
+<li><a href="#114-含模型参数的自定义层">11.4. 含模型参数的自定义层</a></li>
 </ul>
 </li>
-<li><a href="#混合编程">混合编程</a><ul>
-<li><a href="#使用hybridblock自定义模型">使用HybridBlock自定义模型</a></li>
+<li><a href="#12-混合编程">12. 混合编程</a><ul>
+<li><a href="#使用hybridsequential类构造模型">使用HybridSequential类构造模型</a></li>
+<li><a href="#121-使用hybridblock自定义模型">12.1. 使用HybridBlock自定义模型</a></li>
 </ul>
 </li>
-<li><a href="#疑惑">疑惑</a><ul>
-<li><a href="#bn">BN</a></li>
+<li><a href="#13-疑惑">13. 疑惑</a><ul>
+<li><a href="#131-bn">13.1. BN</a></li>
 </ul>
 </li>
-<li><a href="#偏置">偏置</a></li>
-<li><a href="#模型参数">模型参数</a></li>
-<li><a href="#自定义层">自定义层</a></li>
+<li><a href="#14-偏置">14. 偏置</a></li>
+<li><a href="#15-模型参数">15. 模型参数</a></li>
+<li><a href="#16-自定义层">16. 自定义层</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="2-softmax回归">2. Softmax回归</span></h1><ol>
@@ -272,66 +273,8 @@
 <h2><span id="92-xavier随机初始化">9.2. Xavier随机初始化</span></h2><p>假设某全连接层的输入个数为$a$，输出个数为$b$,Xavier随机初始化将使该层中权重参数的每个元素都随机采样于均匀分布</p>
 <script type="math/tex; mode=display">U(-\sqrt{\frac{6}{a+b}},\sqrt{\frac{6}{a+b}})</script><h2><span id="93-模型参数的延后初始化">9.3. 模型参数的延后初始化</span></h2><p>模型net在调用初始化函数 initialize之后，在做前向计算net(X)之前，权重参数的形状出现了0.<br><img src="/2019/01/31/再看gluon新收获/params.png" alt=""><br>在之前使用gluon创建的全连接层都没有指定输入个数，例如使用感知机net里，创建的隐藏层仅仅指定输出大小为256，当调用initialize函数时，由于隐藏层输入个数依然未知，系统无法知道隐藏层权重参数的形状，只有在当我们将形状为(2,20)的输入X传进网络进行前向计算net(X)时，系统才推断该层的权重参数形状为(256,20)，因此，这时候才真正开始初始化参数.     </p>
 <h1><span id="10-gpu计算">10. GPU计算</span></h1><p>使用GPU进行计算，通过ctx指定，NDArray存在内存上，在创建NDArray时可以通过指定ctx在指定的gpu上创建数组<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a=nd.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],ctx=mx.gpu())</span><br><span class="line">b=nd.random.uniform(shape=(<span class="number">2</span>,<span class="number">3</span>),ctx=mx.gpu(<span class="number">1</span>))</span><br></pre></td></tr></table></figure></p>
-<p>同NDArray类似，Gluon的模型也可以在初始化时通过ctx参数指定设备，下面的代码将模型参数初始化在显存上。当输入x是显存上的NDArray时，gluon会在同一块显卡的显存上计算结果。<br><strong>mxnet要求计算的所有输入数据都在内存或同一块显卡的显存上</strong></p>
-<pre><code class="lang-python">net=nn.Sequential()
-net.add(nn.Dense(1))
-net.initialize(ctx=mx.gpu())
-x=nd.random.uniform(shape=(2,8))
-y=net(x)
-</code></pre>
-<h1><span id="block">Block</span></h1><p>&ensp;&ensp;&ensp;&ensp;上面使用<code>Sequential</code>来构造模型，下面介绍另一种方法：使用<code>Block</code>类来构造模型，它让模型的构造更加灵活。<br>Bolck类是nn模块里提供的一个模型构造类，我们可以继承它来构造我们想要的模型。下面继承Block类构造MLP，需要重载Block类的<strong>init</strong>函数和forward函数。</p>
-<pre><code class="lang-python">from mxnet import nd
-from mxnet.gluon import nn
-
-class MLP(nn.Block):
-    # 声明带有模型参数的层，这里声明了两个全连接层
-    def __init__(self, **kwargs):
-        # 调用MLP父类Block的构造函数来进行必要的初始化。这样在构造实例时还可以指定其他函数
-        # 参数，如“模型参数的访问、初始化和共享”一节将介绍的模型参数params
-        super(MLP, self).__init__(**kwargs)
-        self.hidden = nn.Dense(256, activation=&#39;relu&#39;)  # 隐藏层
-        self.output = nn.Dense(10)  # 输出层
-
-    # 定义模型的前向计算，即如何根据输入x计算返回所需要的模型输出
-    def forward(self, x):
-        return self.output(self.hidden(x))
-</code></pre>
-<pre><code class="lang-python">X = nd.random.uniform(shape=(2, 20))
-net = MLP()
-net.initialize()
-net(X)
-</code></pre>
-<p>首先需要实例化MLP，得到一个对象net，初始化net并传入X做一次前向计算。net(X)会调用MLP继承自Block类的<strong>call</strong>函数，这个函数会自动调用forward函数完成前向计算。</p>
-<h2><span id="sequential和block的关系">Sequential和Block的关系</span></h2><p>&ensp;&ensp;&ensp;&ensp;Block类是一个通用的部件，Sequential类也继承了Block。Sequential类可以定义一些简单的模型，且不需要定义forward函数，但是直接继承Block类可以极大的拓展模型构造的灵活性。  </p>
-<h2><span id="使用block自定义层">使用Block自定义层</span></h2><p>虽然Gluon提供了大量常用的层，但是有时候还需要自定义的层。下面介绍如何使用NDArray来自定义一个Gluon层，从而可以重复调用。</p>
-<h2><span id="不含模型参数的自定义层">不含模型参数的自定义层</span></h2><p>下面的CenteredLayer类通过继承Block类自顶一个将输入减掉均值后输出的层，并将层的计算定义在forward函数中。这个层只做了减法，所以不需要模型参数    </p>
-<pre><code class="lang-python">from mxnet import gluon,nd
-from mxnet.gluon import nn
-
-class CenteredLayer(nn.Block):
-    #因为模型不需要参数，所以__init__也没有传入参数
-    def __init__(self,**kwargs):
-        super(CenteredLayer,self).__init__(**kwargs)
-    def forward(self,x):
-        return x - x.mean()
-</code></pre>
-<h2><span id="含模型参数的自定义层">含模型参数的自定义层</span></h2><p>我们还可以自定义含模型参数的自定义层。其中的模型参数可以通过训练学到。<strong>在使用自定义层时，定义了模型参数，这时只是定义了参数的形状，并不会给参数初始化，参数初始化还是使用net.initialize()函数</strong>在自定义含模型参数的层时，我们可以利用Block类自带的ParameterDict类型的成员变量params。它是一个由<strong>字符串类型</strong>的参数名字映射到<strong>Parameter类型</strong>的模型参数的字典。我们可以<strong>通过get函数从ParameterDict创建Parameter实例</strong>。下面实现一个含参数权重和偏差参数的全连接层，使用ReLU函数作为激活函数，其中in_units表示输入的个数，units表示输出的个数。</p>
-<pre><code class="lang-python">class MyDense(nn.Block):
-    def __init__(self,units,in_units,**kwargs):
-        super(MyDense,self).__init__(**kwargs)
-        self.weight = self.params.get(&#39;weight&#39;, shape=(in_units, units))
-        self.bias = self.params.get(&#39;bias&#39;, shape=(units,))
-
-    def forward(self,x):
-        linear = nd.dot(x,slef.weight.data())+self.bias().data()
-        return nd.relu(linear)
-
-dense = MyDense(units=3,in_units = 5)
-dense.initialize()
-</code></pre>
-<p><strong>总结：使用nn.Block自定义层，在自定层中的<strong>init</strong>()方法中，自定义模型参数，使用self.params.get(‘参数名称’,shape=(a,b))。还可以自定义层，这个层中没有参数，我们在层中添加gluon.nn中的层，比如self.conv1 = nn.Conv2D()。初始化完之后，定义forward函数。在这个层定义好之后，需要创建一个网络对象，使用net=Sequential(),然后再net.add()添加需要的层，</strong></p>
-<h1><span id="混合编程">混合编程</span></h1><p>&ensp;&ensp;&ensp;&ensp;HybridBlock类和HybridSequential类构建模型。默认情况下，它们和Block类或者Sequential类一样依据命令式编程的方式执行。当我们调用hybridize函数后，Gluon会转换成依据符号式编程的方式执行。事实上，绝大多数模型都可以接受这样的混合式编程的执行方式。<br>通过调用hybridize函数来编译和优化HybridSequential实例中串联的层的计算。模型的计算结果不变。<br>只有继承HybridBlock类的层才会被优化计算。例如，HybridSequential类和Gluon提供的Dense类都是HybridBlock类的子类，它们都会被优化计算。如果一个层只是继承自Block类而不是HybridBlock类，那么它将不会被优化。</p>
-<h2><span id="使用hybridblock自定义模型">使用HybridBlock自定义模型</span></h2><p>和Sequential类与Block类之间的关系一样，HybridSequential类是HybridBlock类的子类。与Block实例需要实现forward函数不太一样的是，对于HybridBlock实例，我们需要实现hybrid_forward函数。</p>
+<p>同NDArray类似，Gluon的模型也可以在初始化时通过ctx参数指定设备，下面的代码将模型参数初始化在显存上。当输入x是显存上的NDArray时，gluon会在同一块显卡的显存上计算结果。<br><strong>mxnet要求计算的所有输入数据都在内存或同一块显卡的显存上</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">net=nn.Sequential()</span><br><span class="line">net.add(nn.Dense(<span class="number">1</span>))</span><br><span class="line">net.initialize(ctx=mx.gpu())</span><br><span class="line">x=nd.random.uniform(shape=(<span class="number">2</span>,<span class="number">8</span>))</span><br><span class="line">y=net(x)</span><br><span class="line">```   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 11. Block   </span></span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;上面使用`Sequential`来构造模型，下面介绍另一种方法：使用`Block`类来构造模型，它让模型的构造更加灵活。  </span><br><span class="line">Bolck类是nn模块里提供的一个模型构造类，我们可以继承它来构造我们想要的模型。下面继承Block类构造MLP，需要重载Block类的__init__函数和forward函数。</span><br><span class="line">```python  </span><br><span class="line"><span class="keyword">from</span> mxnet <span class="keyword">import</span> nd</span><br><span class="line"><span class="keyword">from</span> mxnet.gluon <span class="keyword">import</span> nn</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MLP</span><span class="params">(nn.Block)</span>:</span></span><br><span class="line">    <span class="comment"># 声明带有模型参数的层，这里声明了两个全连接层</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, **kwargs)</span>:</span></span><br><span class="line">        <span class="comment"># 调用MLP父类Block的构造函数来进行必要的初始化。这样在构造实例时还可以指定其他函数</span></span><br><span class="line">        <span class="comment"># 参数，如“模型参数的访问、初始化和共享”一节将介绍的模型参数params</span></span><br><span class="line">        super(MLP, self).__init__(**kwargs)</span><br><span class="line">        self.hidden = nn.Dense(<span class="number">256</span>, activation=<span class="string">'relu'</span>)  <span class="comment"># 隐藏层</span></span><br><span class="line">        self.output = nn.Dense(<span class="number">10</span>)  <span class="comment"># 输出层</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 定义模型的前向计算，即如何根据输入x计算返回所需要的模型输出</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.output(self.hidden(x))</span><br><span class="line">```   </span><br><span class="line">```python   </span><br><span class="line">X = nd.random.uniform(shape=(<span class="number">2</span>, <span class="number">20</span>))</span><br><span class="line">net = MLP()</span><br><span class="line">net.initialize()</span><br><span class="line">net(X)</span><br><span class="line">```   </span><br><span class="line">首先需要实例化MLP，得到一个对象net，初始化net并传入X做一次前向计算。net(X)会调用MLP继承自Block类的__call__函数，这个函数会自动调用forward函数完成前向计算。</span><br><span class="line"><span class="comment">## 11.1. Sequential和Block的关系  </span></span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;Block类是一个通用的部件，Sequential类也继承了Block。Sequential类可以定义一些简单的模型，且不需要定义forward函数，但是直接继承Block类可以极大的拓展模型构造的灵活性。  </span><br><span class="line"></span><br><span class="line"><span class="comment">## 11.2. 使用Block自定义层     </span></span><br><span class="line">虽然Gluon提供了大量常用的层，但是有时候还需要自定义的层。下面介绍如何使用NDArray来自定义一个Gluon层，从而可以重复调用。</span><br><span class="line"><span class="comment">## 11.3. 不含模型参数的自定义层   </span></span><br><span class="line">下面的CenteredLayer类通过继承Block类自顶一个将输入减掉均值后输出的层，并将层的计算定义在forward函数中。这个层只做了减法，所以不需要模型参数    </span><br><span class="line">```python</span><br><span class="line"><span class="keyword">from</span> mxnet <span class="keyword">import</span> gluon,nd</span><br><span class="line"><span class="keyword">from</span> mxnet.gluon <span class="keyword">import</span> nn</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CenteredLayer</span><span class="params">(nn.Block)</span>:</span></span><br><span class="line">    <span class="comment">#因为模型不需要参数，所以__init__也没有传入参数</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,**kwargs)</span>:</span></span><br><span class="line">        super(CenteredLayer,self).__init__(**kwargs)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self,x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> x - x.mean()</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line"><span class="comment">## 11.4. 含模型参数的自定义层</span></span><br><span class="line">我们还可以自定义含模型参数的自定义层。其中的模型参数可以通过训练学到。**在使用自定义层时，定义了模型参数，这时只是定义了参数的形状，并不会给参数初始化，参数初始化还是使用net.initialize()函数**在自定义含模型参数的层时，我们可以利用Block类自带的ParameterDict类型的成员变量params。它是一个由**字符串类型**的参数名字映射到**Parameter类型**的模型参数的字典。我们可以**通过get函数从ParameterDict创建Parameter实例**。下面实现一个含参数权重和偏差参数的全连接层，使用ReLU函数作为激活函数，其中in_units表示输入的个数，units表示输出的个数。</span><br><span class="line">```python   </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDense</span><span class="params">(nn.Block)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,units,in_units,**kwargs)</span>:</span></span><br><span class="line">        super(MyDense,self).__init__(**kwargs)</span><br><span class="line">        self.weight = self.params.get(<span class="string">'weight'</span>, shape=(in_units, units))</span><br><span class="line">        self.bias = self.params.get(<span class="string">'bias'</span>, shape=(units,))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self,x)</span>:</span></span><br><span class="line">        linear = nd.dot(x,slef.weight.data())+self.bias().data()</span><br><span class="line">        <span class="keyword">return</span> nd.relu(linear)</span><br><span class="line"></span><br><span class="line">dense = MyDense(units=<span class="number">3</span>,in_units = <span class="number">5</span>)</span><br><span class="line">dense.initialize()</span><br><span class="line"></span><br><span class="line">```  </span><br><span class="line">**总结：使用nn.Block自定义层，在自定层中的__init__()方法中，自定义模型参数，使用self.params.get(<span class="string">'参数名称'</span>,shape=(a,b))。还可以自定义层，这个层中没有参数，我们在层中添加gluon.nn中的层，比如self.conv1 = nn.Conv2D()。初始化完之后，定义forward函数。在这个层定义好之后，需要创建一个网络对象，使用net=Sequential(),然后再net.add()添加需要的层，**</span><br><span class="line"></span><br><span class="line"><span class="comment"># 12. 混合编程  </span></span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用HybridBlock类和HybridSequential类构建模型。默认情况下，它们和Block类或者Sequential类一样依据命令式编程的方式执行。当我们调用hybridize函数后，Gluon会转换成依据符号式编程的方式执行。事实上，绝大多数模型都可以接受这样的混合式编程的执行方式。</span><br><span class="line">通过调用hybridize函数来编译和优化HybridSequential实例中串联的层的计算。模型的计算结果不变。   </span><br><span class="line">**只有继承HybridBlock类的层才会被优化计算。例如，HybridSequential类和Gluon提供的Dense类都是HybridBlock类的子类，它们都会被优化计算**。如果一个层只是继承自Block类而不是HybridBlock类，那么它将不会被优化。   </span><br><span class="line"><span class="comment">## 使用HybridSequential类构造模型   </span></span><br><span class="line">我们之前学习使用Sequential来串联多个层，为了使用混合式编程，将Sequential换成HybridSequential类      </span><br><span class="line">```python  </span><br><span class="line"><span class="keyword">from</span> mxnet <span class="keyword">import</span> nd,sym  </span><br><span class="line"><span class="keyword">from</span> mxnet.gluon <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">import</span> time   </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_net</span><span class="params">()</span>:</span></span><br><span class="line">    net = nn.HybridSequential()<span class="comment">#创建HybridSequential实例  </span></span><br><span class="line">    net.add(nn.Dense(<span class="number">256</span>, activation=<span class="string">'relu'</span>),</span><br><span class="line">            nn.Dense(<span class="number">128</span>, activation=<span class="string">'relu'</span>),</span><br><span class="line">            nn.Dense(<span class="number">2</span>))   </span><br><span class="line">    net.initialize()</span><br><span class="line">    <span class="keyword">return</span> net   </span><br><span class="line">    </span><br><span class="line">x = nd.random.normal(shape=(<span class="number">1</span>, <span class="number">512</span>))</span><br><span class="line">net = get_net()    </span><br><span class="line">net.hybridize()<span class="comment">#调用hybridize来编译优化HybridSequential实例中串联的层的计算，模型的计算结果不变。</span></span><br><span class="line">net(x)</span><br></pre></td></tr></table></figure></p>
+<h2><span id="121-使用hybridblock自定义模型">12.1. 使用HybridBlock自定义模型</span></h2><p>和Sequential类与Block类之间的关系一样，HybridSequential类是HybridBlock类的子类。与Block实例需要实现forward函数不太一样的是，对于HybridBlock实例，我们需要实现hybrid_forward函数。</p>
 <pre><code class="lang-python">class HybridNet(nn.HybridBlock):
     def __init__(self, **kwargs):
         super(HybridNet, self).__init__(**kwargs)
@@ -346,8 +289,8 @@ dense.initialize()
         return self.output(x)
 </code></pre>
 <p>在继承HybridBlock类时，我们需要在hybrid_forward函数中添加额外的输入F。我们知道，MXNet既有基于命令式编程的NDArray类，又有基于符号式编程的Symbol类。由于这两个类的函数基本一致，MXNet会根据输入来决定F使用NDArray或Symbol   </p>
-<h1><span id="疑惑">疑惑</span></h1><p>Dense(5)，其中的5表示这一层输出的个数，Gluon中不需要指定每一层输入的形状，net(X)做的操作就是wx+b，只要把输入传进去，内部会自动进行前向计算，不需要传入w和b。</p>
-<h2><span id="bn">BN</span></h2><p>参考资料<br><a href="https://www.jiqizhixin.com/articles/2018-08-29-7" target="_blank" rel="noopener">https://www.jiqizhixin.com/articles/2018-08-29-7</a><br><a href="https://icml.cc/2016/tutorials/icml2016_tutorial_deep_residual_networks_kaiminghe.pdf" target="_blank" rel="noopener">https://icml.cc/2016/tutorials/icml2016_tutorial_deep_residual_networks_kaiminghe.pdf</a><br><strong>批量归一化层，不断调整神经网络的中间输出，从而使得整个神经网络在各层输出的中间值更稳定，主要是让收敛变快，加速训练，，对准确率影响不大</strong><br>BN层的作用：</p>
+<h1><span id="13-疑惑">13. 疑惑</span></h1><p>Dense(5)，其中的5表示这一层输出的个数，Gluon中不需要指定每一层输入的形状，net(X)做的操作就是wx+b，只要把输入传进去，内部会自动进行前向计算，不需要传入w和b。</p>
+<h2><span id="131-bn">13.1. BN</span></h2><p>参考资料<br><a href="https://www.jiqizhixin.com/articles/2018-08-29-7" target="_blank" rel="noopener">https://www.jiqizhixin.com/articles/2018-08-29-7</a><br><a href="https://icml.cc/2016/tutorials/icml2016_tutorial_deep_residual_networks_kaiminghe.pdf" target="_blank" rel="noopener">https://icml.cc/2016/tutorials/icml2016_tutorial_deep_residual_networks_kaiminghe.pdf</a><br><strong>批量归一化层，不断调整神经网络的中间输出，从而使得整个神经网络在各层输出的中间值更稳定，主要是让收敛变快，加速训练，，对准确率影响不大</strong><br>BN层的作用：</p>
 <ol>
 <li>加快模型训练速度，更快收敛</li>
 <li>允许使用更大的学习率，提高训练速度<br>可以选择比较大的初始学习率，</li>
@@ -355,7 +298,7 @@ dense.initialize()
 <li>BN引入的噪声能够起到对模型参数进行正则化的作用，有利于增强模型泛化能力<br>BN的局限：</li>
 <li>Batchsize太小效果不佳<br>BN是严重依赖Mini-Batch中的训练实例的，如果Batch Size比较小，则效果有明显的下降。之所以这样，是因为小的BatchSize意味着数据样本少，因为得不到有效统计量，也就是说噪声太大。</li>
 <li><p>BN在MLP和CNN上效果很好，但是在RNN等动态网络上效果不明显<br>对于RNN来说，尽管其结构看上去是个静态网络，但在实际运行展开时是个动态网络结构，因为输入的Sequence序列是不定长的，也就是说一个Mini-Batch中的训练实例又长又短。对于类似RNN这种动态网络结构，BN使用起来不方便。    </p>
-<h1><span id="偏置">偏置</span></h1><p>原先一直以为卷积操作计算时不涉及偏置，后来发现卷积也涉及到偏置。 二维卷积层将输入和卷积核做卷积运算，并加上一个标量偏差来得到输出。卷积层的模型参数包括了卷积核和标量偏差，在训练的过程中，通常我们先对卷积核随机初始化，然后不断迭代卷积核和偏差。<br>```python  class Conv2D(nn.Block):<br> def <strong>init</strong>(self, kernel_size, **kwargs):</p>
+<h1><span id="14-偏置">14. 偏置</span></h1><p>原先一直以为卷积操作计算时不涉及偏置，后来发现卷积也涉及到偏置。 二维卷积层将输入和卷积核做卷积运算，并加上一个标量偏差来得到输出。卷积层的模型参数包括了卷积核和标量偏差，在训练的过程中，通常我们先对卷积核随机初始化，然后不断迭代卷积核和偏差。<br>```python  class Conv2D(nn.Block):<br> def <strong>init</strong>(self, kernel_size, **kwargs):</p>
 <pre><code> super(Conv2D, self).__init__(**kwargs)
  self.weight = self.params.get(&#39;weight&#39;, shape=kernel_size)
  self.bias = self.params.get(&#39;bias&#39;, shape=(1,))
@@ -364,8 +307,8 @@ dense.initialize()
 </code></pre></li>
 </ol>
 <p>```     </p>
-<h1><span id="模型参数">模型参数</span></h1><p>在定义好模型之后，使用initialize()对模型所有的参数进行初始化。在自定义层的时候，如果自定义层含有参数，这时候只需要对模型的参数指定名称（为了以后容易区分）和形状（不是必须的，如果是用参数延后初始化，可以不指定），一般不对参数指定初始化方式。使用initialize()对模型中的所有参数进行初始化，使用同一种初始化方式。    </p>
-<h1><span id="自定义层">自定义层</span></h1><p>在自定义含有参数的层时，需要重写2个函数：init(),forward()。这2个函数中如果需要参数可以传入相应的参数。在<strong>init</strong>中主要是定义权重和偏差等，在forward中定义前向计算。实例化一个自定义层时传入的参数是<strong>init</strong>中的参数，比如gcn1 = gcn_layer(256),其中256是<strong>init</strong>的参数，然后前向计算时，传入的参数是forward的参数，gcn1(x)</p>
+<h1><span id="15-模型参数">15. 模型参数</span></h1><p>在定义好模型之后，使用initialize()对模型所有的参数进行初始化。在自定义层的时候，如果自定义层含有参数，这时候只需要对模型的参数指定名称（为了以后容易区分）和形状（不是必须的，如果是用参数延后初始化，可以不指定），一般不对参数指定初始化方式。使用initialize()对模型中的所有参数进行初始化，使用同一种初始化方式。    </p>
+<h1><span id="16-自定义层">16. 自定义层</span></h1><p>在自定义含有参数的层时，需要重写2个函数：init(),forward()。这2个函数中如果需要参数可以传入相应的参数。在<strong>init</strong>中主要是定义权重和偏差等，在forward中定义前向计算。实例化一个自定义层时传入的参数是<strong>init</strong>中的参数，比如gcn1 = gcn_layer(256),其中256是<strong>init</strong>的参数，然后前向计算时，传入的参数是forward的参数，gcn1(x)</p>
 
       
 
@@ -512,7 +455,7 @@ dense.initialize()
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. Softmax回归</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. Sigmoid和Softmax</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">4. 交叉熵损失函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.1.</span> <span class="toc-text">4.1. softmax运算步骤</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">5. 优化算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.</span> <span class="toc-text">5.1. 梯度下降GD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.2.</span> <span class="toc-text">5.2. 随机梯度下降SGD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.3.</span> <span class="toc-text">5.3. 小批量随机梯度下降</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.4.</span> <span class="toc-text">5.4. 学习率</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">6. batch size</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.1.</span> <span class="toc-text">6.1. 总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">7.</span> <span class="toc-text">7. 使用gluon定义模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">7.1.</span> <span class="toc-text">7.1. 线性回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">7.2.</span> <span class="toc-text">7.2. softmax回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">7.3.</span> <span class="toc-text">7.3. 多层感知机</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">8.</span> <span class="toc-text">8. 过拟合和欠拟合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">8.1.</span> <span class="toc-text">8.1. 验证数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">8.2.</span> <span class="toc-text">8.2. 权重衰减</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">8.3.</span> <span class="toc-text">8.3. 丢弃法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">9.</span> <span class="toc-text">9. 模型参数初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">9.1.</span> <span class="toc-text">9.1. 随机初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">9.2.</span> <span class="toc-text">9.2. Xavier随机初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">9.3.</span> <span class="toc-text">9.3. 模型参数的延后初始化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">10.</span> <span class="toc-text">10. GPU计算</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">11.</span> <span class="toc-text">Block</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">11.1.</span> <span class="toc-text">Sequential和Block的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">11.2.</span> <span class="toc-text">使用Block自定义层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">11.3.</span> <span class="toc-text">不含模型参数的自定义层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">11.4.</span> <span class="toc-text">含模型参数的自定义层</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">12.</span> <span class="toc-text">混合编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">12.1.</span> <span class="toc-text">使用HybridBlock自定义模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">13.</span> <span class="toc-text">疑惑</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">13.1.</span> <span class="toc-text">BN</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">14.</span> <span class="toc-text">偏置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">15.</span> <span class="toc-text">模型参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">16.</span> <span class="toc-text">自定义层</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. Softmax回归</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. Sigmoid和Softmax</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">4. 交叉熵损失函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.1.</span> <span class="toc-text">4.1. softmax运算步骤</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">5. 优化算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.</span> <span class="toc-text">5.1. 梯度下降GD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.2.</span> <span class="toc-text">5.2. 随机梯度下降SGD</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.3.</span> <span class="toc-text">5.3. 小批量随机梯度下降</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.4.</span> <span class="toc-text">5.4. 学习率</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">6.</span> <span class="toc-text">6. batch size</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">6.1.</span> <span class="toc-text">6.1. 总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">7.</span> <span class="toc-text">7. 使用gluon定义模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">7.1.</span> <span class="toc-text">7.1. 线性回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">7.2.</span> <span class="toc-text">7.2. softmax回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">7.3.</span> <span class="toc-text">7.3. 多层感知机</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">8.</span> <span class="toc-text">8. 过拟合和欠拟合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">8.1.</span> <span class="toc-text">8.1. 验证数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">8.2.</span> <span class="toc-text">8.2. 权重衰减</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">8.3.</span> <span class="toc-text">8.3. 丢弃法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">9.</span> <span class="toc-text">9. 模型参数初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">9.1.</span> <span class="toc-text">9.1. 随机初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">9.2.</span> <span class="toc-text">9.2. Xavier随机初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">9.3.</span> <span class="toc-text">9.3. 模型参数的延后初始化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">10.</span> <span class="toc-text">10. GPU计算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">10.1.</span> <span class="toc-text">12.1. 使用HybridBlock自定义模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">11.</span> <span class="toc-text">13. 疑惑</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">11.1.</span> <span class="toc-text">13.1. BN</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">12.</span> <span class="toc-text">14. 偏置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">13.</span> <span class="toc-text">15. 模型参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">14.</span> <span class="toc-text">16. 自定义层</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -650,15 +593,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">预分区</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -738,11 +681,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
+                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Machine Learning</a>
+                <a href="javascript:void(0)" class="js-tag color3">python、spark</a>
               </li>
             
             <div class="clearfix"></div>
