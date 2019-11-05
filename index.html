@@ -163,11 +163,10 @@
 <li>Transformer</li>
 </ul>
 <hr>
-<h1><span id="简介">简介</span></h1><p>2019NIPS的一篇论文，<br><a href="https://arxiv.org/pdf/1907.00235.pdf" target="_blank" rel="noopener">论文地址</a>     </p>
-<h1><span id="introduction">Introduction</span></h1><p>本文说Transformer有2个缺点，（1）locality-agnostics：局部不可知性，原先只针对一个点，计算该点和其余所有点的相关性，没有考虑到子序列和子序列的attention。（2）memory bottleneck：内存瓶颈，空间复杂度和输入序列的长度L有关。对于捕获长时间序列不方便。   </p>
-<h1><span id="模型">模型</span></h1><p>本文针对以上2个问题，提出2种解决方案，（1）传统Transformer—&gt;Conv Transformer,（2）使用LogSparse来减少内存的使用。<br><img src="/2019/11/05/Enhancing-the-Locality-and-Breaking-the-Memory-Bottleneck-of-Transformer-on-Time-Series-Forecasting/conv.png" alt=""><br>图b是传统的Transformer，在计算Attention时，计算的是一个点和其余所有点的Attention，在本文中使用一维卷积来生成query和key，在计算Attention时，使用的是子序列之间的Attention，捕获了local上下文信息。   </p>
-<p><img src="/2019/11/05/Enhancing-the-Locality-and-Breaking-the-Memory-Bottleneck-of-Transformer-on-Time-Series-Forecasting/log.png" alt=""><br>在传统Transformer在计算Atterntion时，使用的因果卷积，在第t步捕获前面所有历史时间步的信息，但是这样空间复杂度较大。所以本文提出了LogSparse，即在计算Attention时，对历史时间步的信息使用log函数进行抽样，然后多堆叠几层，也可以捕获前面所有时间步的信息。减少了空间复杂度，又可以捕获历史时间步的所有信息。</p>
-
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>2019NIPS的一篇论文，<br><a href="https://arxiv.org/pdf/1907.00235.pdf" target="_blank" rel="noopener">论文地址</a><br></p>
+        
+          <a class="article-more-a" href="/2019/11/05/Enhancing-the-Locality-and-Breaking-the-Memory-Bottleneck-of-Transformer-on-Time-Series-Forecasting/#more">more >></a>
+        
       
 
       
@@ -831,6 +830,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
@@ -840,10 +843,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">热点问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -859,15 +858,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">生活</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Spark</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">HDFS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">生活</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -895,14 +894,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
@@ -912,6 +903,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">GPU服务器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
