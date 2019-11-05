@@ -151,6 +151,121 @@
           <div id="js-content" class="content-ll">
 			
   
+    <article id="post-Enhancing-the-Locality-and-Breaking-the-Memory-Bottleneck-of-Transformer-on-Time-Series-Forecasting" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: &gt;-<br>  Enhancing the Locality and Breaking the Memory Bottleneck of Transformer on<br>  Time Series Forecasting<br>date: 2019-11-05T09:34:39.000Z<br>categories: 论文阅读笔记<br>tags:</p>
+<ul>
+<li>Time Series</li>
+<li>Transformer</li>
+</ul>
+<hr>
+<h1><span id="简介">简介</span></h1><p>2019NIPS的一篇论文，<br><a href="https://arxiv.org/pdf/1907.00235.pdf" target="_blank" rel="noopener">论文地址</a>     </p>
+<h1><span id="introduction">Introduction</span></h1><p>本文说Transformer有2个缺点，（1）locality-agnostics：局部不可知性，原先只针对一个点，计算该点和其余所有点的相关性，没有考虑到子序列和子序列的attention。（2）memory bottleneck：内存瓶颈，空间复杂度和输入序列的长度L有关。对于捕获长时间序列不方便。   </p>
+<h1><span id="模型">模型</span></h1><p>本文针对以上2个问题，提出2种解决方案，（1）传统Transformer—&gt;Conv Transformer,（2）使用LogSparse来减少内存的使用。<br><img src="/2019/11/05/Enhancing-the-Locality-and-Breaking-the-Memory-Bottleneck-of-Transformer-on-Time-Series-Forecasting/conv.png" alt=""><br>图b是传统的Transformer，在计算Attention时，计算的是一个点和其余所有点的Attention，在本文中使用一维卷积来生成query和key，在计算Attention时，使用的是子序列之间的Attention，捕获了local上下文信息。   </p>
+<p><img src="/2019/11/05/Enhancing-the-Locality-and-Breaking-the-Memory-Bottleneck-of-Transformer-on-Time-Series-Forecasting/log.png" alt=""><br>在传统Transformer在计算Atterntion时，使用的因果卷积，在第t步捕获前面所有历史时间步的信息，但是这样空间复杂度较大。所以本文提出了LogSparse，即在计算Attention时，对历史时间步的信息使用log函数进行抽样，然后多堆叠几层，也可以捕获前面所有时间步的信息。减少了空间复杂度，又可以捕获历史时间步的所有信息。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/05/Enhancing-the-Locality-and-Breaking-the-Memory-Bottleneck-of-Transformer-on-Time-Series-Forecasting/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-DGL" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: DGL<br>date: 2019-11-04T14:19:34.000Z<br>categories: Deep Learning<br>tags:</p>
+<ul>
+<li>GCN</li>
+<li>DGL</li>
+</ul>
+<hr>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>&ensp;&ensp;&ensp;&ensp;Deep Graph Library(DGL),一款面向图神经网络以及图机器学习的全新框架。DGL基于主流框架进行开发。用户可以使用他们偏爱的框架编写常见的CNN和注意力层，而当遇到图相关的计算时可以切换到DGL。用户和DGL的交互主要通过自定义函数UDF（user-defined function）。目前DGL支持Pytorch和MXNet/Gluon作为系统后端。<br></p>
+        
+          <a class="article-more-a" href="/2019/11/04/DGL/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/04/DGL/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-XGBoost" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -214,13 +329,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>title: Transformer<br>date: 2019-11-02T15:09:45.000Z<br>categories: NLP<br>tags:</p>
+<p>title: Transformer<br>date: 2019-11-02T15:09:45.000Z<br>categories: 论文阅读笔记<br>tags:</p>
 <ul>
 <li>Transformer</li>
 <li>NLP</li>
 </ul>
 <hr>
-<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;《Attention is all you need》是Google Brain在2017年发表在NIPS的一篇文章。虽然在这篇文章之前，也在用Attention，但在这篇文章中，正式提出了Attention的概念，从此Attention在各个领域得到了广泛的应用。<br><a href="https://arxiv.org/pdf/1706.03762.pdf" target="_blank" rel="noopener">Attention is all you need</a><br></p>
+<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;《Attention is all you need》是Google Brain在2017年发表在NIPS的一篇文章。虽然在这篇文章之前，也在用Attention，但在这篇文章中，正式提出了Attention的概念，从此Attention在各个领域得到了广泛的应用。<br><a href="https://arxiv.org/pdf/1706.03762.pdf" target="_blank" rel="noopener">论文地址</a><br></p>
         
           <a class="article-more-a" href="/2019/11/02/Transformer/#more">more >></a>
         
@@ -593,150 +708,6 @@
 
 
   
-    <article id="post-梯度爆炸和衰减" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: 梯度爆炸和衰减<br>date: 2019-07-16T11:14:49.000Z<br>categories: Deep Learning<br>tags:</p>
-<ul>
-<li>反向传播</li>
-<li>梯度爆炸</li>
-<li>梯度衰减</li>
-</ul>
-<hr>
-        
-          <a class="article-more-a" href="/2019/07/16/梯度爆炸和衰减/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/16/梯度爆炸和衰减/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Dataset" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/12/Dataset/">Dataset</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/12/Dataset/" class="archive-article-date">
-  	<time datetime="2019-07-12T06:22:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h1>
-        
-          <a class="article-more-a" href="/2019/07/12/Dataset/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">交通领域数据源</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Dataset//" class="article-tag-list-link color3">Dataset</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/12/Dataset/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -888,10 +859,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">生活</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Spark</a>
               </li>
              
@@ -900,11 +867,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
+                <a href="javascript:void(0)" class="js-tag color3">生活</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -932,6 +895,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
@@ -944,11 +915,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
+                <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
               </li>
              
               <li class="article-tag-list-item">

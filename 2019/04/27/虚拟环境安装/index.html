@@ -16,12 +16,16 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在服务器上安装gluon虚拟环境。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/conda-info.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/putty.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/port.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/python.png">
-<meta property="og:updated_time" content="2019-11-02T06:31:55.815Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/bashrc2.png">
+<meta property="og:updated_time" content="2019-11-04T11:23:26.065Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gluon环境安装">
 <meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在服务器上安装gluon虚拟环境。">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/python.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/conda-info.png">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
   
@@ -187,13 +191,38 @@
 <li>安装Anaconda<br><code>wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh</code><br>下载Anaconda3-5.2.0-Linux-x86_64.sh上传到服务器中，</li>
 <li>运行安装向导<br><code>bash Anaconda3-5.2.0-Linux-x86_64.sh</code><br>为了激活安装， 你应该源~/.bashrc文件：<br><code>source ~/.bashrc</code></li>
 <li>确认安装成功<br><code>conda --version</code><br>然后使用<code>which python</code>查看你当前使用的是哪个python<br>如果输出的目录是<code>data/anaconda/python</code>说明你当前使用的还是服务器自带的python，需要重新练连接一下服务器。<br>如果输出是<code>data/WangBeibei/anaconda/python</code>，说明当前使用是自己安装的anaconda</li>
-<li>配置清华镜像<br>使用conda创建虚拟（运行）环境。conda和pip默认使用国外站点来下载软件，我们可以配置国内镜像来加速下载（国外用户无须此操作）。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"># 配置清华conda镜像</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line"># 配置清华PyPI镜像（如无法运行，将pip版本升级到&gt;=10.0.0）</span><br><span class="line">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">```     </span><br><span class="line">5. `conda env create -f environment.yml`   </span><br><span class="line">创建虚拟环境gluon，安装mxnet框架和一些依赖包。</span><br><span class="line">6.   `conda info -e`   </span><br><span class="line">查看当前服务器上都有哪些虚拟环境,下面截图中显示，当前存在2个虚拟环境，其中带*的是当前正在使用的虚拟环境。  </span><br><span class="line">![](虚拟环境安装/conda-info.png)</span><br><span class="line"></span><br><span class="line">7. `screen -S WBB`（超级有用！！！）  </span><br><span class="line">因为是外网服务器，所以网络连接经常断开，连接一断开，运行在上面的程序就不能运行了，所以创建虚拟窗口，在这个虚拟窗口内运行程序，就算网络断开了，程序依然会继续运行</span><br><span class="line"></span><br><span class="line">8. `source activate gluon`   </span><br><span class="line">激活虚拟环境gluon，若要在gluon这个虚拟环境下安装一些库，需要先切换到这个环境下，然后使用conda install xxx或者pip install xxx，优先选择使用conda install xxx。安装完之后可以通过conda list查看当前已经安装的包。</span><br><span class="line"></span><br><span class="line">9. 使用jupyter notebook  </span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;第一次使用jupyter notebook，需要映射端口号，默认jupyter notebook的端口号是8888，但是在这个集群上，如果别人已经把8888端口占用了，集群会自动给你分配一个端口号，然后在putty中映射一下这个端口，具体操作如下：</span><br><span class="line">在菜单栏选中change setting，找到Tunnels   </span><br><span class="line">![](虚拟环境安装/putty.png)   </span><br><span class="line">![](虚拟环境安装/port.png) </span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用screen创建一个窗口运行jupyter notebook程序的好处，就算ssh和28号服务器的连接断开，jupyter notebook的程序依然可以在后台运行。</span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;如果在jupyter notebook的程序运行完了，有3中关闭程序的方法：  </span><br><span class="line">1、在jupyter notebook菜单栏，有一个`close and hot`的按钮  </span><br><span class="line">2、在jupyter notebook上面的菜单中有一个`running`，shutdown掉程序  </span><br><span class="line">3、`screen -R 23560`切入到虚拟窗口，然后再这个窗口ctrl+c关闭jupyter notebook进程。不用使用exit，因为使用exit是关闭虚拟窗口，直接按`Ctrl+a+d`从虚拟窗口中切出，这样这个窗口还是存在的，下一次直接使用`screen -ls`查看存在的窗口，然后  </span><br><span class="line">`source /etc/profile`   </span><br><span class="line">`source gluon`   </span><br><span class="line">`jupyter notebook`  </span><br><span class="line">再次打开jupyter notebook程序   </span><br><span class="line"></span><br><span class="line">1.  `ctrl+A+D`退出虚拟窗口   </span><br><span class="line">当把程序运行之后，使用以上按钮退出虚拟窗口，这样程序就在后台运行，就算把电脑换机了，程序还是会运行。   </span><br><span class="line">11. `screen -R WBB`   </span><br><span class="line">使用以上命令进入到虚拟窗口中，查看程序运行的结果</span><br><span class="line">12. 下载Tensorflow   </span><br><span class="line">首先到清华的网站下[https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/)直接粘贴下面3行命令，</span><br></pre></td></tr></table></figure>
+<li><p>配置清华镜像<br>使用conda创建虚拟（运行）环境。conda和pip默认使用国外站点来下载软件，我们可以配置国内镜像来加速下载（国外用户无须此操作）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 配置清华conda镜像</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line"># 配置清华PyPI镜像（如无法运行，将pip版本升级到&gt;=10.0.0）</span><br><span class="line">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">```     </span><br><span class="line">5. `conda env create -f environment.yml`   </span><br><span class="line">创建虚拟环境gluon，安装mxnet框架和一些依赖包。  </span><br><span class="line">6. 或者使用下列方式安装   </span><br><span class="line">   ```python</span><br><span class="line">   conda create -n mxnet python=3.6#创建虚拟环境</span><br><span class="line">   conda activate mxnet#激活虚拟环境</span><br><span class="line">   cat /usr/local/cuda/version.txt#查看cuda版本  </span><br><span class="line">   #安装对应版本的mxnet，安装mxnet-cu100是GPU版本的mxnet，</span><br><span class="line">   #如果仅使用pip install mxnet安装的CPU版本。</span><br><span class="line">   pip install -i https://pypi.tuna.tsinghua.edu.cn/simple mxnet-cu100</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>conda info -e</code><br>查看当前服务器上都有哪些虚拟环境,下面截图中显示，当前存在2个虚拟环境，其中带*的是当前正在使用的虚拟环境。<br><img src="/2019/04/27/虚拟环境安装/conda-info.png" alt=""></p>
+</li>
+<li><p><code>screen -S WBB</code>（超级有用！！！）<br>因为是外网服务器，所以网络连接经常断开，连接一断开，运行在上面的程序就不能运行了，所以创建虚拟窗口，在这个虚拟窗口内运行程序，就算网络断开了，程序依然会继续运行</p>
+</li>
+<li><p><code>source activate gluon</code><br>激活虚拟环境gluon，若要在gluon这个虚拟环境下安装一些库，需要先切换到这个环境下，然后使用conda install xxx或者pip install xxx，优先选择使用conda install xxx。安装完之后可以通过conda list查看当前已经安装的包。</p>
+</li>
+<li><p>使用jupyter notebook<br>&ensp;&ensp;&ensp;&ensp;第一次使用jupyter notebook，需要映射端口号，默认jupyter notebook的端口号是8888，但是在这个集群上，如果别人已经把8888端口占用了，集群会自动给你分配一个端口号，然后在putty中映射一下这个端口，具体操作如下：<br>在菜单栏选中change setting，找到Tunnels<br><img src="/2019/04/27/虚拟环境安装/putty.png" alt=""><br><img src="/2019/04/27/虚拟环境安装/port.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;使用screen创建一个窗口运行jupyter notebook程序的好处，就算ssh和28号服务器的连接断开，jupyter notebook的程序依然可以在后台运行。<br>&ensp;&ensp;&ensp;&ensp;如果在jupyter notebook的程序运行完了，有3中关闭程序的方法：<br>1、在jupyter notebook菜单栏，有一个<code>close and hot</code>的按钮<br>2、在jupyter notebook上面的菜单中有一个<code>running</code>，shutdown掉程序<br>3、<code>screen -R 23560</code>切入到虚拟窗口，然后再这个窗口ctrl+c关闭jupyter notebook进程。不用使用exit，因为使用exit是关闭虚拟窗口，直接按<code>Ctrl+a+d</code>从虚拟窗口中切出，这样这个窗口还是存在的，下一次直接使用<code>screen -ls</code>查看存在的窗口，然后<br><code>source /etc/profile</code><br><code>source gluon</code><br><code>jupyter notebook</code><br>再次打开jupyter notebook程序   </p>
+</li>
+<li><p><code>ctrl+A+D</code>退出虚拟窗口<br>当把程序运行之后，使用以上按钮退出虚拟窗口，这样程序就在后台运行，就算把电脑换机了，程序还是会运行。   </p>
+</li>
+<li><code>screen -R WBB</code><br>使用以上命令进入到虚拟窗口中，查看程序运行的结果</li>
+<li>下载Tensorflow<br>首先到清华的网站下<a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/</a>直接粘贴下面3行命令，<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>conda config —add channels <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</a><br>conda config —add channels <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</a><br>conda config —set show_channel_urls yes<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">然后使用vi ~/.condarc将里面的-default删除，这样下载TensorFlow就不会使用国外的网站，而是使用清华的镜像</span><br><span class="line">然后使用`conda install tensorflow-gpu`下载TensorFlow框架</span><br><span class="line"></span><br><span class="line">运行TensorFlow程序，指定使用哪一块GPU，如果不指定</span><br><span class="line">使用全部GPU</span><br><span class="line">`CUDA_VISIBLE_DEVICES=5  python train.py`  </span><br><span class="line">直接杀死一个进程  </span><br><span class="line">`kill -9 [PID]`</span><br><span class="line"># 3. 一些常用的命令   </span><br><span class="line">（1）使用清华源下载  </span><br><span class="line">`pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pykafka`    </span><br><span class="line">（2）和conda有关  </span><br><span class="line">`conda --version`  </span><br><span class="line">通过使用如下update命令来升级conda：  </span><br><span class="line">`conda update conda`  </span><br><span class="line">```   </span><br><span class="line">pip install 库名</span><br><span class="line">pip install 库名 --upgrade</span><br><span class="line"># 或者</span><br><span class="line">conda install 库名</span><br><span class="line">conda update 库名</span><br><span class="line"></span><br><span class="line"># 更新所有库</span><br><span class="line">conda update --all</span><br><span class="line"></span><br><span class="line"># 更新 conda 自身</span><br><span class="line">conda update conda</span><br><span class="line"></span><br><span class="line"># 更新 anaconda 自身</span><br><span class="line">conda update anaconda</span><br><span class="line"></span><br><span class="line"># 查看已安装的包</span><br><span class="line">conda list</span><br></pre></td></tr></table></figure></p>
+<p>然后使用vi ~/.condarc将里面的-default删除，这样下载TensorFlow就不会使用国外的网站，而是使用清华的镜像<br>然后使用<code>conda install tensorflow-gpu</code>下载TensorFlow框架</p>
+<p>运行TensorFlow程序，指定使用哪一块GPU，如果不指定<br>使用全部GPU<br><code>CUDA_VISIBLE_DEVICES=5  python train.py</code><br>直接杀死一个进程<br><code>kill -9 [PID]</code></p>
+<h1><span id="3-一些常用的命令">3. 一些常用的命令</span></h1><p>（1）使用清华源下载<br><code>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pykafka</code><br>（2）和conda有关<br><code>conda --version</code><br>通过使用如下update命令来升级conda：<br><code>conda update conda</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">pip install 库名</span><br><span class="line">pip install 库名 --upgrade</span><br><span class="line"># 或者</span><br><span class="line">conda install 库名</span><br><span class="line">conda update 库名</span><br><span class="line"></span><br><span class="line"># 更新所有库</span><br><span class="line">conda update --all</span><br><span class="line"></span><br><span class="line"># 更新 conda 自身</span><br><span class="line">conda update conda</span><br><span class="line"></span><br><span class="line"># 更新 anaconda 自身</span><br><span class="line">conda update anaconda</span><br><span class="line"></span><br><span class="line"># 查看已安装的包</span><br><span class="line">conda list</span><br></pre></td></tr></table></figure></p>
 <p>（3）使用conda install xxx或者pip install xxx，优先选择使用conda install xxx。安装完之后可以通过conda list查看当前已经安装的包<br>（4）删除一个虚拟环境<br><code>conda remove -n gluon--all</code><br>为了确定这个名为flowers的环境已经被移除，输入以下命令<code>conda info -e</code> ,会看到已经没有gluon这个环境<br>（5）查看GPU的占用情况<br><code>nvidia-smi</code><br>（6）<code>screen -S jupyter</code><br><code>source activate gluon</code><br><code>source deactivate</code><br><code>jupyter notebook</code><br><code>screen -r jupyter</code><br><code>screen -X -S 122128 quit</code><br>（7）查看当前的进程是谁的<br><code>ps -ef | grep 35230</code><br>（8）在windows在激活虚拟环境<br><code>activate gluon</code><br><code>deactivate gluon</code>    </p>
 <h1><span id="4-openssh">4. openSSH</span></h1><p>Windows10自带了openssh工具，打开powershell使用ssh username@ip就可以连接服务器了</p>
-<h1><span id="5-问题">5. 问题</span></h1><p>我创建了一个gluon的虚拟环境，使用<code>source avtivate gluon</code>激活这个环境时，在这里面装了mxnet框架。但是在screen中启动jupyter notebook时，import mxnet时却报错说no module names mxnet，然后我退出jupyter notebook（仍在screen中），使用which python查看当前使用的python，仍然是base的python，不是env/gluon中的python，因为base中的python没有装mxnet，所以import会出错。那怎么把gluon虚拟环境中的python换成env/gluon中的python呢？<br>参考这个网址：<a href="http://www.pianshen.com/article/2276285026/" target="_blank" rel="noopener">http://www.pianshen.com/article/2276285026/</a><br>在虚拟环境下运行以下命令：<br><code>ipython kernelspec list</code><br>查看jupyter notebook内核指定的python运行环境位置，然后cd到这个目录中，会看到有一个kernel.json文件，使用vi命令编辑这个文件，将python解释器的位置换成<code>/data/WangBeibei/anaconda3/envs/gluon/bin/python</code><br><img src="/2019/04/27/虚拟环境安装/python.png" alt=""><br>然后使用<code>source deavtivate</code>断开gluon虚拟环境，在重新激活<code>source avtivate gluon</code>，然后再启动<code>jupyter noteboook</code>就可以了。</p>
+<h1><span id="5-问题">5. 问题</span></h1><ol>
+<li>我创建了一个gluon的虚拟环境，使用<code>source avtivate gluon</code>激活这个环境时，在这里面装了mxnet框架。但是在screen中启动jupyter notebook时，import mxnet时却报错说no module names mxnet，然后我退出jupyter notebook（仍在screen中），使用which python查看当前使用的python，仍然是base的python，不是env/gluon中的python，因为base中的python没有装mxnet，所以import会出错。那怎么把gluon虚拟环境中的python换成env/gluon中的python呢？<br>参考这个网址：<a href="http://www.pianshen.com/article/2276285026/" target="_blank" rel="noopener">http://www.pianshen.com/article/2276285026/</a><br>在虚拟环境下运行以下命令：<br><code>ipython kernelspec list</code><br>查看jupyter notebook内核指定的python运行环境位置，然后cd到这个目录中，会看到有一个kernel.json文件，使用vi命令编辑这个文件，将python解释器的位置换成<code>/data/WangBeibei/anaconda3/envs/gluon/bin/python</code><br><img src="/2019/04/27/虚拟环境安装/python.png" alt=""><br>然后使用<code>source deavtivate</code>断开gluon虚拟环境，在重新激活<code>source avtivate gluon</code>，然后再启动<code>jupyter noteboook</code>就可以了。<br>如果还是出错，使用<code>conda install ipykernel</code>命令，然后再重新激活虚拟环境，再次启动<code>jupyter notebook</code>.   </li>
+<li>我创建了一个虚拟环境，名为mxnet，在这个虚拟环境中使用<code>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple mxnet-cu100</code>安装GPU版本的mxnet。然后再虚拟环境mxnet中使用python运行以下命令可以成功运行。     <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mxnet <span class="keyword">as</span> mx  </span><br><span class="line"><span class="keyword">from</span> mxnet <span class="keyword">import</span> nd   </span><br><span class="line">z = nd.ones(shape=(<span class="number">3</span>, <span class="number">3</span>), ctx=mx.gpu(<span class="number">0</span>))</span><br><span class="line">```   </span><br><span class="line">然后我创建了一个screen，在这个screen中`source activate mxnet`启动虚拟环境，然后使用python运行以上相同的代码，却出错。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>OSError: libcudart.so.10.0: cannot open shared  object file: No such file or directory<br><code>``   
+查了资料解决方案如下：
+按Ctrl+A+D退出screen。然后查看.bashrc的内容，原先是   
+![](虚拟环境安装/bashrc1.png)        
+将其修改如下：修改完之后使用</code>source .bashrc`激活<br>当有多个PATH时，中间使用冒号拼接。<br><img src="/2019/04/27/虚拟环境安装/bashrc2.png" alt=""><br>然后再screen，再次运行上述的python代码成功。</p>
 
       
 
@@ -351,7 +380,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 虚拟环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">4. openSSH</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">5. 问题</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. 虚拟环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. 一些常用的命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">4. openSSH</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">5. 问题</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -517,10 +546,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">生活</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Spark</a>
               </li>
              
@@ -529,11 +554,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
+                <a href="javascript:void(0)" class="js-tag color3">生活</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -561,6 +582,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
@@ -573,11 +602,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+                <a href="javascript:void(0)" class="js-tag color4">服务器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
+                <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
               </li>
              
               <li class="article-tag-list-item">
