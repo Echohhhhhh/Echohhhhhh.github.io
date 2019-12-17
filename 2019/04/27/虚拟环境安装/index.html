@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/port.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/python.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/bashrc2.png">
-<meta property="og:updated_time" content="2019-11-04T11:23:26.065Z">
+<meta property="og:updated_time" content="2019-12-13T02:17:28.490Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gluon环境安装">
 <meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在服务器上安装gluon虚拟环境。">
@@ -186,17 +186,18 @@
 <li><a href="#5-%e9%97%ae%e9%a2%98">5. 问题</a></li>
 </ul>
 <!-- /TOC -->
-<h1><span id="2-虚拟环境">2. 虚拟环境</span></h1><p>&ensp;&ensp;&ensp;&ensp;在服务器上可以安装不同的虚拟环境，这些虚拟环境之间互不影响，不同的虚拟环境可以安装不同的python版本，不同的框架。 </p>
+<h1><span id="2-虚拟环境">2. 虚拟环境</span></h1><p>&ensp;&ensp;&ensp;&ensp;在服务器上可以安装不同的虚拟环境，这些虚拟环境之间互不影响，不同的虚拟环境可以安装不同的python版本，不同的框架。  </p>
 <ol>
+<li>给服务器连网<br>在windows系统中，按<code>Windows+R</code>，输入<code>mstsc</code>，输入服务器的ip登陆，然后在浏览器里登陆 </li>
 <li>安装Anaconda<br><code>wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh</code><br>下载Anaconda3-5.2.0-Linux-x86_64.sh上传到服务器中，</li>
 <li>运行安装向导<br><code>bash Anaconda3-5.2.0-Linux-x86_64.sh</code><br>为了激活安装， 你应该源~/.bashrc文件：<br><code>source ~/.bashrc</code></li>
 <li>确认安装成功<br><code>conda --version</code><br>然后使用<code>which python</code>查看你当前使用的是哪个python<br>如果输出的目录是<code>data/anaconda/python</code>说明你当前使用的还是服务器自带的python，需要重新练连接一下服务器。<br>如果输出是<code>data/WangBeibei/anaconda/python</code>，说明当前使用是自己安装的anaconda</li>
 <li><p>配置清华镜像<br>使用conda创建虚拟（运行）环境。conda和pip默认使用国外站点来下载软件，我们可以配置国内镜像来加速下载（国外用户无须此操作）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 配置清华conda镜像</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line"># 配置清华PyPI镜像（如无法运行，将pip版本升级到&gt;=10.0.0）</span><br><span class="line">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">```     </span><br><span class="line">5. `conda env create -f environment.yml`   </span><br><span class="line">创建虚拟环境gluon，安装mxnet框架和一些依赖包。  </span><br><span class="line">6. 或者使用下列方式安装   </span><br><span class="line">   ```python</span><br><span class="line">   conda create -n mxnet python=3.6#创建虚拟环境</span><br><span class="line">   conda activate mxnet#激活虚拟环境</span><br><span class="line">   cat /usr/local/cuda/version.txt#查看cuda版本  </span><br><span class="line">   #安装对应版本的mxnet，安装mxnet-cu100是GPU版本的mxnet，</span><br><span class="line">   #如果仅使用pip install mxnet安装的CPU版本。</span><br><span class="line">   pip install -i https://pypi.tuna.tsinghua.edu.cn/simple mxnet-cu100</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 配置清华conda镜像</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line"># 配置清华PyPI镜像（如无法运行，将pip版本升级到&gt;=10.0.0）</span><br><span class="line">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple    </span><br><span class="line"></span><br><span class="line">```     </span><br><span class="line">5. `conda env create -f environment.yml`   </span><br><span class="line">创建虚拟环境gluon，安装mxnet框架和一些依赖包。  </span><br><span class="line">6. 或者使用下列方式安装   </span><br><span class="line">   ```python</span><br><span class="line">   conda create -n mxnet python=3.6#创建虚拟环境</span><br><span class="line">   conda activate mxnet#激活虚拟环境</span><br><span class="line">   cat /usr/local/cuda/version.txt#查看cuda版本  </span><br><span class="line">   #安装对应版本的mxnet，安装mxnet-cu100是GPU版本的mxnet，</span><br><span class="line">   #如果仅使用pip install mxnet安装的CPU版本。</span><br><span class="line">   pip install -i https://pypi.tuna.tsinghua.edu.cn/simple mxnet-cu100  #安装pytorch</span><br><span class="line">   conda install pytorch torchvision cudatoolkit=10.1 -c pytorch</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>conda info -e</code><br>查看当前服务器上都有哪些虚拟环境,下面截图中显示，当前存在2个虚拟环境，其中带*的是当前正在使用的虚拟环境。<br><img src="/2019/04/27/虚拟环境安装/conda-info.png" alt=""></p>
 </li>
-<li><p><code>screen -S WBB</code>（超级有用！！！）<br>因为是外网服务器，所以网络连接经常断开，连接一断开，运行在上面的程序就不能运行了，所以创建虚拟窗口，在这个虚拟窗口内运行程序，就算网络断开了，程序依然会继续运行</p>
+<li><p><code>screen -S WBB</code>（超级有用！！！）<br>因为是外网服务器，所以网络连接经常断开，连接一断开，运行在上面的程序就不能运行了，所以创建虚拟窗口，在这个虚拟窗口内运行程序，就算网络断开了，程序依然会继续运行<br><code>screen -D  -r ＜session-id&gt;</code>先踢掉一个用户，再登录<br><code>screen -S id -X quit</code>删除一个screen</p>
 </li>
 <li><p><code>source activate gluon</code><br>激活虚拟环境gluon，若要在gluon这个虚拟环境下安装一些库，需要先切换到这个环境下，然后使用conda install xxx或者pip install xxx，优先选择使用conda install xxx。安装完之后可以通过conda list查看当前已经安装的包。</p>
 </li>
@@ -222,7 +223,10 @@
 查了资料解决方案如下：
 按Ctrl+A+D退出screen。然后查看.bashrc的内容，原先是   
 ![](虚拟环境安装/bashrc1.png)        
-将其修改如下：修改完之后使用</code>source .bashrc`激活<br>当有多个PATH时，中间使用冒号拼接。<br><img src="/2019/04/27/虚拟环境安装/bashrc2.png" alt=""><br>然后再screen，再次运行上述的python代码成功。</p>
+将其修改如下：修改完之后使用</code>source .bashrc`激活<br>当有多个PATH时，中间使用冒号拼接。<br><img src="/2019/04/27/虚拟环境安装/bashrc2.png" alt=""><br>然后再screen，再次运行上述的python代码成功。 </p>
+<ol>
+<li>查看系统cuda的版本，安装对应版本的深度学习框架<br><code>cat /usr/local/cuda/version.txt</code><br>如果安装错了，先使用<code>pip uninstall mxnet-cu100</code>，删除原先的mxnet，然后再使用<code>pip install mxnet-cu101</code>安装对应的版本。</li>
+</ol>
 
       
 
@@ -518,10 +522,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
@@ -531,6 +531,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">热点问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -570,15 +574,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -591,14 +603,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">GPU服务器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">

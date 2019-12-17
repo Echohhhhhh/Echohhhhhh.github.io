@@ -151,6 +151,126 @@
           <div id="js-content" class="content-ll">
 			
   
+    <article id="post-nni" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: nni<br>date: 2019-11-25T14:23:50.000Z<br>categories:</p>
+<ul>
+<li>工具<br>tags:</li>
+<li>Docker</li>
+<li>nni</li>
+<li>调参工具</li>
+</ul>
+<hr>
+<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>NN是微软官方出的一个自动调参的第三方库。非常好用。但是用起来还是有一些需要注意的地方。这里记录一下。<br></p>
+        
+          <a class="article-more-a" href="/2019/11/25/nni/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/25/nni/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Deep-Learning-for-Spatio-Temporal-Data-Mining-A-Survey" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: ‘Deep Learning for Spatio-Temporal Data Mining: A Survey’<br>date: 2019-11-08T15:49:36.000Z<br>categories: 论文阅读笔记<br>tags:</p>
+<h2><span id="-时空领域">  - 时空领域</span></h2><h1><span id="简介">简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;<a href="https://arxiv.org/pdf/1906.04928.pdf" target="_blank" rel="noopener">论文地址</a><br>这篇论文是时空领域的综述论文，介绍了近几年时空领域的发展。<br>一些比较好的GitHub<br><a href="https://github.com/xuehaouwa/Awesome-Trajectory-Prediction" target="_blank" rel="noopener">https://github.com/xuehaouwa/Awesome-Trajectory-Prediction</a> </p>
+<h1><span id="引言">引言</span></h1><p>时空领域的数据的应用很广泛，包括环境和气候预测（风预测，降雨预测等），公共安全预测（crime预测），智能交通预测（交通流量预测），人类活动（人类轨迹模式挖掘）。本文将时空数据的类型，和广泛应用的深度学习模型，以及现有的研究进展。   </p>
+<h1><span id="时空数据分类">时空数据分类</span></h1><ol>
+<li>Even data<br>事件数据由离散的事件组成，有location和time信息，例如cirme事件和traffic accident事件，疾病爆发事件，社会事件。 </li>
+<li>Trajectory data<br>轨迹数据是一系列随着时间变化的经纬度序列组成。有人的轨迹和车的轨迹。  </li>
+<li>Point reference data<br>一般都是气象数据，测量一个区域的温度，植被等。  </li>
+<li>Raster data（栅格数据）<br>有固定的m个区域，每个区域有n个时间段，可以用一个$R^{m \times n}$来表示。例如traffic flow数据。</li>
+<li>Vedio data<br>视频数据和时空数据类似，相邻的像素可以表示相似的RGB，在时间上，特征变化平缓。可以用三维张量表示。  </li>
+</ol>
+<p>以上的5类数据可以用下图的方式表示。</p>
+<p><img src="/2019/11/08/Deep-Learning-for-Spatio-Temporal-Data-Mining-A-Survey/stdata.png" alt=""><br>(1)轨迹和时间序列都可以表示成序列的形式。<br>(2)有时轨迹也可以表示成2维矩阵，矩阵的行和列是网格的长和宽，矩阵的值表示轨迹走的网格。这个表示形式通常使用CNN模型。例如：<a href="https://arxiv.org/pdf/1705.09436.pdf" target="_blank" rel="noopener">（2017NIPS）Human Trajectory Prediction using Spatially aware Deep Attention Models</a><br>(3)空间地图可以表示为Graph和2维矩阵。至于使用图还是2D矩阵根据应用而定。例如在城市交通流预测，交通网络中的交通数据使用Graph表示，例如<a href="https://arxiv.org/pdf/1707.01926.pdf" target="_blank" rel="noopener">(2018ICLR)Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting
+</a><br>(4)网格数据，通常使用2D或3D张量表示，如果是2D矩阵，行和列分别表示区域和时间。如果是3D张量，分别表示区域的行和列，时间。<br><img src="/2019/11/08/Deep-Learning-for-Spatio-Temporal-Data-Mining-A-Survey/model.png" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/08/Deep-Learning-for-Spatio-Temporal-Data-Mining-A-Survey/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Enhancing-the-Locality-and-Breaking-the-Memory-Bottleneck-of-Transformer-on-Time-Series-Forecasting" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -593,120 +713,6 @@
 
 
   
-    <article id="post-traffic-accident" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: Traffic Accident相关论文<br>date: 2019-07-21T18:35:32.000Z<br>categories: 论文阅读笔记<br>tags:</p>
-<ul>
-<li>时空领域</li>
-<li>accident预测</li>
-</ul>
-<hr>
-<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>以下是关于event prediction的相关论文，主要是traffic accident这一类的事件预测。<br></p>
-        
-          <a class="article-more-a" href="/2019/07/21/traffic-accident/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/21/traffic-accident/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-神经网络踩坑" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: 神经网络踩坑<br>date: 2019-07-17T16:08:20.000Z<br>categories: Deep Learning<br>tags:</p>
-<ul>
-<li>训练经验</li>
-<li>踩坑</li>
-</ul>
-<hr>
-<p>参考资料:<br><a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650729285&amp;idx=1&amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e6f79daaeed&amp;mpshare=1&amp;scene=1&amp;srcid=07263lmMeeAcHLPSZpJXJI3L#rd" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650729285&amp;idx=1&amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e6f79daaeed&amp;mpshare=1&amp;scene=1&amp;srcid=07263lmMeeAcHLPSZpJXJI3L#rd</a>   </p>
-        
-          <a class="article-more-a" href="/2019/07/17/神经网络踩坑/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/17/神经网络踩坑/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -830,10 +836,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
@@ -843,6 +845,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">热点问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -882,15 +888,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -903,14 +917,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">GPU服务器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">

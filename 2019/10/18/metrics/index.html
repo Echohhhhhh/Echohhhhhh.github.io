@@ -25,7 +25,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/precison-mi.png">
 <meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/recall-mi.png">
 <meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/f1-mi.png">
-<meta property="og:updated_time" content="2019-11-02T07:53:36.236Z">
+<meta property="og:updated_time" content="2019-11-22T01:27:04.603Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
 <meta name="twitter:description" content="title: metricsdate: 2019-10-18T10:48:03.000Zcategories: Deep Learningtags:   - 评价指标1. 简介介绍在回归问题中的主要评价指标，以及各自的特点">
@@ -179,6 +179,7 @@
 <li><a href="#32-mse%e8%af%af%e5%b7%ae%e5%b9%b3%e6%96%b9%e5%b9%b3%e5%9d%87%e5%80%bc">3.2. MSE(误差平方平均值)</a></li>
 <li><a href="#33-rmse%e5%9d%87%e6%96%b9%e6%a0%b9%e8%af%af%e5%b7%ae">3.3. RMSE(均方根误差)</a></li>
 <li><a href="#34-mape%e5%b9%b3%e5%9d%87%e7%bb%9d%e5%af%b9%e7%99%be%e5%88%86%e6%af%94%e8%af%af%e5%b7%ae">3.4. MAPE(平均绝对百分比误差)</a></li>
+<li><a href="#35-%e6%80%bb%e7%bb%93">3.5. 总结</a></li>
 </ul>
 </li>
 <li><a href="#4-%e5%88%86%e7%b1%bb%e9%97%ae%e9%a2%98">4. 分类问题</a><ul>
@@ -212,7 +213,17 @@
 <li>范围$[0,\infin]$，当MAPE=0%表示完美模型，MAPE大于100%表示劣质模型。</li>
 <li>当真实值有数据等于0时，存在分母为0的情况，该公式不可用</li>
 <li>比如将y1预测为1.5，和100预测为100.5，差值是一样的，。即1的MAPE比100的MAPE大很多。以MAPE作为loss函数时，更加关注y比较小的值。</li>
-<li>单看MAPE的大小是没有意义的，因为MAPE是个相对值，而不是绝对值。MAPE只能用来对不同模型同一组数据的评估。比如对于同一组数据，模型A的MAPE比模型B小，可以说明模型A比模型B好。但是如果说MAPE=10%，并不能判断这个模型好还是不好。      </li>
+<li><p>单看MAPE的大小是没有意义的，因为MAPE是个相对值，而不是绝对值。MAPE只能用来对不同模型同一组数据的评估。比如对于同一组数据，模型A的MAPE比模型B小，可以说明模型A比模型B好。但是如果说MAPE=10%，并不能判断这个模型好还是不好。    </p>
+<h2><span id="35-总结">3.5. 总结</span></h2><p>综上，在选用评价指标时，需要考虑</p>
+</li>
+<li><p>数据中是否有0，如果有0值就不能用MPE、MAPE之类的指标；</p>
+</li>
+<li><p>数据的分布如何，如果是长尾分布可以选择带对数变换的指标，中位数指标比平均数指标更好；</p>
+</li>
+<li><p>是否存在极端值，诸如MAE、MSE、RMSE之类容易受到极端值影响的指标就不要选用；</p>
+</li>
+<li><p>得到的指标是否依赖于量纲(即绝对度量，而不是相对度量)，如果指标依赖量纲那么不同模型之间可能因为量纲不同而无法比较；    </p>
+</li>
 </ol>
 <h1><span id="4-分类问题">4. 分类问题</span></h1><p>在二分类任务中，使用Precison，Recall和F1值来评价分类的效果。<br><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/hun.png" alt=""><br><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/f1.png" alt=""><br>F1是针对二分类的，对于多分类，有2个常用的指标，Marco-F1和Micro-F1.   </p>
 <h2><span id="41-micro-f1">4.1. Micro-F1</span></h2><p><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/micro.png" alt=""><br>假设对于一个多分类问题，有三个类，分别是1，2，3<br>$TP_i$表示分类$i$的TP<br>$FP_i$表示分类$i$的FP<br>$TN_i$表示分类$i$的TN<br>$FN_i$表示分类$i$的FN<br>接下来，我们来计算Micro的Precison<br><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/precison-mi.png" alt=""><br>以及Micro的Recall<br><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/recall-mi.png" alt=""><br>然后计算Micro-F1<br><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/f1-mi.png" alt="">   </p>
@@ -348,7 +359,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">  - 评价指标</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">2. 问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">3. 回归问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">3.1. MAE(平均绝对误差)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">3.2. MSE(误差平方平均值)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3.3. RMSE(均方根误差)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">3.4. MAPE(平均绝对百分比误差)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">4. 分类问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">4.1. Micro-F1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">4.2. Macro-F1</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">  - 评价指标</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">2. 问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">3. 回归问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">3.1. MAE(平均绝对误差)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">3.2. MSE(误差平方平均值)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3.3. RMSE(均方根误差)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">3.4. MAPE(平均绝对百分比误差)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">3.5. 总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number"></span> <span class="toc-text">4. 分类问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">4.1. Micro-F1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">4.2. Macro-F1</span></a></li></ol>
                     </li></div>
                 </span>
             </div>
@@ -486,10 +497,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
@@ -499,6 +506,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">热点问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -538,15 +549,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -559,14 +578,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">GPU服务器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">

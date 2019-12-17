@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/02/05/CNN+残差/ResNet5.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/05/CNN+残差/ResNet6.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/05/CNN+残差/ResNet7.png">
-<meta property="og:updated_time" content="2019-11-02T06:58:55.830Z">
+<meta property="og:updated_time" content="2019-11-23T10:19:02.109Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CNN和残差">
 <meta name="twitter:description" content="1. 卷积卷积操作需要有1一个数组和一个卷积核，假设卷积核的形状为pxq，代表卷积核的高和宽。二维卷积层的输入输出用4维表示，格式为(样本，通道，高，宽)">
@@ -190,6 +190,7 @@
 <li><a href="#13-%e5%b0%8f%e7%bb%93">1.3. 小结</a></li>
 <li><a href="#14-%e9%80%9a%e9%81%93channel">1.4. 通道channel</a></li>
 <li><a href="#15-%e6%b1%a0%e5%8c%96%e5%b1%82">1.5. 池化层</a></li>
+<li><a href="#16-cnn%e5%ba%94%e7%94%a8">1.6. CNN应用</a></li>
 </ul>
 </li>
 <li><a href="#2-cnn%e4%ba%94%e5%a4%a7%e7%bb%8f%e5%85%b8%e6%a8%a1%e5%9e%8b">2. CNN五大经典模型</a><ul>
@@ -216,7 +217,7 @@
 <h2><span id="15-池化层">1.5. 池化层</span></h2><p>pooling层(池化层)的输入一般是上一个卷积层，主要有以下2个作用：  </p>
 <ol>
 <li>保留主要的特征，同时减少下一层的参数和计算量，防止过拟合</li>
-<li>保持某种不变性，包括平移，旋转，常用的平均池化和最大池化<br><strong>池化层的输出通道数和输入通道数相同</strong>     <h1><span id="2-cnn五大经典模型">2. CNN五大经典模型</span></h1></li>
+<li>保持某种不变性，包括平移，旋转，常用的平均池化和最大池化<br><strong>池化层的输出通道数和输入通道数相同</strong>       <h2><span id="16-cnn应用">1.6. CNN应用</span></h2>（1）输入和输出形状一样：一般kernel_size=(3,3),padding=1,stride=1，输入和输出的形状一样<br>（2）输入和输出高和宽减半：kernel_size=(3,3),padding=1,stride=2<h1><span id="2-cnn五大经典模型">2. CNN五大经典模型</span></h1></li>
 <li>Lenet：1986年</li>
 <li>Alexnet：2012年</li>
 <li>GoogleNet：2014年</li>
@@ -229,7 +230,33 @@
 <ul>
 <li>对全连接层做批量归一化<br>权重参数和偏差参数分别为$W和b$，激活函数为$\phi$,批量归一化运算符为$BN$,使用批量归一化的全连接层的输出为   <script type="math/tex; mode=display">\phi(BN(Wx+b))</script></li>
 <li>对卷积层做批量归一化<br>对卷积层来说，批量归一化发生在卷积计算之后，应用激活函数之前。<br>对于前面的模型，我们可以在卷积层或全连接层之后、激活层之前加入批量归一化层，以LeNet为例：</li>
-<li>未加入批量归一化层<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">net=nn.Sequential()</span><br><span class="line">net.add(nn.Conv2D(channels=<span class="number">6</span>,kernel_size=<span class="number">5</span>,activation=<span class="string">'sigmoid'</span>),</span><br><span class="line">       nn.MaxPool2D(pool_size=<span class="number">2</span>,strides=<span class="number">2</span>),</span><br><span class="line">       nn.Conv2D(channels=<span class="number">16</span>,kernel_size=<span class="number">5</span>,activation=<span class="string">'sigmoid'</span>),</span><br><span class="line">       nn.MaxPool2D(pool_size=<span class="number">2</span>,strides=<span class="number">2</span>),</span><br><span class="line">       nn.Dense(<span class="number">120</span>,activation=<span class="string">'sigmoid'</span>),</span><br><span class="line">       nn.Dense(<span class="number">84</span>,activation=<span class="string">'sigmoid'</span>),</span><br><span class="line">       nn.Dense(<span class="number">10</span>))</span><br><span class="line">```     </span><br><span class="line">- 加入批量归一化层     </span><br><span class="line">在卷积层或全连接层之后，激活层之前加入批量归一化层</span><br><span class="line">```python</span><br><span class="line">net = nn.Sequential()</span><br><span class="line">net.add(nn.Conv2D(<span class="number">6</span>, kernel_size=<span class="number">5</span>),</span><br><span class="line">        nn.BatchNorm(),</span><br><span class="line">        nn.Activation(<span class="string">'sigmoid'</span>),</span><br><span class="line">        nn.MaxPool2D(pool_size=<span class="number">2</span>, strides=<span class="number">2</span>),</span><br><span class="line">        nn.Conv2D(<span class="number">16</span>, kernel_size=<span class="number">5</span>),</span><br><span class="line">        nn.BatchNorm(),</span><br><span class="line">        nn.Activation(<span class="string">'sigmoid'</span>),</span><br><span class="line">        nn.MaxPool2D(pool_size=<span class="number">2</span>, strides=<span class="number">2</span>),</span><br><span class="line">        nn.Dense(<span class="number">120</span>),</span><br><span class="line">        nn.BatchNorm(),</span><br><span class="line">        nn.Activation(<span class="string">'sigmoid'</span>),</span><br><span class="line">        nn.Dense(<span class="number">84</span>),</span><br><span class="line">        nn.BatchNorm(),</span><br><span class="line">        nn.Activation(<span class="string">'sigmoid'</span>),</span><br><span class="line">        nn.Dense(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<li>未加入批量归一化层<pre><code class="lang-python">net=nn.Sequential()
+net.add(nn.Conv2D(channels=6,kernel_size=5,activation=&#39;sigmoid&#39;),
+     nn.MaxPool2D(pool_size=2,strides=2),
+     nn.Conv2D(channels=16,kernel_size=5,activation=&#39;sigmoid&#39;),
+     nn.MaxPool2D(pool_size=2,strides=2),
+     nn.Dense(120,activation=&#39;sigmoid&#39;),
+     nn.Dense(84,activation=&#39;sigmoid&#39;),
+     nn.Dense(10))
+</code></pre>
+</li>
+<li>加入批量归一化层<br>在卷积层或全连接层之后，激活层之前加入批量归一化层<pre><code class="lang-python">net = nn.Sequential()
+net.add(nn.Conv2D(6, kernel_size=5),
+      nn.BatchNorm(),
+      nn.Activation(&#39;sigmoid&#39;),
+      nn.MaxPool2D(pool_size=2, strides=2),
+      nn.Conv2D(16, kernel_size=5),
+      nn.BatchNorm(),
+      nn.Activation(&#39;sigmoid&#39;),
+      nn.MaxPool2D(pool_size=2, strides=2),
+      nn.Dense(120),
+      nn.BatchNorm(),
+      nn.Activation(&#39;sigmoid&#39;),
+      nn.Dense(84),
+      nn.BatchNorm(),
+      nn.Activation(&#39;sigmoid&#39;),
+      nn.Dense(10))
+</code></pre>
 </li>
 </ul>
 <h2><span id="27-残差网络resnet">2.7. 残差网络ResNet</span></h2><p>2015年ImageNet冠军model。<br>深度网络的好处：特征的等级随着网络深度的加深二变高，及其深的深度使得该网络拥有强大的表达能力。<br>但不是网络层数越多，效果就越好。随着网络深度的加深，(1)会出现梯度衰减的问题，在反向传播时，使梯度不断下降直至消失，对于权重的更新会越来越慢，直至不更新。(2)并且较深层网络比较浅的网络有更高的训练误差，称为退化问题。<br>深度残差网络主要思想很简单，就是在标准的前馈卷积网络上，加一个跳跃绕过一些层的连接。每绕过一层就产生一个残差块(residual block)，卷积层预测加输入张量的残差。普通的深度前馈网络难以优化。除了深度，所加层也使得training和validation的错误率增加，即使用上了batch normalization也是如此。残差神经网络由于存在shorcut connections，网络间的数据流通更为顺畅。残差网络结构的解决方案是，增加卷积层输出求和的捷径连接。<br>实验表明，残差网络更容易优化，并且能够通过增加相当的深度来提高准确率。核心是解决了增加深度带来的副作用（退化问题），这样能够通过单纯地增加网络深度，来提高网络性能。   </p>
@@ -399,7 +426,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 卷积</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">1.1. 填充</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">1.2. 步幅</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">1.3. 小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.4.</span> <span class="toc-text">1.4. 通道channel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.5.</span> <span class="toc-text">1.5. 池化层</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. CNN五大经典模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">2.1. LeNet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">2.2. AlexNet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">2.3. GoogleNet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.4.</span> <span class="toc-text">2.4. VGG</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.5.</span> <span class="toc-text">2.5. NiN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.6.</span> <span class="toc-text">2.6. 批量归一化层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.7.</span> <span class="toc-text">2.7. 残差网络ResNet</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 卷积</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">1.1. 填充</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">1.2. 步幅</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">1.3. 小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.4.</span> <span class="toc-text">1.4. 通道channel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.5.</span> <span class="toc-text">1.5. 池化层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.6.</span> <span class="toc-text">1.6. CNN应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. CNN五大经典模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">2.1. LeNet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">2.2. AlexNet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">2.3. GoogleNet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.4.</span> <span class="toc-text">2.4. VGG</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.5.</span> <span class="toc-text">2.5. NiN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.6.</span> <span class="toc-text">2.6. 批量归一化层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.7.</span> <span class="toc-text">2.7. 残差网络ResNet</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -537,10 +564,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">HBase</a>
               </li>
              
@@ -550,6 +573,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">热点问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Markdown学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -589,15 +616,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -610,14 +645,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">GPU服务器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
