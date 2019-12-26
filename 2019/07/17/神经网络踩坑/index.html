@@ -16,7 +16,7 @@
 <meta property="og:description" content="title: 神经网络踩坑date: 2019-07-17T16:08:20.000Zcategories: Deep Learningtags:  训练经验 踩坑   参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc716bbd2198cd7b14">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/sigmoid.png">
-<meta property="og:updated_time" content="2019-12-14T09:35:45.856Z">
+<meta property="og:updated_time" content="2019-12-26T08:38:29.606Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
 <meta name="twitter:description" content="title: 神经网络踩坑date: 2019-07-17T16:08:20.000Zcategories: Deep Learningtags:  训练经验 踩坑   参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc716bbd2198cd7b14">
@@ -222,12 +222,14 @@
 </li>
 <li><strong>Dropout的使用</strong><br>丢弃层会将隐藏单元中的值以一定的概率丢弃，即被设置为0，起到正则化的作用，用来应对过拟合。在测试模型时，为了拿到更加确定的结果，一般不使用丢弃法，只在训练模型下才使用dropout。在训练模型时，将靠近输入层的丢弃概率设的小一点。dropout一般放在全连接层后面。   </li>
 <li>调参经验<br><a href="https://www.cnblogs.com/kamekin/p/10163743.html" target="_blank" rel="noopener">调参经验</a><br><a href="https://mp.weixin.qq.com/s/whbQ3b7NcA9Ifvb9aymkbQ" target="_blank" rel="noopener">33 个神经网络「炼丹」技巧</a></li>
-<li>EarlyStopping<br>早停是在模型在val_loss，或者val_acc,val_mae等指标上进行。传入2个参数，patience和delta。<ul>
+<li>EarlyStopping<br><a href="https://github.com/dmlc/dgl/tree/master/examples/mxnet/gat" target="_blank" rel="noopener">GAT官方实现EarlyStopping的完整代码</a><br>早停是在模型在val_loss，或者val_acc,val_mae等指标上进行。传入2个参数，patience和delta。<ul>
 <li>如果val_loss在连续patience epoch内，val_loss都大于最好的val_loss，即val_loss在增大，模型出现过拟合。</li>
-<li>或者当前val_loss&gt;最好的val_loss-delta，即val_loss虽然减少，但是减少很小，基本可以视为不变。</li>
+<li>当前val_loss&gt;最好的val_loss-delta，有2种情况，<br>  （1）当前val_loss上升，counter+1<br>  （2）val_loss虽然减少，但是减少很小，基本可以视为不变，counter+1，</li>
+<li>当前val_loss &lt;= 最好的val_loss-delta,说明val_loss一直在下降，即更新最高的val_loss</li>
 <li>总结：即val_loss在连续patience内，都没有显著下降(current_loss &lt;= best_loss - delta)，则停止训练</li>
 </ul>
 </li>
+<li>卷积尺寸大小变化<br>（1）2D卷积，输入和输出形状一样：一般kernel_size=(3,3),padding=1,stride=1，输入和输出的形状一样<br>（2）2D卷积，输入和输出高和宽减半：kernel_size=(3,3),padding=1,stride=2，输出的形状是输入一半<br>（3）3D卷积，一般kernel_size=(3,3,3),padding=1,stride=1，输入和输出的形状一样<br>（4）3D卷积，一般kernel_size=(1,1,1),padding=0,stride=1，输入和输出的形状一样</li>
 </ol>
 
       
@@ -550,23 +552,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -587,6 +581,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -614,15 +616,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">gluon</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">分布式调优</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
               </li>
             
             <div class="clearfix"></div>

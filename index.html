@@ -151,6 +151,63 @@
           <div id="js-content" class="content-ll">
 			
   
+    <article id="post-leecode-tirck" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: leecode tirck<br>date: 2019-12-26T19:25:57.000Z<br>categories: null<br>tags:</p>
+<ul>
+<li>算法</li>
+<li>Python</li>
+</ul>
+<hr>
+<h1><span id="简介">简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;最近开始刷Leecode，使用Python语言，踩了很多坑，在此记录。    </p>
+<h1><span id="一个萝卜一个坑">一个萝卜一个坑</span></h1><h2><span id="int函数">int函数</span></h2><p>int()函数用于将一个字符串或数字转换为整型。<br><code>int(x,base=10)</code>:x—字符串或数字，base—进制数，默认十进制。 如果显示的指定base参数，x必须为str。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int(<span class="number">3</span>) = <span class="number">3</span></span><br><span class="line">int(<span class="number">3.6</span>) = <span class="number">3</span></span><br><span class="line">int(<span class="string">'12'</span>,<span class="number">16</span>) = <span class="number">18</span></span><br><span class="line">int(<span class="string">'11'</span>,<span class="number">2</span>) = <span class="number">3</span><span class="comment">#将字符串解析为2进制</span></span><br><span class="line">```    </span><br><span class="line"><span class="comment">## bin函数  </span></span><br><span class="line">bin()返回一个整数int的二进制表示，返回类型str</span><br><span class="line">`bin(x)`  </span><br><span class="line">```python   </span><br><span class="line"><span class="comment">#返回的结果前2个字符是固定的'0b'，后面才是真正的值。</span></span><br><span class="line">bin(<span class="number">10</span>) = <span class="string">'0b1010'</span></span><br><span class="line">bin(<span class="number">20</span>) = <span class="string">'0b10100'</span></span><br></pre></td></tr></table></figure></p>
+<h2><span id="zip函数">zip函数</span></h2><p>zip()接受一系列(多个，个数不固定)可迭代对象(最常用list,tuple)作为参数，将多个对象中，对应位置的元素打包成一个个tuple，然后返回由这些tuple组成的list。若传入参数中长度不一样，则返回liist的长度和参数中最短的相同。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="string">'wang'</span>,<span class="string">'bei'</span>]</span><br><span class="line">y = [<span class="string">'lei'</span>,<span class="string">'xiao'</span>,<span class="string">'kang'</span>]</span><br><span class="line">list(zip(x,y))</span><br><span class="line">输出：[(<span class="string">'wang'</span>,<span class="string">'lei'</span>),(<span class="string">'bei'</span>,<span class="string">'xiao'</span>)] </span><br><span class="line"></span><br><span class="line">x = <span class="string">'wang'</span></span><br><span class="line">y = <span class="string">'lei'</span></span><br><span class="line">list(zip(x,y))</span><br><span class="line">输出：[(<span class="string">'w'</span>,<span class="string">'l'</span>),(<span class="string">'a'</span>,<span class="string">'e'</span>),(<span class="string">'n'</span>,<span class="string">'i'</span>)]  </span><br><span class="line"></span><br><span class="line"><span class="comment">#假设zip传入的参数是x，y，zip依次将(x[0],y[0]),(x[1],y[1])..</span></span><br><span class="line"><span class="comment">#以可迭代对象返回，可强制转换为list或tuple</span></span><br><span class="line">```  </span><br><span class="line">zip(*)传入的参数是zip()的返回值类型，从&lt;zip\&gt;类型中每一个tuple中，取出第<span class="number">0</span>个元素组成一个list，再取出第<span class="number">1</span>个元素组成一个list，即zip(\*)返回值是一个大list，里面有<span class="number">2</span>个tuple  </span><br><span class="line">```python    </span><br><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">b = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]</span><br><span class="line">zipped = list(zip(a,b))</span><br><span class="line"><span class="comment">#zipped = [(1,'a'),(2,'b'),(3,'c')]</span></span><br><span class="line">c = list(zip(*zipped))</span><br><span class="line"><span class="comment">#c = [(1,2,3),('a','b','c')]</span></span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/26/leecode-tirck/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-nni" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -340,7 +397,7 @@
 <li>DGL</li>
 </ul>
 <hr>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>&ensp;&ensp;&ensp;&ensp;Deep Graph Library(DGL),一款面向图神经网络以及图机器学习的全新框架。DGL基于主流框架进行开发。用户可以使用他们偏爱的框架编写常见的CNN和注意力层，而当遇到图相关的计算时可以切换到DGL。用户和DGL的交互主要通过自定义函数UDF（user-defined function）。目前DGL支持Pytorch和MXNet/Gluon作为系统后端。<br></p>
+<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;Deep Graph Library(DGL),一款面向图神经网络以及图机器学习的全新框架。DGL基于主流框架进行开发。用户可以使用他们偏爱的框架编写常见的CNN和注意力层，而当遇到图相关的计算时可以切换到DGL。用户和DGL的交互主要通过自定义函数UDF（user-defined function）。目前DGL支持Pytorch和MXNet/Gluon作为系统后端。<br></p>
         
           <a class="article-more-a" href="/2019/11/04/DGL/#more">more >></a>
         
@@ -655,64 +712,6 @@
 
 
   
-    <article id="post-论文总结" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: 论文总结<br>date: 2019-08-02T10:52:51.000Z<br>categories: 论文阅读笔记<br>tags:</p>
-<ul>
-<li>时空领域</li>
-<li>GCN</li>
-<li>Flow</li>
-</ul>
-<hr>
-<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>&ensp;&ensp;&ensp;&ensp;这学期看了很多论文，下面把看过的论文总结一下。<br></p>
-        
-          <a class="article-more-a" href="/2019/08/02/论文总结/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/02/论文总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -888,23 +887,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -925,6 +916,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -952,15 +951,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">gluon</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">分布式调优</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
               </li>
             
             <div class="clearfix"></div>

@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/02/05/CNN+残差/ResNet5.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/05/CNN+残差/ResNet6.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/05/CNN+残差/ResNet7.png">
-<meta property="og:updated_time" content="2019-11-23T10:19:02.109Z">
+<meta property="og:updated_time" content="2019-12-20T03:21:40.640Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CNN和残差">
 <meta name="twitter:description" content="1. 卷积卷积操作需要有1一个数组和一个卷积核，假设卷积核的形状为pxq，代表卷积核的高和宽。二维卷积层的输入输出用4维表示，格式为(样本，通道，高，宽)">
@@ -217,7 +217,7 @@
 <h2><span id="15-池化层">1.5. 池化层</span></h2><p>pooling层(池化层)的输入一般是上一个卷积层，主要有以下2个作用：  </p>
 <ol>
 <li>保留主要的特征，同时减少下一层的参数和计算量，防止过拟合</li>
-<li>保持某种不变性，包括平移，旋转，常用的平均池化和最大池化<br><strong>池化层的输出通道数和输入通道数相同</strong>       <h2><span id="16-cnn应用">1.6. CNN应用</span></h2>（1）输入和输出形状一样：一般kernel_size=(3,3),padding=1,stride=1，输入和输出的形状一样<br>（2）输入和输出高和宽减半：kernel_size=(3,3),padding=1,stride=2<h1><span id="2-cnn五大经典模型">2. CNN五大经典模型</span></h1></li>
+<li>保持某种不变性，包括平移，旋转，常用的平均池化和最大池化<br><strong>池化层的输出通道数和输入通道数相同</strong>       <h2><span id="16-cnn应用">1.6. CNN应用</span></h2>（1）2D卷积，输入和输出形状一样：一般kernel_size=(3,3),padding=1,stride=1，输入和输出的形状一样<br>（2）2D卷积，输入和输出高和宽减半：kernel_size=(3,3),padding=1,stride=2，输出的形状是输入一半<br>（3）3D卷积，一般kernel_size=(3,3,3),padding=1,stride=1，输入和输出的形状一样<br>（4）3D卷积，一般kernel_size=(1,1,1),padding=0,stride=1，输入和输出的形状一样<h1><span id="2-cnn五大经典模型">2. CNN五大经典模型</span></h1></li>
 <li>Lenet：1986年</li>
 <li>Alexnet：2012年</li>
 <li>GoogleNet：2014年</li>
@@ -616,23 +616,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,6 +645,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -680,15 +680,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">gluon</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">分布式调优</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
               </li>
             
             <div class="clearfix"></div>

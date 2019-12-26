@@ -15,6 +15,8 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="title: Attentiondate: 2019-03-12T10:34:53.000Zcategories: NLPtags:  NLP Attention   1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;主要介绍Attention的机制，以及在NLP中的应用。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/Attention/function.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/Attention/function_score.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/Attention/st.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/Attention/attention.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/Attention/ct.png">
@@ -23,11 +25,11 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/12/Attention/e.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/Attention/a.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/Attention/g.png">
-<meta property="og:updated_time" content="2019-11-05T07:28:43.273Z">
+<meta property="og:updated_time" content="2019-12-20T06:52:22.364Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
 <meta name="twitter:description" content="title: Attentiondate: 2019-03-12T10:34:53.000Zcategories: NLPtags:  NLP Attention   1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;主要介绍Attention的机制，以及在NLP中的应用。">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/12/Attention/st.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/12/Attention/function.png">
   
     <link rel="alternative" href="/atom.xml" title="Echo&#39;s blog" type="application/atom+xml">
   
@@ -175,19 +177,29 @@
 <ul>
 <li><a href="#1-%e7%ae%80%e4%bb%8b">1. 简介</a></li>
 <li><a href="#2-attention">2. Attention</a></li>
-<li><a href="#3-attention%e5%9c%a8nlp%e7%9a%84%e5%ba%94%e7%94%a8">3. Attention在NLP的应用</a></li>
-<li><a href="#attention%e5%88%86%e7%b1%bb">Attention分类</a><ul>
-<li><a href="#soft-attenion">Soft Attenion</a></li>
-<li><a href="#hard-attention">Hard Attention</a></li>
-<li><a href="#global-attention">Global Attention</a></li>
-<li><a href="#local-attention">Local Attention</a></li>
-<li><a href="#self-attention">Self Attention</a></li>
+<li><a href="#3-attention%e7%9a%84%e8%ae%a1%e7%ae%97%e5%85%ac%e5%bc%8f">3. Attention的计算公式</a></li>
+<li><a href="#4-attention%e5%9c%a8nlp%e7%9a%84%e5%ba%94%e7%94%a8">4. Attention在NLP的应用</a></li>
+<li><a href="#5-attention%e5%88%86%e7%b1%bb">5. Attention分类</a><ul>
+<li><a href="#51-soft-attenion">5.1. Soft Attenion</a></li>
+<li><a href="#52-hard-attention">5.2. Hard Attention</a></li>
+<li><a href="#53-global-attention">5.3. Global Attention</a></li>
+<li><a href="#54-local-attention">5.4. Local Attention</a></li>
+<li><a href="#55-self-attention">5.5. Self Attention</a></li>
 </ul>
 </li>
 </ul>
 <!-- /TOC -->
-<h1><span id="2-attention">2. Attention</span></h1><p><a href="https://blog.csdn.net/BVL10101111/article/details/78470716" target="_blank" rel="noopener">Attentions详细讲解</a><br>Attention一般有2种，（1）：Location-based Attention，这里的attention没有其他额外需要关注的对象，即多个$h_i$内部做attention。（2）Concatenation-based Attention：有额外需要关注的对象，即多个$h_i$对$h_t$的attention。我们平时用第2种比较多一些。</p>
-<h1><span id="3-attention在nlp的应用">3. Attention在NLP的应用</span></h1><p>&ensp;&ensp;&ensp;&ensp;在上面的编码器-解码器中，从编码器传到解码器的背景变量$c$是不变的。就是说解码器在翻译第一个词和第二个词是c是不变的。但是实际情况中，比如英语they are watching。翻译成法语是：IIs regardent。比如在翻译IIS时，和they are更相关，在翻译regardent和watching更相关，所以希望把背景变量$c$设置成一个变化的值。当翻译IIS时，对编码器的隐藏变量$h_1,h_2$更看重，当翻译regardent对隐藏变量$h_3$更看重，所以就需要在解码器中，在不同时间步时，对编码器的隐藏变量$h_1,h_2,h_3$分配不同的权重，加权平均得到背景变量$c$。<br>&ensp;&ensp;&ensp;&ensp;原先解码器隐藏层变量的计算是上一时刻的输出$y_{t<code>-1}$，上一时刻的隐藏状态$s_{t</code>-1}$以及背景变量$c$，在加入attention机制后，这里的背景变量变成了$c_{t`}$，每一步的背景变量都不一样。</p>
+<h1><span id="2-attention">2. Attention</span></h1><p><a href="https://blog.csdn.net/BVL10101111/article/details/78470716" target="_blank" rel="noopener">Attentions详细讲解</a><br>Attention一般有2种，（1）：Location-based Attention，这里的attention没有其他额外需要关注的对象，即多个$h_i$内部做attention。（2）Concatenation-based Attention：有额外需要关注的对象，即多个$h_i$对$h_t$的attention。我们平时用第2种比较多一些。   </p>
+<h1><span id="3-attention的计算公式">3. Attention的计算公式</span></h1><p>&ensp;&ensp;&ensp;&ensp;在计算Attention分数时，有很多中计算方式，包括addictive，concat，dot product。其中涉及点积运算的评分函数的思路是度量2个向量间的相似度。  以下展示了6种计算Attention分数的方法：</p>
+<p><img src="/2019/03/12/Attention/function.png" alt="">  </p>
+<ol>
+<li>Additive/Concat:将2个向量拼接在一起，然后输入到全连接中，得到attention分数，$score=W[h_i:h_j]$  </li>
+<li>Dot product:2个向量点积计算attention score，$score = h_i . h_j^T$</li>
+<li>Scaled dot product:缩放点积，$score = \tfrac{h_i . h_j^T}{\sqrt{n}}$</li>
+<li>Location-based Attention:这里Attention涉及的对象只有1个，自己和自己Attention计算得到分数。</li>
+<li>Cos：2个向量Cos运算</li>
+<li>General<br><img src="/2019/03/12/Attention/function_score.png" alt=""><h1><span id="4-attention在nlp的应用">4. Attention在NLP的应用</span></h1>&ensp;&ensp;&ensp;&ensp;在上面的编码器-解码器中，从编码器传到解码器的背景变量$c$是不变的。就是说解码器在翻译第一个词和第二个词是c是不变的。但是实际情况中，比如英语they are watching。翻译成法语是：IIs regardent。比如在翻译IIS时，和they are更相关，在翻译regardent和watching更相关，所以希望把背景变量$c$设置成一个变化的值。当翻译IIS时，对编码器的隐藏变量$h_1,h_2$更看重，当翻译regardent对隐藏变量$h_3$更看重，所以就需要在解码器中，在不同时间步时，对编码器的隐藏变量$h_1,h_2,h_3$分配不同的权重，加权平均得到背景变量$c$。<br>&ensp;&ensp;&ensp;&ensp;原先解码器隐藏层变量的计算是上一时刻的输出$y_{t<code>-1}$，上一时刻的隐藏状态$s_{t</code>-1}$以及背景变量$c$，在加入attention机制后，这里的背景变量变成了$c_{t`}$，每一步的背景变量都不一样。  </li>
+</ol>
 <p><img src="/2019/03/12/Attention/st.png" alt=""><br><img src="/2019/03/12/Attention/attention.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;下面看一下$c_{t<code>}$是怎么设计的。 就是编码器的不同时刻的隐藏状态的加权平均。只是这里的权重$\alpha_{t</code>t}$在每一个时刻是一个变化的值。  注意这里的$t<code>$是输出(解码器)的时间戳，$t$是输入(编码器)的时间戳。首先我们先固定$t</code>$，下面的式子中$t<code>$是不变的。在计算$c_{t</code>}$时，变化$t从1到T$，遍历所有的$h_t$，然后给定一个$h_t$，怎么求$h_t$对应的权重$\alpha_{t`t}$。</p>
 <p><img src="/2019/03/12/Attention/ct.png" alt=""><br>例如计算解码器在第$t’$个时间步的背景向量$t’$，使用解码器$t’-1$个时间步的隐藏状态$S_{t’-1}$作为query，将编码器所有时间步的隐藏状态$h_0,…h_t$作为key和value，先将$S_{t’-1}$和$h_0,…h_t$做Attention，然后将Attention score使用$softmax$归一化，再和$h_0,…h_t$加权求和，得到解码器中第$t’$个时间步的背景向量$c_{t’}$<br><img src="/2019/03/12/Attention/nlp.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;下面我们看一下$\alpha_{t<code>t}$是怎么来表示。加权平均就要使所有的权值加起来为1，所以用到softmax运算。softmax中的每一个值是
 $e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏变量$s_{t`-1}$和编码器所有时间步的隐藏变量$h_t$计算得到。</p>
@@ -195,11 +207,11 @@ $e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏
 <p>&ensp;&ensp;&ensp;&ensp;注意力机制对函数$a$设计有很多。下面是一种设计方法。首先一定要有$s_{t<code>-1}$和编码器所有时间步的隐藏状态$h_t$。然后引入了3个模型参数$v^T,W_s,W_h$,这3个参数通过训练得到。对$s_{t</code>-1}$做一个projection，对$h_t$做一个projection，使得projection之后的向量长度相等，这样就可以加在一起，然后使用tanh激活函数，这时的向量长度还是projection之后的长度，但是我们希望$e_{t`t}$是一个标量，那就再引入向量$v^T$，和右边的向量做一个点乘得到一个标量。其实注意力可以通过多层感知机（全连接层）得到。  </p>
 <p><img src="/2019/03/12/Attention/a.png" alt=""><br>下面介绍计算解码器的隐藏变量时的函数$g$是什么？g可以看到是一个GRU单元。</p>
 <p><img src="/2019/03/12/Attention/g.png" alt=""><br>其中$y_{t’-1}$是解码器上一时间步的输出，可以看做当前时间步的输入，$s_{t’-1}$是解码器上一时间步的隐藏状态，$c_{t’}$是当前时间步的背景向量。<br>这里总结一下模型的参数都有哪些：编码器中的W和b，上式中解码器中的W和b，还有计算attention中的$v^T,W_s,W_h$。  </p>
-<h1><span id="attention分类">Attention分类</span></h1><h2><span id="soft-attenion">Soft Attenion</span></h2><p>加权求和，可以求导，可以放到模型中训练，用的比较多</p>
-<h2><span id="hard-attention">Hard Attention</span></h2><p>Hard attention 是一个随机的过程，Hard attention不会选择整个encoder的隐层输出作为其输入，Hard Attention会依赖概率$𝑆_𝑖$来采样输入端的隐状态的一部分来进行计算，而不是整个encoder 的隐状态。由于其是一个随机过程，所以不能直接求导，为了实现梯度的反向传播，需要采用蒙特卡洛采样等方法来估算模块的梯度。  </p>
-<h2><span id="global-attention">Global Attention</span></h2><p>Global attention和传统的attention model是一样的，所有的hidden state都被用于计算Context vector的权重，其长度等于Encoder输入的长度。<br>缺点：encoder很长时计算量大   </p>
-<h2><span id="local-attention">Local Attention</span></h2><p>并不是使用Encoder中所有时间步的隐藏状态做Attention，只使用一部分和decoder做Attention。  </p>
-<h2><span id="self-attention">Self Attention</span></h2><p>Q,K,V都是自己本身，即自己对自己的注意力机制。有以下优点：  </p>
+<h1><span id="5-attention分类">5. Attention分类</span></h1><h2><span id="51-soft-attenion">5.1. Soft Attenion</span></h2><p>加权求和，可以求导，可以放到模型中训练，用的比较多</p>
+<h2><span id="52-hard-attention">5.2. Hard Attention</span></h2><p>Hard attention 是一个随机的过程，Hard attention不会选择整个encoder的隐层输出作为其输入，Hard Attention会依赖概率$𝑆_𝑖$来采样输入端的隐状态的一部分来进行计算，而不是整个encoder 的隐状态。由于其是一个随机过程，所以不能直接求导，为了实现梯度的反向传播，需要采用蒙特卡洛采样等方法来估算模块的梯度。  </p>
+<h2><span id="53-global-attention">5.3. Global Attention</span></h2><p>Global attention和传统的attention model是一样的，所有的hidden state都被用于计算Context vector的权重，其长度等于Encoder输入的长度。<br>缺点：encoder很长时计算量大   </p>
+<h2><span id="54-local-attention">5.4. Local Attention</span></h2><p>并不是使用Encoder中所有时间步的隐藏状态做Attention，只使用一部分和decoder做Attention。  </p>
+<h2><span id="55-self-attention">5.5. Self Attention</span></h2><p>Q,K,V都是自己本身，即自己对自己的注意力机制。有以下优点：  </p>
 <ol>
 <li>可以捕获同一个句子中单词之间的句法特征和语义特征。</li>
 <li>更容易捕获句子中长距离的相互依赖特征，而RNN则需要依次按顺序计算，捕获的可能性降低。</li>
@@ -337,7 +349,7 @@ $e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. Attention</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. Attention在NLP的应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">Attention分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.1.</span> <span class="toc-text">Soft Attenion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.2.</span> <span class="toc-text">Hard Attention</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.3.</span> <span class="toc-text">Global Attention</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.4.</span> <span class="toc-text">Local Attention</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.5.</span> <span class="toc-text">Self Attention</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">2. Attention</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">3. Attention的计算公式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">4. Attention在NLP的应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">5.</span> <span class="toc-text">5. Attention分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.1.</span> <span class="toc-text">5.1. Soft Attenion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.2.</span> <span class="toc-text">5.2. Hard Attention</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.3.</span> <span class="toc-text">5.3. Global Attention</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.4.</span> <span class="toc-text">5.4. Local Attention</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">5.5.</span> <span class="toc-text">5.5. Self Attention</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -527,23 +539,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -564,6 +568,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -591,15 +603,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">gluon</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">分布式调优</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
               </li>
             
             <div class="clearfix"></div>

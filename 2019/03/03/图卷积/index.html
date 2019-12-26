@@ -43,7 +43,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/改进1.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/图卷积3.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/图卷积4.png">
-<meta property="og:updated_time" content="2019-12-17T10:27:32.882Z">
+<meta property="og:updated_time" content="2019-12-23T11:45:19.971Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图卷积">
 <meta name="twitter:description" content="1. 图卷积&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;看了很久关于图卷积的内容，但总觉得自己理解不深刻，在这里把自己的一些想法写出来，也算把图卷积的内容梳理一下。参考资料">
@@ -313,7 +313,7 @@
 <p><img src="/2019/03/03/图卷积/改进1.png" alt=""> </p>
 <p>&ensp;&ensp;&ensp;&ensp;第二代图卷积。$g_\theta$是关于特征值的一个函数，以前是直接把特征值变成卷积核，现在把每一个特征值上都乘上一个特征值矩阵的k次幂，然后把0到k-1次幂加到一起，构造成一个新的卷积核。把这个卷积核代入，得到右侧这个式子，右边这个式子不需要做特征值分解，直接把L连乘k次就可以了。<strong>这个卷积核是需要训练的，其中的参数是</strong>$\theta_k$<strong>通过初始化赋值再通过反向传播进行调整</strong>。所以这个一个改进，这个式子比前面那个式子的时间复杂度低。但是右边的这个时间复杂度也不低，因为涉及到L的k次幂，现在就想办法把右边这个式子的时间复杂度降低。   </p>
 <h3><span id="324-第三代图卷积">3.2.4. 第三代图卷积</span></h3><p><img src="/2019/03/03/图卷积/图卷积3.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;ICLR2017<a href="https://arxiv.org/pdf/1609.02907.pdf" target="_blank" rel="noopener">Semi-supervised Classification with Graph Convolutional Networks</a>这篇论文就对上面那个式子进行改进，让K=1，最大特征值=2，这个式子就变成了右边这个式子，继续化简，让$\theta_0$和$\theta_1$互为相反数，称为一个权重，为什么能这么变呢，因为他相信训练的时候卷积核就可以学出互为相反数的参数。这样只考虑一阶邻居，如果堆叠2个卷积层的话，就可以考虑2阶邻居了。    </p>
-<p><img src="/2019/03/03/图卷积/图卷积4.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;然后这篇论文又对刚刚的那个式子作一个归一化的trick，就是把邻接矩阵A加上一个单位矩阵，原先A是一个邻接矩阵，对角线上全为0，现在加上一个1，就是说节点自己到自己是没有边的，现在是自己有一条边又到达了自己，也就是增加一个自连接，然后重新计算一个度矩阵，然后就得到重新归一化的拉普拉斯矩阵，然后代入化成矩阵相乘的形式就是右边这个式子。这样卷积就定义完了，其中输入就是图信号X，卷积核就是Θ，前面的东西就是一个常量，只要拥有这三部分就可以得到GCN的卷积。卷积定义完了，然后加一个relu激活函数，这样一层图卷积就定义完了，如果要叠加一层，就是把上一层图卷积输出后的表示作为图卷积的输入，再做一次卷积。因为这篇论文做的是分类任务，所以要输出每个节点属于某个类的概率，所以用一个softmax就可以输出概率。<br>&ensp;&ensp;&ensp;&ensp;这就是现在谱图卷积计算的式子，实际上就是几个矩阵连乘，并没有卷积核滑动的概念。</p>
+<p><img src="/2019/03/03/图卷积/图卷积4.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;然后这篇论文又对刚刚的那个式子作一个归一化的trick，就是把邻接矩阵A加上一个单位矩阵，原先A是一个邻接矩阵，对角线上全为0，现在加上一个1，就是说节点自己到自己是没有边的，现在是自己有一条边又到达了自己，也就是增加一个自连接，然后重新计算一个度矩阵，然后就得到重新归一化的拉普拉斯矩阵，然后代入化成矩阵相乘的形式就是右边这个式子。这样卷积就定义完了，其中输入就是图信号X，卷积核就是Θ，前面的东西就是一个常量，只要拥有这三部分就可以得到GCN的卷积。卷积定义完了，然后加一个relu激活函数，这样一层图卷积就定义完了，如果要叠加一层，就是把上一层图卷积输出后的表示作为图卷积的输入，再做一次卷积。因为这篇论文做的是分类任务，所以要输出每个节点属于某个类的概率，所以用一个softmax就可以输出概率。<br>&ensp;&ensp;&ensp;&ensp;形象的解释：每个节点拿到邻居节点信息然后聚合到自身Embedding上。在上面的公式中，$\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}$可以看做是归一化后的邻接矩阵。$X\Theta$相当于对原始节点的Embedding做一次线性变换，左乘邻接矩阵表示对每个节点来说，该节点的特征变为邻居节点特征相加后的结果。<br>&ensp;&ensp;&ensp;&ensp;这就是现在谱图卷积计算的式子，实际上就是几个矩阵连乘，并没有卷积核滑动的概念。</p>
 
       
 
@@ -657,23 +657,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Multi-Graph Convolutional</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">时空领域</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -694,6 +686,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">虚拟环境</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SpringMVC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">拦截器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -721,15 +721,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">gluon</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">分布式调优</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GCN</a>
               </li>
             
             <div class="clearfix"></div>
