@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/archives/index.html</loc>
+    
+    <lastmod>2019-12-29T08:01:02.740Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/index.html</loc>
+    
+    <lastmod>2019-12-29T08:00:49.775Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/index.html</loc>
+    
+    <lastmod>2019-12-29T08:00:34.475Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/11/02/Transformer/</loc>
+    
+    <lastmod>2019-12-29T07:56:04.652Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/12/26/leecode-tirck/</loc>
     
     <lastmod>2019-12-26T13:30:37.845Z</lastmod>
@@ -40,13 +68,6 @@
     <loc>http://yoursite.com/2019/02/05/CNN+%E6%AE%8B%E5%B7%AE/</loc>
     
     <lastmod>2019-12-20T03:21:40.640Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/11/02/Transformer/</loc>
-    
-    <lastmod>2019-12-17T14:12:24.596Z</lastmod>
     
   </url>
   
@@ -103,27 +124,6 @@
     <loc>http://yoursite.com/2019/08/02/%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/</loc>
     
     <lastmod>2019-11-05T01:31:01.806Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/archives/index.html</loc>
-    
-    <lastmod>2019-11-02T08:57:54.934Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/index.html</loc>
-    
-    <lastmod>2019-11-02T08:57:35.601Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
-    
-    <lastmod>2019-11-02T08:57:01.709Z</lastmod>
     
   </url>
   
