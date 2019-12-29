@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/11/25/nni/</loc>
+    
+    <lastmod>2019-12-29T08:42:41.169Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/12/26/leecode-tirck/</loc>
     
     <lastmod>2019-12-29T08:35:59.649Z</lastmod>
@@ -68,13 +75,6 @@
     <loc>http://yoursite.com/2019/02/05/CNN+%E6%AE%8B%E5%B7%AE/</loc>
     
     <lastmod>2019-12-20T03:21:40.640Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/11/25/nni/</loc>
-    
-    <lastmod>2019-12-14T08:04:36.098Z</lastmod>
     
   </url>
   
