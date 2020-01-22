@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Spark,Python,分布式调优,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Echo's blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序，一些常用的操作。">
+<meta name="keywords" content="Spark,Python,分布式调优">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pyspark">
+<meta property="og:url" content="http://yoursite.com/2019/04/20/pyspark/index.html">
+<meta property="og:site_name" content="Echo&#39;s blog">
+<meta property="og:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序，一些常用的操作。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/04/20/pyspark/executor.png">
+<meta property="og:updated_time" content="2019-11-02T06:39:49.682Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pyspark">
+<meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用Python编写Spark程序，一些常用的操作。">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/20/pyspark/executor.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/20/pyspark/">
+
+
+
+
+
+  <title>pyspark | Echo's blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b759ac2a7fa45129e3ef060bf68259f0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Echo's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">远方到底有多远</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/20/pyspark/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Echo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">pyspark</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-20T12:40:56+08:00">
+                2019-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/分布式平台/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式平台</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  6.8k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;使用Python编写Spark程序，一些常用的操作。<br><a id="more"></a><br><!-- TOC --></p>
+<ul>
+<li><a href="#1-%e7%ae%80%e4%bb%8b">1. 简介</a></li>
+<li><a href="#2-%e9%87%8d%e8%a6%81%e6%a6%82%e5%bf%b5%e5%92%8c%e6%9c%af%e8%af%ad">2. 重要概念和术语</a></li>
+<li><a href="#3-%e6%89%a7%e8%a1%8c%e6%a8%a1%e5%bc%8f">3. 执行模式</a><ul>
+<li><a href="#31-standalone%e6%a8%a1%e5%bc%8f">3.1. standalone模式</a></li>
+<li><a href="#32-yarn%e6%a8%a1%e5%bc%8f">3.2. Yarn模式</a></li>
+<li><a href="#33-%e5%8f%82%e6%95%b0%e8%b0%83%e4%bc%98">3.3. 参数调优</a></li>
+<li><a href="#executor">Executor</a></li>
+</ul>
+</li>
+<li><a href="#4-%e5%88%9b%e5%bb%basc">4. 创建sc</a></li>
+<li><a href="#5-rdd%e8%bd%ac%e6%8d%a2">5. RDD转换</a><ul>
+<li><a href="#51-%e8%bd%ac%e6%8d%a2%e6%93%8d%e4%bd%9c">5.1. 转换操作</a></li>
+<li><a href="#52-%e8%a1%8c%e5%8a%a8%e6%93%8d%e4%bd%9c">5.2. 行动操作</a></li>
+<li><a href="#53-%e6%8c%81%e4%b9%85%e5%8c%96">5.3. 持久化</a></li>
+</ul>
+</li>
+<li><a href="#6-%e5%88%86%e5%8c%ba">6. 分区</a></li>
+<li><a href="#7-%e5%88%9b%e5%bb%bardd">7. 创建RDD</a><ul>
+<li><a href="#71-%e9%80%9a%e8%bf%87paralize%e5%88%9b%e5%bb%bardd">7.1. 通过paralize创建RDD</a></li>
+<li><a href="#72-%e8%af%bb%e6%96%87%e6%9c%ac%e6%96%87%e4%bb%b6%e5%88%9b%e5%bb%bardd">7.2. 读文本文件创建RDD</a></li>
+</ul>
+</li>
+<li><a href="#8-map%e5%92%8cflatmap">8. map和flatMap</a></li>
+<li><a href="#9-flatmap%e5%92%8cflatmapvalues">9. flatMap和flatMapValues</a></li>
+<li><a href="#10-reducebykey%e5%92%8cgroupbykey">10. reduceByKey和groupByKey</a></li>
+<li><a href="#11-sortby%e5%92%8csortbykey">11. sortBy和SortByKey</a></li>
+<li><a href="#12-%e5%b0%86spark%e8%ae%a1%e7%ae%97%e7%9a%84%e7%bb%93%e6%9e%9c%e5%ad%98%e5%82%a8%e5%9c%a8%e6%96%87%e4%bb%b6%e4%b8%ad">12. 将Spark计算的结果存储在文件中</a><ul>
+<li><a href="#121-%e5%86%99%e5%85%a5%e5%88%b0%e6%9c%8d%e5%8a%a1%e5%99%a8%e6%9c%ac%e5%9c%b0%e6%96%87%e4%bb%b6%e4%b8%ad">12.1. 写入到服务器本地文件中</a></li>
+<li><a href="#122-%e5%86%99%e5%85%a5%e5%88%b0hdfs%e6%96%87%e4%bb%b6%e4%b8%ad">12.2. 写入到HDFS文件中</a></li>
+<li><a href="#123-%e6%89%93%e5%8d%b0rdd%e5%85%83%e7%b4%a0">12.3. 打印RDD元素</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1><span id="2-重要概念和术语">2. 重要概念和术语</span></h1><ul>
+<li>Master和Worker是物理节点，Driver和Executor是进程。<br>搭建Spark集群的时候我们就已经设置好了Mater节点和Worker节点。一个集群有多个Master节点和多个Worker节点。<br>Master节点常驻Mater守护进程，负责管理worker节点，我们从master节点提交应用。<br>Worker节点常驻Worker守护进程，与Master节点通信，并且管理Executor进程。<br>PS：一台机器可以同时作为master和worker节点（举个例子：你有四台机器，你可以选择一台设置为master节点，然后剩下三台设为worker节点，也可以把四台都设为worker节点，这种情况下，有一个机器既是master节点又是worker节点）</li>
+<li><p>Driver / Driver Program<br>运行main函数并且创建SparkContext的程序。客户端的应用程序，Driver Program类似于wordcount程序中的mian函数。<br>当我们提交应用程序后，便会启动一个对应的Driver进程。Driver会根据我们设置的参数占用一定的资源（主要是CPU核数、内存）。<br>程序启动时，Driver进程首先会向集群资源管理者（Standalone，Mesos，Yarn）申请Spark应用所需的资源，也就是Executor，然后集群管理者会根据Spark应用所设置的参数在各个Worker上分配一定数量的Executor，每个Executor都占用一定数量的CPU和Memory。在申请到应用所需的资源后，Driver就开始调度和执行我们的程序了。Driver进程会把我们编写的Spark程序拆分成多个stage，每个stage执行一部分代码片段，并为每个stage创建一批task，然后将这些task分配到各个Executor中执行。<br>Executor进程在Worker节点上，一个Worker可以有多个Executor，每个Executor都有一个进程池，每个进程执行一个task。Executor执行完task之后将结果返回给Driver，每个Executor执行的task属于一个spark程序。此外Executor还有一个功能是为应用程序中的RDD提供内存，RDD是直接缓存在Executor进程内的。<br><a href="https://blog.csdn.net/hongmofang10/article/details/84587262" target="_blank" rel="noopener">这篇博客讲的很好</a><br><a href="https://blog.csdn.net/qq_21383435/article/details/78653427" target="_blank" rel="noopener">通俗易懂</a> </p>
+<pre><code>spark-submit --master yarn --num-executors 32 --executor-memory 8G --executor-cores 8 --jars ../jars/spark-examples_2.10_my_converters_test-1.6.0.jar spark_streaming_all.py
+</code></pre><p>其中参数的含义：  </p>
+<ul>
+<li>num-executors：创建多少个 executor</li>
+<li>executor-memory：各个 executor 使用的最大内存，不可超过单机的最大可使用内存</li>
+<li>executor-cores：各个 executor 使用的并发线程数目，也即每个 executor 最大可并发执行的 Task 数目</li>
+</ul>
+</li>
+<li><p>Cluster Manager<br>集群的资源管理器，在集群上获取资源的外部服务，例如Standalone，Mesos，Yarn。<br>拿Yarn举例，客户端程序会向Yarn申请运行我这个任务需要多少，多少CPU等，然后Cluster Manager会通过调度告诉客户端可以使用，然后客户端就可以把程序送到每个Worker Node上面执行。    </p>
+<h1><span id="3-执行模式">3. 执行模式</span></h1><p>&ensp;&ensp;&ensp;&ensp;运行spark程序有3种模式，local，standalone，yarn。在使用spark-submit命令提交程序时，需要指定一些参数。   </p>
+</li>
+<li>—master:如spark://host:7077, mesos://host:port, yarn,  yarn-cluster,yarn-client, local   </li>
+<li>—calss CLASS_NAME 应用程序的主类   </li>
+<li>—name NAME 应用程序的名称,这个可以在程序中通过setAppName(“kafka_hbase”)指定  </li>
+<li>—jars JARS 逗号分隔的本地jar包，后面添加jar的路径</li>
+<li>—driver-memory MEM Driver内存，默认1G</li>
+<li>—num-executors NUM，启动的executor的个数，默认为2，在yarn中使用。</li>
+<li>—executor-core NUM，每个executor的核数。在yarn或者standalone下使用</li>
+<li>—executor-memory MEM 每个executor的内存，默认是1G</li>
+<li>—total-executor-cores NUM,所有executor总共的核数，仅仅在mesos或standalone中使用</li>
+<li>driver-cores NUM Driver的核数，默认是1，这个参数只在standalone模式下使用   <h2><span id="31-standalone模式">3.1. standalone模式</span></h2>&ensp;&ensp;&ensp;&ensp;运行一个pyspark程序，使用standalone模式来提交程序，需要使用的参数有：<br>—master spark://hz4:7077<br>—jars xxx1.jar,xxx2.jar<br>不使用—num-executors,这个在yarn中使用<br>—executor-memory MEM,每个executor占用的内存，如果一个executor占用4G，有5个executor，那这个程序占用20G<br>—executor-core NUM，表示每个executor的核数<br><strong>—total-executor-cores NUM</strong>,所有的executor占用的核数。使用total-executor-cores / executor-core得到executor的个数，假设total-executor-cores设置为30，executor-core为6，则表示运行这个程序一共有5个executor，分别在不同worker上。一个worker可以有多个executor。 假设有5个executor，2个worker，那么一个worker上有多个executor。如果不指定—total-executor-cores，程序会把worker上的核全都占用，这样别人提交程序的时候就没有办法运行。<br>&ensp;&ensp;&ensp;&ensp;运行一个程序的命令：spark-submit —master spark://hz4:7077  —executor-memory 4G —executor-cores 6 —total-executor-cores 30 —jars ../jars/spark-examples_2.10_my_converters-1.6.0.jar spark_streaming.py   <h2><span id="32-yarn模式">3.2. Yarn模式</span></h2>&ensp;&ensp;&ensp;&ensp;yarn模式可以用的参数有：<br>—master yarn<br>—jars xxx1.jar,xxx2.jar<br><strong>—num-executors NUM</strong>, 启动的executor的个数，默认为2，不要使用默认，会很慢。在yarn中使用。yarn资源管理器会在不同的worker上分配executor给程序。<br>—executor-memory MEM,每个executor占用的内存，如果一个executor占用4G，有5个executor，那这个程序占用20G<br>—executor-core NUM，表示每个executor的核数，如果有5个executor，每个executor占用4G，那这个程序运行时占用20G内存。<br>&ensp;&ensp;&ensp;&ensp;运行一个程序的命令：spark-submit —master yarn —num-executors 20 —executor-memory 4G —executor-cores 4 —jars ../jars/spark-examples_2.10_my_converters-1.6.0.jar spark_streaming.py <h2><span id="33-参数调优">3.3. 参数调优</span></h2>&ensp;&ensp;&ensp;&ensp;</li>
+<li>num-executors：该参数用于设置Spark作业总共要用多少个Executor进程来执行,Driver在向YARN集群管理器申请资源时，YARN集群管理器会尽可能按照你的设置来在<br>集群的各个工作节点上，启动相应数量的Executor进程。<br><strong>参数调优建议</strong>：<br>每个Spark作业的运行一般设置50~100个左右的Executor进程比较合适，设置太少或太多的Executor进程都不好。设置的太少，无法充分利用集群资源；<br>设置的太多的话，大部分队列可能无法给予充分的资源。  </li>
+<li>executor-memory：该参数用于设置每个Executor进程的内存。Executor内存的大小，很多时候直接决定了Spark作业的性能，而且跟常见的JVM OOM异常，也有直接的关联。<br><strong>参数调优建议</strong>：<br>每个Executor进程的内存设置4G~8G较为合适。但是这只是一个参考值，具体的设置还是得根据不同部门的资源队列来定。可以看看自己团队的资源队列<br>的最大内存限制是多少，num-executors乘以executor-memory，是不能超过队列的最大内存量的。此外，如果你是跟团队里其他人共享这个资源队列，<br>那么申请的内存量最好不要超过资源队列最大总内存的1/3~1/2，避免你自己的Spark作业占用了队列所有的资源，导致别的同学的作业无法运行。   </li>
+<li>executor-cores：该参数用于设置每个Executor进程的CPU core数量。这个参数决定了每个Executor进程并行执行task线程的能力。因为每个CPU core同一时间只能执行一个<br>task线程，因此每个Executor进程的CPU core数量越多，越能够快速地执行完分配给自己的所有task线程。<br><strong>参数调优建议</strong>：<br>Executor的CPU core数量设置为2~4个较为合适。同样得根据不同部门的资源队列来定，可以看看自己的资源队列的最大CPU core限制是多少，再依据设置的<br>Executor数量，来决定每个Executor进程可以分配到几个CPU core。同样建议，如果是跟他人共享这个队列，那么num-executors * executor-cores不要超过<br>队列总CPU core的1/3~1/2左右比较合适，也是避免影响其他同学的作业运行。  </li>
+<li>driver-memory：该参数用于设置Driver进程的内存。<br><strong>参数调优建议</strong>：<br>Driver的内存通常来说不设置，或者设置1G左右应该就够了。唯一需要注意的一点是，如果需要使用collect算子将RDD的数据全部拉取到Driver上进行处理，<br>那么必须确保Driver的内存足够大，否则会出现OOM内存溢出的问题。  </li>
+<li>—conf spark.default.parallelism：该参数用于设置每个stage的默认task数量。这个参数极为重要，如果不设置可能会直接影响你的Spark作业性能。<br><strong>参数调优建议</strong>：<br>Spark作业的默认task数量为500~1000个较为合适。很多同学常犯的一个错误就是不去设置这个参数，那么此时就会导致Spark自己根据底层HDFS的block数量<br>来设置task的数量，默认是一个HDFS block对应一个task。通常来说，Spark默认设置的数量是偏少的（比如就几十个task），如果task数量偏少的话，就会<br>导致你前面设置好的Executor的参数都前功尽弃。试想一下，无论你的Executor进程有多少个，内存和CPU有多大，但是task只有1个或者10个，那么90%的<br>Executor进程可能根本就没有task执行，也就是白白浪费了资源！因此Spark官网建议的设置原则是，设置该参数为num-executors * executor-cores的2~3倍<br>较为合适，比如Executor的总CPU core数量为300个，那么设置1000个task是可以的，此时可以充分地利用Spark集群的资源。<h2><span id="executor">Executor</span></h2>&ensp;&ensp;&ensp;&ensp;在运行pyspark程序时出错：   Container killed by YARN for exceeding memory limits. 16.9 GB of 16 GB physical memory used. Consider boosting spark.yarn.executor.memoryOverhead”这个错误总会使你的job夭折。它的意思是：因为超出内存限制，集群停掉了container。<br>Spark的Excutor的Container内存有两大部分组成：Excutor内存和堆外内存。   </li>
+</ul>
+<p><img src="/2019/04/20/pyspark/executor.png" alt="">     </p>
+<p>Spark底层shuffle的传输方式是使用netty传输，netty在进行网络传输的过程会申请堆外内存（netty是零拷贝），所以使用了堆外内存，即spark.yarn.executor.memoryOverhead。<br><strong>Executor内存</strong><br>又spark.executor.memory参数设置，在spark-shell中由—executor-memory指定，分为2部分，shuffle.memoryFraction和storage.memoryFraction。<br><strong>spark.shuffle.memoryFractio</strong><br>该参数用于设置shuffle过程中一个task拉取到上个stage的task的输出后，进行聚合操作时能够使用的Executor内存的比例，默认是0.2。也就是说，Executor默认只有20%的内存用来进行该操作。shuffle操作在进行聚合时，如果发现使用的内存超出了这个20%的限制，那么多余的数据就会溢写到磁盘文件中去，此时就会极大地降低性能。<br><strong>参数调优</strong><br>如果Spark作业中的RDD持久化操作较少，shuffle操作较多时，建议降低持久化操作的内存占比，提高shuffle操作的内存占比比例，避免shuffle过程中数据过多时内存不够用，必须溢写到磁盘上，降低了性能。此外，如果发现作业由于频繁的gc导致运行缓慢，意味着task执行用户代码的内存不够用，那么同样建议调低这个参数的值。<br><strong>spark.storage.memoryFractio</strong><br>该参数用于设置RDD持久化数据在Executor内存中能占的比例，默认是0.6。也就是说，默认Executor 60%的内存，可以用来保存持久化的RDD数据。根据你选择的不同的持久化策略，如果内存不够时，可能数据就不会持久化，或者数据会写入磁盘。<br><strong>参数调优</strong><br>如果Spark作业中，有较多的RDD持久化操作，该参数的值可以适当提高一些，保证持久化的数据能够容纳在内存中。避免内存不够缓存所有的数据，导致数据只能写入磁盘中，降低了性能。但是如果Spark作业中的shuffle类操作比较多，而持久化操作比较少，那么这个参数的值适当降低一些比较合适。此外，如果发现作业由于频繁的gc导致运行缓慢（通过spark web ui可以观察到作业的gc耗时），意味着task执行用户代码的内存不够用，那么同样建议调低这个参数的值。         </p>
+<p><strong>spark.yarn.executor.memoryOverhead</strong><br>executor执行的时候，用的内存可能会超过executor-memoy，所以会为executor额外预留一部分内存。spark.yarn.executor.memoryOverhead代表了这部分内存。这个参数如果没有设置，会有一个自动计算公式(位于ClientArguments.scala中)，代码如下：<br>其中，MEMORY_OVERHEAD_FACTOR默认为0.1，executorMemory为设置的executor-memory, MEMORY_OVERHEAD_MIN默认为384m。参数MEMORY_OVERHEAD_FACTOR和MEMORY_OVERHEAD_MIN一般不能直接修改，是Spark代码中直接写死的。</p>
+<p>关于Executor 计算的相关公式，见源码org.apache.spark.deploy.yarn.Clent，org.apache.spark.deploy.yarn.ClentArguments<br>主要部分如下 </p>
+<pre><code class="lang-python">var executorMemory = 1024 // 默认值，1024MB
+val MEMORY_OVERHEAD_FACTOR = 0.10  // OverHead 比例参数，默认0.1
+val MEMORY_OVERHEAD_MIN = 384
+
+val executorMemoryOverhead = sparkConf.getInt(&quot;spark.yarn.executor.memoryOverhead&quot;,
+math.max((MEMORY_OVERHEAD_FACTOR * executorMemory).toInt, MEMORY_OVERHEAD_MIN))
+// 假设有设置参数，即获取参数，否则使用executorMemoryOverhead 的默认值
+
+val executorMem = args.executorMemory + executorMemoryOverhead
+// 最终分配的executor 内存为 两部分的和
+</code></pre>
+<p><strong>解决方案</strong><br>在参数中设置<strong>spark.yarn.executor.memoryOverhead=4096</strong>，单位是MB，一般是2的幂,这里使用4G，默认申请的堆外内存是Executor内存的10%，真正处理大数据的时候，这里都会出现问题，导致spark作业反复崩溃，无法运行；此时就会去调节这个参数，到至少1G（1024M），甚至说2G、4G）</p>
+<p>spark-submit —master yarn —num-executors 20 —executor-memory 4G —executor-cores 4 —conf spark.yarn.executor.memoryOverhead=4096 —jars ../jars/spark-examples_2.10_my_converters-1.6.0.jar feature_extraction.py    </p>
+<p><strong>executor-memory+spark.yarn.executor.memoryOverhead&lt;MonitorMemory</strong><br>指定的 ExecutorMemory与MemoryOverhead 之和大于 MonitorMemory，则会导致Executor申请失败，程序直接不能运行；若运行过程中，实际使用内存超过上限阈值，Executor进程会被Yarn终止掉（kill）</p>
+<p>在运行程序中发现CPU的占用率不高，，增加num-executors的个数，减少executor-cores的个数<br>参考资料：<br><a href="https://www.cnblogs.com/haozhengfei/p/5fc4a976a864f33587b094f36b72c7d3.html" target="_blank" rel="noopener">https://www.cnblogs.com/haozhengfei/p/5fc4a976a864f33587b094f36b72c7d3.html</a><br><a href="https://blog.csdn.net/hammertank/article/details/48346285" target="_blank" rel="noopener">https://blog.csdn.net/hammertank/article/details/48346285</a><br><a href="http://www.raychase.net/3546" target="_blank" rel="noopener">http://www.raychase.net/3546</a><br><a href="https://www.jianshu.com/p/10e91ace3378" target="_blank" rel="noopener">https://www.jianshu.com/p/10e91ace3378</a></p>
+<h1><span id="4-创建sc">4. 创建sc</span></h1><p>&ensp;&ensp;&ensp;&ensp;在服务器中的命令行中，输出：pyspark，会打开spark-shell交互窗口，这时spark-shell会自动创建一个sc，不用再创建sc，手动创建了也不能用，会出错。如果在py文件中写程序，首先需要手动创建一个sc。   </p>
+<pre><code class="lang-python">from pyspark import SparkConf, SparkContext
+conf = SparkConf().set(&quot;spark.executorEnv.PYTHONHASHSEED&quot;, &quot;0&quot;).setAppName(&quot;kafka_hbase&quot;)
+sc = SparkContext(conf=conf)
+</code></pre>
+<p>或者使用    </p>
+<pre><code class="lang-python">from pyspark import SparkConf, SparkContext
+conf = SparkConf().setMaster(&#39;local&#39;).setAppName(&#39;My_App&#39;)
+sc = SparkContext(conf = conf)
+</code></pre>
+<p>首先创建一个SparkConf对象来配置应用，然后基于该SparkConf来创建一个SparkContext对象。<br><code>.setMaster()</code>给定了集群的URL，高速spark如何连接到集群上，这里的<code>local</code>表示让spark运行在单机单变成上。<br>也可以是<code>.setMaster(&#39;spark://192.168.1.11:7077&#39;)</code>表示使用standalone运行spark程序。<br><code>.setAppName()</code>给出应用的名字，当连接到一集群上时，这个值可以帮助你找到你的应用。      </p>
+<h1><span id="5-rdd转换">5. RDD转换</span></h1><p>&ensp;&ensp;&ensp;&ensp;RDD被创建好之后，在后续使用过程中有2中操作：</p>
+<ul>
+<li>转换（Transformation）：基于现有的RRD创建一个新的RDD</li>
+<li>行动（Action）：在数据集上进行运算，返回计算值。<h2><span id="51-转换操作">5.1. 转换操作</span></h2>&ensp;&ensp;&ensp;&ensp;对于RDD而言，每一次转换操作都会产生不同的RDD，如果说rdd2 = rdd1.map(lamda x : x+1),rdd1的值不会改变，通过转换操作返回一个新的rdd供下一个转换操作。转换得到的RDD是惰性的，也就是说，整个过程只记录了转换的轨迹，并不会发生真正的计算，只有遇到Action操作时，才会发生真正的计算。开始从血缘关系源头开始，进行物理的转换操作。<br>&ensp;&ensp;&ensp;&ensp;下面列出一些常见的转换（Transformation）操作。</li>
+</ul>
+<ul>
+<li>filter(func)：筛选出满足函数func的元素，并返回一个新的数据集</li>
+<li>map(func)：将每个元素传递到函数func中，并将结果返回为一个新的数据集</li>
+<li>flatMap(func)：与map()相似，但每个输入元素都可以映射到0或多个输出结果</li>
+<li>groupByKey()：应用于(K,V)键值对的数据集时，返回一个新的(K, Iterable)形式的数据集</li>
+<li>reduceByKey(func)：应用于(K,V)键值对的数据集时，返回一个新的(K, V)形式的数据集，其中的每个值是将每个key传递到函数func中进行聚合   <h2><span id="52-行动操作">5.2. 行动操作</span></h2>&ensp;&ensp;&ensp;&ensp;行动操作是真正触发计算的地方。Spark程序执行到行动操作，才会执行真正的计算，从文件中加载数据，完成一次有一次转换操作，最终，完成行动操作得到结果。<strong>在触发Action操作时，开始真正的计算，这时，Spark会把计算分解成多个任务在不同机器上执行，每台机器上运行位于属于它自己的map和reduce，最后把结果返回给Driver Program</strong>。<br>&ensp;&ensp;&ensp;&ensp;下面给出一些常见的行动（Action）操作</li>
+<li>count() 返回数据集中的元素个数</li>
+<li>collect() 以数组的形式返回数据集中的所有元素</li>
+<li>first() 返回数据集中的第一个元素</li>
+<li>take(n) 以数组的形式返回数据集中的前n个元素</li>
+<li>reduce(func) 通过函数func（输入两个参数并返回一个值）聚合数据集中的元素</li>
+<li>foreach(func) 将数据集中的每个元素传递到函数func中运行<h2><span id="53-持久化">5.3. 持久化</span></h2>&ensp;&ensp;&ensp;&ensp;在Spark中，RDD采用惰性的机制，每次遇到Action操作，都会从头开始执行计算。如果整个Spark程序只有一次Action操作，当然不会又什么问题。但是，在一些情况下，我们需要对一个RDD多次调用不同的Action，这就意味着，每次调用Action操作，都会触发一次从头开始的计算，代价很大，并且这些Action操作都是对一个RDD而言，所以可以把这个RDD持久化。<br>比如下面是多次对一个RDD进行Action操作   <pre><code class="lang-python">list = [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;]
+rdd = sc.parallelize(list)
+#count()是一个Action操作，触发一次真正从头到尾的计算
+print(rdd.count())
+&gt;&gt;&gt;3
+#collect()也是一个Action()操作，触发一个真正从头到尾的计算
+print(&#39;,&#39;.join(rdd.collect()))
+&gt;&gt;&gt;a,b,c
+</code></pre>
+&ensp;&ensp;&ensp;&ensp;上面代码执行过程中，前后共触发了2次从头到尾的计算。<br>&ensp;&ensp;&ensp;&ensp;实际上，可以通过持久化(缓存)机制避免这种重复计算的开销。可以使用persist()方法对一个RDD<strong>标记为持久化</strong>，之所以说“标记为持久化”，是因为出现persist()语句的地方，并不会马上计算RDD并把它持久化，而是要等到第一个Action操作触发时，才开始计算RDD，并把RDD的内容进行持久化。持久化的RDD将会被保留在计算节点的内存中，以便被后面的Action操作重复使用。<br>&ensp;&ensp;&ensp;&ensp;persist()方法可以传入持久化级别参数。   </li>
+<li>persist(MEMOEY_ONLY)表示将RDD作为反序列化的对象存储在JVM中，如果内存不足，就要按照LRU原则替换缓存中的内容。   </li>
+<li>persist(MEMORY_AND_DISK)表示将RDD作为反序列化的对象存储在JVM中，如果内存不足，超出的分区将会被存储在硬盘上。</li>
+<li>一般使用cache()方法时，会调用persist(MEMORY_ONLY)   <pre><code class="lang-python">list = [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;]
+rdd = sc.parallelize(list)
+#会调用persist(MEMORY_ONLY)，但是语句执行到这里，并不会缓存rdd的内容，因为这时rdd还没有被计算生成
+rdd.cache()
+#count()是一个Action操作，触发一次真正从头到尾的计算，这时才会执行上面的rdd.cache()，把这个rdd的内容放在缓存中。
+print(rdd.count())
+&gt;&gt;&gt;3
+#collect()也是一个Action()操作，不需要触发一个真正从头到尾的计算，只需要重复使用上面缓存中的rdd。
+print(&#39;,&#39;.join(rdd.collect()))
+&gt;&gt;&gt;a,b,c
+</code></pre>
+最后，可以使用unpersist()方法手动地把持久化的RDD从缓存中移除。    <h1><span id="6-分区">6. 分区</span></h1>&ensp;&ensp;&ensp;&ensp;RDD是弹性分布式数据集，通常RDD很大，会被分成很多个分区，分别保存在不同的节点上。RDD的一个分区原则是使得分区的个数尽量等于集群中CPU核心（core）数目。<br>&ensp;&ensp;&ensp;&ensp;对于不同的Spark部署而言（local，Standalone,yarn，Mesos）,都可以通过设置spark.default.parallelism这个参数的值，来配置默认的分区数据，一般而言：</li>
+</ul>
+<ul>
+<li>local模式：默认为本地机器的CPU数目，若设置了local[N],则默认为N</li>
+<li>Standalone和yarn：max(集群中所有CPU核心数目总和,2)作为默认值</li>
+<li>Mesos：默认的分区数为8   <pre><code class="lang-scala">scala&gt;val array = Array(1,2,3,4,5)
+array: Array[Int] = Array(1, 2, 3, 4, 5)
+scala&gt;val rdd = sc.parallelize(array,2) #设置两个分区
+rdd: org.apache.spark.rdd.RDD[Int] = ParallelCollectionRDD[13] at parallelize at &lt;console&gt;:29
+</code></pre>
+&ensp;&ensp;&ensp;&ensp;对于textFile而言，如果没有在方法中指定分区数，则默认为min(defaultParallelism,2)，其中，defaultParallelism对应的就是spark.default.parallelism。<br>&ensp;&ensp;&ensp;&ensp;如果是从HDFS中读取文件，则分区数为文件分片数(比如，128MB/片)。</li>
+</ul>
+<h1><span id="7-创建rdd">7. 创建RDD</span></h1><p>&ensp;&ensp;&ensp;&ensp;创建RDD有2种方式，一种是通过列表创建，一种是通过读取文件创建。<strong>RDD的内部其实是一个Iterator\<string\></string\></strong></p>
+<h2><span id="71-通过paralize创建rdd">7.1. 通过paralize创建RDD</span></h2><pre><code class="lang-python">string=&#39;a\nb\nc\na\nd\ne&#39;
+b = string.split(&#39;\n&#39;)
+sc.parallelize(b)
+</code></pre>
+<p><code>b</code>是一个list列表，通过列表b可以创建一个RDD。      </p>
+<h2><span id="72-读文本文件创建rdd">7.2. 读文本文件创建RDD</span></h2><p>&ensp;&ensp;&ensp;&ensp; 读取文本文件获取RDD，可以从服务器本地读取(其他节点也可以)，也可以从hdfs上读取文件。文本每行的内容以字符串的形式作为RDD的一个元素。<br>从服务器本地读取文件时，需要加上file://</p>
+<pre><code class="lang-python">rdd1 = sc.textFile(&quot;file:///file0/input/test.txt&quot;)
+</code></pre>
+<p>从HDFS上读取文件   </p>
+<pre><code class="lang-python">rdd1 = sc.textFile(&#39;hdfs://master:8020/pc2/data.csv&#39;)
+</code></pre>
+<h1><span id="8-map和flatmap">8. map和flatMap</span></h1><p>&ensp;&ensp;&ensp;&ensp;map是对RDD中的每个元素执行一个函数，每个元素返回一个list，然后把每个元素的list再组成一个大的list，例如[[a,a],[b,b]]，然后flatMap就是先对每个元素执行一个函数，每个元素返回一个list，然后把每个元素的list的内容取出来，组成一个大的list，例如[a,a,b,b]。   </p>
+<p>&ensp;&ensp;&ensp;&ensp;<a href="https://www.jianshu.com/p/c76ba3091a21" target="_blank" rel="noopener">这篇博客</a>讲解的比较好。说明flatMap中的函数返回类型一定是一个可迭代的类型，先把元素生成一个列表，然后再把每个列表中的元素取出来拼接成一个大的列表。<br><a href="https://www.4spaces.org/spark-map-flatmap/" target="_blank" rel="noopener">这篇也讲的很好</a>    </p>
+<h1><span id="9-flatmap和flatmapvalues">9. flatMap和flatMapValues</span></h1><p>&ensp;&ensp;&ensp;&ensp;flatMap针对的RDD中的每个元素先做map操作，再做flatten操作，最后形成超大的list返回。flatMapValues只针对元素是<k,v>格式的RDD，原RDD中的key保持不变，只对value进行变换，变换之后的value和原来的key组成新的<k,v1>，作为RDD中的一个元素。参考<a href="http://blog.cheyo.net/172.html" target="_blank" rel="noopener">这篇博客</a></k,v1></k,v></p>
+<h1><span id="10-reducebykey和groupbykey">10. reduceByKey和groupByKey</span></h1><p>&ensp;&ensp;&ensp;&ensp;推荐使用reduceByKey，<a href="https://blog.csdn.net/zongzhiyuan/article/details/49965021" target="_blank" rel="noopener">这篇博客</a>对于两者的区别进行了解释。<br>groupByKey涉及数据的shuffle操作，shuffle是spark重建数据的机制，将来自不同分区的数据进行分组，开销很大。    </p>
+<h1><span id="11-sortby和sortbykey">11. sortBy和SortByKey</span></h1><p>&ensp;&ensp;&ensp;&ensp;sortByKey针对(key,value)对中的key进行排序。<br>&ensp;&ensp;&ensp;&ensp;sortBy可以根据我们需要的值进行排序，不一定是key，比如统计单词出现的次数，然后按照次数进行排序(key,value)，我们就是对value进行排序，可以使用sortBy函数。<br>sortBy()中有3个参数，第一个参数是一个函数，第二个参数是ascending，表示升序还是降序，默认是True(升序)。第三个参数是numPartitions，该参数决定排序后的RDD的分区个数，默认排序后的分区个数和排序之前的个数相等。</p>
+<h1><span id="12-将spark计算的结果存储在文件中">12. 将Spark计算的结果存储在文件中</span></h1><h2><span id="121-写入到服务器本地文件中">12.1. 写入到服务器本地文件中</span></h2><p>&ensp;&ensp;&ensp;&ensp;假设pyspark计算的结果存储在results变量中，然后将<code>results</code>的内容存储在文件中。</p>
+<pre><code class="lang-python"># 将结果写入到服务器本地的文件中
+filename = &#39;result.txt&#39;
+with open(filename,&#39;w&#39;) as f:
+    for line in results:
+        f.write(line)
+        f.write(&#39;\n&#39;)
+</code></pre>
+<h2><span id="122-写入到hdfs文件中">12.2. 写入到HDFS文件中</span></h2><p>&ensp;&ensp;&ensp;&ensp;spark将RDD中的每个元素作为一行写入到文本文件中。在写入到HDFS之前，首先把results中的每个元素转成字符串的形式。<br>&ensp;&ensp;&ensp;&ensp;比如<code>rdd1</code>为<code>[(&#39;b&#39;,3),(&#39;a&#39;,2),(&#39;c&#39;,1)]</code>，<code>rdd1</code>中的每个元素是一个元组，需要把每个元素转换成字符串类型。<br><code>rdd2 = rdd1.map(lamda x: x[0]+&quot;,&quot;+str(x[1]))</code> ,然后使用<code>rdd2.saveAsTextFile(&#39;/tmp/word_count_result&#39;)</code>，把结果存储到<code>word_count_result</code>这个文件中，这个文件没有后缀名。    </p>
+<h2><span id="123-打印rdd元素">12.3. 打印RDD元素</span></h2><p>&ensp;&ensp;&ensp;&ensp;在实际编程中，我们经常需要把RDD中的元素打印输出到屏幕上（标准输出stdout），一般会采用语句rdd.foreach(println)或者rdd.map(println)。当采用本地模式（local）在单机上执行时，这些语句会打印出一个RDD中的所有元素。但是，当采用集群模式执行时，在worker节点上执行打印语句是输出到worker节点的stdout中，而不是输出到任务控制节点Driver Program中，因此，任务控制节点Driver Program中的stdout是不会显示打印语句的这些输出内容的。为了能够把所有worker节点上的打印输出信息也显示到Driver Program中，可以使用collect()方法，比如，rdd.collect().foreach(println)，但是，由于collect()方法会把各个worker节点上的所有RDD元素都抓取到Driver Program中，因此，这可能会导致内存溢出。因此，当你只需要打印RDD的部分元素时，可以采用语句rdd.take(100).foreach(println)。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Echo WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Echo Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+      <div id="bitcoin" style="display: inline-block">
+        <img id="bitcoin_qr" src="/images/bitcoin.png" alt="Echo Bitcoin">
+        <p>Bitcoin</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/分布式调优/" rel="tag"># 分布式调优</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/15/Python学习/" rel="next" title="Python学习">
+                <i class="fa fa-chevron-left"></i> Python学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/24/机器学习/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODU3Mi8xNTEwMA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/touxiang.jpg" alt="Echo">
+            
+              <p class="site-author-name" itemprop="name">Echo</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:voidking@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/voidking" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/voidking" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/voidking_com" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">2. 重要概念和术语</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">3. 执行模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">3.1. standalone模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">3.2. Yarn模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">3.3. 参数调优</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.</span> <span class="nav-text">Executor</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">4. 创建sc</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">5. RDD转换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">5.1. 转换操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.</span> <span class="nav-text">5.2. 行动操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.3.</span> <span class="nav-text">5.3. 持久化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">6. 分区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">7. 创建RDD</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.1.</span> <span class="nav-text">7.1. 通过paralize创建RDD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.2.</span> <span class="nav-text">7.2. 读文本文件创建RDD</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">8. map和flatMap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">9.</span> <span class="nav-text">9. flatMap和flatMapValues</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">10.</span> <span class="nav-text">10. reduceByKey和groupByKey</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">11.</span> <span class="nav-text">11. sortBy和SortByKey</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">12.</span> <span class="nav-text">12. 将Spark计算的结果存储在文件中</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">12.1.</span> <span class="nav-text">12.1. 写入到服务器本地文件中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">12.2.</span> <span class="nav-text">12.2. 写入到HDFS文件中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">12.3.</span> <span class="nav-text">12.3. 打印RDD元素</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Echo</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">110.2k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "topRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+</body>
+</html>

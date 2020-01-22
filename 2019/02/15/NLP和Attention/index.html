@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="NLP,Seq2Seq,Attention,Transformer,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Echo's blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="1. 词嵌入&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;词向量就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫词嵌入。前几天看到了一篇讲解Word2Vec的推送，讲的超级好，通俗易懂。">
+<meta name="keywords" content="NLP,Seq2Seq,Attention,Transformer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NLP和Attention">
+<meta property="og:url" content="http://yoursite.com/2019/02/15/NLP和Attention/index.html">
+<meta property="og:site_name" content="Echo&#39;s blog">
+<meta property="og:description" content="1. 词嵌入&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;词向量就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫词嵌入。前几天看到了一篇讲解Word2Vec的推送，讲的超级好，通俗易懂。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/02/15/NLP和Attention/式1.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/15/NLP和Attention/式2.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/15/NLP和Attention/式1.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/15/NLP和Attention/负采样.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/15/NLP和Attention/seq2seq.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/15/NLP和Attention/st.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/15/NLP和Attention/attention.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/15/NLP和Attention/ct.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/15/NLP和Attention/alpha.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/15/NLP和Attention/e.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/15/NLP和Attention/a.png">
+<meta property="og:image" content="http://yoursite.com/2019/02/15/NLP和Attention/g.png">
+<meta property="og:updated_time" content="2019-11-02T07:25:39.699Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NLP和Attention">
+<meta name="twitter:description" content="1. 词嵌入&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;词向量就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫词嵌入。前几天看到了一篇讲解Word2Vec的推送，讲的超级好，通俗易懂。">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/15/NLP和Attention/式1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/15/NLP和Attention/">
+
+
+
+
+
+  <title>NLP和Attention | Echo's blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b759ac2a7fa45129e3ef060bf68259f0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Echo's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">远方到底有多远</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/15/NLP和Attention/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Echo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">NLP和Attention</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-15T22:36:12+08:00">
+                2019-02-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  4.5k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1><span id="1-词嵌入">1. 词嵌入</span></h1><p>&ensp;&ensp;&ensp;&ensp;<strong>词向量</strong>就是用来表示词的向量，也可以是词的特征向量或表征。把词映射成向量的技术叫<strong>词嵌入</strong>。<br>前几天看到了一篇<a href="https://mp.weixin.qq.com/s/thUjPlkqpu6H_t92SUDtLg" target="_blank" rel="noopener">讲解Word2Vec的推送</a>，讲的超级好，通俗易懂。</p>
+ <a id="more"></a> 
+<!-- TOC -->
+<ul>
+<li><a href="#1-%e8%af%8d%e5%b5%8c%e5%85%a5">1. 词嵌入</a><ul>
+<li><a href="#11-%e8%b4%9f%e9%87%87%e6%a0%b7">1.1. 负采样</a></li>
+<li><a href="#12-%e5%b1%82%e5%ba%8fsoftmax">1.2. 层序Softmax</a></li>
+<li><a href="#13-%e5%ae%9e%e7%8e%b0%e6%ad%a5%e9%aa%a4">1.3. 实现步骤</a></li>
+<li><a href="#%e5%8f%91%e5%b1%95">发展</a></li>
+</ul>
+</li>
+<li><a href="#2-seq2seq">2. Seq2Seq</a><ul>
+<li><a href="#21-%e7%bc%96%e7%a0%81%e5%99%a8">2.1. 编码器</a></li>
+<li><a href="#22-%e8%a7%a3%e7%a0%81%e5%99%a8">2.2. 解码器</a></li>
+<li><a href="#23-%e4%bc%98%e7%bc%ba%e7%82%b9">2.3. 优缺点</a></li>
+</ul>
+</li>
+<li><a href="#3-attention">3. Attention</a></li>
+</ul>
+<!-- /TOC -->
+<p>&ensp;&ensp;&ensp;&ensp;一种最简单的词嵌入是one-hot向量，每个词使用非0即1的向量表示。这样构造虽然简单，但不是一个好的选择。因为one-hot词向量无法准确表达不同词之间的相似度，如我们常常使用的余弦相似度，因为任何两个不同词的one-hot向量的余弦相似度都为0，多个不同词之间的相似度很难通过one-hot向量准确表示出来。<br>&ensp;&ensp;&ensp;&ensp;word2vec工具的提出正是为了解决上面的问题。2013年Google团队发表了word2vec工具。它将每个词表示成一个<strong>定长的向量，并使得这些向量可以较好地表达不同词之间的相似和类比关系</strong>。word2vev包含了2个模型：跳字模型(skip-gram)和连续词袋模型(continuous bag of words CBOW)。以及2种高效训练的方法：负采样(negative sampling)和层序softmax(hierarchical softmax)。 </p>
+<p>&ensp;&ensp;&ensp;&ensp;skip-gram是给定一个中心词，计算周围词出现的概率。在skip-gram中每个词被表示成2个d维向量。当它为中心词时向量被表示成$v_i\in\mathbb{R}^d$,当它为背景词时向量被表示成$u_i\in\mathbb{R}^d$。给定中心词生成背景词的条件概率可以通过softmax运算得到：    </p>
+<p><img src="/2019/02/15/NLP和Attention/式1.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;假设中心词是loves，判断根据loves生成背景词son的概率，分子是loves的中心词向量和son的背景词向量做内积，分母是除去loves的所有词的背景词向量分别和loves的中心词向量做内积，再相加。然后分子/分母得到根据loves生成son的概率。<br>&ensp;&ensp;&ensp;&ensp;假设给定一个长度为$T$的文本序列$w^{(t)}$。假设给定中心词的情况下背景词的生成相互独立，当背景窗口大小为$m$时，跳字模型的似然函数即给定任一中心词生成所有背景词的概率。</p>
+<p><img src="/2019/02/15/NLP和Attention/式2.png" alt="">   </p>
+<p>&ensp;&ensp;&ensp;&ensp;文本序列是预先给定的，已经有一句话了。首先时间$t=1$，确定一个中心词，然后根据这个中心词计算背景词的概率，把2m个概率相乘。然后t+1，再找下一个中心词，再计算这个中心词生成背景词的概率，再把2m个概率相乘，直到中心词到最后一个。</p>
+<p>&ensp;&ensp;&ensp;&ensp;训练skip-gram模型就是为了得到每个词的中心词向量和背景词向量，每个词所对应的的中心词向量和背景词向量是skip-gram的模型参数。训练中通过最大化似然函数来学习模型参数，即最大化似然估计。训练结束后，我们可以得到字典中所有词的中心词向量和背景词向量。在自然语言处理应用中，一般使用skip-gram的中心词向量作为词的表征向量。<br>&ensp;&ensp;&ensp;&ensp;连续词袋模型基于背景词来生成中心词。比如一个句子the man - his son，根据前后4个词预测中间的词。也是通过最大化似然函数来训练得到字典中每个词的中心词向量和背景词向量。和跳字模型不一样的是，我们一般使用连续词袋模型的背景词向量作为词的表征向量。<br>&ensp;&ensp;&ensp;&ensp;但是skip-gram和CBOW的计算开销都比较大，下面介绍2个近似训练法：负采样和层序softmax.通过这2种方法可以减小训练开销。    </p>
+<h2><span id="11-负采样">1.1. 负采样</span></h2><p>&ensp;&ensp;&ensp;&ensp;跳字模型的核心在于使用softmax运算得到给定中心词$w_c$来生成背景词的概率。<br><img src="/2019/02/15/NLP和Attention/式1.png" alt=""></p>
+<p>&ensp;&ensp;&ensp;&ensp;由于softmax运算考虑了背景词可能是词典$\mathcal{V}$中的任一词，在计算损失函数时计算了所有背景词的损失。不论是跳字模型还是连续词袋模型，由于条件概率使用了softmax运算，每一步的梯度计算都包含词典大小数目的项的累加。对于含几十万或上百万词的较大词典，每次的梯度计算开销可能过大。为了降低该计算复杂度，本节将介绍两种近似训练方法，即负采样（negative sampling）或层序softmax（hierarchical softmax）。</p>
+<p>&ensp;&ensp;&ensp;&ensp;在CBOW模型中，已知词$w$的上下文$Context(w)$,需要预测$w$，因此对于$Context(w)$，词$w$就是一个正样本，其他词就是一个负样本。从所有的负样本中选择一个负样本子集。训练的目标就是增大当上下文为$Context(w)$时，中心词$w$出现的概率，并且同时降低负样本的概率。<br>&ensp;&ensp;&ensp;&ensp;对于一个给定的词$w$，怎么生成这个词的负采样子集$NEG(W)$?<br>词典中的词出现的次数有高有低，对于那些高频词，被选为负样本的概率就比较大，对于那些低频词，被选中负样本的概率就小，本质上就是一个<strong>带权采样问题</strong>。对于一对中心词和背景词，随机采样K个负样本，论文中的建议K=5，负样本采样的概率$P(w)$设为$w$词频与总词频之比的$3/4$次方。<br><img src="/2019/02/15/NLP和Attention/负采样.png" alt="负采样">   </p>
+<p>&ensp;&ensp;&ensp;&ensp;在训练中，首先给出所有的句子。对于skip-gram模型负采样，给定一个中心词预测周围的词。对于一个句子，首先把语料分割成(context(w),w)样本，对于每一个中心词，都可以在这个句子中找出这个中心词的背景词（周围词）,并在词典中找出这个中心词的负样本（非背景词），一个中心词的负样本论文建议个数为5，就是对于一个中心词找出5个负样本。对语料进行预处理形成以下数据集：一个样本包括一个中心词，它所对应的n个背景词，m个噪声词（负样本）。每个样本的背景词窗口大小可能不一样，即每个中心词的背景词和噪声词的个数可能不一样。<br>&ensp;&ensp;&ensp;&ensp;<strong>负采样通过考虑同时含有正类样本和负类样本的相互独立事件来构造损失函数。其训练中每一步的梯度计算开销与采样的噪声词的个数线性相关</strong>。</p>
+<h2><span id="12-层序softmax">1.2. 层序Softmax</span></h2><p>&ensp;&ensp;&ensp;&ensp;使用哈夫曼二叉树来存储词典，叶子节点就是字典$\mathcal{V}$中的每个词，非叶子节点就是一些隐藏向量。<br>&ensp;&ensp;&ensp;&ensp;<strong>层序Softmax使用了二叉树，并根据根节点到叶结点的路径来构造损失函数。其训练中每一步的梯度计算开销与词典大小的对数相关</strong>。    </p>
+<h2><span id="13-实现步骤">1.3. 实现步骤</span></h2><p>&ensp;&ensp;&ensp;&ensp;给定一个训练集，首先对数据进行处理，给定一个背景词窗口大小，对于每一个中心词，找到中心词在句子中的背景词、噪声词。这就是训练集，其中一个样本是(第i个中心词，n个背景词，m个噪声词)，使用这些样本作为训练。<br>&ensp;&ensp;&ensp;&ensp;嵌入层不需要自己写，直接使用Embedding来定义，根据嵌入层可以获取一个词的词向量。嵌入层有一个嵌入矩阵，输入是词典的大小（词的个数），输出是词向量的纬度。所以嵌入矩阵的维度为(词典大小，词向量维度)。嵌入层的输入是语料库中的词的索引[0,1,2,3…]，输入一个词的索引i,嵌入层返回权重矩阵的第i行作为它的词向量。<br> &ensp;&ensp;&ensp;&ensp;skip-gram的输入是包含中心词索引向量，背景词和噪声词索引向量。这2个向量先通过嵌入层得到词向量，然后输出中心词向量与背景词向量噪声词向量的内积作为中心词的词向量。   </p>
+<h2><span id="发展">发展</span></h2><p> &ensp;&ensp;&ensp;&ensp;在word2vec提出来之后，之后又有了新的发展。在2014年Stanford团队提出了GloVe，在2017年Facebook提出了fastText。其中GloVe提出两个词共现的概率，用词向量表达共现词频的对数。fastText提出每个词都是由子词提出来的，把中心词向量表示成所有子词的词向量的和。</p>
+<h1><span id="2-seq2seq">2. Seq2Seq</span></h1><p>&ensp;&ensp;&ensp;&ensp;原先都是给定一个不定长的序列，输出一个定长的序列。比如给定一个不定长的序列预测下一个词。在自然语言处理中，输入和输出都可以是不定长序列。以机器翻译为例，输入可以是一段不定长的英语文本序列，输出也可以是一段不定长的法语文本序列。当输入和输出都是不定长序列时，我们可以使用编码器-解码器（encoder-decoder）或者seq2seq模型。这两个模型本质上都用到了两个循环神经网络，分别叫做编码器和解码器。编码器用来分析输入序列，解码器用来生成输出序列。<br>Seq2Seq就是RNN Encoder-Decoder，其中的RNN通常是LSTM。 序列到序列模型就像一个翻译模型，输入是一个序列，输出也是一个序列。这种结构最重要的是输入和输出序列的长度是可变的。  </p>
+<p>&ensp;&ensp;&ensp;&ensp;图10.8描述了使用编码器—解码器将上述英语句子翻译成法语句子的一种方法。在训练数据集中，我们可以在每个句子后附上特殊符号“\<eos>”（end of sequence）以表示序列的终止。编码器每个时间步的输入依次为英语句子中的单词、标点和特殊符号“\<eos>”。图10.8中使用了<strong>编码器在最终时间步的隐藏状态作为输入句子的表征或编码信息</strong>。解码器在各个时间步中使用<strong>输入句子的编码信息c</strong>和<strong>上个时间步的输出</strong>以及<strong>隐藏状态</strong>作为输入。 我们希望解码器在各个时间步能正确依次输出翻译后的法语单词、标点和特殊符号“\<eos>”。 需要注意的是，解码器在最初时间步的输入用到了一个表示序列开始的特殊符号“\<bos>”（beginning of sequence）。其中每个词用$x_t$向量来表示，$x_t$可以通过预训练好的词向量来获取。</bos></eos></eos></eos></p>
+<p><img src="/2019/02/15/NLP和Attention/seq2seq.png" alt=""></p>
+<h2><span id="21-编码器">2.1. 编码器</span></h2><p>&ensp;&ensp;&ensp;&ensp;编码器的作用是把一个不定长的输入序列变成一个定长的背景变量$c$，并在该背景变量中编码输入序列信息。常用的编码器是循环神经网络。背景变量$c=q(h_1,…h_T)$,编码器通过自定义函数$q$将各个时间步的隐藏状态变换成背景变量。   </p>
+<h2><span id="22-解码器">2.2. 解码器</span></h2><p>&ensp;&ensp;&ensp;&ensp;编码器输出的背景变量$c$编码了整个输入序列$x_1,…x_T$的信息。给定训练样板中的输出序列$y_1,…y_{T<code>}$，对每个时间步$t</code>$，解码器输出$y_{t<code>}$的条件概率将基于之前的输出序列$y_1,...y_{t</code>-1}$和背景变量$c$，即$P(y_t<code>|y_1,...y_{t</code>-1},c)$。为此，我们可以使用另一个循环神经网络作为解码器。在时间步$t<code>$，解码器根据背景变量$c$，上一时间步的输出$y_{t</code>-1}$和上一时间步的隐藏变量$s_{t<code>-1}$来生成当前时间步的隐藏变量$s_{t</code>}$。有了解码器的隐藏状态后，我们可以使用自定义的输出层和softmax运算来计算生成当前时间步的输出$y_{t<code>}$。即计算的顺序是：先根据背景变量$c$，上一时间步的输出$y_{t</code>-1}$和上一时间步的隐藏变量$s_{t<code>-1}$来生成当前时间步的隐藏变量$s_{t</code>}$，然后再根据当前时间步的隐藏状态$s_{t<code>}$生成当前时间步的输出$y_{t</code>}$。<br>3个小trick：</p>
+<ul>
+<li>解码器什么时候停止？当预测的下一个词是\<eos>时停止。</eos></li>
+<li>对于解码器，当生成第一个隐藏状态$s_1$时，需要给定$s_0,y_0和c$,其中$y_0=<bos>对应的词向量$</bos></li>
+<li>对于编码器，生成第一个隐藏状态$h_1$时，需要给定当前的输入$x_1和上一时刻的隐藏状态h_0$，$h_0$可以初始化为全零的向量。对于编码器，$s_0$也可以初始化为全零向量。也可以初始化为$s_0=tanh(W\overleftarrow{h_1})$，编码器从右向左输入，最后得到第一个词的隐藏向量，然后用来初始化解码器的$s_0$。<h2><span id="23-优缺点">2.3. 优缺点</span></h2>&ensp;&ensp;&ensp;&ensp;encoder-decoder模型虽然非常经典，但是局限性也非常大。最大的局限性就在于编码和解码之间的唯一联系就是一个固定长度的语义向量C。也就是说，编码器要将整个序列的信息压缩进一个固定长度的向量中去。但是这样做有两个弊端，一是语义向量无法完全表示整个序列的信息，还有就是先输入的内容携带的信息会被后输入的信息稀释掉，或者说，被覆盖了。输入序列越长，这个现象就越严重。这就使得在解码的时候一开始就没有获得输入序列足够的信息， 那么解码的准确度自然也就要打个折扣了</li>
+</ul>
+<h1><span id="3-attention">3. Attention</span></h1><p><a href="https://blog.csdn.net/BVL10101111/article/details/78470716" target="_blank" rel="noopener">Attentions详细讲解</a><br>Attention一般有2种，（1）：Location-based Attention，这里的attention没有其他额外需要关注的对象，即多个$h_i$内部做attention。（2）Concatenation-based Attention：有额外需要关注的对象，即多个$h_i$对$h_t$的attention。我们平时用第2种比较多一些。</p>
+<p>&ensp;&ensp;&ensp;&ensp;在上面的编码器-解码器中，从编码器传到解码器的背景变量$c$是不变的。就是说解码器在翻译第一个词和第二个词是c是不变的。但是实际情况中，比如英语they are watching。翻译成法语是：IIs regardent。比如在翻译IIS时，和they are更相关，在翻译regardent和watching更相关，所以希望把背景变量$c$设置成一个变化的值。当翻译IIS时，对编码器的隐藏变量$h_1,h_2$更看重，当翻译regardent对隐藏变量$h_3$更看重，所以就需要在解码器中，在不同时间步时，对编码器的隐藏变量$h_1,h_2,h_3$分配不同的权重，加权平均得到背景变量$c$。<br>&ensp;&ensp;&ensp;&ensp;原先解码器隐藏层变量的计算是上一时刻的输出$y_{t<code>-1}$，上一时刻的隐藏状态$s_{t</code>-1}$以及背景变量$c$，在加入attention机制后，这里的背景变量变成了$c_{t`}$，每一步的背景变量都不一样。</p>
+<p><img src="/2019/02/15/NLP和Attention/st.png" alt=""><br><img src="/2019/02/15/NLP和Attention/attention.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;下面看一下$c_{t<code>}$是怎么设计的。 就是编码器的不同时刻的隐藏状态的加权平均。只是这里的权重$\alpha_{t</code>t}$在每一个时刻是一个变化的值。  注意这里的$t<code>$是输出(解码器)的时间戳，$t$是输入(编码器)的时间戳。首先我们先固定$t</code>$，下面的式子中$t<code>$是不变的。在计算$c_{t</code>}$时，变化$t从1到T$，遍历所有的$h_t$，然后给定一个$h_t$，怎么求$h_t$对应的权重$\alpha_{t`t}$。</p>
+<p><img src="/2019/02/15/NLP和Attention/ct.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;下面我们看一下$\alpha_{t<code>t}$是怎么来表示。加权平均就要使所有的权值加起来为1，所以用到softmax运算。softmax中的每一个值是
+$e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏变量$s_{t`-1}$和当前编码器的隐藏变量$h_t$计算得到。</p>
+<p><img src="/2019/02/15/NLP和Attention/alpha.png" alt=""><br><img src="/2019/02/15/NLP和Attention/e.png" alt="">   </p>
+<p>&ensp;&ensp;&ensp;&ensp;注意力机制对函数$a$设计有很多。下面是一种设计方法。首先一定要有$s_{t<code>-1}$和$h_t$。然后引入了3个模型参数$v^T,W_s,W_h$,这3个参数通过训练得到。对$s_{t</code>-1}$做一个projection，对$h_t$做一个projection，使得projection之后的向量长度相等，这样就可以加在一起，然后使用tanh激活函数，这时的向量长度还是projection之后的长度，但是我们希望$e_{t`t}$是一个标量，那就再引入向量$v^T$，和右边的向量做一个点乘得到一个标量。其实注意力可以通过多层感知机（全连接层）得到。  </p>
+<p><img src="/2019/02/15/NLP和Attention/a.png" alt=""><br>下面介绍计算解码器的隐藏变量时的函数$g$是什么？g可以看到是一个GRU单元。</p>
+<p><img src="/2019/02/15/NLP和Attention/g.png" alt=""><br>这里总结一下模型的参数都有哪些：编码器中的W和b，上式中解码器中的W和b，还有计算attention中的$v^T,W_s,W_h$。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Echo WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Echo Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+      <div id="bitcoin" style="display: inline-block">
+        <img id="bitcoin_qr" src="/images/bitcoin.png" alt="Echo Bitcoin">
+        <p>Bitcoin</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
+          
+            <a href="/tags/Seq2Seq/" rel="tag"># Seq2Seq</a>
+          
+            <a href="/tags/Attention/" rel="tag"># Attention</a>
+          
+            <a href="/tags/Transformer/" rel="tag"># Transformer</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/12/RNN/" rel="next" title="RNN">
+                <i class="fa fa-chevron-left"></i> RNN
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/28/HBase/" rel="prev" title="HBase">
+                HBase <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODU3Mi8xNTEwMA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/touxiang.jpg" alt="Echo">
+            
+              <p class="site-author-name" itemprop="name">Echo</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:voidking@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/voidking" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/voidking" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/voidking_com" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">1. 词嵌入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">1.1. 负采样</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">1.2. 层序Softmax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">1.3. 实现步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">发展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">2. Seq2Seq</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">2.1. 编码器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">2.2. 解码器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">2.3. 优缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">3. Attention</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Echo</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">110.2k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "topRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+</body>
+</html>

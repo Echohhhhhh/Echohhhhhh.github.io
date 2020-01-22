@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Git,VSCode,GPU服务器,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Echo's blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在做项目的过程中，学习到很多的东西，在这里记录下来。">
+<meta name="keywords" content="Git,VSCode,GPU服务器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Learning">
+<meta property="og:url" content="http://yoursite.com/2019/03/14/各类工具的使用/index.html">
+<meta property="og:site_name" content="Echo&#39;s blog">
+<meta property="og:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在做项目的过程中，学习到很多的东西，在这里记录下来。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/14/各类工具的使用/bytes.png">
+<meta property="og:updated_time" content="2019-12-29T08:56:06.109Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Learning">
+<meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在做项目的过程中，学习到很多的东西，在这里记录下来。">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/14/各类工具的使用/bytes.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/14/各类工具的使用/">
+
+
+
+
+
+  <title>Learning | Echo's blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b759ac2a7fa45129e3ef060bf68259f0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Echo's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">远方到底有多远</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/14/各类工具的使用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Echo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Learning</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-14T22:48:30+08:00">
+                2019-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.5k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;在做项目的过程中，学习到很多的东西，在这里记录下来。<br><a id="more"></a><br><!-- TOC --></p>
+<ul>
+<li><a href="#1-%e7%ae%80%e4%bb%8b">1. 简介</a></li>
+<li><a href="#2-%e5%b7%a5%e5%85%b7%e4%bd%bf%e7%94%a8">2. 工具使用</a><ul>
+<li><a href="#21-git">2.1. Git</a></li>
+<li><a href="#22-%e4%bd%bf%e7%94%a8gpu%e6%9c%8d%e5%8a%a1%e5%99%a8">2.2. 使用GPU服务器</a></li>
+<li><a href="#23-%e9%83%a8%e7%bd%b2%e4%bb%a3%e7%a0%81%e5%88%b0%e6%9c%8d%e5%8a%a1%e5%99%a8">2.3. 部署代码到服务器</a></li>
+<li><a href="#24-%e5%9c%a8%e6%9c%ac%e5%9c%b0%e8%bf%90%e8%a1%8cgluon">2.4. 在本地运行gluon</a></li>
+<li><a href="#25-%e4%bf%ae%e5%a4%8d%e9%9b%86%e7%be%a4">2.5. 修复集群</a></li>
+<li><a href="#26-%e8%bf%90%e8%a1%8cspark">2.6. 运行Spark</a></li>
+<li><a href="#27-%e4%bd%bf%e7%94%a8vscode">2.7. 使用vsCode</a></li>
+<li><a href="#%e5%ad%97%e8%8a%82">字节</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1><span id="2-工具使用">2. 工具使用</span></h1><h2><span id="21-git">2.1. Git</span></h2><p>&ensp;&ensp;&ensp;&ensp;Git是一个用来版本控制的软件，在用的过程中涉及到以下步骤</p>
+<ol>
+<li>在服务器上创建仓库。首先在服务器上创建一个文件夹，例如test。cd到这个文件夹下，使用<figure class="highlight plain"><figcaption><span>init```命令，把这个文件夹初始化为一个git仓库，会看到这个文件夹下多了一个.git的文件，然后我们把项目代码拷贝到test这个文件夹下。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">2. 在自己的电脑上下载并安装Git软件</span><br><span class="line">3. 从服务器git仓库上把代码clone到本地电脑。首先在自己电脑上，创建一个保存代码的目录，在这个目录下右键选择Git Bash，输入下面的代码</span><br><span class="line">```git clone zz@172.11.11.111:/file0/repo/EQ/```这样服务器git仓库中的东西就完封不动的clone到本地了。</span><br><span class="line">4. 在自己电脑上打开eclipse或者myeclipse，在file中导入这个项目代码，就可以进行修改代码了。</span><br><span class="line">5. pull和push。右键选中这个工程，点击team，就可以对项目进行pull和push。当你在本地修改完代码，本地的git会记录下来这些改动，所以本地文件夹中的git也有原先的历史记录，当push的时候会读取本地的git，找到本地的代码在服务器上的源，然后把改动同步到服务器上的git中。 </span><br><span class="line">6. 除了使用eclipse中的team来pull和push代码，还可以使用命令来进行pull或push。每次改完代码提交的时候，打开EQ这个目录（一定要在这个目录下，因为只有这个目录有git这个文件夹），右键```Git Bash Here```输入以下命令:</span><br><span class="line">```git add –all ```,</span><br><span class="line">```git commit –m “自己随便写，写自己本地改动的地方” ```,</span><br><span class="line">```git push</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>自己在写代码之前，也是打开EQ这个目录，右键<figure class="highlight plain"><figcaption><span>Bash Here```输入以下命令）:```git pull ```这样就会把别人改动过的代码更新到EQ这个文件夹下。     </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">**问题1**   </span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在eclipse中右键点击team--&gt;show in History，会出现所有的改动。点击改动的一个文件，应该会出现2个窗口，一个窗口显示现在的代码，一个窗口显示原先的代码，可以明显的看出哪里进行了改动，但是我的电脑确没有出现历史窗口，只有现在代码的窗口。   </span><br><span class="line">**解决：** 在点击show in history之后右键一个文件，点击“compare with previous version”就会出现历史窗口。    </span><br><span class="line"></span><br><span class="line">**问题2**   </span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在每次写代码之前都要先pull一下，把别人push的代码拉取到本地。但有时候你在写代码之前忘了pull别人的代码，直接在本地电脑上修改，然后你在pull别人的代码时会出现conflict，那是因为你和服务器上的代码修改了同一个地方，git不知道该采用谁的修改。   </span><br><span class="line">**解决:** 首先在eclipse中，右键点击team，把你自己本地的代码先commit，不要push。然后打开vscode，导入和eclispe中一样的代码（和eclipse导入的代码在同一个文件下，带有.git），然后在vscode中点击左侧的第三个图标(git的图标)，然后在```...```中右键从服务器上pull到本地。然后再点击左侧的第一个图标，在这里面如果文件的右侧出现M，说明这个文件被修改过，然后你在这里面进行解决冲突。是采用本地的修改还是采用服务上的修改。等到冲突都解决时保存。然后再回到eclispe，会发现项目已经没有报错了。这时在eclispe中右键team，把代码commit and push到服务器中。</span><br><span class="line">## 2.2. 使用GPU服务器</span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用putty来连接服务器，使用FileZilla来进行文件传输。在putty中输入服务器的IP地址，然后输入用户名和密码。</span><br><span class="line">1. 查看当前GPU的占用情况   </span><br><span class="line">```nvidia-smi</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>查看当前的进程是谁的(后面加进程号)   <figure class="highlight ps"><figcaption><span>-ef | grep 35230```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span>. 创建一个jupyter窗口   </span><br><span class="line">```screen -S jupyter```    </span><br><span class="line">然后在这个窗口内输入以下命令就可以打开jupyter notebook进行编程   </span><br><span class="line">```source /etc/profile```   </span><br><span class="line">```source activate insis_template_3.<span class="number">6</span> ```激活环境  </span><br><span class="line">```jupyter notebook ```打开jupyter   </span><br><span class="line"><span class="number">4</span>. 当程序写完时，kill掉窗口    </span><br><span class="line">```screen -X -S <span class="number">122128</span> quit```    </span><br><span class="line">```source deactivate``` </span><br><span class="line"><span class="number">5</span>. 查看当前有哪些窗口</span><br><span class="line">```screen -ls```     </span><br><span class="line"><span class="number">6</span>. 进入到一个窗口中</span><br><span class="line">```screen -r  <span class="number">35230</span>```    </span><br><span class="line">在这个窗口中按ctrl+c，shutdown掉一个jupyter进程，然后<span class="keyword">exit</span>退出这个窗口   </span><br><span class="line"><span class="number">7</span>. 使用screen创建一个窗口运行jupyter notebook程序的好处：就算ssh和<span class="number">28</span>号服务器的连接断开，jupyter notebook的程序依然可以在后台运行。如果你打开的jupyter notebook的程序运行完了，有<span class="number">3</span>种关闭程序的方法：</span><br><span class="line"><span class="number">1</span>、在jupyter notebook菜单栏，有一个close and hot的按钮。</span><br><span class="line"><span class="number">2</span>、在jupyter notebook中running中shutdown掉程序</span><br><span class="line"><span class="number">3</span>、screen -r <span class="number">23560</span>切入到虚拟窗口，然后在这个窗口ctrl+c</span><br><span class="line">关闭jupyter notebook进程。不用使用<span class="keyword">exit</span>，因为使用<span class="keyword">exit</span>是关闭</span><br><span class="line">虚拟窗口，直接按shift+a+d从虚拟窗口中切出，这样这个窗口</span><br><span class="line">还是存在的，下一次直接使用screen -ls查看存在的窗口，然后</span><br><span class="line">```source /etc/profile```， </span><br><span class="line">```source activate insis_template_3.<span class="number">6</span>```， </span><br><span class="line">```jupyter notebook</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>再次打开jupyter notebook程序</p>
+<h2><span id="搭建深度学习框架">搭建深度学习框架</span></h2><p>&ensp;&ensp;&ensp;&ensp;在GPU服务器上怎么搭建深度学习框架。   </p>
+<ol>
+<li>首先在服务器上搭建自己的python运行环境。即安装Anaconda，安装步骤如下</li>
+<li><p>下载安装脚本：   </p>
+<figure class="highlight plain"><figcaption><span>https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3. 运行安装向导：   </span><br><span class="line">```bash Anaconda3-5.2.0-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为了激活安装， 你应该源~/.bashrc文件：    </p>
+<figure class="highlight plain"><figcaption><span>~/.bashrc```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5. 确认是否安装成功：   </span><br><span class="line">```conda --version</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后使用which python查看你当前使用的是哪个python，如果输出的目录是data/anaconda/python说明你当前使用的还是服务器自带的python，需要重新练连接一下服务器。如果输出是data/WangBeibei/anaconda/python，说明当前使用是自己安装的anaconda。</p>
+</li>
+<li><p>然后下载深度学习框架TensorFlow。首先到清华的网站下<a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/，直接粘贴下面3行命令，" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/，直接粘贴下面3行命令，</a></p>
+<figure class="highlight plain"><figcaption><span>config --add channels</span><a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/```" target="_blank" rel="noopener">link</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">```conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/```   </span><br><span class="line">```conda config --set show_channel_urls yes```   </span><br><span class="line">然后使用vi ~/.condarc将里面的-default删除，这样下载TensorFlow就不会使用国外的网站，而是使用清华的镜像。</span><br><span class="line">8. 然后使用conda install tensorflow-gpu下载TensorFlow框架。</span><br><span class="line">9. 运行TensorFlow程序，指定使用哪一块GPU，如果不指定使用全部GPU。   </span><br><span class="line">```CUDA_VISIBLE_DEVICES=5  python train.py</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>直接杀死一个进程<br><code>kill -9 [PID]</code>    </p>
+<h2><span id="23-部署代码到服务器">2.3. 部署代码到服务器</span></h2></li>
+<li>首先在服务器上安装Tomcat</li>
+<li>使用FileZilla进入到服务器，使用putty进入到服务器。</li>
+<li>使用putty cd到到file0/apache-tomcat下，输入bin/shutdown.sh关掉Tomcat服务器。然后把webapps下的项目删除，进入到logs删除里面的日志。</li>
+<li>使用eclipse把项目导出成war压缩包</li>
+<li>使用FileZilla把war上传到webapps下。</li>
+<li>使用bin/startup.sh启动Tomcat服务器</li>
+<li>查看日志主要在catalina.out这个文件中</li>
+<li><a href="http://hz1:8080/EQ/jsp/login.jsp" target="_blank" rel="noopener">http://hz1:8080/EQ/jsp/login.jsp</a><h2><span id="24-在本地运行gluon">2.4. 在本地运行gluon</span></h2>&ensp;&ensp;&ensp;&ensp;在cmd命令行中，找到存储程序的目录，然后输入activate gluon，然后输入jupyter notebook就可以写程序了<h2><span id="25-修复集群">2.5. 修复集群</span></h2>&ensp;&ensp;&ensp;&ensp;当集群中有个节点不能启动时，可以在虚拟机管理界面把虚拟机启动。<br>在浏览器中输入<a href="https://172.31.43.150" target="_blank" rel="noopener">https://172.31.43.150</a><br>点击“登录到vsphere web client”<br>用户名：administrator@vsphere.local，<br>密码：Lenovo-123，<br>点击右侧的“vCenter清单列表”，然后点击左侧的“虚拟机”，在左侧找到需要重启的虚拟机，单击选中，在右侧“关闭虚拟机电源”，关闭后再点击“打开虚拟机电源”。这样就把虚拟机重启了。还需要启动Cloudera manager agent。使用putty，例如输入hz5，<br>进入到ssh，用户名root，密码hz@bjtu_cit。<br>先和server同步时间ntpdate hz1，<br>然后启动agent：/opt/cm-5.7.2/etc/init.d/cloudera-scm-agent start</li>
+</ol>
+<p>平时就可以使用/vsphere-client/?csp#extensionId%3Dvsphere.core.viVms.domainView</p>
+<h2><span id="26-运行spark">2.6. 运行Spark</span></h2><p>&ensp;&ensp;&ensp;&ensp;不论是用什么语言写的spark程序在运行的时候都要用spark-submit来运行<br>如果是java程序需要指定—class 主程序的报名.类名<br>例如—class test.Test<br>python不需要指定—class这个参数</p>
+<ol>
+<li>local模式：spark-submit —class test.Test —master local[2] mySpark.py    </li>
+<li>standalone模型： spark-submit —class test.Test —master spark://hz4:7077 mySpark.py   </li>
+<li>yarn模式： spark-submit —class test.Test —master yarn mySpark.py<h2><span id="27-使用vscode">2.7. 使用vsCode</span></h2>&ensp;&ensp;&ensp;&ensp;使用vscode编写python程序时，如果出现空格和Tab共用时导致程序出错。需要把所有的Tab换成空格，在vscode最下面有一个蓝色的条纹，在条纹的右边有”空格4”，点击这个字，然后在vscode的最上面会出现几个选项：点击“将缩进转换成空格”这个选项，再运行就没错了。  <h2><span id="字节">字节</span></h2>&ensp;&ensp;&ensp;&ensp;int是4个字节，无论数字多长都是4个字节，如果用string定义数字时，字节的长度就是字符的个数。   <pre><code class="lang-java">int a = 11111111;
+System.out.println(a+&quot;(int)的字节数：&quot;+Bytes.toBytes(a).length);
+int b=22;
+System.out.println(b+&quot;(int)的字节数：&quot;+Bytes.toBytes(b).length);
+String aString = &quot;11111111&quot;;
+System.out.println(aString+&quot;(string)的字节数：&quot;+Bytes.toBytes(aString).length);
+String bString = &quot;22&quot;;
+System.out.println(bString+&quot;(string)的字节数：&quot;+Bytes.toBytes(bString).length);
+</code></pre>
+输出如下所示：<br><img src="/2019/03/14/各类工具的使用/bytes.png" alt=""></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Echo WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Echo Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+      <div id="bitcoin" style="display: inline-block">
+        <img id="bitcoin_qr" src="/images/bitcoin.png" alt="Echo Bitcoin">
+        <p>Bitcoin</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+            <a href="/tags/VSCode/" rel="tag"># VSCode</a>
+          
+            <a href="/tags/GPU服务器/" rel="tag"># GPU服务器</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/12/Attention/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/26/分布式组件/" rel="prev" title="分布式组件介绍">
+                分布式组件介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODU3Mi8xNTEwMA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/touxiang.jpg" alt="Echo">
+            
+              <p class="site-author-name" itemprop="name">Echo</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:voidking@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/voidking" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/voidking" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/voidking_com" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">2. 工具使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">2.1. Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">搭建深度学习框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">2.3. 部署代码到服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.</span> <span class="nav-text">2.4. 在本地运行gluon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.5.</span> <span class="nav-text">2.5. 修复集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.6.</span> <span class="nav-text">2.6. 运行Spark</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.7.</span> <span class="nav-text">2.7. 使用vsCode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.8.</span> <span class="nav-text">字节</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Echo</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">110.2k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "topRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+</body>
+</html>

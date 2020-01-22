@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="VoidKing, Hankin, 好好学习的好, 郝锦">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Echo's blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="GPU服务器使用@(机器学习)[GPU, Linux] [TOC] 常用操作使用 tensorflow 查看能使用的设备的情况12from tensorflow.python.client import device_libprint(device_lib.list_local_devices()) 查看GPU使用情况nvidia-smi 查看进程用户ps -aux|grep 进程号 kill -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Echo&#39;s blog">
+<meta property="og:url" content="http://yoursite.com/2020/01/10/GPU服务器使用/index.html">
+<meta property="og:site_name" content="Echo&#39;s blog">
+<meta property="og:description" content="GPU服务器使用@(机器学习)[GPU, Linux] [TOC] 常用操作使用 tensorflow 查看能使用的设备的情况12from tensorflow.python.client import device_libprint(device_lib.list_local_devices()) 查看GPU使用情况nvidia-smi 查看进程用户ps -aux|grep 进程号 kill -">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559631603222.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559631652616.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559631740899.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559631786956.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559631808115.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559631878844.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559631921242.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559632017921.png">
+<meta property="og:image" content="http://yoursite.com/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1560828253377.png">
+<meta property="og:updated_time" content="2020-01-10T07:21:31.117Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Echo&#39;s blog">
+<meta name="twitter:description" content="GPU服务器使用@(机器学习)[GPU, Linux] [TOC] 常用操作使用 tensorflow 查看能使用的设备的情况12from tensorflow.python.client import device_libprint(device_lib.list_local_devices()) 查看GPU使用情况nvidia-smi 查看进程用户ps -aux|grep 进程号 kill -">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559631603222.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/10/GPU服务器使用/">
+
+
+
+
+
+  <title> | Echo's blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b759ac2a7fa45129e3ef060bf68259f0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Echo's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">远方到底有多远</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/10/GPU服务器使用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Echo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline"></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-10T11:15:29+08:00">
+                2020-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1><span id="gpu服务器使用">GPU服务器使用</span></h1><p>@(机器学习)[GPU, Linux]</p>
+<p>[TOC]</p>
+<h2><span id="常用操作">常用操作</span></h2><h3><span id="使用-tensorflow-查看能使用的设备的情况">使用 tensorflow 查看能使用的设备的情况</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow.python.client <span class="keyword">import</span> device_lib</span><br><span class="line">print(device_lib.list_local_devices())</span><br></pre></td></tr></table></figure>
+<h3><span id="查看gpu使用情况">查看GPU使用情况</span></h3><p><code>nvidia-smi</code></p>
+<h3><span id="查看进程用户">查看进程用户</span></h3><p><code>ps -aux|grep 进程号</code></p>
+<p><code>kill -9 进程号</code></p>
+<h3><span id="python程序加参数">Python程序加参数</span></h3><p><code>Python 程序名.py --参数名=参数</code><br>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python MainForFitTrain_2D_v2.py --len_closeness=11 --len_trend=2 --delay=18 --freq=6 --len_test=1000 --nb_start_epoch=0 --nb_end_epoch=250 --nb_filter=32 --nb_residual_unit=4</span><br></pre></td></tr></table></figure>
+<h3><span id="指定某块gpu跑程序">指定某块GPU跑程序</span></h3><p><code>CUDA_VISIBLE_DEVICES=0,1,2 python /data/YinKang/LSTM/LSTMtest.py</code></p>
+<h3><span id="查看python环境">查看Python环境</span></h3><p><code>conda info --envs</code></p>
+<h3><span id="激活python环境">激活Python环境</span></h3><p><code>source activate insis_template_3.6</code></p>
+<h3><span id="查看用户进程">查看用户进程</span></h3><p><code>ps -ef|grep YinKang</code></p>
+<h3><span id="程序中指定使用显卡">程序中指定使用显卡</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">'CUDA_DEVICE_ORDER'</span>] = <span class="string">'PCI_BUS_ID'</span> <span class="comment">#按照PCI_BUS_ID顺序从0开始排列GPU</span></span><br><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>]=<span class="string">"0,1"</span></span><br><span class="line"><span class="comment"># 使用0号</span></span><br></pre></td></tr></table></figure>
+<h3><span id="挂起程序在后台运行">挂起程序在后台运行</span></h3><p><code>nohup python xxxxxx &amp;</code></p>
+<h2><span id="screen-相关操作">screen 相关操作</span></h2><h3><span id="新建窗口">新建窗口</span></h3><p>新建一个窗口有3种方法：</p>
+<ul>
+<li><p>$ screen #这样就可以新建窗口，进入到一个窗口中，但是这样窗口就没有名字，无法区分他们</p>
+</li>
+<li><p>$ screen -S name #这样新建一个名字为name的窗口，并入到该窗口中<br>例如：screen -S count 新建了一个叫count的窗口并进入</p>
+</li>
+<li><p>$screen command #这样新建一个窗口并在窗口中执行command，同样没有名字<br>例如：screen python ./a.py 新建并执行a.py程序</p>
+</li>
+</ul>
+<h3><span id="会话分离">会话分离</span></h3><p>我们在一个窗口运行某个程序之后，想退出登录关闭terminal干点别的事，让程序在后台运行。这时就需要和窗口会话分离,有2种方式：</p>
+<ul>
+<li><p>快捷键Ctrl a表示进入命令模式<br>在当前会话窗口中按Ctrl a +d快捷键可以实现分离，这时窗口会弹出[detached]的提示，并回到主窗口。</p>
+</li>
+<li><p>screen -d name #远程detach某个session,前提是已经跳出了name窗口</p>
+</li>
+</ul>
+<h3><span id="恢复会话窗口">恢复会话窗口</span></h3><p>首先查看有哪些窗口正在运行</p>
+<blockquote>
+<p>$screen -ls #列出窗口列表</p>
+<p>There is a screen on:<br>2637.count (12/17/2015/10:00:32 AM) (Detached)</p>
+<p>$ screen -r 2637 #进入2637线程，恢复count会话窗口</p>
+</blockquote>
+<p>这样就能回到count窗口了</p>
+<h3><span id="杀死会话窗口">杀死会话窗口</span></h3><p>如果想关掉一个多余的窗口，有3种方法：</p>
+<p><code>kill -9 threadnum</code> 例如在上面的2637，kill -9 2637 即可杀死线程，当然就杀死了窗口</p>
+<p>使用<code>Ctrl a +k</code> 杀死当前窗口和窗口中运行的程序</p>
+<p>使用Ctrl a 然后输入quit命令退出Screen会话。需要注意的是，这样退出会杀死所有窗口并退出其中运行的所有程序</p>
+<h3><span id="清除死去的窗口">清除死去的窗口</span></h3><p>当窗口被杀死后，再用<code>screen -ls</code> 可以看到该窗口后面的(???dead)字样，说明窗口死了，但是仍在占用空间。这时需要清除窗口</p>
+<p><code>$ screen -wipe #自动清除死去的窗口</code></p>
+<h3><span id="解除窗口占用">解除窗口占用</span></h3><p>有时使用<code>screen -r  xxxx</code>时发现不能进入screen，窗口xxx时被占用的，可以用 <code>screen -d xxxx</code>来解除占用后再进入。</p>
+<h2><span id="快速连接服务器">快速连接服务器</span></h2><p>使用命令行窗口快速连接服务器，不需要输入密码和IP。</p>
+<h3><span id="在本地主机生成密钥对">在本地主机生成密钥对</span></h3><p><code>ssh-keygen -t rsa</code><br>这个命令生成一个密钥对：id_rsa（私钥文件）和id_rsa.pub（公钥文件）。默认被保存在~/.ssh/目录下。(~表示当前用户目录)</p>
+<h3><span id="将公钥添加到远程主机的-authorized_keys-文件中">将公钥添加到远程主机的 authorized_keys 文件中</span></h3><ul>
+<li>如果是linux系统直接使用 <code>ssh-copy-id username@remote-server</code>即可</li>
+<li>若是windows用户，需要将<code>id_rsa.pub</code>公钥文件上传到远程服务器，然后使用<code>cat /SongLongze/id_rsa.pub &gt;&gt; /SongLongze/.ssh/authorized_keys</code> 命令将公钥追加到authorized_keys 文件中。</li>
+</ul>
+<p>添加密钥后连接远程服务器即可不需要输入密码。</p>
+<p><strong>可能遇到的问题及解决方法：</strong> <a href="https://app.yinxiang.com/shard/s29/nl/5481871/313f20f2-2287-4913-85e7-acaf2d7d6483" target="_blank" rel="noopener">ssh公钥登录无效</a></p>
+<h3><span id="修改本地host">修改本地host</span></h3><p>修改本地host文件，windows系统的host文件地址为<code>c:/windows/system32/drivers/etc</code>，使用文本编辑器打开后添加 <code>202.112.147.109 s28</code>,前面的为远程服务器的ip，后面的为设置的域名。</p>
+<p>全部设置完成后即可通过终端使用 ssh SongLognze@s29 命令直接登陆远程服务器而不需要输入IP地址</p>
+<h2><span id="使用pycharm远程调试">使用Pycharm远程调试</span></h2><h3><span id="ssh方式">SSH方式</span></h3><ol>
+<li><p>打开pycharm中的Deployment的设置</p>
+<p><img src="/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559631603222.png" alt="打开pycharm中的Deployment的设置"></p>
+</li>
+<li><p>添加一个新的SFTP</p>
+<p><img src="/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559631652616.png" alt="添加一个新的SFTP"></p>
+</li>
+<li><p>填写服务器的ip地址，端口号（默认22），账号，密码，连接服务器的目录，编码方式等。==注意这里的<code>Root path</code>指的是指定一个目录为根目录，pycharm会把你指定的目录当成根目录，所有的操作都会在你指定的目录内进行，所以一定要指定一个当前用户权限充足的目录为<code>Root path</code>，否则会遇到权限问题==</p>
+<p><img src="/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559631740899.png" alt="填写连接信息"></p>
+</li>
+<li><p>进行地址映射，Deployment path 是以上一步的Root path为基础继续往下填写的，下面配置解释器的时候也是如此</p>
+<p><img src="/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559631786956.png" alt="进行地址映射"></p>
+</li>
+<li><p>添加不进行同步的文件夹</p>
+<p><img src="/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559631808115.png" alt="添加不进行同步的文件夹"></p>
+</li>
+<li><p>在设置中找到解释器并添加新的解释器</p>
+<p><img src="/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559631878844.png" alt="添加新的解释器"></p>
+</li>
+<li><p>选择SSH解释器并输入ip，用户名，密码</p>
+<p><img src="/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559631921242.png" alt="配置SSH解释器"></p>
+</li>
+<li><p>修改同步的文件夹，解释器位置，勾选自动同步，这里要注意的是这里的远程文件的文件夹地址的根目录不是真正的根目录，而是基于之前Deployment设置里填写Root目录为根目录。</p>
+<p><img src="/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1559632017921.png" alt="选择解释器位置"></p>
+</li>
+<li><p>配置完成，将项目的解释器选为刚才配置的即可。</p>
+</li>
+<li><p>注：可能出现重启Pycharm后再次运行程序显示 <code>data.username must not be null</code>或者每次都要输入账号密码的情况，解决方案如下：</p>
+<ol>
+<li><p>在进行配置的时候注意选择 save password</p>
+</li>
+<li><p>进入Pycharm的设置 <code>Settings/Preferences | Appearance &amp; Behavior | System Settings | Passwords</code>，然后设置成下图，如果设置失败则点击右面的设置Clear一下即可。</p>
+<p><img src="/2020/01/10/GPU服务器使用/GPU服务器使用.assets/1560828253377.png" alt="1560828253377"></p>
+</li>
+</ol>
+</li>
+</ol>
+<h3><span id="docker方式">Docker方式</span></h3><p><code>见Docker笔记部分</code></p>
+<h2><span id="调参工具-nni-的使用">调参工具 NNI 的使用</span></h2><p> <a href="https://nni.readthedocs.io/zh/latest/index.html" target="_blank" rel="noopener">NNI文档</a></p>
+<h3><span id="如何安装">如何安装？</span></h3><p>nni基本不需要任何环境配置，在 <code>python &gt;= 3.5</code> 的环境中，只需要运行 <code>pip install nni</code> 即可完成安装。</p>
+<h3><span id="如何使用">如何使用？</span></h3><h4><span id="实现-nni-的-trial尝试代码">实现 NNI 的 Trial（尝试）代码</span></h4><p> <strong>Trial（尝试）</strong>是将一组参数组合（例如，超参）在模型上独立的一次尝试。<br> 定义 NNI 的 Trial，需要首先定义参数组，并更新模型代码。 NNI 有两种方法来实现 Trial：NNI API 以及 NNI Python annotation。==<strong>这里主要介绍 NNI API</strong>==</p>
+<h5><span id="nni-api">NNI API</span></h5><h6><span id="第一步准备搜索空间参数文件">第一步：准备搜索空间参数文件</span></h6><p>样例：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"channels"</span>: &#123;<span class="attr">"_type"</span>:<span class="string">"choice"</span>, <span class="attr">"_value"</span>:[<span class="number">220</span>,<span class="number">230</span>,<span class="number">240</span>,<span class="number">250</span>]&#125;,</span><br><span class="line">  <span class="attr">"dropout_rate"</span>: &#123;<span class="attr">"_type"</span>:<span class="string">"choice"</span>, <span class="attr">"_value"</span>:[<span class="number">0.4</span>,<span class="number">0.5</span>,<span class="number">0.6</span>]&#125;,</span><br><span class="line">  <span class="attr">"weight_decay"</span>: &#123;<span class="attr">"_type"</span>:<span class="string">"uniform"</span>, <span class="attr">"_value"</span>:[<span class="number">0.0001</span>,<span class="number">0.01</span>]&#125;,</span><br><span class="line">  <span class="attr">"lr"</span>: &#123;<span class="attr">"_type"</span>:<span class="string">"choice"</span>, <span class="attr">"_value"</span>:[<span class="number">0.001</span>]&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参考<a href="http://xcnni.readthedocs.io/zh/latest/Tutorial/SearchSpaceSpec.html" target="_blank" rel="noopener">搜索空间</a></p>
+<h6><span id="第二步更新模型代码">第二步：更新模型代码</span></h6><ul>
+<li><p>Import NNI</p>
+<p>在 Trial 代码中加上 <code>import nni</code>。</p>
+</li>
+<li><p>从 Tuner 获得参数值</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RECEIVED_PARAMS = nni.get_next_parameter()</span><br></pre></td></tr></table></figure>
+<p><code>RECEIVED_PARAMS</code> 是一个对象，如：</p>
+<p><code>{&quot;conv_size&quot;: 2, &quot;hidden_size&quot;: 124, &quot;learning_rate&quot;: 0.0307, &quot;dropout_rate&quot;: 0.2029}</code>.</p>
+<ul>
+<li>定期返回指标数据（可选）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nni.report_intermediate_result(metrics)</span><br></pre></td></tr></table></figure>
+<p><code>指标</code>可以是任意的 Python 对象。 如果使用了 NNI 内置的 Tuner/Assessor，<code>指标</code>只可以是两种类型：1) 数值类型，如 float、int， 2) dict 对象，其中必须由键名为 <code>default</code>，值为数值的项目。 <code>指标</code>会发送给 <a href="https://nni.readthedocs.io/zh/latest/Assessor/BuiltinAssessor.html" target="_blank" rel="noopener">Assessor</a>。 通常，<code>指标</code>是损失值或精度。</p>
+<ul>
+<li>返回配置的最终性能</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nni.report_final_result(metrics)</span><br></pre></td></tr></table></figure>
+<p><code>指标</code>也可以是任意的 Python 对象。 如果使用了内置的 Tuner/Assessor，<code>指标</code>格式和 <code>report_intermediate_result</code> 中一样，这个数值表示模型的性能，如精度、损失值等。 <code>指标</code>会发送给 <a href="https://nni.readthedocs.io/zh/latest/Tuner/BuiltinTuner.html" target="_blank" rel="noopener">Tuner</a>。</p>
+<p>例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">+ <span class="keyword">import</span> nni</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">run_trial</span><span class="params">(params)</span>:</span></span><br><span class="line">      mnist = input_data.read_data_sets(params[<span class="string">'data_dir'</span>], one_hot=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">      mnist_network = MnistNetwork(channel_1_num=params[<span class="string">'channel_1_num'</span>], channel_2_num=params[<span class="string">'channel_2_num'</span>], conv_size=params[<span class="string">'conv_size'</span>], hidden_size=params[<span class="string">'hidden_size'</span>], pool_size=params[<span class="string">'pool_size'</span>], learning_rate=params[<span class="string">'learning_rate'</span>])</span><br><span class="line">      mnist_network.build_network()</span><br><span class="line"></span><br><span class="line">      <span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">          mnist_network.train(sess, mnist)</span><br><span class="line">          test_acc = mnist_network.evaluate(mnist)</span><br><span class="line"></span><br><span class="line">+         nni.report_final_result(test_acc)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">-     params = &#123;<span class="string">'data_dir'</span>: <span class="string">'/tmp/tensorflow/mnist/input_data'</span>, <span class="string">'dropout_rate'</span>: <span class="number">0.5</span>, <span class="string">'channel_1_num'</span>: <span class="number">32</span>, <span class="string">'channel_2_num'</span>: <span class="number">64</span>,</span><br><span class="line">-     <span class="string">'conv_size'</span>: <span class="number">5</span>, <span class="string">'pool_size'</span>: <span class="number">2</span>, <span class="string">'hidden_size'</span>: <span class="number">1024</span>, <span class="string">'learning_rate'</span>: <span class="number">1e-4</span>, <span class="string">'batch_num'</span>: <span class="number">2000</span>, <span class="string">'batch_size'</span>: <span class="number">32</span>&#125;</span><br><span class="line">+     params = nni.get_next_parameter()</span><br><span class="line">      run_trial(params)</span><br></pre></td></tr></table></figure>
+<h6><span id="第三步启用-nni-api">第三步：启用 NNI API</span></h6><p>要启用 NNI 的 API 模式，需要将配置文件中的 useAnnotation 设置为 <em>false</em>，并提供搜索空间文件的路径（即第一步中定义的文件）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useAnnotation: false</span><br><span class="line">searchSpacePath: /path/to/your/search_space.json</span><br></pre></td></tr></table></figure>
+<p>参考<a href="https://nni.readthedocs.io/zh/latest/Tutorial/ExperimentConfig.html" target="_blank" rel="noopener">这里</a>进一步了解如何配置 Experiment。</p>
+<ul>
+<li>参考<a href="https://nni.readthedocs.io/zh/latest/sdk_reference.html" target="_blank" rel="noopener">这里</a>，了解更多 NNI API (例如 <code>nni.get_sequence_id()</code>)。</li>
+</ul>
+<h4><span id="定义-yaml-配置文件">定义 YAML 配置文件</span></h4><p>YAML 格式的配置文件，其中声明了搜索空间和 Trial 文件的路径，以及其它信息，如调优算法，最大尝试次数，最大运行时间等等。</p>
+<p>==<strong>一个简单的例子</strong>==</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">authorName:</span> <span class="string">ollie</span></span><br><span class="line"><span class="attr">experimentName:</span> <span class="string">pcnn_test</span></span><br><span class="line"><span class="comment"># 并发运行的 Trial 数量</span></span><br><span class="line"><span class="attr">trialConcurrency:</span> <span class="number">1</span></span><br><span class="line"><span class="comment"># Experiment 的最长持续运行时间</span></span><br><span class="line"><span class="attr">maxExecDuration:</span> <span class="number">1</span><span class="string">h</span></span><br><span class="line"><span class="comment"># 最大尝试次数，空表示一直运行</span></span><br><span class="line"><span class="attr">maxTrialNum:</span> <span class="number">10</span></span><br><span class="line"><span class="comment"># 可选项: local, remote, pai</span></span><br><span class="line"><span class="attr">trainingServicePlatform:</span> <span class="string">local</span></span><br><span class="line"><span class="comment"># 搜索空间文件，相对路径</span></span><br><span class="line"><span class="attr">searchSpacePath:</span> <span class="string">HyperParams/transe.json</span></span><br><span class="line"><span class="comment"># nni日志记录的路径，这里为绝对路径</span></span><br><span class="line"><span class="attr">logDir:</span> <span class="string">/data/Distant_Supervision_Relation_Extraction/codes/nni_log</span></span><br><span class="line"><span class="comment"># 可选项: true, false</span></span><br><span class="line"><span class="attr">useAnnotation:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 定义调参器，可选项: TPE, Random, Anneal, Evolution</span></span><br><span class="line"><span class="attr">tuner:</span></span><br><span class="line"><span class="attr">  builtinTunerName:</span> <span class="string">TPE</span></span><br><span class="line"><span class="attr">  classArgs:</span></span><br><span class="line">   <span class="comment"># 可选项: maximize, minimize，选择优化目标</span></span><br><span class="line"><span class="attr">    optimize_mode:</span> <span class="string">maximize</span></span><br><span class="line"><span class="comment"># 运行的命令，以及 Trial 代码的路径</span></span><br><span class="line"><span class="attr">trial:</span></span><br><span class="line"><span class="attr">  command:</span> <span class="string">python</span> <span class="string">main.py</span> <span class="bullet">-c</span> <span class="number">1</span> <span class="bullet">-b</span> <span class="number">128</span> <span class="bullet">-n</span> <span class="number">8</span> <span class="bullet">-m</span> <span class="string">trans</span> <span class="bullet">-o</span> <span class="string">adam</span></span><br><span class="line"><span class="attr">  codeDir:</span> <span class="string">.</span></span><br><span class="line"><span class="attr">  gpuNum:</span> <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<h4><span id="启动-nni-管理器">启动 NNI 管理器</span></h4><p>从命令行使用 <strong>config.yml</strong> 文件启动 Experiment 。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nnictl create --port <span class="number">9092</span> --config /nni_config.yml</span><br></pre></td></tr></table></figure>
+<h3><span id="如何在openpai上使用nni">如何在OpenPAI上使用NNI？</span></h3><p>参考 <a href="https://nni.readthedocs.io/zh/latest/TrainingService/PaiMode.html" target="_blank" rel="noopener">在 OpenPAI 上运行 Experiment</a></p>
+<h4><span id="准备一个包含hdfs的docker镜像">准备一个包含hdfs的docker镜像</span></h4><p>具体可参考 docker 笔记</p>
+<h4><span id="修改yaml配置文件">修改YAML配置文件</span></h4><p><strong>注意codeDir目录下不能包含任何中文或者<code>&quot;.&quot;</code>开头的文件夹</strong></p>
+<p>==<strong>一个例子</strong>==</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">authorName:</span> <span class="string">Ollie</span></span><br><span class="line"><span class="attr">experimentName:</span> <span class="string">transe_test</span></span><br><span class="line"><span class="comment"># 指定nni管理器ip 为29号服务器</span></span><br><span class="line"><span class="attr">nniManagerIp:</span> <span class="number">202.205</span><span class="number">.99</span><span class="number">.174</span></span><br><span class="line"><span class="comment"># 并发运行的 Trial 数量</span></span><br><span class="line"><span class="attr">trialConcurrency:</span> <span class="number">2</span></span><br><span class="line"><span class="comment"># Experiment 的最长持续运行时间</span></span><br><span class="line"><span class="attr">maxExecDuration:</span> <span class="number">8</span><span class="string">h</span></span><br><span class="line"><span class="comment"># 最大尝试次数，空表示一直运行</span></span><br><span class="line"><span class="attr">maxTrialNum:</span> <span class="number">100</span></span><br><span class="line"><span class="comment"># 可选项: local, remote, pai</span></span><br><span class="line"><span class="attr">trainingServicePlatform:</span> <span class="string">pai</span></span><br><span class="line"><span class="comment"># 搜索空间文件，相对路径</span></span><br><span class="line"><span class="attr">searchSpacePath:</span> <span class="string">HyperParams/transe.json</span></span><br><span class="line"><span class="attr">logDir:</span> <span class="string">/data/GaoJianwei/Distant_Supervision_Relation_Extraction/codes/nni_log</span></span><br><span class="line"><span class="comment"># 可选项: true, false</span></span><br><span class="line"><span class="attr">useAnnotation:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 定义调参器，可选项: TPE, Random, Anneal, Evolution</span></span><br><span class="line"><span class="attr">tuner:</span></span><br><span class="line"><span class="attr">  builtinTunerName:</span> <span class="string">TPE</span></span><br><span class="line"><span class="attr">  classArgs:</span></span><br><span class="line">  <span class="comment"># 可选项: maximize, minimize，选择优化目标</span></span><br><span class="line"><span class="attr">    optimize_mode:</span> <span class="string">maximize</span></span><br><span class="line"><span class="comment"># 运行的命令，以及 Trial 代码的路径</span></span><br><span class="line"><span class="attr">trial:</span></span><br><span class="line"><span class="attr">  command:</span> <span class="string">python</span> <span class="string">main.py</span> <span class="bullet">-c</span> <span class="number">0</span> <span class="bullet">-b</span> <span class="number">128</span> <span class="bullet">-n</span> <span class="number">8</span> <span class="bullet">-m</span> <span class="string">trans</span> <span class="bullet">-o</span> <span class="string">adam</span></span><br><span class="line"><span class="attr">  codeDir:</span> <span class="string">.</span></span><br><span class="line"><span class="attr">  gpuNum:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  cpuNum:</span> <span class="number">4</span></span><br><span class="line"><span class="attr">  memoryMB:</span> <span class="number">8192</span></span><br><span class="line">  <span class="comment"># docker 镜像地址</span></span><br><span class="line"><span class="attr">  image:</span> <span class="attr">lin-ai-27:5000/gjw/mxnetnlp:hdfs</span></span><br><span class="line"><span class="comment"># 配置访问的 OpenPAI 集群</span></span><br><span class="line"><span class="attr">paiConfig:</span></span><br><span class="line"><span class="attr">  userName:</span> <span class="string">account</span></span><br><span class="line">  <span class="comment"># 密码如果是全数字需要 ""</span></span><br><span class="line"><span class="attr">  passWord:</span> <span class="string">password</span></span><br><span class="line"><span class="attr">  host:</span> <span class="number">172.31</span><span class="number">.246</span><span class="number">.52</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> pai 模式下，NNIManager 会启动 RESTful 服务，监听端口为 NNI 网页服务器的端口加1。 例如，如果网页端口为<code>8080</code>，那么 RESTful 服务器会监听在 <code>8081</code>端口，来接收运行在 Kubernetes 中的 Trial 作业的指标。 因此，需要在防火墙中启用端口 <code>8081</code> 的 TCP 协议，以允许传入流量。</p>
+<p>通常在服务器中8080端口无法使用，我们需要在启动NNI管理器时手动通过 —port 指定端口。</p>
+<p><strong>由于NNI并不依赖于任何环境，因此当我们使用OpenPAI提交NNI任务时，为了方便（需要解决ip和端口映射问题），我们不需要在docker中启动NNI，直接在服务器环境下安装NNI，启动即可</strong></p>
+<h4><span id="启动-nni-管理器">启动 NNI 管理器</span></h4><p>完成并保存 NNI Experiment 配置文件后（例如可保存为：exp_pai.yml），运行以下命令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ nnictl create --port <span class="number">9092</span> --config /nni_config.yml</span><br><span class="line">$ nnictl create --config exp_pai.yml</span><br></pre></td></tr></table></figure>
+<h2><span id="僵尸程序占用显存">僵尸程序占用显存</span></h2><p>使用<code>nvidia-smi</code>查看时，没有程序显示显存占用，但显存所剩无几。</p>
+<p>在<code>root</code>用户下使用命令<code>fuser -v /dev/nvidia*</code>显示在显卡上运行的进行，找到相应的显卡，并将其中的僵尸程序<code>kill</code>掉即可。</p>
+<h2><span id="分配新账户">分配新账户</span></h2><ol>
+<li>用root用户登录后执行<code>python /data/software/insis_scripts/add_user.py --username UserName</code><ol>
+<li>然后<code>`passwd UserName</code></li>
+</ol>
+</li>
+</ol>
+<p>其中，执行的文件内容为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">root_dir = <span class="string">'/data'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_user</span><span class="params">(username)</span>:</span></span><br><span class="line">    os.system(<span class="string">'useradd -s /bin/bash -g insis -d /data/%s -m %s'</span>%(username, username))</span><br><span class="line">    os.system(<span class="string">'chmod 700 /data/%s'</span>%(username))</span><br><span class="line">    os.system(<span class="string">'gpasswd -a %s docker'</span>%(username))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    parser = argparse.ArgumentParser()</span><br><span class="line">    parser.add_argument(<span class="string">"--username"</span>, type=str, required=<span class="keyword">True</span>, help=<span class="string">"username"</span>)</span><br><span class="line">    args = parser.parse_args()</span><br><span class="line">    add_user(args.username)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Donate comment here</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Echo WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Echo Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+      <div id="bitcoin" style="display: inline-block">
+        <img id="bitcoin_qr" src="/images/bitcoin.png" alt="Echo Bitcoin">
+        <p>Bitcoin</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/10/openpai/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODU3Mi8xNTEwMA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/touxiang.jpg" alt="Echo">
+            
+              <p class="site-author-name" itemprop="name">Echo</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:voidking@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/voidking" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/voidking" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/voidking_com" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">GPU服务器使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.1.</span> <span class="nav-text">使用 tensorflow 查看能使用的设备的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.2.</span> <span class="nav-text">查看GPU使用情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.3.</span> <span class="nav-text">查看进程用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.4.</span> <span class="nav-text">Python程序加参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.5.</span> <span class="nav-text">指定某块GPU跑程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.6.</span> <span class="nav-text">查看Python环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.7.</span> <span class="nav-text">激活Python环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.8.</span> <span class="nav-text">查看用户进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.9.</span> <span class="nav-text">程序中指定使用显卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.10.</span> <span class="nav-text">挂起程序在后台运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">screen 相关操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.1.</span> <span class="nav-text">新建窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.2.</span> <span class="nav-text">会话分离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.3.</span> <span class="nav-text">恢复会话窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.4.</span> <span class="nav-text">杀死会话窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.5.</span> <span class="nav-text">清除死去的窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.6.</span> <span class="nav-text">解除窗口占用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">快速连接服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.1.</span> <span class="nav-text">在本地主机生成密钥对</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.2.</span> <span class="nav-text">将公钥添加到远程主机的 authorized_keys 文件中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.3.</span> <span class="nav-text">修改本地host</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">使用Pycharm远程调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.1.</span> <span class="nav-text">SSH方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.2.</span> <span class="nav-text">Docker方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.</span> <span class="nav-text">调参工具 NNI 的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.1.</span> <span class="nav-text">如何安装？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.2.</span> <span class="nav-text">如何使用？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">实现 NNI 的 Trial（尝试）代码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.2.1.1.</span> <span class="nav-text">NNI API</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.2.1.1.1.</span> <span class="nav-text">第一步：准备搜索空间参数文件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.2.1.1.2.</span> <span class="nav-text">第二步：更新模型代码</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.2.1.1.3.</span> <span class="nav-text">第三步：启用 NNI API</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">定义 YAML 配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.2.3.</span> <span class="nav-text">启动 NNI 管理器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.3.</span> <span class="nav-text">如何在OpenPAI上使用NNI？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">准备一个包含hdfs的docker镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.3.2.</span> <span class="nav-text">修改YAML配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.3.3.</span> <span class="nav-text">启动 NNI 管理器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.6.</span> <span class="nav-text">僵尸程序占用显存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.7.</span> <span class="nav-text">分配新账户</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Echo</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">110.2k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "topRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+</body>
+</html>

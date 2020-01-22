@@ -1775,8 +1775,8 @@ with open(filename,&#39;w&#39;) as f:
         <category>分布式平台</category>
       </categories>
       <tags>
-        <tag>Python</tag>
         <tag>Spark</tag>
+        <tag>Python</tag>
         <tag>分布式调优</tag>
       </tags>
   </entry>
