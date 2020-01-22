@@ -84,7 +84,7 @@
 <meta property="og:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在做项目的过程中，学习到很多的东西，在这里记录下来。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/03/14/各类工具的使用/bytes.png">
-<meta property="og:updated_time" content="2019-12-29T08:56:06.109Z">
+<meta property="og:updated_time" content="2020-01-22T09:58:25.814Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning">
 <meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在做项目的过程中，学习到很多的东西，在这里记录下来。">
@@ -375,8 +375,8 @@
 
           
             <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
             </span>
           
 
@@ -416,22 +416,7 @@
       
 
       
-        <h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;在做项目的过程中，学习到很多的东西，在这里记录下来。<br><a id="more"></a><br><!-- TOC --></p>
-<ul>
-<li><a href="#1-%e7%ae%80%e4%bb%8b">1. 简介</a></li>
-<li><a href="#2-%e5%b7%a5%e5%85%b7%e4%bd%bf%e7%94%a8">2. 工具使用</a><ul>
-<li><a href="#21-git">2.1. Git</a></li>
-<li><a href="#22-%e4%bd%bf%e7%94%a8gpu%e6%9c%8d%e5%8a%a1%e5%99%a8">2.2. 使用GPU服务器</a></li>
-<li><a href="#23-%e9%83%a8%e7%bd%b2%e4%bb%a3%e7%a0%81%e5%88%b0%e6%9c%8d%e5%8a%a1%e5%99%a8">2.3. 部署代码到服务器</a></li>
-<li><a href="#24-%e5%9c%a8%e6%9c%ac%e5%9c%b0%e8%bf%90%e8%a1%8cgluon">2.4. 在本地运行gluon</a></li>
-<li><a href="#25-%e4%bf%ae%e5%a4%8d%e9%9b%86%e7%be%a4">2.5. 修复集群</a></li>
-<li><a href="#26-%e8%bf%90%e8%a1%8cspark">2.6. 运行Spark</a></li>
-<li><a href="#27-%e4%bd%bf%e7%94%a8vscode">2.7. 使用vsCode</a></li>
-<li><a href="#%e5%ad%97%e8%8a%82">字节</a></li>
-</ul>
-</li>
-</ul>
-<!-- /TOC -->
+        <h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;在做项目的过程中，学习到很多的东西，在这里记录下来。<br><a id="more"></a> </p>
 <h1><span id="2-工具使用">2. 工具使用</span></h1><h2><span id="21-git">2.1. Git</span></h2><p>&ensp;&ensp;&ensp;&ensp;Git是一个用来版本控制的软件，在用的过程中涉及到以下步骤</p>
 <ol>
 <li>在服务器上创建仓库。首先在服务器上创建一个文件夹，例如test。cd到这个文件夹下，使用<figure class="highlight plain"><figcaption><span>init```命令，把这个文件夹初始化为一个git仓库，会看到这个文件夹下多了一个.git的文件，然后我们把项目代码拷贝到test这个文件夹下。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">2. 在自己的电脑上下载并安装Git软件</span><br><span class="line">3. 从服务器git仓库上把代码clone到本地电脑。首先在自己电脑上，创建一个保存代码的目录，在这个目录下右键选择Git Bash，输入下面的代码</span><br><span class="line">```git clone zz@172.11.11.111:/file0/repo/EQ/```这样服务器git仓库中的东西就完封不动的clone到本地了。</span><br><span class="line">4. 在自己电脑上打开eclipse或者myeclipse，在file中导入这个项目代码，就可以进行修改代码了。</span><br><span class="line">5. pull和push。右键选中这个工程，点击team，就可以对项目进行pull和push。当你在本地修改完代码，本地的git会记录下来这些改动，所以本地文件夹中的git也有原先的历史记录，当push的时候会读取本地的git，找到本地的代码在服务器上的源，然后把改动同步到服务器上的git中。 </span><br><span class="line">6. 除了使用eclipse中的team来pull和push代码，还可以使用命令来进行pull或push。每次改完代码提交的时候，打开EQ这个目录（一定要在这个目录下，因为只有这个目录有git这个文件夹），右键```Git Bash Here```输入以下命令:</span><br><span class="line">```git add –all ```,</span><br><span class="line">```git commit –m “自己随便写，写自己本地改动的地方” ```,</span><br><span class="line">```git push</span><br></pre></td></tr></table></figure></li>
@@ -786,7 +771,7 @@ System.out.println(bString+&quot;(string)的字节数：&quot;+Bytes.toBytes(bSt
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">110.2k</span>
+    <span title="Site words total count">110.1k</span>
   
 </div>
 
@@ -806,7 +791,7 @@ System.out.println(bString+&quot;(string)的字节数：&quot;+Bytes.toBytes(bSt
 
   
     <span class="site-uv">
-      <i class="fa fa-user"></i>
+      <i class="fa fa-user"></i> 访问人数
       <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
       
     </span>
@@ -814,9 +799,9 @@ System.out.println(bString+&quot;(string)的字节数：&quot;+Bytes.toBytes(bSt
 
   
     <span class="site-pv">
-      <i class="fa fa-eye"></i>
+      <i class="fa fa-eye"></i> 总访问量
       <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      
+      次
     </span>
   
 </div>
