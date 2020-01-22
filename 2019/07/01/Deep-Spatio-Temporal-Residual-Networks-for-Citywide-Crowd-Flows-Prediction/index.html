@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="title: Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Predictiondate: 2019-07-01T21:02:12.000Ztags:   - spatial-temporal、ResNet、Crowd Flows Prediction简介参考资料https://www.microsoft.com/">
+<meta name="description" content="title: Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Predictiondate: 2019-07-01T21:02:12.000Zcategories: 论文阅读笔记tags:  spatial-temporal ResNet Crowd Flows Predictioncomments: false">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Echo&#39;s blog">
 <meta property="og:url" content="http://yoursite.com/2019/07/01/Deep-Spatio-Temporal-Residual-Networks-for-Citywide-Crowd-Flows-Prediction/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="title: Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Predictiondate: 2019-07-01T21:02:12.000Ztags:   - spatial-temporal、ResNet、Crowd Flows Prediction简介参考资料https://www.microsoft.com/">
+<meta property="og:description" content="title: Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Predictiondate: 2019-07-01T21:02:12.000Zcategories: 论文阅读笔记tags:  spatial-temporal ResNet Crowd Flows Predictioncomments: false">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/07/01/Deep-Spatio-Temporal-Residual-Networks-for-Citywide-Crowd-Flows-Prediction/figure1.png">
-<meta property="og:updated_time" content="2019-07-01T14:22:48.247Z">
+<meta property="og:updated_time" content="2020-01-22T13:24:08.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Echo&#39;s blog">
-<meta name="twitter:description" content="title: Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Predictiondate: 2019-07-01T21:02:12.000Ztags:   - spatial-temporal、ResNet、Crowd Flows Prediction简介参考资料https://www.microsoft.com/">
+<meta name="twitter:description" content="title: Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Predictiondate: 2019-07-01T21:02:12.000Zcategories: 论文阅读笔记tags:  spatial-temporal ResNet Crowd Flows Predictioncomments: false">
 <meta name="twitter:image" content="http://yoursite.com/2019/07/01/Deep-Spatio-Temporal-Residual-Networks-for-Citywide-Crowd-Flows-Prediction/figure1.png">
 
 
@@ -366,7 +366,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  853
+                  862
                 </span>
               
 
@@ -404,8 +404,14 @@
 
       
         <hr>
-<p>title: Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction<br>date: 2019-07-01T21:02:12.000Z<br>tags:</p>
-<h2><span id="-spatial-temporal-resnet-crowd-flows-prediction">  - spatial-temporal、ResNet、Crowd Flows Prediction</span></h2><h1><span id="简介">简介</span></h1><p>参考资料<br><a href="https://www.microsoft.com/en-us/research/publication/deep-spatio-temporal-residual-networks-for-citywide-crowd-flows-prediction/" target="_blank" rel="noopener">https://www.microsoft.com/en-us/research/publication/deep-spatio-temporal-residual-networks-for-citywide-crowd-flows-prediction/</a><br>城市计算，郑宇发表的论文：<br><a href="https://www.microsoft.com/en-us/research/project/urban-computing/#!publications" target="_blank" rel="noopener">https://www.microsoft.com/en-us/research/project/urban-computing/#!publications</a><br><a id="more"></a>   </p>
+<p>title: Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction<br>date: 2019-07-01T21:02:12.000Z<br>categories: 论文阅读笔记<br>tags:</p>
+<ul>
+<li>spatial-temporal</li>
+<li>ResNet</li>
+<li>Crowd Flows Prediction<br>comments: false</li>
+</ul>
+<hr>
+<h1><span id="简介">简介</span></h1><p>参考资料<br><a href="https://www.microsoft.com/en-us/research/publication/deep-spatio-temporal-residual-networks-for-citywide-crowd-flows-prediction/" target="_blank" rel="noopener">https://www.microsoft.com/en-us/research/publication/deep-spatio-temporal-residual-networks-for-citywide-crowd-flows-prediction/</a><br>城市计算，郑宇发表的论文：<br><a href="https://www.microsoft.com/en-us/research/project/urban-computing/#!publications" target="_blank" rel="noopener">https://www.microsoft.com/en-us/research/project/urban-computing/#!publications</a><br><a id="more"></a>   </p>
 <h1><span id="abstract">Abstract</span></h1><p>&ensp;&ensp;&ensp;&ensp;预测人群流量对于公共安全是非常重要的，同时也有挑战，因为涉及到很多复杂的因素。例如区域间交通、时间、以及天气。我们提出了一个基于深度学习的方法：ST-ResNet，预测城市中每个区域的inflow和outflow。基于时空数据，我们设计了端到端结构的ST-ResNet。我们应用残差神经网络框架来建模时间closeness、period和trend的属性。对每一个属性，设计一个残差卷积单元分支，每个残差卷积单元对空间进行建模。三个残差神经网络对每个区域分配不同的权重。残差神经网络的输出再和外部因素（天气）整合，最终预测每个区域的人流量。在北京和NYC2种数据集上做了实验。</p>
 <h1><span id="instruction">Instruction</span></h1><p>&ensp;&ensp;&ensp;&ensp;在这篇论文中，预测2种流量：inflow和outflow。inflow：在给定一个时间间隔中，从其他区域进入到一个区域的所有流量。outflow：在给定时间间隔中，从这个区域离开的流量。这2种流量都标识人迁移的变化。inflow/outflow可以由行人的数量、周围路上车的数量、公共交通系统（bus,metro）上的人数量或者它们的总和（如果都可以获取到）。 例如图1中的(b)，可以通过手机信号来推测人inflow/outflow分别是(3,1)，使用车辆的GPS轨迹，推测处inflow/outflow分别是(0,3)。<br><img src="/2019/07/01/Deep-Spatio-Temporal-Residual-Networks-for-Citywide-Crowd-Flows-Prediction/figure1.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;预测城市中每个区域的inflow和outflow有以下3个复杂的因素：</p>
 <ol>
@@ -605,7 +611,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -654,7 +660,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">  - spatial-temporal、ResNet、Crowd Flows Prediction</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">Instruction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">Preliminaries</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Instruction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">Preliminaries</span></a></li></ol></div>
             
 
           </div>
