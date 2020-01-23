@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="Spark,HDFS,HBase,Hive,">
+  <meta name="keywords" content="HBase,Spark,HDFS,Hive,">
 
 
 
@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="1. 简介介绍Spark，HDFS，HBase，Hive的内容">
-<meta name="keywords" content="Spark,HDFS,HBase,Hive">
+<meta name="description" content="介绍Spark，HDFS，HBase，Hive的内容">
+<meta name="keywords" content="HBase,Spark,HDFS,Hive">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式组件介绍">
 <meta property="og:url" content="http://yoursite.com/2019/03/26/分布式组件/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="1. 简介介绍Spark，HDFS，HBase，Hive的内容">
+<meta property="og:description" content="介绍Spark，HDFS，HBase，Hive的内容">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-23T02:41:06.551Z">
+<meta property="og:updated_time" content="2020-01-23T07:20:35.002Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式组件介绍">
-<meta name="twitter:description" content="1. 简介介绍Spark，HDFS，HBase，Hive的内容">
+<meta name="twitter:description" content="介绍Spark，HDFS，HBase，Hive的内容">
 
 
 
@@ -422,52 +422,35 @@
       
 
       
-        <h1><span id="1-简介">1. 简介</span></h1><p>介绍Spark，HDFS，HBase，Hive的内容<br><a id="more"></a><br><!-- TOC --></p>
+        <p>介绍Spark，HDFS，HBase，Hive的内容<br><a id="more"></a><br><!-- TOC --></p>
 <ul>
-<li><a href="#1-%e7%ae%80%e4%bb%8b">1. 简介</a></li>
-<li><a href="#2-spark-rdd">2. Spark-RDD</a></li>
-<li><a href="#3-hdfs">3. HDFS</a></li>
-<li><a href="#4-hive%e5%92%8chbase">4. Hive和HBase</a><ul>
-<li><a href="#41-%e5%ba%94%e7%94%a8%e5%9c%ba%e6%99%af">4.1. 应用场景</a></li>
+<li><a href="#1-spark-rdd">1. Spark-RDD</a></li>
+<li><a href="#2-hdfs">2. HDFS</a></li>
+<li><a href="#3-hive%e5%92%8chbase">3. Hive和HBase</a><ul>
+<li><a href="#31-%e5%ba%94%e7%94%a8%e5%9c%ba%e6%99%af">3.1. 应用场景</a></li>
 </ul>
 </li>
 </ul>
 <!-- /TOC -->
-<h1><span id="2-spark-rdd">2. Spark-RDD</span></h1><p>&ensp;&ensp;&ensp;&ensp;RDD从表现形式上类似数据库的视图。可以理解为Java中的一个lis或者数据库中的一张表（或者视图）。Spark对RDD的操作，类似于对SQL中的一张表进行操作。但是RDD类似于数据库中的视图，而不是表，因为RDD是弹性的，就是一个RDD的数据并不一定是物理真实存在的。把一个超大的数据集，切分成N个小堆，找M个执行器(M&lt;N)，每一个执行器各自拿一块或者多块数据慢慢计算，等到计算出结果再收集在一起，这就算执行完了。那么Spark做了一项工作就是：凡是能够被我计算的，都要符合我的要求，所以spark无论处理什么数据，都要先整理成一个拥有多个分块的数据集，这个数据集就是RDD。<br>&ensp;&ensp;&ensp;&ensp;当你写一个spark程序时，比如下面的程序，获取了一个RDD，叫做<code>lines</code>，但是这个RDD不包含任何待处理的数据，真正的数据在执行时才会被加载，加载时数据要么来自spark外部，例如hdfs，要么来自spark内部，前提是你已经对它做了cache。</p>
-<pre><code class="lang-java">SparkConf conf = new SparkConf().setAppName(&quot;wordcount&quot;).setMaster(&quot;local&quot;);
-JavaSparkContext sc = new JavaSparkContext(conf);
-JavaRDD&lt;String&gt; lines = sc.textFile(&quot;/Users/jianhong1/testfile&quot;);
-</code></pre>
-<p>&ensp;&ensp;&ensp;&ensp;Spark的计算执行可以认为是这样一个过程：在代码中创建一个RDD，但是这个RDD并不包含数据，只有等到Action算子的时候，开始计算，RDD才会加载数据。从一个RDD中读取数据，然后处理数据    </p>
-<h1><span id="3-hdfs">3. HDFS</span></h1><p>&ensp;&ensp;&ensp;&ensp;HDFS分布式文件系统把文件分布存储到多个计算机节点上，成千上万的计算机节点构成了一个集群。这些节点分为主节点和从节点。HDFS以Master-Slave模式运行。主节点：名称节点(NameNode)，从节点：数据节点(DataNode)。其中有一个NameNode和多个DataNode。<br>&ensp;&ensp;&ensp;&ensp;NameNode有2个职责：（1）负责客户端请求的响应。（2）用于保存HDFS的元数据信息，比如文件系统的命名空间，块信息。维护着文件系统树以及整棵树所有的文件和目录。这些信息以两个文件形式永久保存在本地磁盘上：命名空间镜像文件(Namespace image)和编辑日志文件(edit log)。FsImage用于维护文件系统的目录结构以及元数据信息，文件与数据块(block)列表的对应关系。操作日志文件EditLog中记录了所有针对文件的创建、删除、重命名等操作。元数据存放在fsimage中，在运行时加载到内存中（读写比较快）。操作日志写到edits中。<br>&ensp;&ensp;&ensp;&ensp;DataNode的职责是：HDFS有多个DataNode。（1）存储管理用户的文件块数据。（2）定期（默认1h）向NameNode汇报自身所持有的block信息(通过心跳信息上报)。当NameNode长时间没有收到DataNode-n的心跳信息，则认为DataNode-n不可用。DataNode提供真实文件数据的存储服务。    </p>
+<h1><span id="1-spark-rdd">1. Spark-RDD</span></h1><p>&ensp;&ensp;&ensp;&ensp;RDD从表现形式上类似数据库的视图。可以理解为Java中的一个lis或者数据库中的一张表（或者视图）。Spark对RDD的操作，类似于对SQL中的一张表进行操作。但是RDD类似于数据库中的视图，而不是表，因为RDD是弹性的，就是一个RDD的数据并不一定是物理真实存在的。把一个超大的数据集，切分成N个小堆，找M个执行器(M&lt;N)，每一个执行器各自拿一块或者多块数据慢慢计算，等到计算出结果再收集在一起，这就算执行完了。那么Spark做了一项工作就是：凡是能够被我计算的，都要符合我的要求，所以spark无论处理什么数据，都要先整理成一个拥有多个分块的数据集，这个数据集就是RDD。<br>&ensp;&ensp;&ensp;&ensp;当你写一个spark程序时，比如下面的程序，获取了一个RDD，叫做<code>lines</code>，但是这个RDD不包含任何待处理的数据，真正的数据在执行时才会被加载，加载时数据要么来自spark外部，例如hdfs，要么来自spark内部，前提是你已经对它做了cache。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SparkConf conf = <span class="keyword">new</span> SparkConf().setAppName(<span class="string">"wordcount"</span>).setMaster(<span class="string">"local"</span>);</span><br><span class="line">JavaSparkContext sc = <span class="keyword">new</span> JavaSparkContext(conf);</span><br><span class="line">JavaRDD&lt;String&gt; lines = sc.textFile(<span class="string">"/Users/jianhong1/testfile"</span>);</span><br></pre></td></tr></table></figure>
+<p>&ensp;&ensp;&ensp;&ensp;Spark的计算执行可以认为是这样一个过程：在代码中创建一个RDD，但是这个RDD并不包含数据，只有等到Action算子的时候，开始计算，RDD才会加载数据。从一个RDD中读取数据，然后处理数据</p>
+<h1><span id="2-hdfs">2. HDFS</span></h1><p>&ensp;&ensp;&ensp;&ensp;HDFS分布式文件系统把文件分布存储到多个计算机节点上，成千上万的计算机节点构成了一个集群。这些节点分为主节点和从节点。HDFS以Master-Slave模式运行。主节点：名称节点(NameNode)，从节点：数据节点(DataNode)。其中有一个NameNode和多个DataNode。<br>&ensp;&ensp;&ensp;&ensp;NameNode有2个职责：（1）负责客户端请求的响应。（2）用于保存HDFS的元数据信息，比如文件系统的命名空间，块信息。维护着文件系统树以及整棵树所有的文件和目录。这些信息以两个文件形式永久保存在本地磁盘上：命名空间镜像文件(Namespace image)和编辑日志文件(edit log)。FsImage用于维护文件系统的目录结构以及元数据信息，文件与数据块(block)列表的对应关系。操作日志文件EditLog中记录了所有针对文件的创建、删除、重命名等操作。元数据存放在fsimage中，在运行时加载到内存中（读写比较快）。操作日志写到edits中。<br>&ensp;&ensp;&ensp;&ensp;DataNode的职责是：HDFS有多个DataNode。（1）存储管理用户的文件块数据。（2）定期（默认1h）向NameNode汇报自身所持有的block信息(通过心跳信息上报)。当NameNode长时间没有收到DataNode-n的心跳信息，则认为DataNode-n不可用。DataNode提供真实文件数据的存储服务。</p>
 <ul>
 <li>文件块(block)：最基本的存储单位。对于文件内容而言，一个文件的长度大小是size，那么从文件的0偏移开始，按照固定的大小，顺序对文件进行划分并编号，划分好的每一个块称为一个Block。</li>
-<li><p>Hdfs块大小如何设定？在hdfs-default.xml中设置。</p>
-<pre><code class="lang-xml">&lt;property&gt;
-&lt;name&gt;dfs.blocksize&lt;/name&gt;   #block块存储的配置信息
-&lt;value&gt;134217728&lt;/value&gt;   #这里的块的容量最大是128M，请注意
-&lt;description&gt;
-    The default block size for new files, in bytes.
-    You can use the following suffix (case insensitive):
-    k(kilo), m(mega), g(giga), t(tera), p(peta), e(exa) to specify the size (such as 128k, 512m, 1g, etc.),
-    Or provide complete size in bytes (such as 134217728 for 128 MB).
-&lt;/description&gt;
-&lt;/property&gt;
-</code></pre>
-</li>
-<li><p>HDFS默认Block大小是128MB，以一个256MB的文件为例，一共需要2个Block。不同于普通文件系统的是，HDFS中，如果一个文件小于数据块的大小，并不占用整个数据块存储空间。</p>
-</li>
-<li>Replication，默认是3，在hdfs-site.xml的dfs.replication属性。<br>使用<code>vi hdfs-site.xml</code>命令可以修改，配置文件对全局生效。<pre><code class="lang-xml">&lt;configuration&gt;
- &lt;property&gt;
-   &lt;name&gt;dfs.replication&lt;/name&gt;
-   &lt;value&gt;3&lt;/value&gt;
- &lt;/property&gt;
-&lt;/configuration&gt;
-</code></pre>
-<h1><span id="4-hive和hbase">4. Hive和HBase</span></h1></li>
-<li>Hive：通俗地讲，Hive是构建在Hadoop之上的数据仓库。是因为（1）数据存储在HDFS上，并不是存储在Hive中，（2）数据计算时使用MapReduce。Hive是一种构建在Hadoop文件系统上的数据仓库框架，并对存储在HDFS中的数据进行分析和管理。它可以将结构化的数据文件映射成一张数据库表，并提供完整的SQL查询功能，就是把写好的hql转换为map-reduce程序操作用来查询存放在HDFS上的数据。HQL是一种类SQL语言。</li>
-<li>HBase：通俗地讲，HBase可以认为是HDFS的一个包装，HBase的本质是数据存储，是一个Nosql数据库。HBase部署在HDFS之上，并且克服了HDFS在随机读写方面的缺点。HBase是一种Key/Value系统，它运行在HDFS之上。和Hive不一样，HBase能够在它的数据库上实时运行，而不是运行MapReduce任务。   <h2><span id="41-应用场景">4.1. 应用场景</span></h2>&ensp;&ensp;&ensp;&ensp;Hive用于对一段时间内的数据进行分析查询。例如，用于计算趋势或者网站的日志。<strong>Hive不适合用来进行实时查询，因为它需要很长时间才可以返回结果</strong>。Hive本身不存储和计算数据，它完全依赖HDFS和MapReduce，Hive中的表只是逻辑的表。Hive很适合数据仓库的统计分析，Hive的最佳使用场合是大数据集的批处理作业。例如网络日志分析，一般按照天、周、月、年来进行数据统计。不适合实时查询。例如Hive在几百兆的数据集上执行查询一般都有分钟级别的时间延迟。因此Hive不适合低延迟的应用，例如：联机事务处理。<br>&ensp;&ensp;&ensp;&ensp;<strong>HBase非常适合用来进行大数据的实时查询</strong>。Facebook用HBase进行消息和实时的分析。HBase中的表是物理表，不是逻辑表，提供一个超大的内存Hash表，搜索引擎通过它来存储索引，方便查询操作。<br>&ensp;&ensp;&ensp;&ensp;HDFS作为底层存储，是存储文件的系统，而HBase负责组织文件。Hive需要用到HDFS存储文件，需要用到MapReduce计算框架。</li>
+<li>Hdfs块大小如何设定？在hdfs-default.xml中设置。</li>
 </ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.blocksize<span class="tag">&lt;/<span class="name">name</span>&gt;</span>   #block块存储的配置信息</span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>134217728<span class="tag">&lt;/<span class="name">value</span>&gt;</span>   #这里的块的容量最大是128M，请注意</span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">      The default block size for new files, in bytes.</span><br><span class="line">      You can use the following suffix (case insensitive):</span><br><span class="line">      k(kilo), m(mega), g(giga), t(tera), p(peta), e(exa) to specify the size (such as 128k, 512m, 1g, etc.),</span><br><span class="line">      Or provide complete size in bytes (such as 134217728 for 128 MB).</span><br><span class="line">  <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>HDFS默认Block大小是128MB，以一个256MB的文件为例，一共需要2个Block。不同于普通文件系统的是，HDFS中，如果一个文件小于数据块的大小，并不占用整个数据块存储空间。</li>
+<li>Replication，默认是3，在hdfs-site.xml的dfs.replication属性。<br>使用<code>vi hdfs-site.xml</code>命令可以修改，配置文件对全局生效。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">value</span>&gt;</span>3<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1><span id="3-hive和hbase">3. Hive和HBase</span></h1><ul>
+<li>Hive：通俗地讲，Hive是构建在Hadoop之上的数据仓库。是因为（1）数据存储在HDFS上，并不是存储在Hive中，（2）数据计算时使用MapReduce。Hive是一种构建在Hadoop文件系统上的数据仓库框架，并对存储在HDFS中的数据进行分析和管理。它可以将结构化的数据文件映射成一张数据库表，并提供完整的SQL查询功能，就是把写好的hql转换为map-reduce程序操作用来查询存放在HDFS上的数据。HQL是一种类SQL语言。</li>
+<li>HBase：通俗地讲，HBase可以认为是HDFS的一个包装，HBase的本质是数据存储，是一个Nosql数据库。HBase部署在HDFS之上，并且克服了HDFS在随机读写方面的缺点。HBase是一种Key/Value系统，它运行在HDFS之上。和Hive不一样，HBase能够在它的数据库上实时运行，而不是运行MapReduce任务。</li>
+</ul>
+<h2><span id="31-应用场景">3.1. 应用场景</span></h2><p>&ensp;&ensp;&ensp;&ensp;Hive用于对一段时间内的数据进行分析查询。例如，用于计算趋势或者网站的日志。<strong>Hive不适合用来进行实时查询，因为它需要很长时间才可以返回结果</strong>。Hive本身不存储和计算数据，它完全依赖HDFS和MapReduce，Hive中的表只是逻辑的表。Hive很适合数据仓库的统计分析，Hive的最佳使用场合是大数据集的批处理作业。例如网络日志分析，一般按照天、周、月、年来进行数据统计。不适合实时查询。例如Hive在几百兆的数据集上执行查询一般都有分钟级别的时间延迟。因此Hive不适合低延迟的应用，例如：联机事务处理。<br>&ensp;&ensp;&ensp;&ensp;<strong>HBase非常适合用来进行大数据的实时查询</strong>。Facebook用HBase进行消息和实时的分析。HBase中的表是物理表，不是逻辑表，提供一个超大的内存Hash表，搜索引擎通过它来存储索引，方便查询操作。<br>&ensp;&ensp;&ensp;&ensp;HDFS作为底层存储，是存储文件的系统，而HBase负责组织文件。Hive需要用到HDFS存储文件，需要用到MapReduce计算框架。</p>
 
       
     </div>
@@ -514,11 +497,11 @@ JavaRDD&lt;String&gt; lines = sc.textFile(&quot;/Users/jianhong1/testfile&quot;)
       
         <div class="post-tags">
           
+            <a href="/tags/HBase/" rel="tag"># HBase</a>
+          
             <a href="/tags/Spark/" rel="tag"># Spark</a>
           
             <a href="/tags/HDFS/" rel="tag"># HDFS</a>
-          
-            <a href="/tags/HBase/" rel="tag"># HBase</a>
           
             <a href="/tags/Hive/" rel="tag"># Hive</a>
           
@@ -706,7 +689,7 @@ JavaRDD&lt;String&gt; lines = sc.textFile(&quot;/Users/jianhong1/testfile&quot;)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. Spark-RDD</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. HDFS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. Hive和HBase</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 应用场景</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. Spark-RDD</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. HDFS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. Hive和HBase</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. 应用场景</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -88,7 +88,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/04/CDH集群/spark3.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/04/CDH集群/spark4.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/04/CDH集群/kafka1.png">
-<meta property="og:updated_time" content="2020-01-23T07:01:39.737Z">
+<meta property="og:updated_time" content="2020-01-23T07:05:22.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH集群">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近去给甲方安装CDH集群，对于集群的搭建和测试在这里总结一下。">
@@ -503,7 +503,7 @@
 </tbody>
 </table>
 </div>
-<p>现在实验室的cdh集群版本是CDH5.7.2,其中每个组件的版本是<br>| 组件 | CDH5.7.2|CDH5.16.1|<br>-|-|-|-<br>|Hadoop|2.6.0|2.6.0|<br>|HDFS|2.6.0|2.6.0|<br>|HBase|1.2.0|1.2.0|<br>|Hive|1.1.0|1.1.0|<br>|Spark|1.6.0|1.6.0|<br>|Kafka|0.10.0|0.10.0|<br>|Zookeeper|3.4.5|3.4.5|</p>
+<p>现在实验室的cdh集群版本是CDH5.7.2,其中每个组件的版本是<br>| 组件 | CDH5.7.2|CDH5.16.1|<br>-|-|-|-<br>|Hadoop|2.6.0|2.6.0|<br>|HDFS|2.6.0|2.6.0|<br>|HBase|1.2.0|1.2.0|<br>|Hive|1.1.0|1.1.0|<br>|Spark|1.6.0|1.6.0|<br>|Kafka|0.10.0|0.10.0|<br>|Zookeeper|3.4.5|3.4.5|<br>以后安装CDH集群，应该安装CDH5.16.1版本</p>
 <h1><span id="2-linux目录介绍">2. Linux目录介绍</span></h1><div class="table-container">
 <table>
 <thead>
@@ -568,7 +568,7 @@
 </table>
 </div>
 <h1><span id="3-安装前说明">3. 安装前说明</span></h1><ul>
-<li>Zookeeper和Kafka部分主节点，要装3台</li>
+<li>Zookeeper和Kafka不分主节点，要装3台</li>
 <li>HBase和HDFS分主从节点，都需要2个主节点，一个active主节点，一个standby主节点，剩下的机器作为从节点</li>
 <li>关闭防火墙，安装ntp、jdk、mysql，anaconda可以同时进行。   </li>
 <li>本次以3个服务器为例安装CDH集群</li>
