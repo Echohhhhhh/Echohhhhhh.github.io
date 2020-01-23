@@ -1130,8 +1130,7 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
   <entry>
     <title>梯度爆炸和衰减</title>
     <url>/2019/07/16/%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8%E5%92%8C%E8%A1%B0%E5%87%8F/</url>
-    <content><![CDATA[<a id="more"></a>
-<!-- TOC -->
+    <content><![CDATA[<p>记录梯度爆炸和衰减的相关内容<br><a id="more"></a><br><!-- TOC --></p>
 <ul>
 <li><a href="#1-为什么使用梯度更新规则">1. 为什么使用梯度更新规则</a></li>
 <li><a href="#2-激活函数">2. 激活函数</a></li>
