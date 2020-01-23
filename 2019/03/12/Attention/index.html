@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/12/Attention/e.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/Attention/a.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/Attention/g.png">
-<meta property="og:updated_time" content="2020-01-23T08:06:18.106Z">
+<meta property="og:updated_time" content="2020-01-23T14:11:21.852Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Attention">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;主要介绍Attention的机制，以及在NLP中的应用。">
@@ -460,17 +460,16 @@
 <li>General<br><img src="/2019/03/12/Attention/function_score.png" alt=""></li>
 </ol>
 <h1><span id="3-attention在nlp的应用">3. Attention在NLP的应用</span></h1><p>&ensp;&ensp;&ensp;&ensp;在上面的编码器-解码器中，从编码器传到解码器的背景变量$c$是不变的。就是说解码器在翻译第一个词和第二个词是c是不变的。但是实际情况中，比如英语they are watching。翻译成法语是：IIs regardent。比如在翻译IIS时，和they are更相关，在翻译regardent和watching更相关，所以希望把背景变量$c$设置成一个变化的值。当翻译IIS时，对编码器的隐藏变量$h_1,h_2$更看重，当翻译regardent对隐藏变量$h_3$更看重，所以就需要在解码器中，在不同时间步时，对编码器的隐藏变量$h_1,h_2,h_3$分配不同的权重，加权平均得到背景变量$c$。</p>
-<p>&ensp;&ensp;&ensp;&ensp;原先解码器隐藏层变量的计算是上一时刻的输出$y_{t<code>-1}$，上一时刻的隐藏状态$s_{t</code>-1}$以及背景变量$c$，在加入attention机制后，这里的背景变量变成了$c_{t`}$，每一步的背景变量都不一样。  </p>
+<p>&ensp;&ensp;&ensp;&ensp;原先解码器隐藏层变量的计算是上一时刻的输出$y_{t’-1}$，上一时刻的隐藏状态$s_{t’-1}$以及背景变量$c$，在加入attention机制后，这里的背景变量变成了$c_{t’}$，每一步的背景变量都不一样。  </p>
 <p><img src="/2019/03/12/Attention/st.png" alt=""><br><img src="/2019/03/12/Attention/attention.png" alt=""></p>
-<p>&ensp;&ensp;&ensp;&ensp;下面看一下$c_{t<code>}$是怎么设计的。 就是编码器的不同时刻的隐藏状态的加权平均。只是这里的权重$\alpha_{t</code>t}$在每一个时刻是一个变化的值。  注意这里的$t<code>$是输出(解码器)的时间戳，$t$是输入(编码器)的时间戳。首先我们先固定$t</code>$，下面的式子中$t<code>$是不变的。在计算$c_{t</code>}$时，变化$t从1到T$，遍历所有的$h_t$，然后给定一个$h_t$，怎么求$h_t$对应的权重$\alpha_{t`t}$。</p>
+<p>&ensp;&ensp;&ensp;&ensp;下面看一下$c_{t’}$是怎么设计的。 就是编码器的不同时刻的隐藏状态的加权平均。只是这里的权重$\alpha_{t’t}$在每一个时刻是一个变化的值。  注意这里的$t’$是输出(解码器)的时间戳，$t$是输入(编码器)的时间戳。首先我们先固定$t’$，下面的式子中$t’$是不变的。在计算$c_{t’}$时，变化$t从1到T$，遍历所有的$h_t$，然后给定一个$h_t$，怎么求$h_t$对应的权重$\alpha_{t’t}$。</p>
 <p><img src="/2019/03/12/Attention/ct.png" alt=""></p>
 <p>例如计算解码器在第$t’$个时间步的背景向量$t’$，使用解码器$t’-1$个时间步的隐藏状态$S_{t’-1}$作为query，将编码器所有时间步的隐藏状态$h_0,…h_t$作为key和value，先将$S_{t’-1}$和$h_0,…h_t$做Attention，然后将Attention score使用$softmax$归一化，再和$h_0,…h_t$加权求和，得到解码器中第$t’$个时间步的背景向量$c_{t’}$</p>
 <p><img src="/2019/03/12/Attention/nlp.png" alt=""></p>
-<p>&ensp;&ensp;&ensp;&ensp;下面我们看一下$\alpha_{t<code>t}$是怎么来表示。加权平均就要使所有的权值加起来为1，所以用到softmax运算。softmax中的每一个值是
-$e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏变量$s_{t`-1}$和编码器所有时间步的隐藏变量$h_t$计算得到。</p>
+<p>&ensp;&ensp;&ensp;&ensp;下面我们看一下$\alpha_{t’t}$是怎么来表示。加权平均就要使所有的权值加起来为1，所以用到softmax运算。softmax中的每一个值是<br>$e$,这个是怎么计算的.$e_{t’t}$通过解码器上一时刻的隐藏变量$s_{t’-1}$和编码器所有时间步的隐藏变量$h_t$计算得到。</p>
 <p><img src="/2019/03/12/Attention/alpha.png" alt=""></p>
 <p><img src="/2019/03/12/Attention/e.png" alt=""></p>
-<p>&ensp;&ensp;&ensp;&ensp;注意力机制对函数$a$设计有很多。下面是一种设计方法。首先一定要有$s_{t<code>-1}$和编码器所有时间步的隐藏状态$h_t$。然后引入了3个模型参数$v^T,W_s,W_h$,这3个参数通过训练得到。对$s_{t</code>-1}$做一个projection，对$h_t$做一个projection，使得projection之后的向量长度相等，这样就可以加在一起，然后使用tanh激活函数，这时的向量长度还是projection之后的长度，但是我们希望$e_{t`t}$是一个标量，那就再引入向量$v^T$，和右边的向量做一个点乘得到一个标量。其实注意力可以通过多层感知机（全连接层）得到。 </p>
+<p>&ensp;&ensp;&ensp;&ensp;注意力机制对函数$a$设计有很多。下面是一种设计方法。首先一定要有$s_{t’-1}$和编码器所有时间步的隐藏状态$h_t$。然后引入了3个模型参数$v^T,W_s,W_h$,这3个参数通过训练得到。对$s_{t’-1}$做一个projection，对$h_t$做一个projection，使得projection之后的向量长度相等，这样就可以加在一起，然后使用tanh激活函数，这时的向量长度还是projection之后的长度，但是我们希望$e_{t’t}$是一个标量，那就再引入向量$v^T$，和右边的向量做一个点乘得到一个标量。其实注意力可以通过多层感知机（全连接层）得到。 </p>
 <p><img src="/2019/03/12/Attention/a.png" alt=""></p>
 <p>下面介绍计算解码器的隐藏变量时的函数$g$是什么？g可以看到是一个GRU单元。</p>
 <p><img src="/2019/03/12/Attention/g.png" alt=""></p>
@@ -671,7 +670,7 @@ $e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1301,11 +1300,31 @@ $e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏
       
       new needShareButton('#needsharebutton-float', flOptions);
     
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script>
 
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

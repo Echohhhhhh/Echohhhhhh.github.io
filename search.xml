@@ -3,7 +3,21 @@
   <entry>
     <title>openpai</title>
     <url>/2020/01/10/openpai/</url>
-    <content><![CDATA[<p>&ensp;&ensp;&ensp;&ensp;最近实验室安装了openpai平台，可以在上面提交程序运行。下面记录怎么使用OpenPai提交NNI程序，进行调参。<br><a id="more"></a></p>
+    <content><![CDATA[<p>&ensp;&ensp;&ensp;&ensp;最近实验室安装了openpai平台，可以在上面提交程序运行。下面记录怎么使用OpenPai提交NNI程序，进行调参。<br><a id="more"></a><br><!-- TOC --></p>
+<ul>
+<li><a href="#1-%e4%bd%bf%e7%94%a8%e6%ad%a5%e9%aa%a4">1. 使用步骤</a><ul>
+<li><a href="#11-%e7%bc%96%e5%86%99%e7%a8%8b%e5%ba%8f">1.1. 编写程序</a></li>
+<li><a href="#12-%e5%87%86%e5%a4%87%e9%95%9c%e5%83%8f">1.2. 准备镜像</a></li>
+<li><a href="#13-%e7%bc%96%e5%86%99nni%e7%9a%84yml%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6">1.3. 编写NNI的yml配置文件</a></li>
+<li><a href="#14-%e5%ae%89%e8%a3%85nni">1.4. 安装NNI</a></li>
+<li><a href="#15-%e5%90%af%e5%8a%a8nni">1.5. 启动NNI</a></li>
+<li><a href="#16-nni%e6%b5%8f%e8%a7%88%e5%99%a8%e6%9f%a5%e7%9c%8b">1.6. NNI浏览器查看</a></li>
+<li><a href="#17-%e5%9c%a8%e6%b5%8f%e8%a7%88%e5%99%a8%e4%b8%ad%e6%9f%a5%e7%9c%8bopenpai">1.7. 在浏览器中查看OpenPai</a></li>
+<li><a href="#18-%e5%85%b3%e9%97%adnni">1.8. 关闭NNI</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
 <h1><span id="1-使用步骤">1. 使用步骤</span></h1><h2><span id="11-编写程序">1.1. 编写程序</span></h2><p>   先在VSCode中完成代码，先在VSCode的虚拟环境中运行，如果可以运行，再使用OpemPai运行。<br>   <strong>注：在OpenPai上运行程序，不需要指定使用哪块GPU，因为OpenPai会自动申请需要使用的GPU。即以下代码注释掉</strong></p>
    <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3"</span></span><br></pre></td></tr></table></figure>
 <h2><span id="12-准备镜像">1.2. 准备镜像</span></h2><p>   准备一个包含hdfs的镜像，将需要用的镜像push到实验室服务器的仓库。<br>   下面是我本人的镜像：</p>
@@ -34,7 +48,7 @@
     <title>pytorch 学习</title>
     <url>/2020/01/06/pytorch-%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<p>介绍Pytorch的一些使用方法<br><a id="more"></a></p>
-<h1><span id="gpu">GPU</span></h1><p><a href="http://tankzhou.cn/2019/06/29/%E5%8D%95%E6%9C%BA%E5%B9%B6%E8%A1%8C%E8%AE%AD%E7%BB%83/" target="_blank" rel="noopener">参考资料</a></p>
+<h1><span id="gpu">GPU</span></h1><p><a href="https://zhuanlan.zhihu.com/p/71566775" target="_blank" rel="noopener">转载出处</a></p>
 <p><a href="https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter04_DL_computation/4.6_use-gpu" target="_blank" rel="noopener">GPU计算</a></p>
 <h2><span id="查看-gpu-信息">查看 GPU 信息</span></h2><p>更多接口，参考 <a href="https://pytorch.org/docs/stable/cuda.html" target="_blank" rel="noopener">torch.cuda</a></p>
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">torch</span><span class="selector-class">.cuda</span><span class="selector-class">.is_available</span>()       # 判断 <span class="selector-tag">GPU</span> 是否可用</span><br><span class="line"><span class="selector-tag">torch</span><span class="selector-class">.cuda</span><span class="selector-class">.device_count</span>()       # 判断有多少 <span class="selector-tag">GPU</span></span><br><span class="line"><span class="selector-tag">torch</span><span class="selector-class">.cuda</span><span class="selector-class">.get_device_name</span>(0)   # 返回 <span class="selector-tag">gpu</span> 名字，设备索引默认从 0 开始</span><br><span class="line"><span class="selector-tag">torch</span><span class="selector-class">.cuda</span><span class="selector-class">.current_device</span>()     # 返回当前设备索引</span><br></pre></td></tr></table></figure>
@@ -80,7 +94,7 @@
 <p>单机多卡训练，即<strong>并行训练</strong>。并行训练又分为<strong>数据并行</strong> (<code>Data Parallelism</code>) 和<strong>模型并行</strong>两种。</p>
 <p>数据并行指的是，多张 <code>GPU</code> 使用相同的模型副本，但是使用不同的数据批进行训练。而模型并行指的是，多张<code>GPU</code> 分别训练模型的不同部分，使用同一批数据。</p>
 <p>两者对比如下图所示：</p>
-<p><img src="http://tankzhou.cn/images/%E6%A8%A1%E5%9E%8B%E5%B9%B6%E8%A1%8C%20VS%20%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8C.png" alt=""></p>
+<p><img src="/2020/01/06/pytorch-学习/多GPU.jpg" alt=""></p>
 <p>模型并行 VS 数据并行</p>
 <h2><span id="数据并行">数据并行</span></h2><p><a href="https://pytorch.org/tutorials/beginner/blitz/data_parallel_tutorial.html" target="_blank" rel="noopener">Pytorch多GPU官方实例</a></p>
 <h3><span id="pytorch-api">Pytorch API</span></h3><p>【<strong>Class 原型</strong>】</p>
@@ -159,20 +173,19 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision.models <span class="keyword">as</span> models</span><br><span class="line"></span><br><span class="line">num_batches = <span class="number">3</span></span><br><span class="line">batch_size = <span class="number">120</span></span><br><span class="line">image_w = <span class="number">128</span></span><br><span class="line">image_h = <span class="number">128</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model)</span>:</span></span><br><span class="line">    model.train(<span class="keyword">True</span>)</span><br><span class="line">    loss_fn = nn.MSELoss()</span><br><span class="line">    optimizer = optim.SGD(model.parameters(), lr=<span class="number">0.001</span>)</span><br><span class="line"></span><br><span class="line">    one_hot_indices = torch.LongTensor(batch_size) \</span><br><span class="line">                           .random_(<span class="number">0</span>, num_classes) \</span><br><span class="line">                           .view(batch_size, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(num_batches):</span><br><span class="line">        <span class="comment"># generate random inputs and labels</span></span><br><span class="line">        inputs = torch.randn(batch_size, <span class="number">3</span>, image_w, image_h)</span><br><span class="line">        labels = torch.zeros(batch_size, num_classes) \</span><br><span class="line">                      .scatter_(<span class="number">1</span>, one_hot_indices, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># run forward pass</span></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        outputs = model(inputs.to(<span class="string">'cuda:0'</span>))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># run backward pass</span></span><br><span class="line">        labels = labels.to(outputs.device)</span><br><span class="line">        loss_fn(outputs, labels).backward()</span><br><span class="line">        optimizer.step()</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.switch_backend(<span class="string">'Agg'</span>)</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line"></span><br><span class="line">num_repeat = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">stmt = <span class="string">"train(model)"</span></span><br><span class="line"></span><br><span class="line">setup = <span class="string">"model = ModelParallelResNet50()"</span></span><br><span class="line"><span class="comment"># globals arg is only available in Python 3. In Python 2, use the following</span></span><br><span class="line"><span class="comment"># import __builtin__</span></span><br><span class="line"><span class="comment"># __builtin__.__dict__.update(locals())</span></span><br><span class="line">mp_run_times = timeit.repeat(</span><br><span class="line">    stmt, setup, number=<span class="number">1</span>, repeat=num_repeat, globals=globals())</span><br><span class="line">mp_mean, mp_std = np.mean(mp_run_times), np.std(mp_run_times)</span><br><span class="line"></span><br><span class="line">setup = <span class="string">"import torchvision.models as models;"</span> + \</span><br><span class="line">        <span class="string">"model = models.resnet50(num_classes=num_classes).to('cuda:0')"</span></span><br><span class="line">rn_run_times = timeit.repeat(</span><br><span class="line">    stmt, setup, number=<span class="number">1</span>, repeat=num_repeat, globals=globals())</span><br><span class="line">rn_mean, rn_std = np.mean(rn_run_times), np.std(rn_run_times)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot</span><span class="params">(means, stds, labels, fig_name)</span>:</span></span><br><span class="line">    fig, ax = plt.subplots()</span><br><span class="line">    ax.bar(np.arange(len(means)), means, yerr=stds,</span><br><span class="line">           align=<span class="string">'center'</span>, alpha=<span class="number">0.5</span>, ecolor=<span class="string">'red'</span>, capsize=<span class="number">10</span>, width=<span class="number">0.6</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">'ResNet50 Execution Time (Second)'</span>)</span><br><span class="line">    ax.set_xticks(np.arange(len(means)))</span><br><span class="line">    ax.set_xticklabels(labels)</span><br><span class="line">    ax.yaxis.grid(<span class="keyword">True</span>)</span><br><span class="line">    plt.tight_layout()</span><br><span class="line">    plt.savefig(fig_name)</span><br><span class="line">    plt.close(fig)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plot([mp_mean, rn_mean],</span><br><span class="line">     [mp_std, rn_std],</span><br><span class="line">     [<span class="string">'Model Parallel'</span>, <span class="string">'Single GPU'</span>],</span><br><span class="line">     <span class="string">'mp_vs_rn.png'</span>)</span><br></pre></td></tr></table></figure>
 <p>结果如下所示。模型并行相较于单 <code>GPU</code> 训练的模型，训练时间开销多出 <code>4.02/3.75-1=7%</code> 左右。当然，这存在优化空间，因为多 <code>GPU</code> 中，每一时刻只有一个 <code>GPU</code> 进行训练，其他闲置。而在中间数据转移过程中，又消耗一定的时间。</p>
-<p><img src="http://tankzhou.cn/images/mp_vs_rn.png" alt=""></p>
+<p><img src="/2020/01/06/pytorch-学习/模型并行.jpg" alt=""></p>
 <p>模型并行 VS 单 GPU</p>
 <h3><span id="输入流水线">输入流水线</span></h3><p>解决上面的问题的最直接的方式就是使用流水线技术，即 <code>GPU-0</code> 输出到 <code>GPU-1</code> 之后，在 <code>GPU-1</code> 训练的同时，<code>GPU-0</code> 接收下一批数据，这样就可以多 <code>GPU</code> 同时执行了。</p>
 <p>下面，我们将 <code>120</code> 个样本的 <code>batch</code> 再次细分，分为 <code>20</code> 张样本每份的小 <code>batch</code>。由于 <code>Pytorch</code> 同步启动 <code>CUDA</code> 操作，因此，该操作不需要使用额外的多线程来处理。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PipelineParallelResNet50</span><span class="params">(ModelParallelResNet50)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, split_size=<span class="number">20</span>, *args, **kwargs)</span>:</span></span><br><span class="line">        super(PipelineParallelResNet50, self).__init__(*args, **kwargs)</span><br><span class="line">        self.split_size = split_size</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        splits = iter(x.split(self.split_size, dim=<span class="number">0</span>))</span><br><span class="line">        s_next = next(splits)</span><br><span class="line">        s_prev = self.seq1(s_next).to(<span class="string">'cuda:1'</span>)</span><br><span class="line">        ret = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> s_next <span class="keyword">in</span> splits:</span><br><span class="line">            <span class="comment"># A. s_prev runs on cuda:1</span></span><br><span class="line">            s_prev = self.seq2(s_prev)</span><br><span class="line">            ret.append(self.fc(s_prev.view(s_prev.size(<span class="number">0</span>), <span class="number">-1</span>)))</span><br><span class="line"></span><br><span class="line">            <span class="comment"># B. s_next runs on cuda:0, which can run concurrently with A</span></span><br><span class="line">            s_prev = self.seq1(s_next).to(<span class="string">'cuda:1'</span>)</span><br><span class="line"></span><br><span class="line">        s_prev = self.seq2(s_prev)</span><br><span class="line">        ret.append(self.fc(s_prev.view(s_prev.size(<span class="number">0</span>), <span class="number">-1</span>)))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> torch.cat(ret)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">setup = <span class="string">"model = PipelineParallelResNet50()"</span></span><br><span class="line">pp_run_times = timeit.repeat(</span><br><span class="line">    stmt, setup, number=<span class="number">1</span>, repeat=num_repeat, globals=globals())</span><br><span class="line">pp_mean, pp_std = np.mean(pp_run_times), np.std(pp_run_times)</span><br><span class="line"></span><br><span class="line">plot([mp_mean, rn_mean, pp_mean],</span><br><span class="line">     [mp_std, rn_std, pp_std],</span><br><span class="line">     [<span class="string">'Model Parallel'</span>, <span class="string">'Single GPU'</span>, <span class="string">'Pipelining Model Parallel'</span>],</span><br><span class="line">     <span class="string">'mp_vs_rn_vs_pp.png'</span>)</span><br></pre></td></tr></table></figure>
 <p>需要注意的是，<code>device-to-device</code> 的 <code>tensor copy</code> 操作是同步的。如果创建多个数据流，则需要保证 <code>copy</code> 操作以合适的同步方式进行。</p>
 <p>在完成 <code>tensor</code> 拷贝之前，对 <code>source tensor</code> 进行写入，或者对 <code>target tensor</code> 进行读写，都可能会导致不可预期的行为。上面的实现中，在源和目标设备中，均只使用了默认的 <code>stream</code>，因此无需额外的强化同步操作。</p>
-<p><img src="http://tankzhou.cn/images/mp_vs_rn_vs_pp.png" alt=""></p>
-<p>模型并行 VS 单 GPU VS 流水线模型并行</p>
+<p><img src="/2020/01/06/pytorch-学习/模型并行2.jpg" alt=""><br>模型并行 VS 单 GPU VS 流水线模型并行</p>
 <p>如上图所示，流水线输入确实加速了训练进程，大约 <code>3.75/2.51-1=49%</code>，但距离 <code>100%</code> 的加速相去甚远。由于我们在流水线并行实现中，引入了一个新的参数 <code>split_sizes</code>，但是并不知晓其对训练时间的影响。</p>
 <p>直觉上来说，使用一个小的 <code>split_sizes</code> 将会导致许多微小的 <code>CUDA</code> 内核的启动，而使用较大的 <code>split_sizes</code>，则会导致较长的空闲时间。下面是一个搜索最佳 <code>split_sizes</code> 的实验。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">means = []</span><br><span class="line">stds = []</span><br><span class="line">split_sizes = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">20</span>, <span class="number">40</span>, <span class="number">60</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> split_size <span class="keyword">in</span> split_sizes:</span><br><span class="line">    setup = <span class="string">"model = PipelineParallelResNet50(split_size=%d)"</span> % split_size</span><br><span class="line">    pp_run_times = timeit.repeat(</span><br><span class="line">        stmt, setup, number=<span class="number">1</span>, repeat=num_repeat, globals=globals())</span><br><span class="line">    means.append(np.mean(pp_run_times))</span><br><span class="line">    stds.append(np.std(pp_run_times))</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax.plot(split_sizes, means)</span><br><span class="line">ax.errorbar(split_sizes, means, yerr=stds, ecolor=<span class="string">'red'</span>, fmt=<span class="string">'ro'</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">'ResNet50 Execution Time (Second)'</span>)</span><br><span class="line">ax.set_xlabel(<span class="string">'Pipeline Split Size'</span>)</span><br><span class="line">ax.set_xticks(split_sizes)</span><br><span class="line">ax.yaxis.grid(<span class="keyword">True</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.savefig(<span class="string">"split_size_tradeoff.png"</span>)</span><br><span class="line">plt.close(fig)</span><br></pre></td></tr></table></figure>
 <p>实验结果如下所示：</p>
-<p><img src="http://tankzhou.cn/images/split_size_tradeoff.png" alt=""></p>
+<p><img src="/2020/01/06/pytorch-学习/pipeline.jpg" alt=""></p>
 <p>流水线输入分割份数</p>
 <p>如上图所示，最佳的参数为 <code>12</code>，其将导致 <code>3.75/2.43-1=54%</code> 的加速。但这仍存在加速的可能。例如，所有在 <code>cuda:0</code> 上的操作放在默认的 <code>stream</code> 上。这意味着，在下一个 <code>split</code> 上的计算，不能与上一个 <code>split</code> 的 <code>copy</code> 操作进行重叠。然而，由于 <code>next_split</code> 和 <code>prev_plit</code> 是不同的 <code>tensor</code>，因此这不存在问题。</p>
 <p>该实现需要在每个 <code>GPU</code> 上使用多个 <code>stream</code>，并且模型中不同的子网络需要使用不同的 <code>stream</code> 管理策略。</p>
@@ -185,19 +198,30 @@
       </tags>
   </entry>
   <entry>
-    <title>leetcode tirck</title>
+    <title>leetcode踩坑</title>
     <url>/2019/12/26/leecode-tirck/</url>
     <content><![CDATA[<p>&ensp;&ensp;&ensp;&ensp;最近开始刷Leecode，使用Python语言，踩了很多坑，在此记录。</p>
 <a id="more"></a>
-<h1><span id="一个萝卜一个坑">一个萝卜一个坑</span></h1><h2><span id="int函数">int函数</span></h2><p>int()函数用于将一个字符串或数字转换为整型。<br><code>int(x,base=10)</code>:x—字符串或数字，base—进制数，默认十进制。 如果显示的指定base参数，x必须为str。</p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-%e4%b8%80%e4%b8%aa%e8%90%9d%e5%8d%9c%e4%b8%80%e4%b8%aa%e5%9d%91">1. 一个萝卜一个坑</a><ul>
+<li><a href="#11-int%e5%87%bd%e6%95%b0">1.1. int函数</a></li>
+<li><a href="#12-bin%e5%87%bd%e6%95%b0">1.2. bin函数</a></li>
+<li><a href="#13-zip%e5%87%bd%e6%95%b0">1.3. zip函数</a></li>
+<li><a href="#14-%e4%ba%8c%e5%88%86%e6%b3%95%e8%ae%b2%e8%a7%a3">1.4. 二分法讲解</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-一个萝卜一个坑">1. 一个萝卜一个坑</span></h1><h2><span id="11-int函数">1.1. int函数</span></h2><p>int()函数用于将一个字符串或数字转换为整型。<br><code>int(x,base=10)</code>:x—字符串或数字，base—进制数，默认十进制。 如果显示的指定base参数，x必须为str。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">int(<span class="number">3</span>) = <span class="number">3</span></span><br><span class="line">int(<span class="number">3.6</span>) = <span class="number">3</span></span><br><span class="line">int(<span class="string">'12'</span>,<span class="number">16</span>) = <span class="number">18</span></span><br><span class="line">int(<span class="string">'11'</span>,<span class="number">2</span>) = <span class="number">3</span><span class="comment">#将字符串解析为2进制</span></span><br></pre></td></tr></table></figure>
-<h2><span id="bin函数">bin函数</span></h2><p>bin()返回一个整数int的二进制表示，返回类型str<br><code>bin(x)</code></p>
+<h2><span id="12-bin函数">1.2. bin函数</span></h2><p>bin()返回一个整数int的二进制表示，返回类型str<br><code>bin(x)</code></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#返回的结果前2个字符是固定的'0b'，后面才是真正的值。</span></span><br><span class="line">bin(<span class="number">10</span>) = <span class="string">'0b1010'</span></span><br><span class="line">bin(<span class="number">20</span>) = <span class="string">'0b10100'</span></span><br></pre></td></tr></table></figure>
-<h2><span id="zip函数">zip函数</span></h2><p>zip()接受一系列(多个，个数不固定)可迭代对象(最常用list,tuple)作为参数，将多个对象中，对应位置的元素打包成一个个tuple，然后返回由这些tuple组成的list。若传入参数中长度不一样，则返回liist的长度和参数中最短的相同。  </p>
+<h2><span id="13-zip函数">1.3. zip函数</span></h2><p>zip()接受一系列(多个，个数不固定)可迭代对象(最常用list,tuple)作为参数，将多个对象中，对应位置的元素打包成一个个tuple，然后返回由这些tuple组成的list。若传入参数中长度不一样，则返回liist的长度和参数中最短的相同。  </p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = [<span class="string">'wang'</span>,<span class="string">'bei'</span>]</span><br><span class="line">y = [<span class="string">'lei'</span>,<span class="string">'xiao'</span>,<span class="string">'kang'</span>]</span><br><span class="line">list(zip(x,y))</span><br><span class="line">输出：[(<span class="string">'wang'</span>,<span class="string">'lei'</span>),(<span class="string">'bei'</span>,<span class="string">'xiao'</span>)]</span><br><span class="line"></span><br><span class="line">x = <span class="string">'wang'</span></span><br><span class="line">y = <span class="string">'lei'</span></span><br><span class="line">list(zip(x,y))</span><br><span class="line">输出：[(<span class="string">'w'</span>,<span class="string">'l'</span>),(<span class="string">'a'</span>,<span class="string">'e'</span>),(<span class="string">'n'</span>,<span class="string">'i'</span>)]  </span><br><span class="line"></span><br><span class="line"><span class="comment">#假设zip传入的参数是x，y，zip依次将(x[0],y[0]),(x[1],y[1])..</span></span><br><span class="line"><span class="comment">#以可迭代对象返回，可强制转换为list或tuple</span></span><br></pre></td></tr></table></figure>
 <p>zip(<em>)传入的参数是zip()的返回值类型，从<zip\>类型中每一个tuple中，取出第0个元素组成一个list，再取出第1个元素组成一个list，即zip(\</zip\></em>)返回值是一个大list，里面有2个tuple</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">b = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]</span><br><span class="line">zipped = list(zip(a,b))</span><br><span class="line"><span class="comment">#zipped = [(1,'a'),(2,'b'),(3,'c')]</span></span><br><span class="line">c = list(zip(*zipped))</span><br><span class="line"><span class="comment">#c = [(1,2,3),('a','b','c')]</span></span><br></pre></td></tr></table></figure>
-<h2><span id="二分法讲解">二分法讲解</span></h2><p><a href="https://leetcode-cn.com/problems/search-insert-position/solution/te-bie-hao-yong-de-er-fen-cha-fa-fa-mo-ban-python-/" target="_blank" rel="noopener">参考资料</a></p>
+<h2><span id="14-二分法讲解">1.4. 二分法讲解</span></h2><p><a href="https://leetcode-cn.com/problems/search-insert-position/solution/te-bie-hao-yong-de-er-fen-cha-fa-fa-mo-ban-python-/" target="_blank" rel="noopener">参考资料</a></p>
 ]]></content>
       <categories>
         <category>算法</category>
@@ -275,8 +299,7 @@
       </categories>
       <tags>
         <tag>Docker</tag>
-        <tag>nni</tag>
-        <tag>调参工具</tag>
+        <tag>NNI</tag>
       </tags>
   </entry>
   <entry>
@@ -325,6 +348,7 @@
         <category>论文阅读笔记</category>
       </categories>
       <tags>
+        <tag>NLP</tag>
         <tag>Time Series</tag>
         <tag>Transformer</tag>
       </tags>
@@ -334,23 +358,23 @@
     <url>/2019/11/04/DGL/</url>
     <content><![CDATA[<p>&ensp;&ensp;&ensp;&ensp;Deep Graph Library(DGL),一款面向图神经网络以及图机器学习的全新框架。DGL基于主流框架进行开发。用户可以使用他们偏爱的框架编写常见的CNN和注意力层，而当遇到图相关的计算时可以切换到DGL。用户和DGL的交互主要通过自定义函数UDF（user-defined function）。目前DGL支持Pytorch和MXNet/Gluon作为系统后端。<br><a id="more"></a><br><!-- TOC --></p>
 <ul>
-<li><a href="#2-dgl">2. DGL</a></li>
-<li><a href="#3-%e5%87%bd%e6%95%b0%e4%bb%8b%e7%bb%8d">3. 函数介绍</a><ul>
-<li><a href="#31-%e5%88%9b%e5%bb%ba%e5%9b%be">3.1. 创建图</a></li>
-<li><a href="#32-%e8%8e%b7%e5%8f%96%e8%8a%82%e7%82%b9%e5%92%8c%e8%be%b9%e7%9a%84%e4%b8%aa%e6%95%b0">3.2. 获取节点和边的个数</a></li>
-<li><a href="#33-%e5%88%86%e9%85%8d%e8%8a%82%e7%82%b9%e5%92%8c%e8%be%b9%e7%9a%84%e7%89%b9%e5%be%81">3.3. 分配节点和边的特征</a></li>
-<li><a href="#34-%e5%88%a0%e9%99%a4%e8%8a%82%e7%82%b9%e5%92%8c%e8%be%b9%e7%89%b9%e5%be%81">3.4. 删除节点和边特征</a></li>
-<li><a href="#35-%e8%87%aa%e5%ae%9a%e4%b9%89message%e5%87%bd%e6%95%b0">3.5. 自定义message函数</a></li>
-<li><a href="#36-%e8%87%aa%e5%ae%9a%e4%b9%89reduce%e5%87%bd%e6%95%b0">3.6. 自定义reduce函数</a></li>
-<li><a href="#37-%e6%b3%a8%e5%86%8cmessage%e5%92%8creduce%e5%87%bd%e6%95%b0">3.7. 注册message和reduce函数</a></li>
-<li><a href="#38-updateall%e6%9b%b4%e6%96%b0%e8%8a%82%e7%82%b9%e7%89%b9%e5%be%81">3.8. update_all更新节点特征</a></li>
-<li><a href="#39-%e9%ab%98%e7%ba%a7%e7%94%a8%e6%b3%95">3.9. 高级用法</a></li>
+<li><a href="#1-dgl">1. DGL</a></li>
+<li><a href="#2-%e5%87%bd%e6%95%b0%e4%bb%8b%e7%bb%8d">2. 函数介绍</a><ul>
+<li><a href="#21-%e5%88%9b%e5%bb%ba%e5%9b%be">2.1. 创建图</a></li>
+<li><a href="#22-%e8%8e%b7%e5%8f%96%e8%8a%82%e7%82%b9%e5%92%8c%e8%be%b9%e7%9a%84%e4%b8%aa%e6%95%b0">2.2. 获取节点和边的个数</a></li>
+<li><a href="#23-%e5%88%86%e9%85%8d%e8%8a%82%e7%82%b9%e5%92%8c%e8%be%b9%e7%9a%84%e7%89%b9%e5%be%81">2.3. 分配节点和边的特征</a></li>
+<li><a href="#24-%e5%88%a0%e9%99%a4%e8%8a%82%e7%82%b9%e5%92%8c%e8%be%b9%e7%89%b9%e5%be%81">2.4. 删除节点和边特征</a></li>
+<li><a href="#25-%e8%87%aa%e5%ae%9a%e4%b9%89message%e5%87%bd%e6%95%b0">2.5. 自定义message函数</a></li>
+<li><a href="#26-%e8%87%aa%e5%ae%9a%e4%b9%89reduce%e5%87%bd%e6%95%b0">2.6. 自定义reduce函数</a></li>
+<li><a href="#27-%e6%b3%a8%e5%86%8cmessage%e5%92%8creduce%e5%87%bd%e6%95%b0">2.7. 注册message和reduce函数</a></li>
+<li><a href="#28-updateall%e6%9b%b4%e6%96%b0%e8%8a%82%e7%82%b9%e7%89%b9%e5%be%81">2.8. update_all更新节点特征</a></li>
+<li><a href="#29-%e9%ab%98%e7%ba%a7%e7%94%a8%e6%b3%95">2.9. 高级用法</a></li>
 </ul>
 </li>
 </ul>
 <!-- /TOC -->
 <p><a href="https://archwalker.github.io/blog/2019/07/07/GNN-Framework-DGL-GCN.html" target="_blank" rel="noopener">GNN 教程：DGL框架-消息和GCN的实现</a>     </p>
-<h1><span id="2-dgl">2. DGL</span></h1><p>DGL是基于<strong>消息传递message passing</strong>的编程模型。原因在于图上的计算往往可以表示为2步：</p>
+<h1><span id="1-dgl">1. DGL</span></h1><p>DGL是基于<strong>消息传递message passing</strong>的编程模型。原因在于图上的计算往往可以表示为2步：</p>
 <ol>
 <li>发送节点：根据自身的特征计算需要向外分发的消息。</li>
 <li>接收节点：对收到的消息进行累加并更新自身的特征。<br>用户需要自定义<strong>消息分发函数</strong>和<strong>消息聚合函数</strong>，来构造新的模型。</li>
@@ -363,17 +387,17 @@
 <p>GCN的公式如下所示：</p>
 <p><img src="/2019/11/04/DGL/gcn.png" alt=""></p>
 <p>上面的数学描述可以利用<strong>消息传递</strong>的机制实现：<br>（1）在GCN中，每个节点都有属于自己的表示$h_i$<br>（2）根据消息传递（message passing），每个节点将会收到邻居节点发来的Embedding<br>（3）每个节点将聚合邻居节点的Embedding，得到中间表示$\hat{h_i}$<br>（4）对中间节点表示$\hat{h_i}$进行线性变换，然后利用非线性函数$f$进行计算：$h^{new}_u = f(W_u\hat{h}_u)$<br>（5）利用新的节点表示$h^{new}_u$对该节点的表示$h_u$进行更新。</p>
-<h1><span id="3-函数介绍">3. 函数介绍</span></h1><p><a href="https://docs.dgl.ai/en/latest/api/python/graph.html" target="_blank" rel="noopener">官方文档</a><br><a href="https://docs.dgl.ai/en/latest/tutorials/basics/1_first.html" target="_blank" rel="noopener">实现GCN例子</a></p>
-<h2><span id="31-创建图">3.1. 创建图</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> dgl</span><br><span class="line">g = dgl.DGLGraph()</span><br><span class="line"><span class="comment">#为图添加节点和边</span></span><br><span class="line">g.add_node(<span class="number">34</span>)<span class="comment">#添加34个节点</span></span><br><span class="line"><span class="comment">#一共有78条边</span></span><br><span class="line">edge_list = [(<span class="number">1</span>, <span class="number">0</span>), (<span class="number">2</span>, <span class="number">0</span>), (<span class="number">2</span>, <span class="number">1</span>), (<span class="number">3</span>, <span class="number">0</span>), (<span class="number">3</span>, <span class="number">1</span>), (<span class="number">3</span>, <span class="number">2</span>),</span><br><span class="line">        (<span class="number">4</span>, <span class="number">0</span>), (<span class="number">5</span>, <span class="number">0</span>), (<span class="number">6</span>, <span class="number">0</span>), (<span class="number">6</span>, <span class="number">4</span>), (<span class="number">6</span>, <span class="number">5</span>), (<span class="number">7</span>, <span class="number">0</span>), (<span class="number">7</span>, <span class="number">1</span>),</span><br><span class="line">        (<span class="number">7</span>, <span class="number">2</span>), (<span class="number">7</span>, <span class="number">3</span>), (<span class="number">8</span>, <span class="number">0</span>), (<span class="number">8</span>, <span class="number">2</span>), (<span class="number">9</span>, <span class="number">2</span>), (<span class="number">10</span>, <span class="number">0</span>), (<span class="number">10</span>, <span class="number">4</span>),</span><br><span class="line">        (<span class="number">10</span>, <span class="number">5</span>), (<span class="number">11</span>, <span class="number">0</span>), (<span class="number">12</span>, <span class="number">0</span>), (<span class="number">12</span>, <span class="number">3</span>), (<span class="number">13</span>, <span class="number">0</span>), (<span class="number">13</span>, <span class="number">1</span>), (<span class="number">13</span>, <span class="number">2</span>),</span><br><span class="line">        (<span class="number">13</span>, <span class="number">3</span>), (<span class="number">16</span>, <span class="number">5</span>), (<span class="number">16</span>, <span class="number">6</span>), (<span class="number">17</span>, <span class="number">0</span>), (<span class="number">17</span>, <span class="number">1</span>), (<span class="number">19</span>, <span class="number">0</span>), (<span class="number">19</span>, <span class="number">1</span>),</span><br><span class="line">        (<span class="number">21</span>, <span class="number">0</span>), (<span class="number">21</span>, <span class="number">1</span>), (<span class="number">25</span>, <span class="number">23</span>), (<span class="number">25</span>, <span class="number">24</span>), (<span class="number">27</span>, <span class="number">2</span>), (<span class="number">27</span>, <span class="number">23</span>),</span><br><span class="line">        (<span class="number">27</span>, <span class="number">24</span>), (<span class="number">28</span>, <span class="number">2</span>), (<span class="number">29</span>, <span class="number">23</span>), (<span class="number">29</span>, <span class="number">26</span>), (<span class="number">30</span>, <span class="number">1</span>), (<span class="number">30</span>, <span class="number">8</span>),</span><br><span class="line">        (<span class="number">31</span>, <span class="number">0</span>), (<span class="number">31</span>, <span class="number">24</span>), (<span class="number">31</span>, <span class="number">25</span>), (<span class="number">31</span>, <span class="number">28</span>), (<span class="number">32</span>, <span class="number">2</span>), (<span class="number">32</span>, <span class="number">8</span>),</span><br><span class="line">        (<span class="number">32</span>, <span class="number">14</span>), (<span class="number">32</span>, <span class="number">15</span>), (<span class="number">32</span>, <span class="number">18</span>), (<span class="number">32</span>, <span class="number">20</span>), (<span class="number">32</span>, <span class="number">22</span>), (<span class="number">32</span>, <span class="number">23</span>),</span><br><span class="line">        (<span class="number">32</span>, <span class="number">29</span>), (<span class="number">32</span>, <span class="number">30</span>), (<span class="number">32</span>, <span class="number">31</span>), (<span class="number">33</span>, <span class="number">8</span>), (<span class="number">33</span>, <span class="number">9</span>), (<span class="number">33</span>, <span class="number">13</span>),</span><br><span class="line">        (<span class="number">33</span>, <span class="number">14</span>), (<span class="number">33</span>, <span class="number">15</span>), (<span class="number">33</span>, <span class="number">18</span>), (<span class="number">33</span>, <span class="number">19</span>), (<span class="number">33</span>, <span class="number">20</span>), (<span class="number">33</span>, <span class="number">22</span>),</span><br><span class="line">        (<span class="number">33</span>, <span class="number">23</span>), (<span class="number">33</span>, <span class="number">26</span>), (<span class="number">33</span>, <span class="number">27</span>), (<span class="number">33</span>, <span class="number">28</span>), (<span class="number">33</span>, <span class="number">29</span>), (<span class="number">33</span>, <span class="number">30</span>),</span><br><span class="line">        (<span class="number">33</span>, <span class="number">31</span>), (<span class="number">33</span>, <span class="number">32</span>)]</span><br><span class="line"><span class="comment">#添加边的源节点和目的节点  </span></span><br><span class="line">drc,dst = tuple(zip(*edge_list))</span><br><span class="line">g.add_edges(src,dst)</span><br><span class="line"><span class="comment">#边是双向的</span></span><br><span class="line">g.add_edges(dst,src)</span><br></pre></td></tr></table></figure>
-<h2><span id="32-获取节点和边的个数">3.2. 获取节点和边的个数</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#查看节点和边个数</span></span><br><span class="line">g.number_of_nodes()</span><br><span class="line">g.number_of_edges()  </span><br><span class="line"></span><br><span class="line"><span class="comment">#查看节点和边类型</span></span><br><span class="line">g.node_attr_schemes()</span><br></pre></td></tr></table></figure>
-<h2><span id="33-分配节点和边的特征">3.3. 分配节点和边的特征</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch  </span><br><span class="line"><span class="comment">#分配节点特征</span></span><br><span class="line">g.ndata[<span class="string">'feature'</span>] = torch.eye(<span class="number">34</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取某个节点的特征  </span></span><br><span class="line">G.nodes[<span class="number">2</span>].data[<span class="string">'feature'</span>]</span><br><span class="line">G.nodes[[<span class="number">10</span>,<span class="number">11</span>]].data[<span class="string">'feature'</span>]  </span><br><span class="line"></span><br><span class="line"><span class="comment">#分配边特征,9条边，每条边特征有2个</span></span><br><span class="line">g.edata[<span class="string">'edge_feature'</span>] = torch.randn(<span class="number">9</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#单独为每条边赋值</span></span><br><span class="line">g.edata[<span class="number">1</span>].data[<span class="string">'edge_feature'</span>] = torch.randn(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">g.edata[[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>]].data[<span class="string">'edge_feature'</span>] = torch.randn(<span class="number">3</span>,<span class="number">2</span>)</span><br><span class="line"><span class="comment">#同时指定起点和终点</span></span><br><span class="line">g.edata[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]].data[<span class="string">'edge_feature'</span>] = torch.randn(<span class="number">3</span>,<span class="number">2</span>)  </span><br><span class="line"></span><br><span class="line"><span class="comment">#查看图的节点特征和边特征</span></span><br><span class="line">g.ndata,g.edata</span><br></pre></td></tr></table></figure>
-<h2><span id="34-删除节点和边特征">3.4. 删除节点和边特征</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">g.ndata.pop(<span class="string">'feature'</span>)</span><br><span class="line">g.edata.pop(<span class="string">'edge_feature'</span>)</span><br></pre></td></tr></table></figure>
-<h2><span id="35-自定义message函数">3.5. 自定义message函数</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">message_func</span><span class="params">(edges)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    在该函数中，接收一个参数edges，edges有3个成员变量：</span></span><br><span class="line"><span class="string">    edges.src:获取源节点</span></span><br><span class="line"><span class="string">    edges.dst:获取目的节点</span></span><br><span class="line"><span class="string">    edges.data:获取边</span></span><br><span class="line"><span class="string">    主要是向目的节点传递消息，返回的格式是dict</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="string">'alpha'</span>: alpha, <span class="string">'state'</span>: edge.src[<span class="string">'state'</span>] &#125;</span><br></pre></td></tr></table></figure>
-<h2><span id="36-自定义reduce函数">3.6. 自定义reduce函数</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduce_func</span><span class="params">(nodes)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    源节点通过message函数，将消息发送给目的节点，目的节点接收多个邻居发来的消息，并存储在mailbox中，reduce函数聚合多个邻居发来的消息,并以dict的形式返回。</span></span><br><span class="line"><span class="string">    reduce函数，接收一个参数nodes，nodes有2个成员变量</span></span><br><span class="line"><span class="string">    nodes.data:获取节点的特征</span></span><br><span class="line"><span class="string">    nodes.mailbox:获取message函数返回的值</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    state = nodes.mailbox[<span class="string">'state'</span>]</span><br><span class="line">    alpha = nodes.mailbox[<span class="string">'alpha'</span>]</span><br><span class="line">    alpha = nd.softmax(alpha, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    new_state = nd.relu(nd.sum(alpha * state, axis=<span class="number">1</span>))  </span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="string">'new_state'</span>: new_state &#125;</span><br></pre></td></tr></table></figure>
-<h2><span id="37-注册message和reduce函数">3.7. 注册message和reduce函数</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#自定了message和reduce函数，在graph中注册，以便后续使用 </span></span><br><span class="line">g.register_message_func(message_func)</span><br><span class="line">g.register_reduce_func(reduce_func)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pagerank_batch</span><span class="params">(g)</span>:</span></span><br><span class="line">    g.send(g.edges())</span><br><span class="line">    g.recv(g.nodes())</span><br><span class="line"></span><br><span class="line">    <span class="comment">#如果没有将自定义的message和reduce函数注册，使用以下语句</span></span><br><span class="line">    g.send(g.edges(),message_func)</span><br><span class="line">    g.recv(g.nodes(),reduce_func)</span><br></pre></td></tr></table></figure>
-<h2><span id="38-update_all更新节点特征">3.8. update_all更新节点特征</span></h2><p>该方法是上面方法的高级版本<br><code>DGLGraph.update_all(message_func=&#39;default&#39;, reduce_func=&#39;default&#39;, apply_node_func=&#39;default&#39;)</code><br>传入的参数是message函数名，reduce函数名，UDF函数名,如果不传入，使用默认值。</p>
+<h1><span id="2-函数介绍">2. 函数介绍</span></h1><p><a href="https://docs.dgl.ai/en/latest/api/python/graph.html" target="_blank" rel="noopener">官方文档</a><br><a href="https://docs.dgl.ai/en/latest/tutorials/basics/1_first.html" target="_blank" rel="noopener">实现GCN例子</a></p>
+<h2><span id="21-创建图">2.1. 创建图</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> dgl</span><br><span class="line">g = dgl.DGLGraph()</span><br><span class="line"><span class="comment">#为图添加节点和边</span></span><br><span class="line">g.add_node(<span class="number">34</span>)<span class="comment">#添加34个节点</span></span><br><span class="line"><span class="comment">#一共有78条边</span></span><br><span class="line">edge_list = [(<span class="number">1</span>, <span class="number">0</span>), (<span class="number">2</span>, <span class="number">0</span>), (<span class="number">2</span>, <span class="number">1</span>), (<span class="number">3</span>, <span class="number">0</span>), (<span class="number">3</span>, <span class="number">1</span>), (<span class="number">3</span>, <span class="number">2</span>),</span><br><span class="line">        (<span class="number">4</span>, <span class="number">0</span>), (<span class="number">5</span>, <span class="number">0</span>), (<span class="number">6</span>, <span class="number">0</span>), (<span class="number">6</span>, <span class="number">4</span>), (<span class="number">6</span>, <span class="number">5</span>), (<span class="number">7</span>, <span class="number">0</span>), (<span class="number">7</span>, <span class="number">1</span>),</span><br><span class="line">        (<span class="number">7</span>, <span class="number">2</span>), (<span class="number">7</span>, <span class="number">3</span>), (<span class="number">8</span>, <span class="number">0</span>), (<span class="number">8</span>, <span class="number">2</span>), (<span class="number">9</span>, <span class="number">2</span>), (<span class="number">10</span>, <span class="number">0</span>), (<span class="number">10</span>, <span class="number">4</span>),</span><br><span class="line">        (<span class="number">10</span>, <span class="number">5</span>), (<span class="number">11</span>, <span class="number">0</span>), (<span class="number">12</span>, <span class="number">0</span>), (<span class="number">12</span>, <span class="number">3</span>), (<span class="number">13</span>, <span class="number">0</span>), (<span class="number">13</span>, <span class="number">1</span>), (<span class="number">13</span>, <span class="number">2</span>),</span><br><span class="line">        (<span class="number">13</span>, <span class="number">3</span>), (<span class="number">16</span>, <span class="number">5</span>), (<span class="number">16</span>, <span class="number">6</span>), (<span class="number">17</span>, <span class="number">0</span>), (<span class="number">17</span>, <span class="number">1</span>), (<span class="number">19</span>, <span class="number">0</span>), (<span class="number">19</span>, <span class="number">1</span>),</span><br><span class="line">        (<span class="number">21</span>, <span class="number">0</span>), (<span class="number">21</span>, <span class="number">1</span>), (<span class="number">25</span>, <span class="number">23</span>), (<span class="number">25</span>, <span class="number">24</span>), (<span class="number">27</span>, <span class="number">2</span>), (<span class="number">27</span>, <span class="number">23</span>),</span><br><span class="line">        (<span class="number">27</span>, <span class="number">24</span>), (<span class="number">28</span>, <span class="number">2</span>), (<span class="number">29</span>, <span class="number">23</span>), (<span class="number">29</span>, <span class="number">26</span>), (<span class="number">30</span>, <span class="number">1</span>), (<span class="number">30</span>, <span class="number">8</span>),</span><br><span class="line">        (<span class="number">31</span>, <span class="number">0</span>), (<span class="number">31</span>, <span class="number">24</span>), (<span class="number">31</span>, <span class="number">25</span>), (<span class="number">31</span>, <span class="number">28</span>), (<span class="number">32</span>, <span class="number">2</span>), (<span class="number">32</span>, <span class="number">8</span>),</span><br><span class="line">        (<span class="number">32</span>, <span class="number">14</span>), (<span class="number">32</span>, <span class="number">15</span>), (<span class="number">32</span>, <span class="number">18</span>), (<span class="number">32</span>, <span class="number">20</span>), (<span class="number">32</span>, <span class="number">22</span>), (<span class="number">32</span>, <span class="number">23</span>),</span><br><span class="line">        (<span class="number">32</span>, <span class="number">29</span>), (<span class="number">32</span>, <span class="number">30</span>), (<span class="number">32</span>, <span class="number">31</span>), (<span class="number">33</span>, <span class="number">8</span>), (<span class="number">33</span>, <span class="number">9</span>), (<span class="number">33</span>, <span class="number">13</span>),</span><br><span class="line">        (<span class="number">33</span>, <span class="number">14</span>), (<span class="number">33</span>, <span class="number">15</span>), (<span class="number">33</span>, <span class="number">18</span>), (<span class="number">33</span>, <span class="number">19</span>), (<span class="number">33</span>, <span class="number">20</span>), (<span class="number">33</span>, <span class="number">22</span>),</span><br><span class="line">        (<span class="number">33</span>, <span class="number">23</span>), (<span class="number">33</span>, <span class="number">26</span>), (<span class="number">33</span>, <span class="number">27</span>), (<span class="number">33</span>, <span class="number">28</span>), (<span class="number">33</span>, <span class="number">29</span>), (<span class="number">33</span>, <span class="number">30</span>),</span><br><span class="line">        (<span class="number">33</span>, <span class="number">31</span>), (<span class="number">33</span>, <span class="number">32</span>)]</span><br><span class="line"><span class="comment">#添加边的源节点和目的节点  </span></span><br><span class="line">drc,dst = tuple(zip(*edge_list))</span><br><span class="line">g.add_edges(src,dst)</span><br><span class="line"><span class="comment">#边是双向的</span></span><br><span class="line">g.add_edges(dst,src)</span><br></pre></td></tr></table></figure>
+<h2><span id="22-获取节点和边的个数">2.2. 获取节点和边的个数</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#查看节点和边个数</span></span><br><span class="line">g.number_of_nodes()</span><br><span class="line">g.number_of_edges()  </span><br><span class="line"></span><br><span class="line"><span class="comment">#查看节点和边类型</span></span><br><span class="line">g.node_attr_schemes()</span><br></pre></td></tr></table></figure>
+<h2><span id="23-分配节点和边的特征">2.3. 分配节点和边的特征</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch  </span><br><span class="line"><span class="comment">#分配节点特征</span></span><br><span class="line">g.ndata[<span class="string">'feature'</span>] = torch.eye(<span class="number">34</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取某个节点的特征  </span></span><br><span class="line">G.nodes[<span class="number">2</span>].data[<span class="string">'feature'</span>]</span><br><span class="line">G.nodes[[<span class="number">10</span>,<span class="number">11</span>]].data[<span class="string">'feature'</span>]  </span><br><span class="line"></span><br><span class="line"><span class="comment">#分配边特征,9条边，每条边特征有2个</span></span><br><span class="line">g.edata[<span class="string">'edge_feature'</span>] = torch.randn(<span class="number">9</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#单独为每条边赋值</span></span><br><span class="line">g.edata[<span class="number">1</span>].data[<span class="string">'edge_feature'</span>] = torch.randn(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">g.edata[[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>]].data[<span class="string">'edge_feature'</span>] = torch.randn(<span class="number">3</span>,<span class="number">2</span>)</span><br><span class="line"><span class="comment">#同时指定起点和终点</span></span><br><span class="line">g.edata[[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]].data[<span class="string">'edge_feature'</span>] = torch.randn(<span class="number">3</span>,<span class="number">2</span>)  </span><br><span class="line"></span><br><span class="line"><span class="comment">#查看图的节点特征和边特征</span></span><br><span class="line">g.ndata,g.edata</span><br></pre></td></tr></table></figure>
+<h2><span id="24-删除节点和边特征">2.4. 删除节点和边特征</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">g.ndata.pop(<span class="string">'feature'</span>)</span><br><span class="line">g.edata.pop(<span class="string">'edge_feature'</span>)</span><br></pre></td></tr></table></figure>
+<h2><span id="25-自定义message函数">2.5. 自定义message函数</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">message_func</span><span class="params">(edges)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    在该函数中，接收一个参数edges，edges有3个成员变量：</span></span><br><span class="line"><span class="string">    edges.src:获取源节点</span></span><br><span class="line"><span class="string">    edges.dst:获取目的节点</span></span><br><span class="line"><span class="string">    edges.data:获取边</span></span><br><span class="line"><span class="string">    主要是向目的节点传递消息，返回的格式是dict</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="string">'alpha'</span>: alpha, <span class="string">'state'</span>: edge.src[<span class="string">'state'</span>] &#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="26-自定义reduce函数">2.6. 自定义reduce函数</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduce_func</span><span class="params">(nodes)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    源节点通过message函数，将消息发送给目的节点，目的节点接收多个邻居发来的消息，并存储在mailbox中，reduce函数聚合多个邻居发来的消息,并以dict的形式返回。</span></span><br><span class="line"><span class="string">    reduce函数，接收一个参数nodes，nodes有2个成员变量</span></span><br><span class="line"><span class="string">    nodes.data:获取节点的特征</span></span><br><span class="line"><span class="string">    nodes.mailbox:获取message函数返回的值</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    state = nodes.mailbox[<span class="string">'state'</span>]</span><br><span class="line">    alpha = nodes.mailbox[<span class="string">'alpha'</span>]</span><br><span class="line">    alpha = nd.softmax(alpha, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    new_state = nd.relu(nd.sum(alpha * state, axis=<span class="number">1</span>))  </span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="string">'new_state'</span>: new_state &#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="27-注册message和reduce函数">2.7. 注册message和reduce函数</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#自定了message和reduce函数，在graph中注册，以便后续使用 </span></span><br><span class="line">g.register_message_func(message_func)</span><br><span class="line">g.register_reduce_func(reduce_func)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pagerank_batch</span><span class="params">(g)</span>:</span></span><br><span class="line">    g.send(g.edges())</span><br><span class="line">    g.recv(g.nodes())</span><br><span class="line"></span><br><span class="line">    <span class="comment">#如果没有将自定义的message和reduce函数注册，使用以下语句</span></span><br><span class="line">    g.send(g.edges(),message_func)</span><br><span class="line">    g.recv(g.nodes(),reduce_func)</span><br></pre></td></tr></table></figure>
+<h2><span id="28-update_all更新节点特征">2.8. update_all更新节点特征</span></h2><p>该方法是上面方法的高级版本<br><code>DGLGraph.update_all(message_func=&#39;default&#39;, reduce_func=&#39;default&#39;, apply_node_func=&#39;default&#39;)</code><br>传入的参数是message函数名，reduce函数名，UDF函数名,如果不传入，使用默认值。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pagerank_level2</span><span class="params">(g)</span>:</span></span><br><span class="line">    <span class="comment"># g.update_all()</span></span><br><span class="line">    g.update_all(self.message_func,self.reduce_func)</span><br></pre></td></tr></table></figure>
-<h2><span id="39-高级用法">3.9. 高级用法</span></h2><p><a href="https://docs.dgl.ai/en/latest/tutorials/basics/3_pagerank.html" target="_blank" rel="noopener">PageRank实现</a></p>
+<h2><span id="29-高级用法">2.9. 高级用法</span></h2><p><a href="https://docs.dgl.ai/en/latest/tutorials/basics/3_pagerank.html" target="_blank" rel="noopener">PageRank实现</a></p>
 <ul>
 <li><p><code>dgl.function.copy_src(src, out)</code>:需要指定源节点的名称，和message的key值</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> dgl</span><br><span class="line">message_func = dgl.function.copy_src(<span class="string">'feature'</span>, <span class="string">'state'</span>)</span><br><span class="line">等价于  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">message_func</span><span class="params">(edges)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">'state'</span>: edges.src[<span class="string">'feature'</span>]&#125;</span><br></pre></td></tr></table></figure>
@@ -476,7 +500,6 @@
       </categories>
       <tags>
         <tag>XGBoost</tag>
-        <tag>分类任务</tag>
       </tags>
   </entry>
   <entry>
@@ -501,6 +524,7 @@
 </ul>
 <!-- /TOC -->
 <p><a href="https://mp.weixin.qq.com/s?__biz=MjM5ODkzMzMwMQ==&amp;mid=2650411699&amp;idx=3&amp;sn=83286bfa620ebe7297759fb78c31286c&amp;chksm=becd94e989ba1dff4f933b69d5c74b6cc5c41026e3bed6e5067361a91863b7b6169335ff3326&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">参考资料</a></p>
+<p>Latex公式在VSCode中显示还正常，博客上显示错乱。。。，凑合看吧</p>
 <h1><span id="1-transformer讲解1">1. Transformer讲解1</span></h1><p><a href="https://spaces.ac.cn/archives/4765" target="_blank" rel="noopener">Attention is All You Need浅读（简介+代码）</a></p>
 <p><a href="https://github.com/aespresso/a_journey_into_math_of_ml/blob/master/03_transformer_tutorial_1st_part/transformer_1.ipynb" target="_blank" rel="noopener">transformer教程</a></p>
 <p><a href="https://www.bilibili.com/video/av58239477/" target="_blank" rel="noopener">transformer视频讲解</a></p>
@@ -519,13 +543,13 @@
 <h2><span id="11-位置嵌入">1.1. 位置嵌入</span></h2><p><img src="/2019/11/02/Transformer/PE.png" alt=""></p>
 <p>其中<br>$pos$：字在句子中的位置，比如一句话有10个字，pos从0~9<br>$i$：embedding dimension的维度，比如一个字的字向量有256维，则$i$的取值为0~255。<br>$d_{model}$：总共字向量的维度，即256.<br>如果一句话中有10个字，pos从0至9，一个字向量维度是256，从0~255.则<br>第0个字的position embedding为$PE_{(0,0)},PE_{(0,1)},…,PE_{(0,254)},PE_{(0,255)}$.如果字向量维度的下标是偶数使用$sin$，为奇数使用$cos$。使用以上公式可以区分字与字之间的位置信息。<br>在输入的时候将每个字的词嵌入和位置嵌入相加，作为总体的输入。</p>
 <h2><span id="12-self-attention">1.2. self-attention</span></h2><ol>
-<li><p>经过Embedding-lookup查表得到字向量，和position embedding得到位置嵌入，两者相加，得到一个字的最终嵌入表示，输入的维度为<br>$X \in R^{batch_size \quad <em> \quad seq_len \quad </em> \quad embedding_dim}$,<br>比如一个batch中有32个句子，每个句子有10个单词，embedding_dim=100，则输入的维度为$X \in R^{32<em>10</em>100}$</p>
+<li><p>经过Embedding-lookup查表得到字向量，和position embedding得到位置嵌入，两者相加，得到一个字的最终嵌入表示，输入的维度为$X \in R^{batch_size \quad <em> \quad seq_len \quad </em> \quad embedding_dim}$<br>比如一个batch中有32个句子，每个句子有10个单词，embedding_dim=100，则输入的维度为$X \in R^{32<em>10</em>100}$</p>
 </li>
 <li><p>然后将$X_{embedding}$进行3次线性变换，$W_QX_{embedding},W_KX_{embedding},W_VX_{embedding}$得到$Q,K,V$,维度都是$R^{batch_size \quad <em> \quad seq_len \quad </em> \quad embedding_dim}$  </p>
 </li>
-<li>对$Q,K,V进行分割，即多头注意力机制，其中head的个数是一个超参数，$$注意：embedding \quad dimension必须能够整除head。$即一个矩阵变成$h$个矩阵，分割之后$Q,K,V$的维度为$[batch_size,seq_len,h,embedding_dimension/h]$,之后把$Q,K,V的seq_len,h$的维度进行转置，为了方面后面的计算，转置之后的$Q,K,V$的维度为$[batch_size,h,seq_len,embedding_dimension/h]$  </li>
+<li>对$Q,K,V$进行分割，即多头注意力机制，其中head的个数是一个超参数，注意：$embedding \quad dimension必须能够整除head$,即一个矩阵变成$h$个矩阵，分割之后$Q,K,V$的维度为$[batch_size,seq_len,h,embedding_dimension/h]$,之后把$Q,K,V$的$seq_len,h$的维度进行转置，为了方面后面的计算，转置之后的$Q,K,V$的维度为$[batch_size,h,seq_len,embedding_dimension/h]$  </li>
 <li>拿出一个$head$，即$Q*K^T$,得到的维度是$[batch_size,h,seq_len,seq_len]$,每个字与每个字之间的注意力，每一行表示当前这个字和所有字的关系。如果2个字之间的意思越相近，得到的注意力也越大。对每一行做softmax归一化，即每一行的和为1，得到归一化之后的注意力矩阵。</li>
-<li>将注意力矩阵给$V$加权，即让所有字的信息融入到当前字中，得到当前字的一个加权表示。最终让每一个字都融合所有字的信息。得到的$V的维度为[batch_size,h,seq_len,embedding_dimension/h]$.</li>
+<li>将注意力矩阵给$V$加权，即让所有字的信息融入到当前字中，得到当前字的一个加权表示。最终让每一个字都融合所有字的信息。得到的$V$的维度为$[batch_size,h,seq_len,embedding_dimension/h]$.</li>
 <li>在训练的时候，通常多句话进行计算，即形成一个mini-batch。mini-batch中的句子的长度不一样，找出句子的最大长度max_seq_len，将短的句子补成和最大句子一样的长度，使用0padding。假设max_seq_len=10，一个句子的长度为7，即得到的attention矩阵，下面3行和右边3列都是0。在对attention矩阵做softmax会出问题，因为softmax计算涉及到指数计算，$e^0=1$,即经过softmax计算attention不为0，让无效的部分参与了计算。为了解决这个问题，需要用一个mask让这些无效的区域不参与计算，一般给无效的区域加一个很大的负数的偏置，$Z_illegal$表示无效的区域，加上一个很大的负数，变成负数，即通过softmax指数计算结果还是0。  </li>
 <li>不同的head得到的结果concat起来，才能恢复到原来的维度[batch_size,seq_len,embedding_dimension]。不同的head关注的点不一样，可能有的head关注的local的关系，有的head关注的是global的关系。  </li>
 <li>最后一步是PositionwiseFFN，其实就是2层全连接，对输出$[batch_size,seq_len,embedding_dimension]$，经过2次线性变换和一个Relu激活函数。Relu=max(0,x)</li>
@@ -539,7 +563,7 @@
 <h2><span id="13-残差连接和layernorm">1.3. 残差连接和LayerNorm</span></h2><p><img src="/2019/11/02/Transformer/res1.png" alt=""></p>
 <h2><span id="14-transformer的整体结构">1.4. transformer的整体结构</span></h2><p><img src="/2019/11/02/Transformer/transformer-all.png" alt=""></p>
 <h1><span id="2-tramsformer讲解2">2. Tramsformer讲解2</span></h1><p><a href="https://www.bilibili.com/video/av56239558?from=search&amp;seid=9460464372943296837" target="_blank" rel="noopener">李宏毅视频讲解</a></p>
-<p>其中<br>$x1,x2,x3,x4表示4个词向量，组成一个sequence,$$每一个a分别乘上3个矩阵，得到q,k,v，然后使用每一个q对每个k做attention，$。</p>
+<p>其中<br>$x1,x2,x3,x4表示4个词向量，组成一个sequence,$$每一个a分别乘上3个矩阵，得到q,k,v，然后使用每一个q对每个k做attention$。</p>
 <p><img src="/2019/11/02/Transformer/a1.png" alt=""></p>
 <p>将每一个q对k做attention，然后将结果进行softmax归一化，相加为1.</p>
 <p><img src="/2019/11/02/Transformer/a2.png" alt=""></p>
@@ -564,7 +588,7 @@
       </tags>
   </entry>
   <entry>
-    <title>metrics</title>
+    <title>评价指标</title>
     <url>/2019/10/18/metrics/</url>
     <content><![CDATA[<p>介绍在回归问题中的主要评价指标，以及各自的特点</p>
 <a id="more"></a>
@@ -625,24 +649,24 @@
 <li><p>得到的指标是否依赖于量纲(即绝对度量，而不是相对度量)，如果指标依赖量纲那么不同模型之间可能因为量纲不同而无法比较；</p>
 </li>
 </ol>
-<h1><span id="3-分类问题">3. 分类问题</span></h1><p>在二分类任务中，使用Precison，Recall和F1值来评价分类的效果。<br><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/hun.png" alt=""></p>
-<p><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/f1.png" alt=""></p>
+<h1><span id="3-分类问题">3. 分类问题</span></h1><p>在二分类任务中，使用Precison，Recall和F1值来评价分类的效果。<br><img src="/2019/10/18/metrics/hun.png" alt=""></p>
+<p><img src="/2019/10/18/metrics/f1.png" alt=""></p>
 <p>F1是针对二分类的，对于多分类，有2个常用的指标，Marco-F1和Micro-F1.</p>
-<h2><span id="31-micro-f1">3.1. Micro-F1</span></h2><p><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/micro.png" alt=""></p>
+<h2><span id="31-micro-f1">3.1. Micro-F1</span></h2><p><img src="/2019/10/18/metrics/micro.png" alt=""></p>
 <p>假设对于一个多分类问题，有三个类，分别是1，2，3</p>
 <p>$TP_i$表示分类$i$的TP<br>$FP_i$表示分类$i$的FP<br>$TN_i$表示分类$i$的TN<br>$FN_i$表示分类$i$的FN<br>接下来，我们来计算Micro的Precison</p>
-<p><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/precison-mi.png" alt=""></p>
+<p><img src="/2019/10/18/metrics/precison-mi.png" alt=""></p>
 <p>以及Micro的Recall</p>
-<p><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/recall-mi.png" alt=""></p>
+<p><img src="/2019/10/18/metrics/recall-mi.png" alt=""></p>
 <p>然后计算Micro-F1</p>
-<p><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/f1-mi.png" alt=""></p>
+<p><img src="/2019/10/18/metrics/f1-mi.png" alt=""></p>
 <h2><span id="32-macro-f1">3.2. Macro-F1</span></h2><p>先计算每个类的Precison和Rcall，从而计算出每个类的F1，然后将所有类的F1值平均得到Macro-F1。<br>如果数据集中各个类的分布不均衡的话，建议使用Micro-F1。<br>Macro-F1平等的看待各个类别，它的值更容易受少类别的影响Micro则更容易受常见类别的影响。</p>
 ]]></content>
       <categories>
-        <category>Deep Learning</category>
+        <category>Machine Learning</category>
       </categories>
       <tags>
-        <tag>评价指标</tag>
+        <tag>machine learning</tag>
       </tags>
   </entry>
   <entry>
@@ -875,8 +899,6 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
       </categories>
       <tags>
         <tag>时空领域</tag>
-        <tag>GCN</tag>
-        <tag>Flow</tag>
       </tags>
   </entry>
   <entry>
@@ -946,58 +968,84 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
       </categories>
       <tags>
         <tag>时空领域</tag>
-        <tag>accident预测</tag>
+        <tag>Traffic accident</tag>
       </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>神经网络踩坑</title>
     <url>/2019/07/17/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%B8%A9%E5%9D%91/</url>
-    <content><![CDATA[<hr>
-<p>title: 神经网络踩坑<br>date: 2019-07-17T16:08:20.000Z<br>categories: Deep Learning<br>tags:</p>
-<ul>
-<li>训练经验</li>
-<li>踩坑<br>comments: false</li>
-</ul>
-<hr>
-<p>参考资料:<br><a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650729285&amp;idx=1&amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e6f79daaeed&amp;mpshare=1&amp;scene=1&amp;srcid=07263lmMeeAcHLPSZpJXJI3L#rd" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650729285&amp;idx=1&amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e6f79daaeed&amp;mpshare=1&amp;scene=1&amp;srcid=07263lmMeeAcHLPSZpJXJI3L#rd</a>   </p>
+    <content><![CDATA[<p>参考资料:<br><a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650729285&amp;idx=1&amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e6f79daaeed&amp;mpshare=1&amp;scene=1&amp;srcid=07263lmMeeAcHLPSZpJXJI3L#rd" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650729285&amp;idx=1&amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e6f79daaeed&amp;mpshare=1&amp;scene=1&amp;srcid=07263lmMeeAcHLPSZpJXJI3L#rd</a>   </p>
 <a id="more"></a>
-<ol>
-<li><strong>Suffle数据集</strong><br><strong>先划分数据集再shuffle</strong>。先将数据集划分成训练集、验证集、测试集。然后在DataLoader划分mini-batch时对训练集进行shuffle得到batch。<strong>对验证集和测试集不需要shuffle</strong>。不对训练集进行shuffle容易造成过拟合。<br><strong>只对train进行shuffle，对val和test不进行shuffle</strong></li>
-<li><p><strong>归一化</strong><br>先划分数据集，再归一化。将数据划分成训练集，验证集，测试集，然后计算<strong>训练集的平均值和标准差</strong>。使用训练集的平均值和标准差对验证集和测试集进行归一化。模型不应该知道关于测试集的任何信息，所以要用训练集的均值和标准差对训练集归一化。<br><strong>划分数据集—&gt;归一化—&gt;对训练集shuffle</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, train_size = <span class="number">0.7</span>) <span class="comment">#train 70%, test 30%</span></span><br><span class="line">ss = StandardScaler()</span><br><span class="line">ss.fit(X_train)</span><br><span class="line"><span class="comment">#X_val_std = ss.transform(X_val)#如果有验证集</span></span><br><span class="line">X_test_std = ss.transform(X_test)</span><br></pre></td></tr></table></figure>
-<p>一般都是把数据归一化成[0,1]或者减去均值除以标准化。默认是对每一列进行归一化，即axis=0。很少用sklearn的标准化方法，都是自己写一个方法用来标准化。<br><img src="/2019/07/17/神经网络踩坑/norm.png" alt=""><br>在实际中对train，val，test归一化有2种方法，<br>方法1：同时传入train，val，test参数，返回归一化后的trian，val，test和训练集的mean、std。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalize</span><span class="params">(x)</span>:</span></span><br><span class="line">    mean = x.mean(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line">    std = x.std(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line">    <span class="keyword">return</span> (x - mean) / std  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalization</span><span class="params">(train, val, test)</span>:</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Parameters</span></span><br><span class="line"><span class="string">----------</span></span><br><span class="line"><span class="string">train, val, test: np.ndarray</span></span><br><span class="line"><span class="string">Returns</span></span><br><span class="line"><span class="string">----------</span></span><br><span class="line"><span class="string">stats: dict, two keys: mean and std</span></span><br><span class="line"><span class="string">train_norm, val_norm, test_norm: np.ndarray,</span></span><br><span class="line"><span class="string">                                 shape is the same as original</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">assert</span> train.shape[<span class="number">1</span>:] == val.shape[<span class="number">1</span>:] <span class="keyword">and</span> val.shape[<span class="number">1</span>:] == test.shape[<span class="number">1</span>:]</span><br><span class="line"></span><br><span class="line">    <span class="comment">#求出训练集的mean和std</span></span><br><span class="line">    <span class="comment">#假设train的维度是(3,6,9),mean和std的维度为(1,6,9)</span></span><br><span class="line">    mean = train.mean(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line">    std = train.std(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalize</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (x - mean) / std</span><br><span class="line"></span><br><span class="line">train_norm = normalize(train)</span><br><span class="line">val_norm = normalize(val)</span><br><span class="line">test_norm = normalize(test)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> &#123;<span class="string">'mean'</span>: mean, <span class="string">'std'</span>: std&#125;, train_norm, val_norm, test_norm</span><br></pre></td></tr></table></figure>
-<p>方法2：<br>如果使用(data-mean)/std进行标准化，需要计算train的平均值和标准差，但是怎么将train的平均值和标准差保留用在val和test上呢？下面自定义一个标准化的类</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Scaler</span>:</span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, data)</span>:</span></span><br><span class="line"><span class="comment">#计算train的平均值和标准差</span></span><br><span class="line">      <span class="comment">#假如data的维度是(2880, 1024, 2)</span></span><br><span class="line">      <span class="comment">#下面的平均值是mean所有的数相加/总个数</span></span><br><span class="line">    self.mean = np.mean(data)<span class="comment">#实数</span></span><br><span class="line">    self.std = np.std(data)<span class="comment">#实数</span></span><br><span class="line">   <span class="comment">#归一化：(数据-平均值)/标准差</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">transform</span><span class="params">(self, data)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (data - self.mean) / self.std</span><br><span class="line">	</span><br><span class="line">   <span class="comment">#反归一化：(数据*标准差)+平均值</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">inverse_transform</span><span class="params">(self, data)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> data * self.std + self.mean</span><br></pre></td></tr></table></figure>
-<p>然后在用到<code>Scaler</code>这个类时，<code>scaler = utils.Scaler(train)</code>,则scaler对象则保留了train的平均值和标准差，使用<code>scaler.mean和scaler.std</code>即可以获得train的平均值和标准差。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">scaler = utils.Scaler(train)</span><br><span class="line"><span class="comment">#对train，val，test进行标准化   </span></span><br><span class="line">train_new = scaler.transform(train)</span><br><span class="line">val_new = scaler.transform(val)</span><br><span class="line">test_new = scaler.transform(test)</span><br></pre></td></tr></table></figure>
-<p>在计算loss时，不需要反归一化。在计算评价指标时需要反归一化。在计算评价指标时，比如RMSE,MAE等，首先根据归一化后的test_new得到预测结果predict，然后将predict根据scaler的inverse_transform反归一化，然后使用真实量级的predict和label再计算评价指标。</p>
-</li>
-<li><p><strong>batch_size</strong><br>当数据量较大时，向网络中传入所有的数据来计算loss和梯度，更新参数会造成内存溢出。所以每次向网络中值传入一个batch的数据，说过这一个batch的数据来更新权重，输出这个batch里面所有样本的平均loss。下次再使用另一个batch，更新网络参数，直到所有的数据全都输入，完成一个epoch。</p>
-</li>
-<li><p><strong>划分数据集</strong><br>如果数据充足的情况下，通常采用均匀随机抽样的方法将数据集划分为3部分，训练集，验证集和测试集，这三个集合不能有交集，常见的比例是8:1:1，6:2:2。需要注意的是，通常都会给定训练集和测试集，而不会给验证集，一般的做法是从训练集中抽取一部分数据作为验证集。</p>
-</li>
-<li><p><strong>验证集的使用</strong><br>在训练时，仅使用训练集的数据进行训练，使用验证集评价模型。当选中最好的模型超参数之后，再使用训练集+验证集来训练模型，以充分利用所有的标注数据，然后再测试集上测试</p>
-<p>训练模型时，使用一个bacth来训练模型更新模型参数，记录下batch的loss。当训练完一个epcoh时，记录下模型的参数和梯度。并在验证集上计算验证集的误差，在测试集上计算测试集的MAE和MSE。<br><strong>在训练的时候，每个batch记录训练的时间，</strong><br><strong>使用 tensorboard，训练模型时，每一个batch记录一下train_loss，每一个epoch记录一下模型梯度，在验证集上的loss和评价指标，在测试集上的loss和评价指标，和模型的参数(只保存在val上效果最好的那组参数，其余的删掉)。至于使用val的loss还是评价指标来选择最好的模型，这个需要自己选择</strong><br>在模型训练的时候记录训练集/验证集/测试集的loss，以及验证集/测试集的评价指标。<br>为训练集，验证集，测试集创建3个SummaryWriter。<br>mxboard中log文件夹下的目录结构为：<br>—logs<br>$\qquad$—时间1文件夹<br>$\qquad\qquad$—train文件夹<br>$\qquad\qquad$—valid文件夹<br>$\qquad\qquad$—test文件夹<br>$\qquad$—时间2文件夹<br>$\qquad\qquad$—train文件夹<br>$\qquad\qquad$—valid文件夹<br>$\qquad\qquad$—test文件夹</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">timestamp = datetime.now().strftime(<span class="string">"%Y%m%d%H%M%S"</span>)</span><br><span class="line"> mxboard_log = <span class="string">'./logs/%s_%s/'</span> % (<span class="string">'GRU'</span>,timestamp)</span><br><span class="line"> <span class="keyword">if</span> os.path.exists(mxboard_log):</span><br><span class="line">     shutil.rmtree(mxboard_log)</span><br><span class="line"> os.makedirs(mxboard_log)   </span><br><span class="line"></span><br><span class="line"> train_sw = SummaryWriter(logdir=mxboard_log+<span class="string">'/train'</span>,flush_secs=<span class="number">2</span>)</span><br><span class="line"> val_sw = SummaryWriter(logdir=mxboard_log+<span class="string">'/val'</span>,flush_secs=<span class="number">2</span>)</span><br><span class="line"> test_sw = SummaryWriter(logdir=mxboard_log+<span class="string">'/test'</span>,flush_secs=<span class="number">2</span>)  </span><br><span class="line"></span><br><span class="line"> <span class="comment">#为了让loss显示在一张图上，tag需要一样，但是使用不同的sw，即3个loss会分别写入train,valid,test文件夹中，但是在tensorboard网页上会显示在同一张图中，</span></span><br><span class="line"> train_sw.add_scalar(tag=<span class="string">'loss'</span>,value=training_loss,global_step=global_step)  </span><br><span class="line"> val_sw.add_scalar(tag=<span class="string">'loss'</span>,value=loss_mean,global_step=global_step)</span><br><span class="line"> test_sw.add_scalar(tag=<span class="string">'loss'</span>,value=loss_mean,global_step=global_step)  </span><br><span class="line"> <span class="comment">#评价指标的显示，同理。</span></span><br><span class="line"> val_sw.add_scalar(tag=<span class="string">'MAE'</span>,value=mae,global_step=global_step)</span><br><span class="line"> test_sw.add_scalar(tag=<span class="string">'MAE'</span>,value=mae,global_step=global_step)</span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/panzheyi/ST-MetaNet" target="_blank" rel="noopener">ST-MetaNet</a>这篇论文的代码在使用验证集验证的过程是：</p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-suffle%e6%95%b0%e6%8d%ae%e9%9b%86">1. Suffle数据集</a></li>
+<li><a href="#2-%e5%bd%92%e4%b8%80%e5%8c%96">2. 归一化</a></li>
+<li><a href="#3-batchsize">3. batch_size</a></li>
+<li><a href="#4-%e5%88%92%e5%88%86%e6%95%b0%e6%8d%ae%e9%9b%86">4. 划分数据集</a></li>
+<li><a href="#5-%e9%aa%8c%e8%af%81%e9%9b%86%e7%9a%84%e4%bd%bf%e7%94%a8">5. 验证集的使用</a></li>
+<li><a href="#6-%e4%ba%a4%e5%8f%89%e9%aa%8c%e8%af%81">6. 交叉验证</a></li>
+<li><a href="#7-%e6%95%b0%e6%8d%ae%e8%be%93%e5%85%a5%e5%92%8c%e8%be%93%e5%87%ba">7. 数据输入和输出</a></li>
+<li><a href="#8-%e6%bf%80%e6%b4%bb%e5%87%bd%e6%95%b0">8. 激活函数</a></li>
+<li><a href="#9-gpu%e8%bf%90%e8%a1%8c%e7%a8%8b%e5%ba%8f">9. GPU运行程序</a></li>
+<li><a href="#10-%e4%bd%bf%e7%94%a8%e5%a4%9agpu%e8%bf%90%e8%a1%8c">10. 使用多GPU运行</a></li>
+<li><a href="#11-ndarray%e5%92%8cnumpy">11. NDArray和numpy</a></li>
+<li><a href="#12-tensorboard%e4%bd%bf%e7%94%a8">12. tensorboard使用</a></li>
+<li><a href="#13-dropout%e7%9a%84%e4%bd%bf%e7%94%a8">13. Dropout的使用</a></li>
+<li><a href="#14-%e8%b0%83%e5%8f%82%e7%bb%8f%e9%aa%8c">14. 调参经验</a></li>
+<li><a href="#15-earlystopping">15. EarlyStopping</a></li>
+<li><a href="#16-%e5%8d%b7%e7%a7%af%e5%b0%ba%e5%af%b8%e5%a4%a7%e5%b0%8f%e5%8f%98%e5%8c%96">16. 卷积尺寸大小变化</a></li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-suffle数据集">1. Suffle数据集</span></h1><p>   <strong>先划分数据集再shuffle</strong>。先将数据集划分成训练集、验证集、测试集。然后在DataLoader划分mini-batch时对训练集进行shuffle得到batch。<strong>对验证集和测试集不需要shuffle</strong>。不对训练集进行shuffle容易造成过拟合。<br>   <strong>只对train进行shuffle，对val和test不进行shuffle</strong></p>
+<h1><span id="2-归一化">2. 归一化</span></h1><p>   先划分数据集，再归一化。将数据划分成训练集，验证集，测试集，然后计算<strong>训练集的平均值和标准差</strong>。使用训练集的平均值和标准差对验证集和测试集进行归一化。模型不应该知道关于测试集的任何信息，所以要用训练集的均值和标准差对训练集归一化。<br>   <strong>划分数据集—&gt;归一化—&gt;对训练集shuffle</strong></p>
+   <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, train_size = <span class="number">0.7</span>) <span class="comment">#train 70%, test 30%</span></span><br><span class="line">ss = StandardScaler()</span><br><span class="line">ss.fit(X_train)</span><br><span class="line"><span class="comment">#X_val_std = ss.transform(X_val)#如果有验证集</span></span><br><span class="line">X_test_std = ss.transform(X_test)</span><br></pre></td></tr></table></figure>
+<p>   一般都是把数据归一化成[0,1]或者减去均值除以标准化。默认是对每一列进行归一化，即axis=0。很少用sklearn的标准化方法，都是自己写一个方法用来标准化。<br>   <img src="/2019/07/17/神经网络踩坑/norm.png" alt=""><br>   在实际中对train，val，test归一化有2种方法，<br>   方法1：同时传入train，val，test参数，返回归一化后的trian，val，test和训练集的mean、std。</p>
+   <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalize</span><span class="params">(x)</span>:</span></span><br><span class="line">    mean = x.mean(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line">    std = x.std(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line">    <span class="keyword">return</span> (x - mean) / std  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalization</span><span class="params">(train, val, test)</span>:</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Parameters</span></span><br><span class="line"><span class="string">----------</span></span><br><span class="line"><span class="string">train, val, test: np.ndarray</span></span><br><span class="line"><span class="string">Returns</span></span><br><span class="line"><span class="string">----------</span></span><br><span class="line"><span class="string">stats: dict, two keys: mean and std</span></span><br><span class="line"><span class="string">train_norm, val_norm, test_norm: np.ndarray,</span></span><br><span class="line"><span class="string">                                 shape is the same as original</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">assert</span> train.shape[<span class="number">1</span>:] == val.shape[<span class="number">1</span>:] <span class="keyword">and</span> val.shape[<span class="number">1</span>:] == test.shape[<span class="number">1</span>:]</span><br><span class="line"></span><br><span class="line">    <span class="comment">#求出训练集的mean和std</span></span><br><span class="line">    <span class="comment">#假设train的维度是(3,6,9),mean和std的维度为(1,6,9)</span></span><br><span class="line">    mean = train.mean(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line">    std = train.std(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalize</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (x - mean) / std</span><br><span class="line"></span><br><span class="line">train_norm = normalize(train)</span><br><span class="line">val_norm = normalize(val)</span><br><span class="line">test_norm = normalize(test)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> &#123;<span class="string">'mean'</span>: mean, <span class="string">'std'</span>: std&#125;, train_norm, val_norm, test_norm</span><br></pre></td></tr></table></figure>
+<p>   方法2：<br>   如果使用(data-mean)/std进行标准化，需要计算train的平均值和标准差，但是怎么将train的平均值和标准差保留用在val和test上呢？下面自定义一个标准化的类</p>
+   <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Scaler</span>:</span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, data)</span>:</span></span><br><span class="line"><span class="comment">#计算train的平均值和标准差</span></span><br><span class="line">      <span class="comment">#假如data的维度是(2880, 1024, 2)</span></span><br><span class="line">      <span class="comment">#下面的平均值是mean所有的数相加/总个数</span></span><br><span class="line">    self.mean = np.mean(data)<span class="comment">#实数</span></span><br><span class="line">    self.std = np.std(data)<span class="comment">#实数</span></span><br><span class="line">   <span class="comment">#归一化：(数据-平均值)/标准差</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">transform</span><span class="params">(self, data)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (data - self.mean) / self.std</span><br><span class="line">	</span><br><span class="line">   <span class="comment">#反归一化：(数据*标准差)+平均值</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">inverse_transform</span><span class="params">(self, data)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> data * self.std + self.mean</span><br></pre></td></tr></table></figure>
+<p>   然后在用到<code>Scaler</code>这个类时，<code>scaler = utils.Scaler(train)</code>,则scaler对象则保留了train的平均值和标准差，使用<code>scaler.mean和scaler.std</code>即可以获得train的平均值和标准差。</p>
+   <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">scaler = utils.Scaler(train)</span><br><span class="line"><span class="comment">#对train，val，test进行标准化   </span></span><br><span class="line">train_new = scaler.transform(train)</span><br><span class="line">val_new = scaler.transform(val)</span><br><span class="line">test_new = scaler.transform(test)</span><br></pre></td></tr></table></figure>
+<p>   在计算loss时，不需要反归一化。在计算评价指标时需要反归一化。在计算评价指标时，比如RMSE,MAE等，首先根据归一化后的test_new得到预测结果predict，然后将predict根据scaler的inverse_transform反归一化，然后使用真实量级的predict和label再计算评价指标。</p>
+<h1><span id="3-batch_size">3. batch_size</span></h1><p>   当数据量较大时，向网络中传入所有的数据来计算loss和梯度，更新参数会造成内存溢出。所以每次向网络中值传入一个batch的数据，说过这一个batch的数据来更新权重，输出这个batch里面所有样本的平均loss。下次再使用另一个batch，更新网络参数，直到所有的数据全都输入，完成一个epoch。</p>
+<h1><span id="4-划分数据集">4. 划分数据集</span></h1><p>   如果数据充足的情况下，通常采用均匀随机抽样的方法将数据集划分为3部分，训练集，验证集和测试集，这三个集合不能有交集，常见的比例是8:1:1，6:2:2。需要注意的是，通常都会给定训练集和测试集，而不会给验证集，一般的做法是从训练集中抽取一部分数据作为验证集。</p>
+<h1><span id="5-验证集的使用">5. 验证集的使用</span></h1><p>   在训练时，仅使用训练集的数据进行训练，使用验证集评价模型。当选中最好的模型超参数之后，再使用训练集+验证集来训练模型，以充分利用所有的标注数据，然后再测试集上测试</p>
+<p>   训练模型时，使用一个bacth来训练模型更新模型参数，记录下batch的loss。当训练完一个epcoh时，记录下模型的参数和梯度。并在验证集上计算验证集的误差，在测试集上计算测试集的MAE和MSE。<br>   <strong>在训练的时候，每个batch记录训练的时间，</strong><br>   <strong>使用 tensorboard，训练模型时，每一个batch记录一下train_loss，每一个epoch记录一下模型梯度，在验证集上的loss和评价指标，在测试集上的loss和评价指标，和模型的参数(只保存在val上效果最好的那组参数，其余的删掉)。至于使用val的loss还是评价指标来选择最好的模型，这个需要自己选择</strong><br>   在模型训练的时候记录训练集/验证集/测试集的loss，以及验证集/测试集的评价指标。<br>   为训练集，验证集，测试集创建3个SummaryWriter。<br>   mxboard中log文件夹下的目录结构为：<br>   —logs<br>   $\qquad$—时间1文件夹<br>   $\qquad\qquad$—train文件夹<br>   $\qquad\qquad$—valid文件夹<br>   $\qquad\qquad$—test文件夹<br>   $\qquad$—时间2文件夹<br>   $\qquad\qquad$—train文件夹<br>   $\qquad\qquad$—valid文件夹<br>   $\qquad\qquad$—test文件夹</p>
+   <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">timestamp = datetime.now().strftime(<span class="string">"%Y%m%d%H%M%S"</span>)</span><br><span class="line"> mxboard_log = <span class="string">'./logs/%s_%s/'</span> % (<span class="string">'GRU'</span>,timestamp)</span><br><span class="line"> <span class="keyword">if</span> os.path.exists(mxboard_log):</span><br><span class="line">     shutil.rmtree(mxboard_log)</span><br><span class="line"> os.makedirs(mxboard_log)   </span><br><span class="line"></span><br><span class="line"> train_sw = SummaryWriter(logdir=mxboard_log+<span class="string">'/train'</span>,flush_secs=<span class="number">2</span>)</span><br><span class="line"> val_sw = SummaryWriter(logdir=mxboard_log+<span class="string">'/val'</span>,flush_secs=<span class="number">2</span>)</span><br><span class="line"> test_sw = SummaryWriter(logdir=mxboard_log+<span class="string">'/test'</span>,flush_secs=<span class="number">2</span>)  </span><br><span class="line"></span><br><span class="line"> <span class="comment">#为了让loss显示在一张图上，tag需要一样，但是使用不同的sw，即3个loss会分别写入train,valid,test文件夹中，但是在tensorboard网页上会显示在同一张图中，</span></span><br><span class="line"> train_sw.add_scalar(tag=<span class="string">'loss'</span>,value=training_loss,global_step=global_step)  </span><br><span class="line"> val_sw.add_scalar(tag=<span class="string">'loss'</span>,value=loss_mean,global_step=global_step)</span><br><span class="line"> test_sw.add_scalar(tag=<span class="string">'loss'</span>,value=loss_mean,global_step=global_step)  </span><br><span class="line"> <span class="comment">#评价指标的显示，同理。</span></span><br><span class="line"> val_sw.add_scalar(tag=<span class="string">'MAE'</span>,value=mae,global_step=global_step)</span><br><span class="line"> test_sw.add_scalar(tag=<span class="string">'MAE'</span>,value=mae,global_step=global_step)</span><br></pre></td></tr></table></figure>
+<p>   <a href="https://github.com/panzheyi/ST-MetaNet" target="_blank" rel="noopener">ST-MetaNet</a>这篇论文的代码在使用验证集验证的过程是：</p>
 <ol>
 <li>在for循环中遍历所有的的epoch</li>
 <li>在每个epoch中，使用训练集训练模型，使用该epoch训练的模型对val进行验证，记录当前模型在val的metric(eg. MAE,MSE)和该模型的参数。</li>
 <li>进行下一个epoch，重复步骤2</li>
 <li>等到所有的epoch都结束了，选出在val上MAE或MSE最好的那个epoch的模型参数，重新给model加载这个epoch的参数，对测试集进行测试，输出metrics。</li>
-<li>即这篇的val是用来早停的，选出效果最好的epoch的模型参数。  </li>
-</ol>
+<li><p>即这篇的val是用来早停的，选出效果最好的epoch的模型参数。  </p>
 <p><a href="https://github.com/Davidham3/ASTGCN" target="_blank" rel="noopener">ASTGCN</a>这篇论文的代码在使用没有选出最好效果的epoch，而是每个epoch在val上计算loss。  </p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(epochs):</span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> train_loader:</span><br><span class="line">        start_time = time()</span><br><span class="line">        output = model(input)</span><br><span class="line">        loss = loss_funtion(output,label)</span><br><span class="line">        loss.backward()</span><br><span class="line">        trainer.step(batch_size)</span><br><span class="line">        train_loss = loss.mean().asscalar()</span><br><span class="line">        <span class="comment">#一个batch,使用sw记录train_loss</span></span><br><span class="line">        sw.add_scalar(train_loss)</span><br><span class="line">        print(<span class="string">'每个batch需要的时间和train_loss'</span>)</span><br><span class="line">    <span class="comment">#一个epoch，使用sw记录model的梯度</span></span><br><span class="line">    sw.add_histogram(param.grad())</span><br><span class="line">    <span class="comment">#一个epoch，使用val进行验证，并使用sw记录val的loss</span></span><br><span class="line">    compute_val_loss(net, val_loader)</span><br><span class="line">    <span class="comment">#一个epoch，计算test的metric，并使用sw记录test的MAE等值</span></span><br><span class="line">    compute_metrics(net,test_loader) </span><br><span class="line">    <span class="comment">#一个epoch保存模型参数</span></span><br><span class="line">    net.save_param()</span><br></pre></td></tr></table></figure>
 <p>完整代码  </p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">   global_step = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">1</span>, epochs + <span class="number">1</span>):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> train_w, train_d, train_r, train_t <span class="keyword">in</span> train_loader:</span><br><span class="line"></span><br><span class="line">            start_time = time()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">with</span> autograd.record():</span><br><span class="line">                output = net([train_w, train_d, train_r])</span><br><span class="line">                l = loss_function(output, train_t)</span><br><span class="line">            l.backward()</span><br><span class="line">            trainer.step(train_t.shape[<span class="number">0</span>])</span><br><span class="line">            training_loss = l.mean().asscalar()</span><br><span class="line"></span><br><span class="line">            sw.add_scalar(tag=<span class="string">'training_loss'</span>,</span><br><span class="line">                          value=training_loss,</span><br><span class="line">                          global_step=global_step)</span><br><span class="line"></span><br><span class="line">            print(<span class="string">'global step: %s, training loss: %.2f, time: %.2fs'</span></span><br><span class="line">                  % (global_step, training_loss, time() - start_time))</span><br><span class="line">            global_step += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># logging the gradients of parameters for checking convergence</span></span><br><span class="line">        <span class="keyword">for</span> name, param <span class="keyword">in</span> net.collect_params().items():</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                sw.add_histogram(tag=name + <span class="string">"_grad"</span>,</span><br><span class="line">                                 values=param.grad(),</span><br><span class="line">                                 global_step=global_step,</span><br><span class="line">                                 bins=<span class="number">1000</span>)</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                print(<span class="string">"can't plot histogram of &#123;&#125;_grad"</span>.format(name))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># compute validation loss</span></span><br><span class="line">        compute_val_loss(net, val_loader, loss_function, sw, epoch)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># evaluate the model on testing set</span></span><br><span class="line">        evaluate(net, test_loader, true_value, num_of_vertices, sw, epoch)</span><br><span class="line"></span><br><span class="line">        params_filename = os.path.join(params_path,</span><br><span class="line">                                       <span class="string">'%s_epoch_%s.params'</span> % (model_name,</span><br><span class="line">                                                               epoch))</span><br><span class="line">        net.save_parameters(params_filename)</span><br><span class="line">        print(<span class="string">'save parameters to file: %s'</span> % (params_filename))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># close SummaryWriter</span></span><br><span class="line">    sw.close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="string">'prediction_filename'</span> <span class="keyword">in</span> training_config:</span><br><span class="line">        prediction_path = training_config[<span class="string">'prediction_filename'</span>]</span><br><span class="line"></span><br><span class="line">        prediction = predict(net, test_loader)</span><br><span class="line"></span><br><span class="line">        np.savez_compressed(</span><br><span class="line">            os.path.normpath(prediction_path),</span><br><span class="line">            prediction=prediction,</span><br><span class="line">            ground_truth=all_data[<span class="string">'test'</span>][<span class="string">'target'</span>]</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">   ```  </span><br><span class="line"></span><br><span class="line"><span class="number">6.</span> **交叉验证**  </span><br><span class="line">   原先对交叉验证使用的数据集一直都理解错了。  </span><br><span class="line">   [参考资料](https://blog.csdn.net/qq_24753293/article/details/<span class="number">79970997</span>)</span><br><span class="line">   交叉验证使用的数据集是训练集，而不是全部的数据集。在交叉验证的时候把训练集分成K个集合，其中K<span class="number">-1</span>份用来训练，<span class="number">1</span>份用来验证。</span><br><span class="line">   ![](神经网络踩坑/cross.png)</span><br><span class="line">   比如使用<span class="number">5</span>折交叉验证，使用不同的<span class="number">5</span>个训练集和测试集，训练得到<span class="number">5</span>个模型，但是我们最后使用的模型并不是这<span class="number">5</span>个模型中的一个。我们仍然认为这<span class="number">5</span>个模型是一个模型，虽然参数不同，只是它们的输入不同而已。交叉验证只是为了验证这个模型的性能，交叉验证的目的并不是为了得到最终的模型。</span><br><span class="line">   假设我们有<span class="number">2</span>个模型：线性回归和MLP。怎么说哪个模型更好呢？我们可以使用K折交叉验证来证明哪个模型更好，一旦我们选择了更好模型，例如MLP,那我们就用全部的数据来训练这个模型。</span><br><span class="line">   先使用网格搜索选择超参数，然后使用交叉验证输出这个模型的预测结果。</span><br><span class="line">   交叉验证有<span class="number">2</span>个用处：</span><br><span class="line">   - 准确的调整模型的超参数。超参数不同模型就不同。使用交叉验证来选出最好的超参数。</span><br><span class="line">   - 比如分类问题，有多个算法，逻辑回归，决策树，聚类等方法，不确定使用哪个方法时，可以使用交叉验证。</span><br><span class="line">  </span><br><span class="line"><span class="number">7.</span> **数据输入和输出**  </span><br><span class="line">   （<span class="number">1</span>）在gloun中Dense的输入是二维的，(batch_size,feature)，比如输入是(<span class="number">64</span>,<span class="number">120</span>)表示一个batch有<span class="number">64</span>个样本，每个样本有<span class="number">120</span>个特征。如果训练集中的X不是二维的，可以使用reshape()将X变换成(<span class="number">-1</span>,全连接输入单元个数)</span><br><span class="line">   （<span class="number">2</span>）卷积神经网络，卷积的输入和输出形状是(batch_size,通道,高,宽)，如果后面接的是全连接，就要转换成二维(batch_size,每个样本特征=通道\*高*宽)，但是不需要人去手动转换形状，Dense会自动转换。如果是keras，从卷积层到全连接层，形状不会自动转变，所以需要自己加一个`Flatten()`层。  </span><br><span class="line">   （<span class="number">3</span>）如果是一个分类问题，比如mnist数字识别，最后一层是一个神经单元个数为<span class="number">10</span>的全连接层，然后把输送入到softmax，将每一行的<span class="number">10</span>个值都变成在[<span class="number">0</span>,<span class="number">1</span>]之间小数。损失函数是交叉熵损失损失。在gluon中，最后一层Dense只需要指定输出神经单元个数即可，即`Dense(<span class="number">10</span>)`，在预测的时候，输出predict，这时的predict并没有归一化到[<span class="number">0</span>,<span class="number">1</span>]的范围内，我们直接把predict和true_label输入到loss中，在loss函数中，才会对predict进行softmax计算，将predict归一化到[<span class="number">0</span>,<span class="number">1</span>]范围内。   </span><br><span class="line">   在keras中，和gluon不同，会在最后一层的输出指定softmax激活函数，即`Dense(<span class="number">10</span>,activation=<span class="string">'softmax'</span>)`。</span><br><span class="line"></span><br><span class="line">   ![](神经网络踩坑/conv.png)  </span><br><span class="line">   （<span class="number">3</span>）循环神经网络的输入形状为(时间步数，batch_size，特征个数)   </span><br><span class="line">   [通俗易懂的RNN图解](https://www.zhihu.com/question/<span class="number">41949741</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">8.</span> **激活函数**   </span><br><span class="line">   在使用激活函数的时候，一般都是</span><br><span class="line">   net.add(nn.Dense(<span class="number">10</span>,activation=<span class="string">'relu'</span>)),在定义层的时候直接加上activation，</span><br><span class="line">   也可以使用,但是不常用</span><br><span class="line">   net.add(nn.Dense(<span class="number">10</span>),</span><br><span class="line">           nn.Activation(<span class="string">'relu'</span>) </span><br><span class="line">    )</span><br><span class="line">    或者net.add(nn.Conv2D(channels=<span class="number">6</span>, kernel_size=<span class="number">5</span>, activation=<span class="string">'sigmoid'</span>))</span><br><span class="line">    只有当在该层和激活函数之间有其余的操作时，才会分开写，例如在卷积计算之后，激活函数之前加上批量归一化层，写成</span><br><span class="line"></span><br><span class="line">    ```python   </span><br><span class="line">    net.add(nn.Conv2D(<span class="number">6</span>, kernel_size=<span class="number">5</span>),</span><br><span class="line">        BatchNorm(),</span><br><span class="line">        nn.Activation(<span class="string">'sigmoid'</span>))  </span><br><span class="line">        或者  </span><br><span class="line">        n.Dense(<span class="number">120</span>),</span><br><span class="line">        BatchNorm(),</span><br><span class="line">        nn.Activation(<span class="string">'sigmoid'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">global_step = <span class="number">1</span></span><br><span class="line"> <span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">1</span>, epochs + <span class="number">1</span>):</span><br><span class="line"></span><br><span class="line">     <span class="keyword">for</span> train_w, train_d, train_r, train_t <span class="keyword">in</span> train_loader:</span><br><span class="line"></span><br><span class="line">         start_time = time()</span><br><span class="line"></span><br><span class="line">         <span class="keyword">with</span> autograd.record():</span><br><span class="line">             output = net([train_w, train_d, train_r])</span><br><span class="line">             l = loss_function(output, train_t)</span><br><span class="line">         l.backward()</span><br><span class="line">         trainer.step(train_t.shape[<span class="number">0</span>])</span><br><span class="line">         training_loss = l.mean().asscalar()</span><br><span class="line"></span><br><span class="line">         sw.add_scalar(tag=<span class="string">'training_loss'</span>,</span><br><span class="line">                       value=training_loss,</span><br><span class="line">                       global_step=global_step)</span><br><span class="line"></span><br><span class="line">         print(<span class="string">'global step: %s, training loss: %.2f, time: %.2fs'</span></span><br><span class="line">               % (global_step, training_loss, time() - start_time))</span><br><span class="line">         global_step += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">     <span class="comment"># logging the gradients of parameters for checking convergence</span></span><br><span class="line">     <span class="keyword">for</span> name, param <span class="keyword">in</span> net.collect_params().items():</span><br><span class="line">         <span class="keyword">try</span>:</span><br><span class="line">             sw.add_histogram(tag=name + <span class="string">"_grad"</span>,</span><br><span class="line">                              values=param.grad(),</span><br><span class="line">                              global_step=global_step,</span><br><span class="line">                              bins=<span class="number">1000</span>)</span><br><span class="line">         <span class="keyword">except</span>:</span><br><span class="line">             print(<span class="string">"can't plot histogram of &#123;&#125;_grad"</span>.format(name))</span><br><span class="line"></span><br><span class="line">     <span class="comment"># compute validation loss</span></span><br><span class="line">     compute_val_loss(net, val_loader, loss_function, sw, epoch)</span><br><span class="line"></span><br><span class="line">     <span class="comment"># evaluate the model on testing set</span></span><br><span class="line">     evaluate(net, test_loader, true_value, num_of_vertices, sw, epoch)</span><br><span class="line"></span><br><span class="line">     params_filename = os.path.join(params_path,</span><br><span class="line">                                    <span class="string">'%s_epoch_%s.params'</span> % (model_name,</span><br><span class="line">                                                            epoch))</span><br><span class="line">     net.save_parameters(params_filename)</span><br><span class="line">     print(<span class="string">'save parameters to file: %s'</span> % (params_filename))</span><br><span class="line"></span><br><span class="line"> <span class="comment"># close SummaryWriter</span></span><br><span class="line"> sw.close()</span><br><span class="line"></span><br><span class="line"> <span class="keyword">if</span> <span class="string">'prediction_filename'</span> <span class="keyword">in</span> training_config:</span><br><span class="line">     prediction_path = training_config[<span class="string">'prediction_filename'</span>]</span><br><span class="line"></span><br><span class="line">     prediction = predict(net, test_loader)</span><br><span class="line"></span><br><span class="line">     np.savez_compressed(</span><br><span class="line">         os.path.normpath(prediction_path),</span><br><span class="line">         prediction=prediction,</span><br><span class="line">         ground_truth=all_data[<span class="string">'test'</span>][<span class="string">'target'</span>]</span><br><span class="line">     )</span><br></pre></td></tr></table></figure>
 </li>
+</ol>
+<h1><span id="6-交叉验证">6. 交叉验证</span></h1><p>   原先对交叉验证使用的数据集一直都理解错了。<br>   <a href="https://blog.csdn.net/qq_24753293/article/details/79970997" target="_blank" rel="noopener">参考资料</a><br>   交叉验证使用的数据集是训练集，而不是全部的数据集。在交叉验证的时候把训练集分成K个集合，其中K-1份用来训练，1份用来验证。<br>   <img src="/2019/07/17/神经网络踩坑/cross.png" alt=""><br>   比如使用5折交叉验证，使用不同的5个训练集和测试集，训练得到5个模型，但是我们最后使用的模型并不是这5个模型中的一个。我们仍然认为这5个模型是一个模型，虽然参数不同，只是它们的输入不同而已。交叉验证只是为了验证这个模型的性能，交叉验证的目的并不是为了得到最终的模型。<br>   假设我们有2个模型：线性回归和MLP。怎么说哪个模型更好呢？我们可以使用K折交叉验证来证明哪个模型更好，一旦我们选择了更好模型，例如MLP,那我们就用全部的数据来训练这个模型。<br>   先使用网格搜索选择超参数，然后使用交叉验证输出这个模型的预测结果。<br>   交叉验证有2个用处：</p>
+<ul>
+<li>准确的调整模型的超参数。超参数不同模型就不同。使用交叉验证来选出最好的超参数。</li>
+<li>比如分类问题，有多个算法，逻辑回归，决策树，聚类等方法，不确定使用哪个方法时，可以使用交叉验证。</li>
+</ul>
+<h1><span id="7-数据输入和输出">7. 数据输入和输出</span></h1><ol>
+<li>在gloun中Dense的输入是二维的，(batch_size,feature)，比如输入是(64,120)表示一个batch有64个样本，每个样本有120个特征。如果训练集中的X不是二维的，可以使用reshape()将X变换成(-1,全连接输入单元个数)</li>
+<li>卷积神经网络，卷积的输入和输出形状是(batch_size,通道,高,宽)，如果后面接的是全连接，就要转换成二维(batch_size,每个样本特征=通道*高*宽)，但是不需要人去手动转换形状，Dense会自动转换。如果是keras，从卷积层到全连接层，形状不会自动转变，所以需要自己加一个<code>Flatten()</code>层。  </li>
+<li>如果是一个分类问题，比如mnist数字识别，最后一层是一个神经单元个数为10的全连接层，然后把输送入到softmax，将每一行的10个值都变成在[0,1]之间小数。损失函数是交叉熵损失损失。在gluon中，最后一层Dense只需要指定输出神经单元个数即可，即<code>Dense(10)</code>，在预测的时候，输出predict，这时的predict并没有归一化到[0,1]的范围内，我们直接把predict和true_label输入到loss中，在loss函数中，才会对predict进行softmax计算，将predict归一化到[0,1]范围内。   </li>
+<li><p>在keras中，和gluon不同，会在最后一层的输出指定softmax激活函数，即<code>Dense(10,activation=&#39;softmax&#39;)</code>。</p>
+<p><img src="/2019/07/17/神经网络踩坑/conv.png" alt=""><br>（3）循环神经网络的输入形状为(时间步数，batch_size，特征个数)<br><a href="https://www.zhihu.com/question/41949741" target="_blank" rel="noopener">通俗易懂的RNN图解</a></p>
+</li>
+</ol>
+<h1><span id="8-激活函数">8. 激活函数</span></h1><p>   在使用激活函数的时候，一般都是<br>   net.add(nn.Dense(10,activation=’relu’)),在定义层的时候直接加上activation，<br>   也可以使用,但是不常用<br>   net.add(nn.Dense(10),<br>           nn.Activation(‘relu’)<br>    )<br>    或者net.add(nn.Conv2D(channels=6, kernel_size=5, activation=’sigmoid’))<br>    只有当在该层和激活函数之间有其余的操作时，才会分开写，例如在卷积计算之后，激活函数之前加上批量归一化层，写成</p>
+<pre><code><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">net.add(nn.Conv2D(<span class="number">6</span>, kernel_size=<span class="number">5</span>),</span><br><span class="line">    BatchNorm(),</span><br><span class="line">    nn.Activation(<span class="string">'sigmoid'</span>))  </span><br><span class="line">    或者  </span><br><span class="line">    n.Dense(<span class="number">120</span>),</span><br><span class="line">    BatchNorm(),</span><br><span class="line">    nn.Activation(<span class="string">'sigmoid'</span>)</span><br></pre></td></tr></table></figure>
+</code></pre><ol>
 <li><p>什么时候用激活函数</p>
 <ul>
 <li>如果是回归问题，最后一层不需要激活函数（当然，如果数据归一化，可以加激活函数，也可以不加）</li>
 <li>如果是分类问题，最后一层的激活函数使用sigmoid(二分类)，softmax(多分类)</li>
-<li><p>大部分问题上，使用Relu会得到较好的性能。现在已经很少使用sigmoid激活函数了，sigmoid函数的输出范围在[0,1]之间，x轴在[-5,5]之间的梯度非常高，当x在该范围之外时，梯度很好，接近于0，在反向传播时，容易出现梯度消失问题，无法完成深层网络的训练。<br><img src="/2019/07/17/神经网络踩坑/sigmoid.png" alt=""></p>
+<li><p>大部分问题上，使用Relu会得到较好的性能。现在已经很少使用sigmoid激活函数了，sigmoid函数的输出范围在[0,1]之间，x轴在[-5,5]之间的梯度非常高，当x在该范围之外时，梯度很好，接近于0，在反向传播时，容易出现梯度消失问题，无法完成深层网络的训练。</p>
+<p><img src="/2019/07/17/神经网络踩坑/sigmoid.png" alt=""></p>
 </li>
 <li><p>由于梯度消失问题，尽量避免使用sigmoid和tanh激活函数</p>
 </li>
@@ -1006,9 +1054,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <li>使用softmax作为最后一层的激活函数时，前一层最好不要使用relu激活，而是使用tanh代替，否则最终的loss很可能变成nan</li>
 </ul>
 </li>
-<li><p><strong>GPU运行程序</strong><br>ctx=mx.gpu(2)，下标从0开始<br><strong>需要用到ctx的地方：</strong></p>
-</li>
 </ol>
+<h1><span id="9-gpu运行程序">9. GPU运行程序</span></h1><p>   ctx=mx.gpu(2)，下标从0开始<br>   <strong>需要用到ctx的地方：</strong></p>
 <ul>
 <li><p>数据集需要放到gpu上。有2种方法。<br> （1）在创建数据的时候，指定ctx，在gpu上创建数据。</p>
  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">train_loader = gluon.data.DataLoader(</span><br><span class="line">                     gluon.data.ArrayDataset(</span><br><span class="line">                         nd.array(all_data[<span class="string">'train'</span>][<span class="string">'week'</span>], ctx=ctx),</span><br><span class="line">                         nd.array(all_data[<span class="string">'train'</span>][<span class="string">'day'</span>], ctx=ctx),</span><br><span class="line">                         nd.array(all_data[<span class="string">'train'</span>][<span class="string">'recent'</span>], ctx=ctx),</span><br><span class="line">                         nd.array(all_data[<span class="string">'train'</span>][<span class="string">'target'</span>], ctx=ctx)</span><br><span class="line">                     ),</span><br><span class="line">                     batch_size=batch_size,</span><br><span class="line">                     shuffle=<span class="keyword">True</span></span><br><span class="line"> )</span><br></pre></td></tr></table></figure>
@@ -1020,64 +1067,99 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 </ul>
 </li>
 </ul>
-<ol>
-<li><p><strong>使用多GPU运行</strong><br>假设<code>ctx=[mx.gpu(1),mx.gpu(2)]</code>，则需要调整以下内容<br>(1)模型初始化，使用<br><code>net.initialize(init=init.Normal(sigma=0.01), ctx=ctx)</code><br>(2)split_and_load函数，将一个batch_size的数据再次划分成子集，并复制到各个GPU上，比如batch_size=6，有2个GPU，那么每个GPU上有3个样本，  </p>
+<h1><span id="10-使用多gpu运行">10. 使用多GPU运行</span></h1><p>假设<code>ctx=[mx.gpu(1),mx.gpu(2)]</code>，则需要调整以下内容<br>(1)模型初始化，使用<br><code>net.initialize(init=init.Normal(sigma=0.01), ctx=ctx)</code><br>(2)split_and_load函数，将一个batch_size的数据再次划分成子集，并复制到各个GPU上，比如batch_size=6，有2个GPU，那么每个GPU上有3个样本，  </p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = nd.random.uniform(shape=(<span class="number">4</span>, <span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>))  </span><br><span class="line">gpu_x = gutils.split_and_load(x, ctx)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>NDArray和numpy</strong><br> 使用gluon运行程序，gluon中的数据结构是NDArray，普通的python程序中的数据是numpy。什么时候用nd.array？什么时候用np.array?</p>
+<h1><span id="11-ndarray和numpy">11. NDArray和numpy</span></h1><p>使用gluon运行程序，gluon中的数据结构是NDArray，普通的python程序中的数据是numpy。什么时候用nd.array？什么时候用np.array?</p>
 <ul>
-<li><strong>nd.array</strong><br>（1）在模型内部的运算，使用的都是nd。比如模型的数据输入，在创建DataLoader时，数据需要转换成nd.array()类型。<br>（2）自定义的compute_val_loss()计算验证集的loss时，传入的数据是val_loader，是nd.array类型，但是在返回loss的时候，需要转换成np.array()，<br>（3）自定义的evaluate计算数据，返回的值是np.array()</li>
-<li><strong>np.array</strong><br>（1）在metrics.py中计算MSE，RMSE，MAE等指标时，输出和输出都是np.array类型。</li>
-<li><p><strong>nd.array和np.array转换</strong><br>（1）nd.array—&gt;np.array:</p>
+<li><strong>nd.array</strong><ul>
+<li>在模型内部的运算，使用的都是nd。比如模型的数据输入，在创建DataLoader时，数据需要转换成nd.array()类型。</li>
+<li>自定义的compute_val_loss()计算验证集的loss时，传入的数据是val_loader，是nd.array类型，但是在返回loss的时候，需要转换成np.array()，</li>
+<li>自定义的evaluate计算数据，返回的值是np.array()</li>
+</ul>
+</li>
+<li><strong>np.array</strong><ul>
+<li>在metrics.py中计算MSE，RMSE，MAE等指标时，输出和输出都是np.array类型。</li>
+</ul>
+</li>
+<li><p><strong>nd.array和np.array转换</strong></p>
+<ul>
+<li><p>nd.array—&gt;np.array:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = np.arange(<span class="number">10</span>)</span><br><span class="line">b = a.asnumpy()</span><br></pre></td></tr></table></figure>
-<p>（2）np.array—&gt;nd.array</p>
+</li>
+<li><p>np.array—&gt;nd.array</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">c = nd.array(b)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
-<li><p><strong>tensorboard使用</strong> </p>
-<ul>
+</ul>
+<h1><span id="12-tensorboard使用">12. tensorboard使用</span></h1><ul>
 <li>在训练集上每次epoch之后，验证模型在验证集上的平均loss，对验证集上的每个batch中的每个样本都求出一个loss，将所有样本的loss放在list中，最后求list的平均值得到验证集的平均loss。</li>
-<li>在训练集上每次epoch之后，写一个evaluate函数，验证模型在测试集上的RMSE或MSE等指标。<br>tensorboard中tag相同的会被显示在同一张图中。为了显示训练集，验证集和测试集的loss，tag都被设置为loss，但是SummaWriter的logdir不同。  </li>
+<li>在训练集上每次epoch之后，写一个evaluate函数，验证模型在测试集上的RMSE或MSE等指标。tensorboard中tag相同的会被显示在同一张图中。为了显示训练集，验证集和测试集的loss，tag都被设置为loss，但是SummaWriter的logdir不同</li>
+</ul>
+<h1><span id="13-dropout的使用">13. Dropout的使用</span></h1><p>丢弃层会将隐藏单元中的值以一定的概率丢弃，即被设置为0，起到正则化的作用，用来应对过拟合。在测试模型时，为了拿到更加确定的结果，一般不使用丢弃法，只在训练模型下才使用dropout。在训练模型时，将靠近输入层的丢弃概率设的小一点。dropout一般放在全连接层后面</p>
+<h1><span id="14-调参经验">14. 调参经验</span></h1><p><a href="https://www.cnblogs.com/kamekin/p/10163743.html" target="_blank" rel="noopener">调参经验</a></p>
+<p><a href="https://mp.weixin.qq.com/s/whbQ3b7NcA9Ifvb9aymkbQ" target="_blank" rel="noopener">33 个神经网络「炼丹」技巧</a></p>
+<h1><span id="15-earlystopping">15. EarlyStopping</span></h1><p><a href="https://github.com/dmlc/dgl/tree/master/examples/mxnet/gat" target="_blank" rel="noopener">GAT官方实现EarlyStopping的完整代码</a></p>
+<p>早停是在模型在val_loss，或者val_acc,val_mae等指标上进行。传入2个参数，patience和delta。</p>
+<ul>
+<li>如果val_loss在连续patience epoch内，val_loss都大于最好的val_loss，即val_loss在增大，模型出现过拟合。</li>
+<li><p>当前val_loss&gt;最好的val_loss-delta，有2种情况</p>
+<ul>
+<li>当前val_loss上升，counter+1</li>
+<li>val_loss虽然减少，但是减少很小，基本可以视为不变，counter+1</li>
 </ul>
 </li>
-<li><strong>Dropout的使用</strong><br> 丢弃层会将隐藏单元中的值以一定的概率丢弃，即被设置为0，起到正则化的作用，用来应对过拟合。在测试模型时，为了拿到更加确定的结果，一般不使用丢弃法，只在训练模型下才使用dropout。在训练模型时，将靠近输入层的丢弃概率设的小一点。dropout一般放在全连接层后面。   </li>
-<li>调参经验<br> <a href="https://www.cnblogs.com/kamekin/p/10163743.html" target="_blank" rel="noopener">调参经验</a><br> <a href="https://mp.weixin.qq.com/s/whbQ3b7NcA9Ifvb9aymkbQ" target="_blank" rel="noopener">33 个神经网络「炼丹」技巧</a></li>
-<li>EarlyStopping<br> <a href="https://github.com/dmlc/dgl/tree/master/examples/mxnet/gat" target="_blank" rel="noopener">GAT官方实现EarlyStopping的完整代码</a><br> 早停是在模型在val_loss，或者val_acc,val_mae等指标上进行。传入2个参数，patience和delta。<ul>
-<li>如果val_loss在连续patience epoch内，val_loss都大于最好的val_loss，即val_loss在增大，模型出现过拟合。</li>
-<li>当前val_loss&gt;最好的val_loss-delta，有2种情况，<br>  （1）当前val_loss上升，counter+1<br>  （2）val_loss虽然减少，但是减少很小，基本可以视为不变，counter+1，</li>
-<li>当前val_loss &lt;= 最好的val_loss-delta,说明val_loss一直在下降，即更新最高的val_loss</li>
+<li><p>当前val_loss &lt;= 最好的val_loss-delta,说明val_loss一直在下降，即更新最高的val_loss</p>
+</li>
 <li>总结：即val_loss在连续patience内，都没有显著下降(current_loss &lt;= best_loss - delta)，则停止训练</li>
 </ul>
-</li>
-<li>卷积尺寸大小变化<br> （1）2D卷积，输入和输出形状一样：一般kernel_size=(3,3),padding=1,stride=1，输入和输出的形状一样<br> （2）2D卷积，输入和输出高和宽减半：kernel_size=(3,3),padding=1,stride=2，输出的形状是输入一半<br> （3）3D卷积，一般kernel_size=(3,3,3),padding=1,stride=1，输入和输出的形状一样<br> （4）3D卷积，一般kernel_size=(1,1,1),padding=0,stride=1，输入和输出的形状一样</li>
-</ol>
+<h1><span id="16-卷积尺寸大小变化">16. 卷积尺寸大小变化</span></h1><ul>
+<li>2D卷积，输入和输出形状一样：一般kernel_size=(3，3),padding=1,stride=1，输入和输出的形状一样</li>
+<li>2D卷积，输入和输出高和宽减半：kernel_size=(3,3),padding=1,stride=2，输出的形状是输入一半</li>
+<li>3D卷积，一般kernel_size=(3,3,3),padding=1,stride=1，输入和输出的形状一样</li>
+<li>3D卷积，一般kernel_size=(1,1,1),padding=0,stride=1，输入和输出的形状一样</li>
+</ul>
 ]]></content>
+      <categories>
+        <category>Deep Learning</category>
+      </categories>
+      <tags>
+        <tag>调参经验</tag>
+      </tags>
   </entry>
   <entry>
     <title>梯度爆炸和衰减</title>
     <url>/2019/07/16/%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8%E5%92%8C%E8%A1%B0%E5%87%8F/</url>
     <content><![CDATA[<a id="more"></a>
+<!-- TOC -->
+<ul>
+<li><a href="#1-为什么使用梯度更新规则">1. 为什么使用梯度更新规则</a></li>
+<li><a href="#2-激活函数">2. 激活函数</a></li>
+<li><a href="#3-初始化缓解梯度消失和爆炸">3. 初始化缓解梯度消失和爆炸</a></li>
+<li><a href="#4-如何判断出现梯度爆炸">4. 如何判断出现梯度爆炸</a></li>
+<li><a href="#5-如何解决梯度爆炸">5. 如何解决梯度爆炸</a></li>
+</ul>
+<!-- /TOC -->
 <p>参考资料：<br><a href="https://zhuanlan.zhihu.com/p/33006526" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/33006526</a><br><a href="http://wangxin123.com/2019/01/01/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#什么是梯度消失和梯度爆炸，分别会引发什么问题" target="_blank" rel="noopener">什么是梯度消失和梯度爆炸，分别会引发什么问题</a></p>
-<h1><span id="为什么使用梯度更新规则">为什么使用梯度更新规则</span></h1><p>&ensp;&ensp;&ensp;&ensp;现在，神经网络的参数都是通过反向传播更新的。深层神经网络由很多分线性层堆叠，每一个非线性层都可以看做是一个非线性函数。神经网络就是一个复合的非线性函数，将输入映射成输出。损失函数就是使关于真实值与预测值之间的误差。通过损失函数对参数求导，得到梯度，梯度的含义就是这个参数对整个网络的影响程度大小。使用梯度下降更新参数。<br>梯度决定了网络（参数）的学习速率。如果梯度出现异常，参数更新出现异常，即神经元失去了学习的能力。<br>如果权重的值都小于1，最终的输出很小，<br>如果权重的值都大于1，最终的输出很大，</p>
+<h1><span id="1-为什么使用梯度更新规则">1. 为什么使用梯度更新规则</span></h1><p>&ensp;&ensp;&ensp;&ensp;现在，神经网络的参数都是通过反向传播更新的。深层神经网络由很多分线性层堆叠，每一个非线性层都可以看做是一个非线性函数。神经网络就是一个复合的非线性函数，将输入映射成输出。损失函数就是使关于真实值与预测值之间的误差。通过损失函数对参数求导，得到梯度，梯度的含义就是这个参数对整个网络的影响程度大小。使用梯度下降更新参数。<br>梯度决定了网络（参数）的学习速率。如果梯度出现异常，参数更新出现异常，即神经元失去了学习的能力。<br>如果权重的值都小于1，最终的输出很小，<br>如果权重的值都大于1，最终的输出很大，</p>
 <ul>
 <li>在反向求导时，假设对$W^1$求梯度，如果其他的权重都小于1，求得的梯度很小，出现梯度消失，使用$W-\alpha \Delta W$，权重更新的很慢，训练的难度大大增加。<strong>梯度消失比梯度爆炸更常见</strong> </li>
 <li>在反向求导时，如果权重大于1，梯度大幅度更新，网络变得很不稳定。较好的情况是网络无法利用训练数据学习，最差的情况是梯度或权重增大溢出，变成网络无法更新的Nan值。<br>不用层的参数更新速率不一样，一般靠近网络输出层的参数更新速度加快，学习的情况较好。靠近网络输入层的参数更新速度慢，学习的很慢，有时候训练了很久，前几层的权重参数值和刚开始初始化的值差不多。因此，梯度消失和爆炸的根本原因在于反向传播法则。<br><img src="/2019/07/16/梯度爆炸和衰减/1.png" alt="">       </li>
 </ul>
-<h1><span id="激活函数">激活函数</span></h1><p>（1）在权重更新的时候，需要计算前层的偏导信息，因此如果激活函数选择的不合适，比如sigmoid，梯度消失的很明显。因为sigmoid的导数不会超过0.25，经过链式求导，很容易出现梯度消失。<br><img src="/2019/07/16/梯度爆炸和衰减/sigmoid.png" alt=""><br>（2）tanh比sigmoid好一些，但是它的导数仍然小于1<br><img src="/2019/07/16/梯度爆炸和衰减/tanh.png" alt="">    </p>
-<h1><span id="初始化缓解梯度消失和爆炸">初始化缓解梯度消失和爆炸</span></h1><p>使用Xavier初始化：基本思想是通过网络层时，输出和输出的方差相同。Xavier在tanh中表现很好，但在Relu激活函数中表现很差。<br>何凯明提出了针对Relu的初始化方法<br>Delving deep into rectifiers: Surpassing human-level performance on ImageNet classification He, K. et al. (2015)<br>该方法集合He initialization，简单思想是：在Relu网络中，假定每一层有一半的神经元被激活，另一半为0，所有，要保持方差不变，只需要在Xavier的基础上再除以2。<br>针对Relu的激活函数，基本使用He initialization。</p>
+<h1><span id="2-激活函数">2. 激活函数</span></h1><p>（1）在权重更新的时候，需要计算前层的偏导信息，因此如果激活函数选择的不合适，比如sigmoid，梯度消失的很明显。因为sigmoid的导数不会超过0.25，经过链式求导，很容易出现梯度消失。<br><img src="/2019/07/16/梯度爆炸和衰减/sigmoid.png" alt=""><br>（2）tanh比sigmoid好一些，但是它的导数仍然小于1<br><img src="/2019/07/16/梯度爆炸和衰减/tanh.png" alt="">    </p>
+<h1><span id="3-初始化缓解梯度消失和爆炸">3. 初始化缓解梯度消失和爆炸</span></h1><p>使用Xavier初始化：基本思想是通过网络层时，输出和输出的方差相同。Xavier在tanh中表现很好，但在Relu激活函数中表现很差。<br>何凯明提出了针对Relu的初始化方法<br>Delving deep into rectifiers: Surpassing human-level performance on ImageNet classification He, K. et al. (2015)<br>该方法集合He initialization，简单思想是：在Relu网络中，假定每一层有一半的神经元被激活，另一半为0，所有，要保持方差不变，只需要在Xavier的基础上再除以2。<br>针对Relu的激活函数，基本使用He initialization。</p>
 <ul>
 <li>Xavier初始化：tanh，sigmoid激活函数</li>
 <li>He初始化：Relu激活函数</li>
 </ul>
-<h1><span id="如何判断出现梯度爆炸">如何判断出现梯度爆炸</span></h1><p>当出现以下信号时，说明出现了梯度爆炸：</p>
+<h1><span id="4-如何判断出现梯度爆炸">4. 如何判断出现梯度爆炸</span></h1><p>当出现以下信号时，说明出现了梯度爆炸：</p>
 <ol>
 <li>训练过程中，每个节点和层的权重梯度连续大于1</li>
 <li>模型不稳定，梯度显著变化，快速变大</li>
 <li>训练过程中，权重变成了Nan</li>
 <li>权重无法从训练数据中更新</li>
 </ol>
-<h1><span id="如何解决梯度爆炸">如何解决梯度爆炸</span></h1><ol>
+<h1><span id="5-如何解决梯度爆炸">5. 如何解决梯度爆炸</span></h1><ol>
 <li>梯度剪切<br>此方法针对梯度爆炸提出来的，基本思想是设置一个梯度剪切阈值，然后更新梯度的时候，如果梯度超过了这个阈值，就强制限制在这个范围之，这可以防止梯度爆炸。</li>
 <li>权重正则化<br>比较常见的是L1正则化和L2正则化。正则化是通过对网络权重做正则化限制过拟合<br><img src="/2019/07/16/梯度爆炸和衰减/reg.png" alt="">    </li>
 <li><p>Relu，LeakRelu激活函数<br>如果激活函数的导数为1，就不存在梯度爆炸的问题了。每层网络都可以得到相同的更新速度。在深层网络中使用relu激活函数不会导致梯度消失和爆炸的情况。<br><img src="/2019/07/16/梯度爆炸和衰减/relu.png" alt=""></p>
@@ -1097,9 +1179,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>Deep Learning</category>
       </categories>
       <tags>
+        <tag>梯度</tag>
         <tag>反向传播</tag>
-        <tag>梯度爆炸</tag>
-        <tag>梯度衰减</tag>
       </tags>
   </entry>
   <entry>
@@ -1114,7 +1195,7 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>Dataset</category>
       </categories>
       <tags>
-        <tag>交通领域数据源</tag>
+        <tag>时空领域</tag>
       </tags>
   </entry>
   <entry>
@@ -1140,9 +1221,7 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>论文阅读笔记</category>
       </categories>
       <tags>
-        <tag>spatial-temporal</tag>
-        <tag>ResNet</tag>
-        <tag>Crowd Flows Prediction</tag>
+        <tag>时空领域</tag>
       </tags>
   </entry>
   <entry>
@@ -1182,7 +1261,6 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>Java</category>
       </categories>
       <tags>
-        <tag>JVM</tag>
         <tag>Tomcat</tag>
       </tags>
   </entry>
@@ -1352,7 +1430,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>论文阅读笔记</category>
       </categories>
       <tags>
-        <tag>Abnomaly Event Forecasting</tag>
+        <tag>时空领域</tag>
+        <tag>异常检测</tag>
       </tags>
   </entry>
   <entry>
@@ -1505,7 +1584,6 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
       </categories>
       <tags>
         <tag>Docker</tag>
-        <tag>镜像</tag>
       </tags>
   </entry>
   <entry>
@@ -1544,8 +1622,6 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>Python</category>
       </categories>
       <tags>
-        <tag>Centos</tag>
-        <tag>matplotlib</tag>
         <tag>中文乱码</tag>
       </tags>
   </entry>
@@ -1610,17 +1686,12 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> mxnet <span class="keyword">as</span> mx</span><br><span class="line"><span class="keyword">from</span> mxnet <span class="keyword">import</span> nd   </span><br><span class="line">z = nd.ones(shape=(<span class="number">3</span>, <span class="number">3</span>), ctx=mx.gpu(<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
 <p> 然后我创建了一个screen，在这个screen中<code>source activate mxnet</code>启动虚拟环境，然后使用python运行以上相同的代码，却出错。</p>
  <figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">OSError: libcudart.so<span class="number">.10</span><span class="number">.0</span>: cannot <span class="built_in">open</span> shared  object <span class="built_in">file</span>: No such <span class="built_in">file</span> <span class="keyword">or</span> <span class="built_in">directory</span></span><br></pre></td></tr></table></figure>
+<p> 查了资料解决方案如下：<br> 按Ctrl+A+D退出screen。然后查看.bashrc的内容，原先是</p>
+<p> <img src="/2019/04/27/虚拟环境安装/bashrc1.png" alt=""></p>
+<p> 将其修改如下：修改完之后使用<code>source .bashrc</code>激活<br> 当有多个PATH时，中间使用冒号拼接。<br> <img src="/2019/04/27/虚拟环境安装/bashrc2.png" alt=""><br> 然后再screen，再次运行上述的python代码成功。</p>
 </li>
-</ol>
-<pre><code>查了资料解决方案如下：
-按Ctrl+A+D退出screen。然后查看.bashrc的内容，原先是   
-![](虚拟环境安装/bashrc1.png)        
-将其修改如下：修改完之后使用`source .bashrc`激活   
-当有多个PATH时，中间使用冒号拼接。
-![](虚拟环境安装/bashrc2.png)    
-然后再screen，再次运行上述的python代码成功。 
-</code></pre><ol>
-<li>cuda版本出错<br>查看系统cuda的版本，安装对应版本的深度学习框架<br><code>cat /usr/local/cuda/version.txt</code>如果安装错了，先使用<code>pip uninstall mxnet-cu100</code>，删除原先的mxnet，然后再使用<code>pip install mxnet-cu101</code>安装对应的版本.</li>
+<li><p>cuda版本出错<br>查看系统cuda的版本，安装对应版本的深度学习框架<br><code>cat /usr/local/cuda/version.txt</code>如果安装错了，先使用<code>pip uninstall mxnet-cu100</code>，删除原先的mxnet，然后再使用<code>pip install mxnet-cu101</code>安装对应的版本.</p>
+</li>
 </ol>
 ]]></content>
       <categories>
@@ -1752,9 +1823,7 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>Machine Learning</category>
       </categories>
       <tags>
-        <tag>特征预处理</tag>
-        <tag>模型评估</tag>
-        <tag>网格搜索</tag>
+        <tag>machine learning</tag>
       </tags>
   </entry>
   <entry>
@@ -1830,25 +1899,36 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <li>—executor-core NUM，表示每个executor的核数</li>
 <li><strong>—total-executor-cores NUM</strong>,所有的executor占用的核数。使用total-executor-cores / executor-core得到executor的个数，假设total-executor-cores设置为30，executor-core为6，则表示运行这个程序一共有5个executor，分别在不同worker上。一个worker可以有多个executor。 假设有5个executor，2个worker，那么一个worker上有多个executor。如果不指定—total-executor-cores，程序会把worker上的核全都占用，这样别人提交程序的时候就没有办法运行。<br>&ensp;&ensp;&ensp;&ensp;运行一个程序的命令：spark-submit —master spark://hz4:7077  —executor-memory 4G —executor-cores 6 —total-executor-cores 30 —jars ../jars/spark-examples_2.10_my_converters-1.6.0.jar spark_streaming.py</li>
 </ul>
-<h2><span id="22-yarn模式">2.2. Yarn模式</span></h2><p>&ensp;&ensp;&ensp;&ensp;yarn模式可以用的参数有：<br>—master yarn<br>—jars xxx1.jar,xxx2.jar<br><strong>—num-executors NUM</strong>, 启动的executor的个数，默认为2，不要使用默认，会很慢。在yarn中使用。yarn资源管理器会在不同的worker上分配executor给程序。<br>—executor-memory MEM,每个executor占用的内存，如果一个executor占用4G，有5个executor，那这个程序占用20G<br>—executor-core NUM，表示每个executor的核数，如果有5个executor，每个executor占用4G，那这个程序运行时占用20G内存。<br>&ensp;&ensp;&ensp;&ensp;运行一个程序的命令：spark-submit —master yarn —num-executors 20 —executor-memory 4G —executor-cores 4 —jars ../jars/spark-examples_2.10_my_converters-1.6.0.jar spark_streaming.py</p>
-<h2><span id="23-参数调优">2.3. 参数调优</span></h2><ul>
-<li>num-executors：该参数用于设置Spark作业总共要用多少个Executor进程来执行,Driver在向YARN集群管理器申请资源时，YARN集群管理器会尽可能按照你的设置来在<br>集群的各个工作节点上，启动相应数量的Executor进程。</li>
-</ul>
-<p><strong>参数调优建议</strong>：<br>每个Spark作业的运行一般设置50~100个左右的Executor进程比较合适，设置太少或太多的Executor进程都不好。设置的太少，无法充分利用集群资源；<br>设置的太多的话，大部分队列可能无法给予充分的资源。</p>
+<h2><span id="22-yarn模式">2.2. Yarn模式</span></h2><p>&ensp;&ensp;&ensp;&ensp;yarn模式可以用的参数有：</p>
 <ul>
+<li>—master yarn</li>
+<li>—jars xxx1.jar,xxx2.jar</li>
+<li><strong>—num-executors NUM</strong>, 启动的executor的个数，默认为2，不要使用默认，会很慢。在yarn中使用。yarn资源管理器会在不同的worker上分配executor给程序。</li>
+<li>—executor-memory MEM,每个executor占用的内存，如果一个executor占用4G，有5个executor，那这个程序占用20G </li>
+<li>—executor-core NUM，表示每个executor的核数，如果有5个executor，每个executor占用4G，那这个程序运行时占用20G内存。<br>运行一个程序的命令：<code>spark-submit --master yarn --num-executors 20 --executor-memory 4G --executor-cores 4 --jars ../jars/spark-examples_2.10_my_converters-1.6.0.jar spark_streaming.py</code></li>
+</ul>
+<h2><span id="23-参数调优">2.3. 参数调优</span></h2><ul>
+<li><p>num-executors：该参数用于设置Spark作业总共要用多少个Executor进程来执行,Driver在向YARN集群管理器申请资源时，YARN集群管理器会尽可能按照你的设置来在<br>集群的各个工作节点上，启动相应数量的Executor进程。<br><strong>参数调优建议</strong>：<br>每个Spark作业的运行一般设置50~100个左右的Executor进程比较合适，设置太少或太多的Executor进程都不好。设置的太少，无法充分利用集群资源；<br>设置的太多的话，大部分队列可能无法给予充分的资源。</p>
+</li>
 <li><p>executor-memory：该参数用于设置每个Executor进程的内存。Executor内存的大小，很多时候直接决定了Spark作业的性能，而且跟常见的JVM OOM异常，也有直接的关联。<br><strong>参数调优建议</strong>：<br>每个Executor进程的内存设置4G~8G较为合适。但是这只是一个参考值，具体的设置还是得根据不同部门的资源队列来定。可以看看自己团队的资源队列<br>的最大内存限制是多少，num-executors乘以executor-memory，是不能超过队列的最大内存量的。此外，如果你是跟团队里其他人共享这个资源队列，<br>那么申请的内存量最好不要超过资源队列最大总内存的1/3~1/2，避免你自己的Spark作业占用了队列所有的资源，导致别的同学的作业无法运行。</p>
 </li>
 <li><p>executor-cores：该参数用于设置每个Executor进程的CPU core数量。这个参数决定了每个Executor进程并行执行task线程的能力。因为每个CPU core同一时间只能执行一个<br>task线程，因此每个Executor进程的CPU core数量越多，越能够快速地执行完分配给自己的所有task线程。<br><strong>参数调优建议</strong>：<br>Executor的CPU core数量设置为2~4个较为合适。同样得根据不同部门的资源队列来定，可以看看自己的资源队列的最大CPU core限制是多少，再依据设置的<br>Executor数量，来决定每个Executor进程可以分配到几个CPU core。同样建议，如果是跟他人共享这个队列，那么num-executors * executor-cores不要超过<br>队列总CPU core的1/3~1/2左右比较合适，也是避免影响其他同学的作业运行。  </p>
 </li>
-<li>driver-memory：该参数用于设置Driver进程的内存。</li>
-</ul>
-<p><strong>参数调优建议</strong>：<br>Driver的内存通常来说不设置，或者设置1G左右应该就够了。唯一需要注意的一点是，如果需要使用collect算子将RDD的数据全部拉取到Driver上进行处理，<br>那么必须确保Driver的内存足够大，否则会出现OOM内存溢出的问题。</p>
-<ul>
-<li>—conf spark.default.parallelism：该参数用于设置每个stage的默认task数量。这个参数极为重要，如果不设置可能会直接影响你的Spark作业性能。<br><strong>参数调优建议</strong>：<br>Spark作业的默认task数量为500~1000个较为合适。很多同学常犯的一个错误就是不去设置这个参数，那么此时就会导致Spark自己根据底层HDFS的block数量<br>来设置task的数量，默认是一个HDFS block对应一个task。通常来说，Spark默认设置的数量是偏少的（比如就几十个task），如果task数量偏少的话，就会<br>导致你前面设置好的Executor的参数都前功尽弃。试想一下，无论你的Executor进程有多少个，内存和CPU有多大，但是task只有1个或者10个，那么90%的<br>Executor进程可能根本就没有task执行，也就是白白浪费了资源！因此Spark官网建议的设置原则是，设置该参数为num-executors * executor-cores的2~3倍<br>较为合适，比如Executor的总CPU core数量为300个，那么设置1000个task是可以的，此时可以充分地利用Spark集群的资源。</li>
+<li><p>driver-memory：该参数用于设置Driver进程的内存。<br><strong>参数调优建议</strong>：<br>Driver的内存通常来说不设置，或者设置1G左右应该就够了。唯一需要注意的一点是，如果需要使用collect算子将RDD的数据全部拉取到Driver上进行处理，<br>那么必须确保Driver的内存足够大，否则会出现OOM内存溢出的问题。</p>
+</li>
+<li><p>—conf spark.default.parallelism：该参数用于设置每个stage的默认task数量。这个参数极为重要，如果不设置可能会直接影响你的Spark作业性能。<br><strong>参数调优建议</strong>：<br>Spark作业的默认task数量为500~1000个较为合适。很多同学常犯的一个错误就是不去设置这个参数，那么此时就会导致Spark自己根据底层HDFS的block数量<br>来设置task的数量，默认是一个HDFS block对应一个task。通常来说，Spark默认设置的数量是偏少的（比如就几十个task），如果task数量偏少的话，就会<br>导致你前面设置好的Executor的参数都前功尽弃。试想一下，无论你的Executor进程有多少个，内存和CPU有多大，但是task只有1个或者10个，那么90%的<br>Executor进程可能根本就没有task执行，也就是白白浪费了资源！因此Spark官网建议的设置原则是，设置该参数为num-executors * executor-cores的2~3倍<br>较为合适，比如Executor的总CPU core数量为300个，那么设置1000个task是可以的，此时可以充分地利用Spark集群的资源。</p>
+</li>
 </ul>
 <h2><span id="24-executor">2.4. Executor</span></h2><p>&ensp;&ensp;&ensp;&ensp;在运行pyspark程序时出错：   Container killed by YARN for exceeding memory limits. 16.9 GB of 16 GB physical memory used. Consider boosting spark.yarn.executor.memoryOverhead”这个错误总会使你的job夭折。它的意思是：因为超出内存限制，集群停掉了container。<br>Spark的Excutor的Container内存有两大部分组成：Excutor内存和堆外内存</p>
 <p><img src="/2019/04/20/pyspark/executor.png" alt=""></p>
-<p>Spark底层shuffle的传输方式是使用netty传输，netty在进行网络传输的过程会申请堆外内存（netty是零拷贝），所以使用了堆外内存，即spark.yarn.executor.memoryOverhead。<br><strong>Executor内存</strong><br>又spark.executor.memory参数设置，在spark-shell中由—executor-memory指定，分为2部分，shuffle.memoryFraction和storage.memoryFraction。<br><strong>spark.shuffle.memoryFractio</strong><br>该参数用于设置shuffle过程中一个task拉取到上个stage的task的输出后，进行聚合操作时能够使用的Executor内存的比例，默认是0.2。也就是说，Executor默认只有20%的内存用来进行该操作。shuffle操作在进行聚合时，如果发现使用的内存超出了这个20%的限制，那么多余的数据就会溢写到磁盘文件中去，此时就会极大地降低性能。<br><strong>参数调优</strong><br>如果Spark作业中的RDD持久化操作较少，shuffle操作较多时，建议降低持久化操作的内存占比，提高shuffle操作的内存占比比例，避免shuffle过程中数据过多时内存不够用，必须溢写到磁盘上，降低了性能。此外，如果发现作业由于频繁的gc导致运行缓慢，意味着task执行用户代码的内存不够用，那么同样建议调低这个参数的值。<br><strong>spark.storage.memoryFractio</strong><br>该参数用于设置RDD持久化数据在Executor内存中能占的比例，默认是0.6。也就是说，默认Executor 60%的内存，可以用来保存持久化的RDD数据。根据你选择的不同的持久化策略，如果内存不够时，可能数据就不会持久化，或者数据会写入磁盘。<br><strong>参数调优</strong><br>如果Spark作业中，有较多的RDD持久化操作，该参数的值可以适当提高一些，保证持久化的数据能够容纳在内存中。避免内存不够缓存所有的数据，导致数据只能写入磁盘中，降低了性能。但是如果Spark作业中的shuffle类操作比较多，而持久化操作比较少，那么这个参数的值适当降低一些比较合适。此外，如果发现作业由于频繁的gc导致运行缓慢（通过spark web ui可以观察到作业的gc耗时），意味着task执行用户代码的内存不够用，那么同样建议调低这个参数的值。<br><strong>spark.yarn.executor.memoryOverhead</strong><br>executor执行的时候，用的内存可能会超过executor-memoy，所以会为executor额外预留一部分内存。spark.yarn.executor.memoryOverhead代表了这部分内存。这个参数如果没有设置，会有一个自动计算公式(位于ClientArguments.scala中)，代码如下：<br>其中，MEMORY_OVERHEAD_FACTOR默认为0.1，executorMemory为设置的executor-memory, MEMORY_OVERHEAD_MIN默认为384m。参数MEMORY_OVERHEAD_FACTOR和MEMORY_OVERHEAD_MIN一般不能直接修改，是Spark代码中直接写死的。</p>
+<p>Spark底层shuffle的传输方式是使用netty传输，netty在进行网络传输的过程会申请堆外内存（netty是零拷贝），所以使用了堆外内存，即spark.yarn.executor.memoryOverhead。<br><strong>Executor内存</strong><br>又spark.executor.memory参数设置，在spark-shell中由—executor-memory指定，分为2部分，shuffle.memoryFraction和storage.memoryFraction。  </p>
+<ul>
+<li><p><strong>spark.shuffle.memoryFractio</strong><br>该参数用于设置shuffle过程中一个task拉取到上个stage的task的输出后，进行聚合操作时能够使用的Executor内存的比例，默认是0.2。也就是说，Executor默认只有20%的内存用来进行该操作。shuffle操作在进行聚合时，如果发现使用的内存超出了这个20%的限制，那么多余的数据就会溢写到磁盘文件中去，此时就会极大地降低性能。<br><strong>参数调优</strong><br>如果Spark作业中的RDD持久化操作较少，shuffle操作较多时，建议降低持久化操作的内存占比，提高shuffle操作的内存占比比例，避免shuffle过程中数据过多时内存不够用，必须溢写到磁盘上，降低了性能。此外，如果发现作业由于频繁的gc导致运行缓慢，意味着task执行用户代码的内存不够用，那么同样建议调低这个参数的值。</p>
+</li>
+<li><p><strong>spark.storage.memoryFractio</strong><br>该参数用于设置RDD持久化数据在Executor内存中能占的比例，默认是0.6。也就是说，默认Executor 60%的内存，可以用来保存持久化的RDD数据。根据你选择的不同的持久化策略，如果内存不够时，可能数据就不会持久化，或者数据会写入磁盘。<br><strong>参数调优</strong><br>如果Spark作业中，有较多的RDD持久化操作，该参数的值可以适当提高一些，保证持久化的数据能够容纳在内存中。避免内存不够缓存所有的数据，导致数据只能写入磁盘中，降低了性能。但是如果Spark作业中的shuffle类操作比较多，而持久化操作比较少，那么这个参数的值适当降低一些比较合适。此外，如果发现作业由于频繁的gc导致运行缓慢（通过spark web ui可以观察到作业的gc耗时），意味着task执行用户代码的内存不够用，那么同样建议调低这个参数的值。</p>
+</li>
+<li><strong>spark.yarn.executor.memoryOverhead</strong><br>executor执行的时候，用的内存可能会超过executor-memoy，所以会为executor额外预留一部分内存。spark.yarn.executor.memoryOverhead代表了这部分内存。这个参数如果没有设置，会有一个自动计算公式(位于ClientArguments.scala中)，代码如下：<br>其中，MEMORY_OVERHEAD_FACTOR默认为0.1，executorMemory为设置的executor-memory, MEMORY_OVERHEAD_MIN默认为384m。参数MEMORY_OVERHEAD_FACTOR和MEMORY_OVERHEAD_MIN一般不能直接修改，是Spark代码中直接写死的。</li>
+</ul>
 <p>关于Executor 计算的相关公式，见源码org.apache.spark.deploy.yarn.Clent，org.apache.spark.deploy.yarn.ClentArguments<br>主要部分如下</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">var executorMemory = <span class="number">1024</span> // 默认值，<span class="number">1024</span>MB</span><br><span class="line">val MEMORY_OVERHEAD_FACTOR = <span class="number">0.10</span>  // OverHead 比例参数，默认<span class="number">0.1</span></span><br><span class="line">val MEMORY_OVERHEAD_MIN = <span class="number">384</span></span><br><span class="line"></span><br><span class="line">val executorMemoryOverhead = sparkConf.getInt(<span class="string">"spark.yarn.executor.memoryOverhead"</span>,</span><br><span class="line">math.max((MEMORY_OVERHEAD_FACTOR * executorMemory).toInt, MEMORY_OVERHEAD_MIN))</span><br><span class="line">// 假设有设置参数，即获取参数，否则使用executorMemoryOverhead 的默认值</span><br><span class="line">val executorMem = args.executorMemory + executorMemoryOverhead</span><br><span class="line">// 最终分配的executor 内存为 两部分的和</span><br></pre></td></tr></table></figure>
 <p><strong>解决方案</strong></p>
@@ -1928,7 +2008,6 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
       <tags>
         <tag>Python</tag>
         <tag>Spark</tag>
-        <tag>分布式调优</tag>
       </tags>
   </entry>
   <entry>
@@ -2006,25 +2085,52 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <li>np.cumprod()，返回累乘积值<br>注意：在使用以上这些函数时，需要指定axis的方向，若不指定，默认统计整个数组。axis=0表示列，axis=1表示行。一般axis=0比较符合实际情况。</li>
 </ul>
 <p><img src="/2019/04/15/Python学习/max.png" alt=""></p>
-<h1><span id="5-pandas">5. Pandas</span></h1><p>&ensp;&ensp;&ensp;&ensp; DataFrame根据某一列排序，其中inplace=True表示修改df的值，默认是false，表示不修改df的值，会返回一个排好序的DataFrame。<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">排好序的dataframe的index列还是原先dataframe的index。比如下面的图是排序之间的dataframe</span><br><span class="line"></span><br><span class="line">![](Python学习/排序前.png)</span><br><span class="line"></span><br><span class="line">使用```df.sort_values(&quot;数据时间&quot;,inplace=True)```  按照时间排序，但是index还是原先的index，我想让排序后的dataframe的index从0开始。</span><br><span class="line"></span><br><span class="line">![](Python学习/排序后.png)</span><br><span class="line"></span><br><span class="line">```df[2:4]```表示返回第3和4行的数据，即索引为3731，512这2行的数据，而不是返回索引为2和3的数据。</span><br><span class="line">使用```sort_df.reset_index(drop=True, inplace=True)``` 重新定义索引，使其从0开始。</span><br><span class="line"></span><br><span class="line">![](Python学习/reindex.png)</span><br><span class="line"></span><br><span class="line">获取dataframe中的索引  </span><br><span class="line">`firstIndex = df.index.tolist()`  返回一个list，存储的是dataframe中的索引列表。</span><br><span class="line">`firstIndex = df.index.tolist()[0] ` 返回的是第一行数据的索引   </span><br><span class="line">`firstIndex = df.index.tolist()[-1]` 返回的是最后一行数据的索引</span><br><span class="line"></span><br><span class="line">## 获取dataframe中的数据</span><br><span class="line"></span><br><span class="line">![](Python学习/1.png)</span><br><span class="line"></span><br><span class="line">1. ```df[1:4]```表示获取表的第2至4行</span><br><span class="line"></span><br><span class="line">![](Python学习/2.png)</span><br><span class="line"></span><br><span class="line">2. df.head()默认返回dataframe中的前5行，如果返回前10行，使用head(10).</span><br><span class="line"></span><br><span class="line">![](Python学习/3.png)</span><br><span class="line"></span><br><span class="line">3. 使用```df.iloc[]```和```df.loc[]```获取数据。</span><br><span class="line"></span><br><span class="line">![](Python学习/4.png)</span><br><span class="line"></span><br><span class="line">![](Python学习/5.png)</span><br><span class="line"></span><br><span class="line">通过  ```df.iloc[]```传入的参数是数据，而```df.loc[]```传入的参数是字符串索引，除非索引是数字，这时loc[]可以传入数字。  </span><br><span class="line">比如df1.loc[2]表示获取索引为&apos;2&apos;的那一行，而df.iloc[2]表示获取df1的第3行数据，是一个相对位置。  </span><br><span class="line">参考资料：  </span><br><span class="line">[https://www.jb51.net/article/141665.htm](https://www.jb51.net/article/141665.htm)</span><br><span class="line"></span><br><span class="line">## DateFrame常用方法</span><br><span class="line"></span><br><span class="line">- 获取df中某一列特征值的个数   </span><br><span class="line">`credit_df[&apos;Class&apos;].value_counts()`或</span><br><span class="line">`credit_df[&apos;Class&apos;].value_counts()[0]`</span><br><span class="line">- 显示df中的详细信息</span><br><span class="line">`df.info()`</span><br><span class="line">`df.describe()`</span><br><span class="line">- 获取df中的所有列名</span><br><span class="line">`col_names = list(df.columns.values)`</span><br><span class="line">- 将df按照某一特征进行分组</span><br><span class="line">`df.groupby([&apos;total_vol&apos;]).size()`获取每个组中元素的个数   </span><br><span class="line">`df.groupby([&apos;total_vol&apos;,&apos;soc&apos;]).size()`按照多个属性分组</span><br><span class="line">- 从df中获取样本的特征和标签</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">获取特征</span><br><span class="line">X = df.drop(&quot;误报&quot;,axis = 1)</span><br><span class="line">获取标签</span><br><span class="line">Y = df[&quot;误报&quot;]</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>获取df中的一列或多列</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">one_col = df[<span class="string">'total_vol'</span>]</span><br><span class="line">multi_cols_name = [<span class="string">'total_vol'</span>,<span class="string">'soc'</span>,<span class="string">'cur'</span>]   </span><br><span class="line">multi_cols = df[multi_cols_name]</span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看df中为空的个数,输出每一列为nan的个数<br><code>df.isna().sum()</code></li>
+<h1><span id="5-pandas">5. Pandas</span></h1><p>&ensp;&ensp;&ensp;&ensp; DataFrame根据某一列排序，其中inplace=True表示修改df的值，默认是false，表示不修改df的值，会返回一个排好序的DataFrame。<br><code>df.sort_values(&quot;数据时间&quot;,inplace=True)</code></p>
+<p>排好序的dataframe的index列还是原先dataframe的index。比如下面的图是排序之间的dataframe</p>
+<p><img src="/2019/04/15/Python学习/排序前.png" alt=""></p>
+<p>使用<code>df.sort_values(&quot;数据时间&quot;,inplace=True)</code>按照时间排序，但是index还是原先的index，我想让排序后的dataframe的index从0开始。</p>
+<p><img src="/2019/04/15/Python学习/排序后.png" alt=""></p>
+<p><code>df[2:4]</code>表示返回第3和4行的数据，即索引为3731，512这2行的数据，而不是返回索引为2和3的数据。<br>使用<code>sort_df.reset_index(drop=True, inplace=True)</code> 重新定义索引，使其从0开始。</p>
+<p><img src="/2019/04/15/Python学习/reindex.png" alt=""></p>
+<p>获取dataframe中的索引<br><code>firstIndex = df.index.tolist()</code>  返回一个list，存储的是dataframe中的索引列表。<br><code>firstIndex = df.index.tolist()[0]</code> 返回的是第一行数据的索引<br><code>firstIndex = df.index.tolist()[-1]</code> 返回的是最后一行数据的索引</p>
+<h2><span id="获取dataframe中的数据">获取dataframe中的数据</span></h2><p><img src="/2019/04/15/Python学习/1.png" alt=""></p>
+<ol>
+<li><p><code>df[1:4]</code>表示获取表的第2至4行<br><img src="/2019/04/15/Python学习/2.png" alt=""></p>
+</li>
+<li><p>df.head()默认返回dataframe中的前5行，如果返回前10行，使用head(10)<br><img src="/2019/04/15/Python学习/3.png" alt=""></p>
+</li>
+<li><p>使用<code>df.iloc[]</code>和<code>df.loc[]</code>获取数据。<br><img src="/2019/04/15/Python学习/4.png" alt=""><br><img src="/2019/04/15/Python学习/5.png" alt=""></p>
+</li>
+</ol>
+<p>通过 <code>df.iloc[]</code>传入的参数是数据，而<code>df.loc[]</code>传入的参数是字符串索引，除非索引是数字，这时loc[]可以传入数字。<br>比如df1.loc[2]表示获取索引为’2’的那一行，而df.iloc[2]表示获取df1的第3行数据，是一个相对位置。<br>参考资料：<br><a href="https://www.jb51.net/article/141665.htm" target="_blank" rel="noopener">https://www.jb51.net/article/141665.htm</a></p>
+<h2><span id="dateframe常用方法">DateFrame常用方法</span></h2><ul>
+<li>获取df中某一列特征值的个数<br><code>credit_df[&#39;Class&#39;].value_counts()</code>或<br><code>credit_df[&#39;Class&#39;].value_counts()[0]</code></li>
+<li>显示df中的详细信息<br><code>df.info()</code><br><code>df.describe()</code></li>
+<li>获取df中的所有列名<br><code>col_names = list(df.columns.values)</code></li>
+<li>将df按照某一特征进行分组<br><code>df.groupby([&#39;total_vol&#39;]).size()</code>获取每个组中元素的个数<br><code>df.groupby([&#39;total_vol&#39;,&#39;soc&#39;]).size()</code>按照多个属性分组</li>
+<li><p>从df中获取样本的特征和标签</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#获取特征</span></span><br><span class="line">X = df.drop(<span class="string">"误报"</span>,axis = <span class="number">1</span>)</span><br><span class="line"><span class="comment">#获取标签</span></span><br><span class="line">Y = df[<span class="string">"误报"</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取df中的一列或多列</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">one_col = df[<span class="string">'total_vol'</span>]</span><br><span class="line">multi_cols_name = [<span class="string">'total_vol'</span>,<span class="string">'soc'</span>,<span class="string">'cur'</span>]</span><br><span class="line">multi_cols = df[multi_cols_name]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看df中为空的个数,输出每一列为nan的个数<br><code>df.isna().sum()</code></p>
+</li>
 </ul>
 <h1><span id="dict">Dict</span></h1><p>python创建一个字典有3中方式</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dict</span><span class="params">(**kwarg)</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">dict</span><span class="params">(mapping,**kwarg)</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">dict</span><span class="params">(iterable,**kwarg)</span></span></span><br></pre></td></tr></table></figure>
-<p>其中<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- class dict(**kwarg)  </span><br><span class="line">通过关键字参数创建一个字典，例如</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">d = dict(name=&apos;Tom&apos;,age=23)</span><br><span class="line">out: &#123;&apos;age&apos;: 23, &apos;name&apos;: &apos;Tom&apos;&#125;</span><br><span class="line"></span><br><span class="line">d = dict(a = 12, b = 13, c = 15)  </span><br><span class="line">out: &#123;&apos;a&apos;: 12, &apos;b&apos;: 13, &apos;c&apos;: 15&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中<code>**kwarg</code>是python中可变参数，代表关键字参数，允许你传入0个或任意多个含参数名的参数，这个关键字参数在函数内部自动组装成一个dict。</p>
 <ul>
-<li>class dict(mapping,<strong>kwarg)<br>通过从一个映射函数对象中构造一个新字典，与dict(</strong>kwarg)函数不一样的地方是参数输入是一个映射类型的函数对象，比如zip函数，map函数</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">以映射函数方式来构造字典</span><br><span class="line">d2 = dict(zip([<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three'</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]))  </span><br><span class="line">out: &#123;<span class="string">'one'</span>: <span class="number">1</span>, <span class="string">'three'</span>: <span class="number">3</span>, <span class="string">'two'</span>: <span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>class dict(iterable,**kwarg)<br>其中iterable表示可迭代对象，可迭代对象可以使用for…in…来遍历，在Pytohn中list，tuple，str，dict，set等都是可迭代对象。创建dict时如果传入的是可迭代对象，则可迭代对象中每一项自身必须是可迭代的，并且每一项只能由有2个对象，第一个对象称为字典的key，第二个对象为key对应的value。如果key有重复，其value为最后重复项的值</li>
-</ul>
+<li><p>class dict(**kwarg)<br>通过关键字参数创建一个字典，例如</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d = dict(name=<span class="string">'Tom'</span>,age=<span class="number">23</span>)</span><br><span class="line">out: &#123;<span class="string">'age'</span>: <span class="number">23</span>, <span class="string">'name'</span>: <span class="string">'Tom'</span>&#125;</span><br><span class="line"></span><br><span class="line">d = dict(a = <span class="number">12</span>, b = <span class="number">13</span>, c = <span class="number">15</span>)  </span><br><span class="line">out: &#123;<span class="string">'a'</span>: <span class="number">12</span>, <span class="string">'b'</span>: <span class="number">13</span>, <span class="string">'c'</span>: <span class="number">15</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>class dict(mapping,<strong>kwarg)<br>通过从一个映射函数对象中构造一个新字典，与dict(</strong>kwarg)函数不一样的地方是参数输入是一个映射类型的函数对象，比如zip函数，map函数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#以映射函数方式来构造字典</span></span><br><span class="line">d2 = dict(zip([<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three'</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]))  </span><br><span class="line">out: &#123;<span class="string">'one'</span>: <span class="number">1</span>, <span class="string">'three'</span>: <span class="number">3</span>, <span class="string">'two'</span>: <span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>class dict(iterable,**kwarg)<br>其中iterable表示可迭代对象，可迭代对象可以使用for…in…来遍历，在Pytohn中list，tuple，str，dict，set等都是可迭代对象。创建dict时如果传入的是可迭代对象，则可迭代对象中每一项自身必须是可迭代的，并且每一项只能由有2个对象，第一个对象称为字典的key，第二个对象为key对应的value。如果key有重复，其value为最后重复项的值</p>
 <p><img src="/2019/04/15/Python学习/dict.png" alt=""></p>
+</li>
+</ul>
 <h1><span id="函数参数">函数参数</span></h1><p>&ensp;&ensp;&ensp;&ensp;在python中定义一个函数，可以传入4种参数：<br>位置参数，默认参数，关键字参数，可变参数</p>
 <h2><span id="位置参数">位置参数</span></h2><p>普通的参数，参数之间是有顺序的， 顺序不能写错</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">power</span><span class="params">(x, n)</span>:</span></span><br><span class="line">    s = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line">        n = n - <span class="number">1</span></span><br><span class="line">        s = s * x</span><br><span class="line">    <span class="keyword">return</span> s</span><br></pre></td></tr></table></figure>
@@ -2095,46 +2201,84 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <table>
 <thead>
 <tr>
-<th></th>
 <th>组件</th>
 <th>版本</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td></td>
 <td>CenOS</td>
 <td>CenOS7</td>
-<td></td>
 </tr>
 <tr>
-<td></td>
 <td>JDK</td>
 <td>JDK1.8</td>
-<td></td>
 </tr>
 <tr>
-<td></td>
 <td>CDH集群</td>
 <td>CDH5.7.2</td>
-<td></td>
 </tr>
 <tr>
-<td></td>
 <td>CDH-kafka</td>
 <td>CDH-kafka1.2.0</td>
-<td></td>
 </tr>
 <tr>
-<td></td>
 <td>Python</td>
 <td>Python3.5</td>
-<td></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>现在实验室的cdh集群版本是CDH5.7.2,其中每个组件的版本是<br>| 组件 | CDH5.7.2|CDH5.16.1|<br>-|-|-|-<br>|Hadoop|2.6.0|2.6.0|<br>|HDFS|2.6.0|2.6.0|<br>|HBase|1.2.0|1.2.0|<br>|Hive|1.1.0|1.1.0|<br>|Spark|1.6.0|1.6.0|<br>|Kafka|0.10.0|0.10.0|<br>|Zookeeper|3.4.5|3.4.5|<br>以后安装CDH集群，应该安装CDH5.16.1版本</p>
+<p>现在实验室的cdh集群版本是CDH5.7.2,其中每个组件的版本是</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>CDH5.7.2</th>
+<th>CDH5.16.1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hadoop</td>
+<td>2.6.0</td>
+<td>2.6.0</td>
+</tr>
+<tr>
+<td>HDFS</td>
+<td>2.6.0</td>
+<td>2.6.0</td>
+</tr>
+<tr>
+<td>HBase</td>
+<td>1.2.0</td>
+<td>1.2.0</td>
+</tr>
+<tr>
+<td>Hive</td>
+<td>1.1.0</td>
+<td>1.1.0</td>
+</tr>
+<tr>
+<td>Spark</td>
+<td>1.6.0</td>
+<td>1.6.0</td>
+</tr>
+<tr>
+<td>Kafka</td>
+<td>0.10.0</td>
+<td>0.10.0</td>
+</tr>
+<tr>
+<td>Zookeeper</td>
+<td>3.4.5</td>
+<td>3.4.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>以后安装CDH集群，应该安装CDH5.16.1版本</p>
 <h1><span id="2-linux目录介绍">2. Linux目录介绍</span></h1><div class="table-container">
 <table>
 <thead>
@@ -2260,7 +2404,6 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
       </categories>
       <tags>
         <tag>CDH集群</tag>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -2270,8 +2413,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <ul>
 <li><a href="#1-spark-rdd">1. Spark-RDD</a></li>
 <li><a href="#2-hdfs">2. HDFS</a></li>
-<li><a href="#3-hive%e5%92%8chbase">3. Hive和HBase</a><ul>
-<li><a href="#31-%e5%ba%94%e7%94%a8%e5%9c%ba%e6%99%af">3.1. 应用场景</a></li>
+<li><a href="#3-hive和hbase">3. Hive和HBase</a><ul>
+<li><a href="#31-应用场景">3.1. 应用场景</a></li>
 </ul>
 </li>
 </ul>
@@ -2338,13 +2481,83 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <!-- /TOC -->
 <h1><span id="1-git">1. Git</span></h1><p>&ensp;&ensp;&ensp;&ensp;Git是一个用来版本控制的软件，在用的过程中涉及到以下内容</p>
 <ol>
-<li><p>在服务器上创建仓库。首先在服务器上创建一个文件夹，例如test。cd到这个文件夹下，使用<figure class="highlight plain"><figcaption><span>init```命令，将该文件夹初始化为一个git仓库，会看到这个文件夹下多了一个.git的文件，然后我们把项目代码拷贝到test这个文件夹下。</span></figcaption><table><tr><td class="code"><pre><span class="line">2. 在自己的电脑上下载并安装Git软件</span><br><span class="line">3. 从服务器git仓库上把代码clone到本地电脑。首先在自己电脑上，创建一个保存代码的目录，在这个目录下右键选择`Git Bash`，输入下面的代码`git clone username@172.11.11.111:/file0/repo/EQ/`，这样服务器git仓库中的东西就完封不动的clone到本地了。</span><br><span class="line">4. 在自己电脑上打开eclipse或者myeclipse，在file中导入这个项目，就可以进行修改代码了。</span><br><span class="line">5. pull和push。右键选中这个工程，点击`team`，就可以对项目进行pull和push。当在本地修改完代码，本地的git会记录下来这些改动，所以本地文件夹中的git也有原先的历史记录，当push的时候会读取本地的git，找到本地的代码在服务器上的源，然后把改动同步到服务器上的git中。 </span><br><span class="line">6. 除了使用eclipse中的team来pull和push代码，还可以使用命令来进行pull或push。每次改完代码提交的时候，打开EQ这个目录（一定要在这个目录下，因为只有这个目录有git这个文件夹），右键```Git Bash Here```输入以下命令:</span><br><span class="line">   ```git add –all```,</span><br><span class="line">   ```git commit –m &quot;修改说明&quot;```,</span><br><span class="line">   ```git push</span><br></pre></td></tr></table></figure></p>
-</li>
-<li><p>每次写代码之前，先进行pull。也是打开EQ这个目录，右键<code>Git Bash Here</code>输入以下命令:<code>git pull</code>这样就会把别人改动过的代码更新到EQ这个文件夹下。</p>
-</li>
+<li>在服务器上创建仓库。首先在服务器上创建一个文件夹，例如test。cd到这个文件夹下，使用<code>git init</code>命令，将该文件夹初始化为一个git仓库，会看到这个文件夹下多了一个.git的文件，然后我们把项目代码拷贝到test这个文件夹下。</li>
+<li>在自己的电脑上下载并安装Git软件</li>
+<li>从服务器git仓库上把代码clone到本地电脑。首先在自己电脑上，创建一个保存代码的目录，在这个目录下右键选择<code>Git Bash</code>，输入下面的代码<code>git clone username@172.11.11.111:/file0/repo/EQ/</code>，这样服务器git仓库中的东西就完封不动的clone到本地了。</li>
+<li>在自己电脑上打开eclipse或者myeclipse，在file中导入这个项目，就可以进行修改代码了。</li>
+<li>pull和push。右键选中这个工程，点击<code>team</code>，就可以对项目进行pull和push。当在本地修改完代码，本地的git会记录下来这些改动，所以本地文件夹中的git也有原先的历史记录，当push的时候会读取本地的git，找到本地的代码在服务器上的源，然后把改动同步到服务器上的git中。 </li>
+<li>除了使用eclipse中的team来pull和push代码，还可以使用命令来进行pull或push。每次改完代码提交的时候，打开EQ这个目录（一定要在这个目录下，因为只有这个目录有git这个文件夹），右键<code>Git Bash Here</code>输入以下命令:<br><code>git add –all</code>,<br><code>git commit –m &quot;修改说明&quot;</code>,<br><code>git push</code></li>
+<li>每次写代码之前，先进行pull。也是打开EQ这个目录，右键<code>Git Bash Here</code>输入以下命令:<code>git pull</code>这样就会把别人改动过的代码更新到EQ这个文件夹下。</li>
 </ol>
 <p><strong>问题1</strong>：在eclipse中右键点击team—&gt;show in History，会出现所有的改动。点击改动的一个文件，应该会出现2个窗口，一个窗口显示现在的代码，一个窗口显示原先的代码，可以明显的看出哪里进行了改动，但是我的电脑确没有出现历史窗口，只有现在代码的窗口。<br><strong>解决：</strong> 在点击show in history之后右键一个文件，点击“compare with previous version”就会出现历史窗口。</p>
-<p><strong>问题2</strong>：在每次写代码之前都要先pull一下，把别人push的代码拉取到本地。但有时候你在写代码之前忘了pull别人的代码，直接在本地电脑上修改，然后你在pull别人的代码时会出现conflict，那是因为你和服务器上的代码修改了同一个地方，git不知道该采用谁的修改。<br><strong>解决:</strong> 首先在eclipse中，右键点击team，把你自己本地的代码先commit，不要push。然后打开vscode，导入和eclispe中一样的代码（和eclipse导入的代码在同一个文件下，带有.git），然后在vscode中点击左侧的第三个图标(git的图标)，然后在<figure class="highlight plain"><figcaption><span>and push到服务器中。</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"># 2. 使用GPU服务器</span><br><span class="line"></span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;涉及到2个软件：Putty是一个ssh工具。FileZilla用户和服务器进行文件传输。</span><br><span class="line"></span><br><span class="line">## 2.1. 查看当前GPU的占用情况</span><br><span class="line"></span><br><span class="line">`nvidia-smi`</span><br><span class="line">`gpustat -i 2`:其中`-i 2`是可选的，表示每2秒刷新一次。</span><br><span class="line"></span><br><span class="line">## 2.2. 查看当前的进程是谁的 </span><br><span class="line"></span><br><span class="line">`ps -ef | grep 进程号`</span><br><span class="line">`kill -9 进程号`</span><br><span class="line"></span><br><span class="line">## 2.3. 查看某个用户的进程 </span><br><span class="line"></span><br><span class="line">`ps -ef|grep WangBeibei`</span><br><span class="line"></span><br><span class="line"># 3. Screen相关命令  </span><br><span class="line"></span><br><span class="line">## 3.1. 新建窗口</span><br><span class="line">    </span><br><span class="line">新建一个窗口有3种方法：</span><br><span class="line"></span><br><span class="line">- screen #这样就可以新建窗口，进入到一个窗口中，但是这样窗口就没有名字，无法区分他们</span><br><span class="line">- screen -S name #这样新建一个名字为name的窗口，并入到该窗口中</span><br><span class="line">例如：screen -S count 新建了一个叫count的窗口并进入</span><br><span class="line">- screen command #这样新建一个窗口并在窗口中执行command，同样没有名字 </span><br><span class="line">例如：screen python ./a.py 新建并执行a.py程序</span><br><span class="line"></span><br><span class="line">## 3.2. 会话分离</span><br><span class="line"></span><br><span class="line">我们在一个窗口运行某个程序之后，想退出登录关闭terminal干点别的事，让程序在后台运行。这时就需要和窗口会话分离,有2种方式：</span><br><span class="line"></span><br><span class="line">- 在当前会话窗口中按Ctrl+a +d快捷键可以实现分离，这时窗口会弹出[detached]的提示，并回到主窗口。</span><br><span class="line">- screen -d name #远程detach某个session,前提是已经跳出了name窗口  </span><br><span class="line"></span><br><span class="line">## 3.3. 恢复会话窗口</span><br><span class="line"></span><br><span class="line">首先查看有哪些窗口正在运行</span><br><span class="line"></span><br><span class="line">&gt; screen -ls #列出窗口列表</span><br><span class="line"></span><br><span class="line">&gt;There is a screen on:</span><br><span class="line">&gt;2637.count (12/17/2015/10:00:32 AM) (Detached)</span><br><span class="line"></span><br><span class="line">&gt;screen -r 2637 #进入2637线程，恢复count会话窗口</span><br><span class="line"></span><br><span class="line">这样就能回到count窗口了  </span><br><span class="line"></span><br><span class="line">## 3.4. kill会话窗口</span><br><span class="line"></span><br><span class="line">如果想关掉一个多余的窗口，有3种方法：</span><br><span class="line"></span><br><span class="line">- `kill -9 threadnum` 例如在上面的2637，kill -9 2637 即可杀死线程，当然就杀死了窗口</span><br><span class="line">- 使用`Ctrl a +k` 杀死当前窗口和窗口中运行的程序</span><br><span class="line">- `screen -S 进程号 -X quit`  </span><br><span class="line"></span><br><span class="line">## 3.5. 清除死去的窗口</span><br><span class="line"></span><br><span class="line">当窗口被杀死后，再用`screen -ls` 可以看到该窗口后面的(???dead)字样，说明窗口死了，但是仍在占用空间。这时需要清除窗口</span><br><span class="line">`screen -wipe #自动清除死去的窗口`  </span><br><span class="line"></span><br><span class="line">## 3.6. 解除窗口占用</span><br><span class="line"></span><br><span class="line">有时你以为已经退出窗口了，但是`screen -ls`命令仍显示该窗口是`attach`状态，说明该窗口xxx时被占用的，可以用`screen -d xxxx`来解除占用后再进入。</span><br><span class="line"></span><br><span class="line"># 4. 使用jupyter运行程序</span><br><span class="line"></span><br><span class="line">1. 创建一个jupyter窗口   </span><br><span class="line">   `screen -S jupyter`   </span><br><span class="line">2. 激活虚拟环境并启动jupyter  </span><br><span class="line">   `source activate insis_template_3.6`激活环境  </span><br><span class="line">   `jupyter notebook`打开jupyter  </span><br><span class="line">3. 端口映射</span><br><span class="line">   第一次使用jupyter notebook，需要映射端口号，默认jupyter notebook的端口号是8888，但是在这个集群上，如果别人已经把8888端口占用了，集群会自动给你分配一个端口号，然后在putty中映射一下这个端口，具体操作如下：</span><br><span class="line">   在菜单栏选中change setting，找到Tunnels</span><br><span class="line">   ![](虚拟环境安装/putty.png)</span><br><span class="line">   ![](虚拟环境安装/port.png)  </span><br><span class="line">4. 浏览器中打开</span><br><span class="line"></span><br><span class="line">使用screen创建一个窗口运行jupyter notebook程序的好处：就算ssh和28号服务器的连接断开，jupyter notebook的程序依然可以在后台运行。如果你打开的jupyter notebook的程序运行完了，有3种关闭程序的方法：</span><br><span class="line">1、在jupyter notebook菜单栏，有一个close and hot的按钮。</span><br><span class="line">2、在jupyter notebook中running中shutdown掉程序</span><br><span class="line">3、screen -r 23560切入到虚拟窗口，然后在这个窗口ctrl+c</span><br><span class="line">关闭jupyter notebook进程。不用使用exit，因为使用exit是关闭</span><br><span class="line">虚拟窗口，直接按shift+a+d从虚拟窗口中切出，这样这个窗口</span><br><span class="line">   </span><br><span class="line"># 5. 部署代码到服务器</span><br><span class="line"></span><br><span class="line">1. 首先在服务器上安装Tomcat</span><br><span class="line">2. 使用FileZilla进入到服务器，使用putty进入到服务器。</span><br><span class="line">3. 关闭Tomcat：使用putty cd到到file0/apache-tomcat下，输入bin/shutdown.sh关掉Tomcat服务器。然后把webapps下的项目删除，进入到logs删除里面的日志。</span><br><span class="line">4. 使用eclipse把项目导出成war压缩包</span><br><span class="line">5. 使用FileZilla把war上传到webapps下。</span><br><span class="line">6. 使用bin/startup.sh启动Tomcat服务器</span><br><span class="line">7. 查看日志主要在catalina.out这个文件中</span><br><span class="line">8. 浏览器查看，http://hz1:8080/EQ/jsp/login.jsp</span><br><span class="line">  </span><br><span class="line"># 6. Tomcat端口占用</span><br><span class="line"></span><br><span class="line">1. win + R,输入cmd回车进入dos界面 </span><br><span class="line">2. 输入netstat -ano|findstr 8080 查看占用8080端口的进程 </span><br><span class="line">3. 输入taskkill /pid 10148 /f 将显示的进程号（我的是10148）结束掉 </span><br><span class="line">4. 重启tomcat</span><br><span class="line"></span><br><span class="line"># 7. 修复集群</span><br><span class="line">   </span><br><span class="line">当集群中有个节点不能启动时，可以在虚拟机管理界面把虚拟机启动。</span><br><span class="line">在浏览器中输入https://172.31.43.150</span><br><span class="line">点击“登录到vsphere web client”</span><br><span class="line">用户名：xxxx，</span><br><span class="line">密码：*****，</span><br><span class="line">点击右侧的“vCenter清单列表”，然后点击左侧的“虚拟机”，在左侧找到需要重启的虚拟机，单击选中，在右侧“关闭虚拟机电源”，关闭后再点击“打开虚拟机电源”。这样就把虚拟机重启了。还需要启动Cloudera manager agent。使用putty，例如输入hz5，</span><br><span class="line">进入到ssh，用户名xxx，密码****。</span><br><span class="line">先和server同步时间ntpdate hz1，</span><br><span class="line">然后启动agent：/opt/cm-5.7.2/etc/init.d/cloudera-scm-agent start</span><br><span class="line"></span><br><span class="line">平时就可以使用/vsphere-client/?csp#extensionId%3Dvsphere.core.viVms.domainView</span><br><span class="line"></span><br><span class="line"># 8. 运行Spark</span><br><span class="line">   </span><br><span class="line">不论是用什么语言写的spark程序在运行的时候都要用spark-submit来运行</span><br><span class="line">如果是java程序需要指定--class 主程序的报名.类名</span><br><span class="line">例如--class test.Test</span><br><span class="line">python不需要指定--class这个参数</span><br><span class="line"></span><br><span class="line">1. local模式：spark-submit --class test.Test --master local[2] mySpark.py</span><br><span class="line">2. standalone模型： spark-submit --class test.Test --master spark://hz4:7077 mySpark.py   </span><br><span class="line">3. yarn模式： spark-submit --class test.Test --master yarn mySpark.py</span><br><span class="line"></span><br><span class="line"># 9. 使用vsCode</span><br><span class="line"></span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用vscode编写python程序时，如果出现空格和Tab共用时导致程序出错。需要把所有的Tab换成空格，在vscode最下面有一个蓝色的条纹，在条纹的右边有&quot;空格4&quot;，点击这个字，然后在vscode的最上面会出现几个选项：点击“将缩进转换成空格”这个选项，再运行就没错了。  </span><br><span class="line"></span><br><span class="line"># 10. 字节</span><br><span class="line"></span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;int是4个字节，无论数字多长都是4个字节，如果用string定义数字时，字节的长度就是字符的个数。</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">int a = 11111111;</span><br><span class="line">System.out.println(a+&quot;(int)的字节数：&quot;+Bytes.toBytes(a).length);</span><br><span class="line">int b=22;</span><br><span class="line">System.out.println(b+&quot;(int)的字节数：&quot;+Bytes.toBytes(b).length);</span><br><span class="line">String aString = &quot;11111111&quot;;</span><br><span class="line">System.out.println(aString+&quot;(string)的字节数：&quot;+Bytes.toBytes(aString).length);</span><br><span class="line">String bString = &quot;22&quot;;</span><br><span class="line">System.out.println(bString+&quot;(string)的字节数：&quot;+Bytes.toBytes(bString).length);</span><br></pre></td></tr></table></figure></p>
+<p><strong>问题2</strong>：在每次写代码之前都要先pull一下，把别人push的代码拉取到本地。但有时候你在写代码之前忘了pull别人的代码，直接在本地电脑上修改，然后你在pull别人的代码时会出现conflict，那是因为你和服务器上的代码修改了同一个地方，git不知道该采用谁的修改。<br><strong>解决:</strong> 首先在eclipse中，右键点击team，把你自己本地的代码先commit，不要push。然后打开vscode，导入和eclispe中一样的代码（和eclipse导入的代码在同一个文件下，带有.git），然后在vscode中点击左侧的第三个图标(git的图标)，然后在<code>...</code>中右键从服务器上pull到本地。然后再点击左侧的第一个图标，在这里面如果文件的右侧出现M，说明这个文件被修改过，然后你在这里面进行解决冲突。是采用本地的修改还是采用服务上的修改。等到冲突都解决时保存。然后再回到eclispe，会发现项目已经没有报错了。这时在eclispe中右键team，把代码commit and push到服务器中。</p>
+<h1><span id="2-使用gpu服务器">2. 使用GPU服务器</span></h1><p>&ensp;&ensp;&ensp;&ensp;涉及到2个软件：Putty是一个ssh工具。FileZilla用户和服务器进行文件传输。</p>
+<h2><span id="21-查看当前gpu的占用情况">2.1. 查看当前GPU的占用情况</span></h2><p><code>nvidia-smi</code><br><code>gpustat -i 2</code>:其中<code>-i 2</code>是可选的，表示每2秒刷新一次。</p>
+<h2><span id="22-查看当前的进程是谁的">2.2. 查看当前的进程是谁的</span></h2><p><code>ps -ef | grep 进程号</code><br><code>kill -9 进程号</code></p>
+<h2><span id="23-查看某个用户的进程">2.3. 查看某个用户的进程</span></h2><p><code>ps -ef|grep WangBeibei</code></p>
+<h1><span id="3-screen相关命令">3. Screen相关命令</span></h1><h2><span id="31-新建窗口">3.1. 新建窗口</span></h2><p>新建一个窗口有3种方法：</p>
+<ul>
+<li>screen #这样就可以新建窗口，进入到一个窗口中，但是这样窗口就没有名字，无法区分他们</li>
+<li>screen -S name #这样新建一个名字为name的窗口，并入到该窗口中<br>例如：screen -S count 新建了一个叫count的窗口并进入</li>
+<li>screen command #这样新建一个窗口并在窗口中执行command，同样没有名字<br>例如：screen python ./a.py 新建并执行a.py程序</li>
+</ul>
+<h2><span id="32-会话分离">3.2. 会话分离</span></h2><p>我们在一个窗口运行某个程序之后，想退出登录关闭terminal干点别的事，让程序在后台运行。这时就需要和窗口会话分离,有2种方式：</p>
+<ul>
+<li>在当前会话窗口中按Ctrl+a +d快捷键可以实现分离，这时窗口会弹出[detached]的提示，并回到主窗口。</li>
+<li>screen -d name #远程detach某个session,前提是已经跳出了name窗口  </li>
+</ul>
+<h2><span id="33-恢复会话窗口">3.3. 恢复会话窗口</span></h2><p>首先查看有哪些窗口正在运行</p>
+<blockquote>
+<p>screen -ls #列出窗口列表</p>
+<p>There is a screen on:<br>2637.count (12/17/2015/10:00:32 AM) (Detached)</p>
+<p>screen -r 2637 #进入2637线程，恢复count会话窗口</p>
+</blockquote>
+<p>这样就能回到count窗口了  </p>
+<h2><span id="34-kill会话窗口">3.4. kill会话窗口</span></h2><p>如果想关掉一个多余的窗口，有3种方法：</p>
+<ul>
+<li><code>kill -9 threadnum</code> 例如在上面的2637，kill -9 2637 即可杀死线程，当然就杀死了窗口</li>
+<li>使用<code>Ctrl a +k</code> 杀死当前窗口和窗口中运行的程序</li>
+<li><code>screen -S 进程号 -X quit</code>  </li>
+</ul>
+<h2><span id="35-清除死去的窗口">3.5. 清除死去的窗口</span></h2><p>当窗口被杀死后，再用<code>screen -ls</code> 可以看到该窗口后面的(???dead)字样，说明窗口死了，但是仍在占用空间。这时需要清除窗口<br><code>screen -wipe #自动清除死去的窗口</code>  </p>
+<h2><span id="36-解除窗口占用">3.6. 解除窗口占用</span></h2><p>有时你以为已经退出窗口了，但是<code>screen -ls</code>命令仍显示该窗口是<code>attach</code>状态，说明该窗口xxx时被占用的，可以用<code>screen -d xxxx</code>来解除占用后再进入。</p>
+<h1><span id="4-使用jupyter运行程序">4. 使用jupyter运行程序</span></h1><ol>
+<li>创建一个jupyter窗口<br><code>screen -S jupyter</code>   </li>
+<li>激活虚拟环境并启动jupyter<br><code>source activate insis_template_3.6</code>激活环境<br><code>jupyter notebook</code>打开jupyter  </li>
+<li><p>端口映射<br>第一次使用jupyter notebook，需要映射端口号，默认jupyter notebook的端口号是8888，但是在这个集群上，如果别人已经把8888端口占用了，集群会自动给你分配一个端口号，然后在putty中映射一下这个端口，具体操作如下：<br>在菜单栏选中change setting，找到Tunnels</p>
+<p><img src="/2019/03/14/各类工具的使用/putty.png" alt=""><br><img src="/2019/03/14/各类工具的使用/port.png" alt=""></p>
+</li>
+<li><p>浏览器中打开</p>
+</li>
+</ol>
+<p>使用screen创建一个窗口运行jupyter notebook程序的好处：就算ssh和28号服务器的连接断开，jupyter notebook的程序依然可以在后台运行。如果你打开的jupyter notebook的程序运行完了，有3种关闭程序的方法：<br>1、在jupyter notebook菜单栏，有一个close and hot的按钮。<br>2、在jupyter notebook中running中shutdown掉程序<br>3、screen -r 23560切入到虚拟窗口，然后在这个窗口ctrl+c<br>关闭jupyter notebook进程。不用使用exit，因为使用exit是关闭<br>虚拟窗口，直接按shift+a+d从虚拟窗口中切出，这样这个窗口</p>
+<h1><span id="5-部署代码到服务器">5. 部署代码到服务器</span></h1><ol>
+<li>首先在服务器上安装Tomcat</li>
+<li>使用FileZilla进入到服务器，使用putty进入到服务器。</li>
+<li>关闭Tomcat：使用putty cd到到file0/apache-tomcat下，输入bin/shutdown.sh关掉Tomcat服务器。然后把webapps下的项目删除，进入到logs删除里面的日志。</li>
+<li>使用eclipse把项目导出成war压缩包</li>
+<li>使用FileZilla把war上传到webapps下。</li>
+<li>使用bin/startup.sh启动Tomcat服务器</li>
+<li>查看日志主要在catalina.out这个文件中</li>
+<li>浏览器查看，<a href="http://hz1:8080/EQ/jsp/login.jsp" target="_blank" rel="noopener">http://hz1:8080/EQ/jsp/login.jsp</a></li>
+</ol>
+<h1><span id="6-tomcat端口占用">6. Tomcat端口占用</span></h1><ol>
+<li>win + R,输入cmd回车进入dos界面 </li>
+<li>输入netstat -ano|findstr 8080 查看占用8080端口的进程 </li>
+<li>输入taskkill /pid 10148 /f 将显示的进程号（我的是10148）结束掉 </li>
+<li>重启tomcat</li>
+</ol>
+<h1><span id="7-修复集群">7. 修复集群</span></h1><p>当集群中有个节点不能启动时，可以在虚拟机管理界面把虚拟机启动。<br>在浏览器中输入<a href="https://172.31.43.150" target="_blank" rel="noopener">https://172.31.43.150</a><br>点击“登录到vsphere web client”<br>用户名：xxxx，<br>密码：<strong>*</strong>，<br>点击右侧的“vCenter清单列表”，然后点击左侧的“虚拟机”，在左侧找到需要重启的虚拟机，单击选中，在右侧“关闭虚拟机电源”，关闭后再点击“打开虚拟机电源”。这样就把虚拟机重启了。还需要启动Cloudera manager agent。使用putty，例如输入hz5，<br>进入到ssh，用户名xxx，密码<em>**</em>。<br>先和server同步时间ntpdate hz1，<br>然后启动agent：/opt/cm-5.7.2/etc/init.d/cloudera-scm-agent start</p>
+<p>平时就可以使用/vsphere-client/?csp#extensionId%3Dvsphere.core.viVms.domainView</p>
+<h1><span id="8-运行spark">8. 运行Spark</span></h1><p>不论是用什么语言写的spark程序在运行的时候都要用spark-submit来运行<br>如果是java程序需要指定—class 主程序的报名.类名<br>例如—class test.Test<br>python不需要指定—class这个参数</p>
+<ol>
+<li>local模式：spark-submit —class test.Test —master local[2] mySpark.py</li>
+<li>standalone模型： spark-submit —class test.Test —master spark://hz4:7077 mySpark.py   </li>
+<li>yarn模式： spark-submit —class test.Test —master yarn mySpark.py</li>
+</ol>
+<h1><span id="9-使用vscode">9. 使用vsCode</span></h1><p>&ensp;&ensp;&ensp;&ensp;使用vscode编写python程序时，如果出现空格和Tab共用时导致程序出错。需要把所有的Tab换成空格，在vscode最下面有一个蓝色的条纹，在条纹的右边有”空格4”，点击这个字，然后在vscode的最上面会出现几个选项：点击“将缩进转换成空格”这个选项，再运行就没错了。  </p>
+<h1><span id="10-字节">10. 字节</span></h1><p>&ensp;&ensp;&ensp;&ensp;int是4个字节，无论数字多长都是4个字节，如果用string定义数字时，字节的长度就是字符的个数。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">11111111</span>;</span><br><span class="line">System.out.println(a+<span class="string">"(int)的字节数："</span>+Bytes.toBytes(a).length);</span><br><span class="line"><span class="keyword">int</span> b=<span class="number">22</span>;</span><br><span class="line">System.out.println(b+<span class="string">"(int)的字节数："</span>+Bytes.toBytes(b).length);</span><br><span class="line">String aString = <span class="string">"11111111"</span>;</span><br><span class="line">System.out.println(aString+<span class="string">"(string)的字节数："</span>+Bytes.toBytes(aString).length);</span><br><span class="line">String bString = <span class="string">"22"</span>;</span><br><span class="line">System.out.println(bString+<span class="string">"(string)的字节数："</span>+Bytes.toBytes(bString).length);</span><br></pre></td></tr></table></figure>
 <p>输出如下所示：<br><img src="/2019/03/14/各类工具的使用/bytes.png" alt=""></p>
 ]]></content>
       <categories>
@@ -2352,11 +2565,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
       </categories>
       <tags>
         <tag>GPU</tag>
-        <tag>Git</tag>
-        <tag>VSCode</tag>
-        <tag>Screen</tag>
-        <tag>Jupyter</tag>
         <tag>服务器</tag>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -2389,17 +2599,16 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <li>General<br><img src="/2019/03/12/Attention/function_score.png" alt=""></li>
 </ol>
 <h1><span id="3-attention在nlp的应用">3. Attention在NLP的应用</span></h1><p>&ensp;&ensp;&ensp;&ensp;在上面的编码器-解码器中，从编码器传到解码器的背景变量$c$是不变的。就是说解码器在翻译第一个词和第二个词是c是不变的。但是实际情况中，比如英语they are watching。翻译成法语是：IIs regardent。比如在翻译IIS时，和they are更相关，在翻译regardent和watching更相关，所以希望把背景变量$c$设置成一个变化的值。当翻译IIS时，对编码器的隐藏变量$h_1,h_2$更看重，当翻译regardent对隐藏变量$h_3$更看重，所以就需要在解码器中，在不同时间步时，对编码器的隐藏变量$h_1,h_2,h_3$分配不同的权重，加权平均得到背景变量$c$。</p>
-<p>&ensp;&ensp;&ensp;&ensp;原先解码器隐藏层变量的计算是上一时刻的输出$y_{t<code>-1}$，上一时刻的隐藏状态$s_{t</code>-1}$以及背景变量$c$，在加入attention机制后，这里的背景变量变成了$c_{t`}$，每一步的背景变量都不一样。  </p>
+<p>&ensp;&ensp;&ensp;&ensp;原先解码器隐藏层变量的计算是上一时刻的输出$y_{t’-1}$，上一时刻的隐藏状态$s_{t’-1}$以及背景变量$c$，在加入attention机制后，这里的背景变量变成了$c_{t’}$，每一步的背景变量都不一样。  </p>
 <p><img src="/2019/03/12/Attention/st.png" alt=""><br><img src="/2019/03/12/Attention/attention.png" alt=""></p>
-<p>&ensp;&ensp;&ensp;&ensp;下面看一下$c_{t<code>}$是怎么设计的。 就是编码器的不同时刻的隐藏状态的加权平均。只是这里的权重$\alpha_{t</code>t}$在每一个时刻是一个变化的值。  注意这里的$t<code>$是输出(解码器)的时间戳，$t$是输入(编码器)的时间戳。首先我们先固定$t</code>$，下面的式子中$t<code>$是不变的。在计算$c_{t</code>}$时，变化$t从1到T$，遍历所有的$h_t$，然后给定一个$h_t$，怎么求$h_t$对应的权重$\alpha_{t`t}$。</p>
+<p>&ensp;&ensp;&ensp;&ensp;下面看一下$c_{t’}$是怎么设计的。 就是编码器的不同时刻的隐藏状态的加权平均。只是这里的权重$\alpha_{t’t}$在每一个时刻是一个变化的值。  注意这里的$t’$是输出(解码器)的时间戳，$t$是输入(编码器)的时间戳。首先我们先固定$t’$，下面的式子中$t’$是不变的。在计算$c_{t’}$时，变化$t从1到T$，遍历所有的$h_t$，然后给定一个$h_t$，怎么求$h_t$对应的权重$\alpha_{t’t}$。</p>
 <p><img src="/2019/03/12/Attention/ct.png" alt=""></p>
 <p>例如计算解码器在第$t’$个时间步的背景向量$t’$，使用解码器$t’-1$个时间步的隐藏状态$S_{t’-1}$作为query，将编码器所有时间步的隐藏状态$h_0,…h_t$作为key和value，先将$S_{t’-1}$和$h_0,…h_t$做Attention，然后将Attention score使用$softmax$归一化，再和$h_0,…h_t$加权求和，得到解码器中第$t’$个时间步的背景向量$c_{t’}$</p>
 <p><img src="/2019/03/12/Attention/nlp.png" alt=""></p>
-<p>&ensp;&ensp;&ensp;&ensp;下面我们看一下$\alpha_{t<code>t}$是怎么来表示。加权平均就要使所有的权值加起来为1，所以用到softmax运算。softmax中的每一个值是
-$e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏变量$s_{t`-1}$和编码器所有时间步的隐藏变量$h_t$计算得到。</p>
+<p>&ensp;&ensp;&ensp;&ensp;下面我们看一下$\alpha_{t’t}$是怎么来表示。加权平均就要使所有的权值加起来为1，所以用到softmax运算。softmax中的每一个值是<br>$e$,这个是怎么计算的.$e_{t’t}$通过解码器上一时刻的隐藏变量$s_{t’-1}$和编码器所有时间步的隐藏变量$h_t$计算得到。</p>
 <p><img src="/2019/03/12/Attention/alpha.png" alt=""></p>
 <p><img src="/2019/03/12/Attention/e.png" alt=""></p>
-<p>&ensp;&ensp;&ensp;&ensp;注意力机制对函数$a$设计有很多。下面是一种设计方法。首先一定要有$s_{t<code>-1}$和编码器所有时间步的隐藏状态$h_t$。然后引入了3个模型参数$v^T,W_s,W_h$,这3个参数通过训练得到。对$s_{t</code>-1}$做一个projection，对$h_t$做一个projection，使得projection之后的向量长度相等，这样就可以加在一起，然后使用tanh激活函数，这时的向量长度还是projection之后的长度，但是我们希望$e_{t`t}$是一个标量，那就再引入向量$v^T$，和右边的向量做一个点乘得到一个标量。其实注意力可以通过多层感知机（全连接层）得到。 </p>
+<p>&ensp;&ensp;&ensp;&ensp;注意力机制对函数$a$设计有很多。下面是一种设计方法。首先一定要有$s_{t’-1}$和编码器所有时间步的隐藏状态$h_t$。然后引入了3个模型参数$v^T,W_s,W_h$,这3个参数通过训练得到。对$s_{t’-1}$做一个projection，对$h_t$做一个projection，使得projection之后的向量长度相等，这样就可以加在一起，然后使用tanh激活函数，这时的向量长度还是projection之后的长度，但是我们希望$e_{t’t}$是一个标量，那就再引入向量$v^T$，和右边的向量做一个点乘得到一个标量。其实注意力可以通过多层感知机（全连接层）得到。 </p>
 <p><img src="/2019/03/12/Attention/a.png" alt=""></p>
 <p>下面介绍计算解码器的隐藏变量时的函数$g$是什么？g可以看到是一个GRU单元。</p>
 <p><img src="/2019/03/12/Attention/g.png" alt=""></p>
@@ -2478,7 +2687,7 @@ $e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏
       </categories>
       <tags>
         <tag>时空领域</tag>
-        <tag>Multi-Graph Convolutional</tag>
+        <tag>GCN</tag>
       </tags>
   </entry>
   <entry>
@@ -2554,7 +2763,7 @@ $e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏
 <p>&ensp;&ensp;&ensp;&ensp;这是整个论文的重点，这个步骤的目的在于将目标node无序的neighbors映射为一个有序的vector。这个label要实现一个目的：assign nodes of two different graphs to a similar relative position in the respective adjacency matrices if and only if their structural roles within the graph are similar. 也就是说，对于两个不同的graphs， 来自这两个graph的子结构g1和g2，它们在各自的graph中有相似的结构，那么他们label应该相似。为了解决这个问题，论文中定义了一个optimal graph normalization问题，定义如下：</p>
 <p><img src="/2019/03/03/图卷积/算法3-1.png" alt=""></p>
 <p>&ensp;&ensp;&ensp;&ensp;这个等式的解在于寻找一个一个labeling L， 使得从图的集合中任意选取两个图G1和G2，它们在vector space距离差距和它们在graph space的距离差距最小化。但是这个问题是NP-hard的问题，所以作者选择找一个近似解。即它比较了各种labeling方法，并从其中找出最优解。具体如下：<br><img src="/2019/03/03/图卷积/算法3-2.png" alt=""></p>
-<p>&ensp;&ensp;&ensp;&ensp;在特征选择阶段，只有第一层和传统的CNN有区别，之后的卷积层和传统的一样。下面来举例来说明PATCHY-SAN如何提取顶点特征和边特征。我们假设a_v为顶点特征的个数，a_e为边特征的个数。w为目标node的个数，k为感受野中node的个数。对于每个输入图结构，运用上面的一系列normalization算法，我们可以得到两个tensor（w,k,a_v）和（w,k,k,a_e）,分别对应于顶点特征和边特征。这两个tensor可以被reshape成(wk, a_v)和(wk^2, a_e)，其中a_v和a_e可以分别看成是CNN中channel的个数。现在我们可以对它们做一维度的卷积操作，其中第一个的感受野大小为k，第二个感受野大小为k^2。而之后的卷积层的构造和传统的CNN一样了。</p>
+<p>&ensp;&ensp;&ensp;&ensp;在特征选择阶段，只有第一层和传统的CNN有区别，之后的卷积层和传统的一样。下面来举例来说明PATCHY-SAN如何提取顶点特征和边特征。我们假设a_v为顶点特征的个数，a_e为边特征的个数。w为目标node的个数，k为感受野中node的个数。对于每个输入图结构，运用上面的一系列normalization算法，我们可以得到两个tensor (w,k,a_v)和(w,k,k,a_e),分别对应于顶点特征和边特征。这两个tensor可以被reshape成(wk, a_v)和(wk^2, a_e)，其中a_v和a_e可以分别看成是CNN中channel的个数。现在我们可以对它们做一维度的卷积操作，其中第一个的感受野大小为k，第二个感受野大小为k^2。而之后的卷积层的构造和传统的CNN一样了。</p>
 <h3><span id="216-算法流程">2.1.6. 算法流程</span></h3><p>输入：任意一张图<br>输出：每个channel输出w个receptive field</p>
 <p>Step1： graph labeling（对图的节点做标记，比如可以用节点的度做标记，做图的划分，也 可以叫做color refinement or vertex classification）<br>文中采用The Weisfeiler-Lehman algorithm做图的划分。由此可以得到每个节点的rank 值（为了不同的图能够有一个规范化的组织方式）</p>
 <p>Step2：对labeling好的节点排序，取前w个节点，作为处理的节点序列。（这样就可以把不 同size的graph，变成同一个size）若不足w个节点，则，在输出中加全零的receptive field，相当于padding</p>
@@ -2661,7 +2870,6 @@ $e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏
       </categories>
       <tags>
         <tag>SpringMVC</tag>
-        <tag>拦截器</tag>
       </tags>
   </entry>
   <entry>
@@ -2696,8 +2904,6 @@ $e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏
       </categories>
       <tags>
         <tag>HBase</tag>
-        <tag>预分区</tag>
-        <tag>热点问题</tag>
       </tags>
   </entry>
   <entry>
@@ -2741,24 +2947,23 @@ $e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏
 <p>&ensp;&ensp;&ensp;&ensp;图10.8描述了使用编码器—解码器将上述英语句子翻译成法语句子的一种方法。在训练数据集中，我们可以在每个句子后附上特殊符号“\<eos>”（end of sequence）以表示序列的终止。编码器每个时间步的输入依次为英语句子中的单词、标点和特殊符号“\<eos>”。图10.8中使用了<strong>编码器在最终时间步的隐藏状态作为输入句子的表征或编码信息</strong>。解码器在各个时间步中使用<strong>输入句子的编码信息c</strong>和<strong>上个时间步的输出</strong>以及<strong>隐藏状态</strong>作为输入。 我们希望解码器在各个时间步能正确依次输出翻译后的法语单词、标点和特殊符号“\<eos>”。 需要注意的是，解码器在最初时间步的输入用到了一个表示序列开始的特殊符号“\<bos>”（beginning of sequence）。其中每个词用$x_t$向量来表示，$x_t$可以通过预训练好的词向量来获取。</bos></eos></eos></eos></p>
 <p><img src="/2019/02/15/NLP和Attention/seq2seq.png" alt=""></p>
 <h2><span id="21-编码器">2.1. 编码器</span></h2><p>&ensp;&ensp;&ensp;&ensp;编码器的作用是把一个不定长的输入序列变成一个定长的背景变量$c$，并在该背景变量中编码输入序列信息。常用的编码器是循环神经网络。背景变量$c=q(h_1,…h_T)$,编码器通过自定义函数$q$将各个时间步的隐藏状态变换成背景变量</p>
-<h2><span id="22-解码器">2.2. 解码器</span></h2><p>&ensp;&ensp;&ensp;&ensp;编码器输出的背景变量$c$编码了整个输入序列$x_1,…x_T$的信息。给定训练样板中的输出序列$y_1,…y_{T<code>}$，对每个时间步$t</code>$，解码器输出$y_{t<code>}$的条件概率将基于之前的输出序列$y_1,...y_{t</code>-1}$和背景变量$c$，即$P(y_t<code>|y_1,...y_{t</code>-1},c)$。为此，我们可以使用另一个循环神经网络作为解码器。在时间步$t<code>$，解码器根据背景变量$c$，上一时间步的输出$y_{t</code>-1}$和上一时间步的隐藏变量$s_{t<code>-1}$来生成当前时间步的隐藏变量$s_{t</code>}$。有了解码器的隐藏状态后，我们可以使用自定义的输出层和softmax运算来计算生成当前时间步的输出$y_{t<code>}$。即计算的顺序是：先根据背景变量$c$，上一时间步的输出$y_{t</code>-1}$和上一时间步的隐藏变量$s_{t<code>-1}$来生成当前时间步的隐藏变量$s_{t</code>}$，然后再根据当前时间步的隐藏状态$s_{t<code>}$生成当前时间步的输出$y_{t</code>}$。<br>3个小trick：</p>
+<h2><span id="22-解码器">2.2. 解码器</span></h2><p>&ensp;&ensp;&ensp;&ensp;编码器输出的背景变量$c$编码了整个输入序列$x_1,…x_T$的信息。给定训练样板中的输出序列$y_1,…y_{T’}$，对每个时间步$t’$，解码器输出$y_{t’}$的条件概率将基于之前的输出序列$y_1,…y_{t’-1}$和背景变量$c$，即$P(y_t’|y_1,…y_{t’-1},c)$。为此，我们可以使用另一个循环神经网络作为解码器。在时间步$t’$，解码器根据背景变量$c$，上一时间步的输出$y_{t’-1}$和上一时间步的隐藏变量$s_{t’-1}$来生成当前时间步的隐藏变量$s_{t’}$。有了解码器的隐藏状态后，我们可以使用自定义的输出层和softmax运算来计算生成当前时间步的输出$y_{t’}$。即计算的顺序是：先根据背景变量$c$，上一时间步的输出$y_{t’-1}$和上一时间步的隐藏变量$s_{t’-1}$来生成当前时间步的隐藏变量$s_{t’}$，然后再根据当前时间步的隐藏状态$s_{t’}$生成当前时间步的输出$y_{t’}$。<br>3个小trick：</p>
 <ul>
 <li>解码器什么时候停止？当预测的下一个词是\<eos>时停止。</eos></li>
-<li>对于解码器，当生成第一个隐藏状态$s_1$时，需要给定$s_0,y_0和c$,其中$y_0=<bos>对应的词向量$</bos></li>
+<li>对于解码器，当生成第一个隐藏状态$s_1$时，需要给定$s_0,y_0和c$,其中$y_0=<bos>$对应的词向量</bos></li>
 <li>对于编码器，生成第一个隐藏状态$h_1$时，需要给定当前的输入$x_1和上一时刻的隐藏状态h_0$，$h_0$可以初始化为全零的向量。对于编码器，$s_0$也可以初始化为全零向量。也可以初始化为$s_0=tanh(W\overleftarrow{h_1})$，编码器从右向左输入，最后得到第一个词的隐藏向量，然后用来初始化解码器的$s_0$</li>
 </ul>
 <h2><span id="23-优缺点">2.3. 优缺点</span></h2><p>&ensp;&ensp;&ensp;&ensp;encoder-decoder模型虽然非常经典，但是局限性也非常大。最大的局限性就在于编码和解码之间的唯一联系就是一个固定长度的语义向量C。也就是说，编码器要将整个序列的信息压缩进一个固定长度的向量中去。但是这样做有两个弊端，一是语义向量无法完全表示整个序列的信息，还有就是先输入的内容携带的信息会被后输入的信息稀释掉，或者说，被覆盖了。输入序列越长，这个现象就越严重。这就使得在解码的时候一开始就没有获得输入序列足够的信息， 那么解码的准确度自然也就要打个折扣了</p>
 <h1><span id="3-attention">3. Attention</span></h1><p><a href="https://blog.csdn.net/BVL10101111/article/details/78470716" target="_blank" rel="noopener">Attentions详细讲解</a><br>Attention一般有2种，（1）：Location-based Attention，这里的attention没有其他额外需要关注的对象，即多个$h_i$内部做attention。（2）Concatenation-based Attention：有额外需要关注的对象，即多个$h_i$对$h_t$的attention。我们平时用第2种比较多一些。</p>
-<p>&ensp;&ensp;&ensp;&ensp;在上面的编码器-解码器中，从编码器传到解码器的背景变量$c$是不变的。就是说解码器在翻译第一个词和第二个词是c是不变的。但是实际情况中，比如英语they are watching。翻译成法语是：IIs regardent。比如在翻译IIS时，和they are更相关，在翻译regardent和watching更相关，所以希望把背景变量$c$设置成一个变化的值。当翻译IIS时，对编码器的隐藏变量$h_1,h_2$更看重，当翻译regardent对隐藏变量$h_3$更看重，所以就需要在解码器中，在不同时间步时，对编码器的隐藏变量$h_1,h_2,h_3$分配不同的权重，加权平均得到背景变量$c$。<br>&ensp;&ensp;&ensp;&ensp;原先解码器隐藏层变量的计算是上一时刻的输出$y_{t<code>-1}$，上一时刻的隐藏状态$s_{t</code>-1}$以及背景变量$c$，在加入attention机制后，这里的背景变量变成了$c_{t`}$，每一步的背景变量都不一样。</p>
+<p>&ensp;&ensp;&ensp;&ensp;在上面的编码器-解码器中，从编码器传到解码器的背景变量$c$是不变的。就是说解码器在翻译第一个词和第二个词是c是不变的。但是实际情况中，比如英语they are watching。翻译成法语是：IIs regardent。比如在翻译IIS时，和they are更相关，在翻译regardent和watching更相关，所以希望把背景变量$c$设置成一个变化的值。当翻译IIS时，对编码器的隐藏变量$h_1,h_2$更看重，当翻译regardent对隐藏变量$h_3$更看重，所以就需要在解码器中，在不同时间步时，对编码器的隐藏变量$h_1,h_2,h_3$分配不同的权重，加权平均得到背景变量$c$。<br>&ensp;&ensp;&ensp;&ensp;原先解码器隐藏层变量的计算是上一时刻的输出$y_{t’-1}$，上一时刻的隐藏状态$s_{t’-1}$以及背景变量$c$，在加入attention机制后，这里的背景变量变成了$c_{t’}$，每一步的背景变量都不一样。</p>
 <p><img src="/2019/02/15/NLP和Attention/st.png" alt=""></p>
 <p><img src="/2019/02/15/NLP和Attention/attention.png" alt=""></p>
-<p>&ensp;&ensp;&ensp;&ensp;下面看一下$c_{t<code>}$是怎么设计的。 就是编码器的不同时刻的隐藏状态的加权平均。只是这里的权重$\alpha_{t</code>t}$在每一个时刻是一个变化的值。  注意这里的$t<code>$是输出(解码器)的时间戳，$t$是输入(编码器)的时间戳。首先我们先固定$t</code>$，下面的式子中$t<code>$是不变的。在计算$c_{t</code>}$时，变化$t从1到T$，遍历所有的$h_t$，然后给定一个$h_t$，怎么求$h_t$对应的权重$\alpha_{t`t}$。</p>
+<p>&ensp;&ensp;&ensp;&ensp;下面看一下$c_{t’}$是怎么设计的。 就是编码器的不同时刻的隐藏状态的加权平均。只是这里的权重$\alpha_{t’t}$在每一个时刻是一个变化的值。  注意这里的$t’$是输出(解码器)的时间戳，$t$是输入(编码器)的时间戳。首先我们先固定$t’$，下面的式子中$t’$是不变的。在计算$c_{t’}$时，变化$t从1到T$，遍历所有的$h_t$，然后给定一个$h_t$，怎么求$h_t$对应的权重$\alpha_{t’t}$。</p>
 <p><img src="/2019/02/15/NLP和Attention/ct.png" alt=""></p>
-<p>&ensp;&ensp;&ensp;&ensp;下面我们看一下$\alpha_{t<code>t}$是怎么来表示。加权平均就要使所有的权值加起来为1，所以用到softmax运算。softmax中的每一个值是
-$e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏变量$s_{t`-1}$和当前编码器的隐藏变量$h_t$计算得到。</p>
+<p>&ensp;&ensp;&ensp;&ensp;下面我们看一下$\alpha_{t’t}$是怎么来表示。加权平均就要使所有的权值加起来为1，所以用到softmax运算。softmax中的每一个值是<br>$e$,这个是怎么计算的.$e_{t’t}$通过解码器上一时刻的隐藏变量$s_{t’-1}$和当前编码器的隐藏变量$h_t$计算得到。</p>
 <p><img src="/2019/02/15/NLP和Attention/alpha.png" alt=""></p>
 <p><img src="/2019/02/15/NLP和Attention/e.png" alt=""></p>
-<p>&ensp;&ensp;&ensp;&ensp;注意力机制对函数$a$设计有很多。下面是一种设计方法。首先一定要有$s_{t<code>-1}$和$h_t$。然后引入了3个模型参数$v^T,W_s,W_h$,这3个参数通过训练得到。对$s_{t</code>-1}$做一个projection，对$h_t$做一个projection，使得projection之后的向量长度相等，这样就可以加在一起，然后使用tanh激活函数，这时的向量长度还是projection之后的长度，但是我们希望$e_{t`t}$是一个标量，那就再引入向量$v^T$，和右边的向量做一个点乘得到一个标量。其实注意力可以通过多层感知机（全连接层）得到。  </p>
+<p>&ensp;&ensp;&ensp;&ensp;注意力机制对函数$a$设计有很多。下面是一种设计方法。首先一定要有$s_{t’-1}$和$h_t$。然后引入了3个模型参数$v^T,W_s,W_h$,这3个参数通过训练得到。对$s_{t’-1}$做一个projection，对$h_t$做一个projection，使得projection之后的向量长度相等，这样就可以加在一起，然后使用tanh激活函数，这时的向量长度还是projection之后的长度，但是我们希望$e_{t’t}$是一个标量，那就再引入向量$v^T$，和右边的向量做一个点乘得到一个标量。其实注意力可以通过多层感知机（全连接层）得到。  </p>
 <p><img src="/2019/02/15/NLP和Attention/a.png" alt=""></p>
 <p>下面介绍计算解码器的隐藏变量时的函数$g$是什么？g可以看到是一个GRU单元</p>
 <p><img src="/2019/02/15/NLP和Attention/g.png" alt=""></p>
@@ -2815,8 +3020,6 @@ $e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏
       </categories>
       <tags>
         <tag>RNN</tag>
-        <tag>LSTM</tag>
-        <tag>GRU</tag>
       </tags>
   </entry>
   <entry>
@@ -2929,9 +3132,7 @@ $e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏
         <category>Deep Learning</category>
       </categories>
       <tags>
-        <tag>ResNet</tag>
         <tag>CNN</tag>
-        <tag>BN</tag>
       </tags>
   </entry>
   <entry>
@@ -3134,6 +3335,7 @@ $e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏
       </categories>
       <tags>
         <tag>GPU</tag>
+        <tag>服务器</tag>
       </tags>
   </entry>
   <entry>
@@ -3263,7 +3465,7 @@ $e$,这个是怎么计算的.$e_{t</code>t}$通过解码器上一时刻的隐藏
         <category>工具</category>
       </categories>
       <tags>
-        <tag>Markdown学习</tag>
+        <tag>Markdown</tag>
       </tags>
   </entry>
 </search>

@@ -82,7 +82,7 @@
 <meta property="og:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近实验室安装了openpai平台，可以在上面提交程序运行。下面记录怎么使用OpenPai提交NNI程序，进行调参。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/01/10/openpai/logs.png">
-<meta property="og:updated_time" content="2020-01-23T09:41:48.651Z">
+<meta property="og:updated_time" content="2020-01-23T13:07:41.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openpai">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近实验室安装了openpai平台，可以在上面提交程序运行。下面记录怎么使用OpenPai提交NNI程序，进行调参。">
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  993
+                  1.1k
                 </span>
               
 
@@ -424,7 +424,21 @@
       
 
       
-        <p>&ensp;&ensp;&ensp;&ensp;最近实验室安装了openpai平台，可以在上面提交程序运行。下面记录怎么使用OpenPai提交NNI程序，进行调参。<br><a id="more"></a></p>
+        <p>&ensp;&ensp;&ensp;&ensp;最近实验室安装了openpai平台，可以在上面提交程序运行。下面记录怎么使用OpenPai提交NNI程序，进行调参。<br><a id="more"></a><br><!-- TOC --></p>
+<ul>
+<li><a href="#1-%e4%bd%bf%e7%94%a8%e6%ad%a5%e9%aa%a4">1. 使用步骤</a><ul>
+<li><a href="#11-%e7%bc%96%e5%86%99%e7%a8%8b%e5%ba%8f">1.1. 编写程序</a></li>
+<li><a href="#12-%e5%87%86%e5%a4%87%e9%95%9c%e5%83%8f">1.2. 准备镜像</a></li>
+<li><a href="#13-%e7%bc%96%e5%86%99nni%e7%9a%84yml%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6">1.3. 编写NNI的yml配置文件</a></li>
+<li><a href="#14-%e5%ae%89%e8%a3%85nni">1.4. 安装NNI</a></li>
+<li><a href="#15-%e5%90%af%e5%8a%a8nni">1.5. 启动NNI</a></li>
+<li><a href="#16-nni%e6%b5%8f%e8%a7%88%e5%99%a8%e6%9f%a5%e7%9c%8b">1.6. NNI浏览器查看</a></li>
+<li><a href="#17-%e5%9c%a8%e6%b5%8f%e8%a7%88%e5%99%a8%e4%b8%ad%e6%9f%a5%e7%9c%8bopenpai">1.7. 在浏览器中查看OpenPai</a></li>
+<li><a href="#18-%e5%85%b3%e9%97%adnni">1.8. 关闭NNI</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
 <h1><span id="1-使用步骤">1. 使用步骤</span></h1><h2><span id="11-编写程序">1.1. 编写程序</span></h2><p>   先在VSCode中完成代码，先在VSCode的虚拟环境中运行，如果可以运行，再使用OpemPai运行。<br>   <strong>注：在OpenPai上运行程序，不需要指定使用哪块GPU，因为OpenPai会自动申请需要使用的GPU。即以下代码注释掉</strong></p>
    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3"</span></span><br></pre></td></tr></table></figure>
 <h2><span id="12-准备镜像">1.2. 准备镜像</span></h2><p>   准备一个包含hdfs的镜像，将需要用的镜像push到实验室服务器的仓库。<br>   下面是我本人的镜像：</p>
@@ -622,7 +636,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1252,11 +1266,31 @@
       
       new needShareButton('#needsharebutton-float', flOptions);
     
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script>
 
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

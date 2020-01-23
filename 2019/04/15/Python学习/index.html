@@ -86,8 +86,16 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/list.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/arr.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/max.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/排序前.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/排序后.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/reindex.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/5.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/dict.png">
-<meta property="og:updated_time" content="2020-01-23T11:06:28.163Z">
+<meta property="og:updated_time" content="2020-01-23T13:56:07.348Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python学习">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;学习Python！！！！">
@@ -501,25 +509,52 @@
 <li>np.cumprod()，返回累乘积值<br>注意：在使用以上这些函数时，需要指定axis的方向，若不指定，默认统计整个数组。axis=0表示列，axis=1表示行。一般axis=0比较符合实际情况。</li>
 </ul>
 <p><img src="/2019/04/15/Python学习/max.png" alt=""></p>
-<h1><span id="5-pandas">5. Pandas</span></h1><p>&ensp;&ensp;&ensp;&ensp; DataFrame根据某一列排序，其中inplace=True表示修改df的值，默认是false，表示不修改df的值，会返回一个排好序的DataFrame。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">排好序的dataframe的index列还是原先dataframe的index。比如下面的图是排序之间的dataframe</span><br><span class="line"></span><br><span class="line">![](Python学习/排序前.png)</span><br><span class="line"></span><br><span class="line">使用```df.sort_values(&quot;数据时间&quot;,inplace=True)```  按照时间排序，但是index还是原先的index，我想让排序后的dataframe的index从0开始。</span><br><span class="line"></span><br><span class="line">![](Python学习/排序后.png)</span><br><span class="line"></span><br><span class="line">```df[2:4]```表示返回第3和4行的数据，即索引为3731，512这2行的数据，而不是返回索引为2和3的数据。</span><br><span class="line">使用```sort_df.reset_index(drop=True, inplace=True)``` 重新定义索引，使其从0开始。</span><br><span class="line"></span><br><span class="line">![](Python学习/reindex.png)</span><br><span class="line"></span><br><span class="line">获取dataframe中的索引  </span><br><span class="line">`firstIndex = df.index.tolist()`  返回一个list，存储的是dataframe中的索引列表。</span><br><span class="line">`firstIndex = df.index.tolist()[0] ` 返回的是第一行数据的索引   </span><br><span class="line">`firstIndex = df.index.tolist()[-1]` 返回的是最后一行数据的索引</span><br><span class="line"></span><br><span class="line">## 获取dataframe中的数据</span><br><span class="line"></span><br><span class="line">![](Python学习/1.png)</span><br><span class="line"></span><br><span class="line">1. ```df[1:4]```表示获取表的第2至4行</span><br><span class="line"></span><br><span class="line">![](Python学习/2.png)</span><br><span class="line"></span><br><span class="line">2. df.head()默认返回dataframe中的前5行，如果返回前10行，使用head(10).</span><br><span class="line"></span><br><span class="line">![](Python学习/3.png)</span><br><span class="line"></span><br><span class="line">3. 使用```df.iloc[]```和```df.loc[]```获取数据。</span><br><span class="line"></span><br><span class="line">![](Python学习/4.png)</span><br><span class="line"></span><br><span class="line">![](Python学习/5.png)</span><br><span class="line"></span><br><span class="line">通过  ```df.iloc[]```传入的参数是数据，而```df.loc[]```传入的参数是字符串索引，除非索引是数字，这时loc[]可以传入数字。  </span><br><span class="line">比如df1.loc[2]表示获取索引为&apos;2&apos;的那一行，而df.iloc[2]表示获取df1的第3行数据，是一个相对位置。  </span><br><span class="line">参考资料：  </span><br><span class="line">[https://www.jb51.net/article/141665.htm](https://www.jb51.net/article/141665.htm)</span><br><span class="line"></span><br><span class="line">## DateFrame常用方法</span><br><span class="line"></span><br><span class="line">- 获取df中某一列特征值的个数   </span><br><span class="line">`credit_df[&apos;Class&apos;].value_counts()`或</span><br><span class="line">`credit_df[&apos;Class&apos;].value_counts()[0]`</span><br><span class="line">- 显示df中的详细信息</span><br><span class="line">`df.info()`</span><br><span class="line">`df.describe()`</span><br><span class="line">- 获取df中的所有列名</span><br><span class="line">`col_names = list(df.columns.values)`</span><br><span class="line">- 将df按照某一特征进行分组</span><br><span class="line">`df.groupby([&apos;total_vol&apos;]).size()`获取每个组中元素的个数   </span><br><span class="line">`df.groupby([&apos;total_vol&apos;,&apos;soc&apos;]).size()`按照多个属性分组</span><br><span class="line">- 从df中获取样本的特征和标签</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">获取特征</span><br><span class="line">X = df.drop(&quot;误报&quot;,axis = 1)</span><br><span class="line">获取标签</span><br><span class="line">Y = df[&quot;误报&quot;]</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>获取df中的一列或多列</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">one_col = df[<span class="string">'total_vol'</span>]</span><br><span class="line">multi_cols_name = [<span class="string">'total_vol'</span>,<span class="string">'soc'</span>,<span class="string">'cur'</span>]   </span><br><span class="line">multi_cols = df[multi_cols_name]</span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看df中为空的个数,输出每一列为nan的个数<br><code>df.isna().sum()</code></li>
+<h1><span id="5-pandas">5. Pandas</span></h1><p>&ensp;&ensp;&ensp;&ensp; DataFrame根据某一列排序，其中inplace=True表示修改df的值，默认是false，表示不修改df的值，会返回一个排好序的DataFrame。<br><code>df.sort_values(&quot;数据时间&quot;,inplace=True)</code></p>
+<p>排好序的dataframe的index列还是原先dataframe的index。比如下面的图是排序之间的dataframe</p>
+<p><img src="/2019/04/15/Python学习/排序前.png" alt=""></p>
+<p>使用<code>df.sort_values(&quot;数据时间&quot;,inplace=True)</code>按照时间排序，但是index还是原先的index，我想让排序后的dataframe的index从0开始。</p>
+<p><img src="/2019/04/15/Python学习/排序后.png" alt=""></p>
+<p><code>df[2:4]</code>表示返回第3和4行的数据，即索引为3731，512这2行的数据，而不是返回索引为2和3的数据。<br>使用<code>sort_df.reset_index(drop=True, inplace=True)</code> 重新定义索引，使其从0开始。</p>
+<p><img src="/2019/04/15/Python学习/reindex.png" alt=""></p>
+<p>获取dataframe中的索引<br><code>firstIndex = df.index.tolist()</code>  返回一个list，存储的是dataframe中的索引列表。<br><code>firstIndex = df.index.tolist()[0]</code> 返回的是第一行数据的索引<br><code>firstIndex = df.index.tolist()[-1]</code> 返回的是最后一行数据的索引</p>
+<h2><span id="获取dataframe中的数据">获取dataframe中的数据</span></h2><p><img src="/2019/04/15/Python学习/1.png" alt=""></p>
+<ol>
+<li><p><code>df[1:4]</code>表示获取表的第2至4行<br><img src="/2019/04/15/Python学习/2.png" alt=""></p>
+</li>
+<li><p>df.head()默认返回dataframe中的前5行，如果返回前10行，使用head(10)<br><img src="/2019/04/15/Python学习/3.png" alt=""></p>
+</li>
+<li><p>使用<code>df.iloc[]</code>和<code>df.loc[]</code>获取数据。<br><img src="/2019/04/15/Python学习/4.png" alt=""><br><img src="/2019/04/15/Python学习/5.png" alt=""></p>
+</li>
+</ol>
+<p>通过 <code>df.iloc[]</code>传入的参数是数据，而<code>df.loc[]</code>传入的参数是字符串索引，除非索引是数字，这时loc[]可以传入数字。<br>比如df1.loc[2]表示获取索引为’2’的那一行，而df.iloc[2]表示获取df1的第3行数据，是一个相对位置。<br>参考资料：<br><a href="https://www.jb51.net/article/141665.htm" target="_blank" rel="noopener">https://www.jb51.net/article/141665.htm</a></p>
+<h2><span id="dateframe常用方法">DateFrame常用方法</span></h2><ul>
+<li>获取df中某一列特征值的个数<br><code>credit_df[&#39;Class&#39;].value_counts()</code>或<br><code>credit_df[&#39;Class&#39;].value_counts()[0]</code></li>
+<li>显示df中的详细信息<br><code>df.info()</code><br><code>df.describe()</code></li>
+<li>获取df中的所有列名<br><code>col_names = list(df.columns.values)</code></li>
+<li>将df按照某一特征进行分组<br><code>df.groupby([&#39;total_vol&#39;]).size()</code>获取每个组中元素的个数<br><code>df.groupby([&#39;total_vol&#39;,&#39;soc&#39;]).size()</code>按照多个属性分组</li>
+<li><p>从df中获取样本的特征和标签</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取特征</span></span><br><span class="line">X = df.drop(<span class="string">"误报"</span>,axis = <span class="number">1</span>)</span><br><span class="line"><span class="comment">#获取标签</span></span><br><span class="line">Y = df[<span class="string">"误报"</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取df中的一列或多列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">one_col = df[<span class="string">'total_vol'</span>]</span><br><span class="line">multi_cols_name = [<span class="string">'total_vol'</span>,<span class="string">'soc'</span>,<span class="string">'cur'</span>]</span><br><span class="line">multi_cols = df[multi_cols_name]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看df中为空的个数,输出每一列为nan的个数<br><code>df.isna().sum()</code></p>
+</li>
 </ul>
 <h1><span id="dict">Dict</span></h1><p>python创建一个字典有3中方式</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dict</span><span class="params">(**kwarg)</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">dict</span><span class="params">(mapping,**kwarg)</span></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">dict</span><span class="params">(iterable,**kwarg)</span></span></span><br></pre></td></tr></table></figure>
-<p>其中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- class dict(**kwarg)  </span><br><span class="line">通过关键字参数创建一个字典，例如</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">d = dict(name=&apos;Tom&apos;,age=23)</span><br><span class="line">out: &#123;&apos;age&apos;: 23, &apos;name&apos;: &apos;Tom&apos;&#125;</span><br><span class="line"></span><br><span class="line">d = dict(a = 12, b = 13, c = 15)  </span><br><span class="line">out: &#123;&apos;a&apos;: 12, &apos;b&apos;: 13, &apos;c&apos;: 15&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中<code>**kwarg</code>是python中可变参数，代表关键字参数，允许你传入0个或任意多个含参数名的参数，这个关键字参数在函数内部自动组装成一个dict。</p>
 <ul>
-<li>class dict(mapping,<strong>kwarg)<br>通过从一个映射函数对象中构造一个新字典，与dict(</strong>kwarg)函数不一样的地方是参数输入是一个映射类型的函数对象，比如zip函数，map函数</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">以映射函数方式来构造字典</span><br><span class="line">d2 = dict(zip([<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three'</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]))  </span><br><span class="line">out: &#123;<span class="string">'one'</span>: <span class="number">1</span>, <span class="string">'three'</span>: <span class="number">3</span>, <span class="string">'two'</span>: <span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>class dict(iterable,**kwarg)<br>其中iterable表示可迭代对象，可迭代对象可以使用for…in…来遍历，在Pytohn中list，tuple，str，dict，set等都是可迭代对象。创建dict时如果传入的是可迭代对象，则可迭代对象中每一项自身必须是可迭代的，并且每一项只能由有2个对象，第一个对象称为字典的key，第二个对象为key对应的value。如果key有重复，其value为最后重复项的值</li>
-</ul>
+<li><p>class dict(**kwarg)<br>通过关键字参数创建一个字典，例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d = dict(name=<span class="string">'Tom'</span>,age=<span class="number">23</span>)</span><br><span class="line">out: &#123;<span class="string">'age'</span>: <span class="number">23</span>, <span class="string">'name'</span>: <span class="string">'Tom'</span>&#125;</span><br><span class="line"></span><br><span class="line">d = dict(a = <span class="number">12</span>, b = <span class="number">13</span>, c = <span class="number">15</span>)  </span><br><span class="line">out: &#123;<span class="string">'a'</span>: <span class="number">12</span>, <span class="string">'b'</span>: <span class="number">13</span>, <span class="string">'c'</span>: <span class="number">15</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>class dict(mapping,<strong>kwarg)<br>通过从一个映射函数对象中构造一个新字典，与dict(</strong>kwarg)函数不一样的地方是参数输入是一个映射类型的函数对象，比如zip函数，map函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#以映射函数方式来构造字典</span></span><br><span class="line">d2 = dict(zip([<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three'</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]))  </span><br><span class="line">out: &#123;<span class="string">'one'</span>: <span class="number">1</span>, <span class="string">'three'</span>: <span class="number">3</span>, <span class="string">'two'</span>: <span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>class dict(iterable,**kwarg)<br>其中iterable表示可迭代对象，可迭代对象可以使用for…in…来遍历，在Pytohn中list，tuple，str，dict，set等都是可迭代对象。创建dict时如果传入的是可迭代对象，则可迭代对象中每一项自身必须是可迭代的，并且每一项只能由有2个对象，第一个对象称为字典的key，第二个对象为key对应的value。如果key有重复，其value为最后重复项的值</p>
 <p><img src="/2019/04/15/Python学习/dict.png" alt=""></p>
+</li>
+</ul>
 <h1><span id="函数参数">函数参数</span></h1><p>&ensp;&ensp;&ensp;&ensp;在python中定义一个函数，可以传入4种参数：<br>位置参数，默认参数，关键字参数，可变参数</p>
 <h2><span id="位置参数">位置参数</span></h2><p>普通的参数，参数之间是有顺序的， 顺序不能写错</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">power</span><span class="params">(x, n)</span>:</span></span><br><span class="line">    s = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line">        n = n - <span class="number">1</span></span><br><span class="line">        s = s * x</span><br><span class="line">    <span class="keyword">return</span> s</span><br></pre></td></tr></table></figure>
@@ -728,7 +763,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -777,7 +812,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 规范</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 词典</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. ndarray和list</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 创建ndarray</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.1.1. 通过np.array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.1.2. 通过np.arange</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.1.3. list和ndarray的索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.1.4. np.max()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. Pandas</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">Dict</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">函数参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">位置参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">关键字参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">默认参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">可变参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">*args</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">**args</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">文件读取</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 规范</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 词典</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. ndarray和list</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 创建ndarray</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.1.1. 通过np.array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.1.2. 通过np.arange</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.1.3. list和ndarray的索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.1.4. np.max()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. Pandas</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">获取dataframe中的数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">DateFrame常用方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">Dict</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">函数参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">位置参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">关键字参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">默认参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">可变参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">*args</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">**args</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">文件读取</span></a></li></ol></div>
             
 
           </div>
@@ -1358,11 +1393,31 @@
       
       new needShareButton('#needsharebutton-float', flOptions);
     
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script>
 
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

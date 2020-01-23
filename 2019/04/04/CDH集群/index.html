@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="CDH集群,Linux,">
+  <meta name="keywords" content="CDH集群,">
 
 
 
@@ -74,7 +74,7 @@
 
 
 <meta name="description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近去给甲方安装CDH集群，对于集群的搭建和测试在这里总结一下。">
-<meta name="keywords" content="CDH集群,Linux">
+<meta name="keywords" content="CDH集群">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CDH集群">
 <meta property="og:url" content="http://yoursite.com/2019/04/04/CDH集群/index.html">
@@ -88,7 +88,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/04/CDH集群/spark3.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/04/CDH集群/spark4.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/04/CDH集群/kafka1.png">
-<meta property="og:updated_time" content="2020-01-23T08:11:18.084Z">
+<meta property="og:updated_time" content="2020-01-23T14:03:17.562Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CDH集群">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近去给甲方安装CDH集群，对于集群的搭建和测试在这里总结一下。">
@@ -464,46 +464,84 @@
 <table>
 <thead>
 <tr>
-<th></th>
 <th>组件</th>
 <th>版本</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td></td>
 <td>CenOS</td>
 <td>CenOS7</td>
-<td></td>
 </tr>
 <tr>
-<td></td>
 <td>JDK</td>
 <td>JDK1.8</td>
-<td></td>
 </tr>
 <tr>
-<td></td>
 <td>CDH集群</td>
 <td>CDH5.7.2</td>
-<td></td>
 </tr>
 <tr>
-<td></td>
 <td>CDH-kafka</td>
 <td>CDH-kafka1.2.0</td>
-<td></td>
 </tr>
 <tr>
-<td></td>
 <td>Python</td>
 <td>Python3.5</td>
-<td></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>现在实验室的cdh集群版本是CDH5.7.2,其中每个组件的版本是<br>| 组件 | CDH5.7.2|CDH5.16.1|<br>-|-|-|-<br>|Hadoop|2.6.0|2.6.0|<br>|HDFS|2.6.0|2.6.0|<br>|HBase|1.2.0|1.2.0|<br>|Hive|1.1.0|1.1.0|<br>|Spark|1.6.0|1.6.0|<br>|Kafka|0.10.0|0.10.0|<br>|Zookeeper|3.4.5|3.4.5|<br>以后安装CDH集群，应该安装CDH5.16.1版本</p>
+<p>现在实验室的cdh集群版本是CDH5.7.2,其中每个组件的版本是</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>CDH5.7.2</th>
+<th>CDH5.16.1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hadoop</td>
+<td>2.6.0</td>
+<td>2.6.0</td>
+</tr>
+<tr>
+<td>HDFS</td>
+<td>2.6.0</td>
+<td>2.6.0</td>
+</tr>
+<tr>
+<td>HBase</td>
+<td>1.2.0</td>
+<td>1.2.0</td>
+</tr>
+<tr>
+<td>Hive</td>
+<td>1.1.0</td>
+<td>1.1.0</td>
+</tr>
+<tr>
+<td>Spark</td>
+<td>1.6.0</td>
+<td>1.6.0</td>
+</tr>
+<tr>
+<td>Kafka</td>
+<td>0.10.0</td>
+<td>0.10.0</td>
+</tr>
+<tr>
+<td>Zookeeper</td>
+<td>3.4.5</td>
+<td>3.4.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>以后安装CDH集群，应该安装CDH5.16.1版本</p>
 <h1><span id="2-linux目录介绍">2. Linux目录介绍</span></h1><div class="table-container">
 <table>
 <thead>
@@ -671,8 +709,6 @@
           
             <a href="/tags/CDH集群/" rel="tag"># CDH集群</a>
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
-          
         </div>
       
 
@@ -808,7 +844,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1438,11 +1474,31 @@
       
       new needShareButton('#needsharebutton-float', flOptions);
     
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script>
 
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

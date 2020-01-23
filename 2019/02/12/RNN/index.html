@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="RNN,LSTM,GRU,">
+  <meta name="keywords" content="RNN,">
 
 
 
@@ -74,7 +74,7 @@
 
 
 <meta name="description" content="1. 门控循环单元GRU&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;梯度裁剪可以应对梯度爆炸，但无法解决梯度衰减的问题。通常由于这个原因，循环神经网络在实际中较难捕捉时间序列中时间步距离较大的依赖关系。">
-<meta name="keywords" content="RNN,LSTM,GRU">
+<meta name="keywords" content="RNN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RNN">
 <meta property="og:url" content="http://yoursite.com/2019/02/12/RNN/index.html">
@@ -83,7 +83,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/02/12/RNN/lstm.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/02/12/RNN/公式.png">
-<meta property="og:updated_time" content="2020-01-23T11:31:47.003Z">
+<meta property="og:updated_time" content="2020-01-23T13:07:56.798Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RNN">
 <meta name="twitter:description" content="1. 门控循环单元GRU&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;梯度裁剪可以应对梯度爆炸，但无法解决梯度衰减的问题。通常由于这个原因，循环神经网络在实际中较难捕捉时间序列中时间步距离较大的依赖关系。">
@@ -505,10 +505,6 @@
           
             <a href="/tags/RNN/" rel="tag"># RNN</a>
           
-            <a href="/tags/LSTM/" rel="tag"># LSTM</a>
-          
-            <a href="/tags/GRU/" rel="tag"># GRU</a>
-          
         </div>
       
 
@@ -644,7 +640,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1274,11 +1270,31 @@
       
       new needShareButton('#needsharebutton-float', flOptions);
     
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script>
 
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

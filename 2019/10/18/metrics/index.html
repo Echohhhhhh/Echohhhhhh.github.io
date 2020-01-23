@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="评价指标,">
+  <meta name="keywords" content="machine learning,">
 
 
 
@@ -74,9 +74,9 @@
 
 
 <meta name="description" content="介绍在回归问题中的主要评价指标，以及各自的特点">
-<meta name="keywords" content="评价指标">
+<meta name="keywords" content="machine learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="metrics">
+<meta property="og:title" content="评价指标">
 <meta property="og:url" content="http://yoursite.com/2019/10/18/metrics/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="介绍在回归问题中的主要评价指标，以及各自的特点">
@@ -85,15 +85,15 @@
 <meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/mse.png">
 <meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/rmse.png">
 <meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/mape.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/hun.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/f1.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/micro.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/precison-mi.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/recall-mi.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/f1-mi.png">
-<meta property="og:updated_time" content="2020-01-23T09:16:11.367Z">
+<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/hun.png">
+<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/f1.png">
+<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/micro.png">
+<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/precison-mi.png">
+<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/recall-mi.png">
+<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/f1-mi.png">
+<meta property="og:updated_time" content="2020-01-23T13:23:08.271Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="metrics">
+<meta name="twitter:title" content="评价指标">
 <meta name="twitter:description" content="介绍在回归问题中的主要评价指标，以及各自的特点">
 <meta name="twitter:image" content="http://yoursite.com/2019/10/18/metrics/mae.png">
 
@@ -131,7 +131,7 @@
 
 
 
-  <title>metrics | Echo's blog</title>
+  <title>评价指标 | Echo's blog</title>
   
 
 
@@ -327,7 +327,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">metrics</h2>
+          <h2 class="post-title" itemprop="name headline">评价指标</h2>
         
 
         <div class="post-meta">
@@ -362,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Deep Learning</span>
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
                   </a>
                 </span>
 
@@ -492,17 +492,17 @@
 <li><p>得到的指标是否依赖于量纲(即绝对度量，而不是相对度量)，如果指标依赖量纲那么不同模型之间可能因为量纲不同而无法比较；</p>
 </li>
 </ol>
-<h1><span id="3-分类问题">3. 分类问题</span></h1><p>在二分类任务中，使用Precison，Recall和F1值来评价分类的效果。<br><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/hun.png" alt=""></p>
-<p><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/f1.png" alt=""></p>
+<h1><span id="3-分类问题">3. 分类问题</span></h1><p>在二分类任务中，使用Precison，Recall和F1值来评价分类的效果。<br><img src="/2019/10/18/metrics/hun.png" alt=""></p>
+<p><img src="/2019/10/18/metrics/f1.png" alt=""></p>
 <p>F1是针对二分类的，对于多分类，有2个常用的指标，Marco-F1和Micro-F1.</p>
-<h2><span id="31-micro-f1">3.1. Micro-F1</span></h2><p><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/micro.png" alt=""></p>
+<h2><span id="31-micro-f1">3.1. Micro-F1</span></h2><p><img src="/2019/10/18/metrics/micro.png" alt=""></p>
 <p>假设对于一个多分类问题，有三个类，分别是1，2，3</p>
 <p>$TP_i$表示分类$i$的TP<br>$FP_i$表示分类$i$的FP<br>$TN_i$表示分类$i$的TN<br>$FN_i$表示分类$i$的FN<br>接下来，我们来计算Micro的Precison</p>
-<p><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/precison-mi.png" alt=""></p>
+<p><img src="/2019/10/18/metrics/precison-mi.png" alt=""></p>
 <p>以及Micro的Recall</p>
-<p><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/recall-mi.png" alt=""></p>
+<p><img src="/2019/10/18/metrics/recall-mi.png" alt=""></p>
 <p>然后计算Micro-F1</p>
-<p><img src="/2019/10/18/metrics/MiST-A-Multiview-and-Multimodal-Spatial-Temporal-Learning-Framework-for-Citywide-Abnormal-Event-Forecasting/f1-mi.png" alt=""></p>
+<p><img src="/2019/10/18/metrics/f1-mi.png" alt=""></p>
 <h2><span id="32-macro-f1">3.2. Macro-F1</span></h2><p>先计算每个类的Precison和Rcall，从而计算出每个类的F1，然后将所有类的F1值平均得到Macro-F1。<br>如果数据集中各个类的分布不均衡的话，建议使用Micro-F1。<br>Macro-F1平等的看待各个类别，它的值更容易受少类别的影响Micro则更容易受常见类别的影响。</p>
 
       
@@ -550,7 +550,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/评价指标/" rel="tag"># 评价指标</a>
+            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
           
         </div>
       
@@ -687,7 +687,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1317,11 +1317,31 @@
       
       new needShareButton('#needsharebutton-float', flOptions);
     
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script>
 
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

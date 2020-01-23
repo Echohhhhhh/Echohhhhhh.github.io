@@ -85,7 +85,9 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/putty.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/port.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/python.png">
-<meta property="og:updated_time" content="2020-01-23T08:02:42.497Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/bashrc1.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/bashrc2.png">
+<meta property="og:updated_time" content="2020-01-23T13:42:13.631Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="虚拟环境安装">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在服务器上安装虚拟环境。">
@@ -485,17 +487,12 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mxnet <span class="keyword">as</span> mx</span><br><span class="line"><span class="keyword">from</span> mxnet <span class="keyword">import</span> nd   </span><br><span class="line">z = nd.ones(shape=(<span class="number">3</span>, <span class="number">3</span>), ctx=mx.gpu(<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
 <p> 然后我创建了一个screen，在这个screen中<code>source activate mxnet</code>启动虚拟环境，然后使用python运行以上相同的代码，却出错。</p>
  <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OSError: libcudart.so<span class="number">.10</span><span class="number">.0</span>: cannot <span class="built_in">open</span> shared  object <span class="built_in">file</span>: No such <span class="built_in">file</span> <span class="keyword">or</span> <span class="built_in">directory</span></span><br></pre></td></tr></table></figure>
+<p> 查了资料解决方案如下：<br> 按Ctrl+A+D退出screen。然后查看.bashrc的内容，原先是</p>
+<p> <img src="/2019/04/27/虚拟环境安装/bashrc1.png" alt=""></p>
+<p> 将其修改如下：修改完之后使用<code>source .bashrc</code>激活<br> 当有多个PATH时，中间使用冒号拼接。<br> <img src="/2019/04/27/虚拟环境安装/bashrc2.png" alt=""><br> 然后再screen，再次运行上述的python代码成功。</p>
 </li>
-</ol>
-<pre><code>查了资料解决方案如下：
-按Ctrl+A+D退出screen。然后查看.bashrc的内容，原先是   
-![](虚拟环境安装/bashrc1.png)        
-将其修改如下：修改完之后使用`source .bashrc`激活   
-当有多个PATH时，中间使用冒号拼接。
-![](虚拟环境安装/bashrc2.png)    
-然后再screen，再次运行上述的python代码成功。 
-</code></pre><ol>
-<li>cuda版本出错<br>查看系统cuda的版本，安装对应版本的深度学习框架<br><code>cat /usr/local/cuda/version.txt</code>如果安装错了，先使用<code>pip uninstall mxnet-cu100</code>，删除原先的mxnet，然后再使用<code>pip install mxnet-cu101</code>安装对应的版本.</li>
+<li><p>cuda版本出错<br>查看系统cuda的版本，安装对应版本的深度学习框架<br><code>cat /usr/local/cuda/version.txt</code>如果安装错了，先使用<code>pip uninstall mxnet-cu100</code>，删除原先的mxnet，然后再使用<code>pip install mxnet-cu101</code>安装对应的版本.</p>
+</li>
 </ol>
 
       
@@ -682,7 +679,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1312,11 +1309,31 @@
       
       new needShareButton('#needsharebutton-float', flOptions);
     
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script>
 
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

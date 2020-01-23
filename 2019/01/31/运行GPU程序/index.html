@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="GPU,">
+  <meta name="keywords" content="GPU,服务器,">
 
 
 
@@ -74,14 +74,14 @@
 
 
 <meta name="description" content="平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU">
-<meta name="keywords" content="GPU">
+<meta name="keywords" content="GPU,服务器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="运行GPU程序">
 <meta property="og:url" content="http://yoursite.com/2019/01/31/运行GPU程序/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-23T08:03:46.916Z">
+<meta property="og:updated_time" content="2020-01-23T13:06:23.397Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="运行GPU程序">
 <meta name="twitter:description" content="平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU">
@@ -477,6 +477,8 @@
           
             <a href="/tags/GPU/" rel="tag"># GPU</a>
           
+            <a href="/tags/服务器/" rel="tag"># 服务器</a>
+          
         </div>
       
 
@@ -612,7 +614,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1242,11 +1244,31 @@
       
       new needShareButton('#needsharebutton-float', flOptions);
     
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script>
 
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

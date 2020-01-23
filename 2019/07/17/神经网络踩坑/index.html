@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="默默努力">
+  <meta name="keywords" content="调参经验,">
 
 
 
@@ -73,20 +73,23 @@
 
 
 
-<meta name="description" content="title: 神经网络踩坑date: 2019-07-17T16:08:20.000Zcategories: Deep Learningtags:  训练经验 踩坑comments: false   参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc7">
+<meta name="description" content="参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e">
+<meta name="keywords" content="调参经验">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Echo&#39;s blog">
+<meta property="og:title" content="神经网络踩坑">
 <meta property="og:url" content="http://yoursite.com/2019/07/17/神经网络踩坑/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="title: 神经网络踩坑date: 2019-07-17T16:08:20.000Zcategories: Deep Learningtags:  训练经验 踩坑comments: false   参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc7">
+<meta property="og:description" content="参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/norm.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/cross.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/conv.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/sigmoid.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/gpu.png">
-<meta property="og:updated_time" content="2020-01-23T07:46:34.082Z">
+<meta property="og:updated_time" content="2020-01-23T13:38:08.108Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Echo&#39;s blog">
-<meta name="twitter:description" content="title: 神经网络踩坑date: 2019-07-17T16:08:20.000Zcategories: Deep Learningtags:  训练经验 踩坑comments: false   参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc7">
+<meta name="twitter:title" content="神经网络踩坑">
+<meta name="twitter:description" content="参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e">
 <meta name="twitter:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/norm.png">
 
 
@@ -123,7 +126,7 @@
 
 
 
-  <title> | Echo's blog</title>
+  <title>神经网络踩坑 | Echo's blog</title>
   
 
 
@@ -319,7 +322,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline"></h2>
+          <h2 class="post-title" itemprop="name headline">神经网络踩坑</h2>
         
 
         <div class="post-meta">
@@ -331,7 +334,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-17T16:08:21+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-17T16:08:20+08:00">
                 2019-07-17
               </time>
             
@@ -342,9 +345,29 @@
           </span>
 
           
-
-          
+            <span class="post-category">
             
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
           
 
           
@@ -405,52 +428,78 @@
       
 
       
-        <hr>
-<p>title: 神经网络踩坑<br>date: 2019-07-17T16:08:20.000Z<br>categories: Deep Learning<br>tags:</p>
-<ul>
-<li>训练经验</li>
-<li>踩坑<br>comments: false</li>
-</ul>
-<hr>
-<p>参考资料:<br><a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650729285&amp;idx=1&amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e6f79daaeed&amp;mpshare=1&amp;scene=1&amp;srcid=07263lmMeeAcHLPSZpJXJI3L#rd" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650729285&amp;idx=1&amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e6f79daaeed&amp;mpshare=1&amp;scene=1&amp;srcid=07263lmMeeAcHLPSZpJXJI3L#rd</a>   </p>
+        <p>参考资料:<br><a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650729285&amp;idx=1&amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e6f79daaeed&amp;mpshare=1&amp;scene=1&amp;srcid=07263lmMeeAcHLPSZpJXJI3L#rd" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650729285&amp;idx=1&amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e6f79daaeed&amp;mpshare=1&amp;scene=1&amp;srcid=07263lmMeeAcHLPSZpJXJI3L#rd</a>   </p>
 <a id="more"></a>
-<ol>
-<li><strong>Suffle数据集</strong><br><strong>先划分数据集再shuffle</strong>。先将数据集划分成训练集、验证集、测试集。然后在DataLoader划分mini-batch时对训练集进行shuffle得到batch。<strong>对验证集和测试集不需要shuffle</strong>。不对训练集进行shuffle容易造成过拟合。<br><strong>只对train进行shuffle，对val和test不进行shuffle</strong></li>
-<li><p><strong>归一化</strong><br>先划分数据集，再归一化。将数据划分成训练集，验证集，测试集，然后计算<strong>训练集的平均值和标准差</strong>。使用训练集的平均值和标准差对验证集和测试集进行归一化。模型不应该知道关于测试集的任何信息，所以要用训练集的均值和标准差对训练集归一化。<br><strong>划分数据集—&gt;归一化—&gt;对训练集shuffle</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, train_size = <span class="number">0.7</span>) <span class="comment">#train 70%, test 30%</span></span><br><span class="line">ss = StandardScaler()</span><br><span class="line">ss.fit(X_train)</span><br><span class="line"><span class="comment">#X_val_std = ss.transform(X_val)#如果有验证集</span></span><br><span class="line">X_test_std = ss.transform(X_test)</span><br></pre></td></tr></table></figure>
-<p>一般都是把数据归一化成[0,1]或者减去均值除以标准化。默认是对每一列进行归一化，即axis=0。很少用sklearn的标准化方法，都是自己写一个方法用来标准化。<br><img src="/2019/07/17/神经网络踩坑/norm.png" alt=""><br>在实际中对train，val，test归一化有2种方法，<br>方法1：同时传入train，val，test参数，返回归一化后的trian，val，test和训练集的mean、std。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalize</span><span class="params">(x)</span>:</span></span><br><span class="line">    mean = x.mean(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line">    std = x.std(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line">    <span class="keyword">return</span> (x - mean) / std  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalization</span><span class="params">(train, val, test)</span>:</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Parameters</span></span><br><span class="line"><span class="string">----------</span></span><br><span class="line"><span class="string">train, val, test: np.ndarray</span></span><br><span class="line"><span class="string">Returns</span></span><br><span class="line"><span class="string">----------</span></span><br><span class="line"><span class="string">stats: dict, two keys: mean and std</span></span><br><span class="line"><span class="string">train_norm, val_norm, test_norm: np.ndarray,</span></span><br><span class="line"><span class="string">                                 shape is the same as original</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">assert</span> train.shape[<span class="number">1</span>:] == val.shape[<span class="number">1</span>:] <span class="keyword">and</span> val.shape[<span class="number">1</span>:] == test.shape[<span class="number">1</span>:]</span><br><span class="line"></span><br><span class="line">    <span class="comment">#求出训练集的mean和std</span></span><br><span class="line">    <span class="comment">#假设train的维度是(3,6,9),mean和std的维度为(1,6,9)</span></span><br><span class="line">    mean = train.mean(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line">    std = train.std(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalize</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (x - mean) / std</span><br><span class="line"></span><br><span class="line">train_norm = normalize(train)</span><br><span class="line">val_norm = normalize(val)</span><br><span class="line">test_norm = normalize(test)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> &#123;<span class="string">'mean'</span>: mean, <span class="string">'std'</span>: std&#125;, train_norm, val_norm, test_norm</span><br></pre></td></tr></table></figure>
-<p>方法2：<br>如果使用(data-mean)/std进行标准化，需要计算train的平均值和标准差，但是怎么将train的平均值和标准差保留用在val和test上呢？下面自定义一个标准化的类</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Scaler</span>:</span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, data)</span>:</span></span><br><span class="line"><span class="comment">#计算train的平均值和标准差</span></span><br><span class="line">      <span class="comment">#假如data的维度是(2880, 1024, 2)</span></span><br><span class="line">      <span class="comment">#下面的平均值是mean所有的数相加/总个数</span></span><br><span class="line">    self.mean = np.mean(data)<span class="comment">#实数</span></span><br><span class="line">    self.std = np.std(data)<span class="comment">#实数</span></span><br><span class="line">   <span class="comment">#归一化：(数据-平均值)/标准差</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">transform</span><span class="params">(self, data)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (data - self.mean) / self.std</span><br><span class="line">	</span><br><span class="line">   <span class="comment">#反归一化：(数据*标准差)+平均值</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">inverse_transform</span><span class="params">(self, data)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> data * self.std + self.mean</span><br></pre></td></tr></table></figure>
-<p>然后在用到<code>Scaler</code>这个类时，<code>scaler = utils.Scaler(train)</code>,则scaler对象则保留了train的平均值和标准差，使用<code>scaler.mean和scaler.std</code>即可以获得train的平均值和标准差。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scaler = utils.Scaler(train)</span><br><span class="line"><span class="comment">#对train，val，test进行标准化   </span></span><br><span class="line">train_new = scaler.transform(train)</span><br><span class="line">val_new = scaler.transform(val)</span><br><span class="line">test_new = scaler.transform(test)</span><br></pre></td></tr></table></figure>
-<p>在计算loss时，不需要反归一化。在计算评价指标时需要反归一化。在计算评价指标时，比如RMSE,MAE等，首先根据归一化后的test_new得到预测结果predict，然后将predict根据scaler的inverse_transform反归一化，然后使用真实量级的predict和label再计算评价指标。</p>
-</li>
-<li><p><strong>batch_size</strong><br>当数据量较大时，向网络中传入所有的数据来计算loss和梯度，更新参数会造成内存溢出。所以每次向网络中值传入一个batch的数据，说过这一个batch的数据来更新权重，输出这个batch里面所有样本的平均loss。下次再使用另一个batch，更新网络参数，直到所有的数据全都输入，完成一个epoch。</p>
-</li>
-<li><p><strong>划分数据集</strong><br>如果数据充足的情况下，通常采用均匀随机抽样的方法将数据集划分为3部分，训练集，验证集和测试集，这三个集合不能有交集，常见的比例是8:1:1，6:2:2。需要注意的是，通常都会给定训练集和测试集，而不会给验证集，一般的做法是从训练集中抽取一部分数据作为验证集。</p>
-</li>
-<li><p><strong>验证集的使用</strong><br>在训练时，仅使用训练集的数据进行训练，使用验证集评价模型。当选中最好的模型超参数之后，再使用训练集+验证集来训练模型，以充分利用所有的标注数据，然后再测试集上测试</p>
-<p>训练模型时，使用一个bacth来训练模型更新模型参数，记录下batch的loss。当训练完一个epcoh时，记录下模型的参数和梯度。并在验证集上计算验证集的误差，在测试集上计算测试集的MAE和MSE。<br><strong>在训练的时候，每个batch记录训练的时间，</strong><br><strong>使用 tensorboard，训练模型时，每一个batch记录一下train_loss，每一个epoch记录一下模型梯度，在验证集上的loss和评价指标，在测试集上的loss和评价指标，和模型的参数(只保存在val上效果最好的那组参数，其余的删掉)。至于使用val的loss还是评价指标来选择最好的模型，这个需要自己选择</strong><br>在模型训练的时候记录训练集/验证集/测试集的loss，以及验证集/测试集的评价指标。<br>为训练集，验证集，测试集创建3个SummaryWriter。<br>mxboard中log文件夹下的目录结构为：<br>—logs<br>$\qquad$—时间1文件夹<br>$\qquad\qquad$—train文件夹<br>$\qquad\qquad$—valid文件夹<br>$\qquad\qquad$—test文件夹<br>$\qquad$—时间2文件夹<br>$\qquad\qquad$—train文件夹<br>$\qquad\qquad$—valid文件夹<br>$\qquad\qquad$—test文件夹</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">timestamp = datetime.now().strftime(<span class="string">"%Y%m%d%H%M%S"</span>)</span><br><span class="line"> mxboard_log = <span class="string">'./logs/%s_%s/'</span> % (<span class="string">'GRU'</span>,timestamp)</span><br><span class="line"> <span class="keyword">if</span> os.path.exists(mxboard_log):</span><br><span class="line">     shutil.rmtree(mxboard_log)</span><br><span class="line"> os.makedirs(mxboard_log)   </span><br><span class="line"></span><br><span class="line"> train_sw = SummaryWriter(logdir=mxboard_log+<span class="string">'/train'</span>,flush_secs=<span class="number">2</span>)</span><br><span class="line"> val_sw = SummaryWriter(logdir=mxboard_log+<span class="string">'/val'</span>,flush_secs=<span class="number">2</span>)</span><br><span class="line"> test_sw = SummaryWriter(logdir=mxboard_log+<span class="string">'/test'</span>,flush_secs=<span class="number">2</span>)  </span><br><span class="line"></span><br><span class="line"> <span class="comment">#为了让loss显示在一张图上，tag需要一样，但是使用不同的sw，即3个loss会分别写入train,valid,test文件夹中，但是在tensorboard网页上会显示在同一张图中，</span></span><br><span class="line"> train_sw.add_scalar(tag=<span class="string">'loss'</span>,value=training_loss,global_step=global_step)  </span><br><span class="line"> val_sw.add_scalar(tag=<span class="string">'loss'</span>,value=loss_mean,global_step=global_step)</span><br><span class="line"> test_sw.add_scalar(tag=<span class="string">'loss'</span>,value=loss_mean,global_step=global_step)  </span><br><span class="line"> <span class="comment">#评价指标的显示，同理。</span></span><br><span class="line"> val_sw.add_scalar(tag=<span class="string">'MAE'</span>,value=mae,global_step=global_step)</span><br><span class="line"> test_sw.add_scalar(tag=<span class="string">'MAE'</span>,value=mae,global_step=global_step)</span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/panzheyi/ST-MetaNet" target="_blank" rel="noopener">ST-MetaNet</a>这篇论文的代码在使用验证集验证的过程是：</p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-suffle%e6%95%b0%e6%8d%ae%e9%9b%86">1. Suffle数据集</a></li>
+<li><a href="#2-%e5%bd%92%e4%b8%80%e5%8c%96">2. 归一化</a></li>
+<li><a href="#3-batchsize">3. batch_size</a></li>
+<li><a href="#4-%e5%88%92%e5%88%86%e6%95%b0%e6%8d%ae%e9%9b%86">4. 划分数据集</a></li>
+<li><a href="#5-%e9%aa%8c%e8%af%81%e9%9b%86%e7%9a%84%e4%bd%bf%e7%94%a8">5. 验证集的使用</a></li>
+<li><a href="#6-%e4%ba%a4%e5%8f%89%e9%aa%8c%e8%af%81">6. 交叉验证</a></li>
+<li><a href="#7-%e6%95%b0%e6%8d%ae%e8%be%93%e5%85%a5%e5%92%8c%e8%be%93%e5%87%ba">7. 数据输入和输出</a></li>
+<li><a href="#8-%e6%bf%80%e6%b4%bb%e5%87%bd%e6%95%b0">8. 激活函数</a></li>
+<li><a href="#9-gpu%e8%bf%90%e8%a1%8c%e7%a8%8b%e5%ba%8f">9. GPU运行程序</a></li>
+<li><a href="#10-%e4%bd%bf%e7%94%a8%e5%a4%9agpu%e8%bf%90%e8%a1%8c">10. 使用多GPU运行</a></li>
+<li><a href="#11-ndarray%e5%92%8cnumpy">11. NDArray和numpy</a></li>
+<li><a href="#12-tensorboard%e4%bd%bf%e7%94%a8">12. tensorboard使用</a></li>
+<li><a href="#13-dropout%e7%9a%84%e4%bd%bf%e7%94%a8">13. Dropout的使用</a></li>
+<li><a href="#14-%e8%b0%83%e5%8f%82%e7%bb%8f%e9%aa%8c">14. 调参经验</a></li>
+<li><a href="#15-earlystopping">15. EarlyStopping</a></li>
+<li><a href="#16-%e5%8d%b7%e7%a7%af%e5%b0%ba%e5%af%b8%e5%a4%a7%e5%b0%8f%e5%8f%98%e5%8c%96">16. 卷积尺寸大小变化</a></li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-suffle数据集">1. Suffle数据集</span></h1><p>   <strong>先划分数据集再shuffle</strong>。先将数据集划分成训练集、验证集、测试集。然后在DataLoader划分mini-batch时对训练集进行shuffle得到batch。<strong>对验证集和测试集不需要shuffle</strong>。不对训练集进行shuffle容易造成过拟合。<br>   <strong>只对train进行shuffle，对val和test不进行shuffle</strong></p>
+<h1><span id="2-归一化">2. 归一化</span></h1><p>   先划分数据集，再归一化。将数据划分成训练集，验证集，测试集，然后计算<strong>训练集的平均值和标准差</strong>。使用训练集的平均值和标准差对验证集和测试集进行归一化。模型不应该知道关于测试集的任何信息，所以要用训练集的均值和标准差对训练集归一化。<br>   <strong>划分数据集—&gt;归一化—&gt;对训练集shuffle</strong></p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y, train_size = <span class="number">0.7</span>) <span class="comment">#train 70%, test 30%</span></span><br><span class="line">ss = StandardScaler()</span><br><span class="line">ss.fit(X_train)</span><br><span class="line"><span class="comment">#X_val_std = ss.transform(X_val)#如果有验证集</span></span><br><span class="line">X_test_std = ss.transform(X_test)</span><br></pre></td></tr></table></figure>
+<p>   一般都是把数据归一化成[0,1]或者减去均值除以标准化。默认是对每一列进行归一化，即axis=0。很少用sklearn的标准化方法，都是自己写一个方法用来标准化。<br>   <img src="/2019/07/17/神经网络踩坑/norm.png" alt=""><br>   在实际中对train，val，test归一化有2种方法，<br>   方法1：同时传入train，val，test参数，返回归一化后的trian，val，test和训练集的mean、std。</p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalize</span><span class="params">(x)</span>:</span></span><br><span class="line">    mean = x.mean(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line">    std = x.std(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line">    <span class="keyword">return</span> (x - mean) / std  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalization</span><span class="params">(train, val, test)</span>:</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Parameters</span></span><br><span class="line"><span class="string">----------</span></span><br><span class="line"><span class="string">train, val, test: np.ndarray</span></span><br><span class="line"><span class="string">Returns</span></span><br><span class="line"><span class="string">----------</span></span><br><span class="line"><span class="string">stats: dict, two keys: mean and std</span></span><br><span class="line"><span class="string">train_norm, val_norm, test_norm: np.ndarray,</span></span><br><span class="line"><span class="string">                                 shape is the same as original</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">assert</span> train.shape[<span class="number">1</span>:] == val.shape[<span class="number">1</span>:] <span class="keyword">and</span> val.shape[<span class="number">1</span>:] == test.shape[<span class="number">1</span>:]</span><br><span class="line"></span><br><span class="line">    <span class="comment">#求出训练集的mean和std</span></span><br><span class="line">    <span class="comment">#假设train的维度是(3,6,9),mean和std的维度为(1,6,9)</span></span><br><span class="line">    mean = train.mean(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line">    std = train.std(axis=<span class="number">0</span>, keepdims=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">normalize</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (x - mean) / std</span><br><span class="line"></span><br><span class="line">train_norm = normalize(train)</span><br><span class="line">val_norm = normalize(val)</span><br><span class="line">test_norm = normalize(test)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> &#123;<span class="string">'mean'</span>: mean, <span class="string">'std'</span>: std&#125;, train_norm, val_norm, test_norm</span><br></pre></td></tr></table></figure>
+<p>   方法2：<br>   如果使用(data-mean)/std进行标准化，需要计算train的平均值和标准差，但是怎么将train的平均值和标准差保留用在val和test上呢？下面自定义一个标准化的类</p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Scaler</span>:</span></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, data)</span>:</span></span><br><span class="line"><span class="comment">#计算train的平均值和标准差</span></span><br><span class="line">      <span class="comment">#假如data的维度是(2880, 1024, 2)</span></span><br><span class="line">      <span class="comment">#下面的平均值是mean所有的数相加/总个数</span></span><br><span class="line">    self.mean = np.mean(data)<span class="comment">#实数</span></span><br><span class="line">    self.std = np.std(data)<span class="comment">#实数</span></span><br><span class="line">   <span class="comment">#归一化：(数据-平均值)/标准差</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">transform</span><span class="params">(self, data)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (data - self.mean) / self.std</span><br><span class="line">	</span><br><span class="line">   <span class="comment">#反归一化：(数据*标准差)+平均值</span></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">inverse_transform</span><span class="params">(self, data)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> data * self.std + self.mean</span><br></pre></td></tr></table></figure>
+<p>   然后在用到<code>Scaler</code>这个类时，<code>scaler = utils.Scaler(train)</code>,则scaler对象则保留了train的平均值和标准差，使用<code>scaler.mean和scaler.std</code>即可以获得train的平均值和标准差。</p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scaler = utils.Scaler(train)</span><br><span class="line"><span class="comment">#对train，val，test进行标准化   </span></span><br><span class="line">train_new = scaler.transform(train)</span><br><span class="line">val_new = scaler.transform(val)</span><br><span class="line">test_new = scaler.transform(test)</span><br></pre></td></tr></table></figure>
+<p>   在计算loss时，不需要反归一化。在计算评价指标时需要反归一化。在计算评价指标时，比如RMSE,MAE等，首先根据归一化后的test_new得到预测结果predict，然后将predict根据scaler的inverse_transform反归一化，然后使用真实量级的predict和label再计算评价指标。</p>
+<h1><span id="3-batch_size">3. batch_size</span></h1><p>   当数据量较大时，向网络中传入所有的数据来计算loss和梯度，更新参数会造成内存溢出。所以每次向网络中值传入一个batch的数据，说过这一个batch的数据来更新权重，输出这个batch里面所有样本的平均loss。下次再使用另一个batch，更新网络参数，直到所有的数据全都输入，完成一个epoch。</p>
+<h1><span id="4-划分数据集">4. 划分数据集</span></h1><p>   如果数据充足的情况下，通常采用均匀随机抽样的方法将数据集划分为3部分，训练集，验证集和测试集，这三个集合不能有交集，常见的比例是8:1:1，6:2:2。需要注意的是，通常都会给定训练集和测试集，而不会给验证集，一般的做法是从训练集中抽取一部分数据作为验证集。</p>
+<h1><span id="5-验证集的使用">5. 验证集的使用</span></h1><p>   在训练时，仅使用训练集的数据进行训练，使用验证集评价模型。当选中最好的模型超参数之后，再使用训练集+验证集来训练模型，以充分利用所有的标注数据，然后再测试集上测试</p>
+<p>   训练模型时，使用一个bacth来训练模型更新模型参数，记录下batch的loss。当训练完一个epcoh时，记录下模型的参数和梯度。并在验证集上计算验证集的误差，在测试集上计算测试集的MAE和MSE。<br>   <strong>在训练的时候，每个batch记录训练的时间，</strong><br>   <strong>使用 tensorboard，训练模型时，每一个batch记录一下train_loss，每一个epoch记录一下模型梯度，在验证集上的loss和评价指标，在测试集上的loss和评价指标，和模型的参数(只保存在val上效果最好的那组参数，其余的删掉)。至于使用val的loss还是评价指标来选择最好的模型，这个需要自己选择</strong><br>   在模型训练的时候记录训练集/验证集/测试集的loss，以及验证集/测试集的评价指标。<br>   为训练集，验证集，测试集创建3个SummaryWriter。<br>   mxboard中log文件夹下的目录结构为：<br>   —logs<br>   $\qquad$—时间1文件夹<br>   $\qquad\qquad$—train文件夹<br>   $\qquad\qquad$—valid文件夹<br>   $\qquad\qquad$—test文件夹<br>   $\qquad$—时间2文件夹<br>   $\qquad\qquad$—train文件夹<br>   $\qquad\qquad$—valid文件夹<br>   $\qquad\qquad$—test文件夹</p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">timestamp = datetime.now().strftime(<span class="string">"%Y%m%d%H%M%S"</span>)</span><br><span class="line"> mxboard_log = <span class="string">'./logs/%s_%s/'</span> % (<span class="string">'GRU'</span>,timestamp)</span><br><span class="line"> <span class="keyword">if</span> os.path.exists(mxboard_log):</span><br><span class="line">     shutil.rmtree(mxboard_log)</span><br><span class="line"> os.makedirs(mxboard_log)   </span><br><span class="line"></span><br><span class="line"> train_sw = SummaryWriter(logdir=mxboard_log+<span class="string">'/train'</span>,flush_secs=<span class="number">2</span>)</span><br><span class="line"> val_sw = SummaryWriter(logdir=mxboard_log+<span class="string">'/val'</span>,flush_secs=<span class="number">2</span>)</span><br><span class="line"> test_sw = SummaryWriter(logdir=mxboard_log+<span class="string">'/test'</span>,flush_secs=<span class="number">2</span>)  </span><br><span class="line"></span><br><span class="line"> <span class="comment">#为了让loss显示在一张图上，tag需要一样，但是使用不同的sw，即3个loss会分别写入train,valid,test文件夹中，但是在tensorboard网页上会显示在同一张图中，</span></span><br><span class="line"> train_sw.add_scalar(tag=<span class="string">'loss'</span>,value=training_loss,global_step=global_step)  </span><br><span class="line"> val_sw.add_scalar(tag=<span class="string">'loss'</span>,value=loss_mean,global_step=global_step)</span><br><span class="line"> test_sw.add_scalar(tag=<span class="string">'loss'</span>,value=loss_mean,global_step=global_step)  </span><br><span class="line"> <span class="comment">#评价指标的显示，同理。</span></span><br><span class="line"> val_sw.add_scalar(tag=<span class="string">'MAE'</span>,value=mae,global_step=global_step)</span><br><span class="line"> test_sw.add_scalar(tag=<span class="string">'MAE'</span>,value=mae,global_step=global_step)</span><br></pre></td></tr></table></figure>
+<p>   <a href="https://github.com/panzheyi/ST-MetaNet" target="_blank" rel="noopener">ST-MetaNet</a>这篇论文的代码在使用验证集验证的过程是：</p>
 <ol>
 <li>在for循环中遍历所有的的epoch</li>
 <li>在每个epoch中，使用训练集训练模型，使用该epoch训练的模型对val进行验证，记录当前模型在val的metric(eg. MAE,MSE)和该模型的参数。</li>
 <li>进行下一个epoch，重复步骤2</li>
 <li>等到所有的epoch都结束了，选出在val上MAE或MSE最好的那个epoch的模型参数，重新给model加载这个epoch的参数，对测试集进行测试，输出metrics。</li>
-<li>即这篇的val是用来早停的，选出效果最好的epoch的模型参数。  </li>
-</ol>
+<li><p>即这篇的val是用来早停的，选出效果最好的epoch的模型参数。  </p>
 <p><a href="https://github.com/Davidham3/ASTGCN" target="_blank" rel="noopener">ASTGCN</a>这篇论文的代码在使用没有选出最好效果的epoch，而是每个epoch在val上计算loss。  </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(epochs):</span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> train_loader:</span><br><span class="line">        start_time = time()</span><br><span class="line">        output = model(input)</span><br><span class="line">        loss = loss_funtion(output,label)</span><br><span class="line">        loss.backward()</span><br><span class="line">        trainer.step(batch_size)</span><br><span class="line">        train_loss = loss.mean().asscalar()</span><br><span class="line">        <span class="comment">#一个batch,使用sw记录train_loss</span></span><br><span class="line">        sw.add_scalar(train_loss)</span><br><span class="line">        print(<span class="string">'每个batch需要的时间和train_loss'</span>)</span><br><span class="line">    <span class="comment">#一个epoch，使用sw记录model的梯度</span></span><br><span class="line">    sw.add_histogram(param.grad())</span><br><span class="line">    <span class="comment">#一个epoch，使用val进行验证，并使用sw记录val的loss</span></span><br><span class="line">    compute_val_loss(net, val_loader)</span><br><span class="line">    <span class="comment">#一个epoch，计算test的metric，并使用sw记录test的MAE等值</span></span><br><span class="line">    compute_metrics(net,test_loader) </span><br><span class="line">    <span class="comment">#一个epoch保存模型参数</span></span><br><span class="line">    net.save_param()</span><br></pre></td></tr></table></figure>
 <p>完整代码  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">   global_step = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">1</span>, epochs + <span class="number">1</span>):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> train_w, train_d, train_r, train_t <span class="keyword">in</span> train_loader:</span><br><span class="line"></span><br><span class="line">            start_time = time()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">with</span> autograd.record():</span><br><span class="line">                output = net([train_w, train_d, train_r])</span><br><span class="line">                l = loss_function(output, train_t)</span><br><span class="line">            l.backward()</span><br><span class="line">            trainer.step(train_t.shape[<span class="number">0</span>])</span><br><span class="line">            training_loss = l.mean().asscalar()</span><br><span class="line"></span><br><span class="line">            sw.add_scalar(tag=<span class="string">'training_loss'</span>,</span><br><span class="line">                          value=training_loss,</span><br><span class="line">                          global_step=global_step)</span><br><span class="line"></span><br><span class="line">            print(<span class="string">'global step: %s, training loss: %.2f, time: %.2fs'</span></span><br><span class="line">                  % (global_step, training_loss, time() - start_time))</span><br><span class="line">            global_step += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># logging the gradients of parameters for checking convergence</span></span><br><span class="line">        <span class="keyword">for</span> name, param <span class="keyword">in</span> net.collect_params().items():</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                sw.add_histogram(tag=name + <span class="string">"_grad"</span>,</span><br><span class="line">                                 values=param.grad(),</span><br><span class="line">                                 global_step=global_step,</span><br><span class="line">                                 bins=<span class="number">1000</span>)</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                print(<span class="string">"can't plot histogram of &#123;&#125;_grad"</span>.format(name))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># compute validation loss</span></span><br><span class="line">        compute_val_loss(net, val_loader, loss_function, sw, epoch)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># evaluate the model on testing set</span></span><br><span class="line">        evaluate(net, test_loader, true_value, num_of_vertices, sw, epoch)</span><br><span class="line"></span><br><span class="line">        params_filename = os.path.join(params_path,</span><br><span class="line">                                       <span class="string">'%s_epoch_%s.params'</span> % (model_name,</span><br><span class="line">                                                               epoch))</span><br><span class="line">        net.save_parameters(params_filename)</span><br><span class="line">        print(<span class="string">'save parameters to file: %s'</span> % (params_filename))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># close SummaryWriter</span></span><br><span class="line">    sw.close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="string">'prediction_filename'</span> <span class="keyword">in</span> training_config:</span><br><span class="line">        prediction_path = training_config[<span class="string">'prediction_filename'</span>]</span><br><span class="line"></span><br><span class="line">        prediction = predict(net, test_loader)</span><br><span class="line"></span><br><span class="line">        np.savez_compressed(</span><br><span class="line">            os.path.normpath(prediction_path),</span><br><span class="line">            prediction=prediction,</span><br><span class="line">            ground_truth=all_data[<span class="string">'test'</span>][<span class="string">'target'</span>]</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">   ```  </span><br><span class="line"></span><br><span class="line"><span class="number">6.</span> **交叉验证**  </span><br><span class="line">   原先对交叉验证使用的数据集一直都理解错了。  </span><br><span class="line">   [参考资料](https://blog.csdn.net/qq_24753293/article/details/<span class="number">79970997</span>)</span><br><span class="line">   交叉验证使用的数据集是训练集，而不是全部的数据集。在交叉验证的时候把训练集分成K个集合，其中K<span class="number">-1</span>份用来训练，<span class="number">1</span>份用来验证。</span><br><span class="line">   ![](神经网络踩坑/cross.png)</span><br><span class="line">   比如使用<span class="number">5</span>折交叉验证，使用不同的<span class="number">5</span>个训练集和测试集，训练得到<span class="number">5</span>个模型，但是我们最后使用的模型并不是这<span class="number">5</span>个模型中的一个。我们仍然认为这<span class="number">5</span>个模型是一个模型，虽然参数不同，只是它们的输入不同而已。交叉验证只是为了验证这个模型的性能，交叉验证的目的并不是为了得到最终的模型。</span><br><span class="line">   假设我们有<span class="number">2</span>个模型：线性回归和MLP。怎么说哪个模型更好呢？我们可以使用K折交叉验证来证明哪个模型更好，一旦我们选择了更好模型，例如MLP,那我们就用全部的数据来训练这个模型。</span><br><span class="line">   先使用网格搜索选择超参数，然后使用交叉验证输出这个模型的预测结果。</span><br><span class="line">   交叉验证有<span class="number">2</span>个用处：</span><br><span class="line">   - 准确的调整模型的超参数。超参数不同模型就不同。使用交叉验证来选出最好的超参数。</span><br><span class="line">   - 比如分类问题，有多个算法，逻辑回归，决策树，聚类等方法，不确定使用哪个方法时，可以使用交叉验证。</span><br><span class="line">  </span><br><span class="line"><span class="number">7.</span> **数据输入和输出**  </span><br><span class="line">   （<span class="number">1</span>）在gloun中Dense的输入是二维的，(batch_size,feature)，比如输入是(<span class="number">64</span>,<span class="number">120</span>)表示一个batch有<span class="number">64</span>个样本，每个样本有<span class="number">120</span>个特征。如果训练集中的X不是二维的，可以使用reshape()将X变换成(<span class="number">-1</span>,全连接输入单元个数)</span><br><span class="line">   （<span class="number">2</span>）卷积神经网络，卷积的输入和输出形状是(batch_size,通道,高,宽)，如果后面接的是全连接，就要转换成二维(batch_size,每个样本特征=通道\*高*宽)，但是不需要人去手动转换形状，Dense会自动转换。如果是keras，从卷积层到全连接层，形状不会自动转变，所以需要自己加一个`Flatten()`层。  </span><br><span class="line">   （<span class="number">3</span>）如果是一个分类问题，比如mnist数字识别，最后一层是一个神经单元个数为<span class="number">10</span>的全连接层，然后把输送入到softmax，将每一行的<span class="number">10</span>个值都变成在[<span class="number">0</span>,<span class="number">1</span>]之间小数。损失函数是交叉熵损失损失。在gluon中，最后一层Dense只需要指定输出神经单元个数即可，即`Dense(<span class="number">10</span>)`，在预测的时候，输出predict，这时的predict并没有归一化到[<span class="number">0</span>,<span class="number">1</span>]的范围内，我们直接把predict和true_label输入到loss中，在loss函数中，才会对predict进行softmax计算，将predict归一化到[<span class="number">0</span>,<span class="number">1</span>]范围内。   </span><br><span class="line">   在keras中，和gluon不同，会在最后一层的输出指定softmax激活函数，即`Dense(<span class="number">10</span>,activation=<span class="string">'softmax'</span>)`。</span><br><span class="line"></span><br><span class="line">   ![](神经网络踩坑/conv.png)  </span><br><span class="line">   （<span class="number">3</span>）循环神经网络的输入形状为(时间步数，batch_size，特征个数)   </span><br><span class="line">   [通俗易懂的RNN图解](https://www.zhihu.com/question/<span class="number">41949741</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">8.</span> **激活函数**   </span><br><span class="line">   在使用激活函数的时候，一般都是</span><br><span class="line">   net.add(nn.Dense(<span class="number">10</span>,activation=<span class="string">'relu'</span>)),在定义层的时候直接加上activation，</span><br><span class="line">   也可以使用,但是不常用</span><br><span class="line">   net.add(nn.Dense(<span class="number">10</span>),</span><br><span class="line">           nn.Activation(<span class="string">'relu'</span>) </span><br><span class="line">    )</span><br><span class="line">    或者net.add(nn.Conv2D(channels=<span class="number">6</span>, kernel_size=<span class="number">5</span>, activation=<span class="string">'sigmoid'</span>))</span><br><span class="line">    只有当在该层和激活函数之间有其余的操作时，才会分开写，例如在卷积计算之后，激活函数之前加上批量归一化层，写成</span><br><span class="line"></span><br><span class="line">    ```python   </span><br><span class="line">    net.add(nn.Conv2D(<span class="number">6</span>, kernel_size=<span class="number">5</span>),</span><br><span class="line">        BatchNorm(),</span><br><span class="line">        nn.Activation(<span class="string">'sigmoid'</span>))  </span><br><span class="line">        或者  </span><br><span class="line">        n.Dense(<span class="number">120</span>),</span><br><span class="line">        BatchNorm(),</span><br><span class="line">        nn.Activation(<span class="string">'sigmoid'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">global_step = <span class="number">1</span></span><br><span class="line"> <span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">1</span>, epochs + <span class="number">1</span>):</span><br><span class="line"></span><br><span class="line">     <span class="keyword">for</span> train_w, train_d, train_r, train_t <span class="keyword">in</span> train_loader:</span><br><span class="line"></span><br><span class="line">         start_time = time()</span><br><span class="line"></span><br><span class="line">         <span class="keyword">with</span> autograd.record():</span><br><span class="line">             output = net([train_w, train_d, train_r])</span><br><span class="line">             l = loss_function(output, train_t)</span><br><span class="line">         l.backward()</span><br><span class="line">         trainer.step(train_t.shape[<span class="number">0</span>])</span><br><span class="line">         training_loss = l.mean().asscalar()</span><br><span class="line"></span><br><span class="line">         sw.add_scalar(tag=<span class="string">'training_loss'</span>,</span><br><span class="line">                       value=training_loss,</span><br><span class="line">                       global_step=global_step)</span><br><span class="line"></span><br><span class="line">         print(<span class="string">'global step: %s, training loss: %.2f, time: %.2fs'</span></span><br><span class="line">               % (global_step, training_loss, time() - start_time))</span><br><span class="line">         global_step += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">     <span class="comment"># logging the gradients of parameters for checking convergence</span></span><br><span class="line">     <span class="keyword">for</span> name, param <span class="keyword">in</span> net.collect_params().items():</span><br><span class="line">         <span class="keyword">try</span>:</span><br><span class="line">             sw.add_histogram(tag=name + <span class="string">"_grad"</span>,</span><br><span class="line">                              values=param.grad(),</span><br><span class="line">                              global_step=global_step,</span><br><span class="line">                              bins=<span class="number">1000</span>)</span><br><span class="line">         <span class="keyword">except</span>:</span><br><span class="line">             print(<span class="string">"can't plot histogram of &#123;&#125;_grad"</span>.format(name))</span><br><span class="line"></span><br><span class="line">     <span class="comment"># compute validation loss</span></span><br><span class="line">     compute_val_loss(net, val_loader, loss_function, sw, epoch)</span><br><span class="line"></span><br><span class="line">     <span class="comment"># evaluate the model on testing set</span></span><br><span class="line">     evaluate(net, test_loader, true_value, num_of_vertices, sw, epoch)</span><br><span class="line"></span><br><span class="line">     params_filename = os.path.join(params_path,</span><br><span class="line">                                    <span class="string">'%s_epoch_%s.params'</span> % (model_name,</span><br><span class="line">                                                            epoch))</span><br><span class="line">     net.save_parameters(params_filename)</span><br><span class="line">     print(<span class="string">'save parameters to file: %s'</span> % (params_filename))</span><br><span class="line"></span><br><span class="line"> <span class="comment"># close SummaryWriter</span></span><br><span class="line"> sw.close()</span><br><span class="line"></span><br><span class="line"> <span class="keyword">if</span> <span class="string">'prediction_filename'</span> <span class="keyword">in</span> training_config:</span><br><span class="line">     prediction_path = training_config[<span class="string">'prediction_filename'</span>]</span><br><span class="line"></span><br><span class="line">     prediction = predict(net, test_loader)</span><br><span class="line"></span><br><span class="line">     np.savez_compressed(</span><br><span class="line">         os.path.normpath(prediction_path),</span><br><span class="line">         prediction=prediction,</span><br><span class="line">         ground_truth=all_data[<span class="string">'test'</span>][<span class="string">'target'</span>]</span><br><span class="line">     )</span><br></pre></td></tr></table></figure>
 </li>
+</ol>
+<h1><span id="6-交叉验证">6. 交叉验证</span></h1><p>   原先对交叉验证使用的数据集一直都理解错了。<br>   <a href="https://blog.csdn.net/qq_24753293/article/details/79970997" target="_blank" rel="noopener">参考资料</a><br>   交叉验证使用的数据集是训练集，而不是全部的数据集。在交叉验证的时候把训练集分成K个集合，其中K-1份用来训练，1份用来验证。<br>   <img src="/2019/07/17/神经网络踩坑/cross.png" alt=""><br>   比如使用5折交叉验证，使用不同的5个训练集和测试集，训练得到5个模型，但是我们最后使用的模型并不是这5个模型中的一个。我们仍然认为这5个模型是一个模型，虽然参数不同，只是它们的输入不同而已。交叉验证只是为了验证这个模型的性能，交叉验证的目的并不是为了得到最终的模型。<br>   假设我们有2个模型：线性回归和MLP。怎么说哪个模型更好呢？我们可以使用K折交叉验证来证明哪个模型更好，一旦我们选择了更好模型，例如MLP,那我们就用全部的数据来训练这个模型。<br>   先使用网格搜索选择超参数，然后使用交叉验证输出这个模型的预测结果。<br>   交叉验证有2个用处：</p>
+<ul>
+<li>准确的调整模型的超参数。超参数不同模型就不同。使用交叉验证来选出最好的超参数。</li>
+<li>比如分类问题，有多个算法，逻辑回归，决策树，聚类等方法，不确定使用哪个方法时，可以使用交叉验证。</li>
+</ul>
+<h1><span id="7-数据输入和输出">7. 数据输入和输出</span></h1><ol>
+<li>在gloun中Dense的输入是二维的，(batch_size,feature)，比如输入是(64,120)表示一个batch有64个样本，每个样本有120个特征。如果训练集中的X不是二维的，可以使用reshape()将X变换成(-1,全连接输入单元个数)</li>
+<li>卷积神经网络，卷积的输入和输出形状是(batch_size,通道,高,宽)，如果后面接的是全连接，就要转换成二维(batch_size,每个样本特征=通道*高*宽)，但是不需要人去手动转换形状，Dense会自动转换。如果是keras，从卷积层到全连接层，形状不会自动转变，所以需要自己加一个<code>Flatten()</code>层。  </li>
+<li>如果是一个分类问题，比如mnist数字识别，最后一层是一个神经单元个数为10的全连接层，然后把输送入到softmax，将每一行的10个值都变成在[0,1]之间小数。损失函数是交叉熵损失损失。在gluon中，最后一层Dense只需要指定输出神经单元个数即可，即<code>Dense(10)</code>，在预测的时候，输出predict，这时的predict并没有归一化到[0,1]的范围内，我们直接把predict和true_label输入到loss中，在loss函数中，才会对predict进行softmax计算，将predict归一化到[0,1]范围内。   </li>
+<li><p>在keras中，和gluon不同，会在最后一层的输出指定softmax激活函数，即<code>Dense(10,activation=&#39;softmax&#39;)</code>。</p>
+<p><img src="/2019/07/17/神经网络踩坑/conv.png" alt=""><br>（3）循环神经网络的输入形状为(时间步数，batch_size，特征个数)<br><a href="https://www.zhihu.com/question/41949741" target="_blank" rel="noopener">通俗易懂的RNN图解</a></p>
+</li>
+</ol>
+<h1><span id="8-激活函数">8. 激活函数</span></h1><p>   在使用激活函数的时候，一般都是<br>   net.add(nn.Dense(10,activation=’relu’)),在定义层的时候直接加上activation，<br>   也可以使用,但是不常用<br>   net.add(nn.Dense(10),<br>           nn.Activation(‘relu’)<br>    )<br>    或者net.add(nn.Conv2D(channels=6, kernel_size=5, activation=’sigmoid’))<br>    只有当在该层和激活函数之间有其余的操作时，才会分开写，例如在卷积计算之后，激活函数之前加上批量归一化层，写成</p>
+<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">net.add(nn.Conv2D(<span class="number">6</span>, kernel_size=<span class="number">5</span>),</span><br><span class="line">    BatchNorm(),</span><br><span class="line">    nn.Activation(<span class="string">'sigmoid'</span>))  </span><br><span class="line">    或者  </span><br><span class="line">    n.Dense(<span class="number">120</span>),</span><br><span class="line">    BatchNorm(),</span><br><span class="line">    nn.Activation(<span class="string">'sigmoid'</span>)</span><br></pre></td></tr></table></figure>
+</code></pre><ol>
 <li><p>什么时候用激活函数</p>
 <ul>
 <li>如果是回归问题，最后一层不需要激活函数（当然，如果数据归一化，可以加激活函数，也可以不加）</li>
 <li>如果是分类问题，最后一层的激活函数使用sigmoid(二分类)，softmax(多分类)</li>
-<li><p>大部分问题上，使用Relu会得到较好的性能。现在已经很少使用sigmoid激活函数了，sigmoid函数的输出范围在[0,1]之间，x轴在[-5,5]之间的梯度非常高，当x在该范围之外时，梯度很好，接近于0，在反向传播时，容易出现梯度消失问题，无法完成深层网络的训练。<br><img src="/2019/07/17/神经网络踩坑/sigmoid.png" alt=""></p>
+<li><p>大部分问题上，使用Relu会得到较好的性能。现在已经很少使用sigmoid激活函数了，sigmoid函数的输出范围在[0,1]之间，x轴在[-5,5]之间的梯度非常高，当x在该范围之外时，梯度很好，接近于0，在反向传播时，容易出现梯度消失问题，无法完成深层网络的训练。</p>
+<p><img src="/2019/07/17/神经网络踩坑/sigmoid.png" alt=""></p>
 </li>
 <li><p>由于梯度消失问题，尽量避免使用sigmoid和tanh激活函数</p>
 </li>
@@ -459,9 +508,8 @@
 <li>使用softmax作为最后一层的激活函数时，前一层最好不要使用relu激活，而是使用tanh代替，否则最终的loss很可能变成nan</li>
 </ul>
 </li>
-<li><p><strong>GPU运行程序</strong><br>ctx=mx.gpu(2)，下标从0开始<br><strong>需要用到ctx的地方：</strong></p>
-</li>
 </ol>
+<h1><span id="9-gpu运行程序">9. GPU运行程序</span></h1><p>   ctx=mx.gpu(2)，下标从0开始<br>   <strong>需要用到ctx的地方：</strong></p>
 <ul>
 <li><p>数据集需要放到gpu上。有2种方法。<br> （1）在创建数据的时候，指定ctx，在gpu上创建数据。</p>
  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">train_loader = gluon.data.DataLoader(</span><br><span class="line">                     gluon.data.ArrayDataset(</span><br><span class="line">                         nd.array(all_data[<span class="string">'train'</span>][<span class="string">'week'</span>], ctx=ctx),</span><br><span class="line">                         nd.array(all_data[<span class="string">'train'</span>][<span class="string">'day'</span>], ctx=ctx),</span><br><span class="line">                         nd.array(all_data[<span class="string">'train'</span>][<span class="string">'recent'</span>], ctx=ctx),</span><br><span class="line">                         nd.array(all_data[<span class="string">'train'</span>][<span class="string">'target'</span>], ctx=ctx)</span><br><span class="line">                     ),</span><br><span class="line">                     batch_size=batch_size,</span><br><span class="line">                     shuffle=<span class="keyword">True</span></span><br><span class="line"> )</span><br></pre></td></tr></table></figure>
@@ -473,38 +521,58 @@
 </ul>
 </li>
 </ul>
-<ol>
-<li><p><strong>使用多GPU运行</strong><br>假设<code>ctx=[mx.gpu(1),mx.gpu(2)]</code>，则需要调整以下内容<br>(1)模型初始化，使用<br><code>net.initialize(init=init.Normal(sigma=0.01), ctx=ctx)</code><br>(2)split_and_load函数，将一个batch_size的数据再次划分成子集，并复制到各个GPU上，比如batch_size=6，有2个GPU，那么每个GPU上有3个样本，  </p>
+<h1><span id="10-使用多gpu运行">10. 使用多GPU运行</span></h1><p>假设<code>ctx=[mx.gpu(1),mx.gpu(2)]</code>，则需要调整以下内容<br>(1)模型初始化，使用<br><code>net.initialize(init=init.Normal(sigma=0.01), ctx=ctx)</code><br>(2)split_and_load函数，将一个batch_size的数据再次划分成子集，并复制到各个GPU上，比如batch_size=6，有2个GPU，那么每个GPU上有3个样本，  </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = nd.random.uniform(shape=(<span class="number">4</span>, <span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>))  </span><br><span class="line">gpu_x = gutils.split_and_load(x, ctx)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>NDArray和numpy</strong><br> 使用gluon运行程序，gluon中的数据结构是NDArray，普通的python程序中的数据是numpy。什么时候用nd.array？什么时候用np.array?</p>
+<h1><span id="11-ndarray和numpy">11. NDArray和numpy</span></h1><p>使用gluon运行程序，gluon中的数据结构是NDArray，普通的python程序中的数据是numpy。什么时候用nd.array？什么时候用np.array?</p>
 <ul>
-<li><strong>nd.array</strong><br>（1）在模型内部的运算，使用的都是nd。比如模型的数据输入，在创建DataLoader时，数据需要转换成nd.array()类型。<br>（2）自定义的compute_val_loss()计算验证集的loss时，传入的数据是val_loader，是nd.array类型，但是在返回loss的时候，需要转换成np.array()，<br>（3）自定义的evaluate计算数据，返回的值是np.array()</li>
-<li><strong>np.array</strong><br>（1）在metrics.py中计算MSE，RMSE，MAE等指标时，输出和输出都是np.array类型。</li>
-<li><p><strong>nd.array和np.array转换</strong><br>（1）nd.array—&gt;np.array:</p>
+<li><strong>nd.array</strong><ul>
+<li>在模型内部的运算，使用的都是nd。比如模型的数据输入，在创建DataLoader时，数据需要转换成nd.array()类型。</li>
+<li>自定义的compute_val_loss()计算验证集的loss时，传入的数据是val_loader，是nd.array类型，但是在返回loss的时候，需要转换成np.array()，</li>
+<li>自定义的evaluate计算数据，返回的值是np.array()</li>
+</ul>
+</li>
+<li><strong>np.array</strong><ul>
+<li>在metrics.py中计算MSE，RMSE，MAE等指标时，输出和输出都是np.array类型。</li>
+</ul>
+</li>
+<li><p><strong>nd.array和np.array转换</strong></p>
+<ul>
+<li><p>nd.array—&gt;np.array:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = np.arange(<span class="number">10</span>)</span><br><span class="line">b = a.asnumpy()</span><br></pre></td></tr></table></figure>
-<p>（2）np.array—&gt;nd.array</p>
+</li>
+<li><p>np.array—&gt;nd.array</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c = nd.array(b)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
-<li><p><strong>tensorboard使用</strong> </p>
-<ul>
+</ul>
+<h1><span id="12-tensorboard使用">12. tensorboard使用</span></h1><ul>
 <li>在训练集上每次epoch之后，验证模型在验证集上的平均loss，对验证集上的每个batch中的每个样本都求出一个loss，将所有样本的loss放在list中，最后求list的平均值得到验证集的平均loss。</li>
-<li>在训练集上每次epoch之后，写一个evaluate函数，验证模型在测试集上的RMSE或MSE等指标。<br>tensorboard中tag相同的会被显示在同一张图中。为了显示训练集，验证集和测试集的loss，tag都被设置为loss，但是SummaWriter的logdir不同。  </li>
+<li>在训练集上每次epoch之后，写一个evaluate函数，验证模型在测试集上的RMSE或MSE等指标。tensorboard中tag相同的会被显示在同一张图中。为了显示训练集，验证集和测试集的loss，tag都被设置为loss，但是SummaWriter的logdir不同</li>
+</ul>
+<h1><span id="13-dropout的使用">13. Dropout的使用</span></h1><p>丢弃层会将隐藏单元中的值以一定的概率丢弃，即被设置为0，起到正则化的作用，用来应对过拟合。在测试模型时，为了拿到更加确定的结果，一般不使用丢弃法，只在训练模型下才使用dropout。在训练模型时，将靠近输入层的丢弃概率设的小一点。dropout一般放在全连接层后面</p>
+<h1><span id="14-调参经验">14. 调参经验</span></h1><p><a href="https://www.cnblogs.com/kamekin/p/10163743.html" target="_blank" rel="noopener">调参经验</a></p>
+<p><a href="https://mp.weixin.qq.com/s/whbQ3b7NcA9Ifvb9aymkbQ" target="_blank" rel="noopener">33 个神经网络「炼丹」技巧</a></p>
+<h1><span id="15-earlystopping">15. EarlyStopping</span></h1><p><a href="https://github.com/dmlc/dgl/tree/master/examples/mxnet/gat" target="_blank" rel="noopener">GAT官方实现EarlyStopping的完整代码</a></p>
+<p>早停是在模型在val_loss，或者val_acc,val_mae等指标上进行。传入2个参数，patience和delta。</p>
+<ul>
+<li>如果val_loss在连续patience epoch内，val_loss都大于最好的val_loss，即val_loss在增大，模型出现过拟合。</li>
+<li><p>当前val_loss&gt;最好的val_loss-delta，有2种情况</p>
+<ul>
+<li>当前val_loss上升，counter+1</li>
+<li>val_loss虽然减少，但是减少很小，基本可以视为不变，counter+1</li>
 </ul>
 </li>
-<li><strong>Dropout的使用</strong><br> 丢弃层会将隐藏单元中的值以一定的概率丢弃，即被设置为0，起到正则化的作用，用来应对过拟合。在测试模型时，为了拿到更加确定的结果，一般不使用丢弃法，只在训练模型下才使用dropout。在训练模型时，将靠近输入层的丢弃概率设的小一点。dropout一般放在全连接层后面。   </li>
-<li>调参经验<br> <a href="https://www.cnblogs.com/kamekin/p/10163743.html" target="_blank" rel="noopener">调参经验</a><br> <a href="https://mp.weixin.qq.com/s/whbQ3b7NcA9Ifvb9aymkbQ" target="_blank" rel="noopener">33 个神经网络「炼丹」技巧</a></li>
-<li>EarlyStopping<br> <a href="https://github.com/dmlc/dgl/tree/master/examples/mxnet/gat" target="_blank" rel="noopener">GAT官方实现EarlyStopping的完整代码</a><br> 早停是在模型在val_loss，或者val_acc,val_mae等指标上进行。传入2个参数，patience和delta。<ul>
-<li>如果val_loss在连续patience epoch内，val_loss都大于最好的val_loss，即val_loss在增大，模型出现过拟合。</li>
-<li>当前val_loss&gt;最好的val_loss-delta，有2种情况，<br>  （1）当前val_loss上升，counter+1<br>  （2）val_loss虽然减少，但是减少很小，基本可以视为不变，counter+1，</li>
-<li>当前val_loss &lt;= 最好的val_loss-delta,说明val_loss一直在下降，即更新最高的val_loss</li>
+<li><p>当前val_loss &lt;= 最好的val_loss-delta,说明val_loss一直在下降，即更新最高的val_loss</p>
+</li>
 <li>总结：即val_loss在连续patience内，都没有显著下降(current_loss &lt;= best_loss - delta)，则停止训练</li>
 </ul>
-</li>
-<li>卷积尺寸大小变化<br> （1）2D卷积，输入和输出形状一样：一般kernel_size=(3,3),padding=1,stride=1，输入和输出的形状一样<br> （2）2D卷积，输入和输出高和宽减半：kernel_size=(3,3),padding=1,stride=2，输出的形状是输入一半<br> （3）3D卷积，一般kernel_size=(3,3,3),padding=1,stride=1，输入和输出的形状一样<br> （4）3D卷积，一般kernel_size=(1,1,1),padding=0,stride=1，输入和输出的形状一样</li>
-</ol>
+<h1><span id="16-卷积尺寸大小变化">16. 卷积尺寸大小变化</span></h1><ul>
+<li>2D卷积，输入和输出形状一样：一般kernel_size=(3，3),padding=1,stride=1，输入和输出的形状一样</li>
+<li>2D卷积，输入和输出高和宽减半：kernel_size=(3,3),padding=1,stride=2，输出的形状是输入一半</li>
+<li>3D卷积，一般kernel_size=(3,3,3),padding=1,stride=1，输入和输出的形状一样</li>
+<li>3D卷积，一般kernel_size=(1,1,1),padding=0,stride=1，输入和输出的形状一样</li>
+</ul>
 
       
     </div>
@@ -548,6 +616,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/调参经验/" rel="tag"># 调参经验</a>
+          
+        </div>
       
 
       
@@ -614,15 +688,6 @@
 
           
 
-  
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODU3Mi8xNTEwMA=="></div>
-    </div>
-
-  
-
-
-
         </div>
         
           
@@ -642,8 +707,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -682,7 +756,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -721,6 +795,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. Suffle数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 归一化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. batch_size</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 划分数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 验证集的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 交叉验证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. 数据输入和输出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 激活函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. GPU运行程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">10. 使用多GPU运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">11. NDArray和numpy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">12. tensorboard使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">13. Dropout的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">14. 调参经验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">15. EarlyStopping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">16. 卷积尺寸大小变化</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -918,17 +1008,6 @@
 
 
 
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
   
 
 
@@ -1307,11 +1386,31 @@
       
       new needShareButton('#needsharebutton-float', flOptions);
     
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script>
 
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

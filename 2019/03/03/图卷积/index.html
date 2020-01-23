@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/改进1.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/图卷积3.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/图卷积4.png">
-<meta property="og:updated_time" content="2020-01-23T07:59:08.606Z">
+<meta property="og:updated_time" content="2020-01-23T14:14:03.183Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图卷积">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;看了很久关于图卷积的内容，但总觉得自己理解不深刻，在这里把自己的一些想法写出来，也算把图卷积的内容梳理一下。 参考资料">
@@ -520,7 +520,7 @@
 <p>&ensp;&ensp;&ensp;&ensp;这是整个论文的重点，这个步骤的目的在于将目标node无序的neighbors映射为一个有序的vector。这个label要实现一个目的：assign nodes of two different graphs to a similar relative position in the respective adjacency matrices if and only if their structural roles within the graph are similar. 也就是说，对于两个不同的graphs， 来自这两个graph的子结构g1和g2，它们在各自的graph中有相似的结构，那么他们label应该相似。为了解决这个问题，论文中定义了一个optimal graph normalization问题，定义如下：</p>
 <p><img src="/2019/03/03/图卷积/算法3-1.png" alt=""></p>
 <p>&ensp;&ensp;&ensp;&ensp;这个等式的解在于寻找一个一个labeling L， 使得从图的集合中任意选取两个图G1和G2，它们在vector space距离差距和它们在graph space的距离差距最小化。但是这个问题是NP-hard的问题，所以作者选择找一个近似解。即它比较了各种labeling方法，并从其中找出最优解。具体如下：<br><img src="/2019/03/03/图卷积/算法3-2.png" alt=""></p>
-<p>&ensp;&ensp;&ensp;&ensp;在特征选择阶段，只有第一层和传统的CNN有区别，之后的卷积层和传统的一样。下面来举例来说明PATCHY-SAN如何提取顶点特征和边特征。我们假设a_v为顶点特征的个数，a_e为边特征的个数。w为目标node的个数，k为感受野中node的个数。对于每个输入图结构，运用上面的一系列normalization算法，我们可以得到两个tensor（w,k,a_v）和（w,k,k,a_e）,分别对应于顶点特征和边特征。这两个tensor可以被reshape成(wk, a_v)和(wk^2, a_e)，其中a_v和a_e可以分别看成是CNN中channel的个数。现在我们可以对它们做一维度的卷积操作，其中第一个的感受野大小为k，第二个感受野大小为k^2。而之后的卷积层的构造和传统的CNN一样了。</p>
+<p>&ensp;&ensp;&ensp;&ensp;在特征选择阶段，只有第一层和传统的CNN有区别，之后的卷积层和传统的一样。下面来举例来说明PATCHY-SAN如何提取顶点特征和边特征。我们假设a_v为顶点特征的个数，a_e为边特征的个数。w为目标node的个数，k为感受野中node的个数。对于每个输入图结构，运用上面的一系列normalization算法，我们可以得到两个tensor (w,k,a_v)和(w,k,k,a_e),分别对应于顶点特征和边特征。这两个tensor可以被reshape成(wk, a_v)和(wk^2, a_e)，其中a_v和a_e可以分别看成是CNN中channel的个数。现在我们可以对它们做一维度的卷积操作，其中第一个的感受野大小为k，第二个感受野大小为k^2。而之后的卷积层的构造和传统的CNN一样了。</p>
 <h3><span id="216-算法流程">2.1.6. 算法流程</span></h3><p>输入：任意一张图<br>输出：每个channel输出w个receptive field</p>
 <p>Step1： graph labeling（对图的节点做标记，比如可以用节点的度做标记，做图的划分，也 可以叫做color refinement or vertex classification）<br>文中采用The Weisfeiler-Lehman algorithm做图的划分。由此可以得到每个节点的rank 值（为了不同的图能够有一个规范化的组织方式）</p>
 <p>Step2：对labeling好的节点排序，取前w个节点，作为处理的节点序列。（这样就可以把不 同size的graph，变成同一个size）若不足w个节点，则，在输出中加全零的receptive field，相当于padding</p>
@@ -752,7 +752,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
