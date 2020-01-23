@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="Git,VSCode,GPU服务器,">
+  <meta name="keywords" content="Git,VSCode,GPU,Screen,Jupyter,服务器,">
 
 
 
@@ -74,19 +74,21 @@
 
 
 <meta name="description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在做项目的过程中，学习到很多的东西，在这里记录下来。">
-<meta name="keywords" content="Git,VSCode,GPU服务器">
+<meta name="keywords" content="Git,VSCode,GPU,Screen,Jupyter,服务器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Learning">
+<meta property="og:title" content="各类工具的使用">
 <meta property="og:url" content="http://yoursite.com/2019/03/14/各类工具的使用/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在做项目的过程中，学习到很多的东西，在这里记录下来。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/03/14/各类工具的使用/虚拟环境安装/putty.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/14/各类工具的使用/虚拟环境安装/port.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/14/各类工具的使用/bytes.png">
-<meta property="og:updated_time" content="2020-01-22T13:22:26.047Z">
+<meta property="og:updated_time" content="2020-01-23T03:42:08.341Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Learning">
+<meta name="twitter:title" content="各类工具的使用">
 <meta name="twitter:description" content="1. 简介&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在做项目的过程中，学习到很多的东西，在这里记录下来。">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/14/各类工具的使用/bytes.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/14/各类工具的使用/虚拟环境安装/putty.png">
 
 
 
@@ -122,7 +124,7 @@
 
 
 
-  <title>Learning | Echo's blog</title>
+  <title>各类工具的使用 | Echo's blog</title>
   
 
 
@@ -318,7 +320,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Learning</h2>
+          <h2 class="post-title" itemprop="name headline">各类工具的使用</h2>
         
 
         <div class="post-meta">
@@ -387,7 +389,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.5k
+                  2.8k
                 </span>
               
 
@@ -426,61 +428,93 @@
       
         <h1><span id="1-简介">1. 简介</span></h1><p>&ensp;&ensp;&ensp;&ensp;在做项目的过程中，学习到很多的东西，在这里记录下来。<br><a id="more"></a><br><!-- TOC --></p>
 <ul>
-<li><a href="#1-%e7%ae%80%e4%bb%8b">1. 简介</a></li>
-<li><a href="#2-%e5%b7%a5%e5%85%b7%e4%bd%bf%e7%94%a8">2. 工具使用</a><ul>
-<li><a href="#21-git">2.1. Git</a></li>
-<li><a href="#22-%e4%bd%bf%e7%94%a8gpu%e6%9c%8d%e5%8a%a1%e5%99%a8">2.2. 使用GPU服务器</a></li>
-<li><a href="#23-%e9%83%a8%e7%bd%b2%e4%bb%a3%e7%a0%81%e5%88%b0%e6%9c%8d%e5%8a%a1%e5%99%a8">2.3. 部署代码到服务器</a></li>
-<li><a href="#24-%e5%9c%a8%e6%9c%ac%e5%9c%b0%e8%bf%90%e8%a1%8cgluon">2.4. 在本地运行gluon</a></li>
-<li><a href="#25-%e4%bf%ae%e5%a4%8d%e9%9b%86%e7%be%a4">2.5. 修复集群</a></li>
-<li><a href="#26-%e8%bf%90%e8%a1%8cspark">2.6. 运行Spark</a></li>
-<li><a href="#27-%e4%bd%bf%e7%94%a8vscode">2.7. 使用vsCode</a></li>
-<li><a href="#%e5%ad%97%e8%8a%82">字节</a></li>
+<li><a href="#1-简介">1. 简介</a></li>
+<li><a href="#2-git">2. Git</a></li>
+<li><a href="#3-使用gpu服务器">3. 使用GPU服务器</a><ul>
+<li><a href="#31-查看当前gpu的占用情况">3.1. 查看当前GPU的占用情况</a></li>
+<li><a href="#32-查看当前的进程是谁的">3.2. 查看当前的进程是谁的</a></li>
+<li><a href="#33-查看某个用户的进程">3.3. 查看某个用户的进程</a></li>
 </ul>
 </li>
+<li><a href="#4-screen相关命令">4. Screen相关命令</a><ul>
+<li><a href="#41-新建窗口">4.1. 新建窗口</a></li>
+<li><a href="#42-会话分离">4.2. 会话分离</a></li>
+<li><a href="#43-恢复会话窗口">4.3. 恢复会话窗口</a></li>
+<li><a href="#44-kill会话窗口">4.4. kill会话窗口</a></li>
+<li><a href="#45-清除死去的窗口">4.5. 清除死去的窗口</a></li>
+<li><a href="#46-解除窗口占用">4.6. 解除窗口占用</a></li>
+</ul>
+</li>
+<li><a href="#5-使用jupyter运行程序">5. 使用jupyter运行程序</a></li>
+<li><a href="#6-部署代码到服务器">6. 部署代码到服务器</a></li>
+<li><a href="#7-tomcat端口占用">7. Tomcat端口占用</a></li>
+<li><a href="#8-修复集群">8. 修复集群</a></li>
+<li><a href="#9-运行spark">9. 运行Spark</a></li>
+<li><a href="#10-使用vscode">10. 使用vsCode</a></li>
+<li><a href="#11-字节">11. 字节</a></li>
 </ul>
 <!-- /TOC -->
-<h1><span id="2-工具使用">2. 工具使用</span></h1><h2><span id="21-git">2.1. Git</span></h2><p>&ensp;&ensp;&ensp;&ensp;Git是一个用来版本控制的软件，在用的过程中涉及到以下步骤</p>
+<h1><span id="2-git">2. Git</span></h1><p>&ensp;&ensp;&ensp;&ensp;Git是一个用来版本控制的软件，在用的过程中涉及到以下内容</p>
 <ol>
-<li>在服务器上创建仓库。首先在服务器上创建一个文件夹，例如test。cd到这个文件夹下，使用<figure class="highlight plain"><figcaption><span>init```命令，把这个文件夹初始化为一个git仓库，会看到这个文件夹下多了一个.git的文件，然后我们把项目代码拷贝到test这个文件夹下。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">2. 在自己的电脑上下载并安装Git软件</span><br><span class="line">3. 从服务器git仓库上把代码clone到本地电脑。首先在自己电脑上，创建一个保存代码的目录，在这个目录下右键选择Git Bash，输入下面的代码</span><br><span class="line">```git clone zz@172.11.11.111:/file0/repo/EQ/```这样服务器git仓库中的东西就完封不动的clone到本地了。</span><br><span class="line">4. 在自己电脑上打开eclipse或者myeclipse，在file中导入这个项目代码，就可以进行修改代码了。</span><br><span class="line">5. pull和push。右键选中这个工程，点击team，就可以对项目进行pull和push。当你在本地修改完代码，本地的git会记录下来这些改动，所以本地文件夹中的git也有原先的历史记录，当push的时候会读取本地的git，找到本地的代码在服务器上的源，然后把改动同步到服务器上的git中。 </span><br><span class="line">6. 除了使用eclipse中的team来pull和push代码，还可以使用命令来进行pull或push。每次改完代码提交的时候，打开EQ这个目录（一定要在这个目录下，因为只有这个目录有git这个文件夹），右键```Git Bash Here```输入以下命令:</span><br><span class="line">```git add –all ```,</span><br><span class="line">```git commit –m “自己随便写，写自己本地改动的地方” ```,</span><br><span class="line">```git push</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>自己在写代码之前，也是打开EQ这个目录，右键<figure class="highlight plain"><figcaption><span>Bash Here```输入以下命令）:```git pull ```这样就会把别人改动过的代码更新到EQ这个文件夹下。     </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">**问题1**   </span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在eclipse中右键点击team--&gt;show in History，会出现所有的改动。点击改动的一个文件，应该会出现2个窗口，一个窗口显示现在的代码，一个窗口显示原先的代码，可以明显的看出哪里进行了改动，但是我的电脑确没有出现历史窗口，只有现在代码的窗口。   </span><br><span class="line">**解决：** 在点击show in history之后右键一个文件，点击“compare with previous version”就会出现历史窗口。    </span><br><span class="line"></span><br><span class="line">**问题2**   </span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在每次写代码之前都要先pull一下，把别人push的代码拉取到本地。但有时候你在写代码之前忘了pull别人的代码，直接在本地电脑上修改，然后你在pull别人的代码时会出现conflict，那是因为你和服务器上的代码修改了同一个地方，git不知道该采用谁的修改。   </span><br><span class="line">**解决:** 首先在eclipse中，右键点击team，把你自己本地的代码先commit，不要push。然后打开vscode，导入和eclispe中一样的代码（和eclipse导入的代码在同一个文件下，带有.git），然后在vscode中点击左侧的第三个图标(git的图标)，然后在```...```中右键从服务器上pull到本地。然后再点击左侧的第一个图标，在这里面如果文件的右侧出现M，说明这个文件被修改过，然后你在这里面进行解决冲突。是采用本地的修改还是采用服务上的修改。等到冲突都解决时保存。然后再回到eclispe，会发现项目已经没有报错了。这时在eclispe中右键team，把代码commit and push到服务器中。</span><br><span class="line">## 2.2. 使用GPU服务器</span><br><span class="line">&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;使用putty来连接服务器，使用FileZilla来进行文件传输。在putty中输入服务器的IP地址，然后输入用户名和密码。</span><br><span class="line">1. 查看当前GPU的占用情况   </span><br><span class="line">```nvidia-smi</span><br></pre></td></tr></table></figure></p>
-<ol>
-<li>查看当前的进程是谁的(后面加进程号)   <figure class="highlight ps"><figcaption><span>-ef | grep 35230```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span>. 创建一个jupyter窗口   </span><br><span class="line">```screen -S jupyter```    </span><br><span class="line">然后在这个窗口内输入以下命令就可以打开jupyter notebook进行编程   </span><br><span class="line">```source /etc/profile```   </span><br><span class="line">```source activate insis_template_3.<span class="number">6</span> ```激活环境  </span><br><span class="line">```jupyter notebook ```打开jupyter   </span><br><span class="line"><span class="number">4</span>. 当程序写完时，kill掉窗口    </span><br><span class="line">```screen -X -S <span class="number">122128</span> quit```    </span><br><span class="line">```source deactivate``` </span><br><span class="line"><span class="number">5</span>. 查看当前有哪些窗口</span><br><span class="line">```screen -ls```     </span><br><span class="line"><span class="number">6</span>. 进入到一个窗口中</span><br><span class="line">```screen -r  <span class="number">35230</span>```    </span><br><span class="line">在这个窗口中按ctrl+c，shutdown掉一个jupyter进程，然后<span class="keyword">exit</span>退出这个窗口   </span><br><span class="line"><span class="number">7</span>. 使用screen创建一个窗口运行jupyter notebook程序的好处：就算ssh和<span class="number">28</span>号服务器的连接断开，jupyter notebook的程序依然可以在后台运行。如果你打开的jupyter notebook的程序运行完了，有<span class="number">3</span>种关闭程序的方法：</span><br><span class="line"><span class="number">1</span>、在jupyter notebook菜单栏，有一个close and hot的按钮。</span><br><span class="line"><span class="number">2</span>、在jupyter notebook中running中shutdown掉程序</span><br><span class="line"><span class="number">3</span>、screen -r <span class="number">23560</span>切入到虚拟窗口，然后在这个窗口ctrl+c</span><br><span class="line">关闭jupyter notebook进程。不用使用<span class="keyword">exit</span>，因为使用<span class="keyword">exit</span>是关闭</span><br><span class="line">虚拟窗口，直接按shift+a+d从虚拟窗口中切出，这样这个窗口</span><br><span class="line">还是存在的，下一次直接使用screen -ls查看存在的窗口，然后</span><br><span class="line">```source /etc/profile```， </span><br><span class="line">```source activate insis_template_3.<span class="number">6</span>```， </span><br><span class="line">```jupyter notebook</span><br></pre></td></tr></table></figure>
+<li><p>在服务器上创建仓库。首先在服务器上创建一个文件夹，例如test。cd到这个文件夹下，使用<figure class="highlight plain"><figcaption><span>init```命令，将该文件夹初始化为一个git仓库，会看到这个文件夹下多了一个.git的文件，然后我们把项目代码拷贝到test这个文件夹下。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2. 在自己的电脑上下载并安装Git软件</span><br><span class="line">3. 从服务器git仓库上把代码clone到本地电脑。首先在自己电脑上，创建一个保存代码的目录，在这个目录下右键选择`Git Bash`，输入下面的代码`git clone username@172.11.11.111:/file0/repo/EQ/`，这样服务器git仓库中的东西就完封不动的clone到本地了。</span><br><span class="line">4. 在自己电脑上打开eclipse或者myeclipse，在file中导入这个项目，就可以进行修改代码了。</span><br><span class="line">5. pull和push。右键选中这个工程，点击`team`，就可以对项目进行pull和push。当在本地修改完代码，本地的git会记录下来这些改动，所以本地文件夹中的git也有原先的历史记录，当push的时候会读取本地的git，找到本地的代码在服务器上的源，然后把改动同步到服务器上的git中。 </span><br><span class="line">6. 除了使用eclipse中的team来pull和push代码，还可以使用命令来进行pull或push。每次改完代码提交的时候，打开EQ这个目录（一定要在这个目录下，因为只有这个目录有git这个文件夹），右键```Git Bash Here```输入以下命令:</span><br><span class="line">   ```git add –all ```,</span><br><span class="line">   ```git commit –m &quot;修改说明&quot; ```,</span><br><span class="line">   ```git push</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>每次写代码之前，先进行pull。也是打开EQ这个目录，右键<code>Git Bash Here</code>输入以下命令:<code>git pull</code>这样就会把别人改动过的代码更新到EQ这个文件夹下。     </p>
 </li>
 </ol>
-<p>再次打开jupyter notebook程序</p>
-<h2><span id="搭建深度学习框架">搭建深度学习框架</span></h2><p>&ensp;&ensp;&ensp;&ensp;在GPU服务器上怎么搭建深度学习框架。   </p>
-<ol>
-<li>首先在服务器上搭建自己的python运行环境。即安装Anaconda，安装步骤如下</li>
-<li><p>下载安装脚本：   </p>
-<figure class="highlight plain"><figcaption><span>https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3. 运行安装向导：   </span><br><span class="line">```bash Anaconda3-5.2.0-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>为了激活安装， 你应该源~/.bashrc文件：    </p>
-<figure class="highlight plain"><figcaption><span>~/.bashrc```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5. 确认是否安装成功：   </span><br><span class="line">```conda --version</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>然后使用which python查看你当前使用的是哪个python，如果输出的目录是data/anaconda/python说明你当前使用的还是服务器自带的python，需要重新练连接一下服务器。如果输出是data/WangBeibei/anaconda/python，说明当前使用是自己安装的anaconda。</p>
-</li>
-<li><p>然后下载深度学习框架TensorFlow。首先到清华的网站下<a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/，直接粘贴下面3行命令，" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/，直接粘贴下面3行命令，</a></p>
-<figure class="highlight plain"><figcaption><span>config --add channels</span><a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/```" target="_blank" rel="noopener">link</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">```conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/```   </span><br><span class="line">```conda config --set show_channel_urls yes```   </span><br><span class="line">然后使用vi ~/.condarc将里面的-default删除，这样下载TensorFlow就不会使用国外的网站，而是使用清华的镜像。</span><br><span class="line">8. 然后使用conda install tensorflow-gpu下载TensorFlow框架。</span><br><span class="line">9. 运行TensorFlow程序，指定使用哪一块GPU，如果不指定使用全部GPU。   </span><br><span class="line">```CUDA_VISIBLE_DEVICES=5  python train.py</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>直接杀死一个进程<br><code>kill -9 [PID]</code>    </p>
-<h2><span id="23-部署代码到服务器">2.3. 部署代码到服务器</span></h2></li>
+<p><strong>问题1</strong>：在eclipse中右键点击team—&gt;show in History，会出现所有的改动。点击改动的一个文件，应该会出现2个窗口，一个窗口显示现在的代码，一个窗口显示原先的代码，可以明显的看出哪里进行了改动，但是我的电脑确没有出现历史窗口，只有现在代码的窗口。<br><strong>解决：</strong> 在点击show in history之后右键一个文件，点击“compare with previous version”就会出现历史窗口。    </p>
+<p><strong>问题2</strong>：在每次写代码之前都要先pull一下，把别人push的代码拉取到本地。但有时候你在写代码之前忘了pull别人的代码，直接在本地电脑上修改，然后你在pull别人的代码时会出现conflict，那是因为你和服务器上的代码修改了同一个地方，git不知道该采用谁的修改。<br><strong>解决:</strong> 首先在eclipse中，右键点击team，把你自己本地的代码先commit，不要push。然后打开vscode，导入和eclispe中一样的代码（和eclipse导入的代码在同一个文件下，带有.git），然后在vscode中点击左侧的第三个图标(git的图标)，然后在<code>...</code>中右键从服务器上pull到本地。然后再点击左侧的第一个图标，在这里面如果文件的右侧出现M，说明这个文件被修改过，然后你在这里面进行解决冲突。是采用本地的修改还是采用服务上的修改。等到冲突都解决时保存。然后再回到eclispe，会发现项目已经没有报错了。这时在eclispe中右键team，把代码commit and push到服务器中。</p>
+<h1><span id="3-使用gpu服务器">3. 使用GPU服务器</span></h1><p>&ensp;&ensp;&ensp;&ensp;涉及到2个软件：Putty是一个ssh工具。FileZilla用户和服务器进行文件传输。</p>
+<h2><span id="31-查看当前gpu的占用情况">3.1. 查看当前GPU的占用情况</span></h2><p><code>nvidia-smi</code><br><code>gpustat -i 2</code>:其中<code>-i 2</code>是可选的，表示每2秒刷新一次。</p>
+<h2><span id="32-查看当前的进程是谁的">3.2. 查看当前的进程是谁的</span></h2><p><code>ps -ef | grep 进程号</code><br><code>kill -9 进程号</code></p>
+<h2><span id="33-查看某个用户的进程">3.3. 查看某个用户的进程</span></h2><p><code>ps -ef|grep WangBeibei</code></p>
+<h1><span id="4-screen相关命令">4. Screen相关命令</span></h1><h2><span id="41-新建窗口">4.1. 新建窗口</span></h2><p>新建一个窗口有3种方法：</p>
+<ul>
+<li>screen #这样就可以新建窗口，进入到一个窗口中，但是这样窗口就没有名字，无法区分他们</li>
+<li>screen -S name #这样新建一个名字为name的窗口，并入到该窗口中<br>例如：screen -S count 新建了一个叫count的窗口并进入</li>
+<li>screen command #这样新建一个窗口并在窗口中执行command，同样没有名字<br>例如：screen python ./a.py 新建并执行a.py程序<h2><span id="42-会话分离">4.2. 会话分离</span></h2>我们在一个窗口运行某个程序之后，想退出登录关闭terminal干点别的事，让程序在后台运行。这时就需要和窗口会话分离,有2种方式：</li>
+<li>在当前会话窗口中按Ctrl+a +d快捷键可以实现分离，这时窗口会弹出[detached]的提示，并回到主窗口。</li>
+<li>screen -d name #远程detach某个session,前提是已经跳出了name窗口  <h2><span id="43-恢复会话窗口">4.3. 恢复会话窗口</span></h2>首先查看有哪些窗口正在运行</li>
+</ul>
+<blockquote>
+<p>screen -ls #列出窗口列表</p>
+<p>There is a screen on:<br>2637.count (12/17/2015/10:00:32 AM) (Detached)</p>
+<p>screen -r 2637 #进入2637线程，恢复count会话窗口</p>
+</blockquote>
+<p>这样就能回到count窗口了  </p>
+<h2><span id="44-kill会话窗口">4.4. kill会话窗口</span></h2><p>如果想关掉一个多余的窗口，有3种方法：</p>
+<ul>
+<li><code>kill -9 threadnum</code> 例如在上面的2637，kill -9 2637 即可杀死线程，当然就杀死了窗口</li>
+<li>使用<code>Ctrl a +k</code> 杀死当前窗口和窗口中运行的程序</li>
+<li><code>screen -S 进程号 -X quit</code>  <h2><span id="45-清除死去的窗口">4.5. 清除死去的窗口</span></h2>当窗口被杀死后，再用<code>screen -ls</code> 可以看到该窗口后面的(???dead)字样，说明窗口死了，但是仍在占用空间。这时需要清除窗口<br><code>screen -wipe #自动清除死去的窗口</code>  <h2><span id="46-解除窗口占用">4.6. 解除窗口占用</span></h2>有时你以为已经退出窗口了，但是<code>screen -ls</code>命令仍显示该窗口是<code>attach</code>状态，说明该窗口xxx时被占用的，可以用<code>screen -d xxxx</code>来解除占用后再进入。</li>
+</ul>
+<h1><span id="5-使用jupyter运行程序">5. 使用jupyter运行程序</span></h1><ol>
+<li>创建一个jupyter窗口<br><code>screen -S jupyter</code>   </li>
+<li>激活虚拟环境并启动jupyter<br><code>source activate insis_template_3.6</code>激活环境<br><code>jupyter notebook</code>打开jupyter  </li>
+<li>端口映射<br>第一次使用jupyter notebook，需要映射端口号，默认jupyter notebook的端口号是8888，但是在这个集群上，如果别人已经把8888端口占用了，集群会自动给你分配一个端口号，然后在putty中映射一下这个端口，具体操作如下：<br>在菜单栏选中change setting，找到Tunnels<br><img src="/2019/03/14/各类工具的使用/虚拟环境安装/putty.png" alt=""><br><img src="/2019/03/14/各类工具的使用/虚拟环境安装/port.png" alt="">  </li>
+<li>浏览器中打开</li>
+</ol>
+<p>使用screen创建一个窗口运行jupyter notebook程序的好处：就算ssh和28号服务器的连接断开，jupyter notebook的程序依然可以在后台运行。如果你打开的jupyter notebook的程序运行完了，有3种关闭程序的方法：<br>1、在jupyter notebook菜单栏，有一个close and hot的按钮。<br>2、在jupyter notebook中running中shutdown掉程序<br>3、screen -r 23560切入到虚拟窗口，然后在这个窗口ctrl+c<br>关闭jupyter notebook进程。不用使用exit，因为使用exit是关闭<br>虚拟窗口，直接按shift+a+d从虚拟窗口中切出，这样这个窗口</p>
+<h1><span id="6-部署代码到服务器">6. 部署代码到服务器</span></h1><ol>
 <li>首先在服务器上安装Tomcat</li>
 <li>使用FileZilla进入到服务器，使用putty进入到服务器。</li>
-<li>使用putty cd到到file0/apache-tomcat下，输入bin/shutdown.sh关掉Tomcat服务器。然后把webapps下的项目删除，进入到logs删除里面的日志。</li>
+<li>关闭Tomcat：使用putty cd到到file0/apache-tomcat下，输入bin/shutdown.sh关掉Tomcat服务器。然后把webapps下的项目删除，进入到logs删除里面的日志。</li>
 <li>使用eclipse把项目导出成war压缩包</li>
 <li>使用FileZilla把war上传到webapps下。</li>
 <li>使用bin/startup.sh启动Tomcat服务器</li>
 <li>查看日志主要在catalina.out这个文件中</li>
-<li><a href="http://hz1:8080/EQ/jsp/login.jsp" target="_blank" rel="noopener">http://hz1:8080/EQ/jsp/login.jsp</a><h2><span id="24-在本地运行gluon">2.4. 在本地运行gluon</span></h2>&ensp;&ensp;&ensp;&ensp;在cmd命令行中，找到存储程序的目录，然后输入activate gluon，然后输入jupyter notebook就可以写程序了<h2><span id="25-修复集群">2.5. 修复集群</span></h2>&ensp;&ensp;&ensp;&ensp;当集群中有个节点不能启动时，可以在虚拟机管理界面把虚拟机启动。<br>在浏览器中输入<a href="https://172.31.43.150" target="_blank" rel="noopener">https://172.31.43.150</a><br>点击“登录到vsphere web client”<br>用户名：administrator@vsphere.local，<br>密码：Lenovo-123，<br>点击右侧的“vCenter清单列表”，然后点击左侧的“虚拟机”，在左侧找到需要重启的虚拟机，单击选中，在右侧“关闭虚拟机电源”，关闭后再点击“打开虚拟机电源”。这样就把虚拟机重启了。还需要启动Cloudera manager agent。使用putty，例如输入hz5，<br>进入到ssh，用户名root，密码hz@bjtu_cit。<br>先和server同步时间ntpdate hz1，<br>然后启动agent：/opt/cm-5.7.2/etc/init.d/cloudera-scm-agent start</li>
+<li>浏览器查看，<a href="http://hz1:8080/EQ/jsp/login.jsp" target="_blank" rel="noopener">http://hz1:8080/EQ/jsp/login.jsp</a>  <h1><span id="7-tomcat端口占用">7. Tomcat端口占用</span></h1></li>
+<li>win + R,输入cmd回车进入dos界面 </li>
+<li>输入netstat -ano|findstr 8080 查看占用8080端口的进程 </li>
+<li>输入taskkill /pid 10148 /f 将显示的进程号（我的是10148）结束掉 </li>
+<li>重启tomcat</li>
 </ol>
+<h1><span id="8-修复集群">8. 修复集群</span></h1><p>当集群中有个节点不能启动时，可以在虚拟机管理界面把虚拟机启动。<br>在浏览器中输入<a href="https://172.31.43.150" target="_blank" rel="noopener">https://172.31.43.150</a><br>点击“登录到vsphere web client”<br>用户名：xxxx，<br>密码：<strong>*</strong>，<br>点击右侧的“vCenter清单列表”，然后点击左侧的“虚拟机”，在左侧找到需要重启的虚拟机，单击选中，在右侧“关闭虚拟机电源”，关闭后再点击“打开虚拟机电源”。这样就把虚拟机重启了。还需要启动Cloudera manager agent。使用putty，例如输入hz5，<br>进入到ssh，用户名xxx，密码<em>**</em>。<br>先和server同步时间ntpdate hz1，<br>然后启动agent：/opt/cm-5.7.2/etc/init.d/cloudera-scm-agent start</p>
 <p>平时就可以使用/vsphere-client/?csp#extensionId%3Dvsphere.core.viVms.domainView</p>
-<h2><span id="26-运行spark">2.6. 运行Spark</span></h2><p>&ensp;&ensp;&ensp;&ensp;不论是用什么语言写的spark程序在运行的时候都要用spark-submit来运行<br>如果是java程序需要指定—class 主程序的报名.类名<br>例如—class test.Test<br>python不需要指定—class这个参数</p>
+<h1><span id="9-运行spark">9. 运行Spark</span></h1><p>不论是用什么语言写的spark程序在运行的时候都要用spark-submit来运行<br>如果是java程序需要指定—class 主程序的报名.类名<br>例如—class test.Test<br>python不需要指定—class这个参数</p>
 <ol>
 <li>local模式：spark-submit —class test.Test —master local[2] mySpark.py    </li>
 <li>standalone模型： spark-submit —class test.Test —master spark://hz4:7077 mySpark.py   </li>
-<li>yarn模式： spark-submit —class test.Test —master yarn mySpark.py<h2><span id="27-使用vscode">2.7. 使用vsCode</span></h2>&ensp;&ensp;&ensp;&ensp;使用vscode编写python程序时，如果出现空格和Tab共用时导致程序出错。需要把所有的Tab换成空格，在vscode最下面有一个蓝色的条纹，在条纹的右边有”空格4”，点击这个字，然后在vscode的最上面会出现几个选项：点击“将缩进转换成空格”这个选项，再运行就没错了。  <h2><span id="字节">字节</span></h2>&ensp;&ensp;&ensp;&ensp;int是4个字节，无论数字多长都是4个字节，如果用string定义数字时，字节的长度就是字符的个数。   <pre><code class="lang-java">int a = 11111111;
+<li>yarn模式： spark-submit —class test.Test —master yarn mySpark.py<h1><span id="10-使用vscode">10. 使用vsCode</span></h1>&ensp;&ensp;&ensp;&ensp;使用vscode编写python程序时，如果出现空格和Tab共用时导致程序出错。需要把所有的Tab换成空格，在vscode最下面有一个蓝色的条纹，在条纹的右边有”空格4”，点击这个字，然后在vscode的最上面会出现几个选项：点击“将缩进转换成空格”这个选项，再运行就没错了。  <h1><span id="11-字节">11. 字节</span></h1>&ensp;&ensp;&ensp;&ensp;int是4个字节，无论数字多长都是4个字节，如果用string定义数字时，字节的长度就是字符的个数。   <pre><code class="lang-java">int a = 11111111;
 System.out.println(a+&quot;(int)的字节数：&quot;+Bytes.toBytes(a).length);
 int b=22;
 System.out.println(b+&quot;(int)的字节数：&quot;+Bytes.toBytes(b).length);
@@ -541,7 +575,13 @@ System.out.println(bString+&quot;(string)的字节数：&quot;+Bytes.toBytes(bSt
           
             <a href="/tags/VSCode/" rel="tag"># VSCode</a>
           
-            <a href="/tags/GPU服务器/" rel="tag"># GPU服务器</a>
+            <a href="/tags/GPU/" rel="tag"># GPU</a>
+          
+            <a href="/tags/Screen/" rel="tag"># Screen</a>
+          
+            <a href="/tags/Jupyter/" rel="tag"># Jupyter</a>
+          
+            <a href="/tags/服务器/" rel="tag"># 服务器</a>
           
         </div>
       
@@ -678,7 +718,7 @@ System.out.println(bString+&quot;(string)的字节数：&quot;+Bytes.toBytes(bSt
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -727,7 +767,7 @@ System.out.println(bString+&quot;(string)的字节数：&quot;+Bytes.toBytes(bSt
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 工具使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">搭建深度学习框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. 部署代码到服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.4. 在本地运行gluon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.5. 修复集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.6. 运行Spark</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.7. 使用vsCode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">字节</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. Git</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 使用GPU服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. 查看当前GPU的占用情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. 查看当前的进程是谁的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. 查看某个用户的进程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. Screen相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 新建窗口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.2. 会话分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.3. 恢复会话窗口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.4. kill会话窗口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.5. 清除死去的窗口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.6. 解除窗口占用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 使用jupyter运行程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 部署代码到服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. Tomcat端口占用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 修复集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. 运行Spark</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">10. 使用vsCode</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">11. 字节</span></a></li></ol></div>
             
 
           </div>
