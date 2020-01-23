@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="默默努力">
+  <meta name="keywords" content="openpai,">
 
 
 
@@ -73,18 +73,19 @@
 
 
 
-<meta name="description" content="title: openpaidate: 2020-01-10T10:34:27.000Zcategories: 工具tags:  openpaicomments: false   &amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近实验室安装了openpai平台，可以在上面提交程序运行。下面记录怎么使用OpenPai提交NNI程序，进行调参。">
+<meta name="description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近实验室安装了openpai平台，可以在上面提交程序运行。下面记录怎么使用OpenPai提交NNI程序，进行调参。">
+<meta name="keywords" content="openpai">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Echo&#39;s blog">
+<meta property="og:title" content="openpai">
 <meta property="og:url" content="http://yoursite.com/2020/01/10/openpai/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="title: openpaidate: 2020-01-10T10:34:27.000Zcategories: 工具tags:  openpaicomments: false   &amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近实验室安装了openpai平台，可以在上面提交程序运行。下面记录怎么使用OpenPai提交NNI程序，进行调参。">
+<meta property="og:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近实验室安装了openpai平台，可以在上面提交程序运行。下面记录怎么使用OpenPai提交NNI程序，进行调参。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/01/10/openpai/logs.png">
-<meta property="og:updated_time" content="2020-01-23T06:57:16.996Z">
+<meta property="og:updated_time" content="2020-01-23T09:41:48.651Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Echo&#39;s blog">
-<meta name="twitter:description" content="title: openpaidate: 2020-01-10T10:34:27.000Zcategories: 工具tags:  openpaicomments: false   &amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近实验室安装了openpai平台，可以在上面提交程序运行。下面记录怎么使用OpenPai提交NNI程序，进行调参。">
+<meta name="twitter:title" content="openpai">
+<meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近实验室安装了openpai平台，可以在上面提交程序运行。下面记录怎么使用OpenPai提交NNI程序，进行调参。">
 <meta name="twitter:image" content="http://yoursite.com/2020/01/10/openpai/logs.png">
 
 
@@ -121,7 +122,7 @@
 
 
 
-  <title> | Echo's blog</title>
+  <title>openpai | Echo's blog</title>
   
 
 
@@ -317,7 +318,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline"></h2>
+          <h2 class="post-title" itemprop="name headline">openpai</h2>
         
 
         <div class="post-meta">
@@ -340,9 +341,29 @@
           </span>
 
           
-
-          
+            <span class="post-category">
             
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
           
 
           
@@ -366,7 +387,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k
+                  993
                 </span>
               
 
@@ -403,28 +424,25 @@
       
 
       
-        <hr>
-<p>title: openpai<br>date: 2020-01-10T10:34:27.000Z<br>categories: 工具<br>tags:</p>
-<ul>
-<li>openpai<br>comments: false</li>
-</ul>
-<hr>
-<p>&ensp;&ensp;&ensp;&ensp;最近实验室安装了openpai平台，可以在上面提交程序运行。下面记录怎么使用OpenPai提交NNI程序，进行调参。<br><a id="more"></a></p>
-<h1><span id="1-使用步骤">1. 使用步骤</span></h1><h2><span id="11-编写程序">1.1. 编写程序</span></h2><p>   先在VSCode中完成代码，先在VSCode的虚拟环境中运行，如果可以运行，再使用OpemPai运行。<br>   <strong>注：在OpenPai上运行程序，不需要指定使用哪块GPU，因为OpenPai会自动申请需要使用的GPU。即以下代码注释掉</strong><br>   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3"</span></span><br></pre></td></tr></table></figure></p>
+        <p>&ensp;&ensp;&ensp;&ensp;最近实验室安装了openpai平台，可以在上面提交程序运行。下面记录怎么使用OpenPai提交NNI程序，进行调参。<br><a id="more"></a></p>
+<h1><span id="1-使用步骤">1. 使用步骤</span></h1><h2><span id="11-编写程序">1.1. 编写程序</span></h2><p>   先在VSCode中完成代码，先在VSCode的虚拟环境中运行，如果可以运行，再使用OpemPai运行。<br>   <strong>注：在OpenPai上运行程序，不需要指定使用哪块GPU，因为OpenPai会自动申请需要使用的GPU。即以下代码注释掉</strong></p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># os.environ["CUDA_VISIBLE_DEVICES"] = "1,2,3"</span></span><br></pre></td></tr></table></figure>
 <h2><span id="12-准备镜像">1.2. 准备镜像</span></h2><p>   准备一个包含hdfs的镜像，将需要用的镜像push到实验室服务器的仓库。<br>   下面是我本人的镜像：</p>
 <ul>
-<li>运行环境mxnet<br><code>lin-ai-27:5000/wangbeibei/mxnet:cu100_hdfs</code></li>
-<li>运行环境是pytorch<br><code>172.31.246.45:5000/dlspree:hdfs_pyg</code><h2><span id="13-编写nni的yml配置文件">1.3. 编写NNI的yml配置文件</span></h2>使用<code>pip install nni==1.2</code>安装1.2版本的nni，如果不指定版本，默认安装最新版，目前最新是1.3，1.3版本的nni其yml配置文件和1.2有所区别<br><a href="https://nni.readthedocs.io/zh/latest/Tutorial/ExperimentConfig.html#openpai" target="_blank" rel="noopener">OpenPai模式</a><br>1.3版本的nni的yml配置文件和1.2有所不同,<a href="https://nni.readthedocs.io/zh/latest/TrainingService/PaiMode.html" target="_blank" rel="noopener">最新版本的配置文件</a>，其中多了<code>nniManagerNFSMountPath,containerNFSMountPath,paiStoragePlugin</code>三个必填的键。<br>下面使用的是1.2版本的nni配置文件  <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">authorName:</span> <span class="string">wangbeibei</span></span><br><span class="line"><span class="attr">experimentName:</span><span class="string">hetero_convlstm_grid_experiment</span></span><br><span class="line"><span class="comment">#并发尝试任务的最大数量，有1张gpu卡就是1，有2gpu卡就是2</span></span><br><span class="line"><span class="attr">trialConcurrency:</span> <span class="number">6</span></span><br><span class="line"><span class="attr">maxExecDuration:</span> <span class="number">100</span><span class="string">h</span></span><br><span class="line"><span class="comment">#Trial 任务的最大数量，成功和失败的都计算在内</span></span><br><span class="line"><span class="attr">maxTrialNum:</span> <span class="number">600</span></span><br><span class="line"><span class="comment">#choice: local, remote, pai</span></span><br><span class="line"><span class="attr">trainingServicePlatform:</span> <span class="string">pai</span></span><br><span class="line"><span class="comment"># 指定nni管理器ip 为29号服务器</span></span><br><span class="line"><span class="attr">nniManagerIp:</span> <span class="number">202.205</span><span class="number">.99</span><span class="number">.174</span></span><br><span class="line"><span class="attr">searchSpacePath:</span><span class="string">hetero_convlstm_search_space.json</span></span><br><span class="line"><span class="comment">#choice: true, false</span></span><br><span class="line"><span class="attr">useAnnotation:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 存储日志和数据的目录, 默认值是 /dataWangBeibei/nni/  experiments</span></span><br><span class="line"><span class="comment">#如果在虚拟环境中运行该代码，logDir是服务器下绝对路径，/data/ WangBeibei/graduation/Codenni_save_logs</span></span><br><span class="line"><span class="comment">#如果在docker下运行该代码，logDir是容器下的绝路径，/root/ Code/nni_save_logs/</span></span><br><span class="line"><span class="attr">logDir:</span> <span class="string">/data/WangBeibei/graduation/Codenni_save_logs</span></span><br><span class="line"><span class="attr">tuner:</span></span><br><span class="line">  <span class="comment">#choice: TPE, Random, Anneal, Evolution,BatchTuner,  MetisTuner, GPTuner</span></span><br><span class="line">  <span class="comment">#SMAC (SMAC should be installed throughnnictl)</span></span><br><span class="line"><span class="attr">  builtinTunerName:</span> <span class="string">TPE</span></span><br><span class="line"><span class="attr">  classArgs:</span></span><br><span class="line">    <span class="comment">#choice: maximize, minimize</span></span><br><span class="line"><span class="attr">    optimize_mode:</span> <span class="string">minimize</span></span><br><span class="line"><span class="attr">trial:</span></span><br><span class="line">  <span class="comment"># 指定了运行 Trial 进程的命令行</span></span><br><span class="line"><span class="attr">  command:</span> <span class="string">cd</span> <span class="string">baseline</span> <span class="string">&amp;&amp;</span> <span class="string">python3</span>  <span class="string">hetero_convlstm_baseline.py</span></span><br><span class="line">  <span class="comment">#指定了 Trial 代码文件的目录,../会进入到Cod目录下</span></span><br><span class="line"><span class="attr">  codeDir:</span> <span class="string">../</span></span><br><span class="line"><span class="attr">  gpuNum:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  cpuNum:</span> <span class="number">8</span></span><br><span class="line"><span class="attr">  memoryMB:</span> <span class="number">14000</span></span><br><span class="line">  <span class="comment"># docker 镜像地址</span></span><br><span class="line">  <span class="comment">#pytorch镜像：172.31.246.45:5000dlspree:hdfs_pyg</span></span><br><span class="line">  <span class="comment">#mxnet镜像：lin-ai-27:5000/wangbeibeimxnet:cu100_hdfs</span></span><br><span class="line"><span class="attr">  image:</span> <span class="number">172.31</span><span class="number">.246</span><span class="number">.45</span><span class="string">:5000/dlspree:hdfs_pyg</span></span><br><span class="line"><span class="comment"># 配置访问的 OpenPAI 集群</span></span><br><span class="line"><span class="attr">paiConfig:</span></span><br><span class="line">  <span class="comment">#OpenPai网页的用户名和密码，也是53号服务器用户名和密码</span></span><br><span class="line"><span class="attr">  userName:</span> <span class="string">user</span></span><br><span class="line">  <span class="comment"># 密码如果是全数字需要 ""</span></span><br><span class="line"><span class="attr">  passWord:</span> <span class="string">psw</span></span><br><span class="line">  <span class="comment">#OpenPai集群的主节点</span></span><br><span class="line"><span class="attr">  host:</span> <span class="number">172.31</span><span class="number">.246</span><span class="number">.52</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>运行环境mxnet<br> <code>lin-ai-27:5000/wangbeibei/mxnet:cu100_hdfs</code></li>
+<li>运行环境是pytorch<br> <code>172.31.246.45:5000/dlspree:hdfs_pyg</code></li>
 </ul>
+<h2><span id="13-编写nni的yml配置文件">1.3. 编写NNI的yml配置文件</span></h2><p>   使用<code>pip install nni==1.2</code>安装1.2版本的nni，如果不指定版本，默认安装最新版，目前最新是1.3，1.3版本的nni其yml配置文件和1.2有所区别<br>   <a href="https://nni.readthedocs.io/zh/latest/Tutorial/ExperimentConfig.html#openpai" target="_blank" rel="noopener">OpenPai模式</a><br>   1.3版本的nni的yml配置文件和1.2有所不同,<a href="https://nni.readthedocs.io/zh/latest/TrainingService/PaiMode.html" target="_blank" rel="noopener">最新版本的配置文件</a>，其中多了<code>nniManagerNFSMountPath,containerNFSMountPath,paiStoragePlugin</code>三个必填的键。<br>   下面使用的是1.2版本的nni配置文件</p>
+   <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">authorName:</span> <span class="string">wangbeibei</span></span><br><span class="line"><span class="attr">experimentName:</span><span class="string">hetero_convlstm_grid_experiment</span></span><br><span class="line"><span class="comment">#并发尝试任务的最大数量，有1张gpu卡就是1，有2gpu卡就是2</span></span><br><span class="line"><span class="attr">trialConcurrency:</span> <span class="number">6</span></span><br><span class="line"><span class="attr">maxExecDuration:</span> <span class="number">100</span><span class="string">h</span></span><br><span class="line"><span class="comment">#Trial 任务的最大数量，成功和失败的都计算在内</span></span><br><span class="line"><span class="attr">maxTrialNum:</span> <span class="number">600</span></span><br><span class="line"><span class="comment">#choice: local, remote, pai</span></span><br><span class="line"><span class="attr">trainingServicePlatform:</span> <span class="string">pai</span></span><br><span class="line"><span class="comment"># 指定nni管理器ip 为29号服务器</span></span><br><span class="line"><span class="attr">nniManagerIp:</span> <span class="number">202.205</span><span class="number">.99</span><span class="number">.174</span></span><br><span class="line"><span class="attr">searchSpacePath:</span><span class="string">hetero_convlstm_search_space.json</span></span><br><span class="line"><span class="comment">#choice: true, false</span></span><br><span class="line"><span class="attr">useAnnotation:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 存储日志和数据的目录, 默认值是 /dataWangBeibei/nni/  experiments</span></span><br><span class="line"><span class="comment">#如果在虚拟环境中运行该代码，logDir是服务器下绝对路径，/data/ WangBeibei/graduation/Codenni_save_logs</span></span><br><span class="line"><span class="comment">#如果在docker下运行该代码，logDir是容器下的绝路径，/root/ Code/nni_save_logs/</span></span><br><span class="line"><span class="attr">logDir:</span> <span class="string">/data/WangBeibei/graduation/Codenni_save_logs</span></span><br><span class="line"><span class="attr">tuner:</span></span><br><span class="line">  <span class="comment">#choice: TPE, Random, Anneal, Evolution,BatchTuner,  MetisTuner, GPTuner</span></span><br><span class="line">  <span class="comment">#SMAC (SMAC should be installed throughnnictl)</span></span><br><span class="line"><span class="attr">  builtinTunerName:</span> <span class="string">TPE</span></span><br><span class="line"><span class="attr">  classArgs:</span></span><br><span class="line">    <span class="comment">#choice: maximize, minimize</span></span><br><span class="line"><span class="attr">    optimize_mode:</span> <span class="string">minimize</span></span><br><span class="line"><span class="attr">trial:</span></span><br><span class="line">  <span class="comment"># 指定了运行 Trial 进程的命令行</span></span><br><span class="line"><span class="attr">  command:</span> <span class="string">cd</span> <span class="string">baseline</span> <span class="string">&amp;&amp;</span> <span class="string">python3</span>  <span class="string">hetero_convlstm_baseline.py</span></span><br><span class="line">  <span class="comment">#指定了 Trial 代码文件的目录,../会进入到Cod目录下</span></span><br><span class="line"><span class="attr">  codeDir:</span> <span class="string">../</span></span><br><span class="line"><span class="attr">  gpuNum:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  cpuNum:</span> <span class="number">8</span></span><br><span class="line"><span class="attr">  memoryMB:</span> <span class="number">14000</span></span><br><span class="line">  <span class="comment"># docker 镜像地址</span></span><br><span class="line">  <span class="comment">#pytorch镜像：172.31.246.45:5000dlspree:hdfs_pyg</span></span><br><span class="line">  <span class="comment">#mxnet镜像：lin-ai-27:5000/wangbeibeimxnet:cu100_hdfs</span></span><br><span class="line"><span class="attr">  image:</span> <span class="number">172.31</span><span class="number">.246</span><span class="number">.45</span><span class="string">:5000/dlspree:hdfs_pyg</span></span><br><span class="line"><span class="comment"># 配置访问的 OpenPAI 集群</span></span><br><span class="line"><span class="attr">paiConfig:</span></span><br><span class="line">  <span class="comment">#OpenPai网页的用户名和密码，也是53号服务器用户名和密码</span></span><br><span class="line"><span class="attr">  userName:</span> <span class="string">user</span></span><br><span class="line">  <span class="comment"># 密码如果是全数字需要 ""</span></span><br><span class="line"><span class="attr">  passWord:</span> <span class="string">psw</span></span><br><span class="line">  <span class="comment">#OpenPai集群的主节点</span></span><br><span class="line"><span class="attr">  host:</span> <span class="number">172.31</span><span class="number">.246</span><span class="number">.52</span></span><br></pre></td></tr></table></figure>
 <p>   <strong>这里资源的配置都是针对一个trail的，memoryMB也是针对一个trail的。</strong><br>   <strong>注意：</strong> pai 模式下，NNIManager 会启动 RESTful 服务，监听端口为 NNI 网页服务器的端口加1。 例如，如果网页端口为<code>8080</code>，那么 RESTful 服务器会监听在 <code>8081</code>端口，来接收运行在 Kubernetes 中的 Trial 作业的指标。 因此，需要在防火墙中启用端口 <code>8081</code> 的 TCP 协议，以允许传入流量。</p>
 <p>通常在服务器中8080端口无法使用，我们需要在启动NNI管理器时手动通过 —port 指定端口。</p>
 <h2><span id="14-安装nni">1.4. 安装NNI</span></h2><p>   由于NNI并不依赖于任何环境，因此当我们使用OpenPAI提交NNI任务时，为了方便（需要解决ip和端口映射问题），<strong>不需要在docker中启动NNI，直接在服务器环境下安装NNI，启动即可</strong>。<br>   使用<code>pip install nni==1.2</code>安装nni</p>
 <h2><span id="15-启动nni">1.5. 启动NNI</span></h2><p>   使用<code>nnictl create --port 6688 --config xxx.yml</code>来启动一个Experiment,如果端口被占用，换别的端口</p>
-<h2><span id="16-nni浏览器查看">1.6. NNI浏览器查看</span></h2><p>   在浏览器中输入<code>服务器ip:6688</code>  </p>
-<h2><span id="17-在浏览器中查看openpai">1.7. 在浏览器中查看OpenPai</span></h2><p>   在浏览器中登录OpenPai，可以查看启动的trail，在代码中的print输出的内容在stdout中查看。<br>   <strong>注：有时候print语句输出的内容在stdout显示不出来，添加<code>flush=True</code>就可以了</strong><br>   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"************进入main函数"</span>,flush=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure></p>
-<p>   <img src="/2020/01/10/openpai/logs.png" alt="">     </p>
-<h2><span id="18-关闭nni">1.8. 关闭NNI</span></h2><p>   直接在服务器中使用<code>nnictl stop</code>即可关闭nni的Experiment</p>
+<h2><span id="16-nni浏览器查看">1.6. NNI浏览器查看</span></h2><p>   在浏览器中输入<code>服务器ip:6688</code></p>
+<h2><span id="17-在浏览器中查看openpai">1.7. 在浏览器中查看OpenPai</span></h2><p>   在浏览器中登录OpenPai，可以查看启动的trail，在代码中的print输出的内容在stdout中查看。<br>   <strong>注：有时候print语句输出的内容在stdout显示不出来，添加<code>flush=True</code>就可以了</strong></p>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"************进入main函数"</span>,flush=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p>   <img src="/2020/01/10/openpai/logs.png" alt=""></p>
+<h2><span id="18-关闭nni">1.8. 关闭NNI</span></h2><p>直接在服务器中使用<code>nnictl stop</code>即可关闭nni的Experiment</p>
 
       
     </div>
@@ -469,6 +487,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/openpai/" rel="tag"># openpai</a>
+          
+        </div>
+      
 
       
       
@@ -493,8 +517,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/06/pytorch-学习/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2020/01/06/pytorch-学习/" rel="next" title="pytorch 学习">
+                <i class="fa fa-chevron-left"></i> pytorch 学习
               </a>
             
           </div>
@@ -502,10 +526,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/10/运行GPU程序/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -533,15 +553,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODU3Mi8xNTEwMA=="></div>
-    </div>
-
-  
-
-
 
         </div>
         
@@ -600,7 +611,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -611,7 +622,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -863,17 +874,6 @@
 
 
 
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
   
 
 
