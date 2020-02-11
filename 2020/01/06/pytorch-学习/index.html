@@ -81,17 +81,18 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="介绍Pytorch的一些使用方法">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/01/06/pytorch-学习/to和cuda区别.png">
 <meta property="og:image" content="http://tankzhou.cn/images/%E6%A2%AF%E5%BA%A6%E6%A3%80%E6%9F%A5%E7%82%B9.gif">
 <meta property="og:image" content="http://yoursite.com/2020/01/06/pytorch-学习/多GPU.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/01/06/pytorch-学习/数据并行.png">
 <meta property="og:image" content="http://yoursite.com/2020/01/06/pytorch-学习/模型并行.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/01/06/pytorch-学习/模型并行2.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/01/06/pytorch-学习/pipeline.jpg">
-<meta property="og:updated_time" content="2020-01-23T13:07:53.936Z">
+<meta property="og:updated_time" content="2020-02-11T03:20:07.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pytorch 学习">
 <meta name="twitter:description" content="介绍Pytorch的一些使用方法">
-<meta name="twitter:image" content="http://tankzhou.cn/images/%E6%A2%AF%E5%BA%A6%E6%A3%80%E6%9F%A5%E7%82%B9.gif">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/06/pytorch-学习/to和cuda区别.png">
 
 
 
@@ -436,7 +437,7 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">torch</span><span class="selector-class">.cuda</span><span class="selector-class">.is_available</span>()       # 判断 <span class="selector-tag">GPU</span> 是否可用</span><br><span class="line"><span class="selector-tag">torch</span><span class="selector-class">.cuda</span><span class="selector-class">.device_count</span>()       # 判断有多少 <span class="selector-tag">GPU</span></span><br><span class="line"><span class="selector-tag">torch</span><span class="selector-class">.cuda</span><span class="selector-class">.get_device_name</span>(0)   # 返回 <span class="selector-tag">gpu</span> 名字，设备索引默认从 0 开始</span><br><span class="line"><span class="selector-tag">torch</span><span class="selector-class">.cuda</span><span class="selector-class">.current_device</span>()     # 返回当前设备索引</span><br></pre></td></tr></table></figure>
 <h2><span id="torchdevice">torch.device</span></h2><p><code>torch.device</code> 表示 <code>torch.Tensor</code> 分配到的设备的对象。其包含一个设备类型（<code>cpu</code> 或 <code>cuda</code>），以及可选的设备序号。如果设备序号不存在，则为当前设备，即 <code>torch.cuda.current_device()</code> 的返回结果。</p>
 <p>可以通过如下方式创建 <code>torch.device</code> 对象：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过字符串</span></span><br><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cpu'</span>)</span><br><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cuda:1'</span>)  # 指定类型及编号。注意，代码不会检查编号是否合法</span><br><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cuda'</span>)    # 默认为当前设备</span><br></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过字符串</span></span><br><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cpu'</span>)</span><br><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cuda:1'</span>)  # 指定类型及编号。注意，代码不会检查编号是否合法</span><br><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cuda'</span>)    # 默认为当前设备，如果是多GPU，默认使用全部GPU</span><br></pre></td></tr></table></figure>
 <p>还可以通过设备类型加上编号，来创建 <code>device</code> 对象：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cuda'</span>, <span class="number">0</span>)</span><br><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cpu'</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 <h2><span id="配置-cuda-访问限制">配置 CUDA 访问限制</span></h2><p>可以通过如下方式，设置当前 <code>Python</code> 脚本可见的 <code>GPU</code>。</p>
@@ -450,18 +451,18 @@
 </blockquote>
 <h2><span id="用-gpu-训练">用 GPU 训练</span></h2><p>默认情况下，使用 <code>CPU</code> 训练模型。可以通过如下方式，通过 <code>GPU</code> 进行训练。<strong>使用 GPU 时，模型和输入必须位于同一张 GPU 上。</strong></p>
 <p><code>.to(device)</code> 和 <code>.cuda()</code> 的区别如下：</p>
-<p><a href="https://stackoom.com/question/3bltP/Pytorch-%E5%9C%A8CUDA%E8%AE%BE%E5%A4%87%E4%B8%8A%E6%9C%89%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E5%88%9B%E5%BB%BA%E5%BC%A0%E9%87%8F-%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%90%97" target="_blank" rel="noopener">to和cuda的区别</a></p>
+<p><a href="https://stackoom.com/question/3bltP/Pytorch-%E5%9C%A8CUDA%E8%AE%BE%E5%A4%87%E4%B8%8A%E6%9C%89%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E5%88%9B%E5%BB%BA%E5%BC%A0%E9%87%8F-%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%90%97" target="_blank" rel="noopener">to和cuda的区别</a><br><img src="/2020/01/06/pytorch-学习/to和cuda区别.png" alt="to和cuda区别"></p>
 <ol>
 <li><code>.to()</code> 中的参数必不可少</li>
 <li>对于 <code>module</code> 而言，<code>.to()</code> 是 <code>inplace</code> 的，而 <code>.cuda()</code> 不是；而对于 <code>tensor</code> 而言，两者一致。</li>
 </ol>
 <blockquote>
-<p><strong>注</strong>：实测，两者时间消耗持平。</p>
+<p><strong>注</strong>：实测，两者时间消耗持平。推荐使用<code>.to()函数</code></p>
 </blockquote>
-<p><strong>方式 1 ：</strong></p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">device</span> = torch.device(<span class="string">"cuda:1"</span>)   <span class="comment"># 指定模型训练所在 GPU</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 GPU 转移至 GPU</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">net</span> = net.cuda(device)    <span class="comment"># 默认在第一块 GPU 上训练</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时将数据转移至 GPU,注意cuda有返回值</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">inputs</span> = inputs.cuda(device)</span><br><span class="line">    <span class="attr">labels</span> = labels.cuda(device)</span><br></pre></td></tr></table></figure>
-<p><strong>方法 2 ：</strong></p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">device</span> = torch.device(<span class="string">"cuda:1"</span>)   <span class="comment"># 指定模型训练所在 GPU</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 GPU 转移至 GPU</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">net</span> = net.to(device)    <span class="comment"># 默认在第一块 GPU 上训练</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时将数据转移至 GPU</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">inputs</span> = inputs.to(device)</span><br><span class="line">    <span class="attr">labels</span> = labels.to(device)</span><br></pre></td></tr></table></figure>
+<p><strong>方式 1 ：使用cuda</strong></p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">device</span> = torch.device(<span class="string">"cuda:1"</span>)   <span class="comment"># 指定模型训练所在 GPU</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 CPU 转移至 GPU</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">net</span> = net.cuda(device)    <span class="comment"># 默认在第一块 GPU 上训练</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时将数据转移至 GPU,注意cuda有返回值</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">inputs</span> = inputs.cuda(device)</span><br><span class="line">    <span class="attr">labels</span> = labels.cuda(device)</span><br></pre></td></tr></table></figure>
+<p><strong>方法 2 ：使用to</strong></p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">device</span> = torch.device(<span class="string">"cuda:1"</span>)   <span class="comment"># 指定模型训练所在 GPU</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 CPU 转移至 GPU</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">net</span> = net.to(device)    <span class="comment"># 默认在第一块 GPU 上训练</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时将数据转移至 GPU</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">inputs</span> = inputs.to(device)</span><br><span class="line">    <span class="attr">labels</span> = labels.to(device)</span><br></pre></td></tr></table></figure>
 <h2><span id="存在的问题">存在的问题</span></h2><h3><span id="batch-size-太大">batch size 太大</span></h3><p>当想要用大批量进行训练，但是 <code>GPU</code> 资源有限，此时可以通过<strong>梯度累加</strong>（<code>accumulating gradients</code>）的方式进行。</p>
 <p>梯度累加的基本思想在于，在优化器更新参数前，也就是执行 <code>optimizer.step()</code> 前，进行多次反向传播，使得梯度累计值自动保存在 <code>parameter.grad</code> 中，最后使用累加的梯度进行参数更新。</p>
 <p>这个在 <code>PyTorch</code> 中特别容易实现，因为 <code>PyTorch</code> 中，梯度值本身会保留，除非我们调用 <code>model.zero_grad()</code> 或 <code>optimizer.zero_grad()</code>。</p>
@@ -502,7 +503,7 @@
 </li>
 <li><p>将总输入的数据 <code>batch</code>，进行均分，分别作为各对应副本的输入 (<code>scatter</code>)</p>
 </li>
-<li><p>每个副本独立进行前向传播，并进行反向传播，但只是求取梯度</p>
+<li><p>每个副本独立进行前向传播，并进行反向传播，但只是求取梯度，每个GPU上的loss都要进行<code>loss.backward()</code>,得到各自的梯度</p>
 </li>
 <li><p>将各副本的梯度汇总（<code>gather</code>）到 <code>controller</code> 设备，并进行求和 (<code>reduced add</code>)</p>
 <blockquote>

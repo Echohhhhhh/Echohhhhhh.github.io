@@ -86,7 +86,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/conv.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/sigmoid.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/gpu.png">
-<meta property="og:updated_time" content="2020-01-23T13:38:08.108Z">
+<meta property="og:updated_time" content="2020-02-04T09:29:36.629Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="神经网络踩坑">
 <meta name="twitter:description" content="参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e">
@@ -391,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4.4k
+                  4.5k
                 </span>
               
 
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  17
+                  18
                 </span>
               
             </div>
@@ -448,6 +448,7 @@
 <li><a href="#14-%e8%b0%83%e5%8f%82%e7%bb%8f%e9%aa%8c">14. 调参经验</a></li>
 <li><a href="#15-earlystopping">15. EarlyStopping</a></li>
 <li><a href="#16-%e5%8d%b7%e7%a7%af%e5%b0%ba%e5%af%b8%e5%a4%a7%e5%b0%8f%e5%8f%98%e5%8c%96">16. 卷积尺寸大小变化</a></li>
+<li><a href="#17-%e5%9b%ba%e5%ae%9a%e9%9a%8f%e6%9c%ba%e6%95%b0%e7%a7%8d%e5%ad%90">17. 固定随机数种子</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="1-suffle数据集">1. Suffle数据集</span></h1><p>   <strong>先划分数据集再shuffle</strong>。先将数据集划分成训练集、验证集、测试集。然后在DataLoader划分mini-batch时对训练集进行shuffle得到batch。<strong>对验证集和测试集不需要shuffle</strong>。不对训练集进行shuffle容易造成过拟合。<br>   <strong>只对train进行shuffle，对val和test不进行shuffle</strong></p>
@@ -571,7 +572,17 @@
 <li>2D卷积，输入和输出形状一样：一般kernel_size=(3，3),padding=1,stride=1，输入和输出的形状一样</li>
 <li>2D卷积，输入和输出高和宽减半：kernel_size=(3,3),padding=1,stride=2，输出的形状是输入一半</li>
 <li>3D卷积，一般kernel_size=(3,3,3),padding=1,stride=1，输入和输出的形状一样</li>
-<li>3D卷积，一般kernel_size=(1,1,1),padding=0,stride=1，输入和输出的形状一样</li>
+<li>3D卷积，一般kernel_size=(1,1,1),padding=0,stride=1，输入和输出的形状一样   </li>
+</ul>
+<hr>
+<p>2020.2.4 更新  </p>
+<h1><span id="17-固定随机数种子">17. 固定随机数种子</span></h1><ul>
+<li><p>mxnet版本</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   seed = <span class="number">2020</span></span><br><span class="line">   mx.random.seed(seed)</span><br><span class="line">np.random.seed(seed)</span><br><span class="line">random.seed(seed)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>pytorch版本</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">seed = <span class="number">2020</span></span><br><span class="line">torch.manual_seed(seed) <span class="comment"># cpu</span></span><br><span class="line">torch.cuda.manual_seed(seed) <span class="comment">#gpu</span></span><br><span class="line">torch.backends.cudnn.deterministic=<span class="keyword">True</span><span class="comment">#cudn,cpu/gpu结果一致</span></span><br><span class="line">np.random.seed(seed)<span class="comment">#numpy</span></span><br><span class="line">random.seed(seed)<span class="comment">#ramdom</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 
       
@@ -805,7 +816,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. Suffle数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 归一化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. batch_size</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 划分数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 验证集的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 交叉验证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. 数据输入和输出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 激活函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. GPU运行程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">10. 使用多GPU运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">11. NDArray和numpy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">12. tensorboard使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">13. Dropout的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">14. 调参经验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">15. EarlyStopping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">16. 卷积尺寸大小变化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. Suffle数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 归一化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. batch_size</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 划分数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 验证集的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 交叉验证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. 数据输入和输出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 激活函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. GPU运行程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">10. 使用多GPU运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">11. NDArray和numpy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">12. tensorboard使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">13. Dropout的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">14. 调参经验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">15. EarlyStopping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">16. 卷积尺寸大小变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">17. 固定随机数种子</span></a></li></ol></div>
             
 
           </div>

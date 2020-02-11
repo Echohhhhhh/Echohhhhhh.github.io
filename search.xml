@@ -54,7 +54,7 @@
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">torch</span><span class="selector-class">.cuda</span><span class="selector-class">.is_available</span>()       # 判断 <span class="selector-tag">GPU</span> 是否可用</span><br><span class="line"><span class="selector-tag">torch</span><span class="selector-class">.cuda</span><span class="selector-class">.device_count</span>()       # 判断有多少 <span class="selector-tag">GPU</span></span><br><span class="line"><span class="selector-tag">torch</span><span class="selector-class">.cuda</span><span class="selector-class">.get_device_name</span>(0)   # 返回 <span class="selector-tag">gpu</span> 名字，设备索引默认从 0 开始</span><br><span class="line"><span class="selector-tag">torch</span><span class="selector-class">.cuda</span><span class="selector-class">.current_device</span>()     # 返回当前设备索引</span><br></pre></td></tr></table></figure>
 <h2><span id="torchdevice">torch.device</span></h2><p><code>torch.device</code> 表示 <code>torch.Tensor</code> 分配到的设备的对象。其包含一个设备类型（<code>cpu</code> 或 <code>cuda</code>），以及可选的设备序号。如果设备序号不存在，则为当前设备，即 <code>torch.cuda.current_device()</code> 的返回结果。</p>
 <p>可以通过如下方式创建 <code>torch.device</code> 对象：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 通过字符串</span></span><br><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cpu'</span>)</span><br><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cuda:1'</span>)  # 指定类型及编号。注意，代码不会检查编号是否合法</span><br><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cuda'</span>)    # 默认为当前设备</span><br></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 通过字符串</span></span><br><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cpu'</span>)</span><br><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cuda:1'</span>)  # 指定类型及编号。注意，代码不会检查编号是否合法</span><br><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cuda'</span>)    # 默认为当前设备，如果是多GPU，默认使用全部GPU</span><br></pre></td></tr></table></figure>
 <p>还可以通过设备类型加上编号，来创建 <code>device</code> 对象：</p>
 <figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cuda'</span>, <span class="number">0</span>)</span><br><span class="line"><span class="attr">device</span> = torch.device(<span class="string">'cpu'</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 <h2><span id="配置-cuda-访问限制">配置 CUDA 访问限制</span></h2><p>可以通过如下方式，设置当前 <code>Python</code> 脚本可见的 <code>GPU</code>。</p>
@@ -68,18 +68,18 @@
 </blockquote>
 <h2><span id="用-gpu-训练">用 GPU 训练</span></h2><p>默认情况下，使用 <code>CPU</code> 训练模型。可以通过如下方式，通过 <code>GPU</code> 进行训练。<strong>使用 GPU 时，模型和输入必须位于同一张 GPU 上。</strong></p>
 <p><code>.to(device)</code> 和 <code>.cuda()</code> 的区别如下：</p>
-<p><a href="https://stackoom.com/question/3bltP/Pytorch-%E5%9C%A8CUDA%E8%AE%BE%E5%A4%87%E4%B8%8A%E6%9C%89%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E5%88%9B%E5%BB%BA%E5%BC%A0%E9%87%8F-%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%90%97" target="_blank" rel="noopener">to和cuda的区别</a></p>
+<p><a href="https://stackoom.com/question/3bltP/Pytorch-%E5%9C%A8CUDA%E8%AE%BE%E5%A4%87%E4%B8%8A%E6%9C%89%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E5%88%9B%E5%BB%BA%E5%BC%A0%E9%87%8F-%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%90%97" target="_blank" rel="noopener">to和cuda的区别</a><br><img src="/2020/01/06/pytorch-学习/to和cuda区别.png" alt="to和cuda区别"></p>
 <ol>
 <li><code>.to()</code> 中的参数必不可少</li>
 <li>对于 <code>module</code> 而言，<code>.to()</code> 是 <code>inplace</code> 的，而 <code>.cuda()</code> 不是；而对于 <code>tensor</code> 而言，两者一致。</li>
 </ol>
 <blockquote>
-<p><strong>注</strong>：实测，两者时间消耗持平。</p>
+<p><strong>注</strong>：实测，两者时间消耗持平。推荐使用<code>.to()函数</code></p>
 </blockquote>
-<p><strong>方式 1 ：</strong></p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line"><span class="attr">device</span> = torch.device(<span class="string">"cuda:1"</span>)   <span class="comment"># 指定模型训练所在 GPU</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 GPU 转移至 GPU</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">net</span> = net.cuda(device)    <span class="comment"># 默认在第一块 GPU 上训练</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时将数据转移至 GPU,注意cuda有返回值</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">inputs</span> = inputs.cuda(device)</span><br><span class="line">    <span class="attr">labels</span> = labels.cuda(device)</span><br></pre></td></tr></table></figure>
-<p><strong>方法 2 ：</strong></p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line"><span class="attr">device</span> = torch.device(<span class="string">"cuda:1"</span>)   <span class="comment"># 指定模型训练所在 GPU</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 GPU 转移至 GPU</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">net</span> = net.to(device)    <span class="comment"># 默认在第一块 GPU 上训练</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时将数据转移至 GPU</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">inputs</span> = inputs.to(device)</span><br><span class="line">    <span class="attr">labels</span> = labels.to(device)</span><br></pre></td></tr></table></figure>
+<p><strong>方式 1 ：使用cuda</strong></p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line"><span class="attr">device</span> = torch.device(<span class="string">"cuda:1"</span>)   <span class="comment"># 指定模型训练所在 GPU</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 CPU 转移至 GPU</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">net</span> = net.cuda(device)    <span class="comment"># 默认在第一块 GPU 上训练</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时将数据转移至 GPU,注意cuda有返回值</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">inputs</span> = inputs.cuda(device)</span><br><span class="line">    <span class="attr">labels</span> = labels.cuda(device)</span><br></pre></td></tr></table></figure>
+<p><strong>方法 2 ：使用to</strong></p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line"><span class="attr">device</span> = torch.device(<span class="string">"cuda:1"</span>)   <span class="comment"># 指定模型训练所在 GPU</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 CPU 转移至 GPU</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">net</span> = net.to(device)    <span class="comment"># 默认在第一块 GPU 上训练</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时将数据转移至 GPU</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available() <span class="literal">and</span> use_gpu:</span><br><span class="line">    <span class="attr">inputs</span> = inputs.to(device)</span><br><span class="line">    <span class="attr">labels</span> = labels.to(device)</span><br></pre></td></tr></table></figure>
 <h2><span id="存在的问题">存在的问题</span></h2><h3><span id="batch-size-太大">batch size 太大</span></h3><p>当想要用大批量进行训练，但是 <code>GPU</code> 资源有限，此时可以通过<strong>梯度累加</strong>（<code>accumulating gradients</code>）的方式进行。</p>
 <p>梯度累加的基本思想在于，在优化器更新参数前，也就是执行 <code>optimizer.step()</code> 前，进行多次反向传播，使得梯度累计值自动保存在 <code>parameter.grad</code> 中，最后使用累加的梯度进行参数更新。</p>
 <p>这个在 <code>PyTorch</code> 中特别容易实现，因为 <code>PyTorch</code> 中，梯度值本身会保留，除非我们调用 <code>model.zero_grad()</code> 或 <code>optimizer.zero_grad()</code>。</p>
@@ -120,7 +120,7 @@
 </li>
 <li><p>将总输入的数据 <code>batch</code>，进行均分，分别作为各对应副本的输入 (<code>scatter</code>)</p>
 </li>
-<li><p>每个副本独立进行前向传播，并进行反向传播，但只是求取梯度</p>
+<li><p>每个副本独立进行前向传播，并进行反向传播，但只是求取梯度，每个GPU上的loss都要进行<code>loss.backward()</code>,得到各自的梯度</p>
 </li>
 <li><p>将各副本的梯度汇总（<code>gather</code>）到 <code>controller</code> 设备，并进行求和 (<code>reduced add</code>)</p>
 <blockquote>
@@ -261,7 +261,7 @@
 <figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">authorName:</span> <span class="string">wangbeibei</span></span><br><span class="line"><span class="attr">experimentName:</span> <span class="string">gru_grid_experiment</span></span><br><span class="line"><span class="comment">#并发尝试任务的最大数量，有1张gpu卡就是1，有2张gpu卡就是2</span></span><br><span class="line"><span class="attr">trialConcurrency:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">maxExecDuration:</span> <span class="number">100</span><span class="string">h</span></span><br><span class="line"><span class="comment">#Trial 任务的最大数量，成功和失败的都计算在内</span></span><br><span class="line"><span class="attr">maxTrialNum:</span> <span class="number">10</span></span><br><span class="line"><span class="comment">#choice: local, remote, pai,在虚拟环境和docker运行时，都写local</span></span><br><span class="line"><span class="attr">trainingServicePlatform:</span> <span class="string">local</span></span><br><span class="line"><span class="comment">#在第一步创建的json文件的路径，这里需要写相对路径，因为当前的yml文件和json文件在同一文件夹下</span></span><br><span class="line"><span class="attr">searchSpacePath:</span> <span class="string">lstm_search_space.json</span></span><br><span class="line"><span class="comment">#choice: true, false</span></span><br><span class="line"><span class="attr">useAnnotation:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 存储日志和数据的目录, 默认值是 /data/WangBeibei/nni/experiments</span></span><br><span class="line"><span class="comment">#如果在虚拟环境中运行该代码，logDir是服务器下的绝对路径，/data/WangBeibei/graduation/Code/nni_save_logs</span></span><br><span class="line"><span class="comment">#如果在docker下运行该代码，logDir是容器下的绝对路径，/root/Code/nni_save_logs/</span></span><br><span class="line"><span class="attr">logDir:</span> <span class="string">/root/Code/nni_save_logs/</span></span><br><span class="line"><span class="attr">tuner:</span></span><br><span class="line">    <span class="comment">#choice: TPE, Random, Anneal, Evolution, BatchTuner, MetisTuner, GPTuner</span></span><br><span class="line">    <span class="comment">#SMAC (SMAC should be installed through nnictl)</span></span><br><span class="line"><span class="attr">    builtinTunerName:</span> <span class="string">TPE</span></span><br><span class="line"><span class="attr">    classArgs:</span></span><br><span class="line">        <span class="comment">#choice: maximize, minimize</span></span><br><span class="line">        <span class="comment">#mae、rmse、mse都是最小化</span></span><br><span class="line"><span class="attr">        optimize_mode:</span> <span class="string">minimize</span></span><br><span class="line"><span class="attr">trial:</span></span><br><span class="line"><span class="comment"># 指定了运行 Trial 进程的命令行</span></span><br><span class="line"><span class="attr">command:</span> <span class="string">cd</span> <span class="string">baseline</span> <span class="string">&amp;&amp;</span> <span class="string">python3</span> <span class="string">lstm_baseline.py</span></span><br><span class="line"><span class="comment">#指定了 Trial 代码文件的目录</span></span><br><span class="line"><span class="comment">#首先从yml目录下，进入到代码的根目录下</span></span><br><span class="line"><span class="attr">codeDir:</span> <span class="string">../</span></span><br><span class="line"><span class="comment">#指定需要使用</span></span><br><span class="line"><span class="attr">gpuNum:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>启动容器<br>nni网页的默认端口是8080，所以需要和本地映射一下，</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -it -p 7000:8080 -v $PWD:/root --runtime=nvidia --rm -u 1018 --name wbbnni lin-ai-27:5000/wangbeibei/mxnet:cu_100  </span><br><span class="line"></span><br><span class="line">docker run -it -p 7000:8080 -v $PWD:/root --runtime=nvidia --rm -u 1018 --name wbbnni lin-ai-29:5000/dlspree:latest</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -it -p 7000:8080 -v $PWD:/root --runtime=nvidia --rm -u 1018 --name wbbnni lin-ai-27:5000/wangbeibei/mxnet:cu_100  </span><br><span class="line"></span><br><span class="line">docker run -it -p 7000:8080 -v $PWD:/root --runtime=nvidia --rm -u 1018 --name wbbnni lin-ai-27:5000/wangbeibei/pytorch_nni</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>启动一个nni的experiment<br>进入到yml所在的目录，使用以下命令，启动一个experiment实例，然后就可以在网页上查看<br>使用<code>nnictl create --config config.yml</code><br>出现以下提示，说明启动成功。</p>
 <p><img src="/2019/11/25/nni/create.png" alt=""></p>
@@ -704,7 +704,7 @@
         <category>Deep Learning</category>
       </categories>
       <tags>
-        <tag>keras</tag>
+        <tag>Keras</tag>
       </tags>
   </entry>
   <entry>
@@ -994,6 +994,7 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <li><a href="#14-%e8%b0%83%e5%8f%82%e7%bb%8f%e9%aa%8c">14. 调参经验</a></li>
 <li><a href="#15-earlystopping">15. EarlyStopping</a></li>
 <li><a href="#16-%e5%8d%b7%e7%a7%af%e5%b0%ba%e5%af%b8%e5%a4%a7%e5%b0%8f%e5%8f%98%e5%8c%96">16. 卷积尺寸大小变化</a></li>
+<li><a href="#17-%e5%9b%ba%e5%ae%9a%e9%9a%8f%e6%9c%ba%e6%95%b0%e7%a7%8d%e5%ad%90">17. 固定随机数种子</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="1-suffle数据集">1. Suffle数据集</span></h1><p>   <strong>先划分数据集再shuffle</strong>。先将数据集划分成训练集、验证集、测试集。然后在DataLoader划分mini-batch时对训练集进行shuffle得到batch。<strong>对验证集和测试集不需要shuffle</strong>。不对训练集进行shuffle容易造成过拟合。<br>   <strong>只对train进行shuffle，对val和test不进行shuffle</strong></p>
@@ -1117,7 +1118,17 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <li>2D卷积，输入和输出形状一样：一般kernel_size=(3，3),padding=1,stride=1，输入和输出的形状一样</li>
 <li>2D卷积，输入和输出高和宽减半：kernel_size=(3,3),padding=1,stride=2，输出的形状是输入一半</li>
 <li>3D卷积，一般kernel_size=(3,3,3),padding=1,stride=1，输入和输出的形状一样</li>
-<li>3D卷积，一般kernel_size=(1,1,1),padding=0,stride=1，输入和输出的形状一样</li>
+<li>3D卷积，一般kernel_size=(1,1,1),padding=0,stride=1，输入和输出的形状一样   </li>
+</ul>
+<hr>
+<p>2020.2.4 更新  </p>
+<h1><span id="17-固定随机数种子">17. 固定随机数种子</span></h1><ul>
+<li><p>mxnet版本</p>
+  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">   seed = <span class="number">2020</span></span><br><span class="line">   mx.random.seed(seed)</span><br><span class="line">np.random.seed(seed)</span><br><span class="line">random.seed(seed)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>pytorch版本</p>
+  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">seed = <span class="number">2020</span></span><br><span class="line">torch.manual_seed(seed) <span class="comment"># cpu</span></span><br><span class="line">torch.cuda.manual_seed(seed) <span class="comment">#gpu</span></span><br><span class="line">torch.backends.cudnn.deterministic=<span class="keyword">True</span><span class="comment">#cudn,cpu/gpu结果一致</span></span><br><span class="line">np.random.seed(seed)<span class="comment">#numpy</span></span><br><span class="line">random.seed(seed)<span class="comment">#ramdom</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 ]]></content>
       <categories>
@@ -1575,8 +1586,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 </ul>
 <h1><span id="8-我的镜像">8. 我的镜像</span></h1><h2><span id="81-mxnet">8.1. mxnet</span></h2><h3><span id="811-无hdfs">8.1.1. 无hdfs</span></h3><p><code>lin-ai-27:5000/wangbeibei/mxnet:cu_100</code></p>
 <h3><span id="812-有hdfs">8.1.2. 有hdfs</span></h3><p>在OpenPai平台上运行程序，使用该镜像<br><code>lin-ai-27:5000/wangbeibei/mxnet:cu100_hdfs</code></p>
-<h2><span id="82-pytorch">8.2. pytorch</span></h2><h3><span id="821-无hdfs">8.2.1. 无hdfs</span></h3><p><code>lin-ai-29:5000/dlspree:latest</code></p>
-<h3><span id="822-有hdfs">8.2.2. 有hdfs</span></h3><p>在OpenPai平台上运行程序，使用该镜像<br><code>172.31.246.45:5000/dlspree:hdfs_pyg</code></p>
+<h2><span id="82-pytorch">8.2. pytorch</span></h2><h3><span id="821-无hdfs">8.2.1. 无hdfs</span></h3><p><code>lin-ai-27:5000/wangbeibei/pytorch_nni:cu_100</code></p>
+<h3><span id="822-有hdfs">8.2.2. 有hdfs</span></h3><p>在OpenPai平台上运行程序，使用该镜像<br><code>172.31.246.45:5000/dlspree:hdfs_pyg</code><br><code>lin-ai-27:5000/wangbeibei/pytorch:cu100_hdfs</code></p>
 ]]></content>
       <categories>
         <category>工具</category>
@@ -2564,8 +2575,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
       </categories>
       <tags>
         <tag>GPU</tag>
-        <tag>服务器</tag>
         <tag>Git</tag>
+        <tag>服务器</tag>
       </tags>
   </entry>
   <entry>
@@ -2997,6 +3008,7 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <p>&ensp;&ensp;&ensp;&ensp;门控循环神经网络的提出(2014年提出)正是为了更好地捕捉时间序列中时间步距离较大的依赖关系。它通过可以学习的门来控制信息的流动。其中，门控循环单元是一种常用的门控循环神经网络。门控循环神经单元引入了重置门和更新门的概念，从而修改了循环神经网络中隐藏状态的计算方式。重置门和更新门的激活函数是sigmoid函数，可以将元素的值变换到0到1之间，因为重置门$R_t$和更新们$Z_t$中每个元素的值域都是[0,1]。</p>
 <h2><span id="11-候选隐藏状态">1.1. 候选隐藏状态</span></h2><p>&ensp;&ensp;&ensp;&ensp;候选隐藏状态用来辅助后面的隐藏状态计算。重置门为0，意味着重置对应隐藏状态元素为0，即丢弃上一时间步的隐藏状态。如果重置门为1，表示保留上一时间步的隐藏状态。重置门控制了上一时间步的隐藏状态如何流入当前时间步的候选隐藏状态。而上一时间步的隐藏状态可能包含了时间序列截至上一时间步的全部历史信息。因此，重置门可以用来丢弃和预测无关的历史信息。</p>
 <h2><span id="12-隐藏状态">1.2. 隐藏状态</span></h2><p>&ensp;&ensp;&ensp;&ensp;时间步$t$的隐藏状态$H_t$的计算使用当前时间步的更新们$Z_t$来对上一时间步的隐藏状态$H_t-1$和当前时间步的候选隐藏状态$\tilde{H}_{t}$做组合。<br>&ensp;&ensp;&ensp;&ensp;更新门控制了包含当前时间步信息的候选隐藏状态如何流入隐藏状态。</p>
+<p><img src="/2019/02/12/RNN/gru.png" alt=""></p>
 <script type="math/tex; mode=display">X_t,H_{t-1},R_t(控制H_{t-1})----->\tilde{H}_t,H_{t-1},Z_t(控制\tilde{H}_t,H_{t-1})----->H_t</script><p>&ensp;&ensp;&ensp;&ensp;假设更新门$Z_t$在t时刻为1，那么时间步$t$的输入信息没有流入当前时间步的隐藏状态$H_t$，实际上，上一时间步的隐藏状态$H_{t-1}$保存并传递到当前时间步$t$。<strong>这个设计可以应对循环神经网络中的梯度衰减问题，并更好地捕捉时间序列中时间步距离较大的依赖关系。</strong></p>
 <h2><span id="13-总结">1.3. 总结</span></h2><ul>
 <li>重置门有助于捕捉时间序列里短期的依赖关系。重置门控制了上一时间步的隐藏状态如何流入当前时间步的候选隐藏状态。而上一时间步的隐藏状态可能包含了时间序列截至上一时间步的全部历史信息。因此，重置门可以用来丢弃和预测无关的历史信息。</li>
@@ -3315,7 +3327,7 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>Deep Learning</category>
       </categories>
       <tags>
-        <tag>gluon</tag>
+        <tag>Mxnet</tag>
       </tags>
   </entry>
   <entry>
@@ -3324,17 +3336,92 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
     <content><![CDATA[<p>平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU<br><a id="more"></a></p>
 <h1><span id="mxnet">mxnet</span></h1><h2><span id="单gpu">单GPU</span></h2><p><a href="http://zh.gluon.ai/chapter_deep-learning-computation/use-gpu.html" target="_blank" rel="noopener">GPU计算</a></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> mxnet <span class="keyword">as</span> mx</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment">#指定使用哪块GPU</span></span><br><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">"3"</span></span><br><span class="line"><span class="comment">#被指定的GPU编号默认为0</span></span><br><span class="line">ctx = mx.gpu(<span class="number">0</span>)</span><br><span class="line"><span class="comment">#模型、数据都需要拷贝到GPU中</span></span><br><span class="line">nd.array(data,ctx)</span><br><span class="line">data.as_in_context(ctx)</span><br></pre></td></tr></table></figure>
-<h2><span id="多gpu">多GPU</span></h2><p><a href="http://zh.gluon.ai/chapter_computational-performance/multiple-gpus-gluon.html" target="_blank" rel="noopener">多GPU计算</a></p>
+<h2><span id="多gpu">多GPU</span></h2><p><a href="http://zh.gluon.ai/chapter_computational-performance/multiple-gpus-gluon.html" target="_blank" rel="noopener">多GPU计算</a><br><a href="http://mxnet.incubator.apache.org/api/faq/multi_device" target="_blank" rel="noopener">Run MXNet on Multiple CPU/GPUs with Data Parallelism</a></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> mxnet <span class="keyword">as</span> mx</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">ctx_id = <span class="string">'1,2,3,4'</span></span><br><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = ctx_id</span><br><span class="line">num_gpus = len(ctx_id.split(<span class="string">','</span>))</span><br><span class="line">ctx = [mx.gpu(i) <span class="keyword">for</span> i <span class="keyword">in</span> range(num_gpus)]</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用split_and_load()将数据分配到多个GPU上</span></span><br></pre></td></tr></table></figure>
 <h1><span id="pytorch">pytorch</span></h1><h2><span id="单gpu">单GPU</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">"1"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    device = torch.device(<span class="string">"cuda:0"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    device = torch.device(<span class="string">"cpu"</span>)</span><br><span class="line"><span class="comment">#使用to()将数据拷贝到GPU上</span></span><br><span class="line">train_feature.to(device)</span><br></pre></td></tr></table></figure>
 <h2><span id="多gpu">多GPU</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">"1,2,3"</span>  </span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    <span class="comment">#指定所有的GPU</span></span><br><span class="line">    device = torch.device(<span class="string">"cuda:0"</span>)</span><br><span class="line">    all_devices = torch.device(<span class="string">"cuda"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    device = torch.device(<span class="string">"cpu"</span>)</span><br><span class="line"><span class="comment">#pytorch在使用多GPU时，需要先将数据和模型拷贝到GPU-0上，</span></span><br><span class="line"><span class="comment">#使用多GPU的关键代码</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.device_count() &gt; <span class="number">1</span>:</span><br><span class="line">    print(<span class="string">"Let's use"</span>, torch.cuda.device_count(), <span class="string">"GPUs!"</span>,flush=<span class="keyword">True</span>)</span><br><span class="line">    <span class="comment">#数据并行</span></span><br><span class="line">    model = nn.DataParallel(model)</span><br><span class="line">model.to(device)</span><br></pre></td></tr></table></figure>
+<hr>
+<p>2020.2.11更新</p>
+<h1><span id="mxnet和pytorch区别">mxnet和pytorch区别</span></h1><p>在写程序时，主要用到<code>mxnet和pytorch</code>框架，这里针对2者在代码上的不同做个总结，下面的不同都是我自己在写程序遇到的，仅仅是一部分，仅供参考。</p>
+<h2><span id="ndarray和tensor">NDArray和Tensor</span></h2><h3><span id="和numpy转换">和numpy转换</span></h3><ul>
+<li><p>mxnet</p>
+<ul>
+<li><strong>Numpy—&gt;NDArray</strong><br><code>nd.array(a)</code></li>
+<li><strong>NDArray—&gt;Numpy</strong><br><code>D.asnumpy()</code></li>
+</ul>
+</li>
+<li><p>pytorch</p>
+<ul>
+<li><strong>Numpy—&gt;Tensor</strong><br><code>D = torch.from_numpy(a)</code></li>
+<li><strong>Tensor—&gt;Numpy</strong><br><code>a = D.numpy()</code></li>
+</ul>
+</li>
+</ul>
+<h3><span id="转换为标量">转换为标量</span></h3><ul>
+<li>mxnet<br><code>asscalar()</code>将函数结果转换成Python的标量<br><code>X.sum().asscalar()</code></li>
+<li>pytorch</li>
+</ul>
+<h3><span id="改变数据形状">改变数据形状</span></h3><ul>
+<li><p>mxnet</p>
+<ul>
+<li><p><strong>reshape()</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">X = x.reshape((<span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line">X = x.reshape((<span class="number">-1</span>, <span class="number">4</span>))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>pytorch</p>
+<ul>
+<li><p><strong>view()</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">y = x.view(<span class="number">15</span>)</span><br><span class="line">z = x.view(<span class="number">-1</span>, <span class="number">5</span>)  <span class="comment"># -1所指的维度可以根据其他维度的值推出来</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3><span id="数据转到gpu上">数据转到GPU上</span></h3><ul>
+<li><p>mxnet<br>使用<code>as_in_context()</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#在gpu上创建NDArray</span></span><br><span class="line">B = nd.random.uniform(shape=(<span class="number">2</span>, <span class="number">3</span>), ctx=mx.gpu(<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">z = x.as_in_context(mx.gpu())</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>pytorch<br>使用<code>to()</code>函数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    device = torch.device(<span class="string">"cuda"</span>) <span class="comment"># GPU</span></span><br><span class="line">y = torch.ones_like(x, device=device)  <span class="comment"># 直接创建一个在GPU上的Tensor</span></span><br><span class="line">x = x.to(device)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3><span id="loss计算">loss计算</span></h3><ul>
+<li>maxnet</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">loss = L2Loss()</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">1</span>,num_epochs + <span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> X,y <span class="keyword">in</span> data_iter:</span><br><span class="line">        <span class="keyword">with</span> autograd.record()：</span><br><span class="line">            <span class="comment">#l维度(batch_size,)</span></span><br><span class="line">            l = loss(net(X),y)</span><br><span class="line">        <span class="comment">#等价于l.sum().backward()</span></span><br><span class="line">        l.backward()</span><br><span class="line">        <span class="comment">#step对参数的梯度进行更新，传入batch_size是因为计算得到的梯度是一个batch样本的梯度和，需要除以batch_size得到梯度的平均值</span></span><br><span class="line">        trainer.step(batch_size)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注1：在使用<code>y.backward()</code>自动求梯度时，如果<code>y</code>不是一个标量，mxnet将默认先对<code>y</code>中元素求和得到新的变量，在求该变量关于<code>x</code>的梯度 </p>
+<p>注2：mxnet的<code>L2Loss()</code>返回值维度<code>(batch_size,)</code>，即batch中每个样本的loss。需要在<code>step()</code>中传入<code>batch_size</code>参数</p>
+</blockquote>
+<ul>
+<li>pytorch</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">loss = MSELoss()</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">1</span>,num_epochs + <span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> X,y <span class="keyword">in</span> data_iter:</span><br><span class="line">        <span class="comment">#l维度(1,)</span></span><br><span class="line">        l = loss(net(X),y)</span><br><span class="line">        optimizer.zero_grad() <span class="comment"># 梯度清零，等价于net.zero_grad()</span></span><br><span class="line">        l.backward()</span><br><span class="line">        <span class="comment">#step对参数的梯度进行更新，不需要传入batch_size参数</span></span><br><span class="line">        trainer.step()</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注1：在<code>y.backward()</code>时，如果<code>y</code>是标量，则<code>backward()</code>不需要传入任何参数，否则，需要传入与<code>y</code>同形的Tensor</p>
+<p>注2：grad在反向传播过程中是累加的，这意味着每一个batch运行反向传播，梯度都会累加之前batch的梯度，所以一般在反向传播传播之前需要把梯度清零。</p>
+<p>注3：pytorch的<code>MSELoss()</code>返回值维度<code>(1,)</code>，因为<code>MSELoss()</code>返回值是batch中所有样本loss的平均值。所以在<code>step()</code>中不需要传入<code>batch_size</code>参数</p>
+</blockquote>
+<h3><span id="rnn输入维度">RNN输入维度</span></h3><p>RNN有2个数据：所有时间步的隐藏状态output、最后一个时间步的隐藏状态out_state</p>
+<ul>
+<li>mxnet<br>输入数据维度默认<code>(T,batch_size,input_size)</code><br>output输出数据维度<code>(T,batch_size,hidden_size)</code></li>
+<li>pytorch<br>输入数据维度默认<code>(T,batch_size,input_size)</code><br>output输出数据维度<code>(T,batch_size,hidden_size)</code></li>
+</ul>
+<h3><span id="多gpu运行">多GPU运行</span></h3><ul>
+<li><p>mxnet<br><code>split_and_load()</code>返回值的list，里面每个元素是<code>NDArray</code><br>计算得到的loss也是list类型，里面存储一个batch在多个GPU上计算的loss，对每个loss分别反向传播求梯度，然后再使用<code>step()</code>更新参数。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">for</span> X,y <span class="keyword">in</span> train_iter:</span><br><span class="line">        gpu_Xs = gutils.split_and_load(X,ctx)</span><br><span class="line">        gpu_ys = gutils.split_and_load(y,ctx)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> autograd.record():</span><br><span class="line">            <span class="comment">#ls是list，里面有n个NDArray，n是GPU的个数</span></span><br><span class="line">            ls = [loss(net(gpu_X),gpu_y <span class="keyword">for</span> gpu_X,gpu_y <span class="keyword">in</span> zip(gpu_Xs,gpu_ys)</span><br><span class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> ls:</span><br><span class="line">            l.backward()</span><br><span class="line"></span><br><span class="line">        train.step(batch_size)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>pytorch<br><a href="https://echohhhhhh.github.io/2019/01/31/%E8%BF%90%E8%A1%8CGPU%E7%A8%8B%E5%BA%8F/" target="_blank" rel="noopener">Pytorch学习</a></p>
+</li>
+</ul>
 ]]></content>
       <categories>
-        <category>工具</category>
+        <category>Deep Learning</category>
       </categories>
       <tags>
         <tag>GPU</tag>
-        <tag>服务器</tag>
+        <tag>Mxnet</tag>
+        <tag>Pytorch</tag>
       </tags>
   </entry>
   <entry>

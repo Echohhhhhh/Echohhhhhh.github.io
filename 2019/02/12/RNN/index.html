@@ -81,13 +81,14 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="1. 门控循环单元GRU&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;梯度裁剪可以应对梯度爆炸，但无法解决梯度衰减的问题。通常由于这个原因，循环神经网络在实际中较难捕捉时间序列中时间步距离较大的依赖关系。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/02/12/RNN/gru.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/12/RNN/lstm.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/02/12/RNN/公式.png">
-<meta property="og:updated_time" content="2020-01-23T13:07:56.798Z">
+<meta property="og:updated_time" content="2020-02-04T07:40:22.515Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RNN">
 <meta name="twitter:description" content="1. 门控循环单元GRU&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;梯度裁剪可以应对梯度爆炸，但无法解决梯度衰减的问题。通常由于这个原因，循环神经网络在实际中较难捕捉时间序列中时间步距离较大的依赖关系。">
-<meta name="twitter:image" content="http://yoursite.com/2019/02/12/RNN/lstm.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/12/RNN/gru.png">
 
 
 
@@ -441,6 +442,7 @@
 <p>&ensp;&ensp;&ensp;&ensp;门控循环神经网络的提出(2014年提出)正是为了更好地捕捉时间序列中时间步距离较大的依赖关系。它通过可以学习的门来控制信息的流动。其中，门控循环单元是一种常用的门控循环神经网络。门控循环神经单元引入了重置门和更新门的概念，从而修改了循环神经网络中隐藏状态的计算方式。重置门和更新门的激活函数是sigmoid函数，可以将元素的值变换到0到1之间，因为重置门$R_t$和更新们$Z_t$中每个元素的值域都是[0,1]。</p>
 <h2><span id="11-候选隐藏状态">1.1. 候选隐藏状态</span></h2><p>&ensp;&ensp;&ensp;&ensp;候选隐藏状态用来辅助后面的隐藏状态计算。重置门为0，意味着重置对应隐藏状态元素为0，即丢弃上一时间步的隐藏状态。如果重置门为1，表示保留上一时间步的隐藏状态。重置门控制了上一时间步的隐藏状态如何流入当前时间步的候选隐藏状态。而上一时间步的隐藏状态可能包含了时间序列截至上一时间步的全部历史信息。因此，重置门可以用来丢弃和预测无关的历史信息。</p>
 <h2><span id="12-隐藏状态">1.2. 隐藏状态</span></h2><p>&ensp;&ensp;&ensp;&ensp;时间步$t$的隐藏状态$H_t$的计算使用当前时间步的更新们$Z_t$来对上一时间步的隐藏状态$H_t-1$和当前时间步的候选隐藏状态$\tilde{H}_{t}$做组合。<br>&ensp;&ensp;&ensp;&ensp;更新门控制了包含当前时间步信息的候选隐藏状态如何流入隐藏状态。</p>
+<p><img src="/2019/02/12/RNN/gru.png" alt=""></p>
 <script type="math/tex; mode=display">X_t,H_{t-1},R_t(控制H_{t-1})----->\tilde{H}_t,H_{t-1},Z_t(控制\tilde{H}_t,H_{t-1})----->H_t</script><p>&ensp;&ensp;&ensp;&ensp;假设更新门$Z_t$在t时刻为1，那么时间步$t$的输入信息没有流入当前时间步的隐藏状态$H_t$，实际上，上一时间步的隐藏状态$H_{t-1}$保存并传递到当前时间步$t$。<strong>这个设计可以应对循环神经网络中的梯度衰减问题，并更好地捕捉时间序列中时间步距离较大的依赖关系。</strong></p>
 <h2><span id="13-总结">1.3. 总结</span></h2><ul>
 <li>重置门有助于捕捉时间序列里短期的依赖关系。重置门控制了上一时间步的隐藏状态如何流入当前时间步的候选隐藏状态。而上一时间步的隐藏状态可能包含了时间序列截至上一时间步的全部历史信息。因此，重置门可以用来丢弃和预测无关的历史信息。</li>
