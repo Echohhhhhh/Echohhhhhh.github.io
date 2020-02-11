@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-11T09:39:36.367Z">
+<meta property="og:updated_time" content="2020-02-11T13:52:06.101Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="运行GPU程序">
 <meta name="twitter:description" content="平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU">
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k
+                  1.1k
                 </span>
               
 
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  5
                 </span>
               
             </div>
@@ -423,16 +423,43 @@
 
       
         <p>平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU<br><a id="more"></a></p>
-<h1><span id="mxnet">mxnet</span></h1><h2><span id="单gpu">单GPU</span></h2><p><a href="http://zh.gluon.ai/chapter_deep-learning-computation/use-gpu.html" target="_blank" rel="noopener">GPU计算</a></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-mxnet">1. mxnet</a><ul>
+<li><a href="#11-%e5%8d%95gpu">1.1. 单GPU</a></li>
+<li><a href="#12-%e5%a4%9agpu">1.2. 多GPU</a></li>
+</ul>
+</li>
+<li><a href="#2-pytorch">2. pytorch</a><ul>
+<li><a href="#21-%e5%8d%95gpu">2.1. 单GPU</a></li>
+<li><a href="#22-%e5%a4%9agpu">2.2. 多GPU</a></li>
+</ul>
+</li>
+<li><a href="#3-mxnet%e5%92%8cpytorch%e5%8c%ba%e5%88%ab">3. mxnet和pytorch区别</a><ul>
+<li><a href="#31-ndarray%e5%92%8ctensor">3.1. NDArray和Tensor</a><ul>
+<li><a href="#311-%e5%92%8cnumpy%e8%bd%ac%e6%8d%a2">3.1.1. 和numpy转换</a></li>
+<li><a href="#312-%e8%bd%ac%e6%8d%a2%e4%b8%ba%e6%a0%87%e9%87%8f">3.1.2. 转换为标量</a></li>
+<li><a href="#313-%e6%94%b9%e5%8f%98%e6%95%b0%e6%8d%ae%e5%bd%a2%e7%8a%b6">3.1.3. 改变数据形状</a></li>
+<li><a href="#314-%e6%95%b0%e6%8d%ae%e8%bd%ac%e5%88%b0gpu%e4%b8%8a">3.1.4. 数据转到GPU上</a></li>
+</ul>
+</li>
+<li><a href="#32-loss%e8%ae%a1%e7%ae%97">3.2. loss计算</a></li>
+<li><a href="#33-rnn%e8%be%93%e5%85%a5%e7%bb%b4%e5%ba%a6">3.3. RNN输入维度</a></li>
+<li><a href="#34-%e5%a4%9agpu%e8%bf%90%e8%a1%8c">3.4. 多GPU运行</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-mxnet">1. mxnet</span></h1><h2><span id="11-单gpu">1.1. 单GPU</span></h2><p><a href="http://zh.gluon.ai/chapter_deep-learning-computation/use-gpu.html" target="_blank" rel="noopener">GPU计算</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mxnet <span class="keyword">as</span> mx</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment">#指定使用哪块GPU</span></span><br><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">"3"</span></span><br><span class="line"><span class="comment">#被指定的GPU编号默认为0</span></span><br><span class="line">ctx = mx.gpu(<span class="number">0</span>)</span><br><span class="line"><span class="comment">#模型、数据都需要拷贝到GPU中</span></span><br><span class="line">nd.array(data,ctx)</span><br><span class="line">data.as_in_context(ctx)</span><br></pre></td></tr></table></figure>
-<h2><span id="多gpu">多GPU</span></h2><p><a href="http://zh.gluon.ai/chapter_computational-performance/multiple-gpus-gluon.html" target="_blank" rel="noopener">多GPU计算</a><br><a href="http://mxnet.incubator.apache.org/api/faq/multi_device" target="_blank" rel="noopener">Run MXNet on Multiple CPU/GPUs with Data Parallelism</a></p>
+<h2><span id="12-多gpu">1.2. 多GPU</span></h2><p><a href="http://zh.gluon.ai/chapter_computational-performance/multiple-gpus-gluon.html" target="_blank" rel="noopener">多GPU计算</a><br><a href="http://mxnet.incubator.apache.org/api/faq/multi_device" target="_blank" rel="noopener">Run MXNet on Multiple CPU/GPUs with Data Parallelism</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mxnet <span class="keyword">as</span> mx</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">ctx_id = <span class="string">'1,2,3,4'</span></span><br><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = ctx_id</span><br><span class="line">num_gpus = len(ctx_id.split(<span class="string">','</span>))</span><br><span class="line">ctx = [mx.gpu(i) <span class="keyword">for</span> i <span class="keyword">in</span> range(num_gpus)]</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用split_and_load()将数据分配到多个GPU上</span></span><br></pre></td></tr></table></figure>
-<h1><span id="pytorch">pytorch</span></h1><h2><span id="单gpu">单GPU</span></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">"1"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    device = torch.device(<span class="string">"cuda:0"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    device = torch.device(<span class="string">"cpu"</span>)</span><br><span class="line"><span class="comment">#使用to()将数据拷贝到GPU上</span></span><br><span class="line">train_feature.to(device)</span><br></pre></td></tr></table></figure>
-<h2><span id="多gpu">多GPU</span></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">"1,2,3"</span>  </span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    <span class="comment">#指定所有的GPU</span></span><br><span class="line">    device = torch.device(<span class="string">"cuda:0"</span>)</span><br><span class="line">    all_devices = torch.device(<span class="string">"cuda"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    device = torch.device(<span class="string">"cpu"</span>)</span><br><span class="line"><span class="comment">#pytorch在使用多GPU时，需要先将数据和模型拷贝到GPU-0上，</span></span><br><span class="line"><span class="comment">#使用多GPU的关键代码</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.device_count() &gt; <span class="number">1</span>:</span><br><span class="line">    print(<span class="string">"Let's use"</span>, torch.cuda.device_count(), <span class="string">"GPUs!"</span>,flush=<span class="keyword">True</span>)</span><br><span class="line">    <span class="comment">#数据并行</span></span><br><span class="line">    model = nn.DataParallel(model)</span><br><span class="line">model.to(device)</span><br></pre></td></tr></table></figure>
+<h1><span id="2-pytorch">2. pytorch</span></h1><h2><span id="21-单gpu">2.1. 单GPU</span></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">"1"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    device = torch.device(<span class="string">"cuda:0"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    device = torch.device(<span class="string">"cpu"</span>)</span><br><span class="line"><span class="comment">#使用to()将数据拷贝到GPU上</span></span><br><span class="line">train_feature.to(device)</span><br></pre></td></tr></table></figure>
+<h2><span id="22-多gpu">2.2. 多GPU</span></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">"1,2,3"</span>  </span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    <span class="comment">#指定所有的GPU</span></span><br><span class="line">    device = torch.device(<span class="string">"cuda:0"</span>)</span><br><span class="line">    all_devices = torch.device(<span class="string">"cuda"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    device = torch.device(<span class="string">"cpu"</span>)</span><br><span class="line"><span class="comment">#pytorch在使用多GPU时，需要先将数据和模型拷贝到GPU-0上，</span></span><br><span class="line"><span class="comment">#使用多GPU的关键代码</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.device_count() &gt; <span class="number">1</span>:</span><br><span class="line">    print(<span class="string">"Let's use"</span>, torch.cuda.device_count(), <span class="string">"GPUs!"</span>,flush=<span class="keyword">True</span>)</span><br><span class="line">    <span class="comment">#数据并行</span></span><br><span class="line">    model = nn.DataParallel(model)</span><br><span class="line">model.to(device)</span><br></pre></td></tr></table></figure>
 <hr>
 <p>2020.2.11更新</p>
-<h1><span id="mxnet和pytorch区别">mxnet和pytorch区别</span></h1><p>在写程序时，主要用到<code>mxnet和pytorch</code>框架，这里针对2者在代码上的不同做个总结，下面的不同都是我自己在写程序遇到的，仅仅是一部分，仅供参考。</p>
-<h2><span id="ndarray和tensor">NDArray和Tensor</span></h2><h3><span id="和numpy转换">和numpy转换</span></h3><ul>
+<h1><span id="3-mxnet和pytorch区别">3. mxnet和pytorch区别</span></h1><p>在写程序时，主要用到<code>mxnet和pytorch</code>框架，这里针对2者在代码上的不同做个总结，下面的不同都是我自己在写程序遇到的，仅仅是一部分，仅供参考。</p>
+<h2><span id="31-ndarray和tensor">3.1. NDArray和Tensor</span></h2><h3><span id="311-和numpy转换">3.1.1. 和numpy转换</span></h3><ul>
 <li><p>mxnet</p>
 <ul>
 <li><strong>Numpy—&gt;NDArray</strong><br><code>nd.array(a)</code></li>
@@ -446,11 +473,11 @@
 </ul>
 </li>
 </ul>
-<h3><span id="转换为标量">转换为标量</span></h3><ul>
+<h3><span id="312-转换为标量">3.1.2. 转换为标量</span></h3><ul>
 <li>mxnet<br><code>asscalar()</code>将函数结果转换成Python的标量<br><code>X.sum().asscalar()</code></li>
 <li>pytorch</li>
 </ul>
-<h3><span id="改变数据形状">改变数据形状</span></h3><ul>
+<h3><span id="313-改变数据形状">3.1.3. 改变数据形状</span></h3><ul>
 <li><p>mxnet</p>
 <ul>
 <li><p><strong>reshape()</strong></p>
@@ -466,7 +493,7 @@
 </ul>
 </li>
 </ul>
-<h3><span id="数据转到gpu上">数据转到GPU上</span></h3><ul>
+<h3><span id="314-数据转到gpu上">3.1.4. 数据转到GPU上</span></h3><ul>
 <li><p>mxnet<br>使用<code>as_in_context()</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#在gpu上创建NDArray</span></span><br><span class="line">B = nd.random.uniform(shape=(<span class="number">2</span>, <span class="number">3</span>), ctx=mx.gpu(<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">z = x.as_in_context(mx.gpu())</span><br></pre></td></tr></table></figure>
 </li>
@@ -474,7 +501,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    device = torch.device(<span class="string">"cuda"</span>) <span class="comment"># GPU</span></span><br><span class="line">y = torch.ones_like(x, device=device)  <span class="comment"># 直接创建一个在GPU上的Tensor</span></span><br><span class="line">x = x.to(device)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3><span id="loss计算">loss计算</span></h3><ul>
+<h2><span id="32-loss计算">3.2. loss计算</span></h2><ul>
 <li>maxnet</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">loss = L2Loss()</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">1</span>,num_epochs + <span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> X,y <span class="keyword">in</span> data_iter:</span><br><span class="line">        <span class="keyword">with</span> autograd.record()：</span><br><span class="line">            <span class="comment">#l维度(batch_size,)</span></span><br><span class="line">            l = loss(net(X),y)</span><br><span class="line">        <span class="comment">#等价于l.sum().backward()</span></span><br><span class="line">        l.backward()</span><br><span class="line">        <span class="comment">#step对参数的梯度进行更新，传入batch_size是因为计算得到的梯度是一个batch样本的梯度和，需要除以batch_size得到梯度的平均值</span></span><br><span class="line">        trainer.step(batch_size)</span><br></pre></td></tr></table></figure>
@@ -491,12 +518,12 @@
 <p>注2：grad在反向传播过程中是累加的，这意味着每一个batch运行反向传播，梯度都会累加之前batch的梯度，所以一般在反向传播传播之前需要把梯度清零。</p>
 <p>注3：pytorch的<code>MSELoss()</code>返回值维度<code>(1,)</code>，因为<code>MSELoss()</code>返回值是batch中所有样本loss的平均值。所以在<code>step()</code>中不需要传入<code>batch_size</code>参数</p>
 </blockquote>
-<h3><span id="rnn输入维度">RNN输入维度</span></h3><p>RNN有2个数据：所有时间步的隐藏状态output、最后一个时间步的隐藏状态out_state</p>
+<h2><span id="33-rnn输入维度">3.3. RNN输入维度</span></h2><p>RNN有2个数据：所有时间步的隐藏状态output、最后一个时间步的隐藏状态out_state</p>
 <ul>
 <li>mxnet<br>输入数据维度默认<code>(T,batch_size,input_size)</code><br>output输出数据维度<code>(T,batch_size,hidden_size)</code></li>
 <li>pytorch<br>输入数据维度默认<code>(T,batch_size,input_size)</code><br>output输出数据维度<code>(T,batch_size,hidden_size)</code></li>
 </ul>
-<h3><span id="多gpu运行">多GPU运行</span></h3><ul>
+<h2><span id="34-多gpu运行">3.4. 多GPU运行</span></h2><ul>
 <li><p>mxnet<br><code>split_and_load()</code>返回值的list，里面每个元素是<code>NDArray</code><br>计算得到的loss也是list类型，里面存储一个batch在多个GPU上计算的loss，对每个loss分别反向传播求梯度，然后再使用<code>step()</code>更新参数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">for</span> X,y <span class="keyword">in</span> train_iter:</span><br><span class="line">        gpu_Xs = gutils.split_and_load(X,ctx)</span><br><span class="line">        gpu_ys = gutils.split_and_load(y,ctx)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> autograd.record():</span><br><span class="line">            <span class="comment">#ls是list，里面有n个NDArray，n是GPU的个数</span></span><br><span class="line">            ls = [loss(net(gpu_X),gpu_y <span class="keyword">for</span> gpu_X,gpu_y <span class="keyword">in</span> zip(gpu_Xs,gpu_ys)</span><br><span class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> ls:</span><br><span class="line">            l.backward()</span><br><span class="line"></span><br><span class="line">        train.step(batch_size)</span><br></pre></td></tr></table></figure>
 </li>
@@ -581,8 +608,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/21/Markdown/" rel="next" title="学习Markdown">
-                <i class="fa fa-chevron-left"></i> 学习Markdown
+              <a href="/2019/01/31/Gluon编程/" rel="next" title="Gluon编程学习">
+                <i class="fa fa-chevron-left"></i> Gluon编程学习
               </a>
             
           </div>
@@ -591,8 +618,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/31/Gluon编程/" rel="prev" title="Gluon编程学习">
-                Gluon编程学习 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/05/CNN+残差/" rel="prev" title="CNN和残差">
+                CNN和残差 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -739,7 +766,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">mxnet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">单GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">多GPU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">pytorch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">单GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">多GPU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">mxnet和pytorch区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">NDArray和Tensor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">和numpy转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">转换为标量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">改变数据形状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">数据转到GPU上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">loss计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">RNN输入维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">多GPU运行</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. mxnet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. 单GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. 多GPU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. pytorch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 单GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. 多GPU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. mxnet和pytorch区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. NDArray和Tensor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.1. 和numpy转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.2. 转换为标量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.3. 改变数据形状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.4. 数据转到GPU上</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. loss计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. RNN输入维度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.4. 多GPU运行</span></a></li></ol></li></ol></div>
             
 
           </div>
