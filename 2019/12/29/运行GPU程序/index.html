@@ -77,11 +77,11 @@
 <meta name="keywords" content="GPU,Mxnet,Pytorch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="运行GPU程序">
-<meta property="og:url" content="http://yoursite.com/2019/01/31/运行GPU程序/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/12/29/运行GPU程序/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-11T13:52:06.101Z">
+<meta property="og:updated_time" content="2020-02-14T09:37:11.871Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="运行GPU程序">
 <meta name="twitter:description" content="平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU">
@@ -114,7 +114,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/31/运行GPU程序/">
+  <link rel="canonical" href="http://yoursite.com/2019/12/29/运行GPU程序/">
 
 
 
@@ -299,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/31/运行GPU程序/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/29/运行GPU程序/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Echo">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-31T17:05:01+08:00">
-                2019-01-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-29T17:05:01+08:00">
+                2019-12-29
               </time>
             
 
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.1k
+                  1.3k
                 </span>
               
 
@@ -475,7 +475,7 @@
 </ul>
 <h3><span id="312-转换为标量">3.1.2. 转换为标量</span></h3><ul>
 <li>mxnet<br><code>asscalar()</code>将函数结果转换成Python的标量<br><code>X.sum().asscalar()</code></li>
-<li>pytorch</li>
+<li>pytorch<br><code>item()</code>将函数结果转换成Python的标量<br><code>X.sum().item()</code></li>
 </ul>
 <h3><span id="313-改变数据形状">3.1.3. 改变数据形状</span></h3><ul>
 <li><p>mxnet</p>
@@ -516,7 +516,7 @@
 <blockquote>
 <p>注1：在<code>y.backward()</code>时，如果<code>y</code>是标量，则<code>backward()</code>不需要传入任何参数，否则，需要传入与<code>y</code>同形的Tensor</p>
 <p>注2：grad在反向传播过程中是累加的，这意味着每一个batch运行反向传播，梯度都会累加之前batch的梯度，所以一般在反向传播传播之前需要把梯度清零。</p>
-<p>注3：pytorch的<code>MSELoss()</code>返回值维度<code>(1,)</code>，因为<code>MSELoss()</code>返回值是batch中所有样本loss的平均值。所以在<code>step()</code>中不需要传入<code>batch_size</code>参数</p>
+<p>注3：pytorch的<code>MSELoss()</code>返回值维度<code>(1,)</code>，Tensor中只有1个数，也称作<code>scalar:零维的张量</code>。因为<code>MSELoss()</code>返回值是batch中所有样本loss的平均值。所以在<code>step()</code>中不需要传入<code>batch_size</code>参数</p>
 </blockquote>
 <h2><span id="33-rnn输入维度">3.3. RNN输入维度</span></h2><p>RNN有2个数据：所有时间步的隐藏状态output、最后一个时间步的隐藏状态out_state</p>
 <ul>
@@ -524,10 +524,12 @@
 <li>pytorch<br>输入数据维度默认<code>(T,batch_size,input_size)</code><br>output输出数据维度<code>(T,batch_size,hidden_size)</code></li>
 </ul>
 <h2><span id="34-多gpu运行">3.4. 多GPU运行</span></h2><ul>
-<li><p>mxnet<br><code>split_and_load()</code>返回值的list，里面每个元素是<code>NDArray</code><br>计算得到的loss也是list类型，里面存储一个batch在多个GPU上计算的loss，对每个loss分别反向传播求梯度，然后再使用<code>step()</code>更新参数。</p>
+<li><p>mxnet<br><code>split_and_load()</code>返回值的list，里面每个元素是<code>NDArray</code>,经过<code>split_and_load()</code>对一个batch数据进行分割，得到的<code>X,y</code>的shape变成<code>(batch_size/n,*)</code>,经过模型输出得到的predicted维度也是<code>(batch_size/n,*)</code><br>计算得到的loss也是list类型，里面存储一个batch在多个GPU上计算的loss，对每个loss分别反向传播求梯度，然后再使用<code>step()</code>更新参数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">for</span> X,y <span class="keyword">in</span> train_iter:</span><br><span class="line">        gpu_Xs = gutils.split_and_load(X,ctx)</span><br><span class="line">        gpu_ys = gutils.split_and_load(y,ctx)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> autograd.record():</span><br><span class="line">            <span class="comment">#ls是list，里面有n个NDArray，n是GPU的个数</span></span><br><span class="line">            ls = [loss(net(gpu_X),gpu_y <span class="keyword">for</span> gpu_X,gpu_y <span class="keyword">in</span> zip(gpu_Xs,gpu_ys)</span><br><span class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> ls:</span><br><span class="line">            l.backward()</span><br><span class="line"></span><br><span class="line">        train.step(batch_size)</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>pytorch<br><a href="https://echohhhhhh.github.io/2019/01/31/%E8%BF%90%E8%A1%8CGPU%E7%A8%8B%E5%BA%8F/" target="_blank" rel="noopener">Pytorch学习</a></p>
+<li><p>pytorch<br><a href="https://echohhhhhh.github.io/2019/01/31/%E8%BF%90%E8%A1%8CGPU%E7%A8%8B%E5%BA%8F/" target="_blank" rel="noopener">Pytorch学习</a>  </p>
+<p>pytorch使用<code>DataParallel()</code>来进行数据并行，不需要手动将数据划分到多个GPU上，即<code>train_feature</code>的维度是<code>(batch_size,*)</code>，经过模型输出的<code>predicted</code>的维度也是<code>(batch_size,*)</code>，这一点和<code>mxnet</code>不同</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用多GPU的关键代码</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.device_count() &gt; <span class="number">1</span>:</span><br><span class="line">    transformer_model = nn.DataParallel(transformer_model)<span class="comment">#默认全部GPU</span></span><br><span class="line">transformer_model.to(device0)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">1</span>,training_epoch+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> train_feature,train_label <span class="keyword">in</span> train_loader:</span><br><span class="line">        <span class="comment">#train_label:(tabch_size,*)</span></span><br><span class="line">        predicted = transformer_model(train_feature)</span><br><span class="line">        l = loss(predicted,train_label)<span class="comment">#l的shape：(1,)</span></span><br><span class="line">        trainer.zero_grad()</span><br><span class="line">        l.backward()</span><br><span class="line">        trainer.step()</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 
@@ -608,8 +610,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/31/Gluon编程/" rel="next" title="Gluon编程学习">
-                <i class="fa fa-chevron-left"></i> Gluon编程学习
+              <a href="/2019/12/26/leecode-tirck/" rel="next" title="leetcode踩坑">
+                <i class="fa fa-chevron-left"></i> leetcode踩坑
               </a>
             
           </div>
@@ -618,8 +620,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/05/CNN+残差/" rel="prev" title="CNN和残差">
-                CNN和残差 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/01/06/pytorch-学习/" rel="prev" title="pytorch 学习">
+                pytorch 学习 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
