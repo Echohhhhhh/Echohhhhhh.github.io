@@ -1,6 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>时空论文列表</title>
+    <url>/2020/02/18/%E6%97%B6%E7%A9%BA%E8%AE%BA%E6%96%87%E5%88%97%E8%A1%A8/</url>
+    <content><![CDATA[<h1><span id="简介">简介</span></h1><p>以下列出AAAI2020和ICLR2020关于时空领域的论文</p>
+<h1><span id="aaai2020">AAAI2020</span></h1><p><strong>[1]. RiskOracle: A Minute-­‐level Citywide Traffic Accident Forecasting Framework</strong><br><a href="https://github.com/zzyy0929/AAAI2020-RiskOracle" target="_blank" rel="noopener">https://github.com/zzyy0929/AAAI2020-RiskOracle</a></p>
+<blockquote>
+<p>Zhengyang Zhou (University of Science and Technology of China); Yang Wang (University of Science and<br>Technology of China)*; Xike Xie (University of Science and Technology of China); Lianliang Chen (University of<br>Science and Technology of China); Hengchang Liu (USTC)</p>
+</blockquote>
+<p><strong>[2]. GMAN: A Graph Multi-­‐Attention Network for Traffic Prediction</strong><br><a href="https://github.com/zhengchuanpan/GMAN" target="_blank" rel="noopener">https://github.com/zhengchuanpan/GMAN</a></p>
+<blockquote>
+<p>Chuanpan Zheng (Xiamen University); Xiaoliang Fan (Xiamen University)*; Cheng Wang (Xiamen University);<br>Jianzhong Qi (The University of Melbourne)</p>
+</blockquote>
+<p><strong>[3]. Multi-­‐Range Attentive Bicomponent Graph Convolutional Network for Traffic Forecasting</strong><br><a href="https://github.com/naganandy/graph-based-deep-learning-literature/blob/master/conference-publications/folders/publications_aaai20/mrabgcn_aaai20/README.md" target="_blank" rel="noopener">https://github.com/naganandy/graph-based-deep-learning-literature/blob/master/conference-publications/folders/publications_aaai20/mrabgcn_aaai20/README.md</a><br><a href="https://arxiv.org/abs/1911.12093?context=cs" target="_blank" rel="noopener">https://arxiv.org/abs/1911.12093?context=cs</a></p>
+<blockquote>
+<p>Weiqi Chen (Zhejiang University); Ling Chen (Zhejiang University)*; Yu Xie (Alibaba Cloud); Wei Cao (Alibaba);<br>Yusong Gao (Alibaba Cloud); Xiaojie Feng (Alibaba Cloud)</p>
+</blockquote>
+<p><strong>[4]. Spatio-­‐Temporal Graph Structure Learning for Traffic Forecasting</strong></p>
+<blockquote>
+<p>Qi Zhang (institute of automation, Chinese academy of science)*; Jianlong Chang (National Laboratory of Pattern<br>Recognition, Institute of Automation, Chinese Academy of Sciences); Gaofeng Meng (Chinese Academy of<br>Sciences); SHIMING XIANG (Chinese Academy of Sciences, China); Chunhong Pan (Institute of Automation, Chinese<br>Academy of Sciences)</p>
+</blockquote>
+<p><strong>[5]. Pay Your Trip for Traffic Congestion: Dynamic Pricing in Traffic-­‐Aware Road Networks</strong></p>
+<blockquote>
+<p>Lisi Chen (HKBU)*; Shuo Shang (KAUST); Bin Yao (“Shanghai Jiaotong University, China”); Jing Li (Inception Institute<br>of Artificial Intelligence)</p>
+</blockquote>
+<p><strong>[6]. Self-­‐Attention ConvLSTM for Spatiotemporal Prediction</strong></p>
+<blockquote>
+<p>Zhihui Lin (Tsinghua University)*; Maomao Li (Tsinghua university); Zhuobin Zheng ( Tsinghua University);<br>Yangyang Cheng (Tsinghua University); Chun Yuan (Tsinghua University)</p>
+</blockquote>
+<p><strong>[7]. An Attentional Recurrent Neural Network for Personalized Next Location Recommendation</strong></p>
+<blockquote>
+<p>Qing Guo (Nanyang Technological University)*; Zhu Sun (Nanyang Technological University); Jie Zhang (Nanyang<br>Technological University); Yin-­‐Leng Theng (Nanyang Technological University)</p>
+</blockquote>
+<p><strong>[8]. Spatial-­‐Temporal Synchronous Graph Convolutional Networks: A New Framework for Spatial-­‐Temporal Network Data Forecasting</strong><br><a href="https://github.com/Davidham3/STSGCN" target="_blank" rel="noopener">https://github.com/Davidham3/STSGCN</a></p>
+<blockquote>
+<p>Chao Song (Beijing Jiaotong University)*; Youfang Lin (Beijing Jiaotong University); Shengnan Guo (Beijing Jiaotong<br>University); Huaiyu Wan (Beijing Jiaotong University)</p>
+</blockquote>
+<p><strong>[9]. STGRAT: A Spatio-Temporal Graph Attention Network for Traffic Forecasting</strong><br><a href="https://arxiv.org/abs/1911.13181" target="_blank" rel="noopener">https://arxiv.org/abs/1911.13181</a></p>
+<blockquote>
+<p>Cheonbok Park1, Chunggi Lee2, Hyojin Bahng1, Taeyun won1,<br>Kihwan Kim2, Seungmin Jin2, Sungahn Ko2, Jaegul Choo1<br>1 Korea University , 2 UNIST</p>
+</blockquote>
+<p><strong>[10]. Semi-Supervised Hierarchical Recurrent Graph Neural Network for City-Wide Parking Availability Prediction</strong><br><a href="https://arxiv.org/abs/1911.10516" target="_blank" rel="noopener">https://arxiv.org/abs/1911.10516</a></p>
+<blockquote>
+<p>Weijia Zhang (University of Science and Technology of China); Hao LIU (Business Intelligence Lab, Baidu<br>Research)*; Yanchi Liu (Rutgers University); Jingbo Zhou (Baidu Inc.); Hui Xiong (Rutgers University)</p>
+</blockquote>
+<p><strong>[11]. RoadTagger: Robust Road Attribute Inference with Graph Neural Networks</strong><br><a href="https://arxiv.org/abs/1912.12408" target="_blank" rel="noopener">https://arxiv.org/abs/1912.12408</a></p>
+<blockquote>
+<p>Songtao He (MIT CSAIL)*; Favyen Bastani (MIT CSAIL); Satvat Jagwani (MIT CSAIL); Edward Park (MIT CSAIL);<br>Sofiane Abbar (Qatar Computing Research Institute); Mohammad Alizadeh (MIT CSAIL); Dr.Hari Balakrishnan<br>(Massachusetts institute of technology); Sanjay Chawla (QCRI); Samuel Madden (MIT); Mohammad Amin Sadeghi<br>(MIT)  </p>
+</blockquote>
+<h1><span id="iclr2020">ICLR2020</span></h1><p><a href="http://tony.9shi.cf/index.php?q=aHR0cHM6Ly93d3cuZW5kdG9lbmQuYWkvYmxvZy9pY2xyMjAyMC8" target="_blank" rel="noopener">ICLR2020 Accepted Papers</a></p>
+<p><strong>[1]. Geom-gcn: Geometric Graph Convolutional Networks</strong><br>Spotlight paper<br><a href="https://github.com/graphdml-uiuc-jlu/geom-gcn" target="_blank" rel="noopener">https://github.com/graphdml-uiuc-jlu/geom-gcn</a></p>
+<blockquote>
+<p>Hongbin Pei, Bingzhe Wei, Kevin Chen-Chuan Chang, Yu Lei, Bo Yang<br>Jilin University</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>论文阅读笔记</category>
+      </categories>
+      <tags>
+        <tag>时空领域</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pytorch之Tensor学习</title>
+    <url>/2020/02/17/Pytorch%E4%B9%8BTensor%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1><span id="1-简介">1. 简介</span></h1><p>最近发现一个学习Pytorch的教程，有视频版和文字版<a href="https://deeplizard.com/" target="_blank" rel="noopener">deeplizard</a>,这里面详细介绍了关于Tensor的知识，讲得很好，在此记录下。</p>
+<a id="more"></a>  
+<!-- TOC -->
+<ul>
+<li><a href="#1-%e7%ae%80%e4%bb%8b">1. 简介</a></li>
+<li><a href="#%e5%88%9b%e5%bb%batensor">创建Tensor</a></li>
+</ul>
+<!-- /TOC -->
+<h1><span id="创建tensor">创建Tensor</span></h1><p>创建Tensor有四种方式</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#创建Tensor</span></span><br><span class="line">&gt; data = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">&gt; o1 = torch.Tensor(data)</span><br><span class="line">&gt; o2 = torch.tensor(data)</span><br><span class="line">&gt; o3 = torch.as_tensor(data)</span><br><span class="line">&gt; o4 = torch.from_numpy(data)</span><br><span class="line"></span><br><span class="line">&gt; print(o1)</span><br><span class="line">&gt; print(o2)</span><br><span class="line">&gt; print(o3)</span><br><span class="line">&gt; print(o4)</span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">2.</span>, <span class="number">3.</span>])</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line"></span><br><span class="line">&gt; print(o1.dtype)</span><br><span class="line">&gt; print(o2.dtype)</span><br><span class="line">&gt; print(o3.dtype)</span><br><span class="line">&gt; print(o4.dtype)</span><br><span class="line">torch.float32</span><br><span class="line">torch.int32</span><br><span class="line">torch.int32</span><br><span class="line">torch.int32</span><br><span class="line"></span><br><span class="line"><span class="comment">#内存是否共享</span></span><br><span class="line">&gt; print(<span class="string">'old:'</span>, data)</span><br><span class="line">old: [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">&gt; data[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">&gt; print(<span class="string">'new:'</span>, data)</span><br><span class="line">new: [<span class="number">0</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">&gt; print(o1)</span><br><span class="line">&gt; print(o2)</span><br><span class="line">&gt; print(o3)</span><br><span class="line">&gt; print(o4)</span><br><span class="line"></span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">2.</span>, <span class="number">3.</span>])</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>torch.Tensor()</code>和<code>torch.tensor()</code>区别<br><code>torch.Tensor()</code>是<code>Tensor</code>类的构造函数，<code>torch.tensor()</code>是factory function，该函数将传入的参数构造成一个<code>Tensor</code>对象并返回。<br>以上4个函数中，<code>torch.Tensor()</code>是构造函数，其余都是factory function。</li>
+<li>这4个函数的主要区别是:<code>torch.Tensor()</code>返回的<code>Tensor</code>默认是<code>float32</code>类型，而其他3个函数返回的<code>Tensor</code>数据类型根据传入的数据而定。并且其他3个函数可以传入<code>dtype</code>来指定数据的类型，但是<code>torch.Tensor()</code>不能传入<code>dtype</code>参数。</li>
+<li><p>通过<code>np.array</code>来创建<code>Tensor</code>，然后改变data的值，可以看到，前2个<code>Tensor</code>的值并没有改变，后2个<code>Tensor</code>的值改变。这是因为<code>torch.Tensor()</code>和<code>torch.tensor()</code>是copy输入数据的值，而<code>torch.as_tensor()</code>和<code>torch.from_numpy()</code>是share输入数据的memory</p>
+<p>Shara Data | Copy Data<br>-|-|-|<br>torch.as_tensor() | torch.tensor()|<br>torch.from_numpy() |     torch.Tensor()|</p>
+</li>
+<li><code>torch.as_tensor()</code>和<code>torch.from_numpy()</code>都是factory function，且都是share data，那这2个函数有什么区别？<code>torch.from_numpy()</code>仅仅接受<code>np.array</code>的参数，然而<code>torch.as_tensor()</code>接受<a href="https://docs.scipy.org/doc/numpy/user/basics.creation.html#converting-python-array-like-objects-to-numpy-arrays" target="_blank" rel="noopener">array-like objects</a>类型的参数</li>
+<li>综上所述，下面2个方法是创建Tensor的推荐方法：<ul>
+<li><code>torch.tensor()</code></li>
+<li><code>torch.as_tensor()</code></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Deep Learning</category>
+      </categories>
+      <tags>
+        <tag>Pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>openpai</title>
     <url>/2020/01/10/openpai/</url>
     <content><![CDATA[<p>&ensp;&ensp;&ensp;&ensp;最近实验室安装了openpai平台，可以在上面提交程序运行。下面记录怎么使用OpenPai提交NNI程序，进行调参。<br><a id="more"></a><br><!-- TOC --></p>
@@ -315,9 +410,9 @@
         <category>Deep Learning</category>
       </categories>
       <tags>
+        <tag>Pytorch</tag>
         <tag>GPU</tag>
         <tag>Mxnet</tag>
-        <tag>Pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -674,9 +769,9 @@
 <li>对$Q,K,V$进行分割，即多头注意力机制，其中head的个数是一个超参数，注意：$embedding \quad dimension必须能够整除head$,即一个矩阵变成$h$个矩阵，分割之后$Q,K,V$的维度为$[batch_size,seq_len,h,embedding_dimension/h]$,之后把$Q,K,V$的$seq_len,h$的维度进行转置，为了方面后面的计算，转置之后的$Q,K,V$的维度为$[batch_size,h,seq_len,embedding_dimension/h]$  </li>
 <li>拿出一个$head$，即$Q*K^T$,得到的维度是$[batch_size,h,seq_len,seq_len]$,每个字与每个字之间的注意力，每一行表示当前这个字和所有字的关系。如果2个字之间的意思越相近，得到的注意力也越大。对每一行做softmax归一化，即每一行的和为1，得到归一化之后的注意力矩阵。</li>
 <li>将注意力矩阵给$V$加权，即让所有字的信息融入到当前字中，得到当前字的一个加权表示。最终让每一个字都融合所有字的信息。得到的$V$的维度为$[batch_size,h,seq_len,embedding_dimension/h]$.</li>
-<li>在训练的时候，通常多句话进行计算，即形成一个mini-batch。mini-batch中的句子的长度不一样，找出句子的最大长度max_seq_len，将短的句子补成和最大句子一样的长度，使用0padding。假设max_seq_len=10，一个句子的长度为7，即得到的attention矩阵，下面3行和右边3列都是0。在对attention矩阵做softmax会出问题，因为softmax计算涉及到指数计算，$e^0=1$,即经过softmax计算attention不为0，让无效的部分参与了计算。为了解决这个问题，需要用一个mask让这些无效的区域不参与计算，一般给无效的区域加一个很大的负数的偏置，$Z_illegal$表示无效的区域，加上一个很大的负数，变成负数，即通过softmax指数计算结果还是0。  </li>
-<li>不同的head得到的结果concat起来，才能恢复到原来的维度[batch_size,seq_len,embedding_dimension]。不同的head关注的点不一样，可能有的head关注的local的关系，有的head关注的是global的关系。  </li>
-<li>最后一步是PositionwiseFFN，其实就是2层全连接，对输出$[batch_size,seq_len,embedding_dimension]$，经过2次线性变换和一个Relu激活函数。Relu=max(0,x)</li>
+<li>在训练的时候，通常多句话进行计算，即形成一个mini-batch。mini-batch中的句子的长度不一样，找出句子的最大长度max_seq_len，将短的句子补成和最大句子一样的长度，使用0padding。假设max_seq_len=10，一个句子的长度为7，即得到的attention矩阵，下面3行和右边3列都是0。在对attention矩阵做softmax会出问题，因为softmax计算涉及到指数计算，$e^0=1$,即经过softmax计算attention不为0，让无效的部分参与了计算。为了解决这个问题，需要用一个mask让这些无效的区域不参与计算，一般给无效的区域加一个很大的负数的偏置，$Z_{illegal}$表示无效的区域，加上一个很大的负数，变成负数，即通过softmax指数计算结果还是0。  </li>
+<li>不同的head得到的结果concat起来，才能恢复到原来的维度$[batch_size,seq_len,embedding_dimension]$。不同的head关注的点不一样，可能有的head关注的local的关系，有的head关注的是global的关系。  </li>
+<li>最后一步是PositionwiseFFN，其实就是2层全连接，对输出$[batch_size,seq_len,embedding_dimension]$，经过2次线性变换和一个Relu激活函数。$Relu=max(0,x)$</li>
 </ol>
 <p><img src="/2019/11/02/Transformer/FFN.png" alt=""></p>
 <p><img src="/2019/11/02/Transformer/multi.png" alt=""></p>
@@ -2140,8 +2235,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>分布式平台</category>
       </categories>
       <tags>
-        <tag>Python</tag>
         <tag>Spark</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -2290,6 +2385,7 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <p><strong>在函数调用时，参数的顺序为位置参数、关键字参数/默认参数，<em>args，\</em>*args</strong></p>
 <h1><span id="文件读取">文件读取</span></h1><p>当一个文件很大时，不能一次性读取所有的内容加载到内存中，需要使用生成器</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_file</span><span class="params">(filename)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    读取文件</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">with</span> open(filename, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        data = f.readline().strip()</span><br><span class="line">        <span class="keyword">while</span> data:</span><br><span class="line">            <span class="keyword">yield</span> data</span><br><span class="line">            data = f.readline().strip()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> read_file(filename):</span><br><span class="line">        value = json.loads(line)[<span class="string">'data'</span>]</span><br><span class="line">        rowkeys.add(list(value.keys())[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+<p>【<strong>参考资料</strong>】<br><a href="https://www.cnblogs.com/vamei/archive/2012/09/13/2682778.html" target="_blank" rel="noopener">Vamei大佬</a><br><a href="https://python3-cookbook.readthedocs.io/zh_CN/latest/preface.html" target="_blank" rel="noopener">Python Cookbook适合进阶者看</a></p>
 ]]></content>
       <categories>
         <category>Python</category>
@@ -2747,9 +2843,9 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <p>下面介绍计算解码器的隐藏变量时的函数$g$是什么？g可以看到是一个GRU单元。</p>
 <p><img src="/2019/03/12/Attention/g.png" alt=""></p>
 <p>其中$y_{t’-1}$是解码器上一时间步的输出，可以看做当前时间步的输入，$s_{t’-1}$是解码器上一时间步的隐藏状态，$c_{t’}$是当前时间步的背景向量。<br>这里总结一下模型的参数都有哪些：编码器中的W和b，上式中解码器中的W和b，还有计算attention中的$v^T,W_s,W_h$。  </p>
-<h1><span id="4-attention分类">4. Attention分类</span></h1><h2><span id="41-soft-attenion">4.1. Soft Attenion</span></h2><p>加权求和，可以求导，可以放到模型中训练，用的比较多</p>
+<h1><span id="4-attention分类">4. Attention分类</span></h1><h2><span id="41-soft-attenion">4.1. Soft Attenion</span></h2><p><a href="https://arxiv.org/pdf/1502.03044.pdf" target="_blank" rel="noopener">《Show, Attend and Tell: Neural Image Caption Generation with Visual Attention》</a>提出了hard/soft Attention<br>加权求和，可以求导，可以放到模型中训练，用的比较多</p>
 <h2><span id="42-hard-attention">4.2. Hard Attention</span></h2><p>Hard attention 是一个随机的过程，Hard attention不会选择整个encoder的隐层输出作为其输入，Hard Attention会依赖概率$𝑆_𝑖$来采样输入端的隐状态的一部分来进行计算，而不是整个encoder 的隐状态。由于其是一个随机过程，所以不能直接求导，为了实现梯度的反向传播，需要采用蒙特卡洛采样等方法来估算模块的梯度。  </p>
-<h2><span id="43-global-attention">4.3. Global Attention</span></h2><p>Global attention和传统的attention model是一样的，所有的hidden state都被用于计算Context vector的权重，其长度等于Encoder输入的长度。<br>缺点：encoder很长时计算量大</p>
+<h2><span id="43-global-attention">4.3. Global Attention</span></h2><p><a href="https://www-nlp.stanford.edu/pubs/emnlp15_attn.pdf" target="_blank" rel="noopener">《Effective Approaches to Attention-based Neural Machine Translation》</a>提出了local/glocal Attention<br>Global attention和传统的attention model是一样的，所有的hidden state都被用于计算Context vector的权重，其长度等于Encoder输入的长度。<br>缺点：encoder很长时计算量大</p>
 <h2><span id="44-local-attention">4.4. Local Attention</span></h2><p>并不是使用Encoder中所有时间步的隐藏状态做Attention，只使用一部分和decoder做Attention。  </p>
 <h2><span id="45-self-attention">4.5. Self Attention</span></h2><p>Q,K,V都是自己本身，即自己对自己的注意力机制。有以下优点：</p>
 <ol>
@@ -2758,6 +2854,7 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <li>self attention 计算中将句子中任意两个单词通过一个计算步骤连接，远距离依赖之间的距离被极大缩短。</li>
 <li>对于增加计算的并行性有直接的帮助作用。</li>
 </ol>
+<p>【<strong>参考资料</strong>】<br><a href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html#born-for-translation" target="_blank" rel="noopener">Attention? Attention!</a></p>
 ]]></content>
       <categories>
         <category>NLP</category>

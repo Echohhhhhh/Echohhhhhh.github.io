@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/4.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/5.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/15/Python学习/dict.png">
-<meta property="og:updated_time" content="2020-01-23T13:56:07.348Z">
+<meta property="og:updated_time" content="2020-02-17T09:13:54.440Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python学习">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;学习Python！！！！">
@@ -580,6 +580,7 @@
 <p><strong>在函数调用时，参数的顺序为位置参数、关键字参数/默认参数，<em>args，\</em>*args</strong></p>
 <h1><span id="文件读取">文件读取</span></h1><p>当一个文件很大时，不能一次性读取所有的内容加载到内存中，需要使用生成器</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_file</span><span class="params">(filename)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    读取文件</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">with</span> open(filename, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        data = f.readline().strip()</span><br><span class="line">        <span class="keyword">while</span> data:</span><br><span class="line">            <span class="keyword">yield</span> data</span><br><span class="line">            data = f.readline().strip()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> read_file(filename):</span><br><span class="line">        value = json.loads(line)[<span class="string">'data'</span>]</span><br><span class="line">        rowkeys.add(list(value.keys())[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+<p>【<strong>参考资料</strong>】<br><a href="https://www.cnblogs.com/vamei/archive/2012/09/13/2682778.html" target="_blank" rel="noopener">Vamei大佬</a><br><a href="https://python3-cookbook.readthedocs.io/zh_CN/latest/preface.html" target="_blank" rel="noopener">Python Cookbook适合进阶者看</a></p>
 
       
     </div>
@@ -741,7 +742,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

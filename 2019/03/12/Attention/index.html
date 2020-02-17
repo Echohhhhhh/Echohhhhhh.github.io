@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/12/Attention/e.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/Attention/a.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/12/Attention/g.png">
-<meta property="og:updated_time" content="2020-01-23T14:11:21.852Z">
+<meta property="og:updated_time" content="2020-02-17T09:05:56.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Attention">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;主要介绍Attention的机制，以及在NLP中的应用。">
@@ -396,7 +396,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.6k
+                  1.7k
                 </span>
               
 
@@ -474,9 +474,9 @@
 <p>下面介绍计算解码器的隐藏变量时的函数$g$是什么？g可以看到是一个GRU单元。</p>
 <p><img src="/2019/03/12/Attention/g.png" alt=""></p>
 <p>其中$y_{t’-1}$是解码器上一时间步的输出，可以看做当前时间步的输入，$s_{t’-1}$是解码器上一时间步的隐藏状态，$c_{t’}$是当前时间步的背景向量。<br>这里总结一下模型的参数都有哪些：编码器中的W和b，上式中解码器中的W和b，还有计算attention中的$v^T,W_s,W_h$。  </p>
-<h1><span id="4-attention分类">4. Attention分类</span></h1><h2><span id="41-soft-attenion">4.1. Soft Attenion</span></h2><p>加权求和，可以求导，可以放到模型中训练，用的比较多</p>
+<h1><span id="4-attention分类">4. Attention分类</span></h1><h2><span id="41-soft-attenion">4.1. Soft Attenion</span></h2><p><a href="https://arxiv.org/pdf/1502.03044.pdf" target="_blank" rel="noopener">《Show, Attend and Tell: Neural Image Caption Generation with Visual Attention》</a>提出了hard/soft Attention<br>加权求和，可以求导，可以放到模型中训练，用的比较多</p>
 <h2><span id="42-hard-attention">4.2. Hard Attention</span></h2><p>Hard attention 是一个随机的过程，Hard attention不会选择整个encoder的隐层输出作为其输入，Hard Attention会依赖概率$𝑆_𝑖$来采样输入端的隐状态的一部分来进行计算，而不是整个encoder 的隐状态。由于其是一个随机过程，所以不能直接求导，为了实现梯度的反向传播，需要采用蒙特卡洛采样等方法来估算模块的梯度。  </p>
-<h2><span id="43-global-attention">4.3. Global Attention</span></h2><p>Global attention和传统的attention model是一样的，所有的hidden state都被用于计算Context vector的权重，其长度等于Encoder输入的长度。<br>缺点：encoder很长时计算量大</p>
+<h2><span id="43-global-attention">4.3. Global Attention</span></h2><p><a href="https://www-nlp.stanford.edu/pubs/emnlp15_attn.pdf" target="_blank" rel="noopener">《Effective Approaches to Attention-based Neural Machine Translation》</a>提出了local/glocal Attention<br>Global attention和传统的attention model是一样的，所有的hidden state都被用于计算Context vector的权重，其长度等于Encoder输入的长度。<br>缺点：encoder很长时计算量大</p>
 <h2><span id="44-local-attention">4.4. Local Attention</span></h2><p>并不是使用Encoder中所有时间步的隐藏状态做Attention，只使用一部分和decoder做Attention。  </p>
 <h2><span id="45-self-attention">4.5. Self Attention</span></h2><p>Q,K,V都是自己本身，即自己对自己的注意力机制。有以下优点：</p>
 <ol>
@@ -485,6 +485,7 @@
 <li>self attention 计算中将句子中任意两个单词通过一个计算步骤连接，远距离依赖之间的距离被极大缩短。</li>
 <li>对于增加计算的并行性有直接的帮助作用。</li>
 </ol>
+<p>【<strong>参考资料</strong>】<br><a href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html#born-for-translation" target="_blank" rel="noopener">Attention? Attention!</a></p>
 
       
     </div>
@@ -648,7 +649,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
