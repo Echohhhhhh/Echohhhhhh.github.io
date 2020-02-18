@@ -85,7 +85,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/RiskOracle.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/nyc-map.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/affinity-matrix.png">
-<meta property="og:updated_time" content="2020-02-18T14:16:09.426Z">
+<meta property="og:updated_time" content="2020-02-18T16:46:31.517Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RiskOracle-A Minute-level Citywide Traffic Accident Forecasting Framework">
 <meta name="twitter:description" content="AAAI2020原文链接：RiskOracle-A Minute-level Citywide Traffic Accident Forecasting Framework中科院所发">
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.3k
+                  3.5k
                 </span>
               
 
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  13
                 </span>
               
             </div>
@@ -429,7 +429,7 @@
       
         <p>AAAI2020原文链接：<a href="https://github.com/zzyy0929/AAAI2020-RiskOracle" target="_blank" rel="noopener">RiskOracle-A Minute-level Citywide Traffic Accident Forecasting Framework</a><br>中科院所发<br><a id="more"></a></p>
 <h1><span id="abstract">Abstract</span></h1><p>&ensp;&ensp;&ensp;&ensp;实时交通事故预测对公共安全和城市管理意义重大（例如.实时路径规划和应急响应部署）。之前的事故预测是在小时级别上，利用神经网络和静态的区域关系。然而，随着道路网络的高度动态性和交通师傅的稀有性，提高预测的粒度仍然是一个挑战，这将会导致结果偏差和零膨胀问题。在这篇论文中，我们提出一个新颖的RiskOracle框架，提高预测的粒度到分钟级别。具体来说，我们首先将0风险值转换为适合网络训练的值，然后，我们提出差分时变图神经网络(DTGN)来捕获交通状态的即时变化和子区间之间的动态相关性，并且，我们采用多任务和区域选择方案来突出显示全市范围内最可能发生事故的子区域，弥合了偏差的风险值和稀疏的事故分布。在2个真实数据集上做了大量实验证明了我们的RiskOracle框架的有效性和可扩展性。</p>
-<h1><span id="introduction">Introduction</span></h1><p>&ensp;&ensp;&ensp;&ensp;交通事故预测对城市安全非常重要。构建一个细粒度级的事故预测模型，为乘客提供及时的安全路径规划，为新兴应用(智能交通和自动驾驶)提供准确的应急响应的需求越来越大。<br>&ensp;&ensp;&ensp;&ensp;关于事故预测周期的长短，现有的工作主要分为2类：长期（天级别预测）和中期（小时级别预测）。我们在表1中总结了所有相关的工作。即使最近关于天级别的预测模型通过建模时空异构数据取得了很好的效果，但是对于紧急的情况并没有意义。<br>&ensp;&ensp;&ensp;&ensp;在小时级别上的中期事故预测可以进一步划分为：传统方法和深度学习。传统方法包括：基于聚类，基于频率树，基于非负矩阵分解。但是，这些方法忽略了时间关系，不能建模复杂非线性的时空关系。深度学习方法例如，仅仅将历史交通事故数据输入到模型中，利用LSTM学习时间相关性，缺少了多源实时交通数据，效果不好。还有一些工作利用深度学习框架SDAE/SDCAE和ConvLSTM，结合人类实时移动数据，来学习交通事故模式，但是它们都不能提取区域间和区域内随时间变化的关系。<br>&ensp;&ensp;&ensp;&ensp;即使深度学习模型的进展为小时级别的事故预测带了可喜的结果，但是我们认为其忽略了3个重要的问题，使得在分钟级别的预测效果较差。第一，在2019中提到的，当预测任务的时空分辨率提高时，会出现零膨胀问题，将预测所有的结果都为0。由于没有方法来解决这个问题，稀少的非零值在训练时使模型无法生效。第二，尽管CNNC可以学习静态的子区域相关性，但是随时间变化的子区域相关性在城市短期事故预测有着重要的作用，例如，由于潮汐流，2个子区域在早上相关性强，在下午相关性弱。第三，在同一子区域相邻时间段内交通状况的异常变化通常会诱发交通事故或其他事件。没有考虑以上3个时空因素，小时级别的预测模型能力将受到严重阻碍。</p>
+<h1><span id="introduction">Introduction</span></h1><p>&ensp;&ensp;&ensp;&ensp;交通事故预测对城市安全非常重要。构建一个细粒度级的事故预测模型，为乘客提供及时的安全路径规划，为新兴应用(智能交通和自动驾驶)提供准确的应急响应的需求越来越大。<br>&ensp;&ensp;&ensp;&ensp;关于事故预测周期的长短，现有的工作主要分为2类：长期（天级别预测）和中期（小时级别预测）。我们在表1中总结了所有相关的工作。即使最近关于天级别的预测模型通过建模时空异质数据取得了很好的效果，但是对于紧急的情况并没有意义。<br>&ensp;&ensp;&ensp;&ensp;在小时级别上的中期事故预测可以进一步划分为：传统方法和深度学习。传统方法包括：基于聚类，基于频率树，基于非负矩阵分解。但是，这些方法忽略了时间关系，不能建模复杂非线性的时空关系。深度学习方法例如，仅仅将历史交通事故数据输入到模型中，利用LSTM学习时间相关性，缺少了多源实时交通数据，效果不好。还有一些工作利用深度学习框架SDAE/SDCAE和ConvLSTM，结合人类实时移动数据，来学习交通事故模式，但是它们都不能提取区域间和区域内随时间变化的关系。<br>&ensp;&ensp;&ensp;&ensp;即使深度学习模型的进展为小时级别的事故预测带了可喜的结果，但是我们认为其忽略了3个重要的问题，使得在分钟级别的预测效果较差。第一，在2019中提到的，当预测任务的时空分辨率提高时，会出现零膨胀问题，将预测所有的结果都为0。由于没有方法来解决这个问题，稀少的非零值在训练时使模型无法生效。第二，尽管CNNC可以学习静态的子区域相关性，但是随时间变化的子区域相关性在城市短期事故预测有着重要的作用，例如，由于潮汐流，2个子区域在早上相关性强，在下午相关性弱。第三，在同一子区域相邻时间段内交通状况的异常变化通常会诱发交通事故或其他事件。没有考虑以上3个时空因素，小时级别的预测模型能力将受到严重阻碍。</p>
 <p><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/Summarization.png" alt=""></p>
 <p>表中的论文<br><a href="https://echohhhhhh.github.io/2019/07/21/traffic-accident/#11-learning-deep-representation-from-big-and-heterogeneous-data-for-traffic-accident-inference2016aaai" target="_blank" rel="noopener">Learning Deep Representation from Big and Heterogeneous Data for Traffic Accident Inference(2016AAAI)</a></p>
 <p><a href="https://echohhhhhh.github.io/2019/07/21/traffic-accident/#14-a-deep-learning-approach-to-the-citywide-traffic-accident-risk-prediction2018ieee-itsc" target="_blank" rel="noopener">A Deep Learning Approach to the Citywide Traffic Accident Risk Prediction(2018IEEE-ITSC)</a></p>
@@ -440,9 +440,27 @@
 <script type="math/tex; mode=display">
 e_{i j}=\left\{\begin{array}{ll}{1} & {\text { iff the traffic elements within two }} \\ {} & {\text { subregions have strong correlations }} \\ {0} & {\text { otherwise }}\end{array}\right.</script><p>&ensp;&ensp;&ensp;&ensp;在该论文中，1个节点的<code>traffic element</code>包括2方面，静态的道路特征和动态的traffic特征。$\rho$来控制<code>affinity matrix</code>$\mathcal{A}_s$和$\mathcal{A}^{\Delta t}_o$的稀疏性，表示整个<code>urban graph</code>的连通性，在<code>affinity matrix</code>中的非0值表示subregion之间有很强的相关性。<br>&ensp;&ensp;&ensp;&ensp;在一个时间段$\Delta t$中<code>subregion</code> $v_i$的动态traffic特征包括3部分，(a)人流量，用<code>traffic volume</code>$TV_{v_i}(\Delta t)$表示;(b)交通状况，用平均交通速度$a_{v_i}(\Delta t)$表示;(c)交通事故风险等级$r_{v_i}(\Delta t)$。动态交通特征的正式定义如下所示。<br><strong>定义2：Static Road Network Features</strong>：一个城市<code>subregion</code>节点$v_i \in \mathcal{V}$,它的静态路网特征包括道路个数，道路类型，道路长度和宽度，除雪等级，红绿灯个数，<code>subregion</code> $v_i$中的所有道路使用一个固定长度的向量$s_i$表示。整个<code>urban graph</code>的静态道路特征使用$S=\{s_1,s_2,…,s_m\}$表示。静态特征，不随着时间变化，没有时间下标。<br><strong>定义3：Dynamic Traffic Features</strong>：对一个<code>subregion</code>节点$v_i \in \mathcal{V}$,在时间段$\Delta t$中，它的动态交通特征被表示为$f_{v_i}(\Delta t)=\left\{T V_{v_{i}}(\Delta t), a_{v_{i}}(\Delta t), r_{v_{i}}(\Delta t)\right\}$，$r_{v_i}(\Delta t)$是交通事故的risk求和，将交通事故分为3类：轻度，中度，重度，risk值分别是1,2,3.所有子区域在时间段$\Delta t$的交通事故风险分布表示为$\mathcal{R}(\Delta t)=\left\{r_{v_{1}}(\Delta t), r_{v_{2}}(\Delta t), \cdots, r_{v_{m}}(\Delta t)\right\}$，动态交通特征表示为$\mathcal{F}(\Delta t)=\left\{f_{v_{1}}(\Delta t), f_{v_{2}}(\Delta t), \cdots, f_{v_{m}}(\Delta t)\right\}$。动态交通特征随着时间变化，所以有区域和时间2个变量，动态特征包括：人流量，交通平均速度，事故风险</p>
 <p><strong>定义4:Traffic Accident Prediction</strong>：给定所有子区域的静态道路特征$S$和所有子区域历史$T$个时间段的动态交通特征$\mathcal{F}(\Delta t)(\Delta t=1,2,…,T)$,目标是预测下一个时间段全市的事故风险$\mathcal{R}(T+1)$和选出高风险的子区域$\mathcal{V}_{acc}(T+1)$</p>
-<h1><span id="minute-level-real-time-traffic-accident-forecasting">Minute-level Real-time Traffic Accident Forecasting</span></h1><p>在这一节，先整体看一下我们的<code>RiskOracle</code>框架，然后再详细介绍。<br><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/RiskOracle.png" alt=""></p>
-<h2><span id="framework-overview">Framework Overview</span></h2><p><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/nyc-map.png" alt=""></p>
-<h1><span id="知识补充">知识补充</span></h1><p><strong>【affinity matrix】关联矩阵</strong><br>描述图（有向图或无向图）中点和边的关系矩阵，每一行表示1个节点，每一列表示1条边。在无向图中，点和边是连接的，则对应矩阵中的值为1。有向图中边的起点为1，终点为-1。<br><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/affinity-matrix.png" alt=""></p>
+<h1><span id="minute-level-real-time-traffic-accident-forecasting">Minute-level Real-time Traffic Accident Forecasting</span></h1><p>&ensp;&ensp;&ensp;&ensp;在这一节，先整体看一下我们的<code>RiskOracle</code>框架，然后再详细介绍。<br><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/RiskOracle.png" alt=""></p>
+<h2><span id="framework-overview">Framework Overview</span></h2><p>&ensp;&ensp;&ensp;&ensp;如图1所示，<code>RiskOracle</code>框架包括3个阶段：数据预处理阶段，训练阶段，预测阶段。</p>
+<h2><span id="data-preprocessing">Data Preprocessing</span></h2><p><strong>解决事故预测中的空间异质</strong>。高风险的值通常出现在城市区域，由于市中心发生事故多且车流量大，导致风险值在空间上不均衡，会忽略农村地区相对高风险的区域。为了实现全市预测，选择最有可能发生事故的区域来解决空间异质性是非常必要的。如图2(a)所示,按照层次结构组织这个子区域，分别用来收集细粒度和粗粒度的事故分布。然后进一步突出显示每个中等区域中的子区域。多尺度分布也可以看做分层事故分布。<br><strong>解决零膨胀问题</strong>。深度神经网络在训练中，如果非零值非常少的话，受到零膨胀的影响，将会预测出无效的值。如图2(b)所示，在选定的10min中，整个NYC只有6个交通事故，说明在短期事故的内在稀有性。为了解决这个问题实现实时事故预测，我们设计基于先验知识的数据增强(PKDE)策略来区分训练数据集中标签的风险值。具体来说，对时间段$\Delta t$,我们将所有区域在该时间段内的风险值$\mathcal{R}(\Delta t)$中的0转换为负值。转换分为2步：a)风险中的0值通过等式2转换为事故风险指标；b)指标值通过等式3转换为静态事故强度。给定子区域$v_i$，我们计算它的事故风险指标$\varepsilon_{v_i}$  </p>
+<script type="math/tex; mode=display">
+\varepsilon_{v_{i}}=\frac{1}{N_{\text {week}}} \sum_{j=1}^{N_{\text {week}}} \frac{r_{v_{i}}(j)}{\sum_{k=1}^{m} r_{v_{k}}(j)}</script><p>其中$N_{week}$是训练集中总共的周数，$r_{v_{i}}(j)$是区域$v_i$在第$j$周总的风险值。然后，根据该子区域的事故风险指标$\varepsilon_{v_i}$,我们通过以下公式计算子区域$v_i$的统计事故强度。  </p>
+<script type="math/tex; mode=display">
+\pi_{v_{i}}=b_{1} \log _{2} \varepsilon_{v_{i}}+b_{2}</script><p>其中$b_1$和$b_2$是算子，用来保持绝对值$\pi_{v_{i}}$的范围和真实风险值的范围对称。通过在0和1之间的对数转换，可以使转换后的数据区分并适合于训练网络。转换的方式为：1)事故风险为0的子区域的事故强度为负，小于非零风险的子区域，反映了零风险子区域有较低的事故风险;2)具有较低事故风险指标的子区域有较低的事故概率，保留了实际事故风险的等级。<br>事故风险指数$\varepsilon_{v_{i}}$值在[0,1]之间，取对数值在$(-\infin,0]%$，如果一个子区域的风险值为0，则事故风险指数为0，则事故强度$\pi_{v_{i}}$为负。</p>
+<p><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/nyc-map.png" alt=""></p>
+<p><strong>补充稀疏的传感数据</strong>。实时交通信息的通常收集不足来进行事故预测，动态交通信息通常和静态空间路网结构相互影响，因此，我们提出了一个共感知策略，利用FM的交互操作，修改<code>xDeepFM</code>为时空深度因式分解(ST-DFM)。<br>我们首先通过静态关联矩阵$\mathcal{A}_s$来提取2个子区域间的路网相似性和连接性。其中关联矩阵affinity matrix中的元素$\alpha_s(i,j)$表示子区域$v_i和v_j$见的静态相关性。</p>
+<script type="math/tex; mode=display">
+\alpha_{s}(i, j)=\left\{\begin{array}{cc}
+{1} & {\text { if subregion } v_{i} \text { and }} {v_{j}} {\text { are adjacent }} \\
+{e^{-J S\left(s_{i} \| s_{j}\right)}} & {\text { otherwise }}
+\end{array}\right.</script><p>其中，$JS$函数是Jensen-Shannon divergence（散度）</p>
+<script type="math/tex; mode=display">
+J S\left(s_{i} \| s_{j}\right)=\frac{1}{2} \sum_{k}\left(\begin{array}{c}
+{s_{i}(k) \log \frac{2 s_{i}(k)}{s_{i}(k)+s_{j}(k)}+} \\
+{s_{j}(k) \log \frac{2 s_{j}(k)}{s_{i}(k)+s_{j}(k)}}
+\end{array}\right)</script><p>和xDeepFM一样，ST-DFM包含压缩交互网络模块和DNN模块。在ST-DFM中嵌入了3个时空字段，即静态空间特征，动态交通特征和时间戳。然后ST-DFM通过CIN模块学习矢量级别不同时空特征间的交互关系，通过DNN模块学习特征的高级表示，最后获取高级特征的组合。我们将对应子区间的交通量输入到ST-DFM中来推断速度值，反之亦然。然后通过训练2个实时交通数据的交集数据，来最大程度推断交通信息，以此获取全局交通状态。</p>
+<h1><span id="知识补充">知识补充</span></h1><p><strong>【Affinity Matrix】关联矩阵</strong><br>描述图（有向图或无向图）中点和边的关系矩阵，每一行表示1个节点，每一列表示1条边。在无向图中，点和边是连接的，则对应矩阵中的值为1。有向图中边的起点为1，终点为-1。<br><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/affinity-matrix.png" alt=""></p>
+<p><strong>【Factorization Machine】</strong> FM (Factorization Machine) 主要是为了解决数据稀疏的情况下，特征怎样组合的问题。<br><a href="https://zhuanlan.zhihu.com/p/80726100" target="_blank" rel="noopener">【推荐系统】Factorization Machine</a></p>
 
       
     </div>
@@ -671,7 +689,7 @@ e_{i j}=\left\{\begin{array}{ll}{1} & {\text { iff the traffic elements within t
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">Preliminaries and Problem Defintion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">Minute-level Real-time Traffic Accident Forecasting</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Framework Overview</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">知识补充</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">Preliminaries and Problem Defintion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">Minute-level Real-time Traffic Accident Forecasting</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Framework Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Data Preprocessing</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">知识补充</span></a></li></ol></div>
             
 
           </div>
