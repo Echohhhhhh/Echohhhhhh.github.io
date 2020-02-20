@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/02/17/Pytorch%E4%B9%8BTensor%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2020-02-19T16:19:20.627Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/</loc>
     
     <lastmod>2020-02-19T16:02:22.527Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://yoursite.com/2020/02/18/%E6%97%B6%E7%A9%BA%E8%AE%BA%E6%96%87%E5%88%97%E8%A1%A8/</loc>
     
     <lastmod>2020-02-18T08:32:08.173Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/02/17/Pytorch%E4%B9%8BTensor%E5%AD%A6%E4%B9%A0/</loc>
-    
-    <lastmod>2020-02-17T15:35:51.851Z</lastmod>
     
   </url>
   
