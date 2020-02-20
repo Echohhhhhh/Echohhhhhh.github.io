@@ -8,6 +8,7 @@
 <ul>
 <li><a href="#1-%e6%91%98%e8%a6%81">1. 摘要</a></li>
 <li><a href="#2-%e4%bb%8b%e7%bb%8d">2. 介绍</a></li>
+<li><a href="#%e8%b4%a1%e7%8c%ae">贡献</a></li>
 <li><a href="#3-%e9%97%ae%e9%a2%98%e5%ae%9a%e4%b9%89">3. 问题定义</a></li>
 <li><a href="#4-minute-level-real-time-traffic-accident-forecasting">4. Minute-level Real-time Traffic Accident Forecasting</a><ul>
 <li><a href="#41-framework-overview">4.1. Framework Overview</a></li>
@@ -36,15 +37,27 @@
 <p><a href="https://echohhhhhh.github.io/2019/07/21/traffic-accident/#14-a-deep-learning-approach-to-the-citywide-traffic-accident-risk-prediction2018ieee-itsc" target="_blank" rel="noopener">A Deep Learning Approach to the Citywide Traffic Accident Risk Prediction(2018IEEE-ITSC)</a></p>
 <p><a href="http://tony.9shi.cf/index.php?q=aHR0cHM6Ly93d3cua2RkLm9yZy9rZGQyMDE4L2FjY2VwdGVkLXBhcGVycy92aWV3L2hldGVyby1jb252bHN0bS1hLWRlZXAtbGVhcm5pbmctYXBwcm9hY2gtdG8tdHJhZmZpYy1hY2NpZGVudC1wcmVkaWN0aW9uLW9uLQ" target="_blank" rel="noopener">Hetero-ConvLSTM: A Deep Learning Approach to Traffic Accident Prediction on Heterogeneous Spatio-Tem(2018KDD)</a></p>
 <p>&ensp;&ensp;&ensp;&ensp;这篇论文，我们研究了分钟级别的全市交通事故预测，提出了三阶段RiskOracle框架，该框架基于多任务差分时变图卷积(Multi-task DTGN)。三个阶段分别是：数据预处理阶段，训练阶段，预测阶段。在数据预处理阶段，我们提出一个感知策略以最大程度地推断全球交通状况，然后设计基于数据增强的先验知识来解决短期预测中的零膨胀问题。在训练阶段，我们提出Multi-task DTGN，其中时变总体上建模了短期子区域的动态相关性，差分特征生成器在交通状态即时变化和交通事故之间建立了高级联系。正如我们所知，交通事故和交通量在城市中通常分布不均衡，因此多任务方案旨在解决事故预测中的空间异质性，然后在预测阶段，我们利用学到的多尺度事故分布，获取到一组离散的最可能发生事故的子区域。在2个真实数据集上的实验证明了我们的框架在10-min和30-min级别的预测任务上都超过了state-of-the-art。</p>
+<h1><span id="贡献">贡献</span></h1><ul>
+<li>提升实时事故预测的时间粒度，从小时—&gt;分钟</li>
+<li>提出多任务STDN来解决短期事故预测的挑战。这是第一篇使用图卷积来解决事故预测问题</li>
+<li>距离远但是有潜在关系的区域在图中可以被动态连接</li>
+<li>通过差分特征生成器，交通状况的异常变化可以被捕获</li>
+<li>多任务学习用来解决稀疏和空间异质性问题。多尺度的事故分布可以突出强调最可能发生交通事故的子区域</li>
+<li>提出数据增强策略来解决零膨胀问题</li>
+<li>提出协同感知策略来处理稀疏的感知数据</li>
+</ul>
 <h1><span id="3-问题定义">3. 问题定义</span></h1><p>&ensp;&ensp;&ensp;&ensp;在这一节，介绍基本定义，使用公式定义问题。<br>&ensp;&ensp;&ensp;&ensp;在我们的工作中，如果直接将整个研究区域作为方形区域，使用CNN进行时空特征提取，尤其在实时事故预测中，则会导致不必要的冗余，因为城市轮廓通常是不规则的。如图2(a)所示，我们首先将路网中研究区域划分为<code>q</code>个中等大小的矩形区域，每一个矩形区域包含一些小的方形子区域。一共有<code>m</code>个子区域(subregion)，我们通过城市图对<code>m</code>个子区域建模。</p>
 <p><strong>定义1：Urban Graph</strong>：研究区域可以定义成无向图，用$G(\mathcal{V},\mathcal{E})$表示。顶点集$\mathcal{V}=\{v_1,v_2,…,v_m\}$，其中$v_i$表示第$i$个方形子区域，给定2个节点$v_i,v_j\in \mathcal{V}$,边$e_{ij} \in \mathcal{E}$表示2个subregion的连接，边非0即1。</p>
 <script type="math/tex; mode=display">
-e_{i j}=\left\{\begin{array}{ll}{1} & {\text { iff the traffic elements within two }} \\ {} & {\text { subregions have strong correlations }} \\ {0} & {\text { otherwise }}\end{array}\right.</script><p>&ensp;&ensp;&ensp;&ensp;在该论文中，1个节点的<code>traffic element</code>包括2方面，静态的道路特征和动态的traffic特征。$\rho$来控制<code>affinity matrix</code>$\mathcal{A}_s$和$\mathcal{A}^{\Delta t}_o$的稀疏性，表示整个<code>urban graph</code>的连通性，在<code>affinity matrix</code>中的非0值表示subregion之间有很强的相关性。<br>&ensp;&ensp;&ensp;&ensp;在一个时间段$\Delta t$中<code>subregion</code> $v_i$的动态traffic特征包括3部分，(a)人流量，用<code>traffic volume</code>$TV_{v_i}(\Delta t)$表示;(b)交通状况，用平均交通速度$a_{v_i}(\Delta t)$表示;(c)交通事故风险等级$r_{v_i}(\Delta t)$。动态交通特征的正式定义如下所示。<br><strong>定义2：Static Road Network Features</strong>：一个城市<code>subregion</code>节点$v_i \in \mathcal{V}$,它的静态路网特征包括道路个数，道路类型，道路长度和宽度，除雪等级，红绿灯个数，<code>subregion</code> $v_i$中的所有道路使用一个固定长度的向量$s_i$表示。整个<code>urban graph</code>的静态道路特征使用$S=\{s_1,s_2,…,s_m\}$表示。静态特征，不随着时间变化，没有时间下标。<br><strong>定义3：Dynamic Traffic Features</strong>：对一个<code>subregion</code>节点$v_i \in \mathcal{V}$,在时间段$\Delta t$中，它的动态交通特征被表示为$f_{v_i}(\Delta t)=\left\{T V_{v_{i}}(\Delta t), a_{v_{i}}(\Delta t), r_{v_{i}}(\Delta t)\right\}$，$r_{v_i}(\Delta t)$是交通事故的risk求和，将交通事故分为3类：轻度，中度，重度，risk值分别是1,2,3.所有子区域在时间段$\Delta t$的交通事故风险分布表示为$\mathcal{R}(\Delta t)=\left\{r_{v_{1}}(\Delta t), r_{v_{2}}(\Delta t), \cdots, r_{v_{m}}(\Delta t)\right\}$，动态交通特征表示为$\mathcal{F}(\Delta t)=\left\{f_{v_{1}}(\Delta t), f_{v_{2}}(\Delta t), \cdots, f_{v_{m}}(\Delta t)\right\}$。动态交通特征随着时间变化，所以有区域和时间2个变量，动态特征包括：人流量，交通平均速度，事故风险</p>
+e_{i j}=\left\{\begin{array}{ll}{1} & {\text { iff the traffic elements within two }} \\ {} & {\text { subregions have strong correlations }} \\ {0} & {\text { otherwise }}\end{array}\right.</script><p>&ensp;&ensp;&ensp;&ensp;在该论文中，1个节点的<code>traffic element</code>包括2方面，静态的道路特征和动态的traffic特征。$\rho$来控制<code>affinity matrix</code>$\mathcal{A}_s$和$\mathcal{A}^{\Delta t}_o$的稀疏性，表示整个<code>urban graph</code>的连通性，在<code>affinity matrix</code>中的非0值表示subregion之间有很强的相关性。<br>&ensp;&ensp;&ensp;&ensp;在一个时间段$\Delta t$中<code>subregion</code> $v_i$的动态traffic特征包括3部分，(a)人流量，用<code>traffic volume</code>$TV_{v_i}(\Delta t)$表示;(b)交通状况，用平均交通速度$a_{v_i}(\Delta t)$表示;(c)交通事故风险等级$r_{v_i}(\Delta t)$。动态交通特征的正式定义如下所示。</p>
+<p><strong>定义2：Static Road Network Features</strong>：一个城市<code>subregion</code>节点$v_i \in \mathcal{V}$,它的静态路网特征包括道路个数，道路类型，道路长度和宽度，除雪等级，红绿灯个数，<code>subregion</code> $v_i$中的所有道路使用一个固定长度的向量$s_i$表示。整个<code>urban graph</code>的静态道路特征使用$S=\{s_1,s_2,…,s_m\}$表示。静态特征，不随着时间变化，没有时间下标。</p>
+<p><strong>定义3：Dynamic Traffic Features</strong>：对一个<code>subregion</code>节点$v_i \in \mathcal{V}$,在时间段$\Delta t$中，它的动态交通特征被表示为$f_{v_i}(\Delta t)=\left\{T V_{v_{i}}(\Delta t), a_{v_{i}}(\Delta t), r_{v_{i}}(\Delta t)\right\}$，$r_{v_i}(\Delta t)$是交通事故的risk求和，将交通事故分为3类：轻度，中度，重度，risk值分别是1,2,3.所有子区域在时间段$\Delta t$的交通事故风险分布表示为$\mathcal{R}(\Delta t)=\left\{r_{v_{1}}(\Delta t), r_{v_{2}}(\Delta t), \cdots, r_{v_{m}}(\Delta t)\right\}$，动态交通特征表示为$\mathcal{F}(\Delta t)=\left\{f_{v_{1}}(\Delta t), f_{v_{2}}(\Delta t), \cdots, f_{v_{m}}(\Delta t)\right\}$。动态交通特征随着时间变化，所以有区域和时间2个变量，动态特征包括：人流量，交通平均速度，事故风险</p>
 <p><strong>定义4:Traffic Accident Prediction</strong>：给定所有子区域的静态道路特征$S$和所有子区域历史$T$个时间段的动态交通特征$\mathcal{F}(\Delta t)(\Delta t=1,2,…,T)$,目标是预测下一个时间段全市的事故风险$\mathcal{R}(T+1)$和选出高风险的子区域$\mathcal{V}_{acc}(T+1)$</p>
 <blockquote>
 <p>总结：根据m个子区域构建无向图，节点表示子区域，边表示2个子区域特征之间的相关性。2个子区域之间的特征有强相关性，边为1，否则为0。即无向图的边非1即0。子区域的特征包括2类：静态道路特征和动态交通特征。静态道路特征包括：道路个数，道路类型，长宽，道路除雪等级，红绿灯个数。动态交通特征包括：在该时间段内的车流量，车平均速度，该子区域事故风险。</p>
 </blockquote>
-<h1><span id="4-minute-level-real-time-traffic-accident-forecasting">4. Minute-level Real-time Traffic Accident Forecasting</span></h1><p>&ensp;&ensp;&ensp;&ensp;在这一节，先整体看一下我们的<code>RiskOracle</code>框架，然后再详细介绍。<br><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/RiskOracle.png" alt=""></p>
+<h1><span id="4-minute-level-real-time-traffic-accident-forecasting">4. Minute-level Real-time Traffic Accident Forecasting</span></h1><p>&ensp;&ensp;&ensp;&ensp;在这一节，先整体看一下我们的<code>RiskOracle</code>框架，然后再详细介绍。</p>
+<p><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/RiskOracle.png" alt=""></p>
 <h2><span id="41-framework-overview">4.1. Framework Overview</span></h2><p>&ensp;&ensp;&ensp;&ensp;如图1所示，<code>RiskOracle</code>框架包括3个阶段：数据预处理阶段，训练阶段，预测阶段。</p>
 <h2><span id="42-data-preprocessing">4.2. Data Preprocessing</span></h2><p><strong>解决事故预测中的空间异质</strong>。高风险的值通常出现在城市区域，由于市中心发生事故多且车流量大，导致风险值在空间上不均衡，会忽略农村地区相对高风险的区域。为了实现全市预测，选择最有可能发生事故的区域来解决空间异质性是非常必要的。如图2(a)所示,按照层次结构组织这个子区域，中等大小区域用来收集粗粒度的事故分布，小的子区域用来收集细粒度的事故分布，然后进一步突出显示每个中等区域中的子区域。多尺度分布也可以看做分层事故分布。<br><strong>解决零膨胀问题</strong>。深度神经网络在训练中，如果非零值非常少的话，受到零膨胀的影响，将会预测出无效的值。如图2(b)所示，在选定的10min中，整个NYC只有6个交通事故，说明在短期事故的内在稀有性。为了解决这个问题实现实时事故预测，我们设计基于先验知识的数据增强(PKDE)策略来区分训练数据集中标签的风险值。具体来说，对时间段$\Delta t$,我们将所有区域在该时间段内的风险值$\mathcal{R}(\Delta t)$中的0转换为具有区分度的负值。转换分为2步：a)风险中的0值通过等式2转换为事故风险指标；b)指标值通过等式3转换为静态事故强度。给定子区域$v_i$，我们计算它的事故风险指标$\varepsilon_{v_i}$  </p>
 <script type="math/tex; mode=display">
@@ -116,7 +129,13 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <h2><span id="52-实现细节">5.2. 实现细节</span></h2><p>训练集:验证集:测试集=6:1:3，划分子区域参照AAAI2019<a href="https://echohhhhhh.github.io/2019/03/05/Spatiotemporal-Multi-Graph-Convolution-Network-for-Ride-hailing-Demand-Forecasting/" target="_blank" rel="noopener">Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting</a>和实际情况。堆叠9层GCN，每层有384个filter。损失函数中$\lambda_{1}=0.8,\lambda_{2}=1,\lambda_{3}=1e-4$。优化器使用Adam。</p>
 <p>在训练阶段，动态交通数据和affinity matrix被划分为小时，天，长期共3组，2种scale的事故分布输入到多任务DTGN中。在测试阶段，将数据组织成以上格式并输入到模型中，最有可能发生事故的子区域可以从主任务和辅助任务2中得到。高风险子区域被突出显示，并与实际的事故记录比较。</p>
 <h2><span id="53-评价指标">5.3. 评价指标</span></h2><p>从2个角度验证RiskOracle模型，回归角度：MSE，分类角度：a)Acc@M，常用于时空排名任务中，表示预测的前M个风险最高的子区域中正确的比例。NYC数据集中，在30min预测时，M=20，在10min预测时，M=6。在SIP数据集中，M=5。b)Acc@K,其中K是第二个辅助任务学到的$k_i$的总和。其中Acc1表示发生事故频率较高时间段的准确率，例如早上7~9点，下午12~4点。</p>
-<h2><span id="54-baseline">5.4. Baseline</span></h2><p>（1）ARIMA，用于时间序列预测<br>（2）Hetero-ConvLSTM(2018KDD),调整超参数为4 blocks with 16 filters, and a size of 12x12 moving window with step=6.<br>（3）ST-ResNet(2017AAAI郑宇)用来预测车流量<br>（4）SDAE(2016AAAI)使用人流量来预测risk<br>（5）SDCAE最新的小时级别风险预测模型</p>
+<h2><span id="54-baseline">5.4. Baseline</span></h2><ol>
+<li>ARIMA，用于时间序列预测</li>
+<li>Hetero-ConvLSTM(2018KDD),调整超参数为4,blocks with 16 filters, and a size of 12x12 moving window with step=6.</li>
+<li>ST-ResNet(2017AAAI郑宇)用来预测车流量</li>
+<li>SDAE(2016AAAI)使用人流量来预测risk</li>
+<li>SDCAE最新的小时级别风险预测模型</li>
+</ol>
 <h2><span id="55-实验结果">5.5. 实验结果</span></h2><p><strong>性能比较</strong><br>实验结果如表3.RiskOracle获得了最高的准确率，且MSE优于大部分baseline。使用分层事故区域选择HARS，我们的模型解决了空间异质性和过渡预测的问题。尤其在NYC数据集上，我们模型在Acc@20比最好的模型高22.49%。对于稀疏的传感数据和短期的时空预测，可扩展性高。并且，我们的模型在高峰期的预测更好，在现实应用中有用。所有的指标NYC的都比SIP的要好，可能因为SIP数据中事故标签不完整。<br>总体上，随着时间粒度变小，我们的模型性能稍微下降，而其他的模型急剧下降因为遇到零膨胀问题。这表明我们的模型在短期事故预测中的有效性和可扩展性。在实际应用中有很少的事故记录时，2个数据集上的提升验证了我们模型的健壮性和普适性。</p>
 <p><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/result.png" alt=""></p>
 <p><strong>Acc@K和消融实验</strong>.如图4所示。Acc@20和Acc@6的结果略高于Acc@K，这是合理的，因为统一阈值无法适应实时条件，并且往往会高估事故率。相反，我们的框架具有使用多尺度事故分布预测，近似估计每个矩形区域中事故数量，具有灵活性。与表3中的结果相比，我们的框架胜过其他baseline，并在Acc@K达到可接受的准确性水平。<br>为了验证哪个组件起作用，做了消融实验，从模型中去掉一些组件。</p>
