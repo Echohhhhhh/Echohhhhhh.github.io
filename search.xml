@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Pytorch之知识点汇总</title>
+    <url>/2020/02/24/Pytorch%E4%B9%8B%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/</url>
+    <content><![CDATA[<h1><span id="简介">简介</span></h1><p>汇总Pytorch的一些知识点</p>
+<h1><span id="查看网络参数">查看网络参数</span></h1><ul>
+<li><p>方法1</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> param <span class="keyword">in</span> network.parameters():</span><br><span class="line">  print(param.shape)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法2<br>可以查看参数的名称</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> name, param <span class="keyword">in</span> network.named_parameters():</span><br><span class="line">  print(name, <span class="string">'\t\t'</span>, param.shape)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1><span id="分类问题">分类问题</span></h1><p>例如Fashion-MNIST分类任务中，一共有10类。假设batch_size=16,每个batch的feature维度为(16,1,28,28)，label的维度(16,)，经过模型最终输出的预测结果维度(16,10)，然后我们使用<code>argmax()</code>来得出最终的预测类别。然后可以和真实label比较，看预测结果的正确性,计算预测正确的个数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>)</span><br><span class="line">tensor([<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">4</span>])</span><br><span class="line"></span><br><span class="line">&gt; labels</span><br><span class="line">tensor([<span class="number">9</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">5</span>])</span><br><span class="line"></span><br><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>).eq(labels)</span><br><span class="line">tensor([<span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">True</span>, <span class="keyword">False</span>], dtype=torch.bool)</span><br><span class="line"></span><br><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>).eq(labels).sum()</span><br><span class="line">tensor(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>).eq(labels).sum().item()</span><br><span class="line"><span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#得到每个batch预测正确的样本</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_num_correct</span><span class="params">(preds, labels)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> preds.argmax(dim=<span class="number">1</span>).eq(labels).sum().item()</span><br></pre></td></tr></table></figure>
+<h1><span id="crossentropyloss和nllloss-区别">CrossEntropyLoss()和NLLLoss() 区别</span></h1><p><a href="https://blog.csdn.net/zwqjoy/article/details/96282788" target="_blank" rel="noopener">Pytorch nn.CrossEntropyLoss()和nn.NLLLoss() 区别</a></p>
+<p><a href="https://www.cnblogs.com/marsggbo/p/10401215.html" target="_blank" rel="noopener">Pytorch里的CrossEntropyLoss详解</a>  </p>
+<p><a href="https://www.zhihu.com/question/66782101" target="_blank" rel="noopener">PyTorch 中，nn 与 nn.functional 有什么区别</a></p>
+<h1><span id="模型训练示例">模型训练示例</span></h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">network = Network()</span><br><span class="line"></span><br><span class="line">train_loader = torch.utils.data.DataLoader(train_set, batch_size=<span class="number">100</span>)</span><br><span class="line">optimizer = optim.Adam(network.parameters(), lr=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    </span><br><span class="line">    total_loss = <span class="number">0</span></span><br><span class="line">    total_correct = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> train_loader: <span class="comment"># Get Batch</span></span><br><span class="line">        images, labels = batch </span><br><span class="line"></span><br><span class="line">        preds = network(images) <span class="comment"># Pass Batch</span></span><br><span class="line">        loss = F.cross_entropy(preds, labels) <span class="comment"># Calculate Loss</span></span><br><span class="line"></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        loss.backward() <span class="comment"># Calculate Gradients</span></span><br><span class="line">        optimizer.step() <span class="comment"># Update Weights</span></span><br><span class="line"></span><br><span class="line">        total_loss += loss.item()</span><br><span class="line">        total_correct += get_num_correct(preds, labels)</span><br><span class="line"></span><br><span class="line">    print(</span><br><span class="line">        <span class="string">"epoch"</span>, epoch, </span><br><span class="line">        <span class="string">"total_correct:"</span>, total_correct, </span><br><span class="line">        <span class="string">"loss:"</span>, total_loss</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<h1><span id="关闭梯度">关闭梯度</span></h1><p>关闭梯度有2种方法</p>
+<ul>
+<li><p>方法1：在模型训练的时候，需要计算梯度，但是在测试的时候不需要计算梯度，那我们就可以使用<code>@torch.no_grad()</code>。下面代码示例求所有的预测结果</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">@torch.no_grad()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_all_preds</span><span class="params">(model, loader)</span>:</span></span><br><span class="line">    all_preds = torch.tensor([])</span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> loader:</span><br><span class="line">        images, labels = batch</span><br><span class="line">        preds = model(images)</span><br><span class="line">        all_preds = torch.cat(</span><br><span class="line">            (all_preds, preds),dim=<span class="number">0</span>)</span><br><span class="line">  <span class="keyword">return</span> all_preds</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>使用<code>@torch.no_grad()</code>就不用再记录梯度的轨迹(不用再保存动态图的计算轨迹)，省内存。</p>
+<ul>
+<li><p>方法2：<br>使用<code>with torch.no_grad()</code>在函数内部</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">  prediction_loader = torch.utils.data.DataLoader(train_set, batch_size=<span class="number">10000</span>)</span><br><span class="line">  train_preds = get_all_preds(network, prediction_loader)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Deep Learning</category>
+      </categories>
+      <tags>
+        <tag>Pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RiskOracle-A Minute-level Citywide Traffic Accident Forecasting Framework</title>
     <url>/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/</url>
-    <content><![CDATA[<p>AAAI2020原文链接：<a href="https://github.com/zzyy0929/AAAI2020-RiskOracle" target="_blank" rel="noopener">RiskOracle-A Minute-level Citywide Traffic Accident Forecasting Framework</a><br>中科科大发<br><a id="more"></a></p>
+    <content><![CDATA[<p>AAAI2020原文链接：<a href="https://github.com/zzyy0929/AAAI2020-RiskOracle" target="_blank" rel="noopener">RiskOracle-A Minute-level Citywide Traffic Accident Forecasting Framework</a><br>中国科大发<br><a id="more"></a></p>
 <!-- TOC -->
 <ul>
 <li><a href="#1-%e6%91%98%e8%a6%81">1. 摘要</a></li>
@@ -231,22 +269,33 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
   <entry>
     <title>Pytorch之Tensor学习</title>
     <url>/2020/02/17/Pytorch%E4%B9%8BTensor%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h1><span id="1-简介">1. 简介</span></h1><p>最近发现一个学习Pytorch的教程，有视频版和文字版<a href="https://deeplizard.com/" target="_blank" rel="noopener">deeplizard</a>,这里面详细介绍了关于Tensor的知识，讲得很好，在此记录下。</p>
+    <content><![CDATA[<h1><span id="1-简介">1. 简介</span></h1><p>最近发现一个学习Pytorch的教程，有视频版和文字版<a href="https://deeplizard.com/" target="_blank" rel="noopener">deeplizard</a>,这里面详细介绍了关于Tensor的知识，真的讲得超级好，解决了我很多关于Tensor运算的疑惑，在此记录下。</p>
 <a id="more"></a>  
 <!-- TOC -->
 <ul>
 <li><a href="#1-%e7%ae%80%e4%bb%8b">1. 简介</a></li>
-<li><a href="#%e5%88%9b%e5%bb%batensor">创建Tensor</a></li>
-<li><a href="#tensor%e7%9a%844%e7%b1%bb%e6%93%8d%e4%bd%9c">Tensor的4类操作</a><ul>
-<li><a href="#reshape%e6%93%8d%e4%bd%9c">Reshape操作</a></li>
-<li><a href="#element-wise%e6%93%8d%e4%bd%9c">Element-wise操作</a></li>
-<li><a href="#reduction%e6%93%8d%e4%bd%9c">Reduction操作</a></li>
-<li><a href="#access%e6%93%8d%e4%bd%9c">Access操作</a></li>
+<li><a href="#2-%e5%88%9b%e5%bb%batensor">2. 创建Tensor</a></li>
+<li><a href="#3-tensor%e7%9a%844%e7%b1%bb%e6%93%8d%e4%bd%9c">3. Tensor的4类操作</a><ul>
+<li><a href="#31-reshape%e6%93%8d%e4%bd%9c">3.1. Reshape操作</a><ul>
+<li><a href="#311-reshape">3.1.1. reshape</a></li>
+<li><a href="#312-squeeze%e5%92%8cunsqueeze%e5%87%bd%e6%95%b0">3.1.2. squeeze和unsqueeze函数</a></li>
+<li><a href="#313-cat%e5%87%bd%e6%95%b0">3.1.3. cat函数</a></li>
+<li><a href="#314-stack%e5%87%bd%e6%95%b0">3.1.4. stack函数</a></li>
+<li><a href="#315-cat%e5%92%8cstack%e7%9a%84%e5%8c%ba%e5%88%ab">3.1.5. cat和stack的区别</a></li>
+</ul>
+</li>
+<li><a href="#32-element-wise%e6%93%8d%e4%bd%9c">3.2. Element-wise操作</a></li>
+<li><a href="#33-reduction%e6%93%8d%e4%bd%9c">3.3. Reduction操作</a><ul>
+<li><a href="#331-%e6%b2%bf%e7%9d%80%e6%9f%90%e4%b8%aaaxis%e8%81%9a%e5%90%88">3.3.1. 沿着某个axis聚合</a></li>
+<li><a href="#332-argmax%e5%87%bd%e6%95%b0%e4%bb%8b%e7%bb%8d">3.3.2. Argmax函数介绍</a></li>
+</ul>
+</li>
+<li><a href="#34-access%e6%93%8d%e4%bd%9c">3.4. Access操作</a></li>
 </ul>
 </li>
 </ul>
 <!-- /TOC -->
-<h1><span id="创建tensor">创建Tensor</span></h1><p>创建Tensor有四种方式</p>
+<h1><span id="2-创建tensor">2. 创建Tensor</span></h1><p>创建Tensor有四种方式</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#创建Tensor</span></span><br><span class="line">&gt; data = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">&gt; o1 = torch.Tensor(data)</span><br><span class="line">&gt; o2 = torch.tensor(data)</span><br><span class="line">&gt; o3 = torch.as_tensor(data)</span><br><span class="line">&gt; o4 = torch.from_numpy(data)</span><br><span class="line"></span><br><span class="line">&gt; print(o1)</span><br><span class="line">&gt; print(o2)</span><br><span class="line">&gt; print(o3)</span><br><span class="line">&gt; print(o4)</span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">2.</span>, <span class="number">3.</span>])</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line"></span><br><span class="line">&gt; print(o1.dtype)</span><br><span class="line">&gt; print(o2.dtype)</span><br><span class="line">&gt; print(o3.dtype)</span><br><span class="line">&gt; print(o4.dtype)</span><br><span class="line">torch.float32</span><br><span class="line">torch.int32</span><br><span class="line">torch.int32</span><br><span class="line">torch.int32</span><br><span class="line"></span><br><span class="line"><span class="comment">#内存是否共享</span></span><br><span class="line">&gt; print(<span class="string">'old:'</span>, data)</span><br><span class="line">old: [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">&gt; data[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">&gt; print(<span class="string">'new:'</span>, data)</span><br><span class="line">new: [<span class="number">0</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">&gt; print(o1)</span><br><span class="line">&gt; print(o2)</span><br><span class="line">&gt; print(o3)</span><br><span class="line">&gt; print(o4)</span><br><span class="line"></span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">2.</span>, <span class="number">3.</span>])</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>torch.Tensor()</code>和<code>torch.tensor()</code>区别<br><code>torch.Tensor()</code>是<code>Tensor</code>类的构造函数，<code>torch.tensor()</code>是factory function，该函数将传入的参数构造成一个<code>Tensor</code>对象并返回。<br>以上4个函数中，<code>torch.Tensor()</code>是构造函数，其余都是factory function。</li>
@@ -262,9 +311,83 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 </ul>
 </li>
 </ul>
-<h1><span id="tensor的4类操作">Tensor的4类操作</span></h1><h2><span id="reshape操作">Reshape操作</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],</span><br><span class="line">    [<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>]</span><br><span class="line">], dtype=torch.float32)</span><br></pre></td></tr></table></figure>
+<h1><span id="3-tensor的4类操作">3. Tensor的4类操作</span></h1><h2><span id="31-reshape操作">3.1. Reshape操作</span></h2><h3><span id="311-reshape">3.1.1. reshape</span></h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],</span><br><span class="line">    [<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>]</span><br><span class="line">], dtype=torch.float32)</span><br></pre></td></tr></table></figure>
 <p>有2种方式获取Tensor的shape:<code>t.size()和t.shape</code></p>
-<h2><span id="element-wise操作">Element-wise操作</span></h2><h2><span id="reduction操作">Reduction操作</span></h2><h2><span id="access操作">Access操作</span></h2>]]></content>
+<h3><span id="312-squeeze和unsqueeze函数">3.1.2. squeeze和unsqueeze函数</span></h3><ol>
+<li><code>torch.squeeze(input, dim=None, out=None) → Tensor</code><br>将维度中的1去掉，如果不指定dim，则去掉所有维度上的1；如果指定dim，则只去掉该维度上的1。<strong>dim是可选项</strong></li>
+</ol>
+<ul>
+<li>输入维度是(A×1×B×C×1×D),不指定dim，输出维度(A×B×CxD)</li>
+<li>输入维度是(A×1×B×C×1×D),不指定dim=1，输出维度(A×B×C×1×D)</li>
+</ul>
+<ol>
+<li><code>torch.unsqueeze(input, dim, out=None) → Tensor</code><br>在指定维度上增加1个维度。<strong>dim是必填项</strong><br><code>torch.unsqueeze(x, 0)</code><h3><span id="313-cat函数">3.1.3. cat函数</span></h3></li>
+</ol>
+<p><code>torch.cat(tensors, dim=0, out=None) → Tensor</code><br>如果要拼接多个Tensor，需要将多个Tensor包装成tuple，例如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.cat((t1,t2,t3),dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>cat不改变数据维度个数</strong></p>
+<h3><span id="314-stack函数">3.1.4. stack函数</span></h3><p><code>torch.stack(tensors, dim=0, out=None) → Tensor</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.stack((t1,t2,t3),dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>stack改变数据维度个数,增加一个维度</strong></p>
+<h3><span id="315-cat和stack的区别">3.1.5. cat和stack的区别</span></h3><p>cat和stack的区别可以用一句话描述：</p>
+<ul>
+<li>cat不会改变数据维度个数，原先是3维数据，n个tensor进行cat之后还是3维数据。</li>
+<li>stack会增加维度个数，原先是3维，n个tensor进行stack会变成4维数据</li>
+</ul>
+<h2><span id="32-element-wise操作">3.2. Element-wise操作</span></h2><p><a href="https://deeplizard.com/learn/video/QscEWm0QTRY" target="_blank" rel="noopener">Broadcasting and Element-wise Operations with PyTorch</a><br><a href="https://deeplizard.com/learn/video/6_33ulFDuCg" target="_blank" rel="noopener">Broadcasting Explained</a></p>
+<p>逐元素有以下4种叫法，意思都一样：</p>
+<ul>
+<li>Element-wise</li>
+<li>Component-wise</li>
+<li>Point-wise</li>
+</ul>
+<p>逐元素操作有以下几种:</p>
+<ol>
+<li><p><strong><code>t1+t2</code>维度相同</strong><br>其中t1和t2维度相同</p>
+</li>
+<li><p><strong><code>t1+2, t1-2, t1*2, t1/2</code></strong><br>实际上是对2进行了<code>broadcasting</code>，然后再和t1运算</p>
+</li>
+<li><p><strong><code>t1+t2</code>，rank相同，维度不同</strong><br>这种情况比较复杂。</p>
+<ul>
+<li><p>首先我们先看这2个Tensor在所有维度上是否兼容。判断2个Tensor在维度上是否兼容有2个条件，只要满足其中的一个条件就兼容，否则不兼容。</p>
+<ul>
+<li>相等</li>
+<li><p>有一个值维1 </p>
+<p>例如：t1维度(1,3)，t2维度(3,1)，<strong>从后往前对比</strong>，我们先看第二个维度的值，分别是3和1，不相等但是满足第二个条件，即第二个维度上兼容。再看第一个维度，分别是1和3，满足第二个条件，即第一个维度上兼容。所以2个Tensor在所有维度上兼容，可以进行下一步的操作。如果不兼容，则这2个Tensor无法进行逐元素运算。</p>
+</li>
+</ul>
+</li>
+<li><p>决定最终结果的输出维度。还是要看2个Tensor的维度。<strong>从后往前对比</strong>, t1维度(1,3)，t2维度(3,1)，先看第二维度是3和1，取最大值作为输出的第一个维度，即3，再看第一维度1和3，也是3作为输出的第二个维度。即输出的维度是(3,3)。</p>
+</li>
+<li>分别将t1维度(1,3)，t2维度(3,1)进行广播成(3,3)，然后再进行相加，得到最终的结果。</li>
+</ul>
+</li>
+<li><p><strong><code>t1+t2</code>，rank不同</strong></p>
+<ul>
+<li>例子1：t1的维度(2,4),t2的维度是(4,)，这2个Tensor也可以进行，实际是先将低rank的t2最后一维和t1的最后一维相等，都等于4，但是t2只有一维，那就在缺失的维度上补1，变成(1,4),然后再广播成(2,4)维度，然后再和t1计算。</li>
+<li>例子2：t1的维度(2,4),t2的维度是(2,)，这2个Tensor不可以进行。因为t1和t2的最后一维分别是4和2，不相等也不等于1，不兼容，无法进行下一步。</li>
+<li>例子3：t1维度(1,2,3)，t2维度(3,3)，这个Tensor就不能做逐元素操作。先看所有维度是否兼容。最后一个维度3和3，相等即兼容，再看前一个维度2和3，既不相等也不等于1，不兼容。则不能进行逐元素操作</li>
+</ul>
+</li>
+</ol>
+<p><strong>以上2，3，4情况都涉及到了broadcasting的知识。</strong>  </p>
+<ol>
+<li><p>比较操作<br>比较也是逐元素操作的一种，</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; torch.tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) &lt; torch.tensor([<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">tensor([<span class="keyword">True</span>, <span class="keyword">False</span>, <span class="keyword">False</span>])</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2><span id="33-reduction操作">3.3. Reduction操作</span></h2><p>聚合操作：减少Tesnor中元素的个数。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>],</span><br><span class="line">    [<span class="number">2</span>,<span class="number">0</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">0</span>,<span class="number">3</span>,<span class="number">0</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line">&gt; t.sum()</span><br><span class="line">tensor(<span class="number">8.</span>)</span><br></pre></td></tr></table></figure>
+<p><code>sum()</code>返回的结果是scalar类型(0维的Tensor)，只包含1个元素</p>
+<h3><span id="331-沿着某个axis聚合">3.3.1. 沿着某个axis聚合</span></h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],</span><br><span class="line">    [<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line">&gt; t.sum(dim=<span class="number">0</span>)</span><br><span class="line">tensor([<span class="number">6.</span>, <span class="number">6.</span>, <span class="number">6.</span>, <span class="number">6.</span>])</span><br></pre></td></tr></table></figure>
+<h3><span id="332-argmax函数介绍">3.3.2. Argmax函数介绍</span></h3><p>当一个Tensor变量a调用<code>argmax()</code>函数时，返回只包含1个元素的Tensor，该元素表示a中最大值的下标。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">0</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">0</span>],</span><br><span class="line">    [<span class="number">4</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">5</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line"></span><br><span class="line">&gt; t.max()</span><br><span class="line">tensor(<span class="number">5.</span>)</span><br><span class="line"></span><br><span class="line">&gt; t.argmax()</span><br><span class="line">tensor(<span class="number">11</span>)</span><br><span class="line"></span><br><span class="line">&gt; t.flatten()</span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">2.</span>, <span class="number">0.</span>, <span class="number">3.</span>, <span class="number">3.</span>, <span class="number">0.</span>, <span class="number">4.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">5.</span>])</span><br></pre></td></tr></table></figure>
+<p>如果<code>argmax()</code>没有指定axis，则返回整个Tensor最大值的下标。如果指定axis，则返回指定轴上最大值下标。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t.max(dim=<span class="number">0</span>)</span><br><span class="line">(tensor([<span class="number">4.</span>, <span class="number">3.</span>, <span class="number">3.</span>, <span class="number">5.</span>]), tensor([<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>]))</span><br><span class="line"></span><br><span class="line">&gt; t.argmax(dim=<span class="number">0</span>)</span><br><span class="line">tensor([<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">&gt; t.max(dim=<span class="number">1</span>)</span><br><span class="line">(tensor([<span class="number">2.</span>, <span class="number">3.</span>, <span class="number">5.</span>]), tensor([<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>]))</span><br><span class="line"></span><br><span class="line">&gt; t.argmax(dim=<span class="number">1</span>)</span><br><span class="line">tensor([<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+<p>当调用<code>max()</code>函数时，返回2个Tensor，第一个Tensor表示返回轴上最大的值，第2个Tensor返回最大值的下标，也就是<code>argmax()</code>的返回值。<br>通常<code>argmax()</code>通常用在分类任务的输出上，决定哪类有最高的预测值。</p>
+<h2><span id="34-access操作">3.4. Access操作</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">    [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],</span><br><span class="line">    [<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line"></span><br><span class="line">&gt; t.mean()</span><br><span class="line">tensor(<span class="number">5.</span>)</span><br><span class="line"></span><br><span class="line">&gt; t.mean().item()</span><br><span class="line"><span class="number">5.0</span></span><br><span class="line"></span><br><span class="line">&gt; t.mean(dim=<span class="number">0</span>).tolist()</span><br><span class="line">[<span class="number">4.0</span>, <span class="number">5.0</span>, <span class="number">6.0</span>]</span><br><span class="line"></span><br><span class="line">&gt; t.mean(dim=<span class="number">0</span>).numpy()</span><br><span class="line">array([<span class="number">4.</span>, <span class="number">5.</span>, <span class="number">6.</span>], dtype=float32)</span><br></pre></td></tr></table></figure>
+<p>如果返回的结果是scalar，只有1个元素，使用item()来获取其中的值。<br>如果返回的结果有多个值，可以将Tensor转换为pyhton中的list和array.</p>
+]]></content>
       <categories>
         <category>Deep Learning</category>
       </categories>
@@ -317,8 +440,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
       </tags>
   </entry>
   <entry>
-    <title>pytorch 学习</title>
-    <url>/2020/01/06/pytorch-%E5%AD%A6%E4%B9%A0/</url>
+    <title>Pytorch之GPU程序</title>
+    <url>/2020/01/06/Pytorch%E4%B9%8BGPU%E7%A8%8B%E5%BA%8F/</url>
     <content><![CDATA[<p>介绍Pytorch的一些使用方法<br><a id="more"></a></p>
 <h1><span id="gpu">GPU</span></h1><p><a href="https://zhuanlan.zhihu.com/p/71566775" target="_blank" rel="noopener">转载出处</a></p>
 <p><a href="https://tangshusen.me/Dive-into-DL-PyTorch/#/chapter04_DL_computation/4.6_use-gpu" target="_blank" rel="noopener">GPU计算</a></p>
@@ -340,7 +463,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 </blockquote>
 <h2><span id="用-gpu-训练">用 GPU 训练</span></h2><p>默认情况下，使用 <code>CPU</code> 训练模型。可以通过如下方式，通过 <code>GPU</code> 进行训练。<strong>使用 GPU 时，模型和输入必须位于同一张 GPU 上。</strong></p>
 <p><code>.to(device)</code> 和 <code>.cuda()</code> 的区别如下：</p>
-<p><a href="https://stackoom.com/question/3bltP/Pytorch-%E5%9C%A8CUDA%E8%AE%BE%E5%A4%87%E4%B8%8A%E6%9C%89%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E5%88%9B%E5%BB%BA%E5%BC%A0%E9%87%8F-%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%90%97" target="_blank" rel="noopener">to和cuda的区别</a><br><img src="/2020/01/06/pytorch-学习/to和cuda区别.png" alt="to和cuda区别"></p>
+<p><a href="https://stackoom.com/question/3bltP/Pytorch-%E5%9C%A8CUDA%E8%AE%BE%E5%A4%87%E4%B8%8A%E6%9C%89%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E5%88%9B%E5%BB%BA%E5%BC%A0%E9%87%8F-%E5%AE%83%E4%BB%AC%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E5%90%97" target="_blank" rel="noopener">to和cuda的区别</a><br><img src="/2020/01/06/Pytorch之GPU程序/pytorch-学习/to和cuda区别.png" alt="to和cuda区别"></p>
 <ol>
 <li><code>.to()</code> 中的参数必不可少</li>
 <li>对于 <code>module</code> 而言，<code>.to()</code> 是 <code>inplace</code> 的，而 <code>.cuda()</code> 不是；而对于 <code>tensor</code> 而言，两者一致。</li>
@@ -366,7 +489,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <p>单机多卡训练，即<strong>并行训练</strong>。并行训练又分为<strong>数据并行</strong> (<code>Data Parallelism</code>) 和<strong>模型并行</strong>两种。</p>
 <p>数据并行指的是，多张 <code>GPU</code> 使用相同的模型副本，但是使用不同的数据批进行训练。而模型并行指的是，多张<code>GPU</code> 分别训练模型的不同部分，使用同一批数据。</p>
 <p>两者对比如下图所示：</p>
-<p><img src="/2020/01/06/pytorch-学习/多GPU.jpg" alt=""></p>
+<p><img src="/2020/01/06/Pytorch之GPU程序/pytorch-学习/多GPU.jpg" alt=""></p>
 <p>模型并行 VS 数据并行</p>
 <h2><span id="数据并行">数据并行</span></h2><p><a href="https://pytorch.org/tutorials/beginner/blitz/data_parallel_tutorial.html" target="_blank" rel="noopener">Pytorch多GPU官方实例</a></p>
 <h3><span id="pytorch-api">Pytorch API</span></h3><p>【<strong>Class 原型</strong>】</p>
@@ -382,7 +505,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <p>【<strong>基本使用方式</strong>】</p>
 <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;</span>&gt; net = torch.nn.DataParallel(model, device_ids=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"><span class="meta">&gt;&gt;</span>&gt; output = net(input_var)  <span class="comment"># input_var can be on any device, including CP</span></span><br></pre></td></tr></table></figure>
 <h3><span id="数据并行的原理">数据并行的原理</span></h3><p>数据并行的具体原理流程为：</p>
-<p><img src="/2020/01/06/pytorch-学习/数据并行.png" alt=""></p>
+<p><img src="/2020/01/06/Pytorch之GPU程序/pytorch-学习/数据并行.png" alt=""></p>
 <ol>
 <li><p>将模型加载至主设备上，作为 <code>controller</code>，一般设置为 <code>cuda:0</code></p>
 </li>
@@ -445,19 +568,19 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision.models <span class="keyword">as</span> models</span><br><span class="line"></span><br><span class="line">num_batches = <span class="number">3</span></span><br><span class="line">batch_size = <span class="number">120</span></span><br><span class="line">image_w = <span class="number">128</span></span><br><span class="line">image_h = <span class="number">128</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model)</span>:</span></span><br><span class="line">    model.train(<span class="keyword">True</span>)</span><br><span class="line">    loss_fn = nn.MSELoss()</span><br><span class="line">    optimizer = optim.SGD(model.parameters(), lr=<span class="number">0.001</span>)</span><br><span class="line"></span><br><span class="line">    one_hot_indices = torch.LongTensor(batch_size) \</span><br><span class="line">                           .random_(<span class="number">0</span>, num_classes) \</span><br><span class="line">                           .view(batch_size, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(num_batches):</span><br><span class="line">        <span class="comment"># generate random inputs and labels</span></span><br><span class="line">        inputs = torch.randn(batch_size, <span class="number">3</span>, image_w, image_h)</span><br><span class="line">        labels = torch.zeros(batch_size, num_classes) \</span><br><span class="line">                      .scatter_(<span class="number">1</span>, one_hot_indices, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># run forward pass</span></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        outputs = model(inputs.to(<span class="string">'cuda:0'</span>))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># run backward pass</span></span><br><span class="line">        labels = labels.to(outputs.device)</span><br><span class="line">        loss_fn(outputs, labels).backward()</span><br><span class="line">        optimizer.step()</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.switch_backend(<span class="string">'Agg'</span>)</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line"></span><br><span class="line">num_repeat = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">stmt = <span class="string">"train(model)"</span></span><br><span class="line"></span><br><span class="line">setup = <span class="string">"model = ModelParallelResNet50()"</span></span><br><span class="line"><span class="comment"># globals arg is only available in Python 3. In Python 2, use the following</span></span><br><span class="line"><span class="comment"># import __builtin__</span></span><br><span class="line"><span class="comment"># __builtin__.__dict__.update(locals())</span></span><br><span class="line">mp_run_times = timeit.repeat(</span><br><span class="line">    stmt, setup, number=<span class="number">1</span>, repeat=num_repeat, globals=globals())</span><br><span class="line">mp_mean, mp_std = np.mean(mp_run_times), np.std(mp_run_times)</span><br><span class="line"></span><br><span class="line">setup = <span class="string">"import torchvision.models as models;"</span> + \</span><br><span class="line">        <span class="string">"model = models.resnet50(num_classes=num_classes).to('cuda:0')"</span></span><br><span class="line">rn_run_times = timeit.repeat(</span><br><span class="line">    stmt, setup, number=<span class="number">1</span>, repeat=num_repeat, globals=globals())</span><br><span class="line">rn_mean, rn_std = np.mean(rn_run_times), np.std(rn_run_times)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot</span><span class="params">(means, stds, labels, fig_name)</span>:</span></span><br><span class="line">    fig, ax = plt.subplots()</span><br><span class="line">    ax.bar(np.arange(len(means)), means, yerr=stds,</span><br><span class="line">           align=<span class="string">'center'</span>, alpha=<span class="number">0.5</span>, ecolor=<span class="string">'red'</span>, capsize=<span class="number">10</span>, width=<span class="number">0.6</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">'ResNet50 Execution Time (Second)'</span>)</span><br><span class="line">    ax.set_xticks(np.arange(len(means)))</span><br><span class="line">    ax.set_xticklabels(labels)</span><br><span class="line">    ax.yaxis.grid(<span class="keyword">True</span>)</span><br><span class="line">    plt.tight_layout()</span><br><span class="line">    plt.savefig(fig_name)</span><br><span class="line">    plt.close(fig)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">plot([mp_mean, rn_mean],</span><br><span class="line">     [mp_std, rn_std],</span><br><span class="line">     [<span class="string">'Model Parallel'</span>, <span class="string">'Single GPU'</span>],</span><br><span class="line">     <span class="string">'mp_vs_rn.png'</span>)</span><br></pre></td></tr></table></figure>
 <p>结果如下所示。模型并行相较于单 <code>GPU</code> 训练的模型，训练时间开销多出 <code>4.02/3.75-1=7%</code> 左右。当然，这存在优化空间，因为多 <code>GPU</code> 中，每一时刻只有一个 <code>GPU</code> 进行训练，其他闲置。而在中间数据转移过程中，又消耗一定的时间。</p>
-<p><img src="/2020/01/06/pytorch-学习/模型并行.jpg" alt=""></p>
+<p><img src="/2020/01/06/Pytorch之GPU程序/pytorch-学习/模型并行.jpg" alt=""></p>
 <p>模型并行 VS 单 GPU</p>
 <h3><span id="输入流水线">输入流水线</span></h3><p>解决上面的问题的最直接的方式就是使用流水线技术，即 <code>GPU-0</code> 输出到 <code>GPU-1</code> 之后，在 <code>GPU-1</code> 训练的同时，<code>GPU-0</code> 接收下一批数据，这样就可以多 <code>GPU</code> 同时执行了。</p>
 <p>下面，我们将 <code>120</code> 个样本的 <code>batch</code> 再次细分，分为 <code>20</code> 张样本每份的小 <code>batch</code>。由于 <code>Pytorch</code> 同步启动 <code>CUDA</code> 操作，因此，该操作不需要使用额外的多线程来处理。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PipelineParallelResNet50</span><span class="params">(ModelParallelResNet50)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, split_size=<span class="number">20</span>, *args, **kwargs)</span>:</span></span><br><span class="line">        super(PipelineParallelResNet50, self).__init__(*args, **kwargs)</span><br><span class="line">        self.split_size = split_size</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        splits = iter(x.split(self.split_size, dim=<span class="number">0</span>))</span><br><span class="line">        s_next = next(splits)</span><br><span class="line">        s_prev = self.seq1(s_next).to(<span class="string">'cuda:1'</span>)</span><br><span class="line">        ret = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> s_next <span class="keyword">in</span> splits:</span><br><span class="line">            <span class="comment"># A. s_prev runs on cuda:1</span></span><br><span class="line">            s_prev = self.seq2(s_prev)</span><br><span class="line">            ret.append(self.fc(s_prev.view(s_prev.size(<span class="number">0</span>), <span class="number">-1</span>)))</span><br><span class="line"></span><br><span class="line">            <span class="comment"># B. s_next runs on cuda:0, which can run concurrently with A</span></span><br><span class="line">            s_prev = self.seq1(s_next).to(<span class="string">'cuda:1'</span>)</span><br><span class="line"></span><br><span class="line">        s_prev = self.seq2(s_prev)</span><br><span class="line">        ret.append(self.fc(s_prev.view(s_prev.size(<span class="number">0</span>), <span class="number">-1</span>)))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> torch.cat(ret)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">setup = <span class="string">"model = PipelineParallelResNet50()"</span></span><br><span class="line">pp_run_times = timeit.repeat(</span><br><span class="line">    stmt, setup, number=<span class="number">1</span>, repeat=num_repeat, globals=globals())</span><br><span class="line">pp_mean, pp_std = np.mean(pp_run_times), np.std(pp_run_times)</span><br><span class="line"></span><br><span class="line">plot([mp_mean, rn_mean, pp_mean],</span><br><span class="line">     [mp_std, rn_std, pp_std],</span><br><span class="line">     [<span class="string">'Model Parallel'</span>, <span class="string">'Single GPU'</span>, <span class="string">'Pipelining Model Parallel'</span>],</span><br><span class="line">     <span class="string">'mp_vs_rn_vs_pp.png'</span>)</span><br></pre></td></tr></table></figure>
 <p>需要注意的是，<code>device-to-device</code> 的 <code>tensor copy</code> 操作是同步的。如果创建多个数据流，则需要保证 <code>copy</code> 操作以合适的同步方式进行。</p>
 <p>在完成 <code>tensor</code> 拷贝之前，对 <code>source tensor</code> 进行写入，或者对 <code>target tensor</code> 进行读写，都可能会导致不可预期的行为。上面的实现中，在源和目标设备中，均只使用了默认的 <code>stream</code>，因此无需额外的强化同步操作。</p>
-<p><img src="/2020/01/06/pytorch-学习/模型并行2.jpg" alt=""><br>模型并行 VS 单 GPU VS 流水线模型并行</p>
+<p><img src="/2020/01/06/Pytorch之GPU程序/pytorch-学习/模型并行2.jpg" alt=""><br>模型并行 VS 单 GPU VS 流水线模型并行</p>
 <p>如上图所示，流水线输入确实加速了训练进程，大约 <code>3.75/2.51-1=49%</code>，但距离 <code>100%</code> 的加速相去甚远。由于我们在流水线并行实现中，引入了一个新的参数 <code>split_sizes</code>，但是并不知晓其对训练时间的影响。</p>
 <p>直觉上来说，使用一个小的 <code>split_sizes</code> 将会导致许多微小的 <code>CUDA</code> 内核的启动，而使用较大的 <code>split_sizes</code>，则会导致较长的空闲时间。下面是一个搜索最佳 <code>split_sizes</code> 的实验。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">means = []</span><br><span class="line">stds = []</span><br><span class="line">split_sizes = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">20</span>, <span class="number">40</span>, <span class="number">60</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> split_size <span class="keyword">in</span> split_sizes:</span><br><span class="line">    setup = <span class="string">"model = PipelineParallelResNet50(split_size=%d)"</span> % split_size</span><br><span class="line">    pp_run_times = timeit.repeat(</span><br><span class="line">        stmt, setup, number=<span class="number">1</span>, repeat=num_repeat, globals=globals())</span><br><span class="line">    means.append(np.mean(pp_run_times))</span><br><span class="line">    stds.append(np.std(pp_run_times))</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax.plot(split_sizes, means)</span><br><span class="line">ax.errorbar(split_sizes, means, yerr=stds, ecolor=<span class="string">'red'</span>, fmt=<span class="string">'ro'</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">'ResNet50 Execution Time (Second)'</span>)</span><br><span class="line">ax.set_xlabel(<span class="string">'Pipeline Split Size'</span>)</span><br><span class="line">ax.set_xticks(split_sizes)</span><br><span class="line">ax.yaxis.grid(<span class="keyword">True</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.savefig(<span class="string">"split_size_tradeoff.png"</span>)</span><br><span class="line">plt.close(fig)</span><br></pre></td></tr></table></figure>
 <p>实验结果如下所示：</p>
-<p><img src="/2020/01/06/pytorch-学习/pipeline.jpg" alt=""></p>
+<p><img src="/2020/01/06/Pytorch之GPU程序/pytorch-学习/pipeline.jpg" alt=""></p>
 <p>流水线输入分割份数</p>
 <p>如上图所示，最佳的参数为 <code>12</code>，其将导致 <code>3.75/2.43-1=54%</code> 的加速。但这仍存在加速的可能。例如，所有在 <code>cuda:0</code> 上的操作放在默认的 <code>stream</code> 上。这意味着，在下一个 <code>split</code> 上的计算，不能与上一个 <code>split</code> 的 <code>copy</code> 操作进行重叠。然而，由于 <code>next_split</code> 和 <code>prev_plit</code> 是不同的 <code>tensor</code>，因此这不存在问题。</p>
 <p>该实现需要在每个 <code>GPU</code> 上使用多个 <code>stream</code>，并且模型中不同的子网络需要使用不同的 <code>stream</code> 管理策略。</p>
@@ -743,9 +866,9 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
         <category>论文阅读笔记</category>
       </categories>
       <tags>
-        <tag>NLP</tag>
         <tag>Time Series</tag>
         <tag>Transformer</tag>
+        <tag>NLP</tag>
       </tags>
   </entry>
   <entry>
@@ -988,8 +1111,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
         <category>论文阅读笔记</category>
       </categories>
       <tags>
-        <tag>NLP</tag>
         <tag>Transformer</tag>
+        <tag>NLP</tag>
       </tags>
   </entry>
   <entry>
@@ -3410,9 +3533,9 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>NLP</category>
       </categories>
       <tags>
+        <tag>Transformer</tag>
         <tag>NLP</tag>
         <tag>Attention</tag>
-        <tag>Transformer</tag>
         <tag>Seq2Seq</tag>
       </tags>
   </entry>

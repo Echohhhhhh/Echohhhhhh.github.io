@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="XGBoost,">
+  <meta name="keywords" content="Pytorch,">
 
 
 
@@ -73,18 +73,18 @@
 
 
 
-<meta name="description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近使用XGBoost做一个二分类的任务。记录XGBoost的主要参数和调参过程。">
-<meta name="keywords" content="XGBoost">
+<meta name="description" content="简介汇总Pytorch的一些知识点 查看网络参数 方法1 12for param in network.parameters():  print(param.shape)  方法2可以查看参数的名称 12for name, param in network.named_parameters():  print(name, &apos;\t\t&apos;, param.shape)   分类问题例如Fashion-M">
+<meta name="keywords" content="Pytorch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="XGBoost">
-<meta property="og:url" content="http://yoursite.com/2019/11/02/XGBoost/index.html">
+<meta property="og:title" content="Pytorch之知识点汇总">
+<meta property="og:url" content="http://yoursite.com/2020/02/24/Pytorch之知识点汇总/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近使用XGBoost做一个二分类的任务。记录XGBoost的主要参数和调参过程。">
+<meta property="og:description" content="简介汇总Pytorch的一些知识点 查看网络参数 方法1 12for param in network.parameters():  print(param.shape)  方法2可以查看参数的名称 12for name, param in network.named_parameters():  print(name, &apos;\t\t&apos;, param.shape)   分类问题例如Fashion-M">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-23T13:08:57.974Z">
+<meta property="og:updated_time" content="2020-02-24T12:44:52.695Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="XGBoost">
-<meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近使用XGBoost做一个二分类的任务。记录XGBoost的主要参数和调参过程。">
+<meta name="twitter:title" content="Pytorch之知识点汇总">
+<meta name="twitter:description" content="简介汇总Pytorch的一些知识点 查看网络参数 方法1 12for param in network.parameters():  print(param.shape)  方法2可以查看参数的名称 12for name, param in network.named_parameters():  print(name, &apos;\t\t&apos;, param.shape)   分类问题例如Fashion-M">
 
 
 
@@ -114,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/11/02/XGBoost/">
+  <link rel="canonical" href="http://yoursite.com/2020/02/24/Pytorch之知识点汇总/">
 
 
 
 
 
-  <title>XGBoost | Echo's blog</title>
+  <title>Pytorch之知识点汇总 | Echo's blog</title>
   
 
 
@@ -299,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/02/XGBoost/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/24/Pytorch之知识点汇总/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Echo">
@@ -316,7 +316,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">XGBoost</h2>
+          <h2 class="post-title" itemprop="name headline">Pytorch之知识点汇总</h2>
         
 
         <div class="post-meta">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-02T15:28:18+08:00">
-                2019-11-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-24T17:08:12+08:00">
+                2020-02-24
               </time>
             
 
@@ -351,8 +351,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
                   </a>
                 </span>
 
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.8k
+                  510
                 </span>
               
 
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7
+                  2
                 </span>
               
             </div>
@@ -422,81 +422,33 @@
       
 
       
-        <p>&ensp;&ensp;&ensp;&ensp;最近使用XGBoost做一个二分类的任务。记录XGBoost的主要参数和调参过程。<br><a id="more"></a></p>
-<!-- TOC -->
+        <h1><span id="简介">简介</span></h1><p>汇总Pytorch的一些知识点</p>
+<h1><span id="查看网络参数">查看网络参数</span></h1><ul>
+<li><p>方法1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> param <span class="keyword">in</span> network.parameters():</span><br><span class="line">  print(param.shape)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法2<br>可以查看参数的名称</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, param <span class="keyword">in</span> network.named_parameters():</span><br><span class="line">  print(name, <span class="string">'\t\t'</span>, param.shape)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1><span id="分类问题">分类问题</span></h1><p>例如Fashion-MNIST分类任务中，一共有10类。假设batch_size=16,每个batch的feature维度为(16,1,28,28)，label的维度(16,)，经过模型最终输出的预测结果维度(16,10)，然后我们使用<code>argmax()</code>来得出最终的预测类别。然后可以和真实label比较，看预测结果的正确性,计算预测正确的个数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>)</span><br><span class="line">tensor([<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">4</span>])</span><br><span class="line"></span><br><span class="line">&gt; labels</span><br><span class="line">tensor([<span class="number">9</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">5</span>])</span><br><span class="line"></span><br><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>).eq(labels)</span><br><span class="line">tensor([<span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">True</span>, <span class="keyword">False</span>], dtype=torch.bool)</span><br><span class="line"></span><br><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>).eq(labels).sum()</span><br><span class="line">tensor(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>).eq(labels).sum().item()</span><br><span class="line"><span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#得到每个batch预测正确的样本</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_num_correct</span><span class="params">(preds, labels)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> preds.argmax(dim=<span class="number">1</span>).eq(labels).sum().item()</span><br></pre></td></tr></table></figure>
+<h1><span id="crossentropyloss和nllloss-区别">CrossEntropyLoss()和NLLLoss() 区别</span></h1><p><a href="https://blog.csdn.net/zwqjoy/article/details/96282788" target="_blank" rel="noopener">Pytorch nn.CrossEntropyLoss()和nn.NLLLoss() 区别</a></p>
+<p><a href="https://www.cnblogs.com/marsggbo/p/10401215.html" target="_blank" rel="noopener">Pytorch里的CrossEntropyLoss详解</a>  </p>
+<p><a href="https://www.zhihu.com/question/66782101" target="_blank" rel="noopener">PyTorch 中，nn 与 nn.functional 有什么区别</a></p>
+<h1><span id="模型训练示例">模型训练示例</span></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">network = Network()</span><br><span class="line"></span><br><span class="line">train_loader = torch.utils.data.DataLoader(train_set, batch_size=<span class="number">100</span>)</span><br><span class="line">optimizer = optim.Adam(network.parameters(), lr=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    </span><br><span class="line">    total_loss = <span class="number">0</span></span><br><span class="line">    total_correct = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> train_loader: <span class="comment"># Get Batch</span></span><br><span class="line">        images, labels = batch </span><br><span class="line"></span><br><span class="line">        preds = network(images) <span class="comment"># Pass Batch</span></span><br><span class="line">        loss = F.cross_entropy(preds, labels) <span class="comment"># Calculate Loss</span></span><br><span class="line"></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        loss.backward() <span class="comment"># Calculate Gradients</span></span><br><span class="line">        optimizer.step() <span class="comment"># Update Weights</span></span><br><span class="line"></span><br><span class="line">        total_loss += loss.item()</span><br><span class="line">        total_correct += get_num_correct(preds, labels)</span><br><span class="line"></span><br><span class="line">    print(</span><br><span class="line">        <span class="string">"epoch"</span>, epoch, </span><br><span class="line">        <span class="string">"total_correct:"</span>, total_correct, </span><br><span class="line">        <span class="string">"loss:"</span>, total_loss</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<h1><span id="关闭梯度">关闭梯度</span></h1><p>关闭梯度有2种方法</p>
 <ul>
-<li><a href="#1-xgboost">1. XGBoost</a><ul>
-<li><a href="#11-xgboost%e7%9a%84%e4%bc%98%e5%8a%bf">1.1. XGBoost的优势</a></li>
-<li><a href="#12-%e5%8f%82%e6%95%b0">1.2. 参数</a></li>
-<li><a href="#13-%e8%b0%83%e5%8f%82">1.3. 调参</a></li>
-</ul>
+<li><p>方法1：在模型训练的时候，需要计算梯度，但是在测试的时候不需要计算梯度，那我们就可以使用<code>@torch.no_grad()</code>。下面代码示例求所有的预测结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@torch.no_grad()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_all_preds</span><span class="params">(model, loader)</span>:</span></span><br><span class="line">    all_preds = torch.tensor([])</span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> loader:</span><br><span class="line">        images, labels = batch</span><br><span class="line">        preds = model(images)</span><br><span class="line">        all_preds = torch.cat(</span><br><span class="line">            (all_preds, preds),dim=<span class="number">0</span>)</span><br><span class="line">  <span class="keyword">return</span> all_preds</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<!-- /TOC -->
-<h1><span id="1-xgboost">1. XGBoost</span></h1><p>&ensp;&ensp;&ensp;&ensp;XGBoost是一种十分精致的算法，可以处理各种不规则的数据。<br>构造一个使用XGBoost的模型十分简单。但是，提高这个模型的表现就有些困难，因为涉及到很多参数。所以为了提高模型的表现，参数的调整十分必要。</p>
-<h2><span id="11-xgboost的优势">1.1. XGBoost的优势</span></h2><ul>
-<li>正则化<br>正则化防止过拟合，实际上，XGBoost以“正则化提升(regularized boosting)”技术而闻名。</li>
-<li>缺失值处理<br>XGBoost内置处理缺失值的规则。XGBoost在不同节点遇到缺失值时采用不同的处理方法，并且会学习未来遇到缺失值的处理方法</li>
-</ul>
-<h2><span id="12-参数">1.2. 参数</span></h2><p>&ensp;&ensp;&ensp;&ensp;XGBoost实际上是很多CART树堆叠起来。传入的特征可以含有None值。XGBoost有很多参数，使用GridSearchCV进行网格搜索时比较耗时。  </p>
-<p>使用pip install xgboost安装</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">XGBClassifier(</span><br><span class="line">        base_score=<span class="number">0.5</span>, </span><br><span class="line">        booster=<span class="string">'gbtree'</span>, </span><br><span class="line">        colsample_bylevel=<span class="number">1</span>,</span><br><span class="line">        colsample_bytree=<span class="number">1</span>, </span><br><span class="line">        gamma=<span class="number">0</span>, </span><br><span class="line">        learning_rate=<span class="number">1</span>, </span><br><span class="line">        max_delta_step=<span class="number">0</span>,</span><br><span class="line">        max_depth=<span class="number">2</span>, </span><br><span class="line">        min_child_weight=<span class="number">1</span>, </span><br><span class="line">        missing=<span class="keyword">None</span>, </span><br><span class="line">        n_estimators=<span class="number">2</span>,</span><br><span class="line">        n_jobs=<span class="number">1</span>, </span><br><span class="line">        nthread=<span class="keyword">None</span>, objective=<span class="string">'binary:logistic'</span>, random_state=<span class="number">0</span>,</span><br><span class="line">        reg_alpha=<span class="number">0</span>, </span><br><span class="line">        reg_lambda=<span class="number">1</span>, </span><br><span class="line">        scale_pos_weight=<span class="number">1</span>, </span><br><span class="line">        seed=<span class="keyword">None</span>,</span><br><span class="line">        silent=<span class="keyword">True</span>, </span><br><span class="line">        subsample=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p>XGBoost参数有3类：<br><a href="https://www.cnblogs.com/wanglei5205/p/8579244.html" target="_blank" rel="noopener">https://www.cnblogs.com/wanglei5205/p/8579244.html</a><br>（1）通用类别：不需要调整，默认就好：</p>
+<p>使用<code>@torch.no_grad()</code>就不用再记录梯度的轨迹(不用再保存动态图的计算轨迹)，省内存。</p>
 <ul>
-<li>booster：[默认gbtree]<br>选择每次迭代的模型，有两种选择：<br>gbtree：基于树的模型<br>gbliner：线性模型</li>
-<li>silent[默认0]<br>当这个参数值为1时，静默模式开启，不会输出任何信息。<br>一般这个参数就保持默认的0，因为这样能帮我们更好地理解模型。</li>
-<li>nthread[默认值为最大可能的线程数]<br>这个参数用来进行多线程控制，应当输入系统的核数。<br>如果你希望使用CPU全部的核，那就不要输入这个参数，算法会自动检测它。</li>
-</ul>
-<p>（2）学习目标参数：与任务有关</p>
-<ul>
-<li>objective:损失函数，支持分类/回归<br>[默认reg:linear]，这个参数定义需要被最小化的损失函数。最常用的值有：<br>binary:logistic 二分类的逻辑回归，返回预测的概率(不是类别)。<br>multi:softmax 使用softmax的多分类器，返回预测的类别(不是概率)。<br>在这种情况下，你还需要多设一个参数：num_class(类别数目)。<br>multi:softprob 和multi:softmax参数一样，但是返回的是每个数据属于各个类别的概率。</li>
-<li><p>eval_metric：评价函数，对于回归问题，默认值是rmse，对于分类问题，默认值是error。<br>典型值有：<br>rmse 均方根误差<br>logloss 负对数似然函数值<br>error 二分类错误率(阈值为0.5)<br>merror 多分类错误率<br>mlogloss 多分类logloss损失函数<br>auc 曲线下面积</p>
-</li>
-<li><p>seed：随机数的种子，默认为0<br>设置它可以复现随机数据的结果，也可以用于调整参数</p>
+<li><p>方法2：<br>使用<code>with torch.no_grad()</code>在函数内部</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">  prediction_loader = torch.utils.data.DataLoader(train_set, batch_size=<span class="number">10000</span>)</span><br><span class="line">  train_preds = get_all_preds(network, prediction_loader)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>（3）booster参数：弱学习器参数，需要仔细调整，会影响模型性能<br>学习率和n_estimators具有相反的关系，建议学习率设小，通过交叉验证确定n_estimators</p>
-<ul>
-<li>eta[默认0.3]，和GBM中的 learning rate 参数类似。 通过减少每一步的权重，可以提高模型的鲁棒性。 典型值为0.01-0.2。</li>
-</ul>
-<p><strong>和树有关的参数</strong></p>
-<ul>
-<li>min_child_weight[默认1]，最小样本权重的和，用于避免过拟合。但是如果这个值过高，会导致欠拟合。这个参数需要使用CV来调整。</li>
-<li>max_depth[默认6]，树的最大深度。 用来避免过拟合的。max_depth越大，模型越复杂，学到更具体更局部的样本。 需要使用CV函数来进行调优。 典型值：3-10</li>
-<li>gamma[默认0]，Gamma指定了节点分裂所需的最小损失函数下降值。这个参数的值越大，算法越保守。这个参数的值和损失函数息息相关，所以是需要调整的。   </li>
-<li>subsample[默认1]<br>和GBM中的subsample参数一模一样。这个参数控制对于每棵树，随机采样的比例。减小这个参数的值，算法会更加保守，避免过拟合。但是，如果这个值设置得过小，它可能会导致欠拟合。<br>典型值：0.5-1  </li>
-<li>colsample_bytree[默认1]<br>和GBM里面的max_features参数类似。用来控制每棵随机采样的列数的占比(每一列是一个特征)。<br>典型值：0.5-1  </li>
-</ul>
-<p><strong>和正则化有关的参数</strong></p>
-<ul>
-<li>lambda[默认1]<br>权重的L2正则化项。(和Ridge regression类似)。<br>这个参数是用来控制XGBoost的正则化部分的。虽然大部分数据科学家很少用到这个参数，但是这个参数在减少过拟合上还是可以挖掘出更多用处的。  </li>
-<li><p>alpha[默认1]<br>权重的L1正则化项。(和Lasso regression类似)。<br>可以应用在很高维度的情况下，使得算法的速度更快。<br><strong>样本不均衡</strong></p>
-</li>
-<li><p>scale_pos_weight[默认1]<br>正样本占的比重，为1时表示正负样例比重是一样的。当正样本较少时，正样本:负样本=1:9，将scale_pos_weight设置为9，scale_pos_weight=负样本个数/正样本个数。在各类别样本十分不平衡时，把这个参数设定为一个正值，可以使算法更快收敛。</p>
-</li>
-</ul>
-<h2><span id="13-调参">1.3. 调参</span></h2><ol>
-<li>先给定一个较高的学习率(learning rate)，一般情况下，学习率为0.1，但是对于不同的问题，理想的学习率在0.05~0.3之间波动。先调节决策树的数量n_estimators</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.display <span class="keyword">import</span> display</span><br><span class="line"></span><br><span class="line">cv_params = &#123;<span class="string">'n_estimators'</span>: [<span class="number">20</span>,<span class="number">40</span>, <span class="number">60</span>, <span class="number">80</span>]&#125;</span><br><span class="line">other_params = &#123;<span class="string">'learning_rate'</span>: <span class="number">0.1</span>, <span class="string">'n_estimators'</span>: <span class="number">500</span>, <span class="string">'max_depth'</span>: <span class="number">5</span>, <span class="string">'min_child_weight'</span>: <span class="number">1</span>, </span><br><span class="line">                <span class="string">'seed'</span>: <span class="number">0</span>,<span class="string">'subsample'</span>: <span class="number">0.8</span>, <span class="string">'colsample_bytree'</span>: <span class="number">0.8</span>, <span class="string">'gamma'</span>: <span class="number">0</span>, <span class="string">'reg_alpha'</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="string">'reg_lambda'</span>: <span class="number">1</span>,<span class="string">'scale_pos_weight'</span>:<span class="number">1</span>,<span class="string">'objective'</span>:<span class="string">'binary:logistic'</span>&#125;</span><br><span class="line">model = XGBClassifier(**other_params)</span><br><span class="line">optimized_GBM = GridSearchCV(estimator=model, param_grid=cv_params, scoring=<span class="string">'accuracy'</span>, cv=<span class="number">5</span>,verbose=<span class="number">1</span>, n_jobs=<span class="number">4</span>)</span><br><span class="line">optimized_GBM.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line">print(<span class="string">'参数的最佳取值：&#123;0&#125;'</span>.format(optimized_GBM.best_params_))</span><br><span class="line">print(<span class="string">'最佳模型得分:&#123;0&#125;'</span>.format(optimized_GBM.best_score_))</span><br><span class="line">display(pd.DataFrame(optimized_GBM.cv_results_).T)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>在给定的learning rate和n_eatimators情况下，对决策树特定参数调优(max_depth,min_child_weight,gamma,subsample,colsample_bytree) </li>
-<li>max_depth和min_child_weight参数调优</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cv_params = &#123;<span class="string">'max_depth'</span>: list(range(<span class="number">3</span>,<span class="number">10</span>,<span class="number">2</span>)), <span class="string">'min_child_weight'</span>: list(range(<span class="number">1</span>,<span class="number">7</span>,<span class="number">1</span>))&#125;</span><br><span class="line">other_params = &#123;<span class="string">'learning_rate'</span>: <span class="number">0.1</span>, <span class="string">'n_estimators'</span>: <span class="number">60</span>, <span class="string">'max_depth'</span>: <span class="number">5</span>, <span class="string">'min_child_weight'</span>: <span class="number">1</span>, </span><br><span class="line">                <span class="string">'seed'</span>: <span class="number">0</span>,<span class="string">'subsample'</span>: <span class="number">0.8</span>, <span class="string">'colsample_bytree'</span>: <span class="number">0.8</span>, <span class="string">'gamma'</span>: <span class="number">0</span>, <span class="string">'reg_alpha'</span>: <span class="number">0</span>,</span><br><span class="line">                <span class="string">'reg_lambda'</span>: <span class="number">1</span>,<span class="string">'scale_pos_weight'</span>:<span class="number">1</span>,<span class="string">'objective'</span>:<span class="string">'binary:logistic'</span>&#125;</span><br></pre></td></tr></table></figure>
-<ol>
-<li><p>gamma参数调优<br>Gamma参数取值范围可以很大，我这里把取值范围设置为5了。你其实也可以取更精确的gamma值</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cv_params = &#123;<span class="string">'gamma'</span>: [<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.4</span>, <span class="number">0.5</span>, <span class="number">0.6</span>]&#125;</span><br><span class="line">other_params = &#123;<span class="string">'learning_rate'</span>: <span class="number">0.1</span>, <span class="string">'n_estimators'</span>: <span class="number">350</span>, <span class="string">'max_depth'</span>: <span class="number">3</span>, <span class="string">'min_child_weight'</span>: <span class="number">5</span>, </span><br><span class="line">              <span class="string">'seed'</span>: <span class="number">0</span>,<span class="string">'subsample'</span>: <span class="number">0.8</span>, <span class="string">'colsample_bytree'</span>: <span class="number">0.8</span>, <span class="string">'gamma'</span>: <span class="number">0</span>, <span class="string">'reg_alpha'</span>: <span class="number">0</span>,</span><br><span class="line">              <span class="string">'reg_lambda'</span>: <span class="number">1</span>,<span class="string">'objective'</span>:<span class="string">'binary:logistic'</span>&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>subsamplehe colsample_bytree参数,相当于每个树的样本和特征个数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> cv_params = &#123;  </span><br><span class="line">  <span class="string">'subsample'</span>: [i / <span class="number">10.0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>, <span class="number">10</span>)],  </span><br><span class="line">  <span class="string">'colsample_bytree'</span>: [i / <span class="number">10.0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>, <span class="number">10</span>)]  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>正则化参数调优<br>下一步应用正则化来降低过拟合。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv_params = &#123;<span class="string">'reg_alpha'</span>: [<span class="number">0.05</span>, <span class="number">0.1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="string">'reg_lambda'</span>: [<span class="number">0.05</span>, <span class="number">0.1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>学习率调优<br>最后使用较低的学习率</p>
-</li>
-</ol>
 
       
     </div>
@@ -543,7 +495,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/XGBoost/" rel="tag"># XGBoost</a>
+            <a href="/tags/Pytorch/" rel="tag"># Pytorch</a>
           
         </div>
       
@@ -571,8 +523,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/02/Transformer/" rel="next" title="Transformer">
-                <i class="fa fa-chevron-left"></i> Transformer
+              <a href="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/" rel="next" title="RiskOracle-A Minute-level Citywide Traffic Accident Forecasting Framework">
+                <i class="fa fa-chevron-left"></i> RiskOracle-A Minute-level Citywide Traffic Accident Forecasting Framework
               </a>
             
           </div>
@@ -580,10 +532,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/04/DGL/" rel="prev" title="DGL">
-                DGL <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -729,7 +677,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. XGBoost</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. XGBoost的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. 参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.3. 调参</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">查看网络参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">分类问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">CrossEntropyLoss()和NLLLoss() 区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">模型训练示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">关闭梯度</span></a></li></ol></div>
             
 
           </div>
