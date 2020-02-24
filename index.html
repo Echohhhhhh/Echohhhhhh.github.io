@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  510
+                  549
                 </span>
               
 
@@ -419,36 +419,14 @@
 
       
         
-          
-            <h1><span id="简介">简介</span></h1><p>汇总Pytorch的一些知识点</p>
-<h1><span id="查看网络参数">查看网络参数</span></h1><ul>
-<li><p>方法1</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> param <span class="keyword">in</span> network.parameters():</span><br><span class="line">  print(param.shape)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>方法2<br>可以查看参数的名称</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> name, param <span class="keyword">in</span> network.named_parameters():</span><br><span class="line">  print(name, <span class="string">'\t\t'</span>, param.shape)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1><span id="分类问题">分类问题</span></h1><p>例如Fashion-MNIST分类任务中，一共有10类。假设batch_size=16,每个batch的feature维度为(16,1,28,28)，label的维度(16,)，经过模型最终输出的预测结果维度(16,10)，然后我们使用<code>argmax()</code>来得出最终的预测类别。然后可以和真实label比较，看预测结果的正确性,计算预测正确的个数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>)</span><br><span class="line">tensor([<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">4</span>])</span><br><span class="line"></span><br><span class="line">&gt; labels</span><br><span class="line">tensor([<span class="number">9</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">5</span>])</span><br><span class="line"></span><br><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>).eq(labels)</span><br><span class="line">tensor([<span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">True</span>, <span class="keyword">False</span>], dtype=torch.bool)</span><br><span class="line"></span><br><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>).eq(labels).sum()</span><br><span class="line">tensor(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>).eq(labels).sum().item()</span><br><span class="line"><span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#得到每个batch预测正确的样本</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_num_correct</span><span class="params">(preds, labels)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> preds.argmax(dim=<span class="number">1</span>).eq(labels).sum().item()</span><br></pre></td></tr></table></figure>
-<h1><span id="crossentropyloss和nllloss-区别">CrossEntropyLoss()和NLLLoss() 区别</span></h1><p><a href="https://blog.csdn.net/zwqjoy/article/details/96282788" target="_blank" rel="noopener">Pytorch nn.CrossEntropyLoss()和nn.NLLLoss() 区别</a></p>
-<p><a href="https://www.cnblogs.com/marsggbo/p/10401215.html" target="_blank" rel="noopener">Pytorch里的CrossEntropyLoss详解</a>  </p>
-<p><a href="https://www.zhihu.com/question/66782101" target="_blank" rel="noopener">PyTorch 中，nn 与 nn.functional 有什么区别</a></p>
-<h1><span id="模型训练示例">模型训练示例</span></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">network = Network()</span><br><span class="line"></span><br><span class="line">train_loader = torch.utils.data.DataLoader(train_set, batch_size=<span class="number">100</span>)</span><br><span class="line">optimizer = optim.Adam(network.parameters(), lr=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    </span><br><span class="line">    total_loss = <span class="number">0</span></span><br><span class="line">    total_correct = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> train_loader: <span class="comment"># Get Batch</span></span><br><span class="line">        images, labels = batch </span><br><span class="line"></span><br><span class="line">        preds = network(images) <span class="comment"># Pass Batch</span></span><br><span class="line">        loss = F.cross_entropy(preds, labels) <span class="comment"># Calculate Loss</span></span><br><span class="line"></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        loss.backward() <span class="comment"># Calculate Gradients</span></span><br><span class="line">        optimizer.step() <span class="comment"># Update Weights</span></span><br><span class="line"></span><br><span class="line">        total_loss += loss.item()</span><br><span class="line">        total_correct += get_num_correct(preds, labels)</span><br><span class="line"></span><br><span class="line">    print(</span><br><span class="line">        <span class="string">"epoch"</span>, epoch, </span><br><span class="line">        <span class="string">"total_correct:"</span>, total_correct, </span><br><span class="line">        <span class="string">"loss:"</span>, total_loss</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
-<h1><span id="关闭梯度">关闭梯度</span></h1><p>关闭梯度有2种方法</p>
-<ul>
-<li><p>方法1：在模型训练的时候，需要计算梯度，但是在测试的时候不需要计算梯度，那我们就可以使用<code>@torch.no_grad()</code>。下面代码示例求所有的预测结果</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@torch.no_grad()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_all_preds</span><span class="params">(model, loader)</span>:</span></span><br><span class="line">    all_preds = torch.tensor([])</span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> loader:</span><br><span class="line">        images, labels = batch</span><br><span class="line">        preds = model(images)</span><br><span class="line">        all_preds = torch.cat(</span><br><span class="line">            (all_preds, preds),dim=<span class="number">0</span>)</span><br><span class="line">  <span class="keyword">return</span> all_preds</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>使用<code>@torch.no_grad()</code>就不用再记录梯度的轨迹(不用再保存动态图的计算轨迹)，省内存。</p>
-<ul>
-<li><p>方法2：<br>使用<code>with torch.no_grad()</code>在函数内部</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">  prediction_loader = torch.utils.data.DataLoader(train_set, batch_size=<span class="number">10000</span>)</span><br><span class="line">  train_preds = get_all_preds(network, prediction_loader)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-          
+          <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>汇总Pytorch的一些知识点</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/02/24/Pytorch之知识点汇总/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
