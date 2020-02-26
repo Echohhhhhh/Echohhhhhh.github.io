@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-02-26T10:03:26.847Z</updated>
+  <updated>2020-02-26T12:26:38.519Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2020/02/26/VSCode%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A4%AA%E6%85%A2/"/>
     <id>http://yoursite.com/2020/02/26/VSCode连接服务器太慢/</id>
     <published>2020-02-26T09:59:55.000Z</published>
-    <updated>2020-02-26T10:03:26.847Z</updated>
+    <updated>2020-02-26T12:26:38.519Z</updated>
     
-    <content type="html"><![CDATA[<p>使用VSCode远程连接服务器太慢，是因为需要远程下载vscode-server-linux-x64.tar.gz，下载太慢，下面是解决方案</p><a id="more"></a><p><img src="/2020/02/26/VSCode连接服务器太慢/vscode.png" alt=""></p><p><a href="https://blog.csdn.net/bcfd_yundou/article/details/96135456" target="_blank" rel="noopener">vscode搭建远程开发</a></p>]]></content>
+    <content type="html"><![CDATA[<p>使用VSCode远程连接服务器太慢，是因为需要远程下载vscode-server-linux-x64.tar.gz，下载太慢，下面是解决方案</p><a id="more"></a><p><img src="/2020/02/26/VSCode连接服务器太慢/vscode.png" alt=""></p><p><a href="https://blog.csdn.net/bcfd_yundou/article/details/96135456" target="_blank" rel="noopener">vscode搭建远程开发</a></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">先将vscode-server-linux-x64.tar.gz拷贝到/data/WangBeibei/.vscode-server/bin/xxx下面，并解压</span></span><br><span class="line">tar -xzvf vscode-server-linux-x64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">删掉压缩包</span></span><br><span class="line">rm -r vscode-server-linux-x64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">将vscode-server-linux-x64目录中所有内容移到/data/WangBeibei/.vscode-server/bin/xxx下面</span></span><br><span class="line">mv /data/WangBeibei/.vscode-server/bin/xxx/vscode-server-linux-x64/* /data/WangBeibei/.vscode-server/bin/xxx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">删掉vscode-server-linux-x64</span></span><br><span class="line">rm -r vscode-server-linux-x64</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     

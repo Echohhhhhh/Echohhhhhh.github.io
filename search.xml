@@ -7,6 +7,7 @@
 <a id="more"></a>
 <p><img src="/2020/02/26/VSCode连接服务器太慢/vscode.png" alt=""></p>
 <p><a href="https://blog.csdn.net/bcfd_yundou/article/details/96135456" target="_blank" rel="noopener">vscode搭建远程开发</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">先将vscode-server-linux-x64.tar.gz拷贝到/data/WangBeibei/.vscode-server/bin/xxx下面，并解压</span></span><br><span class="line">tar -xzvf vscode-server-linux-x64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">删掉压缩包</span></span><br><span class="line">rm -r vscode-server-linux-x64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">将vscode-server-linux-x64目录中所有内容移到/data/WangBeibei/.vscode-server/bin/xxx下面</span></span><br><span class="line">mv /data/WangBeibei/.vscode-server/bin/xxx/vscode-server-linux-x64/* /data/WangBeibei/.vscode-server/bin/xxx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">删掉vscode-server-linux-x64</span></span><br><span class="line">rm -r vscode-server-linux-x64</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>工具</category>
@@ -2590,8 +2591,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>分布式平台</category>
       </categories>
       <tags>
-        <tag>Spark</tag>
         <tag>Python</tag>
+        <tag>Spark</tag>
       </tags>
   </entry>
   <entry>
