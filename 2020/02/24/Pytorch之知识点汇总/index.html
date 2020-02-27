@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="1. 简介汇总Pytorch的一些知识点">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-24T12:50:17.510Z">
+<meta property="og:updated_time" content="2020-02-27T05:47:30.666Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pytorch之知识点汇总">
 <meta name="twitter:description" content="1. 简介汇总Pytorch的一些知识点">
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  549
+                  750
                 </span>
               
 
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -432,6 +432,9 @@
 <li><a href="#4-crossentropyloss%e5%92%8cnllloss-%e5%8c%ba%e5%88%ab">4. CrossEntropyLoss()和NLLLoss() 区别</a></li>
 <li><a href="#5-%e6%a8%a1%e5%9e%8b%e8%ae%ad%e7%bb%83%e7%a4%ba%e4%be%8b">5. 模型训练示例</a></li>
 <li><a href="#6-%e5%85%b3%e9%97%ad%e6%a2%af%e5%ba%a6">6. 关闭梯度</a></li>
+<li><a href="#gpu">GPU</a></li>
+<li><a href="#%e5%a4%9agpu%e8%bf%90%e8%a1%8c%e7%a8%8b%e5%ba%8f">多GPU运行程序</a></li>
+<li><a href="#tensor">Tensor</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="2-查看网络参数">2. 查看网络参数</span></h1><ul>
@@ -460,6 +463,15 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">  prediction_loader = torch.utils.data.DataLoader(train_set, batch_size=<span class="number">10000</span>)</span><br><span class="line">  train_preds = get_all_preds(network, prediction_loader)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<h1><span id="gpu">GPU</span></h1><p>在这里原先一直有个误区，误认为<code>device = torch.device(&quot;cuda&quot;)</code>获取所有的GPU，<code>device = torch.device(&quot;cuda:0&quot;)</code>获取第一个GPU。下面是正解：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#程序只能看到1,2,3序号的GPU，然后重新给它们编号为：0,1,2</span></span><br><span class="line">&gt; os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">'1,2,3'</span></span><br><span class="line"></span><br><span class="line">&gt; device = torch.device(<span class="string">"cuda:0"</span>)<span class="comment">#获取下标为0的GPU</span></span><br><span class="line">device(type=<span class="string">'cuda'</span>, index=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果不指定cuda编号，其实有一个默认编号，</span></span><br><span class="line"><span class="comment">#默认为torch.cuda.current_device()，该值默认为0</span></span><br><span class="line">&gt; device = torch.device(<span class="string">"cuda"</span>)</span><br><span class="line">device(type=<span class="string">'cuda'</span>)</span><br><span class="line"></span><br><span class="line">&gt; torch.cuda.current_device()</span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>也就是说<code>device = torch.device(&quot;cuda&quot;)</code>还是1个GPU，等价于<code>device = torch.device(&quot;cuda:X&quot;)</code>,其中<code>X = torch.cuda.current_device()</code>  </p>
+<p>【<strong>参考资料</strong>】</p>
+<p><a href="https://pytorch.apachecn.org/docs/1.0/tensor_attributes.html" target="_blank" rel="noopener">torch.device</a></p>
+<p><a href="https://pytorch.org/docs/stable/notes/cuda.html" target="_blank" rel="noopener">CUDA SEMANTICS</a></p>
+<h1><span id="多gpu运行程序">多GPU运行程序</span></h1><p><a href="https://echohhhhhh.github.io/2020/01/06/Pytorch%E4%B9%8BGPU%E7%A8%8B%E5%BA%8F/" target="_blank" rel="noopener">Pytorch之GPU程序</a></p>
+<p><a href="https://echohhhhhh.github.io/2019/12/29/%E8%BF%90%E8%A1%8CGPU%E7%A8%8B%E5%BA%8F/" target="_blank" rel="noopener">运行GPU程序</a></p>
+<h1><span id="tensor">Tensor</span></h1><p><a href="https://echohhhhhh.github.io/2020/02/17/Pytorch%E4%B9%8BTensor%E5%AD%A6%E4%B9%A0/" target="_blank" rel="noopener">Pytorch之Tensor学习</a></p>
 
       
     </div>
@@ -692,7 +704,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 查看网络参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 分类问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. CrossEntropyLoss()和NLLLoss() 区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 模型训练示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 关闭梯度</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 查看网络参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 分类问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. CrossEntropyLoss()和NLLLoss() 区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 模型训练示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 关闭梯度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">多GPU运行程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">Tensor</span></a></li></ol></div>
             
 
           </div>

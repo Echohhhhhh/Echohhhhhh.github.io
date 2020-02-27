@@ -49,6 +49,9 @@
 <li><a href="#4-crossentropyloss%e5%92%8cnllloss-%e5%8c%ba%e5%88%ab">4. CrossEntropyLoss()和NLLLoss() 区别</a></li>
 <li><a href="#5-%e6%a8%a1%e5%9e%8b%e8%ae%ad%e7%bb%83%e7%a4%ba%e4%be%8b">5. 模型训练示例</a></li>
 <li><a href="#6-%e5%85%b3%e9%97%ad%e6%a2%af%e5%ba%a6">6. 关闭梯度</a></li>
+<li><a href="#gpu">GPU</a></li>
+<li><a href="#%e5%a4%9agpu%e8%bf%90%e8%a1%8c%e7%a8%8b%e5%ba%8f">多GPU运行程序</a></li>
+<li><a href="#tensor">Tensor</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="2-查看网络参数">2. 查看网络参数</span></h1><ul>
@@ -77,6 +80,15 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">  prediction_loader = torch.utils.data.DataLoader(train_set, batch_size=<span class="number">10000</span>)</span><br><span class="line">  train_preds = get_all_preds(network, prediction_loader)</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<h1><span id="gpu">GPU</span></h1><p>在这里原先一直有个误区，误认为<code>device = torch.device(&quot;cuda&quot;)</code>获取所有的GPU，<code>device = torch.device(&quot;cuda:0&quot;)</code>获取第一个GPU。下面是正解：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#程序只能看到1,2,3序号的GPU，然后重新给它们编号为：0,1,2</span></span><br><span class="line">&gt; os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">'1,2,3'</span></span><br><span class="line"></span><br><span class="line">&gt; device = torch.device(<span class="string">"cuda:0"</span>)<span class="comment">#获取下标为0的GPU</span></span><br><span class="line">device(type=<span class="string">'cuda'</span>, index=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#如果不指定cuda编号，其实有一个默认编号，</span></span><br><span class="line"><span class="comment">#默认为torch.cuda.current_device()，该值默认为0</span></span><br><span class="line">&gt; device = torch.device(<span class="string">"cuda"</span>)</span><br><span class="line">device(type=<span class="string">'cuda'</span>)</span><br><span class="line"></span><br><span class="line">&gt; torch.cuda.current_device()</span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>也就是说<code>device = torch.device(&quot;cuda&quot;)</code>还是1个GPU，等价于<code>device = torch.device(&quot;cuda:X&quot;)</code>,其中<code>X = torch.cuda.current_device()</code>  </p>
+<p>【<strong>参考资料</strong>】</p>
+<p><a href="https://pytorch.apachecn.org/docs/1.0/tensor_attributes.html" target="_blank" rel="noopener">torch.device</a></p>
+<p><a href="https://pytorch.org/docs/stable/notes/cuda.html" target="_blank" rel="noopener">CUDA SEMANTICS</a></p>
+<h1><span id="多gpu运行程序">多GPU运行程序</span></h1><p><a href="https://echohhhhhh.github.io/2020/01/06/Pytorch%E4%B9%8BGPU%E7%A8%8B%E5%BA%8F/" target="_blank" rel="noopener">Pytorch之GPU程序</a></p>
+<p><a href="https://echohhhhhh.github.io/2019/12/29/%E8%BF%90%E8%A1%8CGPU%E7%A8%8B%E5%BA%8F/" target="_blank" rel="noopener">运行GPU程序</a></p>
+<h1><span id="tensor">Tensor</span></h1><p><a href="https://echohhhhhh.github.io/2020/02/17/Pytorch%E4%B9%8BTensor%E5%AD%A6%E4%B9%A0/" target="_blank" rel="noopener">Pytorch之Tensor学习</a></p>
 ]]></content>
       <categories>
         <category>Deep Learning</category>
@@ -646,26 +658,26 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <!-- TOC -->
 <ul>
 <li><a href="#1-mxnet">1. mxnet</a><ul>
-<li><a href="#11-%e5%8d%95gpu">1.1. 单GPU</a></li>
-<li><a href="#12-%e5%a4%9agpu">1.2. 多GPU</a></li>
+<li><a href="#11-单gpu">1.1. 单GPU</a></li>
+<li><a href="#12-多gpu">1.2. 多GPU</a></li>
 </ul>
 </li>
 <li><a href="#2-pytorch">2. pytorch</a><ul>
-<li><a href="#21-%e5%8d%95gpu">2.1. 单GPU</a></li>
-<li><a href="#22-%e5%a4%9agpu">2.2. 多GPU</a></li>
+<li><a href="#21-单gpu">2.1. 单GPU</a></li>
+<li><a href="#22-多gpu">2.2. 多GPU</a></li>
 </ul>
 </li>
-<li><a href="#3-mxnet%e5%92%8cpytorch%e5%8c%ba%e5%88%ab">3. mxnet和pytorch区别</a><ul>
-<li><a href="#31-ndarray%e5%92%8ctensor">3.1. NDArray和Tensor</a><ul>
-<li><a href="#311-%e5%92%8cnumpy%e8%bd%ac%e6%8d%a2">3.1.1. 和numpy转换</a></li>
-<li><a href="#312-%e8%bd%ac%e6%8d%a2%e4%b8%ba%e6%a0%87%e9%87%8f">3.1.2. 转换为标量</a></li>
-<li><a href="#313-%e6%94%b9%e5%8f%98%e6%95%b0%e6%8d%ae%e5%bd%a2%e7%8a%b6">3.1.3. 改变数据形状</a></li>
-<li><a href="#314-%e6%95%b0%e6%8d%ae%e8%bd%ac%e5%88%b0gpu%e4%b8%8a">3.1.4. 数据转到GPU上</a></li>
+<li><a href="#3-mxnet和pytorch区别">3. mxnet和pytorch区别</a><ul>
+<li><a href="#31-ndarray和tensor">3.1. NDArray和Tensor</a><ul>
+<li><a href="#311-和numpy转换">3.1.1. 和numpy转换</a></li>
+<li><a href="#312-转换为标量">3.1.2. 转换为标量</a></li>
+<li><a href="#313-改变数据形状">3.1.3. 改变数据形状</a></li>
+<li><a href="#314-数据转到gpu上">3.1.4. 数据转到GPU上</a></li>
 </ul>
 </li>
-<li><a href="#32-loss%e8%ae%a1%e7%ae%97">3.2. loss计算</a></li>
-<li><a href="#33-rnn%e8%be%93%e5%85%a5%e7%bb%b4%e5%ba%a6">3.3. RNN输入维度</a></li>
-<li><a href="#34-%e5%a4%9agpu%e8%bf%90%e8%a1%8c">3.4. 多GPU运行</a></li>
+<li><a href="#32-loss计算">3.2. loss计算</a></li>
+<li><a href="#33-rnn输入维度">3.3. RNN输入维度</a></li>
+<li><a href="#34-多gpu运行">3.4. 多GPU运行</a></li>
 </ul>
 </li>
 </ul>
@@ -675,7 +687,11 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <h2><span id="12-多gpu">1.2. 多GPU</span></h2><p><a href="http://zh.gluon.ai/chapter_computational-performance/multiple-gpus-gluon.html" target="_blank" rel="noopener">多GPU计算</a><br><a href="http://mxnet.incubator.apache.org/api/faq/multi_device" target="_blank" rel="noopener">Run MXNet on Multiple CPU/GPUs with Data Parallelism</a></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> mxnet <span class="keyword">as</span> mx</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">ctx_id = <span class="string">'1,2,3,4'</span></span><br><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = ctx_id</span><br><span class="line">num_gpus = len(ctx_id.split(<span class="string">','</span>))</span><br><span class="line">ctx = [mx.gpu(i) <span class="keyword">for</span> i <span class="keyword">in</span> range(num_gpus)]</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用split_and_load()将数据分配到多个GPU上</span></span><br></pre></td></tr></table></figure>
 <h1><span id="2-pytorch">2. pytorch</span></h1><h2><span id="21-单gpu">2.1. 单GPU</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">"1"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    device = torch.device(<span class="string">"cuda:0"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    device = torch.device(<span class="string">"cpu"</span>)</span><br><span class="line"><span class="comment">#使用to()将数据拷贝到GPU上</span></span><br><span class="line">train_feature.to(device)</span><br></pre></td></tr></table></figure>
-<h2><span id="22-多gpu">2.2. 多GPU</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">"1,2,3"</span>  </span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    <span class="comment">#指定所有的GPU</span></span><br><span class="line">    device = torch.device(<span class="string">"cuda:0"</span>)</span><br><span class="line">    all_devices = torch.device(<span class="string">"cuda"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    device = torch.device(<span class="string">"cpu"</span>)</span><br><span class="line"><span class="comment">#pytorch在使用多GPU时，需要先将数据和模型拷贝到GPU-0上，</span></span><br><span class="line"><span class="comment">#使用多GPU的关键代码</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.device_count() &gt; <span class="number">1</span>:</span><br><span class="line">    print(<span class="string">"Let's use"</span>, torch.cuda.device_count(), <span class="string">"GPUs!"</span>,flush=<span class="keyword">True</span>)</span><br><span class="line">    <span class="comment">#数据并行</span></span><br><span class="line">    model = nn.DataParallel(model)</span><br><span class="line">model.to(device)</span><br></pre></td></tr></table></figure>
+<h2><span id="22-多gpu">2.2. 多GPU</span></h2><p><a href="https://github.com/dnddnjs/pytorch-multigpu/blob/master/data_parallel/train.py" target="_blank" rel="noopener">pytorch-multigpu</a></p>
+<p><a href="https://pytorch.org/tutorials/beginner/blitz/data_parallel_tutorial.html" target="_blank" rel="noopener">OPTIONAL: DATA PARALLELISM</a></p>
+<p><a href="https://pytorch.org/tutorials/beginner/former_torchies/parallelism_tutorial.html" target="_blank" rel="noopener">MULTI-GPU EXAMPLES</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>] = <span class="string">"1,2,3"</span>  </span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">    device = torch.device(<span class="string">"cuda:0"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    device = torch.device(<span class="string">"cpu"</span>)</span><br><span class="line"><span class="comment">#pytorch在使用多GPU时，需要先将数据和模型拷贝到GPU-0上，</span></span><br><span class="line"><span class="comment">#使用多GPU的关键代码</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.device_count() &gt; <span class="number">1</span>:</span><br><span class="line">    print(<span class="string">"Let's use"</span>, torch.cuda.device_count(), <span class="string">"GPUs!"</span>,flush=<span class="keyword">True</span>)</span><br><span class="line">    <span class="comment">#数据并行</span></span><br><span class="line">    model = nn.DataParallel(model)</span><br><span class="line">model.to(device)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> data <span class="keyword">in</span> rand_loader:</span><br><span class="line">    input = data.to(device)</span><br><span class="line">    output = model(input)</span><br><span class="line">    print(<span class="string">"Outside: input size"</span>, input.size(),</span><br><span class="line">          <span class="string">"output_size"</span>, output.size())</span><br></pre></td></tr></table></figure>
+<p><code>DataParallel</code>自动分割数据，并发送到多个GPU上，每个GPU上完成前向传播， <code>DataParallel</code>收集每个GPU上的结果。</p>
 <hr>
 <p>2020.2.11更新</p>
 <h1><span id="3-mxnet和pytorch区别">3. mxnet和pytorch区别</span></h1><p>在写程序时，主要用到<code>mxnet和pytorch</code>框架，这里针对2者在代码上的不同做个总结，下面的不同都是我自己在写程序遇到的，仅仅是一部分，仅供参考。</p>
@@ -749,7 +765,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 </li>
 <li><p>pytorch<br><a href="https://echohhhhhh.github.io/2019/01/31/%E8%BF%90%E8%A1%8CGPU%E7%A8%8B%E5%BA%8F/" target="_blank" rel="noopener">Pytorch学习</a>  </p>
 <p>pytorch使用<code>DataParallel()</code>来进行数据并行，不需要手动将数据划分到多个GPU上，即<code>train_feature</code>的维度是<code>(batch_size,*)</code>，经过模型输出的<code>predicted</code>的维度也是<code>(batch_size,*)</code>，这一点和<code>mxnet</code>不同</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#使用多GPU的关键代码</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.device_count() &gt; <span class="number">1</span>:</span><br><span class="line">    transformer_model = nn.DataParallel(transformer_model)<span class="comment">#默认全部GPU</span></span><br><span class="line">transformer_model.to(device0)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">1</span>,training_epoch+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> train_feature,train_label <span class="keyword">in</span> train_loader:</span><br><span class="line">        <span class="comment">#train_label:(tabch_size,*)</span></span><br><span class="line">        predicted = transformer_model(train_feature)</span><br><span class="line">        l = loss(predicted,train_label)<span class="comment">#l的shape：(1,)</span></span><br><span class="line">        trainer.zero_grad()</span><br><span class="line">        l.backward()</span><br><span class="line">        trainer.step()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#使用多GPU的关键代码</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.device_count() &gt; <span class="number">1</span>:</span><br><span class="line">    transformer_model = nn.DataParallel(transformer_model)<span class="comment">#默认全部GPU</span></span><br><span class="line">transformer_model.to(device0)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">1</span>,training_epoch+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> train_feature,train_label <span class="keyword">in</span> train_loader:</span><br><span class="line">        train_feature = train_feature.to(device0)</span><br><span class="line">        train_label = train_label.to(device0)</span><br><span class="line">        <span class="comment">#train_label:(tabch_size,*)</span></span><br><span class="line">        predicted = transformer_model(train_feature)</span><br><span class="line">        l = loss(predicted,train_label)<span class="comment">#l的shape：(1,)</span></span><br><span class="line">        trainer.zero_grad()</span><br><span class="line">        l.backward()</span><br><span class="line">        trainer.step()</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 ]]></content>
@@ -2234,11 +2250,20 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <li><p>创建虚拟环境</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda create -n mxnet python=3.6#创建虚拟环境</span><br><span class="line">conda activate mxnet#激活虚拟环境</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>在虚拟环境中安装第三方库<br><strong>注：虚拟环境中第三方库的cuda版本一定要和服务器的cuda版本一致</strong>。</p>
-<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">cat <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/cuda/</span>version.txt<span class="meta">#查看服务器cuda版本  </span></span><br><span class="line"><span class="meta">#安装对应版本的mxnet，安装mxnet-cu100是GPU版本的mxnet，</span></span><br><span class="line"><span class="meta">#如果仅使用pip install mxnet安装的CPU版本。</span></span><br><span class="line">pip install -i https:<span class="comment">//pypi.tuna.tsinghua.edu.cn/simple mxnet-cu100  </span></span><br><span class="line"><span class="meta">#安装pytorch   </span></span><br><span class="line">conda config --add channels https:<span class="comment">//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/ </span></span><br><span class="line">conda install pytorch torchvision cudatoolkit=<span class="number">10.1</span></span><br></pre></td></tr></table></figure>
+<li><p>在虚拟环境中安装第三方库<br><strong>注：虚拟环境中第三方库的cuda版本一定要和服务器的cuda版本一致</strong>。<br>安装</p>
+<ul>
+<li>pip install mxnet-cu100</li>
+<li>pip install nni==1.2</li>
+<li>pip install tensorboard</li>
+<li>pip install tensorboardX</li>
+<li>pip install mxboard</li>
+<li>pip install dgl-cu100</li>
+</ul>
 </li>
-<li><p>删除虚拟环境<br> <code>conda remove -n gluon--all</code><br> 为了确定这个名为flowers的环境已经被移除，输入以下命令<code>conda info -e</code> ,会看到已经没有gluon这个环境</p>
-</li>
+</ol>
+   <figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">cat <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/cuda/</span>version.txt<span class="meta">#查看服务器cuda版本  </span></span><br><span class="line"><span class="meta">#安装对应版本的mxnet，安装mxnet-cu100是GPU版本的mxnet，</span></span><br><span class="line"><span class="meta">#如果仅使用pip install mxnet安装的CPU版本。</span></span><br><span class="line">pip install -i https:<span class="comment">//pypi.tuna.tsinghua.edu.cn/simple mxnet-cu100  </span></span><br><span class="line"><span class="meta">#安装pytorch   </span></span><br><span class="line">conda config --add channels https:<span class="comment">//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/ </span></span><br><span class="line">conda install pytorch torchvision cudatoolkit=<span class="number">10.1</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>删除虚拟环境<br> <code>conda remove -n gluon--all</code><br> 为了确定这个名为flowers的环境已经被移除，输入以下命令<code>conda info -e</code> ,会看到已经没有gluon这个环境</li>
 </ol>
 <h1><span id="2-常用命令">2. 常用命令</span></h1><ol>
 <li><p><code>conda info -e</code><br>查看当前服务器上都有哪些虚拟环境,下面截图中显示，当前存在2个虚拟环境，其中带*的是当前正在使用的虚拟环境。<br><img src="/2019/04/27/虚拟环境安装/conda-info.png" alt=""></p>
@@ -3150,8 +3175,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>工具</category>
       </categories>
       <tags>
-        <tag>GPU</tag>
         <tag>Git</tag>
+        <tag>GPU</tag>
         <tag>服务器</tag>
       </tags>
   </entry>

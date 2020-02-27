@@ -87,7 +87,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/python.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/bashrc1.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/bashrc2.png">
-<meta property="og:updated_time" content="2020-02-26T08:23:16.571Z">
+<meta property="og:updated_time" content="2020-02-26T14:48:06.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="虚拟环境安装">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在服务器上安装虚拟环境。">
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  7
                 </span>
               
             </div>
@@ -450,11 +450,20 @@
 <li><p>创建虚拟环境</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -n mxnet python=3.6#创建虚拟环境</span><br><span class="line">conda activate mxnet#激活虚拟环境</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>在虚拟环境中安装第三方库<br><strong>注：虚拟环境中第三方库的cuda版本一定要和服务器的cuda版本一致</strong>。</p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/cuda/</span>version.txt<span class="meta">#查看服务器cuda版本  </span></span><br><span class="line"><span class="meta">#安装对应版本的mxnet，安装mxnet-cu100是GPU版本的mxnet，</span></span><br><span class="line"><span class="meta">#如果仅使用pip install mxnet安装的CPU版本。</span></span><br><span class="line">pip install -i https:<span class="comment">//pypi.tuna.tsinghua.edu.cn/simple mxnet-cu100  </span></span><br><span class="line"><span class="meta">#安装pytorch   </span></span><br><span class="line">conda config --add channels https:<span class="comment">//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/ </span></span><br><span class="line">conda install pytorch torchvision cudatoolkit=<span class="number">10.1</span></span><br></pre></td></tr></table></figure>
+<li><p>在虚拟环境中安装第三方库<br><strong>注：虚拟环境中第三方库的cuda版本一定要和服务器的cuda版本一致</strong>。<br>安装</p>
+<ul>
+<li>pip install mxnet-cu100</li>
+<li>pip install nni==1.2</li>
+<li>pip install tensorboard</li>
+<li>pip install tensorboardX</li>
+<li>pip install mxboard</li>
+<li>pip install dgl-cu100</li>
+</ul>
 </li>
-<li><p>删除虚拟环境<br> <code>conda remove -n gluon--all</code><br> 为了确定这个名为flowers的环境已经被移除，输入以下命令<code>conda info -e</code> ,会看到已经没有gluon这个环境</p>
-</li>
+</ol>
+   <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/cuda/</span>version.txt<span class="meta">#查看服务器cuda版本  </span></span><br><span class="line"><span class="meta">#安装对应版本的mxnet，安装mxnet-cu100是GPU版本的mxnet，</span></span><br><span class="line"><span class="meta">#如果仅使用pip install mxnet安装的CPU版本。</span></span><br><span class="line">pip install -i https:<span class="comment">//pypi.tuna.tsinghua.edu.cn/simple mxnet-cu100  </span></span><br><span class="line"><span class="meta">#安装pytorch   </span></span><br><span class="line">conda config --add channels https:<span class="comment">//mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/ </span></span><br><span class="line">conda install pytorch torchvision cudatoolkit=<span class="number">10.1</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>删除虚拟环境<br> <code>conda remove -n gluon--all</code><br> 为了确定这个名为flowers的环境已经被移除，输入以下命令<code>conda info -e</code> ,会看到已经没有gluon这个环境</li>
 </ol>
 <h1><span id="2-常用命令">2. 常用命令</span></h1><ol>
 <li><p><code>conda info -e</code><br>查看当前服务器上都有哪些虚拟环境,下面截图中显示，当前存在2个虚拟环境，其中带*的是当前正在使用的虚拟环境。<br><img src="/2019/04/27/虚拟环境安装/conda-info.png" alt=""></p>
