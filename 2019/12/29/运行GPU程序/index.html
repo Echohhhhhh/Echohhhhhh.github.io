@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-27T05:44:54.845Z">
+<meta property="og:updated_time" content="2020-02-27T05:58:06.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="运行GPU程序">
 <meta name="twitter:description" content="平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU">
@@ -426,26 +426,26 @@
 <!-- TOC -->
 <ul>
 <li><a href="#1-mxnet">1. mxnet</a><ul>
-<li><a href="#11-单gpu">1.1. 单GPU</a></li>
-<li><a href="#12-多gpu">1.2. 多GPU</a></li>
+<li><a href="#11-%e5%8d%95gpu">1.1. 单GPU</a></li>
+<li><a href="#12-%e5%a4%9agpu">1.2. 多GPU</a></li>
 </ul>
 </li>
 <li><a href="#2-pytorch">2. pytorch</a><ul>
-<li><a href="#21-单gpu">2.1. 单GPU</a></li>
-<li><a href="#22-多gpu">2.2. 多GPU</a></li>
+<li><a href="#21-%e5%8d%95gpu">2.1. 单GPU</a></li>
+<li><a href="#22-%e5%a4%9agpu">2.2. 多GPU</a></li>
 </ul>
 </li>
-<li><a href="#3-mxnet和pytorch区别">3. mxnet和pytorch区别</a><ul>
-<li><a href="#31-ndarray和tensor">3.1. NDArray和Tensor</a><ul>
-<li><a href="#311-和numpy转换">3.1.1. 和numpy转换</a></li>
-<li><a href="#312-转换为标量">3.1.2. 转换为标量</a></li>
-<li><a href="#313-改变数据形状">3.1.3. 改变数据形状</a></li>
-<li><a href="#314-数据转到gpu上">3.1.4. 数据转到GPU上</a></li>
+<li><a href="#3-mxnet%e5%92%8cpytorch%e5%8c%ba%e5%88%ab">3. mxnet和pytorch区别</a><ul>
+<li><a href="#31-ndarray%e5%92%8ctensor">3.1. NDArray和Tensor</a><ul>
+<li><a href="#311-%e5%92%8cnumpy%e8%bd%ac%e6%8d%a2">3.1.1. 和numpy转换</a></li>
+<li><a href="#312-%e8%bd%ac%e6%8d%a2%e4%b8%ba%e6%a0%87%e9%87%8f">3.1.2. 转换为标量</a></li>
+<li><a href="#313-%e6%94%b9%e5%8f%98%e6%95%b0%e6%8d%ae%e5%bd%a2%e7%8a%b6">3.1.3. 改变数据形状</a></li>
+<li><a href="#314-%e6%95%b0%e6%8d%ae%e8%bd%ac%e5%88%b0gpu%e4%b8%8a">3.1.4. 数据转到GPU上</a></li>
 </ul>
 </li>
-<li><a href="#32-loss计算">3.2. loss计算</a></li>
-<li><a href="#33-rnn输入维度">3.3. RNN输入维度</a></li>
-<li><a href="#34-多gpu运行">3.4. 多GPU运行</a></li>
+<li><a href="#32-loss%e8%ae%a1%e7%ae%97">3.2. loss计算</a></li>
+<li><a href="#33-rnn%e8%be%93%e5%85%a5%e7%bb%b4%e5%ba%a6">3.3. RNN输入维度</a></li>
+<li><a href="#34-%e5%a4%9agpu%e8%bf%90%e8%a1%8c">3.4. 多GPU运行</a></li>
 </ul>
 </li>
 </ul>
