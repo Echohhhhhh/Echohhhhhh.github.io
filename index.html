@@ -298,6 +298,206 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/27/时空论文阅读笔记/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Echo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/27/时空论文阅读笔记/" itemprop="url">时空论文阅读笔记</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-27T20:03:53+08:00">
+                2020-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文阅读笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文阅读笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  698
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1><span id="简介">简介</span></h1><p>因为疫情推迟开学，在家把以前看的论文又看了一遍，每重新看一次都有新的收获，在此整理下。</p>
+<h1><span id="hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</span></h1><blockquote>
+<p>潘哲逸(上海交通大学)<br>梁宇轩(西安电子科技大学)<br>张钧波(京东)<br>易修文(京东)<br>郑宇(京东)</p>
+</blockquote>
+<p>论文声称第一个考虑<strong>空间和时间内在因果关系</strong>的深度框架。</p>
+<p><img src="/2020/02/27/时空论文阅读笔记/HyperST_Net.png" alt=""></p>
+<ul>
+<li>该论文提出的只是一个HyperNetwork框架，并不是一个具体的模型。</li>
+<li>HyperNetwork：和以往不同，以前都是一个网络的输出，输入到下一个网络中，超网络是一个网络的输出作为另一个网络的参数。</li>
+<li>该模型有3个模块：空间模块，时间模块，推理模块。将空间模块的输出经过推理模块，得到的输出作为时间模块的权重参数，以此捕获时间和空间的内在因果关系。</li>
+<li>这只是一个框架，可以变换成多种模型。在空间模块中如果使用全连接就是HyperST-Dense，使用卷积就是HyperST-Conv。</li>
+</ul>
+<h1><span id="restful-resolution-aware-forecasting-of-behavioral-time-series-data2018cikm">RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data(2018CIKM)</span></h1><blockquote>
+<p>吴宪(University of Notre Dame)<br>史宝旭(University of Notre Dame)<br>Yuxiao Dong(微软)<br>黄超(University of Notre Dame)</p>
+</blockquote>
+<p>本文使用多种时间粒度的时间序列数据来预测。<br>模型为<strong>RES</strong>olution-aware <strong>T</strong>ime <strong>S</strong>eries Forecasting (RESTFul)<br>第一个使用多种时间粒度来进行行为时间序列预测</p>
+<p><img src="/2020/02/27/时空论文阅读笔记/RESTFul.png" alt=""></p>
+<ul>
+<li>有2个参数$\alpha和\beta$，取值{day,week}，限制α&gt;=β，<br>$\alpha$=1week,$\beta$=1day,表示1周测量1次，1次测1天。<br>$\alpha$=1week,$\beta$=1week,表示1周测量1次，1次测1周。<br>有一个完整的时间序列，要从中隔抽取不同时间粒度的时间序列。$X=\left[x_{1}, \ldots, x_{t}, \ldots, x_{T-1}, x_{T}\right]$，不同的$\alpha和\beta$就构成不同时间粒度的序列，序列长度为k，这里设置为5。</li>
+<li>对于每一个时间序列都用GRU来捕获时间相关性，得到一个隐藏状态，那么n个时间序列就有n个隐藏状态</li>
+<li>将所有的隐藏状态reshape成$\alpha <em> \beta </em> d$的张量，然后使用卷积融合不同粒度。</li>
+<li>使用数据集：销售数据，311投诉数据</li>
+</ul>
+<h1><span id="attention-based-spatial-temporal-graph-convolutional-networks-for-traffic-flow-forecastingaaai2019">Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting(AAAI2019)</span></h1><p>根据所有节点历史T个时间段traffic flow，occupy，speed，预测所有节点未来T_p个时间段的traffic flow。</p>
+<p><img src="/2020/02/27/时空论文阅读笔记/ASTGCN.png" alt=""></p>
+<ul>
+<li>三个独立的组件，分别对recent，daily，weekly周期进行建模</li>
+<li>比如说预测6.14 8:00-8:55的flow，传入的样本是<br>时：6.14号6:00~7:55（前2个小时）的数据，<br>天：6.13和6.12（前2天）的8:00-8:55，<br>周：上周6.17，上上周5.31（前2周）的8:00-8:55</li>
+</ul>
+<p>#</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/26/VSCode连接服务器太慢/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1860,181 +2060,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/26/leecode-tirck/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Echo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Echo's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/26/leecode-tirck/" itemprop="url">leetcode踩坑</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-26T19:25:57+08:00">
-                2019-12-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  460
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>&ensp;&ensp;&ensp;&ensp;最近开始刷Leecode，使用Python语言，踩了很多坑，在此记录。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/12/26/leecode-tirck/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2087,7 +2112,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
