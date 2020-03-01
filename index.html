@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  698
+                  2.8k
                 </span>
               
 
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  11
                 </span>
               
             </div>
@@ -420,22 +420,57 @@
       
         
           
-            <h1><span id="简介">简介</span></h1><p>因为疫情推迟开学，在家把以前看的论文又看了一遍，每重新看一次都有新的收获，在此整理下。</p>
-<h1><span id="hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</span></h1><blockquote>
+            <p>因为疫情推迟开学，在家把以前看的论文又看了一遍，每重新看一次都有新的收获，在此整理下。</p>
+<!-- TOC -->
+<ul>
+<li><a href="#deep-spatio-temporal-residual-networks-for-citywide-crowd-flows-predictionaaai2017">Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction(AAAI2017)</a></li>
+<li><a href="#2-hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">2. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</a></li>
+<li><a href="#3-restful-resolution-aware-forecasting-of-behavioral-time-series-data2018cikm">3. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data(2018CIKM)</a></li>
+<li><a href="#4-deep-multi-view-spatial-temporal-network-for-taxi-demand-predictionaaai2018">4. Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction(AAAI2018)</a></li>
+<li><a href="#5-revisiting-spatial-temporal-similarity-a-deep-learning-framework-for-traffic-predictionaaai2019">5. Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction(AAAI2019)</a></li>
+<li><a href="#6-attention-based-spatial-temporal-graph-convolutional-networks-for-traffic-flow-forecastingaaai2019">6. Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting(AAAI2019)</a></li>
+<li><a href="#7-spatiotemporal-multi-graph-convolution-network-for-ride-hailing-demand-forecastingaaai2019">7. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting(AAAI2019)</a></li>
+<li><a href="#8-%e6%80%bb%e7%bb%93">8. 总结</a><ul>
+<li><a href="#81-%e6%a0%b9%e6%8d%ae%e7%bd%91%e6%a0%bc%e6%9e%84%e5%bb%ba%e5%9b%be">8.1. 根据网格构建图</a></li>
+<li><a href="#%e8%ae%a1%e7%ae%972%e4%b8%aa%e5%8c%ba%e5%9f%9f%e7%9a%84%e7%9b%b8%e5%85%b3%e6%80%a7">计算2个区域的相关性</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1><span id="deep-spatio-temporal-residual-networks-for-citywide-crowd-flows-predictionaaai2017">Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction(AAAI2017)</span></h1><blockquote>
+<p>张钧波(京东)<br>郑宇(京东)</p>
+</blockquote>
+<ul>
+<li>给定所有区域历史T个时间段的inflow和outflow，预测下一个时间段所有区域的inflow和outflow</li>
+</ul>
+<p><img src="/2020/02/27/时空论文阅读笔记/ST-ResNet.png" alt=""></p>
+<ul>
+<li>每个时间段所有区域的输入是$I<em>J</em>2$,将输入分为recent，daily，weekly周期，预测第t个时间段的infow和outflow：<ul>
+<li>recent：当天前r个时间段</li>
+<li>daily：前d天该时间段</li>
+<li>weekly：前w周该天该时间段</li>
+</ul>
+</li>
+<li>外部特征包括：天气，节假日，dayOfWeek。用2层FCN对外部特征进行嵌入，第一层FCN作为嵌入层，第二层FCN转换维度和$X_{Res}$一致。</li>
+<li>在融合阶段，先将3个时间周期的输出融合，再和外部因素拼接。</li>
+<li>数据集：北京出租车和NYC自行车流量</li>
+<li>将flow使用Max-Min归一化([0,1])，使其范围在[-1,1]，FCN最后一层使用tanh激活函数</li>
+</ul>
+<h1><span id="2-hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">2. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</span></h1><blockquote>
 <p>潘哲逸(上海交通大学)<br>梁宇轩(西安电子科技大学)<br>张钧波(京东)<br>易修文(京东)<br>郑宇(京东)</p>
 </blockquote>
 <p>论文声称第一个考虑<strong>空间和时间内在因果关系</strong>的深度框架。</p>
 <p><img src="/2020/02/27/时空论文阅读笔记/HyperST_Net.png" alt=""></p>
 <ul>
 <li>该论文提出的只是一个HyperNetwork框架，并不是一个具体的模型。</li>
-<li>HyperNetwork：和以往不同，以前都是一个网络的输出，输入到下一个网络中，超网络是一个网络的输出作为另一个网络的参数。</li>
+<li><strong>HyperNetwork</strong>：和以往不同，以前都是一个网络的输出，输入到下一个网络中，<strong>超网络是一个网络的输出作为另一个网络的参数</strong>。</li>
 <li>该模型有3个模块：空间模块，时间模块，推理模块。将空间模块的输出经过推理模块，得到的输出作为时间模块的权重参数，以此捕获时间和空间的内在因果关系。</li>
 <li>这只是一个框架，可以变换成多种模型。在空间模块中如果使用全连接就是HyperST-Dense，使用卷积就是HyperST-Conv。</li>
 </ul>
-<h1><span id="restful-resolution-aware-forecasting-of-behavioral-time-series-data2018cikm">RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data(2018CIKM)</span></h1><blockquote>
+<h1><span id="3-restful-resolution-aware-forecasting-of-behavioral-time-series-data2018cikm">3. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data(2018CIKM)</span></h1><blockquote>
 <p>吴宪(University of Notre Dame)<br>史宝旭(University of Notre Dame)<br>Yuxiao Dong(微软)<br>黄超(University of Notre Dame)</p>
 </blockquote>
-<p>本文使用多种时间粒度的时间序列数据来预测。<br>模型为<strong>RES</strong>olution-aware <strong>T</strong>ime <strong>S</strong>eries Forecasting (RESTFul)<br>第一个使用多种时间粒度来进行行为时间序列预测</p>
+<p>本文使用<strong>多种时间粒度</strong>的<strong>时间序列数据</strong>来预测。<br>模型为<strong>RES</strong>olution-aware <strong>T</strong>ime <strong>S</strong>eries Forecasting (RESTFul)<br>第一个使用多种时间粒度来进行行为时间序列预测</p>
 <p><img src="/2020/02/27/时空论文阅读笔记/RESTFul.png" alt=""></p>
 <ul>
 <li>有2个参数$\alpha和\beta$，取值{day,week}，限制α&gt;=β，<br>$\alpha$=1week,$\beta$=1day,表示1周测量1次，1次测1天。<br>$\alpha$=1week,$\beta$=1week,表示1周测量1次，1次测1周。<br>有一个完整的时间序列，要从中隔抽取不同时间粒度的时间序列。$X=\left[x_{1}, \ldots, x_{t}, \ldots, x_{T-1}, x_{T}\right]$，不同的$\alpha和\beta$就构成不同时间粒度的序列，序列长度为k，这里设置为5。</li>
@@ -443,13 +478,91 @@
 <li>将所有的隐藏状态reshape成$\alpha <em> \beta </em> d$的张量，然后使用卷积融合不同粒度。</li>
 <li>使用数据集：销售数据，311投诉数据</li>
 </ul>
-<h1><span id="attention-based-spatial-temporal-graph-convolutional-networks-for-traffic-flow-forecastingaaai2019">Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting(AAAI2019)</span></h1><p>根据所有节点历史T个时间段traffic flow，occupy，speed，预测所有节点未来T_p个时间段的traffic flow。</p>
+<h1><span id="4-deep-multi-view-spatial-temporal-network-for-taxi-demand-predictionaaai2018">4. Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction(AAAI2018)</span></h1><blockquote>
+<p>姚骅修(Pennsylvania State University)<br>吴飞(Pennsylvania State University)<br>柯金涛(香港科技大学)<br>Xianfeng Tang(Pennsylvania State University)<br>叶杰平(滴滴出行)</p>
+</blockquote>
+<ul>
+<li><strong>出租车需求预测</strong>，根据S<em>S的小区域，历史T个时间段的出租车订单数据，预测下一个时间段中心区域的订单。<em>*空间和时间都是多预测一</em></em>。</li>
+</ul>
+<p><img src="/2020/02/27/时空论文阅读笔记/DMVST_Net.png" alt=""></p>
+<ul>
+<li>现有的研究都是使用CNN对空间建模，LSTM对时间建模，时间和空间分开建模，本文的模型是对时间和空间同时建模</li>
+<li>本文提出DMVST-Net，有3个view：<strong>时间view</strong>（通过LSTM建模时间关系），<strong>空间view</strong>（使用local CNN建模邻近空间关系），<strong>语义view</strong>（建模功能相似的区域）</li>
+<li>local CNN只考虑空间邻近的区域，但是不能考虑离得较远，但出租车需求模型相似的区域，所以又加了语义view</li>
+<li><img src="/2020/02/27/时空论文阅读笔记/DMVST_Net-1.jpg" alt=""></li>
+<li><strong>输入是S*S的邻居区域，如果是边界区域，其邻居用0填充</strong></li>
+<li>在LSTM每个时间步的特征中拼接天气等外部因素</li>
+<li>local CNN和LSTM对时间和空间建模，然后再构建图，表示区域之间需求相似性(功能相似性)。求出2个区域每周的需求量，形成一个时间序列，使用DTW计算2个序列的相似性，即<strong>2个区域的相似性，作为图中的边，创建一个全连接图(任意2个区域都相连)</strong>,使用LINE对图中节点进行嵌入。</li>
+<li><img src="/2020/02/27/时空论文阅读笔记/DMVST_Net-2.png" alt=""><br>损失函数由MSE和MAPE组成，MSE更关注大值，为了避免模型偏向大值的方向训练，又添加了MAPE，但是使用MAPE时，真实值中不能有0</li>
+<li>Max-Min激活，最终输出值在[0,1]之间，反归一化</li>
+<li>最后一层FCN用sigmoid激活，其余的FCN用ReLU激活</li>
+</ul>
+<h1><span id="5-revisiting-spatial-temporal-similarity-a-deep-learning-framework-for-traffic-predictionaaai2019">5. Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction(AAAI2019)</span></h1><blockquote>
+<p>姚骅修(Pennsylvania State University)<br>Xianfeng Tang(Pennsylvania State University)</p>
+</blockquote>
+<ul>
+<li>主要问题是：原先研究中的空间相关性都是静态的，本次建模<strong>动态的空间相关性</strong>。<strong>时间有天和周周期，且有时间偏移</strong>。</li>
+<li>提出模型<strong>S</strong>patial-<strong>T</strong>emporal <strong>D</strong>ynamic <strong>N</strong>etwork(<strong>STDN</strong>)来traffic prediction</li>
+<li>根据S<em>S小区域历史T个时间段的volume和flow，预测下一个时间段中心区域的volume，<em>*空间和时间都是多预测一</em></em></li>
+</ul>
+<p><img src="/2020/02/27/时空论文阅读笔记/STDN.png" alt=""></p>
+<ul>
+<li>将交通量分为2种<ul>
+<li>traffic volume：无方向，一个区域进来和出去的流量。</li>
+<li>traffic flow：有方向，从区域i到区域j的流量</li>
+</ul>
+</li>
+<li>flow-gated local CNN每次输入S*S区域的volume和flow，其中flow起到门控作用，值在[0,1]之间，如果2个区域之间flow大，即门控的值大，2个区域的相关性强。每个时间段经过local CNN输出的值，再拼接上该时间段的天气等外部因素送入LSTM中</li>
+<li><strong>时间偏移Attention</strong>：比如预测第t+1个时间段的volume，用到当天前t=7个时间段的数据(短期依赖)，前P=3天(长期依赖)，每天Q=3个时间段(解决时间偏移问题)。</li>
+<li>先将短期的t个时间段数据输入LSTM中，得到隐藏状态h做Attention。前P天，每天Q个时间段输入到LSTM中，每天得到Q个隐藏状态，和h做attention，将Q个整合成1个，最终生成P个隐藏状态，再输入到LSTM，得到长期依赖的隐藏状态，然后再和短期的隐藏状态h拼接，输入到FCN中。</li>
+<li><strong>短期的隐藏状态和长期的隐藏状态做Attention</strong></li>
+<li><strong>短期的隐藏状态和长期的隐藏状态拼接</strong></li>
+<li>数据集：出租车流量和自行车流量</li>
+</ul>
+<blockquote>
+<ul>
+<li>STDN和DMVST-Net是同一作者发的</li>
+<li>两者都是：空间和时间<strong>多预测一</strong></li>
+<li><strong>STDN</strong>：local CNN + LSTM</li>
+<li><strong>DMVST-Net</strong>：flow-gated local CNN + Periodically Shifted Attention LSTM</li>
+</ul>
+</blockquote>
+<h1><span id="6-attention-based-spatial-temporal-graph-convolutional-networks-for-traffic-flow-forecastingaaai2019">6. Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting(AAAI2019)</span></h1><p>根据所有节点历史T个时间段traffic flow，occupy，speed，预测所有节点未来T_p个时间段的traffic flow。</p>
 <p><img src="/2020/02/27/时空论文阅读笔记/ASTGCN.png" alt=""></p>
 <ul>
 <li>三个独立的组件，分别对recent，daily，weekly周期进行建模</li>
 <li>比如说预测6.14 8:00-8:55的flow，传入的样本是<br>时：6.14号6:00~7:55（前2个小时）的数据，<br>天：6.13和6.12（前2天）的8:00-8:55，<br>周：上周6.17，上上周5.31（前2周）的8:00-8:55</li>
 </ul>
-<p>#</p>
+<h1><span id="7-spatiotemporal-multi-graph-convolution-network-for-ride-hailing-demand-forecastingaaai2019">7. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting(AAAI2019)</span></h1><blockquote>
+<p>Xu Geng(香港大学)<br>Yaguang Li(南加利福尼亚)<br>Lingyu Zhang(滴滴AI)<br>杨强(香港大学)<br>叶杰平(滴滴)</p>
+</blockquote>
+<p><img src="/2020/02/27/时空论文阅读笔记/ST_MGCN.png" alt=""></p>
+<ul>
+<li>问题：根据所有区域历史T个时间段的订单数，预测所有区域下一个时间段的订单数</li>
+<li>将研究区域划分为网格，根据网格构建3个图，这3个图的图信号矩阵一样，只是邻接矩阵不一样。分别<ul>
+<li><strong>邻居图</strong>（3*3网格，每个区域有8个邻居，2个区域是邻居，邻接矩阵为1，否则为0）；</li>
+<li><strong>区域功能相似图</strong>（根据每个区域的POI，计算相似性，值在0&lt;=sim&lt;=1）；</li>
+<li><strong>交通连通图</strong>（看2个区域是否在高速公路，公共交通等方式相连，相连为1，否则为0）</li>
+</ul>
+</li>
+<li><strong>Channel-wise attention</strong>参考CV领域，图像输入$X \in \mathbb{R}^{W\times H \times C}$，计算每一个通道的权重$s$,然后再把输入和通道权重相乘$\tilde{\boldsymbol{X}}_{:,:,c}=\boldsymbol{X}_{:,:, c} \circ s_{c} \quad for \quad c=1,2, \cdots C$</li>
+<li>一共有3类图，每类图的邻接矩阵不一样，图信号矩阵一样，表示该区域的订单数，图信号矩阵是动态的，每个时间段的图信号矩阵都不一样，一共有T个时间段。拿一个图距离，输入为(T,V,P),根据通道维的attention，<strong>这里将时间维作为通道维，对T个时间段做Attention</strong>，最终得到attention后的输入(T,V,P),然后输入到RNN中，因为RNN一次只能输入一个节点T个时间段的数据，但是这里有V个节点，这里V个节点共享一个RNN，最终得到隐藏状态，然后在把3个图的输出融合，得到最终的预测结果(所有区域下一个时间段的订单数)</li>
+<li>T为5，根据ST_ResNet，其中3个邻近，1个天周期，1个周周期。</li>
+</ul>
+<h1><span id="8-总结">8. 总结</span></h1><h2><span id="81-根据网格构建图">8.1. 根据网格构建图</span></h2><p>图用2个矩阵表示：图信号矩阵和邻接矩阵。由网格构建图时，节点表示区域，图信号矩阵就是区域的特征。重点是怎么构建邻接矩阵。</p>
+<ul>
+<li>《Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting》(AAAI2019)这篇文章构建了3个图：邻居图，POI功能相似图，交通连通图</li>
+<li></li>
+</ul>
+<h2><span id="计算2个区域的相关性">计算2个区域的相关性</span></h2><ul>
+<li>用出租车需求量计算2个区域的<strong>相似性</strong>，用2个区域的出租车需求量组成时间序列<ul>
+<li>使用DTW计算2个序列的相似性，2个时间序列越相似，说明2个区域越相似。例如：《Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting》(AAAI2019)</li>
+<li>使用皮尔森系数，例如《Passenger Demand Forecasting with Multi-Task Convolutional Recurrent Neural Networks》(2019PAKDD)</li>
+</ul>
+</li>
+<li>计算2个区域之间的<strong>相关性</strong>，使用区域之间的traffic flow，如果2个区域之间的traffic flow越大，说明这2个区域越相关。但是《Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction》(AAAI2019)说这种相关性也是相似性。我觉得有问题，例如工作区和住宅区，2个区域的traffic flow很大，有很强的相关性，但是相似性并不强。</li>
+<li>根据POI计算2个区域的相似性，例如《Passenger Demand Forecasting with Multi-Task Convolutional Recurrent Neural Networks》(2019PAKDD)</li>
+</ul>
 
           
         
@@ -1917,7 +2030,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/12/29/运行GPU程序/" itemprop="url">运行GPU程序</a></h2>
+                <a class="post-title-link" href="/2019/12/29/运行GPU程序/" itemprop="url">Mxnet和Pytorch区别</a></h2>
         
 
         <div class="post-meta">
@@ -1981,7 +2094,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.4k
+                  1.6k
                 </span>
               
 
@@ -1997,7 +2110,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  7
                 </span>
               
             </div>
