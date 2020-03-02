@@ -8,15 +8,20 @@
 <!-- TOC -->
 <ul>
 <li><a href="#1-deep-spatio-temporal-residual-networks-for-citywide-crowd-flows-predictionaaai2017">1. Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction(AAAI2017)</a></li>
-<li><a href="#2-hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">2. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</a></li>
-<li><a href="#3-restful-resolution-aware-forecasting-of-behavioral-time-series-data2018cikm">3. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data(2018CIKM)</a></li>
+<li><a href="#2-deepstn-context-aware-spatial-temporal-neural-network-for-crowd-flow-prediction-in-metropolisaaai2019">2. DeepSTN+: Context-aware Spatial-Temporal Neural Network for Crowd Flow Prediction in Metropolis(AAAI2019)</a></li>
+<li><a href="#3-attention-based-spatial-temporal-graph-convolutional-networks-for-traffic-flow-forecastingaaai2019">3. Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting(AAAI2019)</a></li>
 <li><a href="#4-deep-multi-view-spatial-temporal-network-for-taxi-demand-predictionaaai2018">4. Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction(AAAI2018)</a></li>
 <li><a href="#5-revisiting-spatial-temporal-similarity-a-deep-learning-framework-for-traffic-predictionaaai2019">5. Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction(AAAI2019)</a></li>
-<li><a href="#6-attention-based-spatial-temporal-graph-convolutional-networks-for-traffic-flow-forecastingaaai2019">6. Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting(AAAI2019)</a></li>
-<li><a href="#7-spatiotemporal-multi-graph-convolution-network-for-ride-hailing-demand-forecastingaaai2019">7. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting(AAAI2019)</a></li>
-<li><a href="#8-%e6%80%bb%e7%bb%93">8. 总结</a><ul>
-<li><a href="#81-%e6%a0%b9%e6%8d%ae%e7%bd%91%e6%a0%bc%e6%9e%84%e5%bb%ba%e5%9b%be">8.1. 根据网格构建图</a></li>
-<li><a href="#82-%e8%ae%a1%e7%ae%972%e4%b8%aa%e5%8c%ba%e5%9f%9f%e7%9a%84%e7%9b%b8%e5%85%b3%e6%80%a7">8.2. 计算2个区域的相关性</a></li>
+<li><a href="#6-spatiotemporal-multi-graph-convolution-network-for-ride-hailing-demand-forecastingaaai2019">6. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting(AAAI2019)</a></li>
+<li><a href="#7-passenger-demand-forecasting-with-multi-task-convolutional-recurrent-neural-networkspakdd2019">7. Passenger Demand Forecasting with Multi-Task Convolutional Recurrent Neural Networks(PAKDD2019)</a></li>
+<li><a href="#8-hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">8. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</a></li>
+<li><a href="#9-restful-resolution-aware-forecasting-of-behavioral-time-series-data2018cikm">9. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data(2018CIKM)</a></li>
+<li><a href="#10-stepdeep-a-novel-spatial-temporal-mobility-event-prediction-framework-based-on-deep-neural-networkkdd2018">10. StepDeep: A Novel Spatial-temporal Mobility Event Prediction Framework based on Deep Neural Network(KDD2018)</a></li>
+<li><a href="#11-%e6%80%bb%e7%bb%93">11. 总结</a><ul>
+<li><a href="#111-%e6%a0%b9%e6%8d%ae%e7%bd%91%e6%a0%bc%e6%9e%84%e5%bb%ba%e5%9b%be">11.1. 根据网格构建图</a></li>
+<li><a href="#112-%e8%ae%a1%e7%ae%972%e4%b8%aa%e5%8c%ba%e5%9f%9f%e7%9a%84%e7%9b%b8%e5%85%b3%e6%80%a7">11.2. 计算2个区域的相关性</a></li>
+<li><a href="#113-poi">11.3. POI</a></li>
+<li><a href="#114-%e6%97%b6%e9%97%b4">11.4. 时间</a></li>
 </ul>
 </li>
 </ul>
@@ -38,35 +43,42 @@
 <li>外部特征包括：天气，节假日，dayOfWeek。用2层FCN对外部特征进行嵌入，第一层FCN作为嵌入层，第二层FCN转换维度和$X_{Res}$一致。</li>
 <li>在融合阶段，先将3个时间周期的输出融合，再和外部因素拼接。</li>
 <li>数据集：北京出租车和NYC自行车流量</li>
-<li>将flow使用Max-Min归一化([0,1])，使其范围在[-1,1]，FCN最后一层使用tanh激活函数</li>
+<li>将flow使用Max-Min归一化到[-1,1]，FCN最后一层使用tanh激活函数</li>
 </ul>
-<h1><span id="2-hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">2. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</span></h1><blockquote>
-<p>潘哲逸(上海交通大学)<br>梁宇轩(西安电子科技大学)<br>张钧波(京东)<br>易修文(京东)<br>郑宇(京东)</p>
+<h1><span id="2-deepstn-context-aware-spatial-temporal-neural-network-for-crowd-flow-prediction-in-metropolisaaai2019">2. DeepSTN+: Context-aware Spatial-Temporal Neural Network for Crowd Flow Prediction in Metropolis(AAAI2019)</span></h1><blockquote>
+<p>Ziqian Lin(清华大学)<br>Jie Feng(清华大学)<br>Ziyang Lu(清华大学)<br>Yong Li(清华大学)<br>Depeng Jin(清华大学)</p>
 </blockquote>
-<p>论文声称第一个考虑<strong>空间和时间内在因果关系</strong>的深度框架。</p>
-<p><img src="/2020/02/27/时空论文阅读笔记/HyperST_Net.png" alt=""></p>
 <ul>
-<li>该论文提出的只是一个HyperNetwork框架，并不是一个具体的模型。</li>
-<li><strong>HyperNetwork</strong>：和以往不同，以前都是一个网络的输出，输入到下一个网络中，<strong>超网络是一个网络的输出作为另一个网络的参数</strong>。</li>
-<li>该模型有3个模块：空间模块，时间模块，推理模块。将空间模块的输出经过推理模块，得到的输出作为时间模块的权重参数，以此捕获时间和空间的内在因果关系。</li>
-<li>这只是一个框架，可以变换成多种模型。在空间模块中如果使用全连接就是HyperST-Dense，使用卷积就是HyperST-Conv。</li>
+<li>crowd flow预测是给定历史T个时间段，预测区域的inflow和outflow</li>
+<li>现有研究的缺点：<ul>
+<li>不能捕获长距离空间依赖</li>
+<li>忽略区域功能对人流的影响(POI)</li>
 </ul>
-<h1><span id="3-restful-resolution-aware-forecasting-of-behavioral-time-series-data2018cikm">3. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data(2018CIKM)</span></h1><blockquote>
-<p>吴宪(University of Notre Dame)<br>史宝旭(University of Notre Dame)<br>Yuxiao Dong(微软)<br>黄超(University of Notre Dame)</p>
-</blockquote>
-<p>本文使用<strong>多种时间粒度</strong>的<strong>时间序列数据</strong>来预测。<br>模型为<strong>RES</strong>olution-aware <strong>T</strong>ime <strong>S</strong>eries Forecasting (RESTFul)<br>第一个使用多种时间粒度来进行行为时间序列预测</p>
-<p><img src="/2020/02/27/时空论文阅读笔记/RESTFul.png" alt=""></p>
+</li>
+<li>提出DeeoSTN+，有3个组件<ul>
+<li>ConvPlus：解决长距离区域的空间依赖</li>
+<li>SemanticPlus：解决区域POI对人流的影响</li>
+<li>early-fusuion模块</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2020/02/27/时空论文阅读笔记/DeepSTN+.png" alt=""></p>
 <ul>
-<li>有2个参数$\alpha和\beta$，取值{day,week}，限制α&gt;=β，<br>$\alpha$=1week,$\beta$=1day,表示1周测量1次，1次测1天。<br>$\alpha$=1week,$\beta$=1week,表示1周测量1次，1次测1周。<br>有一个完整的时间序列，要从中隔抽取不同时间粒度的时间序列。$X=\left[x_{1}, \ldots, x_{t}, \ldots, x_{T-1}, x_{T}\right]$，不同的$\alpha和\beta$就构成不同时间粒度的序列，序列长度为k，这里设置为5。</li>
-<li>对于每一个时间序列都用GRU来捕获时间相关性，得到一个隐藏状态，那么n个时间序列就有n个隐藏状态</li>
-<li>将所有的隐藏状态reshape成$\alpha <em> \beta </em> d$的张量，然后使用卷积融合不同粒度。</li>
-<li>使用数据集：销售数据，311投诉数据</li>
+<li><strong>计算POI在时间上的分布权重</strong></li>
+<li>crowd flow使用Max-Min归一化到[-1,1]，最后一层使用Tanh，范围[-1,1]</li>
+<li>POI使用Max-Min归一化到[0,1]</li>
+</ul>
+<h1><span id="3-attention-based-spatial-temporal-graph-convolutional-networks-for-traffic-flow-forecastingaaai2019">3. Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting(AAAI2019)</span></h1><p>根据所有节点历史T个时间段traffic flow，occupy，speed，预测所有节点未来T_p个时间段的traffic flow。</p>
+<p><img src="/2020/02/27/时空论文阅读笔记/ASTGCN.png" alt=""></p>
+<ul>
+<li>三个独立的组件，分别对recent，daily，weekly周期进行建模</li>
+<li>比如说预测6.14 8:00-8:55的flow，传入的样本是<br>时：6.14号6:00~7:55（前2个小时）的数据，<br>天：6.13和6.12（前2天）的8:00-8:55，<br>周：上周6.17，上上周5.31（前2周）的8:00-8:55</li>
 </ul>
 <h1><span id="4-deep-multi-view-spatial-temporal-network-for-taxi-demand-predictionaaai2018">4. Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction(AAAI2018)</span></h1><blockquote>
 <p>姚骅修(Pennsylvania State University)<br>吴飞(Pennsylvania State University)<br>柯金涛(香港科技大学)<br>Xianfeng Tang(Pennsylvania State University)<br>叶杰平(滴滴出行)</p>
 </blockquote>
 <ul>
-<li><strong>出租车需求预测</strong>，根据S<em>S的小区域，历史T个时间段的出租车订单数据，预测下一个时间段中心区域的订单。<em>*空间和时间都是多预测一</em></em>。</li>
+<li><strong>出租车需求预测</strong>，根据S<em>S的小区域，历史T个时间段的出租车订单数据，预测下一个时间段中心区域的订单。<em>*空间和时间都是多预测一</em></em></li>
 </ul>
 <p><img src="/2020/02/27/时空论文阅读笔记/DMVST_Net.png" alt=""></p>
 <ul>
@@ -111,13 +123,7 @@
 <li><strong>DMVST-Net</strong>：flow-gated local CNN + Periodically Shifted Attention LSTM</li>
 </ul>
 </blockquote>
-<h1><span id="6-attention-based-spatial-temporal-graph-convolutional-networks-for-traffic-flow-forecastingaaai2019">6. Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting(AAAI2019)</span></h1><p>根据所有节点历史T个时间段traffic flow，occupy，speed，预测所有节点未来T_p个时间段的traffic flow。</p>
-<p><img src="/2020/02/27/时空论文阅读笔记/ASTGCN.png" alt=""></p>
-<ul>
-<li>三个独立的组件，分别对recent，daily，weekly周期进行建模</li>
-<li>比如说预测6.14 8:00-8:55的flow，传入的样本是<br>时：6.14号6:00~7:55（前2个小时）的数据，<br>天：6.13和6.12（前2天）的8:00-8:55，<br>周：上周6.17，上上周5.31（前2周）的8:00-8:55</li>
-</ul>
-<h1><span id="7-spatiotemporal-multi-graph-convolution-network-for-ride-hailing-demand-forecastingaaai2019">7. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting(AAAI2019)</span></h1><blockquote>
+<h1><span id="6-spatiotemporal-multi-graph-convolution-network-for-ride-hailing-demand-forecastingaaai2019">6. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting(AAAI2019)</span></h1><blockquote>
 <p>Xu Geng(香港大学)<br>Yaguang Li(南加利福尼亚)<br>Lingyu Zhang(滴滴AI)<br>杨强(香港大学)<br>叶杰平(滴滴)</p>
 </blockquote>
 <p><img src="/2020/02/27/时空论文阅读笔记/ST_MGCN.png" alt=""></p>
@@ -133,12 +139,63 @@
 <li>一共有3类图，每类图的邻接矩阵不一样，图信号矩阵一样，表示该区域的订单数，图信号矩阵是动态的，每个时间段的图信号矩阵都不一样，一共有T个时间段。拿一个图距离，输入为(T,V,P),根据通道维的attention，<strong>这里将时间维作为通道维，对T个时间段做Attention</strong>，最终得到attention后的输入(T,V,P),然后输入到RNN中，因为RNN一次只能输入一个节点T个时间段的数据，但是这里有V个节点，这里V个节点共享一个RNN，最终得到隐藏状态，然后在把3个图的输出融合，得到最终的预测结果(所有区域下一个时间段的订单数)</li>
 <li>T为5，根据ST_ResNet，其中3个邻近，1个天周期，1个周周期。</li>
 </ul>
-<h1><span id="8-总结">8. 总结</span></h1><h2><span id="81-根据网格构建图">8.1. 根据网格构建图</span></h2><p>图用2个矩阵表示：图信号矩阵和邻接矩阵。由网格构建图时，节点表示区域，图信号矩阵就是区域的特征。重点是怎么构建邻接矩阵。</p>
+<h1><span id="7-passenger-demand-forecasting-with-multi-task-convolutional-recurrent-neural-networkspakdd2019">7. Passenger Demand Forecasting with Multi-Task Convolutional Recurrent Neural Networks(PAKDD2019)</span></h1><blockquote>
+<p>Lei Bai1(University of New South Wales)<br>Lina Yao(University of New South Wales)<br>Salil S. Kanhere(University of New South Wales)</p>
+</blockquote>
+<ul>
+<li>根据历史T个时间段<strong>相似区域</strong>出租车demand和人流量，预测下一个时间段中心区域的出租车demand。<strong>时间和空间都是多预测一</strong></li>
+</ul>
+<p><img src="/2020/02/27/时空论文阅读笔记/MT-CRNN.png" alt=""></p>
+<ul>
+<li>根据路网来划分区域</li>
+<li>多任务预测：<ul>
+<li><strong>主任务(回归)</strong>：预测中心区域的订单需求数</li>
+<li><strong>辅助任务(分类)</strong>：预测中心区域的订单需求等级(高、中、低)</li>
+</ul>
+</li>
+<li>主任务输入的是相似区域的订单数据和人流量数据，其中<strong>根据POI和taxi demand来计算2个区域的相似性</strong>，为中心区域选择m=3个最相似区域</li>
+<li>使用外部信息(天气等)来预测订单需求等级(辅助任务)</li>
+</ul>
+<h1><span id="8-hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">8. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</span></h1><blockquote>
+<p>潘哲逸(上海交通大学)<br>梁宇轩(西安电子科技大学)<br>张钧波(京东)<br>易修文(京东)<br>郑宇(京东)</p>
+</blockquote>
+<p>论文声称第一个考虑<strong>空间和时间内在因果关系</strong>的深度框架。</p>
+<p><img src="/2020/02/27/时空论文阅读笔记/HyperST_Net.png" alt=""></p>
+<ul>
+<li>该论文提出的只是一个HyperNetwork框架，并不是一个具体的模型。</li>
+<li><strong>HyperNetwork</strong>：和以往不同，以前都是一个网络的输出，输入到下一个网络中，<strong>超网络是一个网络的输出作为另一个网络的参数</strong>。</li>
+<li>该模型有3个模块：空间模块，时间模块，推理模块。将空间模块的输出经过推理模块，得到的输出作为时间模块的权重参数，以此捕获时间和空间的内在因果关系。</li>
+<li>这只是一个框架，可以变换成多种模型。在空间模块中如果使用全连接就是HyperST-Dense，使用卷积就是HyperST-Conv。</li>
+</ul>
+<h1><span id="9-restful-resolution-aware-forecasting-of-behavioral-time-series-data2018cikm">9. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data(2018CIKM)</span></h1><blockquote>
+<p>吴宪(University of Notre Dame)<br>史宝旭(University of Notre Dame)<br>Yuxiao Dong(微软)<br>黄超(University of Notre Dame)</p>
+</blockquote>
+<p>本文使用<strong>多种时间粒度</strong>的<strong>时间序列数据</strong>来预测。<br>模型为<strong>RES</strong>olution-aware <strong>T</strong>ime <strong>S</strong>eries Forecasting (RESTFul)<br>第一个使用多种时间粒度来进行行为时间序列预测</p>
+<p><img src="/2020/02/27/时空论文阅读笔记/RESTFul.png" alt=""></p>
+<ul>
+<li>有2个参数$\alpha和\beta$，取值{day,week}，限制α&gt;=β，<br>$\alpha$=1week,$\beta$=1day,表示1周测量1次，1次测1天。<br>$\alpha$=1week,$\beta$=1week,表示1周测量1次，1次测1周。<br>有一个完整的时间序列，要从中隔抽取不同时间粒度的时间序列。$X=\left[x_{1}, \ldots, x_{t}, \ldots, x_{T-1}, x_{T}\right]$，不同的$\alpha和\beta$就构成不同时间粒度的序列，序列长度为k，这里设置为5。</li>
+<li>对于每一个时间序列都用GRU来捕获时间相关性，得到一个隐藏状态，那么n个时间序列就有n个隐藏状态</li>
+<li>将所有的隐藏状态reshape成$\alpha <em> \beta </em> d$的张量，然后使用卷积融合不同粒度。</li>
+<li>使用数据集：销售数据，311投诉数据</li>
+</ul>
+<h1><span id="10-stepdeep-a-novel-spatial-temporal-mobility-event-prediction-framework-based-on-deep-neural-networkkdd2018">10. StepDeep: A Novel Spatial-temporal Mobility Event Prediction Framework based on Deep Neural Network(KDD2018)</span></h1><blockquote>
+<p>Bilong Shen(清华大学)<br>梁晓丹(卡耐基梅隆)</p>
+</blockquote>
+<ul>
+<li><strong>S</strong>patial-<strong>T</strong>emporal mobility <strong>E</strong>vent <strong>P</strong>rediction framework based on <strong>Deep</strong> neural network (<strong>StepDeep</strong>)同时考虑时间和空间模式，给定所有区域历史T个时间段的出租车流量和外部因素，预测所有区域在下一个时间段出租车的inflow和outflow。</li>
+<li>网格区域中的flow随时间变化，可以看做一个视频(T,C,W,H)，进而看做是视频预测任务</li>
+<li>数据集NYC出租车轨迹数据，将NYC网格划分，计算每个区域的inflow和outflow，</li>
+</ul>
+<p><img src="/2020/02/27/时空论文阅读笔记/StepDeep.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记/StepDeep1.png" alt=""></p>
+<ul>
+<li>提出3种卷积：时间卷积，空间卷积，时空卷积。将输入(T,C,H,W)输入到以上7层卷积中，最终输出(C,H,W)表示下一个时间段所有区域的inflow和outflow，</li>
+</ul>
+<h1><span id="11-总结">11. 总结</span></h1><h2><span id="111-根据网格构建图">11.1. 根据网格构建图</span></h2><p>图用2个矩阵表示：图信号矩阵和邻接矩阵。由网格构建图时，节点表示区域，图信号矩阵就是区域的特征。重点是怎么构建邻接矩阵。</p>
 <ul>
 <li>《Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting》(AAAI2019)这篇文章构建了3个图：邻居图，POI功能相似图，交通连通图</li>
-<li></li>
 </ul>
-<h2><span id="82-计算2个区域的相关性">8.2. 计算2个区域的相关性</span></h2><ul>
+<h2><span id="112-计算2个区域的相关性">11.2. 计算2个区域的相关性</span></h2><ul>
 <li>用出租车需求量计算2个区域的<strong>相似性</strong>，用2个区域的出租车需求量组成时间序列<ul>
 <li>使用DTW计算2个序列的相似性，2个时间序列越相似，说明2个区域越相似。例如：《Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting》(AAAI2019)</li>
 <li>使用皮尔森系数，例如《Passenger Demand Forecasting with Multi-Task Convolutional Recurrent Neural Networks》(2019PAKDD)</li>
@@ -147,6 +204,12 @@
 <li>计算2个区域之间的<strong>相关性</strong>，使用区域之间的traffic flow，如果2个区域之间的traffic flow越大，说明这2个区域越相关。但是《Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction》(AAAI2019)说这种相关性也是相似性。我觉得有问题，例如工作区和住宅区，2个区域的traffic flow很大，有很强的相关性，但是相似性并不强。</li>
 <li>根据POI计算2个区域的相似性，例如《Passenger Demand Forecasting with Multi-Task Convolutional Recurrent Neural Networks》(2019PAKDD)</li>
 </ul>
+<h2><span id="113-poi">11.3. POI</span></h2><p>很多论文中都习惯将POI成为Semantic</p>
+<ul>
+<li>《Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction》(AAAI2018)</li>
+<li>《DeepSTN+: Context-aware Spatial-Temporal Neural Network for Crowd Flow Prediction in Metropolis》(AAAI2019)</li>
+</ul>
+<h2><span id="114-时间">11.4. 时间</span></h2><p>像dayOfWeek，monthOfYear等时间信息，在论文中称作<strong>time meta feature</strong></p>
 ]]></content>
       <categories>
         <category>论文阅读笔记</category>
