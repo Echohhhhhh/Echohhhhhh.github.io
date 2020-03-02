@@ -17,6 +17,7 @@
 <li><a href="#8-hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">8. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</a></li>
 <li><a href="#9-restful-resolution-aware-forecasting-of-behavioral-time-series-data2018cikm">9. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data(2018CIKM)</a></li>
 <li><a href="#10-stepdeep-a-novel-spatial-temporal-mobility-event-prediction-framework-based-on-deep-neural-networkkdd2018">10. StepDeep: A Novel Spatial-temporal Mobility Event Prediction Framework based on Deep Neural Network(KDD2018)</a></li>
+<li><a href="#stgrat-a-spatio-temporal-graph-attention-network-for-traffic-forecastingaaai2020">STGRAT: A Spatio-Temporal Graph Attention Network for Traffic Forecasting(AAAI2020)</a></li>
 <li><a href="#11-%e6%80%bb%e7%bb%93">11. 总结</a><ul>
 <li><a href="#111-%e6%a0%b9%e6%8d%ae%e7%bd%91%e6%a0%bc%e6%9e%84%e5%bb%ba%e5%9b%be">11.1. 根据网格构建图</a></li>
 <li><a href="#112-%e8%ae%a1%e7%ae%972%e4%b8%aa%e5%8c%ba%e5%9f%9f%e7%9a%84%e7%9b%b8%e5%85%b3%e6%80%a7">11.2. 计算2个区域的相关性</a></li>
@@ -190,6 +191,29 @@
 <p><img src="/2020/02/27/时空论文阅读笔记/StepDeep1.png" alt=""></p>
 <ul>
 <li>提出3种卷积：时间卷积，空间卷积，时空卷积。将输入(T,C,H,W)输入到以上7层卷积中，最终输出(C,H,W)表示下一个时间段所有区域的inflow和outflow，</li>
+</ul>
+<h1><span id="stgrat-a-spatio-temporal-graph-attention-network-for-traffic-forecastingaaai2020">STGRAT: A Spatio-Temporal Graph Attention Network for Traffic Forecasting(AAAI2020)</span></h1><blockquote>
+<p>Cheonbok Park(韩国大学)<br>Chunggi Lee(韩国大学)<br>Hyojin Bahng(韩国大学)</p>
+</blockquote>
+<ul>
+<li>根据所有节点历史T个时间段的交通速度，预测所有节点未来T个时间段的交通速度(T=12)，时间多预测多，Seq2Seq架构</li>
+</ul>
+<p><img src="/2020/02/27/时空论文阅读笔记/STGRAT.png" alt=""></p>
+<ul>
+<li>Encoder layer中有3个sublayer：空间Attention层，时间Attention层和point-wise FCN。<ul>
+<li>空间Attention：关注每个时间步上空间邻近的节点</li>
+<li>时间Attention：关注单个节点，输入时间序列的不同时间步</li>
+</ul>
+</li>
+<li>整个Encoder = 1个嵌入层 + 4个Encoder layer，使用LINE对图节点进行嵌入</li>
+</ul>
+<p><img src="/2020/02/27/时空论文阅读笔记/STGRAT1.png" alt=""></p>
+<ul>
+<li>空间Attention层：参考Transformer，中心结点作为query，其邻居作为key和value，计算每个节点新的表示。</li>
+<li>时间Attention==Transformer，输入维度(batch_size,T,N,D),计算时间步之间的attention分数，输出维度(batch_size,T,N,D)</li>
+<li>Point-wise FFN和Transformer中一样，使用2层FCN，中间使用GELU激活函数，Transformer使用的是ReLU激活函数。</li>
+<li>Decoder layer有4个sublayer：空间Attention层，mask时间Attention层，Encoder-Decoder Attention层，point-wise FFN层。整个Decoder层=1个嵌入层+4个Decoder层。</li>
+<li><strong>本模型比Transformer多了一个空间Attention层，其余都一样，因为时间Attention层、FFN和Transformer的一样</strong></li>
 </ul>
 <h1><span id="11-总结">11. 总结</span></h1><h2><span id="111-根据网格构建图">11.1. 根据网格构建图</span></h2><p>图用2个矩阵表示：图信号矩阵和邻接矩阵。由网格构建图时，节点表示区域，图信号矩阵就是区域的特征。重点是怎么构建邻接矩阵。</p>
 <ul>
@@ -1363,7 +1387,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <li>将注意力矩阵给$V$加权，即让所有字的信息融入到当前字中，得到当前字的一个加权表示。最终让每一个字都融合所有字的信息。得到的$V$的维度为$[batch_size,h,seq_len,embedding_dimension/h]$.</li>
 <li>在训练的时候，通常多句话进行计算，即形成一个mini-batch。mini-batch中的句子的长度不一样，找出句子的最大长度max_seq_len，将短的句子补成和最大句子一样的长度，使用0padding。假设max_seq_len=10，一个句子的长度为7，即得到的attention矩阵，下面3行和右边3列都是0。在对attention矩阵做softmax会出问题，因为softmax计算涉及到指数计算，$e^0=1$,即经过softmax计算attention不为0，让无效的部分参与了计算。为了解决这个问题，需要用一个mask让这些无效的区域不参与计算，一般给无效的区域加一个很大的负数的偏置，$Z_{illegal}$表示无效的区域，加上一个很大的负数，变成负数，即通过softmax指数计算结果还是0。  </li>
 <li>不同的head得到的结果concat起来，才能恢复到原来的维度$[batch_size,seq_len,embedding_dimension]$。不同的head关注的点不一样，可能有的head关注的local的关系，有的head关注的是global的关系。  </li>
-<li>最后一步是PositionwiseFFN，其实就是2层全连接，对输出$[batch_size,seq_len,embedding_dimension]$，经过2次线性变换和一个Relu激活函数。$Relu=max(0,x)$</li>
+<li>最后一步是Position-wise FFN，其实就是2层全连接，对输出$[batch_size,seq_len,embedding_dimension]$，经过2次线性变换和一个Relu激活函数。$Relu=max(0,x)$</li>
 </ol>
 <p><img src="/2019/11/02/Transformer/FFN.png" alt=""></p>
 <p><img src="/2019/11/02/Transformer/multi.png" alt=""></p>

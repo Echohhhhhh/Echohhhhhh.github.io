@@ -94,7 +94,9 @@
 <meta property="og:image" content="http://yoursite.com/2020/02/27/时空论文阅读笔记/RESTFul.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/27/时空论文阅读笔记/StepDeep.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/27/时空论文阅读笔记/StepDeep1.png">
-<meta property="og:updated_time" content="2020-03-02T07:27:06.044Z">
+<meta property="og:image" content="http://yoursite.com/2020/02/27/时空论文阅读笔记/STGRAT.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/27/时空论文阅读笔记/STGRAT1.png">
+<meta property="og:updated_time" content="2020-03-02T14:29:21.114Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="时空论文阅读笔记">
 <meta name="twitter:description" content="因为疫情推迟开学，在家把以前看的论文又看了一遍，每重新看一次都有新的收获，在此整理下。">
@@ -399,7 +401,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3.5k
+                  3.9k
                 </span>
               
 
@@ -415,7 +417,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  14
+                  15
                 </span>
               
             </div>
@@ -450,6 +452,7 @@
 <li><a href="#8-hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">8. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</a></li>
 <li><a href="#9-restful-resolution-aware-forecasting-of-behavioral-time-series-data2018cikm">9. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data(2018CIKM)</a></li>
 <li><a href="#10-stepdeep-a-novel-spatial-temporal-mobility-event-prediction-framework-based-on-deep-neural-networkkdd2018">10. StepDeep: A Novel Spatial-temporal Mobility Event Prediction Framework based on Deep Neural Network(KDD2018)</a></li>
+<li><a href="#stgrat-a-spatio-temporal-graph-attention-network-for-traffic-forecastingaaai2020">STGRAT: A Spatio-Temporal Graph Attention Network for Traffic Forecasting(AAAI2020)</a></li>
 <li><a href="#11-%e6%80%bb%e7%bb%93">11. 总结</a><ul>
 <li><a href="#111-%e6%a0%b9%e6%8d%ae%e7%bd%91%e6%a0%bc%e6%9e%84%e5%bb%ba%e5%9b%be">11.1. 根据网格构建图</a></li>
 <li><a href="#112-%e8%ae%a1%e7%ae%972%e4%b8%aa%e5%8c%ba%e5%9f%9f%e7%9a%84%e7%9b%b8%e5%85%b3%e6%80%a7">11.2. 计算2个区域的相关性</a></li>
@@ -623,6 +626,29 @@
 <p><img src="/2020/02/27/时空论文阅读笔记/StepDeep1.png" alt=""></p>
 <ul>
 <li>提出3种卷积：时间卷积，空间卷积，时空卷积。将输入(T,C,H,W)输入到以上7层卷积中，最终输出(C,H,W)表示下一个时间段所有区域的inflow和outflow，</li>
+</ul>
+<h1><span id="stgrat-a-spatio-temporal-graph-attention-network-for-traffic-forecastingaaai2020">STGRAT: A Spatio-Temporal Graph Attention Network for Traffic Forecasting(AAAI2020)</span></h1><blockquote>
+<p>Cheonbok Park(韩国大学)<br>Chunggi Lee(韩国大学)<br>Hyojin Bahng(韩国大学)</p>
+</blockquote>
+<ul>
+<li>根据所有节点历史T个时间段的交通速度，预测所有节点未来T个时间段的交通速度(T=12)，时间多预测多，Seq2Seq架构</li>
+</ul>
+<p><img src="/2020/02/27/时空论文阅读笔记/STGRAT.png" alt=""></p>
+<ul>
+<li>Encoder layer中有3个sublayer：空间Attention层，时间Attention层和point-wise FCN。<ul>
+<li>空间Attention：关注每个时间步上空间邻近的节点</li>
+<li>时间Attention：关注单个节点，输入时间序列的不同时间步</li>
+</ul>
+</li>
+<li>整个Encoder = 1个嵌入层 + 4个Encoder layer，使用LINE对图节点进行嵌入</li>
+</ul>
+<p><img src="/2020/02/27/时空论文阅读笔记/STGRAT1.png" alt=""></p>
+<ul>
+<li>空间Attention层：参考Transformer，中心结点作为query，其邻居作为key和value，计算每个节点新的表示。</li>
+<li>时间Attention==Transformer，输入维度(batch_size,T,N,D),计算时间步之间的attention分数，输出维度(batch_size,T,N,D)</li>
+<li>Point-wise FFN和Transformer中一样，使用2层FCN，中间使用GELU激活函数，Transformer使用的是ReLU激活函数。</li>
+<li>Decoder layer有4个sublayer：空间Attention层，mask时间Attention层，Encoder-Decoder Attention层，point-wise FFN层。整个Decoder层=1个嵌入层+4个Decoder层。</li>
+<li><strong>本模型比Transformer多了一个空间Attention层，其余都一样，因为时间Attention层、FFN和Transformer的一样</strong></li>
 </ul>
 <h1><span id="11-总结">11. 总结</span></h1><h2><span id="111-根据网格构建图">11.1. 根据网格构建图</span></h2><p>图用2个矩阵表示：图信号矩阵和邻接矩阵。由网格构建图时，节点表示区域，图信号矩阵就是区域的特征。重点是怎么构建邻接矩阵。</p>
 <ul>
@@ -871,7 +897,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction(AAAI2017)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. DeepSTN+: Context-aware Spatial-Temporal Neural Network for Crowd Flow Prediction in Metropolis(AAAI2019)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting(AAAI2019)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction(AAAI2018)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction(AAAI2019)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting(AAAI2019)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. Passenger Demand Forecasting with Multi-Task Convolutional Recurrent Neural Networks(PAKDD2019)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data(2018CIKM)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">10. StepDeep: A Novel Spatial-temporal Mobility Event Prediction Framework based on Deep Neural Network(KDD2018)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">11. 总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">11.1. 根据网格构建图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">11.2. 计算2个区域的相关性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">11.3. POI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">11.4. 时间</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction(AAAI2017)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. DeepSTN+: Context-aware Spatial-Temporal Neural Network for Crowd Flow Prediction in Metropolis(AAAI2019)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting(AAAI2019)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction(AAAI2018)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction(AAAI2019)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting(AAAI2019)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. Passenger Demand Forecasting with Multi-Task Convolutional Recurrent Neural Networks(PAKDD2019)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data(2018CIKM)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">10. StepDeep: A Novel Spatial-temporal Mobility Event Prediction Framework based on Deep Neural Network(KDD2018)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">STGRAT: A Spatio-Temporal Graph Attention Network for Traffic Forecasting(AAAI2020)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">11. 总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">11.1. 根据网格构建图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">11.2. 计算2个区域的相关性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">11.3. POI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">11.4. 时间</span></a></li></ol></li></ol></div>
             
 
           </div>
