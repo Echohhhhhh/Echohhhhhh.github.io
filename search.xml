@@ -1051,7 +1051,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 </ul>
 <p>  <img src="/2019/12/29/Mxnet和Pytorch区别/gpus-pytorch.png" alt=""></p>
 <blockquote>
-<p>从这2个图中可以看出Mxnet和Pytorch多GPU运行的区别。<br>  Mxnet将batch数据和label都分配到每个GPU上，然后在每个GPU上都计算loss，然后再把loss聚合。<br>  Pytorch只把batch数据分配到每个GPU上，在每个GPU上得到输出，gather到主设备上，然后再和label计算loss。<br>  Mxnet会比Pytorch会一些，因为Mxnet的loss是在不同的GPU上计算的，但Pytorch的写法更简单。</p>
+<p>从这2个图中可以看出Mxnet和Pytorch多GPU运行的区别。<br>  <strong>Mxnet</strong>将batch数据和label都分配到每个GPU上，然后在每个GPU上都计算loss，然后再把loss聚合。<br>  <strong>Pytorch</strong>只把batch数据分配到每个GPU上，在每个GPU上得到输出，gather到主设备上，然后再和label计算loss。<br>  Mxnet会比Pytorch会一些，因为Mxnet的loss是在不同的GPU上计算的，但Pytorch的写法更简单。<br>  为了解决Pytorch在一张卡上计算loss的问题，有人提出了解决方案，参考<a href="https://liumin.blog.csdn.net/article/details/89437058" target="_blank" rel="noopener">基于PyTorch使用大batch训练神经网络</a>和<a href="https://blog.csdn.net/weixin_40087578/article/details/87186613?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task" target="_blank" rel="noopener">pytorch 多GPU训练总结（DataParallel的使用）</a></p>
 </blockquote>
 <h2><span id="将网络加入list中">将网络加入list中</span></h2><ul>
 <li><p>mxnet</p>
@@ -1223,9 +1223,9 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
         <category>论文阅读笔记</category>
       </categories>
       <tags>
-        <tag>NLP</tag>
         <tag>Time Series</tag>
         <tag>Transformer</tag>
+        <tag>NLP</tag>
       </tags>
   </entry>
   <entry>
@@ -1471,8 +1471,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
         <category>论文阅读笔记</category>
       </categories>
       <tags>
-        <tag>NLP</tag>
         <tag>Transformer</tag>
+        <tag>NLP</tag>
       </tags>
   </entry>
   <entry>
@@ -3902,9 +3902,9 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>NLP</category>
       </categories>
       <tags>
+        <tag>Transformer</tag>
         <tag>NLP</tag>
         <tag>Attention</tag>
-        <tag>Transformer</tag>
         <tag>Seq2Seq</tag>
       </tags>
   </entry>
