@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="1. 简介汇总Pytorch的一些知识点">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-27T07:17:00.638Z">
+<meta property="og:updated_time" content="2020-03-03T07:54:16.752Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pytorch之知识点汇总">
 <meta name="twitter:description" content="1. 简介汇总Pytorch的一些知识点">
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  756
+                  879
                 </span>
               
 
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -435,6 +435,7 @@
 <li><a href="#7-gpu">7. GPU</a></li>
 <li><a href="#8-%e5%a4%9agpu%e8%bf%90%e8%a1%8c%e7%a8%8b%e5%ba%8f">8. 多GPU运行程序</a></li>
 <li><a href="#9-tensor">9. Tensor</a></li>
+<li><a href="#bn%e5%92%8cdropout%e5%9c%a8%e8%ae%ad%e7%bb%83%e5%92%8c%e6%b5%8b%e8%af%95%e7%9a%84%e4%b8%8d%e5%90%8c">BN和Dropout在训练和测试的不同</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="2-查看网络参数">2. 查看网络参数</span></h1><ul>
@@ -472,6 +473,8 @@
 <h1><span id="8-多gpu运行程序">8. 多GPU运行程序</span></h1><p><a href="https://echohhhhhh.github.io/2020/01/06/Pytorch%E4%B9%8BGPU%E7%A8%8B%E5%BA%8F/" target="_blank" rel="noopener">Pytorch之GPU程序</a></p>
 <p><a href="https://echohhhhhh.github.io/2019/12/29/%E8%BF%90%E8%A1%8CGPU%E7%A8%8B%E5%BA%8F/" target="_blank" rel="noopener">运行GPU程序</a></p>
 <h1><span id="9-tensor">9. Tensor</span></h1><p><a href="https://echohhhhhh.github.io/2020/02/17/Pytorch%E4%B9%8BTensor%E5%AD%A6%E4%B9%A0/" target="_blank" rel="noopener">Pytorch之Tensor学习</a></p>
+<h1><span id="bn和dropout在训练和测试的不同">BN和Dropout在训练和测试的不同</span></h1><p><code>model.train()</code>:启用 BatchNormalization 和 Dropout<br><code>model.eval()</code>:不启用 BatchNormalization 和 Dropout<br>训练完train样本后，生成的模型model要用来测试样本。在model(test)之前，需要加上model.eval()，否则的话，有输入数据，即使不训练，它也会改变权值。这是model中含有batch normalization层所带来的的性质。</p>
+<p>参考资料<br><a href="https://zhuanlan.zhihu.com/p/54986509" target="_blank" rel="noopener">Pytorch model.train 与 model.eval</a><br><a href="https://discuss.pytorch.org/t/model-eval-vs-with-torch-no-grad/19615/19" target="_blank" rel="noopener">‘model.eval()’ vs ‘with torch.no_grad()’</a><br><a href="https://github.com/pytorch/examples/blob/master/word_language_model/main.py" target="_blank" rel="noopener">https://github.com/pytorch/examples/word_language_model</a></p>
 
       
     </div>
@@ -704,7 +707,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 查看网络参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 分类问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. CrossEntropyLoss()和NLLLoss() 区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 模型训练示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 关闭梯度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 多GPU运行程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. Tensor</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 查看网络参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 分类问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. CrossEntropyLoss()和NLLLoss() 区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 模型训练示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 关闭梯度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 多GPU运行程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. Tensor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">BN和Dropout在训练和测试的不同</span></a></li></ol></div>
             
 
           </div>

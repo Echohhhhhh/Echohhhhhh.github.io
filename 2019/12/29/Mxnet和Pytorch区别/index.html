@@ -77,14 +77,17 @@
 <meta name="keywords" content="Pytorch,Mxnet,GPU">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mxnet和Pytorch区别">
-<meta property="og:url" content="http://yoursite.com/2019/12/29/运行GPU程序/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/12/29/Mxnet和Pytorch区别/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-29T07:46:28.068Z">
+<meta property="og:image" content="http://yoursite.com/2019/12/29/Mxnet和Pytorch区别/gpus-mxnet.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/29/Mxnet和Pytorch区别/gpus-pytorch.png">
+<meta property="og:updated_time" content="2020-03-03T09:36:20.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mxnet和Pytorch区别">
 <meta name="twitter:description" content="平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU">
+<meta name="twitter:image" content="http://yoursite.com/2019/12/29/Mxnet和Pytorch区别/gpus-mxnet.png">
 
 
 
@@ -114,7 +117,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/12/29/运行GPU程序/">
+  <link rel="canonical" href="http://yoursite.com/2019/12/29/Mxnet和Pytorch区别/">
 
 
 
@@ -299,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/29/运行GPU程序/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/29/Mxnet和Pytorch区别/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Echo">
@@ -385,7 +388,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.6k
+                  1.8k
                 </span>
               
 
@@ -401,7 +404,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7
+                  8
                 </span>
               
             </div>
@@ -529,14 +532,26 @@
 <li>pytorch<br>输入数据维度默认<code>(T,batch_size,input_size)</code><br>output输出数据维度<code>(T,batch_size,hidden_size)</code></li>
 </ul>
 <h2><span id="34-多gpu运行">3.4. 多GPU运行</span></h2><ul>
-<li><p>mxnet<br><code>split_and_load()</code>返回值的list，里面每个元素是<code>NDArray</code>,经过<code>split_and_load()</code>对一个batch数据进行分割，得到的<code>X,y</code>的shape变成<code>(batch_size/n,*)</code>,经过模型输出得到的predicted维度也是<code>(batch_size/n,*)</code><br>计算得到的loss也是list类型，里面存储一个batch在多个GPU上计算的loss，对每个loss分别反向传播求梯度，然后再使用<code>step()</code>更新参数。</p>
+<li><p>mxnet</p>
+<blockquote>
+<p>mxnet.gluon.utils.split_and_load(data, ctx_list, batch_axis=0, even_split=True)</p>
+</blockquote>
+<p><code>split_and_load()</code>将一个batch中的数据划分为多个小batch到多个GPU上。<br><strong>【注意】默认batch_axis=0，也就是默认划分axis=0的维度，如果batch不在第0维，例如RNN中，输入的维度默认为TNC，batch在第1维，那就需要在split_and_load中指定batch_axis=1</strong><br><code>split_and_load()</code>返回值是list，里面每个元素是<code>NDArray</code>,经过<code>split_and_load()</code>对一个batch数据进行分割，得到的<code>X,y</code>的shape变成<code>(batch_size/n,*)</code>,经过模型输出得到的predicted维度也是<code>(batch_size/n,*)</code><br>计算得到的loss也是list类型，里面存储一个batch在多个GPU上计算的loss，对每个loss分别反向传播求梯度，然后再使用<code>step()</code>更新参数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">for</span> X,y <span class="keyword">in</span> train_iter:</span><br><span class="line">        gpu_Xs = gutils.split_and_load(X,ctx)</span><br><span class="line">        gpu_ys = gutils.split_and_load(y,ctx)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> autograd.record():</span><br><span class="line">            <span class="comment">#ls是list，里面有n个NDArray，n是GPU的个数</span></span><br><span class="line">            ls = [loss(net(gpu_X),gpu_y <span class="keyword">for</span> gpu_X,gpu_y <span class="keyword">in</span> zip(gpu_Xs,gpu_ys)</span><br><span class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> ls:</span><br><span class="line">            l.backward()</span><br><span class="line"></span><br><span class="line">        train.step(batch_size)</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/12/29/Mxnet和Pytorch区别/gpus-mxnet.png" alt=""></p>
 </li>
 <li><p>pytorch<br><a href="https://echohhhhhh.github.io/2019/01/31/%E8%BF%90%E8%A1%8CGPU%E7%A8%8B%E5%BA%8F/" target="_blank" rel="noopener">Pytorch学习</a>  </p>
-<p>pytorch使用<code>DataParallel()</code>来进行数据并行，不需要手动将数据划分到多个GPU上，即<code>train_feature</code>的维度是<code>(batch_size,*)</code>，经过模型输出的<code>predicted</code>的维度也是<code>(batch_size,*)</code>，这一点和<code>mxnet</code>不同</p>
+<blockquote>
+<p>CLASS torch.nn.DataParallel(module, device_ids=None, output_device=None, dim=0)</p>
+</blockquote>
+<p><strong><code>DataParallel</code>自动将batch进行划分，划分维度默认dim=0，如果batch在其他维度，通过dim指定</strong><br>pytorch使用<code>DataParallel()</code>来进行数据并行，不需要手动将数据划分到多个GPU上，即<code>train_feature</code>的维度是<code>(batch_size,*)</code>，经过模型输出的<code>predicted</code>的维度也是<code>(batch_size,*)</code>，这一点和<code>mxnet</code>不同</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用多GPU的关键代码</span></span><br><span class="line"><span class="keyword">if</span> torch.cuda.device_count() &gt; <span class="number">1</span>:</span><br><span class="line">    transformer_model = nn.DataParallel(transformer_model)<span class="comment">#默认全部GPU</span></span><br><span class="line">transformer_model.to(device0)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">1</span>,training_epoch+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> train_feature,train_label <span class="keyword">in</span> train_loader:</span><br><span class="line">        train_feature = train_feature.to(device0)</span><br><span class="line">        train_label = train_label.to(device0)</span><br><span class="line">        <span class="comment">#train_label:(tabch_size,*)</span></span><br><span class="line">        predicted = transformer_model(train_feature)</span><br><span class="line">        l = loss(predicted,train_label)<span class="comment">#l的shape：(1,)</span></span><br><span class="line">        trainer.zero_grad()</span><br><span class="line">        l.backward()</span><br><span class="line">        trainer.step()</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<p>  <img src="/2019/12/29/Mxnet和Pytorch区别/gpus-pytorch.png" alt=""></p>
+<blockquote>
+<p>从这2个图中可以看出Mxnet和Pytorch多GPU运行的区别。<br>  Mxnet将batch数据和label都分配到每个GPU上，然后在每个GPU上都计算loss，然后再把loss聚合。<br>  Pytorch只把batch数据分配到每个GPU上，在每个GPU上得到输出，gather到主设备上，然后再和label计算loss。<br>  Mxnet会比Pytorch会一些，因为Mxnet的loss是在不同的GPU上计算的，但Pytorch的写法更简单。</p>
+</blockquote>
 <h2><span id="将网络加入list中">将网络加入list中</span></h2><ul>
 <li><p>mxnet</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">self.submodules = []</span><br><span class="line">      <span class="keyword">with</span> self.name_scope():</span><br><span class="line">          <span class="keyword">for</span> backbones <span class="keyword">in</span> all_backbones:</span><br><span class="line">              self.submodules.append(</span><br><span class="line">                  ASTGCN_submodule(num_for_prediction, backbones))</span><br><span class="line">              self.register_child(self.submodules[<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
