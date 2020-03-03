@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="1. 简介汇总Pytorch的一些知识点">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-03T07:54:16.752Z">
+<meta property="og:updated_time" content="2020-03-03T14:40:08.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pytorch之知识点汇总">
 <meta name="twitter:description" content="1. 简介汇总Pytorch的一些知识点">
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  879
+                  1.1k
                 </span>
               
 
@@ -436,6 +436,7 @@
 <li><a href="#8-%e5%a4%9agpu%e8%bf%90%e8%a1%8c%e7%a8%8b%e5%ba%8f">8. 多GPU运行程序</a></li>
 <li><a href="#9-tensor">9. Tensor</a></li>
 <li><a href="#bn%e5%92%8cdropout%e5%9c%a8%e8%ae%ad%e7%bb%83%e5%92%8c%e6%b5%8b%e8%af%95%e7%9a%84%e4%b8%8d%e5%90%8c">BN和Dropout在训练和测试的不同</a></li>
+<li><a href="#linear">Linear</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="2-查看网络参数">2. 查看网络参数</span></h1><ul>
@@ -475,7 +476,8 @@
 <h1><span id="9-tensor">9. Tensor</span></h1><p><a href="https://echohhhhhh.github.io/2020/02/17/Pytorch%E4%B9%8BTensor%E5%AD%A6%E4%B9%A0/" target="_blank" rel="noopener">Pytorch之Tensor学习</a></p>
 <h1><span id="bn和dropout在训练和测试的不同">BN和Dropout在训练和测试的不同</span></h1><p><code>model.train()</code>:启用 BatchNormalization 和 Dropout<br><code>model.eval()</code>:不启用 BatchNormalization 和 Dropout<br>训练完train样本后，生成的模型model要用来测试样本。在model(test)之前，需要加上model.eval()，否则的话，有输入数据，即使不训练，它也会改变权值。这是model中含有batch normalization层所带来的的性质。</p>
 <p>参考资料<br><a href="https://zhuanlan.zhihu.com/p/54986509" target="_blank" rel="noopener">Pytorch model.train 与 model.eval</a><br><a href="https://discuss.pytorch.org/t/model-eval-vs-with-torch-no-grad/19615/19" target="_blank" rel="noopener">‘model.eval()’ vs ‘with torch.no_grad()’</a><br><a href="https://github.com/pytorch/examples/blob/master/word_language_model/main.py" target="_blank" rel="noopener">https://github.com/pytorch/examples/word_language_model</a></p>
-
+<h1><span id="linear">Linear</span></h1><p>原先误以为Pytorch中的Linear的输入只能接受二维数据，实际上Linear的输入数据可以是三维、四维等更多维。但是<strong>输入数据的最后一维一定要和<code>in_dim</code>一致，输出数据维度就是把<code>in_dim</code>换成了<code>out_dim</code>，前面所有的维度都不变</strong>。<br>例如定义一个全连接<code>nn.Linear(10,5)</code>，输入数据维度为(3,6,10),输出维度为(3,6,5)。即输入数据最后一个维度一定要和<code>in_dim</code>一致，也不用纠结到底3是batch_size,还是6是batch_size，因为最终输出的数据只有最后一个维度变化，前面维度都不变。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dense = nn.Linear(in_dim,out_dim)</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -707,7 +709,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 查看网络参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 分类问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. CrossEntropyLoss()和NLLLoss() 区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 模型训练示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 关闭梯度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 多GPU运行程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. Tensor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">BN和Dropout在训练和测试的不同</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 查看网络参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 分类问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. CrossEntropyLoss()和NLLLoss() 区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 模型训练示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 关闭梯度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 多GPU运行程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. Tensor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">BN和Dropout在训练和测试的不同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">Linear</span></a></li></ol></div>
             
 
           </div>

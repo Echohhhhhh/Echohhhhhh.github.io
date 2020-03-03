@@ -83,7 +83,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/12/29/Mxnet和Pytorch区别/gpus-mxnet.png">
 <meta property="og:image" content="http://yoursite.com/2019/12/29/Mxnet和Pytorch区别/gpus-pytorch.png">
-<meta property="og:updated_time" content="2020-03-03T10:17:04.142Z">
+<meta property="og:updated_time" content="2020-03-03T13:31:07.439Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mxnet和Pytorch区别">
 <meta name="twitter:description" content="平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU">
@@ -388,7 +388,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k
+                  2k
                 </span>
               
 
@@ -448,8 +448,9 @@
 </li>
 <li><a href="#32-loss%e8%ae%a1%e7%ae%97">3.2. loss计算</a></li>
 <li><a href="#33-rnn%e8%be%93%e5%85%a5%e7%bb%b4%e5%ba%a6">3.3. RNN输入维度</a></li>
-<li><a href="#34-%e5%a4%9agpu%e8%bf%90%e8%a1%8c">3.4. 多GPU运行</a></li>
-<li><a href="#%e5%b0%86%e7%bd%91%e7%bb%9c%e5%8a%a0%e5%85%a5list%e4%b8%ad">将网络加入list中</a></li>
+<li><a href="#34-transformer%e8%be%93%e5%85%a5%e7%bb%b4%e5%ba%a6">3.4. Transformer输入维度</a></li>
+<li><a href="#35-%e5%a4%9agpu%e8%bf%90%e8%a1%8c">3.5. 多GPU运行</a></li>
+<li><a href="#36-%e5%b0%86%e7%bd%91%e7%bb%9c%e5%8a%a0%e5%85%a5list%e4%b8%ad">3.6. 将网络加入list中</a></li>
 </ul>
 </li>
 </ul>
@@ -528,10 +529,34 @@
 </blockquote>
 <h2><span id="33-rnn输入维度">3.3. RNN输入维度</span></h2><p>RNN有2个数据：所有时间步的隐藏状态output、最后一个时间步的隐藏状态out_state</p>
 <ul>
-<li>mxnet<br>输入数据维度默认<code>(T,batch_size,input_size)</code><br>output输出数据维度<code>(T,batch_size,hidden_size)</code></li>
-<li>pytorch<br>输入数据维度默认<code>(T,batch_size,input_size)</code><br>output输出数据维度<code>(T,batch_size,hidden_size)</code></li>
+<li>mxnet<ul>
+<li>输入数据维度默认<code>(T,batch_size,input_size)</code></li>
+<li>output输出数据维度<code>(T,batch_size,hidden_size)</code></li>
 </ul>
-<h2><span id="34-多gpu运行">3.4. 多GPU运行</span></h2><ul>
+</li>
+<li>pytorch<ul>
+<li>输入数据维度默认<code>(T,batch_size,input_size)</code></li>
+<li>output输出数据维度<code>(T,batch_size,hidden_size)</code></li>
+</ul>
+</li>
+</ul>
+<h2><span id="34-transformer输入维度">3.4. Transformer输入维度</span></h2><ul>
+<li><p>mxnet<br>Mxnet中有一个NLP相关的包<code>gluonnlp</code>,里面封装了<code>Transformer</code>，这里只讨论<code>TransformerEncoder</code></p>
+<ul>
+<li>输入维度为<code>(batch_size, length, C_in)</code></li>
+<li>输出维度为<code>(batch_size, length, C_out)</code></li>
+</ul>
+</li>
+<li><p>pytorch<br>Pytorch中也封装了Transformer，<code>TransformerEncoder</code></p>
+<ul>
+<li>输入维度为<code>(length, batch_size, Embedding)</code></li>
+<li>输出维度为<code>(length, batch_size, Embedding)</code><br><code>nn.TransformerEncoderLayer</code></li>
+<li>输入维度为<code>(length, batch_size, Embedding)</code></li>
+<li>输出维度为<code>(length, batch_size, Embedding)</code></li>
+</ul>
+</li>
+</ul>
+<h2><span id="35-多gpu运行">3.5. 多GPU运行</span></h2><ul>
 <li><p>mxnet</p>
 <blockquote>
 <p>mxnet.gluon.utils.split_and_load(data, ctx_list, batch_axis=0, even_split=True)</p>
@@ -552,7 +577,7 @@
 <blockquote>
 <p>从这2个图中可以看出Mxnet和Pytorch多GPU运行的区别。<br>  <strong>Mxnet</strong>将batch数据和label都分配到每个GPU上，然后在每个GPU上都计算loss，然后再把loss聚合。<br>  <strong>Pytorch</strong>只把batch数据分配到每个GPU上，在每个GPU上得到输出，gather到主设备上，然后再和label计算loss。<br>  Mxnet会比Pytorch会一些，因为Mxnet的loss是在不同的GPU上计算的，但Pytorch的写法更简单。<br>  为了解决Pytorch在一张卡上计算loss的问题，有人提出了解决方案，参考<a href="https://liumin.blog.csdn.net/article/details/89437058" target="_blank" rel="noopener">基于PyTorch使用大batch训练神经网络</a>和<a href="https://blog.csdn.net/weixin_40087578/article/details/87186613?depth_1-utm_source=distribute.pc_relevant.none-task&amp;utm_source=distribute.pc_relevant.none-task" target="_blank" rel="noopener">pytorch 多GPU训练总结（DataParallel的使用）</a></p>
 </blockquote>
-<h2><span id="将网络加入list中">将网络加入list中</span></h2><ul>
+<h2><span id="36-将网络加入list中">3.6. 将网络加入list中</span></h2><ul>
 <li><p>mxnet</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">self.submodules = []</span><br><span class="line">      <span class="keyword">with</span> self.name_scope():</span><br><span class="line">          <span class="keyword">for</span> backbones <span class="keyword">in</span> all_backbones:</span><br><span class="line">              self.submodules.append(</span><br><span class="line">                  ASTGCN_submodule(num_for_prediction, backbones))</span><br><span class="line">              self.register_child(self.submodules[<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
 </li>
@@ -797,7 +822,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. mxnet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. 单GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. 多GPU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. pytorch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 单GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. 多GPU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. mxnet和pytorch区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. NDArray和Tensor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.1. 和numpy转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.2. 转换为标量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.3. 改变数据形状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.4. 数据转到GPU上</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. loss计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. RNN输入维度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.4. 多GPU运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">将网络加入list中</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. mxnet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. 单GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. 多GPU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. pytorch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 单GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. 多GPU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. mxnet和pytorch区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. NDArray和Tensor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.1. 和numpy转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.2. 转换为标量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.3. 改变数据形状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.4. 数据转到GPU上</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. loss计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. RNN输入维度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.4. Transformer输入维度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.5. 多GPU运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.6. 将网络加入list中</span></a></li></ol></li></ol></div>
             
 
           </div>
