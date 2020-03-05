@@ -744,6 +744,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <li><a href="#18-%e5%85%b3%e9%97%adnni">1.8. 关闭NNI</a></li>
 </ul>
 </li>
+<li><a href="#%e5%86%85%e5%ad%98%e6%8c%87%e6%a0%87%e8%a7%a3%e8%af%bb">内存指标解读</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="1-使用步骤">1. 使用步骤</span></h1><h2><span id="11-编写程序">1.1. 编写程序</span></h2><p>   先在VSCode中完成代码，先在VSCode的虚拟环境中运行，如果可以运行，再使用OpemPai运行。<br>   <strong>注：在OpenPai上运行程序，不需要指定使用哪块GPU，因为OpenPai会自动申请需要使用的GPU。即以下代码注释掉</strong></p>
@@ -764,6 +765,16 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
    <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(<span class="string">"************进入main函数"</span>,flush=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
 <p>   <img src="/2020/01/10/openpai/logs.png" alt=""></p>
 <h2><span id="18-关闭nni">1.8. 关闭NNI</span></h2><p>直接在服务器中使用<code>nnictl stop</code>即可关闭nni的Experiment</p>
+<h1><span id="内存指标解读">内存指标解读</span></h1><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">trial:</span></span><br><span class="line">    <span class="comment"># 指定了运行 Trial 进程的命令行</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">cd</span> <span class="string">baseline</span> <span class="string">&amp;&amp;</span> <span class="string">python3</span>  <span class="string">hetero_convlstm_baseline.py</span></span><br><span class="line">    <span class="comment">#指定了 Trial 代码文件的目录,../会进入到Cod目录下</span></span><br><span class="line"><span class="attr">    codeDir:</span> <span class="string">../</span></span><br><span class="line"><span class="attr">    gpuNum:</span> <span class="number">2</span></span><br><span class="line"><span class="attr">    cpuNum:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">    memoryMB:</span> <span class="number">20000</span></span><br></pre></td></tr></table></figure>
+<p><strong>【gpuNum】</strong>：设置为2，表示该程序使用2张GPU，即该程序独占2张GPU卡，<strong>独占2张卡的显存和计算力</strong><br><strong>【cpuNum】</strong>：设置为3，占用3块CPU来计算<br><strong>【memoryMB】</strong>：设置为20000MB，表示该程序总共占2000MB的内存，在openpai上内存是共享的，显存是独享的。</p>
+<p>当我设置如上资源来跑程序时，可以看到程序的资源占用情况如下所示：<br><img src="/2020/01/10/openpai/指标示意图.png" alt=""></p>
+<p><strong>【指标解读】</strong></p>
+<p>上面从左到右一共有6张图，我们只关注<code>CPU,memory usage,GPU Utilization,GPU Memory</code>这4张图。</p>
+<ul>
+<li><strong>CPU</strong>：CPU的占用率稳定在300%，说明程序分配的3张CPU卡都用来做计算，CPU一直是满载状况，这时候可以适当增加cpuNum的个数</li>
+<li><strong>memory usage</strong>：内存占用率稳定在12G，我们分配给该程序的资源是20G，分配的有点多，可以适当减少些。内存分配的资源也不是越多越好，因为openpai在跑程序时，当有足够的GPU但是却没有足够的内存，程序依然不能运行，会一直处于waiting状态</li>
+<li><strong>GPU Utilization和GPU Memory</strong>：GPU的占用率稳定在25%，给该程序分配了2张GPU卡，一张卡有11G显存，但是程序只占了25%，也就是大约3G，2张卡对该程序有点多，可以改为1张卡</li>
+</ul>
 ]]></content>
       <categories>
         <category>工具</category>
@@ -1059,6 +1070,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 </ul>
 </li>
 </ul>
+<p>【注意】Mxnet版的Tranformer中Dropout的p默认为0，Pytorch版的Transformer中Dropout的p默认为0.1</p>
 <h2><span id="35-多gpu运行">3.5. 多GPU运行</span></h2><ul>
 <li><p>mxnet</p>
 <blockquote>
@@ -2562,7 +2574,7 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <!-- /TOC -->
 <h1><span id="1-虚拟环境">1. 虚拟环境</span></h1><p>&ensp;&ensp;&ensp;&ensp;在服务器上可以安装不同的虚拟环境，这些虚拟环境之间互不影响，不同的虚拟环境可以安装不同的python版本，不同的框架。</p>
 <ol>
-<li>给服务器连网<br>在windows系统中，按<code>Windows+R</code>，输入<code>mstsc</code>，输入服务器的ip登陆，然后在浏览器里登陆 </li>
+<li>给服务器连网<br>方法1：在windows系统中，按<code>Windows+R</code>，输入<code>mstsc</code>，输入服务器的ip登陆，然后在浏览器里登陆<br>方法2：联网的命令：<code>curl -d &quot;callback=dr1583040563683&amp;DDDDD=upass=&amp;0MKKey=123456&amp;R1=0&amp;R3=0&amp;R6=0&amp;para=00&amp;v6ip=&amp;_=1583040239097&quot; http://10.10.43.3/drcom/login</code><br>注销的命令：<code>curl http://10.10.43.3/drcom/logout?callback=dr1583041023742&amp;_=1583041015901</code>，执行完后按一下回车 </li>
 <li>安装Anaconda<br><code>wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh</code></li>
 <li>运行安装向导<br><code>bash Anaconda3-5.2.0-Linux-x86_64.sh</code><br>为了激活安装， 你应该源~/.bashrc文件：<br><code>source ~/.bashrc</code></li>
 <li>确认安装成功<br><code>conda --version</code><br>然后使用<code>which python</code>查看你当前使用的是哪个python，如果输出的目录是<code>data/anaconda/python</code>说明你当前使用的还是服务器自带的python，需要重新练连接一下服务器。如果输出是<code>data/WangBeibei/anaconda/python</code>，说明当前使用是自己安装的anaconda</li>
@@ -2940,8 +2952,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>分布式平台</category>
       </categories>
       <tags>
-        <tag>Python</tag>
         <tag>Spark</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
@@ -3746,26 +3758,29 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <p>&ensp;&ensp;&ensp;&ensp;第一代卷积。谱图卷积就是给定一个图信号，和一个卷积核。图信号就是假设有一个图，如果有200个节点，每个节点有3个特征，x就是一个200<em>3的矩阵，这个矩阵就是图信号矩阵。卷积核就是一个参数𝜃，谱图卷积的定义就是对归一化的拉普拉斯矩阵特征分解，得到特征值组成的矩阵$\Lambda$和特征向量组成的矩阵U，由于L是对称矩阵，所以U-1等于UT。谱图卷积的定义：在欧式空间内卷积的定义是傅里叶变换乘积的逆变换，研究图上的卷积是怎么来的，将图上的信号做一个图傅里叶变换，将卷积核做一个图傅里叶变换，将这两个做一个内积，然后再做一个图上的逆傅里叶变换。所以一个卷积核在图信号的谱图卷积就定义出来了。这个式子直接把卷积核g的傅里叶变换的对角矩阵当做参数，<strong>此时的卷积核不需要训练，因为右式中的所有值都是已知的。U已知，中间的对角矩阵的值</strong> $\theta$ <em>*就是傅里叶算子，也是已知的，图信号矩阵x也是已知的</em></em>。这种方式太简单，这个卷积核不具有局部性，不能捕获局部关系。并且这个式子的时间复杂度很高，是n的立方，第二个是参数过多。所以后人对其进行改进。</p>
 <h3><span id="223-第二代图卷积chebnet">2.2.3. 第二代图卷积ChebNet</span></h3><p><img src="/2019/03/03/图卷积/ChebNet.png" alt="">  </p>
 <p><img src="/2019/03/03/图卷积/改进1.png" alt=""> </p>
+<p><img src="/2019/03/03/图卷积/ChebNet2.png" alt=""> </p>
 <p>&ensp;&ensp;&ensp;&ensp;第二代图卷积。$g_\theta$是关于特征值的一个函数，以前是直接把特征值变成卷积核，现在把每一个特征值上都乘上一个特征值矩阵的k次幂，然后把0到k-1次幂加到一起，构造成一个新的卷积核。把这个卷积核代入，得到右侧这个式子，右边这个式子不需要做特征值分解，直接把L连乘k次就可以了。<strong>这个卷积核是需要训练的，其中的参数是</strong>$\theta_k$<strong>通过初始化赋值再通过反向传播进行调整</strong>。所以这个一个改进，这个式子比前面那个式子的时间复杂度低。但是右边的这个时间复杂度也不低，因为涉及到L的k次幂，现在就想办法把右边这个式子的时间复杂度降低。   </p>
-<h3><span id="224-第三代图卷积">2.2.4. 第三代图卷积</span></h3><p><img src="/2019/03/03/图卷积/图卷积3.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;ICLR2017<a href="https://arxiv.org/pdf/1609.02907.pdf" target="_blank" rel="noopener">Semi-supervised Classification with Graph Convolutional Networks</a>这篇论文就对上面那个式子进行改进，让K=1，最大特征值=2，这个式子就变成了右边这个式子，继续化简，让$\theta_0$和$\theta_1$互为相反数，称为一个权重，为什么能这么变呢，因为他相信训练的时候卷积核就可以学出互为相反数的参数。这样只考虑一阶邻居，如果堆叠2个卷积层的话，就可以考虑2阶邻居了。    </p>
+<h3><span id="224-第三代图卷积">2.2.4. 第三代图卷积</span></h3><p><img src="/2019/03/03/图卷积/图卷积3.png" alt=""></p>
+<p><img src="/2019/03/03/图卷积/ChebNet-to-GCN.png" alt="由ChebNet转换为GCN">  </p>
+<p>&ensp;&ensp;&ensp;&ensp;ICLR2017<a href="https://arxiv.org/pdf/1609.02907.pdf" target="_blank" rel="noopener">Semi-supervised Classification with Graph Convolutional Networks</a>这篇论文就对上面那个式子进行改进，让K=1，最大特征值=2，这个式子就变成了右边这个式子，继续化简，让$\theta_0$和$\theta_1$互为相反数，称为一个权重，为什么能这么变呢，因为他相信训练的时候卷积核就可以学出互为相反数的参数。这样只考虑一阶邻居，如果堆叠2个卷积层的话，就可以考虑2阶邻居了。    </p>
 <p><img src="/2019/03/03/图卷积/图卷积4.png" alt=""><br>&ensp;&ensp;&ensp;&ensp;然后这篇论文又对刚刚的那个式子作一个归一化的trick，就是把邻接矩阵A加上一个单位矩阵，原先A是一个邻接矩阵，对角线上全为0，现在加上一个1，就是说节点自己到自己是没有边的，现在是自己有一条边又到达了自己，也就是增加一个自连接，然后重新计算一个度矩阵，然后就得到重新归一化的拉普拉斯矩阵，然后代入化成矩阵相乘的形式就是右边这个式子。这样卷积就定义完了，其中输入就是图信号X，卷积核就是Θ，前面的东西就是一个常量，只要拥有这三部分就可以得到GCN的卷积。卷积定义完了，然后加一个relu激活函数，这样一层图卷积就定义完了，如果要叠加一层，就是把上一层图卷积输出后的表示作为图卷积的输入，再做一次卷积。因为这篇论文做的是分类任务，所以要输出每个节点属于某个类的概率，所以用一个softmax就可以输出概率。<br>&ensp;&ensp;&ensp;&ensp;形象的解释：每个节点拿到邻居节点信息然后聚合到自身Embedding上。在上面的公式中，$\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}$可以看做是归一化后的邻接矩阵。$X\Theta$相当于对原始节点的Embedding做一次线性变换，左乘邻接矩阵表示对每个节点来说，该节点的特征变为邻居节点特征相加后的结果。<br>&ensp;&ensp;&ensp;&ensp;这就是现在谱图卷积计算的式子，实际</p>
 <hr>
 <p>2020.2.17更新</p>
 <h3><span id="225-图卷积多种形式">2.2.5. 图卷积多种形式</span></h3><ol>
-<li>$f(H^{(l)},A) = \sigma(AH^{(l)}W^{(l)})$<br>直接将$AH$做矩阵相乘，然后再通过一个权重矩阵$W^{(l)}$做线性变换，之后再经过非线性激活函数$\sigma(·)$,例如$ReLU$,最后得到下一层的输入$H^{(l+1)}$。</li>
-<li>$f(H^{(l)},A) = \sigma(\hat{A}H^{(l)}W^{(l)})$<br>方式1这里直接将权重矩阵$A$和图信号矩阵$H$相乘，表示对于每个节点，将其邻居的特征加起来作为其新的表示。<br>有以下问题：<ul>
+<li>$f(H^{(l)},A) = \sigma(AH^{(l)}W^{(l)})$<br>直接将$AH$做矩阵相乘，然后再通过一个权重矩阵$W^{(l)}$做线性变换，之后再经过非线性激活函数$\sigma(·)$,例如$ReLU$,最后得到下一层的输入$H^{(l+1)}$。表示每次只聚合其邻居，将邻居的值加起来作为中心结点新的特征表示。<br>有以下问题：<ul>
 <li>虽然获取了周围节点的信息，但是自身的信息却没了，除非邻接矩阵中有自连接。解决方案：对每个节点手动增加一条<code>self-loop</code>到每一个节点，即$\hat{A}=A+I$,其中$I$是单位矩阵</li>
 </ul>
 </li>
+<li>$f(H^{(l)},A) = \sigma(\hat{A}H^{(l)}W^{(l)})$<br>在邻接矩阵中加入自连接，每次聚合邻居和自身的值，加起来作为中心结点新的特征表示。$\hat{A}=A+I$,其中$I$是单位矩阵</li>
 <li>$f(H^{(l)},A) = \sigma(D^{-1}AH^{(l)}W^{(l)})$<br>方式1这里直接将权重矩阵$A$和图信号矩阵$H$相乘，表示对于每个节点，将其邻居的特征加起来作为其新的表示。<br>有以下问题：<ul>
-<li>经过一层变换，每个节点特征都会变成邻接特征之和，这样得到的输出会越来越大，即特征向量$X$的scale会改变，在经过多层的变化之后，将和输入的scale差距越来越大。解决方案：原先邻接矩阵$A$中的值非0即1，是否可以将邻接矩阵$A$做归一化，使得每一行之和为1，使得$AH$获得的是<code>weighted sum</code>，可以将$A$的每一行除以行的和，这就可以得到<code>normalized</code>的$A$,而每一行的和就是每个节点的<code>degree</code>,用矩阵表示为$A=D^{-1}A$，对于邻接矩阵中的每个值变成$A_{ij}=\frac{A_{ij}}{d_i}$</li>
+<li>经过一层变换，每个节点特征都会变成邻接特征之和，这样得到的输出会越来越大，即特征向量$X$的scale会改变，在经过多层的变化之后，和输入的scale差距越来越大。解决方案：原先邻接矩阵$A$中的值非0即1，现在对邻接矩阵$A$做归一化，使得每一行之和为1，使得$AH$获得的是<code>weighted sum</code>，做法是：将$A$的每一行除以行的和(即每个节点的度)，这就可以得到<code>normalized</code>的$A$,则新的邻接矩阵表示为$A=D^{-1}A$，对于邻接矩阵中的每个值变成$A_{ij}=\frac{A_{ij}}{d_i}$</li>
 </ul>
 </li>
 <li>$f(H^{(l)},A) = \sigma(D^{-\frac{1}{2}}AD^{-\frac{1}{2}}H^{(l)}W^{(l)})$<ul>
-<li>但是在实际运用中，我们采用的对称的<code>normalization</code>,$A=D^{-\frac{1}{2}}AD^{-\frac{1}{2}}$,对于$A_{ij}=\frac{A_{ij}}{\sqrt{d_i}\sqrt{d_j}}$</li>
+<li>但是在实际运用中，我们通常使用对称的<code>normalization</code>,$A=D^{-\frac{1}{2}}AD^{-\frac{1}{2}}$,对于$A_{ij}=\frac{A_{ij}}{\sqrt{d_i}\sqrt{d_j}}$</li>
 </ul>
 </li>
-<li>$f(H^{(l)},A) = \sigma(\hat{D}^{-\frac{1}{2}}\hat{A}\hat{D}^{-\frac{1}{2}}H^{(l)}W^{(l)})$<br>结合公式2和公式4，得到公式5</li>
+<li>$f(H^{(l)},A) = \sigma(\hat{D}^{-\frac{1}{2}}\hat{A}\hat{D}^{-\frac{1}{2}}H^{(l)}W^{(l)})$<br>结合公式2和公式4，将邻接矩阵$A$加上自连接变成$\hat{A}$,同时使用对称 <code>normalization</code>，得到公式5</li>
 </ol>
 <p>【<strong>参考资料</strong>】<br><a href="https://zhuanlan.zhihu.com/p/107162772" target="_blank" rel="noopener">图卷积网络（GCN）入门详解</a></p>
 ]]></content>

@@ -87,7 +87,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/python.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/bashrc1.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/27/虚拟环境安装/bashrc2.png">
-<meta property="og:updated_time" content="2020-02-26T14:48:06.940Z">
+<meta property="og:updated_time" content="2020-03-04T03:11:22.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="虚拟环境安装">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在服务器上安装虚拟环境。">
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.7k
+                  1.8k
                 </span>
               
 
@@ -438,7 +438,7 @@
 <!-- /TOC -->
 <h1><span id="1-虚拟环境">1. 虚拟环境</span></h1><p>&ensp;&ensp;&ensp;&ensp;在服务器上可以安装不同的虚拟环境，这些虚拟环境之间互不影响，不同的虚拟环境可以安装不同的python版本，不同的框架。</p>
 <ol>
-<li>给服务器连网<br>在windows系统中，按<code>Windows+R</code>，输入<code>mstsc</code>，输入服务器的ip登陆，然后在浏览器里登陆 </li>
+<li>给服务器连网<br>方法1：在windows系统中，按<code>Windows+R</code>，输入<code>mstsc</code>，输入服务器的ip登陆，然后在浏览器里登陆<br>方法2：联网的命令：<code>curl -d &quot;callback=dr1583040563683&amp;DDDDD=upass=&amp;0MKKey=123456&amp;R1=0&amp;R3=0&amp;R6=0&amp;para=00&amp;v6ip=&amp;_=1583040239097&quot; http://10.10.43.3/drcom/login</code><br>注销的命令：<code>curl http://10.10.43.3/drcom/logout?callback=dr1583041023742&amp;_=1583041015901</code>，执行完后按一下回车 </li>
 <li>安装Anaconda<br><code>wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh</code></li>
 <li>运行安装向导<br><code>bash Anaconda3-5.2.0-Linux-x86_64.sh</code><br>为了激活安装， 你应该源~/.bashrc文件：<br><code>source ~/.bashrc</code></li>
 <li>确认安装成功<br><code>conda --version</code><br>然后使用<code>which python</code>查看你当前使用的是哪个python，如果输出的目录是<code>data/anaconda/python</code>说明你当前使用的还是服务器自带的python，需要重新练连接一下服务器。如果输出是<code>data/WangBeibei/anaconda/python</code>，说明当前使用是自己安装的anaconda</li>
