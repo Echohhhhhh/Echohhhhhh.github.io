@@ -765,6 +765,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
    <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(<span class="string">"************进入main函数"</span>,flush=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
 <p>   <img src="/2020/01/10/openpai/logs.png" alt=""></p>
 <h2><span id="18-关闭nni">1.8. 关闭NNI</span></h2><p>直接在服务器中使用<code>nnictl stop</code>即可关闭nni的Experiment</p>
+<hr>
+<p>2020.3.5更新</p>
 <h1><span id="内存指标解读">内存指标解读</span></h1><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">trial:</span></span><br><span class="line">    <span class="comment"># 指定了运行 Trial 进程的命令行</span></span><br><span class="line"><span class="attr">    command:</span> <span class="string">cd</span> <span class="string">baseline</span> <span class="string">&amp;&amp;</span> <span class="string">python3</span>  <span class="string">hetero_convlstm_baseline.py</span></span><br><span class="line">    <span class="comment">#指定了 Trial 代码文件的目录,../会进入到Cod目录下</span></span><br><span class="line"><span class="attr">    codeDir:</span> <span class="string">../</span></span><br><span class="line"><span class="attr">    gpuNum:</span> <span class="number">2</span></span><br><span class="line"><span class="attr">    cpuNum:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">    memoryMB:</span> <span class="number">20000</span></span><br></pre></td></tr></table></figure>
 <p><strong>【gpuNum】</strong>：设置为2，表示该程序使用2张GPU，即该程序独占2张GPU卡，<strong>独占2张卡的显存和计算力</strong><br><strong>【cpuNum】</strong>：设置为3，占用3块CPU来计算<br><strong>【memoryMB】</strong>：设置为20000MB，表示该程序总共占2000MB的内存，在openpai上内存是共享的，显存是独享的。</p>
 <p>当我设置如上资源来跑程序时，可以看到程序的资源占用情况如下所示：<br><img src="/2020/01/10/openpai/指标示意图.png" alt=""></p>
@@ -2952,8 +2954,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>分布式平台</category>
       </categories>
       <tags>
-        <tag>Spark</tag>
         <tag>Python</tag>
+        <tag>Spark</tag>
       </tags>
   </entry>
   <entry>
