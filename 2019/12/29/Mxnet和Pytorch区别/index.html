@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="Pytorch,Mxnet,GPU,">
+  <meta name="keywords" content="Mxnet,GPU,Pytorch,">
 
 
 
@@ -74,7 +74,7 @@
 
 
 <meta name="description" content="平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU">
-<meta name="keywords" content="Pytorch,Mxnet,GPU">
+<meta name="keywords" content="Mxnet,GPU,Pytorch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mxnet和Pytorch区别">
 <meta property="og:url" content="http://yoursite.com/2019/12/29/Mxnet和Pytorch区别/index.html">
@@ -83,7 +83,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/12/29/Mxnet和Pytorch区别/gpus-mxnet.png">
 <meta property="og:image" content="http://yoursite.com/2019/12/29/Mxnet和Pytorch区别/gpus-pytorch.png">
-<meta property="og:updated_time" content="2020-03-04T03:13:09.635Z">
+<meta property="og:updated_time" content="2020-03-06T16:28:57.032Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mxnet和Pytorch区别">
 <meta name="twitter:description" content="平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU">
@@ -388,7 +388,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2k
+                  2.1k
                 </span>
               
 
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  9
                 </span>
               
             </div>
@@ -453,6 +453,7 @@
 <li><a href="#36-%e5%b0%86%e7%bd%91%e7%bb%9c%e5%8a%a0%e5%85%a5list%e4%b8%ad">3.6. 将网络加入list中</a></li>
 </ul>
 </li>
+<li><a href="#%e5%9b%ba%e5%ae%9a%e9%9a%8f%e6%9c%ba%e7%a7%8d%e5%ad%90">固定随机种子</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="1-mxnet">1. mxnet</span></h1><h2><span id="11-单gpu">1.1. 单GPU</span></h2><p><a href="http://zh.gluon.ai/chapter_deep-learning-computation/use-gpu.html" target="_blank" rel="noopener">GPU计算</a></p>
@@ -587,6 +588,13 @@
 </li>
 </ul>
   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyModel</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">      super(MyModel, self).__init__()</span><br><span class="line">      self.linears = nn.ModuleList([nn.linear <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>)])</span><br><span class="line"></span><br><span class="line">  <span class="comment"># ModuleList can act as an iterable, or be indexed using ints</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">      <span class="keyword">for</span> i, l <span class="keyword">in</span> enumerate(self.linears):</span><br><span class="line">          x = self.linears[i // <span class="number">2</span>](x) + l(x)</span><br><span class="line">      <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
+<h1><span id="固定随机种子">固定随机种子</span></h1><ul>
+<li><p>mxnet版本</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   seed = <span class="number">2020</span></span><br><span class="line">   mx.random.seed(seed)</span><br><span class="line">np.random.seed(seed)</span><br><span class="line">random.seed(seed)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>pytorch版本</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">seed = <span class="number">2020</span></span><br><span class="line">torch.manual_seed(seed) <span class="comment"># cpu</span></span><br><span class="line">torch.cuda.manual_seed(seed) <span class="comment">#gpu</span></span><br><span class="line">torch.backends.cudnn.deterministic=<span class="keyword">True</span><span class="comment">#cudn,cpu/gpu结果一致</span></span><br><span class="line">np.random.seed(seed)<span class="comment">#numpy</span></span><br><span class="line">random.seed(seed)<span class="comment">#ramdom</span></span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -633,11 +641,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Pytorch/" rel="tag"># Pytorch</a>
-          
             <a href="/tags/Mxnet/" rel="tag"># Mxnet</a>
           
             <a href="/tags/GPU/" rel="tag"># GPU</a>
+          
+            <a href="/tags/Pytorch/" rel="tag"># Pytorch</a>
           
         </div>
       
@@ -823,7 +831,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. mxnet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. 单GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. 多GPU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. pytorch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 单GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. 多GPU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. mxnet和pytorch区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. NDArray和Tensor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.1. 和numpy转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.2. 转换为标量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.3. 改变数据形状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.4. 数据转到GPU上</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. loss计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. RNN输入维度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.4. Transformer输入维度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.5. 多GPU运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.6. 将网络加入list中</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. mxnet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. 单GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. 多GPU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. pytorch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 单GPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. 多GPU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. mxnet和pytorch区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. NDArray和Tensor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.1. 和numpy转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.2. 转换为标量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.3. 改变数据形状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.4. 数据转到GPU上</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. loss计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. RNN输入维度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.4. Transformer输入维度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.5. 多GPU运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.6. 将网络加入list中</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">固定随机种子</span></a></li></ol></div>
             
 
           </div>

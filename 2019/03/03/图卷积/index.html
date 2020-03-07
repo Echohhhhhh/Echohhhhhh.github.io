@@ -110,7 +110,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/图卷积3.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/ChebNet-to-GCN.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/图卷积4.png">
-<meta property="og:updated_time" content="2020-03-05T05:49:39.327Z">
+<meta property="og:updated_time" content="2020-03-06T16:02:24.136Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图卷积">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;看了很久关于图卷积的内容，但总觉得自己理解不深刻，在这里把自己的一些想法写出来，也算把图卷积的内容梳理一下。 参考资料">
@@ -593,6 +593,7 @@
 </li>
 <li>$f(H^{(l)},A) = \sigma(\hat{D}^{-\frac{1}{2}}\hat{A}\hat{D}^{-\frac{1}{2}}H^{(l)}W^{(l)})$<br>结合公式2和公式4，将邻接矩阵$A$加上自连接变成$\hat{A}$,同时使用对称 <code>normalization</code>，得到公式5</li>
 </ol>
+<p><strong>【注意】图卷积实质上就是全连接，filter的个数就是全连接中神经单元个数</strong></p>
 <p>【<strong>参考资料</strong>】<br><a href="https://zhuanlan.zhihu.com/p/107162772" target="_blank" rel="noopener">图卷积网络（GCN）入门详解</a></p>
 
       
