@@ -83,7 +83,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/12/29/Mxnet和Pytorch区别/gpus-mxnet.png">
 <meta property="og:image" content="http://yoursite.com/2019/12/29/Mxnet和Pytorch区别/gpus-pytorch.png">
-<meta property="og:updated_time" content="2020-03-08T14:33:18.158Z">
+<meta property="og:updated_time" content="2020-03-09T13:37:14.522Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mxnet和Pytorch区别">
 <meta name="twitter:description" content="平时主要使用mxnet和pytorch，下面记录下在代码中怎么使用GPU">
@@ -388,7 +388,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.1k
+                  2.3k
                 </span>
               
 
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  9
+                  10
                 </span>
               
             </div>
@@ -529,19 +529,26 @@
 <p>注2：grad在反向传播过程中是累加的，这意味着每一个batch运行反向传播，梯度都会累加之前batch的梯度，所以一般在反向传播传播之前需要把梯度清零。</p>
 <p>注3：pytorch的<code>MSELoss()</code>返回值维度<code>(1,)</code>，Tensor中只有1个数，也称作<code>scalar:零维的张量</code>。因为<code>MSELoss()</code>返回值是batch中所有样本loss的平均值。所以在<code>step()</code>中不需要传入<code>batch_size</code>参数</p>
 </blockquote>
-<h2><span id="33-rnn输入维度">3.3. RNN输入维度</span></h2><p>RNN有2个数据：所有时间步的隐藏状态output、最后一个时间步的隐藏状态out_state</p>
+<h2><span id="33-rnn输入维度">3.3. RNN输入维度</span></h2><p>这里只讨论单向RNN</p>
 <ul>
 <li>mxnet<ul>
 <li>输入数据维度默认<code>(T,batch_size,input_size)</code></li>
-<li>output输出数据维度<code>(T,batch_size,hidden_size)</code></li>
+<li>初始化state维度<code>(num_layers,batch_size,hidden_size)</code>,可以不输入，则默认用全0初始化</li>
+<li>output输出数据维度<code>(T,batch_size,hidden_size)</code>，表示最后一层所有时间步的隐藏状态</li>
+<li>out_state：输出维度和state一样，都是<code>(num_layers,batch_size,hidden_size)</code>,表示所有层最后一个时间步的隐藏状态,如果state不输入，则out_state不会被返回</li>
+<li>如果想让输入维度是(B,T,C),则指定参数<code>layout=NTC</code></li>
 </ul>
 </li>
 <li>pytorch<ul>
 <li>输入数据维度默认<code>(T,batch_size,input_size)</code></li>
-<li>output输出数据维度<code>(T,batch_size,hidden_size)</code></li>
+<li>初始化state维度<code>(num_layers,batch_size,hidden_size)</code>,可以不输入，则默认用全0初始化</li>
+<li>output输出数据维度<code>(T,batch_size,hidden_size)</code>，表示最后一层所有时间步的隐藏状态</li>
+<li>out_state：输出维度和state一样，都是<code>(num_layers,batch_size,hidden_size)</code>,表示所有层最后一个时间步的隐藏状态,如果state不输入，则out_state不会被返回</li>
+<li>如果想让输入维度是(B,T,C),则指定参数<code>batch_first=True</code></li>
 </ul>
 </li>
 </ul>
+<p><strong>注意：Mxnet和Pytorch的唯一区域是：mxnet的state不指定，out_state就不会输出，pytorch不管state是否指定，out_state都会输出</strong></p>
 <h2><span id="34-transformer输入维度">3.4. Transformer输入维度</span></h2><ul>
 <li><p>mxnet<br>Mxnet中有一个NLP相关的包<code>gluonnlp</code>,里面封装了<code>Transformer</code>，这里只讨论<code>TransformerEncoder</code></p>
 <ul>

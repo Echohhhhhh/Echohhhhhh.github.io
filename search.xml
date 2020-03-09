@@ -1193,19 +1193,26 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <p>注2：grad在反向传播过程中是累加的，这意味着每一个batch运行反向传播，梯度都会累加之前batch的梯度，所以一般在反向传播传播之前需要把梯度清零。</p>
 <p>注3：pytorch的<code>MSELoss()</code>返回值维度<code>(1,)</code>，Tensor中只有1个数，也称作<code>scalar:零维的张量</code>。因为<code>MSELoss()</code>返回值是batch中所有样本loss的平均值。所以在<code>step()</code>中不需要传入<code>batch_size</code>参数</p>
 </blockquote>
-<h2><span id="33-rnn输入维度">3.3. RNN输入维度</span></h2><p>RNN有2个数据：所有时间步的隐藏状态output、最后一个时间步的隐藏状态out_state</p>
+<h2><span id="33-rnn输入维度">3.3. RNN输入维度</span></h2><p>这里只讨论单向RNN</p>
 <ul>
 <li>mxnet<ul>
 <li>输入数据维度默认<code>(T,batch_size,input_size)</code></li>
-<li>output输出数据维度<code>(T,batch_size,hidden_size)</code></li>
+<li>初始化state维度<code>(num_layers,batch_size,hidden_size)</code>,可以不输入，则默认用全0初始化</li>
+<li>output输出数据维度<code>(T,batch_size,hidden_size)</code>，表示最后一层所有时间步的隐藏状态</li>
+<li>out_state：输出维度和state一样，都是<code>(num_layers,batch_size,hidden_size)</code>,表示所有层最后一个时间步的隐藏状态,如果state不输入，则out_state不会被返回</li>
+<li>如果想让输入维度是(B,T,C),则指定参数<code>layout=NTC</code></li>
 </ul>
 </li>
 <li>pytorch<ul>
 <li>输入数据维度默认<code>(T,batch_size,input_size)</code></li>
-<li>output输出数据维度<code>(T,batch_size,hidden_size)</code></li>
+<li>初始化state维度<code>(num_layers,batch_size,hidden_size)</code>,可以不输入，则默认用全0初始化</li>
+<li>output输出数据维度<code>(T,batch_size,hidden_size)</code>，表示最后一层所有时间步的隐藏状态</li>
+<li>out_state：输出维度和state一样，都是<code>(num_layers,batch_size,hidden_size)</code>,表示所有层最后一个时间步的隐藏状态,如果state不输入，则out_state不会被返回</li>
+<li>如果想让输入维度是(B,T,C),则指定参数<code>batch_first=True</code></li>
 </ul>
 </li>
 </ul>
+<p><strong>注意：Mxnet和Pytorch的唯一区域是：mxnet的state不指定，out_state就不会输出，pytorch不管state是否指定，out_state都会输出</strong></p>
 <h2><span id="34-transformer输入维度">3.4. Transformer输入维度</span></h2><ul>
 <li><p>mxnet<br>Mxnet中有一个NLP相关的包<code>gluonnlp</code>,里面封装了<code>Transformer</code>，这里只讨论<code>TransformerEncoder</code></p>
 <ul>
@@ -2079,7 +2086,7 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <li><a href="#4-%e5%88%92%e5%88%86%e6%95%b0%e6%8d%ae%e9%9b%86">4. 划分数据集</a></li>
 <li><a href="#5-%e9%aa%8c%e8%af%81%e9%9b%86%e7%9a%84%e4%bd%bf%e7%94%a8">5. 验证集的使用</a></li>
 <li><a href="#6-%e4%ba%a4%e5%8f%89%e9%aa%8c%e8%af%81">6. 交叉验证</a></li>
-<li><a href="#7-%e6%95%b0%e6%8d%ae%e8%be%93%e5%85%a5%e5%92%8c%e8%be%93%e5%87%ba">7. 数据输入和输出</a></li>
+<li><a href="#7-conv%e8%be%93%e5%85%a5%e5%92%8c%e8%be%93%e5%87%ba%e7%bb%b4%e5%ba%a6">7. Conv输入和输出维度</a></li>
 <li><a href="#8-%e6%bf%80%e6%b4%bb%e5%87%bd%e6%95%b0">8. 激活函数</a></li>
 <li><a href="#9-gpu%e8%bf%90%e8%a1%8c%e7%a8%8b%e5%ba%8f">9. GPU运行程序</a></li>
 <li><a href="#10-%e4%bd%bf%e7%94%a8%e5%a4%9agpu%e8%bf%90%e8%a1%8c">10. 使用多GPU运行</a></li>
@@ -2125,13 +2132,14 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <li>准确的调整模型的超参数。超参数不同模型就不同。使用交叉验证来选出最好的超参数。</li>
 <li>比如分类问题，有多个算法，逻辑回归，决策树，聚类等方法，不确定使用哪个方法时，可以使用交叉验证。</li>
 </ul>
-<h1><span id="7-数据输入和输出">7. 数据输入和输出</span></h1><ol>
+<h1><span id="7-conv输入和输出维度">7. Conv输入和输出维度</span></h1><ol>
 <li>在gloun中Dense的输入是二维的，(batch_size,feature)，比如输入是(64,120)表示一个batch有64个样本，每个样本有120个特征。如果训练集中的X不是二维的，可以使用reshape()将X变换成(-1,全连接输入单元个数)</li>
 <li>卷积神经网络，卷积的输入和输出形状是(batch_size,通道,高,宽)，如果后面接的是全连接，就要转换成二维(batch_size,每个样本特征=通道*高*宽)，但是不需要人去手动转换形状，Dense会自动转换。如果是keras，从卷积层到全连接层，形状不会自动转变，所以需要自己加一个<code>Flatten()</code>层。  </li>
 <li>如果是一个分类问题，比如mnist数字识别，最后一层是一个神经单元个数为10的全连接层，然后把输送入到softmax，将每一行的10个值都变成在[0,1]之间小数。损失函数是交叉熵损失损失。在gluon中，最后一层Dense只需要指定输出神经单元个数即可，即<code>Dense(10)</code>，在预测的时候，输出predict，这时的predict并没有归一化到[0,1]的范围内，我们直接把predict和true_label输入到loss中，在loss函数中，才会对predict进行softmax计算，将predict归一化到[0,1]范围内。   </li>
 <li><p>在keras中，和gluon不同，会在最后一层的输出指定softmax激活函数，即<code>Dense(10,activation=&#39;softmax&#39;)</code>。</p>
-<p><img src="/2019/07/17/神经网络踩坑/conv.png" alt=""><br>（3）循环神经网络的输入形状为(时间步数，batch_size，特征个数)<br><a href="https://www.zhihu.com/question/41949741" target="_blank" rel="noopener">通俗易懂的RNN图解</a></p>
+<p><img src="/2019/07/17/神经网络踩坑/conv.png" alt="">  </p>
 </li>
+<li>循环神经网络的输入形状为(时间步数，batch_size，特征个数)<br><a href="https://www.zhihu.com/question/41949741" target="_blank" rel="noopener">通俗易懂的RNN图解</a></li>
 </ol>
 <h1><span id="8-激活函数">8. 激活函数</span></h1><p>   在使用激活函数的时候，一般都是<br>   net.add(nn.Dense(10,activation=’relu’)),在定义层的时候直接加上activation，<br>   也可以使用,但是不常用<br>   net.add(nn.Dense(10),<br>           nn.Activation(‘relu’)<br>    )<br>    或者net.add(nn.Conv2D(channels=6, kernel_size=5, activation=’sigmoid’))<br>    只有当在该层和激活函数之间有其余的操作时，才会分开写，例如在卷积计算之后，激活函数之前加上批量归一化层，写成</p>
 <pre><code><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">net.add(nn.Conv2D(<span class="number">6</span>, kernel_size=<span class="number">5</span>),</span><br><span class="line">    BatchNorm(),</span><br><span class="line">    nn.Activation(<span class="string">'sigmoid'</span>))  </span><br><span class="line">    或者  </span><br><span class="line">    n.Dense(<span class="number">120</span>),</span><br><span class="line">    BatchNorm(),</span><br><span class="line">    nn.Activation(<span class="string">'sigmoid'</span>)</span><br></pre></td></tr></table></figure>
