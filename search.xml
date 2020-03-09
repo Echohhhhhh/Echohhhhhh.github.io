@@ -1282,8 +1282,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
       </categories>
       <tags>
         <tag>Mxnet</tag>
-        <tag>GPU</tag>
         <tag>Pytorch</tag>
+        <tag>GPU</tag>
       </tags>
   </entry>
   <entry>
@@ -1437,9 +1437,9 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
         <category>论文阅读笔记</category>
       </categories>
       <tags>
-        <tag>NLP</tag>
         <tag>Time Series</tag>
         <tag>Transformer</tag>
+        <tag>NLP</tag>
       </tags>
   </entry>
   <entry>
@@ -1685,8 +1685,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
         <category>论文阅读笔记</category>
       </categories>
       <tags>
-        <tag>NLP</tag>
         <tag>Transformer</tag>
+        <tag>NLP</tag>
       </tags>
   </entry>
   <entry>
@@ -4122,9 +4122,9 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>NLP</category>
       </categories>
       <tags>
+        <tag>Transformer</tag>
         <tag>NLP</tag>
         <tag>Attention</tag>
-        <tag>Transformer</tag>
         <tag>Seq2Seq</tag>
       </tags>
   </entry>
@@ -4159,11 +4159,6 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <p><img src="/2019/02/12/RNN/lstm.jpg" alt=""></p>
 <p>参考资料：<a href="https://www.zhihu.com/question/41949741" target="_blank" rel="noopener">https://www.zhihu.com/question/41949741</a></p>
 <p><img src="/2019/02/12/RNN/公式.png" alt=""></p>
-<p>LSTM实例化的时候只用指定隐藏层的单元个数，不用指定输出层的单元个数。即<br><code>lstm = LSTM(hidden_size=64,num_layers=1)</code></p>
-<ol>
-<li>LSTM在运算的时候需要传入的参数有2个，data和states<br>data的输入的数据，LSTM的输入维度默认是TNC，维度是(time_step,batch_size,input_size)。<br>states：list类型，里面有2个元素，用来初始化LSTM中的H和C。每个元素都是张量，维度是(num_layers,batch_size,num_hidden)，这个参数是可选的，可以不填。</li>
-<li>输出有2个，分别是<code>out,out_states = lstm(input)</code>.<br>out的维度是：(time_step,batch_size,num_hidden)表示最后一层所有时间步的隐藏状态，该输出并不涉及输出层的设计，它们们通常作为后续输出层的输入。<br>out_states的维度是：输出每个LSTM层最后一个时间步的(H,C)，类型是list，里面有2个元素，每个元素的维度和输入的states一样，都是(num_layers,batch_size,num_hidden)。如果输入的states不填，那么out_states将不会被返回。</li>
-</ol>
 ]]></content>
       <categories>
         <category>Deep Learning</category>
