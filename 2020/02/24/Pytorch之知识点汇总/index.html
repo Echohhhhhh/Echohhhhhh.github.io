@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="1. 简介汇总Pytorch的一些知识点">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-07T04:08:04.036Z">
+<meta property="og:updated_time" content="2020-03-07T05:14:34.216Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pytorch之知识点汇总">
 <meta name="twitter:description" content="1. 简介汇总Pytorch的一些知识点">
@@ -479,6 +479,8 @@
 <p>参考资料<br><a href="https://zhuanlan.zhihu.com/p/54986509" target="_blank" rel="noopener">Pytorch model.train 与 model.eval</a><br><a href="https://discuss.pytorch.org/t/model-eval-vs-with-torch-no-grad/19615/19" target="_blank" rel="noopener">‘model.eval()’ vs ‘with torch.no_grad()’</a><br><a href="https://github.com/pytorch/examples/blob/master/word_language_model/main.py" target="_blank" rel="noopener">https://github.com/pytorch/examples/word_language_model</a></p>
 <h1><span id="11-linear">11. Linear</span></h1><p>原先误以为Pytorch中的Linear的输入只能接受二维数据，实际上Linear的输入数据可以是三维、四维等更多维。但是<strong>输入数据的最后一维一定要和<code>in_dim</code>一致，输出数据维度就是把<code>in_dim</code>换成了<code>out_dim</code>，前面所有的维度都不变</strong>。<br>例如定义一个全连接<code>nn.Linear(10,5)</code>，输入数据维度为(3,6,10),输出维度为(3,6,5)。即输入数据最后一个维度一定要和<code>in_dim</code>一致，也不用纠结到底3是batch_size,还是6是batch_size，因为最终输出的数据只有最后一个维度变化，前面维度都不变。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dense = nn.Linear(in_dim,out_dim)</span><br></pre></td></tr></table></figure>
+<hr>
+<p>2020.3.7更新</p>
 <h1><span id="12-embedding">12. Embedding</span></h1><p><code>Embedding</code>层常用在词嵌入中，目的是将高维数据变成稠密的低维数据。例如：字典共9个字：[我,你,看,吃,吧,吗,饭,了,的]，例句：吃饭了吗，对这句话用向量表示有2种方式：</p>
 <ul>
 <li>one-hot表示<br>[0,0,0,1,0,0,0,0,0],<br>[0,0,0,0,0,0,1,0,0],<br>[0,0,0,0,0,0,0,1,0],<br>[0,0,0,0,0,1,0,0,0]<br>one-hot表示过于稀疏，如果字典中的层变大，维度会非常高</li>
@@ -652,7 +654,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
