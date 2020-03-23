@@ -82,11 +82,12 @@
 <meta property="og:description" content="参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/norm.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/y-norm.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/cross.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/conv.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/sigmoid.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/gpu.png">
-<meta property="og:updated_time" content="2020-03-09T13:16:48.733Z">
+<meta property="og:updated_time" content="2020-03-21T08:51:19.189Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="神经网络踩坑">
 <meta name="twitter:description" content="参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e">
@@ -391,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4.5k
+                  5k
                 </span>
               
 
@@ -407,7 +408,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  18
+                  20
                 </span>
               
             </div>
@@ -448,6 +449,7 @@
 <li><a href="#14-%e8%b0%83%e5%8f%82%e7%bb%8f%e9%aa%8c">14. 调参经验</a></li>
 <li><a href="#15-earlystopping">15. EarlyStopping</a></li>
 <li><a href="#16-%e5%8d%b7%e7%a7%af%e5%b0%ba%e5%af%b8%e5%a4%a7%e5%b0%8f%e5%8f%98%e5%8c%96">16. 卷积尺寸大小变化</a></li>
+<li><a href="#%e5%8f%8d%e5%8d%b7%e7%a7%af%e5%b0%ba%e5%af%b8%e5%a4%a7%e5%b0%8f%e5%8f%98%e5%8c%96">反卷积尺寸大小变化</a></li>
 <li><a href="#17-%e5%9b%ba%e5%ae%9a%e9%9a%8f%e6%9c%ba%e6%95%b0%e7%a7%8d%e5%ad%90">17. 固定随机数种子</a></li>
 </ul>
 <!-- /TOC -->
@@ -461,6 +463,14 @@
 <p>   然后在用到<code>Scaler</code>这个类时，<code>scaler = utils.Scaler(train)</code>,则scaler对象则保留了train的平均值和标准差，使用<code>scaler.mean和scaler.std</code>即可以获得train的平均值和标准差。</p>
    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scaler = utils.Scaler(train)</span><br><span class="line"><span class="comment">#对train，val，test进行标准化   </span></span><br><span class="line">train_new = scaler.transform(train)</span><br><span class="line">val_new = scaler.transform(val)</span><br><span class="line">test_new = scaler.transform(test)</span><br></pre></td></tr></table></figure>
 <p>   在计算loss时，不需要反归一化。在计算评价指标时需要反归一化。在计算评价指标时，比如RMSE,MAE等，首先根据归一化后的test_new得到预测结果predict，然后将predict根据scaler的inverse_transform反归一化，然后使用真实量级的predict和label再计算评价指标。</p>
+<p>【注意】对特征和y归一化有2种方式：</p>
+<ol>
+<li><strong>只对特征进行归一化，y不进行归一化</strong>，模型预测的结果和真实y是同一量纲，模型的loss会偏大，计算评价指标时，不需要反归一化</li>
+<li><strong>对特征和y都归一化</strong>，y归一化到[0,1]之间，在计算loss时，不需要反归一化，loss相对方法1会偏小，在计算评价指标时，需要对真实y和预测y进行反归一化，再计算MAE等指标</li>
+<li><p>关于上面是否需要对y进行归一化。如果模型收敛(loss一直在下降)，可以不对y进行归一化。如果模型不收敛(数值过大)，则需要对y进行归一化。</p>
+<p><img src="/2019/07/17/神经网络踩坑/y-norm.png" alt=""><br>如果对y进行归一化，loss初始值很小，模型训练时很快就会收敛loss不再下降。不对y归一化，loss初始值很大，在训练过程中，训练很多轮loss才开始收敛，可能还会造成训练过程不稳定，loss上下震荡。</p>
+</li>
+</ol>
 <h1><span id="3-batch_size">3. batch_size</span></h1><p>   当数据量较大时，向网络中传入所有的数据来计算loss和梯度，更新参数会造成内存溢出。所以每次向网络中值传入一个batch的数据，说过这一个batch的数据来更新权重，输出这个batch里面所有样本的平均loss。下次再使用另一个batch，更新网络参数，直到所有的数据全都输入，完成一个epoch。</p>
 <h1><span id="4-划分数据集">4. 划分数据集</span></h1><p>   如果数据充足的情况下，通常采用均匀随机抽样的方法将数据集划分为3部分，训练集，验证集和测试集，这三个集合不能有交集，常见的比例是8:1:1，6:2:2。需要注意的是，通常都会给定训练集和测试集，而不会给验证集，一般的做法是从训练集中抽取一部分数据作为验证集。</p>
 <h1><span id="5-验证集的使用">5. 验证集的使用</span></h1><p>   在训练时，仅使用训练集的数据进行训练，使用验证集评价模型。当选中最好的模型超参数之后，再使用训练集+验证集来训练模型，以充分利用所有的标注数据，然后再测试集上测试</p>
@@ -511,6 +521,15 @@
 </ul>
 </li>
 </ol>
+<p><a href="https://machinelearningmastery.com/how-to-improve-neural-network-stability-and-modeling-performance-with-data-scaling/" target="_blank" rel="noopener">https://machinelearningmastery.com/how-to-improve-neural-network-stability-and-modeling-performance-with-data-scaling/</a></p>
+<p>For the output units, you should choose an activation function suited to the distribution of the target values:</p>
+<ul>
+<li>For binary (0/1) targets, the logistic function is an excellent choice (Jordan, 1995).</li>
+<li>For categorical targets using 1-of-C coding, the softmax activation function is the logical extension of the logistic function.</li>
+<li>For continuous-valued targets with a bounded range, the logistic and tanh functions can be used, provided you either scale the outputs to the range of the targets or scale the targets to the range of the output activation function (“scaling” means multiplying by and adding appropriate constants).</li>
+<li>If the target values are positive but have no known upper bound, you can use an exponential output activation function, but beware of overflow.</li>
+<li>For continuous-valued targets with no known bounds, use the identity or “linear” activation function (which amounts to no activation function) unless you have a very good reason to do otherwise.</li>
+</ul>
 <h1><span id="9-gpu运行程序">9. GPU运行程序</span></h1><p>   ctx=mx.gpu(2)，下标从0开始<br>   <strong>需要用到ctx的地方：</strong></p>
 <ul>
 <li><p>数据集需要放到gpu上。有2种方法。<br> （1）在创建数据的时候，指定ctx，在gpu上创建数据。</p>
@@ -574,6 +593,15 @@
 <li>2D卷积，输入和输出高和宽减半：kernel_size=(3,3),padding=1,stride=2，输出的形状是输入一半</li>
 <li>3D卷积，一般kernel_size=(3,3,3),padding=1,stride=1，输入和输出的形状一样</li>
 <li>3D卷积，一般kernel_size=(1,1,1),padding=0,stride=1，输入和输出的形状一样   </li>
+</ul>
+<h1><span id="反卷积尺寸大小变化">反卷积尺寸大小变化</span></h1><ul>
+<li><p>2D反卷积<br>原先尺寸(batch_size,32,W,H)—&gt;(batch_size,64,2W,2H)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nn.ConvTranspose2d(in_channels=<span class="number">32</span>, out_channels=<span class="number">64</span>, kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>, out_padding=<span class="number">1</span>),</span><br></pre></td></tr></table></figure>
+<p>原先尺寸(batch_size,32,W,H)—&gt;(batch_size,64,W,H)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nn.ConvTranspose2d(in_channels=<span class="number">32</span>, out_channels=<span class="number">64</span>, kernel_size=<span class="number">3</span>, stride=<span class="number">1</span>, padding=<span class="number">1</span>),</span><br></pre></td></tr></table></figure>
+<p>如果想让尺寸变化，从(W,H)—&gt;(2W,2H),还可以使用下面方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nn.ConvTranspose2d(in_channels=<span class="number">32</span>, out_channels=<span class="number">64</span>, kernel_size=<span class="number">3</span>, stride=<span class="number">1</span>, padding=<span class="number">1</span>),</span><br><span class="line">nn.Upsample(scale_factor=<span class="number">2</span>, mode=<span class="string">'nearest'</span>),</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 <hr>
 <p>2020.2.4 更新  </p>
@@ -746,7 +774,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -768,7 +796,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -817,7 +845,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. Suffle数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 归一化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. batch_size</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 划分数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 验证集的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 交叉验证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. Conv输入和输出维度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 激活函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. GPU运行程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">10. 使用多GPU运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">11. NDArray和numpy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">12. tensorboard使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">13. Dropout的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">14. 调参经验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">15. EarlyStopping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">16. 卷积尺寸大小变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">17. 固定随机数种子</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. Suffle数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 归一化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. batch_size</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 划分数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 验证集的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 交叉验证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. Conv输入和输出维度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 激活函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. GPU运行程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">10. 使用多GPU运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">11. NDArray和numpy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">12. tensorboard使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">13. Dropout的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">14. 调参经验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">15. EarlyStopping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">16. 卷积尺寸大小变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">反卷积尺寸大小变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">17. 固定随机数种子</span></a></li></ol></div>
             
 
           </div>
