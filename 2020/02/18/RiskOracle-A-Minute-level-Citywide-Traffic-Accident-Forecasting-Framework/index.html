@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/result.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/ablation.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/case.png">
-<meta property="og:updated_time" content="2020-03-18T07:50:32.390Z">
+<meta property="og:updated_time" content="2020-03-25T08:45:56.144Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RiskOracle-A Minute-level Citywide Traffic Accident Forecasting Framework">
 <meta name="twitter:description" content="AAAI2020原文链接：RiskOracle-A Minute-level Citywide Traffic Accident Forecasting Framework中国科大发">
@@ -395,7 +395,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  9.3k
+                  9.4k
                 </span>
               
 
@@ -561,7 +561,10 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <p><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/multitask.png" alt=""></p>
 <p>多任务的总loss如下：</p>
 <script type="math/tex; mode=display">
-\operatorname{Loss}(\theta)=m s e_{r i s k}+\lambda_{1} * m s e_{v o l}+\lambda_{2} * m s e_{c o u n t}+\lambda_{3} * L_{2}</script><p>其中$m s e_{r i s k}, m s e_{v o l},m s e_{c o u n t}$是主任务和2个辅助任务的loss，这里使用L2正则化来避免过拟合。$\lambda_{1},\lambda_{2},\lambda_{3}$是损失函数的超参数。</p>
+\operatorname{Loss}(\theta)=m s e_{r i s k}+\lambda_{1} * m s e_{v o l}+\lambda_{2} * m s e_{c o u n t}+\lambda_{3} * L_{2}</script><p>其中$m s e_{r i s k}, m s e_{v o l},m s e_{c o u n t}$是主任务和2个辅助任务的loss，这里使用L2正则化来避免过拟合。$\lambda_{1},\lambda_{2},\lambda_{3}$是损失函数的超参数。$\lambda_{1}=0.8,\lambda_{2}=1,\lambda_{3}=1e-4$。</p>
+<blockquote>
+<p>只根据risk，count，flow的MSELoss进行反向传播，训练模型。在预测时，根据这3个输出，求出评价指标</p>
+</blockquote>
 <p><strong>分层最可能发生事故区域选择</strong>.交通事故和交通量在城市和农村经常不均衡，导致空间异质性问题。因此，用统一的风险阈值来选择最可能发生事故的区域是不合理的，我们基于多任务中预测出的risk，提出一个分层的最可能发生事故区域选择的方法。<br>输入数据是中等区域的事故次数和子区域的risk值，对每个中等区域$i$，我们从中选出$k_i(i=1,2,…,q)$个风险最高的子区域，其中参数$k_i$等于第二个辅助任务学到的$\mathcal{O}_{\text {count}}^{\Delta t}$中对应的值。因此，我们获得了一组最可能发生事故的子区域。并且通过这种方式获得的$k_i$可以减少区域的过度预测，并且模型符合时间和天气的变化。</p>
 <blockquote>
 <p>对于$k_i$的选择这里解释下：在测试阶段，根据q个中等区域的事故数和m个子区域的risk值来选择$k_i$，假设q=5，预测出来5个中等区域发生的事故次数为[0,2,4,1,6],那就从5个中等区域中，分别选0,2,4,1,6个子区域，选risk最高的$k_i$个对应的子区域，就是模型预测的事故高发子区域</p>
@@ -583,7 +586,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <li>SDAE(2016AAAI)使用人流量来预测risk</li>
 <li>SDCAE最新的小时级别风险预测模型</li>
 </ol>
-<h2><span id="55-实验结果">5.5. 实验结果</span></h2><p><strong>性能比较</strong><br>实验结果如表3.RiskOracle获得了最高的准确率，且MSE优于大部分baseline。使用分层事故区域选择HARS，我们的模型解决了空间异质性和过渡预测的问题。尤其在NYC数据集上，我们模型在Acc@20比最好的模型高22.49%。对于稀疏的传感数据和短期的时空预测，可扩展性高。并且，我们的模型在高峰期的预测更好，在现实应用中有用。所有的指标NYC的都比SIP的要好，可能因为SIP数据中事故标签不完整。<br>总体上，随着时间粒度变小，我们的模型性能稍微下降，而其他的模型急剧下降因为遇到零膨胀问题。这表明我们的模型在短期事故预测中的有效性和可扩展性。在实际应用中有很少的事故记录时，2个数据集上的提升验证了我们模型的健壮性和普适性。</p>
+<h2><span id="55-实验结果">5.5. 实验结果</span></h2><p><strong>性能比较</strong><br>实验结果如表3.RiskOracle获得了最高的准确率，且MSE优于大部分baseline。使用分层事故区域选择HARS，我们的模型解决了空间异质性和过度预测的问题。尤其在NYC数据集上，我们模型在Acc@20比最好的模型高22.49%。对于稀疏的传感数据和短期的时空预测，可扩展性高。并且，我们的模型在高峰期的预测更好，在现实应用中有用。所有的指标NYC的都比SIP的要好，可能因为SIP数据中事故标签不完整。<br>总体上，随着时间粒度变小，我们的模型性能稍微下降，而其他的模型急剧下降因为遇到零膨胀问题。这表明我们的模型在短期事故预测中的有效性和可扩展性。在实际应用中有很少的事故记录时，2个数据集上的提升验证了我们模型的健壮性和普适性。</p>
 <p><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/result.png" alt=""></p>
 <p><strong>Acc@K和消融实验</strong>.如图4所示。Acc@20和Acc@6的结果略高于Acc@K，这是合理的，因为统一阈值无法适应实时条件，并且往往会高估事故率。相反，我们的框架具有使用多尺度事故分布预测，近似估计每个矩形区域中事故数量，具有灵活性。与表3中的结果相比，我们的框架胜过其他baseline，并在Acc@K达到可接受的准确性水平。<br>为了验证哪个组件起作用，做了消融实验，从模型中去掉一些组件。</p>
 <ul>
@@ -767,7 +770,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
