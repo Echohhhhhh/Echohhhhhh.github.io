@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近开始刷Leecode，使用Python语言，踩了很多坑，在此记录。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-23T13:07:12.188Z">
+<meta property="og:updated_time" content="2020-03-28T02:14:38.190Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode踩坑">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;最近开始刷Leecode，使用Python语言，踩了很多坑，在此记录。">
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  460
+                  506
                 </span>
               
 
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -431,6 +431,7 @@
 <li><a href="#12-bin%e5%87%bd%e6%95%b0">1.2. bin函数</a></li>
 <li><a href="#13-zip%e5%87%bd%e6%95%b0">1.3. zip函数</a></li>
 <li><a href="#14-%e4%ba%8c%e5%88%86%e6%b3%95%e8%ae%b2%e8%a7%a3">1.4. 二分法讲解</a></li>
+<li><a href="#%e6%ad%a3%e6%97%a0%e7%a9%b7%e5%92%8c%e8%b4%9f%e6%97%a0%e7%a9%b7">正无穷和负无穷</a></li>
 </ul>
 </li>
 </ul>
@@ -444,7 +445,8 @@
 <p>zip(<em>)传入的参数是zip()的返回值类型，从<zip\>类型中每一个tuple中，取出第0个元素组成一个list，再取出第1个元素组成一个list，即zip(\</zip\></em>)返回值是一个大list，里面有2个tuple</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">b = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]</span><br><span class="line">zipped = list(zip(a,b))</span><br><span class="line"><span class="comment">#zipped = [(1,'a'),(2,'b'),(3,'c')]</span></span><br><span class="line">c = list(zip(*zipped))</span><br><span class="line"><span class="comment">#c = [(1,2,3),('a','b','c')]</span></span><br></pre></td></tr></table></figure>
 <h2><span id="14-二分法讲解">1.4. 二分法讲解</span></h2><p><a href="https://leetcode-cn.com/problems/search-insert-position/solution/te-bie-hao-yong-de-er-fen-cha-fa-fa-mo-ban-python-/" target="_blank" rel="noopener">参考资料</a></p>
-
+<h2><span id="正无穷和负无穷">正无穷和负无穷</span></h2><p>在比较大小时，通常先将结果初始化为inf和-inf，使用下面的语句</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">res = float(<span class="string">"inf"</span>)</span><br><span class="line">res = float(<span class="string">"-inf"</span>)</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -607,7 +609,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -629,7 +631,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -678,7 +680,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 一个萝卜一个坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. int函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. bin函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.3. zip函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.4. 二分法讲解</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 一个萝卜一个坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. int函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. bin函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.3. zip函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.4. 二分法讲解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">正无穷和负无穷</span></a></li></ol></li></ol></div>
             
 
           </div>

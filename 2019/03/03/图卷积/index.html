@@ -110,7 +110,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/图卷积3.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/ChebNet-to-GCN.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/03/图卷积/图卷积4.png">
-<meta property="og:updated_time" content="2020-03-06T16:02:24.136Z">
+<meta property="og:updated_time" content="2020-03-30T02:37:25.376Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图卷积">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;看了很久关于图卷积的内容，但总觉得自己理解不深刻，在这里把自己的一些想法写出来，也算把图卷积的内容梳理一下。 参考资料">
@@ -502,6 +502,7 @@
 <li>拓扑结构的数据在生活中很常见，社交网络、交通领域都涉及到非欧式结构的数据。</li>
 </ol>
 <p>&ensp;&ensp;&ensp;&ensp;图卷积网络GCN的本质目的是提取拓扑图的空间特征。图卷积神经网络中有2种：顶点域和谱域。这是提取拓扑图空间特征的两种方式，就是给定非欧式结构数据，从中构建图的两种方法。</p>
+<p><strong>【重点】顶点域和谱域的区别是：谱域需要用到对拉普拉斯矩阵分解，找到一组基U。顶点域不需要使用基。</strong></p>
 <h2><span id="21-顶点域vertex-domain">2.1. 顶点域(Vertex Domain)</span></h2><p>&ensp;&ensp;&ensp;&ensp;提取拓扑图上的空间特征，就是把每个顶点的邻居找出来。这里的问题是:(1)按照什么条件去找中心顶点的邻居，也就是如何确定感受野？(2)确定了邻居，按照什么方式处理包含不同数据邻居的特征？<br>&ensp;&ensp;&ensp;&ensp;<a href="https://arxiv.org/abs/1605.05273" target="_blank" rel="noopener">Learning Convolutional Neural Networks for Graphs</a>是2016年在ICML中发表的一篇论文，这是<a href="http://www.matlog.net/icml2016_slides.pdf" target="_blank" rel="noopener">PPT讲解</a>。由于CNN并不能有效的处理非欧式结构数据，这篇paper的motivation就是想将CNN在图像上的应用generalize到一般的graph上面。<br>&ensp;&ensp;&ensp;&ensp;本文提到的算法思想是：将一个图结构的数据转化为CNN能够高效处理的结构。处理的过程主要分为三个步骤：(1)从图结构中选出一个固定长度具有代表性的结点序列；(2)对于选出的每一个结点，收集固定大小的邻居集合。(3)对由当前节点及其对应的邻居构成的子图进行规范化，作为卷积结构的输入。算法具体分为4个步骤。</p>
 <h3><span id="211-图中顶点的选择node-sequence-selection">2.1.1. 图中顶点的选择Node Sequence Selection</span></h3><p>&ensp;&ensp;&ensp;&ensp;首先对于输入的一个Graph，指定中心顶点的个数，然后确定确定图中的中心结点，确定中心结点主要采取的方法是：centrality，也就是中心化的方法，就是越处于中心位置的点越重要。这里的中心位置不是空间上的概念，应该是度量一个点的关系中的重要性的概念，简单的举例说明。如图5当中的两个图实际上表示的是同一个图，对其中红色标明的两个不同的nodes我们来比较他们的中心位置关系。比较的过程当中，我们计算该node和其余所有nodes的距离关系。我们假设相邻的两个node之间的距离都是1。    </p>
 <p><img src="/2019/03/03/图卷积/2个node.png" alt=""></p>
@@ -756,7 +757,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -778,7 +779,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
