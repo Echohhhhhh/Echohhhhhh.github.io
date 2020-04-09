@@ -77,26 +77,26 @@
 <meta name="keywords" content="Leetcode,排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序算法">
-<meta property="og:url" content="http://yoursite.com/2020/03/30/排序算法/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/03/30/Leetcode之排序/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="开始刷题了，首先整理并实现经典的排序算法并对其优化，使用Python实现。所有的排序默认从小到大排序">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/排序算法/conclusion.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/排序算法/bubble.gif">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/排序算法/select.gif">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/排序算法/insert.gif">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/排序算法/merge.gif">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/排序算法/heap-sort.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/排序算法/heap.gif">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/排序算法/shell.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/排序算法/count.gif">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/排序算法/bucket.jpg">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/排序算法/radix.gif">
-<meta property="og:updated_time" content="2020-04-02T13:03:41.405Z">
+<meta property="og:image" content="http://yoursite.com/2020/03/30/Leetcode之排序/排序算法/conclusion.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/30/Leetcode之排序/排序算法/bubble.gif">
+<meta property="og:image" content="http://yoursite.com/2020/03/30/Leetcode之排序/排序算法/select.gif">
+<meta property="og:image" content="http://yoursite.com/2020/03/30/Leetcode之排序/排序算法/insert.gif">
+<meta property="og:image" content="http://yoursite.com/2020/03/30/Leetcode之排序/排序算法/merge.gif">
+<meta property="og:image" content="http://yoursite.com/2020/03/30/Leetcode之排序/排序算法/heap-sort.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/30/Leetcode之排序/排序算法/heap.gif">
+<meta property="og:image" content="http://yoursite.com/2020/03/30/Leetcode之排序/排序算法/shell.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/30/Leetcode之排序/排序算法/count.gif">
+<meta property="og:image" content="http://yoursite.com/2020/03/30/Leetcode之排序/排序算法/bucket.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/03/30/Leetcode之排序/排序算法/radix.gif">
+<meta property="og:updated_time" content="2020-04-08T09:45:57.986Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序算法">
 <meta name="twitter:description" content="开始刷题了，首先整理并实现经典的排序算法并对其优化，使用Python实现。所有的排序默认从小到大排序">
-<meta name="twitter:image" content="http://yoursite.com/2020/03/30/排序算法/conclusion.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/30/Leetcode之排序/排序算法/conclusion.png">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/03/30/排序算法/">
+  <link rel="canonical" href="http://yoursite.com/2020/03/30/Leetcode之排序/">
 
 
 
@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/30/排序算法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/30/Leetcode之排序/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Echo">
@@ -397,7 +397,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  7k
+                  7.4k
                 </span>
               
 
@@ -413,7 +413,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  27
+                  29
                 </span>
               
             </div>
@@ -463,9 +463,13 @@
 <li><a href="#10-计数排序">10. 计数排序</a></li>
 <li><a href="#11-桶排序">11. 桶排序</a></li>
 <li><a href="#12-基数排序">12. 基数排序</a></li>
+<li><a href="#leetcode题">LeetCode题</a><ul>
+<li><a href="#88-合并两个有序数组">88. 合并两个有序数组</a></li>
+</ul>
+</li>
 </ul>
 <!-- /TOC -->
-<p>一共有10种排序算法，先给出排序算法的性能<br><img src="/2020/03/30/排序算法/conclusion.png" alt=""></p>
+<p>一共有10种排序算法，先给出排序算法的性能<br><img src="/2020/03/30/Leetcode之排序/排序算法/conclusion.png" alt=""></p>
 <ul>
 <li>low B 三人组：冒泡，选择，插入</li>
 <li>NB 三人组：快排，归并，堆排序</li>
@@ -489,7 +493,7 @@
 <li>内存循环j=0,1,2,…i-1，range(0,i)</li>
 <li>将数组分为有序和无序，每一次外循环，都将无序数组的最大值放在后面。首先整个数组都是无序的，经过一次外循环，有序数组个数加1，无序数组减1。然后再经过一次外循环，有序数组个数再加1，无序数组减1，直到所有数据全变成有序。</li>
 </ol>
-<p><img src="/2020/03/30/排序算法/bubble.gif" alt=""><br><strong>实现：</strong></p>
+<p><img src="/2020/03/30/Leetcode之排序/排序算法/bubble.gif" alt=""><br><strong>实现：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">    n = len(nums)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-1</span>,<span class="number">0</span>,<span class="number">-1</span>):<span class="comment">#排序的趟数，一共n-1趟</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>,i):<span class="comment">#对0~i-1个数进行排序</span></span><br><span class="line">            <span class="comment">#每个数和后面比较，只有当前面数&gt;后面数才交换，相等不会交换，体现稳定性</span></span><br><span class="line">            <span class="keyword">if</span> nums[j] &gt; nums[j+<span class="number">1</span>]:</span><br><span class="line">                swap(nums,j,j+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure>
 <ul>
 <li>空间复杂性：$O(1)$</li>
@@ -506,7 +510,7 @@
 <li>然后再从剩下未排序数组中找最小/大元素，放在第二个位置</li>
 <li>此次类推，直到所有的元素排序完成。</li>
 </ul>
-<p><img src="/2020/03/30/排序算法/select.gif" alt=""></p>
+<p><img src="/2020/03/30/Leetcode之排序/排序算法/select.gif" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">select_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">    n = len(nums)</span><br><span class="line">    <span class="comment">#每一趟选出无序中最小的数</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        min_idx = i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>,n):</span><br><span class="line">            <span class="keyword">if</span> nums[j] &lt; nums[min_idx]:</span><br><span class="line">                min_idx = j</span><br><span class="line">        <span class="keyword">if</span> min_idx != i:<span class="comment">#下标不同才交换</span></span><br><span class="line">            swap(nums,i,min_idx)</span><br><span class="line">    <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure>
 <ul>
 <li>不稳定</li>
@@ -522,7 +526,7 @@
 <li>重复步骤3，直到找到有序数组中 &lt;= 新元素</li>
 <li>将新元素插入到该元素后面</li>
 </ol>
-<p><img src="/2020/03/30/排序算法/insert.gif" alt=""></p>
+<p><img src="/2020/03/30/Leetcode之排序/排序算法/insert.gif" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">    n = len(nums)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n):</span><br><span class="line">        <span class="comment">#只有当nums[i]&lt;有序数据时，才将有序数组中的元素后移</span></span><br><span class="line">        <span class="keyword">if</span> nums[i] &lt; nums[i<span class="number">-1</span>]:</span><br><span class="line">            tmp = nums[i]</span><br><span class="line">            insert_idx = i</span><br><span class="line">            <span class="comment">#遍历nums[i-1,...0]找出nums[i]插入位置</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>):</span><br><span class="line">                <span class="comment">#只有有序数据&gt;无序数据时，才将有序数据后移，</span></span><br><span class="line">                <span class="comment">#有序&lt;=无序，有序数组不用后移，所以插入排序是稳定的</span></span><br><span class="line">                <span class="keyword">if</span> nums[j] &gt; tmp:</span><br><span class="line">                    nums[j+<span class="number">1</span>] = nums[j]</span><br><span class="line">                    insert_idx = j</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            nums[insert_idx] = tmp</span><br><span class="line">    <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure>
 <ul>
 <li>在有序数组中找到&lt;=无序数据，不交换位置，所以插入排序是稳定的</li>
@@ -573,7 +577,7 @@
 <li>将2个排序好的子序列合并成一个最终的排序序列</li>
 <li>合并2个有序数组时，比较2个数组最前面的数，谁小先取谁，然后相应的指针向后移一位，然后再比较，直到一个数组为空，最后把另一个数组的剩余部分复制过来即可</li>
 </ol>
-<p><img src="/2020/03/30/排序算法/merge.gif" alt=""></p>
+<p><img src="/2020/03/30/Leetcode之排序/排序算法/merge.gif" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(nums) &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> nums</span><br><span class="line">    mid = int(len(nums) / <span class="number">2</span>)</span><br><span class="line">    left = merge_sort(nums[:mid])</span><br><span class="line">    right = merge_sort(nums[mid:])</span><br><span class="line">    <span class="keyword">return</span> merge(left,right)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span><span class="params">(left,right)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    将2个有序数组合并成1个大的有序数据</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    lp,rp = <span class="number">0</span>,<span class="number">0</span></span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">while</span> lp &lt; len(left) <span class="keyword">and</span> rp &lt; len(right):</span><br><span class="line">        <span class="keyword">if</span> left[lp] &lt; right[rp]:</span><br><span class="line">            result.append(left[lp])</span><br><span class="line">            lp += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result.append(right[rp])</span><br><span class="line">            rp += <span class="number">1</span></span><br><span class="line">    result += left[lp:]</span><br><span class="line">    result += right[rp:]</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
 <ul>
 <li>稳定，因为我们在遇到相等的数据时必然是按顺序抄写到大数组中，没有改变顺序</li>
@@ -587,7 +591,7 @@
 <li>每个节点的左右子树都是一个二叉堆</li>
 </ol>
 <p>堆是一个特殊的完全二叉树，除了最底层之外，每一层都是满的，这使得堆可以利用数组来表示（普通的二叉树通常用链表表示），如下所示，堆和数组的相互关系</p>
-<p><img src="/2020/03/30/排序算法/heap-sort.png" alt=""></p>
+<p><img src="/2020/03/30/Leetcode之排序/排序算法/heap-sort.png" alt=""></p>
 <p>给定某个节点，它在数组中的下标i，可以计算出它的父节点，左/右子节点的下标：<br>父节点下标：floor((i-1)/2)<br>左子节点：2i+1<br>右子节点：2(i+1)</p>
 <p>在堆排序中，我们首先就是找最后一个非叶子节点，例如上面地树，最后一个非叶子节点是7，其实就是叶子节点1的父节点。已知叶子节点的下标是n-1，其他父节点下标就是floor(n/2-1)</p>
 <p><strong>基本思想：</strong><br>堆排序就是把最大堆的堆顶的最大数取出来，将剩下的堆继续调整为最大堆，再次将堆顶的最大数取出来，一直到只剩下一个节点结束。</p>
@@ -603,7 +607,7 @@
 <li>建立最大堆</li>
 <li>挨个输出：将最后一个节点和堆顶交换，重新调整堆为最大堆</li>
 </ol>
-<p><img src="/2020/03/30/排序算法/heap.gif" alt=""></p>
+<p><img src="/2020/03/30/Leetcode之排序/排序算法/heap.gif" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heap_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">    n = len(nums)</span><br><span class="line">    first = int(n/<span class="number">2</span><span class="number">-1</span>)</span><br><span class="line">    <span class="comment">#建立堆</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(first,<span class="number">-1</span>,<span class="number">-1</span>):</span><br><span class="line">        <span class="comment">#这里的high始终为n-1，high本身应该是以nums[i]为根节点的最后一个节点，</span></span><br><span class="line">        <span class="comment">#但是这个堆最后一个节点不好求，所以就直接用n-1作为high，对这个堆的调整没有任何影响，</span></span><br><span class="line">        <span class="comment">#high本身的作用是防止数组越界</span></span><br><span class="line">        heap_shift(nums,i,n<span class="number">-1</span>)</span><br><span class="line">    <span class="comment">#调整堆</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>):</span><br><span class="line">        <span class="comment">#i始终是堆的最后一个元素</span></span><br><span class="line">        swap(nums,<span class="number">0</span>,i)</span><br><span class="line">        heap_shift(nums,<span class="number">0</span>,i<span class="number">-1</span>)</span><br><span class="line">    <span class="keyword">return</span> nums</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heap_shift</span><span class="params">(nums,low,high)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    对某个对进行调整，使其变成最大堆。</span></span><br><span class="line"><span class="string">    其中被调整的数在nums中起始位置为low，</span></span><br><span class="line"><span class="string">    终止位置为high，即[low,high]</span></span><br><span class="line"><span class="string">    nums:待调整的nums</span></span><br><span class="line"><span class="string">    low:堆的第一个元素</span></span><br><span class="line"><span class="string">    high:堆的最后一个元素</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    i = low<span class="comment">#堆顶</span></span><br><span class="line">    j = <span class="number">2</span>*i+<span class="number">1</span><span class="comment">#左孩子</span></span><br><span class="line">    tmp = nums[low]</span><br><span class="line">    <span class="keyword">while</span> j &lt;= high:</span><br><span class="line">        <span class="keyword">if</span> j+<span class="number">1</span>&lt;=high <span class="keyword">and</span> nums[j+<span class="number">1</span>]&gt;nums[j]:</span><br><span class="line">            j += <span class="number">1</span><span class="comment">#j指向右孩子</span></span><br><span class="line">        <span class="keyword">if</span> nums[j] &gt; tmp:</span><br><span class="line">            nums[i] = nums[j]</span><br><span class="line">            i = j</span><br><span class="line">            j = <span class="number">2</span>*i+<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:<span class="comment">#tmp比2个孩子都大,因为孩子已经是最大堆</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    nums[i] = tmp</span><br></pre></td></tr></table></figure>
 <ul>
 <li>时间复杂度：$O(nlog(n))$</li>
@@ -644,7 +648,7 @@
 <li>直到增量为1</li>
 </ol>
 <p><strong>【注意】</strong> 增量序列最后一个必须为1</p>
-<p><img src="/2020/03/30/排序算法/shell.png" alt=""></p>
+<p><img src="/2020/03/30/Leetcode之排序/排序算法/shell.png" alt=""></p>
 <p>当gap=2时，数组为[3,5,1,6,0,8,9,4,7,2],其中[3,1,0,9,7]为一组，[5,6,8,4,2]为一组，for循环i分为等于2,3,4,…9</p>
 <ul>
 <li>当i=2时，对第一个子数组排序，即当前待插入的值是1,和3比较，放在3前面，顺序变成[1,3,0,9,7]</li>
@@ -661,11 +665,11 @@
 </ul>
 <h1><span id="10-计数排序">10. 计数排序</span></h1><p>计数排序的核心在于将输入的数据值转化为键存储在额外开辟的数组空间中。 作为一种线性时间复杂度的排序，<strong>计数排序要求输入的数据必须是有确定范围的整数</strong>。</p>
 <p>计数排序(Counting sort)是一种稳定的排序算法。计数排序使用一个额外的数组C，其中第i个元素是待排序数组A中值等于i的元素的个数。然后根据数组C来将A中的元素排到正确的位置。它只能对整数进行排序。</p>
-<p><img src="/2020/03/30/排序算法/count.gif" alt=""></p>
+<p><img src="/2020/03/30/Leetcode之排序/排序算法/count.gif" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">count_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">    max_value = max(nums)</span><br><span class="line">    count = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(max_value+<span class="number">1</span>)]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> nums:</span><br><span class="line">        count[i]+=<span class="number">1</span></span><br><span class="line">    nums.clear()</span><br><span class="line">    <span class="keyword">for</span> idx,value <span class="keyword">in</span> enumerate(count):</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> range(value):</span><br><span class="line">            nums.append(idx)</span><br><span class="line">    <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure>
 <p>当输入的元素是n个0到k之间的整数时，它的运行时间是 O(n + k)。计数排序不是比较排序，排序的速度快于任何比较排序算法。由于用来计数的数组C的长度取决于待排序数组中数据的范围（等于待排序数组的最大值与最小值的差加上1），这使得计数排序对于数据范围很大的数组，需要大量时间和内存。</p>
 <h1><span id="11-桶排序">11. 桶排序</span></h1><p>桶排序是计数排序的升级版。它利用了函数的映射关系，高效与否的关键就在于这个映射函数的确定。<br>桶排序 (Bucket sort)的工作的原理：假设输入数据服从均匀分布，将数据分到有限数量的桶里，每个桶再分别排序.</p>
-<p><img src="/2020/03/30/排序算法/bucket.jpg" alt=""></p>
+<p><img src="/2020/03/30/Leetcode之排序/排序算法/bucket.jpg" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bucket_sort</span><span class="params">(nums,bucker_nums)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    nums:待排序数组</span></span><br><span class="line"><span class="string">    bucker_nums:一共有多少个桶</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment">#创建桶</span></span><br><span class="line">    min_value = min(nums)</span><br><span class="line">    max_value = max(nums)</span><br><span class="line">    buckets = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> range(bucker_nums)]</span><br><span class="line">    <span class="comment">#每个桶放多少个数</span></span><br><span class="line">    bucker_size = int((max_value-min_value)/bucker_nums+<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> nums:</span><br><span class="line">        <span class="comment">#判断i放在哪个桶里</span></span><br><span class="line">        cur_id = int((i - <span class="number">1</span>) / bucker_size)</span><br><span class="line">        buckets[cur_id].append(i)</span><br><span class="line">        <span class="comment">#使用插入方法排序</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(len(buckets[cur_id])<span class="number">-1</span>,<span class="number">0</span>,<span class="number">-1</span>):</span><br><span class="line">            <span class="comment">#如果当前的值 &lt; 桶中的元素，和大的值交换</span></span><br><span class="line">            <span class="keyword">if</span> buckets[cur_id][j] &lt; buckets[cur_id][j<span class="number">-1</span>]:</span><br><span class="line">                swap(buckets[cur_id],j,j<span class="number">-1</span>)</span><br><span class="line">            <span class="comment">#当前值 &gt;= 桶中的元素，不用交换</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    sorted_nums = []</span><br><span class="line">    <span class="comment">#每个桶已经排好序，遍历每个桶，放在sorted_nums中</span></span><br><span class="line">    <span class="keyword">for</span> bucket <span class="keyword">in</span> buckets:</span><br><span class="line">        sorted_nums.extend(bucket)</span><br><span class="line">    <span class="keyword">return</span> sorted_nums</span><br></pre></td></tr></table></figure>
 <ul>
 <li>桶排序的表现取决于数据的分布，也就是需要对不同数据排序时采取不同的分桶策略</li>
@@ -673,12 +677,19 @@
 <li>时间复杂度：$O(n+k)$</li>
 </ul>
 <h1><span id="12-基数排序">12. 基数排序</span></h1><p>基数排序是按照低位先排序，然后收集，再按照高位排序，然后再收集，依次类推，直到最高位。</p>
-<p><img src="/2020/03/30/排序算法/radix.gif" alt=""></p>
+<p><img src="/2020/03/30/Leetcode之排序/排序算法/radix.gif" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">radix_sort</span><span class="params">(nums)</span>:</span></span><br><span class="line">    max_value = max(nums)</span><br><span class="line">    max_digit = len(str(max_value))<span class="comment">#最大数的位数</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(max_digit):</span><br><span class="line">        buckets = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>)]</span><br><span class="line">        <span class="comment">#假设最大数为786，i = 0,1,2</span></span><br><span class="line">        <span class="keyword">for</span> val <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="comment">#取出个位数，十位数，百位数</span></span><br><span class="line">            <span class="comment">#958,</span></span><br><span class="line">            <span class="comment">#i = 0,8=958//1 %10,</span></span><br><span class="line">            <span class="comment">#i = 1,5=958//10 %10</span></span><br><span class="line">            <span class="comment">#i = 2,9=958//100 %10</span></span><br><span class="line">            digit = (val // <span class="number">10</span>**i) % <span class="number">10</span></span><br><span class="line">            buckets[digit].append(val)</span><br><span class="line">        <span class="comment">#分桶完成，再放回到nums中</span></span><br><span class="line">        nums.clear()</span><br><span class="line">        <span class="keyword">for</span> bucket <span class="keyword">in</span> buckets:</span><br><span class="line">            nums.extend(bucket)</span><br><span class="line">    <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure>
 <ul>
 <li>时间复杂度：$O(nk)$,k是最大数的位数</li>
 <li>空间复杂度：$O(k+n)$</li>
 </ul>
+<h1><span id="leetcode题">LeetCode题</span></h1><h2><span id="88-合并两个有序数组">88. 合并两个有序数组</span></h2><p>给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 num1 成为一个有序数组。</p>
+<p>说明:<br>初始化 nums1 和 nums2 的元素数量分别为 m 和 n 。<br>你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素。</p>
+<p>合并2个有序数组是归并排序的子过程。</p>
+<p><strong>【解法1】</strong><br>开辟一个新的数据nums3，将nums1和nums2排序到nums3中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">merge</span><span class="params">(self, nums1, m, nums2, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums1: List[int]</span></span><br><span class="line"><span class="string">        :type m: int</span></span><br><span class="line"><span class="string">        :type nums2: List[int]</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: None Do not return anything, modify nums1 in-place instead.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        nums3 = []</span><br><span class="line">        p1=<span class="number">0</span></span><br><span class="line">        p2=<span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> p1 &lt; m <span class="keyword">and</span> p2 &lt; n:</span><br><span class="line">            <span class="keyword">if</span> nums1[p1] &lt; nums2[p2]:</span><br><span class="line">                nums3.append(nums1[p1])</span><br><span class="line">                p1+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                nums3.append(nums2[p2])</span><br><span class="line">                p2+=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        nums3 += nums1[p1:m]</span><br><span class="line">        nums3 += nums2[p2:n]</span><br><span class="line">        nums1[:]=nums3[:]</span><br><span class="line">        <span class="keyword">return</span> nums1</span><br></pre></td></tr></table></figure>
+<p><strong>【解法2】</strong><br>题目中说nums1中的空间大小为m+n，就是说我们可以不用新的数组nums3，使用nums1就可以了。从后往前遍历，哪个数大就存到nums1的后面，直到有个数组遍历完。如果遍历完的数组是nums2，这是nums1已经是有序了，直接返回即可。如果nums1遍历完了，就要把nums2未遍历的数都复制到nums1中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">merge</span><span class="params">(self, nums1, m, nums2, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums1: List[int]</span></span><br><span class="line"><span class="string">        :type m: int</span></span><br><span class="line"><span class="string">        :type nums2: List[int]</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: None Do not return anything, modify nums1 in-place instead.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> m==<span class="number">0</span>:</span><br><span class="line">            nums1[:]=nums2[:]</span><br><span class="line">            <span class="keyword">return</span> nums1</span><br><span class="line">        cur_idx=m+n<span class="number">-1</span></span><br><span class="line">        p1 = m<span class="number">-1</span></span><br><span class="line">        p2 = n<span class="number">-1</span></span><br><span class="line">        <span class="keyword">while</span> p1&gt;=<span class="number">0</span> <span class="keyword">and</span> p2&gt;=<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">if</span> nums1[p1]&gt;nums2[p2]:</span><br><span class="line">                nums1[cur_idx]=nums1[p1]</span><br><span class="line">                cur_idx -=<span class="number">1</span></span><br><span class="line">                p1-=<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                nums1[cur_idx]=nums2[p2]</span><br><span class="line">                cur_idx-=<span class="number">1</span></span><br><span class="line">                p2-=<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> p2 &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> nums1</span><br><span class="line">        <span class="keyword">if</span> p1 &lt; <span class="number">0</span>:</span><br><span class="line">            nums1[:cur_idx+<span class="number">1</span>] = nums2[:p2+<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">return</span> nums1</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -765,10 +776,6 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/04/02/查找算法/" rel="prev" title="查找算法">
-                查找算法 <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
       
@@ -842,7 +849,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -913,7 +920,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 术语说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 冒泡排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 冒泡排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. 优化1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. 优化2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 选择排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 插入排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.1. 快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.2. 优化1</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 归并排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. 堆排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">7.1. 堆排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">7.2. 应用：topK问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. NB三人组小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. 希尔排序(插入排序的改良版)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">10. 计数排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">11. 桶排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">12. 基数排序</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 术语说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 冒泡排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 冒泡排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. 优化1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. 优化2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 选择排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 插入排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.1. 快速排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.2. 优化1</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 归并排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. 堆排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">7.1. 堆排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">7.2. 应用：topK问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. NB三人组小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. 希尔排序(插入排序的改良版)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">10. 计数排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">11. 桶排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">12. 基数排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">LeetCode题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">88. 合并两个有序数组</span></a></li></ol></li></ol></div>
             
 
           </div>
