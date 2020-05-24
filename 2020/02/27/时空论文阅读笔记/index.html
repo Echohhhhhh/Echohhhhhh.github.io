@@ -117,7 +117,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/02/27/时空论文阅读笔记/BiLSTM-Enc-Dec.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/27/时空论文阅读笔记/BiLSTM-Enc-Dec1.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/27/时空论文阅读笔记/神经网络踩坑/y-norm.png">
-<meta property="og:updated_time" content="2020-04-09T02:39:27.702Z">
+<meta property="og:updated_time" content="2020-05-01T14:39:49.897Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="时空论文阅读笔记">
 <meta name="twitter:description" content="因为疫情推迟开学，在家把以前看的论文又看了一遍，每重新看一次都有新的收获，在此整理下。">
@@ -470,7 +470,7 @@
 <li><a href="#14-attention-based-spatial-temporal-graph-convolutional-networks-for-traffic-flow-forecastingaaai2019">1.4. Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting(AAAI2019)</a></li>
 <li><a href="#15-spatial-temporal-synchronous-graph-convolutional-networks-a-new-framework-for-spatial-temporal-network-data-forecastingaaai2020">1.5. Spatial-Temporal Synchronous Graph Convolutional Networks: A New Framework for Spatial-Temporal Network Data Forecasting(AAAI2020)</a></li>
 <li><a href="#16-hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">1.6. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</a></li>
-<li><a href="#17-urban-traffic-prediction-from-spatio-temporal-data-using-deep-meta-learning">1.7. Urban Traffic Prediction from Spatio-Temporal Data Using Deep Meta Learning</a></li>
+<li><a href="#17-urban-traffic-prediction-from-spatio-temporal-data-using-deep-meta-learning2019kdd">1.7. Urban Traffic Prediction from Spatio-Temporal Data Using Deep Meta Learning(2019KDD)</a></li>
 <li><a href="#18-stepdeep-a-novel-spatial-temporal-mobility-event-prediction-framework-based-on-deep-neural-networkkdd2018">1.8. StepDeep: A Novel Spatial-temporal Mobility Event Prediction Framework based on Deep Neural Network(KDD2018)</a></li>
 <li><a href="#19-stgrat-a-spatio-temporal-graph-attention-network-for-traffic-forecastingaaai2020">1.9. STGRAT: A Spatio-Temporal Graph Attention Network for Traffic Forecasting(AAAI2020)</a></li>
 </ul>
@@ -484,7 +484,7 @@
 <li><a href="#32-revisiting-spatial-temporal-similarity-a-deep-learning-framework-for-traffic-predictionaaai2019">3.2. Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction(AAAI2019)</a></li>
 <li><a href="#33-spatiotemporal-multi-graph-convolution-network-for-ride-hailing-demand-forecastingaaai2019">3.3. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting(AAAI2019)</a></li>
 <li><a href="#34-passenger-demand-forecasting-with-multi-task-convolutional-recurrent-neural-networkspakdd2019">3.4. Passenger Demand Forecasting with Multi-Task Convolutional Recurrent Neural Networks(PAKDD2019)</a></li>
-<li><a href="#stg2seq-spatial-temporal-graph-to-sequence-model-for-multi-step-passenger-demand-forecasting2019ijcai">STG2Seq: Spatial-temporal Graph to Sequence Model for Multi-step Passenger Demand Forecasting(2019IJCAI)</a></li>
+<li><a href="#35-stg2seq-spatial-temporal-graph-to-sequence-model-for-multi-step-passenger-demand-forecasting2019ijcai">3.5. STG2Seq: Spatial-temporal Graph to Sequence Model for Multi-step Passenger Demand Forecasting(2019IJCAI)</a></li>
 </ul>
 </li>
 <li><a href="#4-%e6%97%b6%e9%97%b4%e5%ba%8f%e5%88%97%e9%a2%84%e6%b5%8b">4. 时间序列预测</a><ul>
@@ -494,14 +494,14 @@
 </li>
 <li><a href="#5-%e6%80%bb%e7%bb%93">5. 总结</a><ul>
 <li><a href="#51-%e6%a0%b9%e6%8d%ae%e7%bd%91%e6%a0%bc%e6%9e%84%e5%bb%ba%e5%9b%be">5.1. 根据网格构建图</a></li>
-<li><a href="#%e5%8a%a8%e6%80%81%e5%9b%be">动态图</a></li>
-<li><a href="#52-%e8%ae%a1%e7%ae%972%e4%b8%aa%e5%8c%ba%e5%9f%9f%e7%9a%84%e7%9b%b8%e4%bc%bc%e6%80%a7">5.2. 计算2个区域的相似性</a></li>
-<li><a href="#53-poi">5.3. POI</a></li>
-<li><a href="#54-%e6%97%b6%e9%97%b4">5.4. 时间</a></li>
-<li><a href="#55-lstm%e5%85%b1t%e4%b8%aa%e9%9a%90%e8%97%8f%e7%8a%b6%e6%80%81%e6%95%b4%e5%90%88">5.5. LSTM共T个隐藏状态整合</a></li>
-<li><a href="#56-%e5%a4%96%e9%83%a8%e5%9b%a0%e7%b4%a0%e5%b5%8c%e5%85%a5">5.6. 外部因素嵌入</a></li>
-<li><a href="#57-mask">5.7. mask</a></li>
-<li><a href="#58-max-min%e5%bd%92%e4%b8%80%e5%8c%96">5.8. Max-min归一化</a></li>
+<li><a href="#52-%e5%8a%a8%e6%80%81%e5%9b%be">5.2. 动态图</a></li>
+<li><a href="#53-%e8%ae%a1%e7%ae%972%e4%b8%aa%e5%8c%ba%e5%9f%9f%e7%9a%84%e7%9b%b8%e4%bc%bc%e6%80%a7">5.3. 计算2个区域的相似性</a></li>
+<li><a href="#54-poi">5.4. POI</a></li>
+<li><a href="#55-%e6%97%b6%e9%97%b4">5.5. 时间</a></li>
+<li><a href="#56-lstm%e5%85%b1t%e4%b8%aa%e9%9a%90%e8%97%8f%e7%8a%b6%e6%80%81%e6%95%b4%e5%90%88">5.6. LSTM共T个隐藏状态整合</a></li>
+<li><a href="#57-%e5%a4%96%e9%83%a8%e5%9b%a0%e7%b4%a0%e5%b5%8c%e5%85%a5">5.7. 外部因素嵌入</a></li>
+<li><a href="#58-mask">5.8. mask</a></li>
+<li><a href="#59-max-min%e5%bd%92%e4%b8%80%e5%8c%96">5.9. Max-min归一化</a></li>
 </ul>
 </li>
 </ul>
@@ -637,7 +637,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <li>该模型有3个模块：空间模块，时间模块，推理模块。将空间模块的输出经过推理模块，得到的输出作为时间模块的权重参数，以此捕获时间和空间的内在因果关系。</li>
 <li>这只是一个框架，可以变换成多种模型。在空间模块中如果使用全连接就是HyperST-Dense，使用卷积就是HyperST-Conv。</li>
 </ul>
-<h2><span id="17-urban-traffic-prediction-from-spatio-temporal-data-using-deep-meta-learning">1.7. Urban Traffic Prediction from Spatio-Temporal Data Using Deep Meta Learning</span></h2><blockquote>
+<h2><span id="17-urban-traffic-prediction-from-spatio-temporal-data-using-deep-meta-learning2019kdd">1.7. Urban Traffic Prediction from Spatio-Temporal Data Using Deep Meta Learning(2019KDD)</span></h2><blockquote>
 <p>潘哲逸(上海交通大学)<br>梁宇轩(西安电子科技大学)<br>张钧波(京东)<br>郑宇(京东)<br><a href="https://github.com/panzheyi/ST-MetaNet" target="_blank" rel="noopener">https://github.com/panzheyi/ST-MetaNet</a> Mxnet</p>
 </blockquote>
 <ul>
@@ -799,7 +799,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <li>主任务输入的是相似区域的订单数据和人流量数据，其中<strong>根据POI和taxi demand来计算2个区域的相似性</strong>，为中心区域选择m=3个最相似区域</li>
 <li>使用外部信息(天气等)来预测订单需求等级(辅助任务)</li>
 </ul>
-<h2><span id="stg2seq-spatial-temporal-graph-to-sequence-model-for-multi-step-passenger-demand-forecasting2019ijcai">STG2Seq: Spatial-temporal Graph to Sequence Model for Multi-step Passenger Demand Forecasting(2019IJCAI)</span></h2><blockquote>
+<h2><span id="35-stg2seq-spatial-temporal-graph-to-sequence-model-for-multi-step-passenger-demand-forecasting2019ijcai">3.5. STG2Seq: Spatial-temporal Graph to Sequence Model for Multi-step Passenger Demand Forecasting(2019IJCAI)</span></h2><blockquote>
 <p>Lei Bai1(University of New South Wales)<br>Lina Yao(University of New South Wales)<br>Salil S. Kanhere(University of New South Wales)</p>
 </blockquote>
 <ul>
@@ -824,7 +824,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <li>对于一个GCN中，输入维度是(k,N,D),reshape成(N,k*D),然后使用下面的公式。下面这个公式用到了残差连接，在经过GCN后，加上原来的$X^l$，同时和后面的sigmoid逐元素相乘，控制线性转换的哪部分可以通过门。<br><img src="/2020/02/27/时空论文阅读笔记/STG2Seq2.png" alt=""></li>
 <li>在经过长期encoder和短期encoder后，将输出拼接，得到$(h+q,N,d_{out})$</li>
 <li><strong>时间Attention</strong>：历史h+q个时间段对target时间段的影响不同，为了求出不同的影响程度，使用Attention机制。将$Y_{h+q}$reshape成$(h+q) \times (N \times d_{out})$<script type="math/tex; mode=display">\boldsymbol{\alpha}=\operatorname{softmax}\left(\tanh \left(Y_{h+q} W_{3}^{Y}+E_{T} W_{4}^{E}+b_{1}\right)\right)</script>其中$W_{3}^{Y} \in \mathbb{R}^{(h+q) \times\left(N \times d_{\text {out }}\right) \times 1}, W_{4}^{E} \in \mathbb{R}^{d_{e} \times(h+q)}$，$b_{1} \in \mathbb{R}^{(h+q)}$ 得到的Attention分数$\boldsymbol{\alpha} \in \mathbb{R}^{(h+q)}$<script type="math/tex; mode=display">Y_{\alpha}=\sum_{i=1}^{h+q} \alpha^{i} y_{i} \quad \in \mathbb{R}^{N \times d_{o u t}}</script></li>
-<li>通道Attention：经过上一步的时间Attention，得到的结果$Y_{\alpha}$维度为$N \times d_{out}$，然后再经过通道Attention，将$Y_{\alpha}$reshape成$N \times d_{out}$<script type="math/tex; mode=display">\boldsymbol{\beta}=\operatorname{softmax}\left(\tanh \left(Y_{\alpha} W_{5}^{Y}+E_{T} W_{6}^{E}+b_{2}\right)\right)</script>其中$W_{5}^{Y} \in \mathbb{R}^{d_{\text {out}} \times N \times 1}, W_{6}^{E} \in \mathbb{R}^{d_{e} \times d_{\text {out}}}, b_{2} \in \mathbb{R}^{d_{out}}$，$\boldsymbol{\beta} \in \mathbb{R}^{d_{\text {out }}}$<script type="math/tex; mode=display">Y_{\beta}=\sum_{i=1}^{d_{\text {out}}} \beta^{i} \mathscr{Y}_{i} \in \mathbb{R}^{N}</script></li>
+<li><strong>通道Attention</strong>：经过上一步的时间Attention，得到的结果$Y_{\alpha}$维度为$N \times d_{out}$，然后再经过通道Attention，将$Y_{\alpha}$reshape成$N \times d_{out}$<script type="math/tex; mode=display">\boldsymbol{\beta}=\operatorname{softmax}\left(\tanh \left(Y_{\alpha} W_{5}^{Y}+E_{T} W_{6}^{E}+b_{2}\right)\right)</script>其中$W_{5}^{Y} \in \mathbb{R}^{d_{\text {out}} \times N \times 1}, W_{6}^{E} \in \mathbb{R}^{d_{e} \times d_{\text {out}}}, b_{2} \in \mathbb{R}^{d_{out}}$，$\boldsymbol{\beta} \in \mathbb{R}^{d_{\text {out }}}$<script type="math/tex; mode=display">Y_{\beta}=\sum_{i=1}^{d_{\text {out}}} \beta^{i} \mathscr{Y}_{i} \in \mathbb{R}^{N}</script></li>
 <li>经过通道Attention，求得$Y_{\beta}$就是一个时间段的预测值</li>
 </ul>
 <p><strong>- 总结：</strong></p>
@@ -851,7 +851,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 </blockquote>
 <ul>
 <li>使用前T个时间段的销售数据，预测未来<code>T&#39;</code>个时间段的销售数据</li>
-<li>传统的encoder-decoder架构使用rnn,本文的一个改建是在decoder中使用BiLSTM</li>
+<li>传统的encoder-decoder架构使用rnn,本文的一个改进是在decoder中使用BiLSTM</li>
 </ul>
 <p><img src="/2020/02/27/时空论文阅读笔记/BiLSTM-Enc-Dec.png" alt=""></p>
 <p><img src="/2020/02/27/时空论文阅读笔记/BiLSTM-Enc-Dec1.png" alt=""></p>
@@ -876,19 +876,19 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 </li>
 <li>计算2个区域的相似性，使用相似性作为邻接矩阵的值<br>《RiskOracle: A Minute-level Citywide Traffic Accident Forecasting Framework》（AAAI2020）</li>
 </ul>
-<h2><span id="动态图">动态图</span></h2><p>一般的图卷积的输入维度是<code>(batch_size,N,C)</code>，即只有一个时间段，但如果输入的是动态图即<code>(batch_size,T,N,C)</code>，该怎么办？</p>
+<h2><span id="52-动态图">5.2. 动态图</span></h2><p>一般的图卷积的输入维度是<code>(batch_size,N,C)</code>，即只有一个时间段，但如果输入的是动态图即<code>(batch_size,T,N,C)</code>，该怎么办？</p>
 <script type="math/tex; mode=display">h^{(l)}=\left(\hat{A} h^{(l-1)} W_{1}+b_{1}\right)</script><ul>
 <li><code>(batch_size,T,N,C)--&gt;(batch_size,T*N,C)--&gt;(T*N,batch_size,C)</code>,例如《Spatial-Temporal Synchronous Graph Convolutional Networks: A New Framework for Spatial-Temporal Network Data Forecasting》（AAAI2020）,将时间T乘到节点N上，需要对邻接矩阵进行变换成<code>(TN,TN)</code>的形式，才可以和h相乘。不常用，除非对邻接矩阵A进行变换</li>
 <li><code>(batch_size,T,N,C)--&gt;(batch_size,N,T*C)</code>，可以先经过一个FCN，将其转换为<code>(batch_size,N,D)</code>,然后再输出到GCN中，也可以不经过FCN，直接输入到GCN中。较常用，例如：<br>《RiskOracle: A Minute-level Citywide Traffic Accident Forecasting Framework》（AAAI2020）<br>《STG2Seq: Spatial-temporal Graph to Sequence Model for Multi-step Passenger Demand Forecasting》（2019IJCAI）</li>
 </ul>
-<h2><span id="52-计算2个区域的相似性">5.2. 计算2个区域的相似性</span></h2><ul>
+<h2><span id="53-计算2个区域的相似性">5.3. 计算2个区域的相似性</span></h2><ul>
 <li><p>用<strong>出租车需求量</strong>计算2个区域的<strong>相似性</strong>，用2个区域<strong>训练集</strong>中出租车需求量组成时间序列</p>
 <ul>
 <li>使用DTW计算2个序列的相似性，2个时间序列越相似，说明2个区域越相似。例如：《Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction》(AAAI2018)</li>
 <li>使用皮尔森度量函数Pearson Correlation Coefficient，<br>《Passenger Demand Forecasting with Multi-Task Convolutional Recurrent Neural Networks》(2019PAKDD)<br>《STG2Seq: Spatial-temporal Graph to Sequence Model for Multi-step Passenger Demand Forecasting》（2019IJCAI）</li>
 </ul>
 </li>
-<li><p>计算2个区域之间的<strong>相关性</strong>，使用<strong>区域间带有方向的traffic flow</strong>，如果2个区域之间的traffic flow越大，说明这2个区域越相关。但是《Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction》(AAAI2019)说这种相关性也是相似性。我觉得有问题，例如工作区和住宅区，2个区域的traffic flow很大，有很强的相关性，但是相似性并不强。</p>
+<li><p>计算2个区域之间的<strong>相关性</strong>，使用<strong>区域间带有方向的traffic flow</strong>，如果2个区域之间的traffic flow越大，说明这2个区域越相关。但是《R evisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction》(AAAI2019)说这种相关性也是相似性。我觉得有问题，例如工作区和住宅区，2个区域的traffic flow很大，有很强的相关性，但是相似性并不强。</p>
 </li>
 <li>根据<strong>POI</strong>计算2个区域的相似性<ul>
 <li>例如《Passenger Demand Forecasting with Multi-Task Convolutional Recurrent Neural Networks》(2019PAKDD)</li>
@@ -897,26 +897,26 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 </li>
 <li>《RiskOracle: A Minute-level Citywide Traffic Accident Forecasting Framework》(AAAI2020)根据区域的道路静态信息和交通动态信息(flow和speed)计算2个区域的相似性。使用JS散度</li>
 </ul>
-<h2><span id="53-poi">5.3. POI</span></h2><p>很多论文中都习惯将POI成为Semantic</p>
+<h2><span id="54-poi">5.4. POI</span></h2><p>很多论文中都习惯将POI成为Semantic</p>
 <ul>
 <li>《Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction》(AAAI2018)</li>
 <li>《DeepSTN+: Context-aware Spatial-Temporal Neural Network for Crowd Flow Prediction in Metropolis》(AAAI2019)</li>
 </ul>
-<h2><span id="54-时间">5.4. 时间</span></h2><p>像dayOfWeek，monthOfYear等时间信息，在论文中称作<strong>time meta feature</strong></p>
-<h2><span id="55-lstm共t个隐藏状态整合">5.5. LSTM共T个隐藏状态整合</span></h2><p>LSTM一共有T个时间步，将输出T个隐藏状态，怎么将其整合成1个，有3种方法：</p>
+<h2><span id="55-时间">5.5. 时间</span></h2><p>像dayOfWeek，monthOfYear等时间信息，在论文中称作<strong>time meta feature</strong></p>
+<h2><span id="56-lstm共t个隐藏状态整合">5.6. LSTM共T个隐藏状态整合</span></h2><p>LSTM一共有T个时间步，将输出T个隐藏状态，怎么将其整合成1个，有3种方法：</p>
 <ul>
 <li>只取最后一个时间步的隐藏状态，例如<br>《Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction》(AAAI2018)</li>
 <li>将T个时间步的隐藏状态拼接或平均或加和</li>
 <li>将T个时间步的隐藏状态和被预测时间步的某个向量(e.g.外部因素)做Attention，对每个时间步赋予不同的权重，整合成1个向量。例如<br>《Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction》(AAAI2019)<br>《When Will You Arrive? Estimating Travel Time Based on Deep Neural Networks》(AAAI20)</li>
 </ul>
-<h2><span id="56-外部因素嵌入">5.6. 外部因素嵌入</span></h2><p>外部因素包括：天气，时间，holiday等信息，</p>
+<h2><span id="57-外部因素嵌入">5.7. 外部因素嵌入</span></h2><p>外部因素包括：天气，时间，holiday等信息，</p>
 <ul>
 <li>外部因素中<strong>类别值</strong>(dayOfWeek，weather等)用one-hot表示，<strong>连续值</strong>(温度，风速)等用float表示，将这些外部因素拼接在一起，送入FCN中做嵌入。<br>例如《 Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction(AAAI2017)》</li>
 <li>外部因素中<strong>类别值</strong>(dayOfWeek，weather等)直接用数字表示，例如周一用0表示，周日用6表示。<strong>连续值</strong>(温度，风速)等用float表示，然后将每个类别值用对应的Embedding嵌入，然后再把嵌入的结果拼接<br>例如《When Will You Arrive? Estimating Travel Time Based on Deep Neural Networks(AAAI20)》<br><code>Embedding</code>相关知识参考<a href="https://echohhhhhh.github.io/2020/02/24/Pytorch%E4%B9%8B%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB/#12-embedding" target="_blank" rel="noopener">Pytorhc之Embedding</a></li>
 </ul>
-<h2><span id="57-mask">5.7. mask</span></h2><p>有时候mask是舍弃一些不想关注的值，比如预测车流量时，真实车流量小于5的值则舍弃，即不关注那些车流量小的值预测结果，只关注大约5的值的预测结果。一般在评价指标中mask</p>
+<h2><span id="58-mask">5.8. mask</span></h2><p>有时候mask是舍弃一些不想关注的值，比如预测车流量时，真实车流量小于5的值则舍弃，即不关注那些车流量小的值预测结果，只关注大约5的值的预测结果。一般在评价指标中mask</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mask_mae_np</span><span class="params">(y_true,y_pred,region_mask,null_val=None)</span>:</span></span><br><span class="line">    <span class="string">"""计算MAE</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">        y_true &#123;np.ndarray&#125; -- 真实值,维度(samples,pre_len,W,H)</span></span><br><span class="line"><span class="string">        y_pred &#123;np.ndarray&#125; -- 预测值,维度(samples,pre_len,W,H)</span></span><br><span class="line"><span class="string">        region_mask &#123;np.ndarray&#125; -- mask矩阵,维度(W,H)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">        np.float64 -- MAE值</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    y_true,y_pred = transfer_dtype(y_true,y_pred)</span><br><span class="line">    <span class="keyword">if</span> null_val <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">        label_mask = np.where(y_true &gt; <span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>).astype(<span class="string">'float32'</span>)</span><br><span class="line">        <span class="comment"># label_mask = np.not_equal(y_true, null_val).astype('float32')</span></span><br><span class="line">        mask = region_mask * label_mask</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        mask = region_mask</span><br><span class="line">    mask /= mask.mean()</span><br><span class="line">    <span class="keyword">return</span> np.mean(np.abs(y_true-y_pred)*mask)</span><br></pre></td></tr></table></figure>
-<h2><span id="58-max-min归一化">5.8. Max-min归一化</span></h2><p>使用Max-Min将数据归一化到[0,1]，但是也有论文归一化成[-1,1]，如下所示：</p>
+<h2><span id="59-max-min归一化">5.9. Max-min归一化</span></h2><p>使用Max-Min将数据归一化到[0,1]，但是也有论文归一化成[-1,1]，如下所示：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MinMaxNormalization</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">'''MinMax Normalization --&gt; [-1, 1]</span></span><br><span class="line"><span class="string">       x = (x - min) / (max - min).</span></span><br><span class="line"><span class="string">       x = x * 2 - 1</span></span><br></pre></td></tr></table></figure>
 <p>【注意】对特征和y归一化有2种方式：</p>
 <ol>
@@ -1087,7 +1087,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1158,7 +1158,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 流量/速度预测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction(AAAI2017)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. DeepSTN+: Context-aware Spatial-Temporal Neural Network for Crowd Flow Prediction in Metropolis(AAAI2019)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.3. UrbanFM: Inferring Fine-Grained Urban Flows(KDD2019)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.4. Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting(AAAI2019)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.5. Spatial-Temporal Synchronous Graph Convolutional Networks: A New Framework for Spatial-Temporal Network Data Forecasting(AAAI2020)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.6. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.7. Urban Traffic Prediction from Spatio-Temporal Data Using Deep Meta Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.8. StepDeep: A Novel Spatial-temporal Mobility Event Prediction Framework based on Deep Neural Network(KDD2018)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.9. STGRAT: A Spatio-Temporal Graph Attention Network for Traffic Forecasting(AAAI2020)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. ETA预测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. When Will You Arrive? Estimating Travel Time Based on Deep Neural Networks(AAAI20)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 出租车需求预测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction(AAAI2018)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction(AAAI2019)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting(AAAI2019)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.4. Passenger Demand Forecasting with Multi-Task Convolutional Recurrent Neural Networks(PAKDD2019)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">STG2Seq: Spatial-temporal Graph to Sequence Model for Multi-step Passenger Demand Forecasting(2019IJCAI)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 时间序列预测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data(2018CIKM)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.2. Multi-Horizon Time Series Forecasting with Temporal Attention Learning(KDD2019)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.1. 根据网格构建图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">动态图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.2. 计算2个区域的相似性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.3. POI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.4. 时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.5. LSTM共T个隐藏状态整合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.6. 外部因素嵌入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.7. mask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.8. Max-min归一化</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 流量/速度预测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction(AAAI2017)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. DeepSTN+: Context-aware Spatial-Temporal Neural Network for Crowd Flow Prediction in Metropolis(AAAI2019)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.3. UrbanFM: Inferring Fine-Grained Urban Flows(KDD2019)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.4. Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting(AAAI2019)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.5. Spatial-Temporal Synchronous Graph Convolutional Networks: A New Framework for Spatial-Temporal Network Data Forecasting(AAAI2020)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.6. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.7. Urban Traffic Prediction from Spatio-Temporal Data Using Deep Meta Learning(2019KDD)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.8. StepDeep: A Novel Spatial-temporal Mobility Event Prediction Framework based on Deep Neural Network(KDD2018)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.9. STGRAT: A Spatio-Temporal Graph Attention Network for Traffic Forecasting(AAAI2020)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. ETA预测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. When Will You Arrive? Estimating Travel Time Based on Deep Neural Networks(AAAI20)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 出租车需求预测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction(AAAI2018)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction(AAAI2019)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting(AAAI2019)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.4. Passenger Demand Forecasting with Multi-Task Convolutional Recurrent Neural Networks(PAKDD2019)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.5. STG2Seq: Spatial-temporal Graph to Sequence Model for Multi-step Passenger Demand Forecasting(2019IJCAI)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 时间序列预测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data(2018CIKM)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.2. Multi-Horizon Time Series Forecasting with Temporal Attention Learning(KDD2019)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.1. 根据网格构建图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.2. 动态图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.3. 计算2个区域的相似性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.4. POI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.5. 时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.6. LSTM共T个隐藏状态整合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.7. 外部因素嵌入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.8. mask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.9. Max-min归一化</span></a></li></ol></li></ol></div>
             
 
           </div>
