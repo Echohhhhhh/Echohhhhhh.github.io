@@ -73,19 +73,19 @@
 
 
 
-<meta name="description" content="autoauto- [1. 树概念介绍](#1-树概念介绍)auto- [2. 树的前向遍历](#2-树的前向遍历)auto- [3. 二叉树的中序遍历](#3-二叉树的中序遍历)auto- [4. 后序遍历](#4-后序遍历)auto- [5. 树的层次遍历](#5-树的层次遍历)auto- [6. 根据前序和中序创建二叉树](#6-根据前序和中序创建二叉树)auto- [7. 计算树的最大深">
+<meta name="description" content="1. 树概念介绍 二叉树一般有2种通用的遍历策略 深度优先搜索DFS 前序遍历：根左右 中序遍历：左根右 后序遍历：左右根   广度优先搜索BFS先遍历第一层，再遍历第二层    值得注意的是，在删除树中的节点时，删除过程将按照后序遍历的顺序进行，也就是先删除左节点和右节点，然后再删除节点本身。  平衡二叉树，需要满足1个条件：  左右子树深度之差&amp;lt;=1   二叉搜索树们，需要满足以下2个">
 <meta name="keywords" content="Leetcode,树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode之树">
 <meta property="og:url" content="http://yoursite.com/2020/05/29/Leetcode之树/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="autoauto- [1. 树概念介绍](#1-树概念介绍)auto- [2. 树的前向遍历](#2-树的前向遍历)auto- [3. 二叉树的中序遍历](#3-二叉树的中序遍历)auto- [4. 后序遍历](#4-后序遍历)auto- [5. 树的层次遍历](#5-树的层次遍历)auto- [6. 根据前序和中序创建二叉树](#6-根据前序和中序创建二叉树)auto- [7. 计算树的最大深">
+<meta property="og:description" content="1. 树概念介绍 二叉树一般有2种通用的遍历策略 深度优先搜索DFS 前序遍历：根左右 中序遍历：左根右 后序遍历：左右根   广度优先搜索BFS先遍历第一层，再遍历第二层    值得注意的是，在删除树中的节点时，删除过程将按照后序遍历的顺序进行，也就是先删除左节点和右节点，然后再删除节点本身。  平衡二叉树，需要满足1个条件：  左右子树深度之差&amp;lt;=1   二叉搜索树们，需要满足以下2个">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/05/29/Leetcode之树/7-1.png">
-<meta property="og:updated_time" content="2020-06-04T08:33:57.713Z">
+<meta property="og:updated_time" content="2020-06-04T08:44:03.974Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode之树">
-<meta name="twitter:description" content="autoauto- [1. 树概念介绍](#1-树概念介绍)auto- [2. 树的前向遍历](#2-树的前向遍历)auto- [3. 二叉树的中序遍历](#3-二叉树的中序遍历)auto- [4. 后序遍历](#4-后序遍历)auto- [5. 树的层次遍历](#5-树的层次遍历)auto- [6. 根据前序和中序创建二叉树](#6-根据前序和中序创建二叉树)auto- [7. 计算树的最大深">
+<meta name="twitter:description" content="1. 树概念介绍 二叉树一般有2种通用的遍历策略 深度优先搜索DFS 前序遍历：根左右 中序遍历：左根右 后序遍历：左右根   广度优先搜索BFS先遍历第一层，再遍历第二层    值得注意的是，在删除树中的节点时，删除过程将按照后序遍历的顺序进行，也就是先删除左节点和右节点，然后再删除节点本身。  平衡二叉树，需要满足1个条件：  左右子树深度之差&amp;lt;=1   二叉搜索树们，需要满足以下2个">
 <meta name="twitter:image" content="http://yoursite.com/2020/05/29/Leetcode之树/7-1.png">
 
 
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.7k
+                  2.6k
                 </span>
               
 
@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  11
+                  10
                 </span>
               
             </div>
@@ -425,7 +425,6 @@
 
       
         <a id="more"></a>
-<!-- TOC -->autoauto- [1. 树概念介绍](#1-树概念介绍)auto- [2. 树的前向遍历](#2-树的前向遍历)auto- [3. 二叉树的中序遍历](#3-二叉树的中序遍历)auto- [4. 后序遍历](#4-后序遍历)auto- [5. 树的层次遍历](#5-树的层次遍历)auto- [6. 根据前序和中序创建二叉树](#6-根据前序和中序创建二叉树)auto- [7. 计算树的最大深度](#7-计算树的最大深度)auto- [8. 对称二叉树](#8-对称二叉树)auto- [9. 平衡二叉树](#9-平衡二叉树)autoauto<!-- /TOC -->
 <h1><span id="1-树概念介绍">1. 树概念介绍</span></h1><ul>
 <li>二叉树一般有2种通用的遍历策略<ul>
 <li>深度优先搜索DFS<ol>
