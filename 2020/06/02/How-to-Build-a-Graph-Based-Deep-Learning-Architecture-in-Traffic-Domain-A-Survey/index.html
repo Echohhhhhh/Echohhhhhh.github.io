@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="时空领域,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这篇综述性论文介绍图神经网络在交通领域的应用。">
+<meta name="keywords" content="时空领域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Build a Graph-Based Deep Learning Architecture in Traffic Domain: A Survey">
+<meta property="og:url" content="http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/index.html">
+<meta property="og:site_name" content="Echo&#39;s blog">
+<meta property="og:description" content="这篇综述性论文介绍图神经网络在交通领域的应用。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/4.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/5.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/6.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/7.png">
+<meta property="og:updated_time" content="2020-06-04T08:30:14.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How to Build a Graph-Based Deep Learning Architecture in Traffic Domain: A Survey">
+<meta name="twitter:description" content="这篇综述性论文介绍图神经网络在交通领域的应用。">
+<meta name="twitter:image" content="http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/">
+
+
+
+
+
+  <title>How to Build a Graph-Based Deep Learning Architecture in Traffic Domain: A Survey | Echo's blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b759ac2a7fa45129e3ef060bf68259f0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Echo's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">远方到底有多远</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Echo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">How to Build a Graph-Based Deep Learning Architecture in Traffic Domain: A Survey</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-02T09:41:59+08:00">
+                2020-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文阅读笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文阅读笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇综述性论文介绍图神经网络在交通领域的应用。</p>
+<a id="more"></a>
+<!-- TOC -->autoauto- [1. 摘要](#1-摘要)auto- [2. 前言](#2-前言)auto- [3. 研究方向](#3-研究方向)auto- [4. 问题定义](#4-问题定义)auto    - [4.1. 构建图](#41-构建图)auto    - [4.2. 构造邻接矩阵](#42-构造邻接矩阵)auto- [5. 前人的模型](#5-前人的模型)auto    - [5.1. GNN](#51-gnn)auto    - [5.2. RNN](#52-rnn)auto    - [5.3. TCN](#53-tcn)auto    - [5.4. Seq2Seq](#54-seq2seq)auto    - [5.5. GAN](#55-gan)auto- [6. 挑战](#6-挑战)auto    - [6.1. 空间依赖](#61-空间依赖)auto    - [6.2. 时间依赖](#62-时间依赖)auto    - [6.3. 时空依赖](#63-时空依赖)auto    - [6.4. 外部因素](#64-外部因素)auto- [7. 未来方向](#7-未来方向)autoauto<!-- /TOC -->
+<h1><span id="1-摘要">1. 摘要</span></h1><p>在交通数据中，有很多数据以图的形式存在，为了充分利用其中的空间信息，很多模型使用图神经网络来处理交通图数据。本文针对交通领域的图网络模型进行总结。</p>
+<h1><span id="2-前言">2. 前言</span></h1><p>在交通预测领域，（1）早期采用的方法有：ARIMA,VAR,Kalman过滤器等，然而，这些方法通常需要一些前提假设，例如数据是静态且线性相关，不能应用在实际数据中。（2）机器学习方法例如SVM，K近邻可以建模交通数据中的非线性相关性，但是模型结构较浅，且需要人工构造和选择特征，不能满足大量交通数据的应用需求。（3）深度学习方法，例如RNN无法捕获空间相关性，CNN无法应用在图数据中，并且CNN更关注local相关性，忽略了global相关性。（4）图神经网络，使用图神经网络来解决交通领域的预测问题。<br>贡献总结如下：</p>
+<ul>
+<li>第一篇介绍图神经网络在交通领域应用的综述</li>
+<li>系统地列出交通领域的研究方向和挑战</li>
+<li>针对4种交通领域数据，介绍如何构建图</li>
+<li>分析了5种应用在图交通领域的技术，介绍了它们的优缺点，以及变体</li>
+<li>讨论了基于图网络的交通任务中4种常见的挑战，并总结对应的解决方案</li>
+<li>收集数据集，开源代码</li>
+</ul>
+<h1><span id="3-研究方向">3. 研究方向</span></h1><p>给出了交通领域的一些研究问题<br><img src="/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/1.png" alt=""></p>
+<ol>
+<li>交通拥堵</li>
+<li>交通需求<br>出租车、自行车、公共交通的需求预测，像滴滴，Uber等线上打车平台经常做这一类问题。</li>
+<li>交通安全<br>预测交通事故的风险，严重程度</li>
+<li>交通监控<br>主要通过监控的图像和视频检测车辆，行人检测。</li>
+<li>自动驾驶<br>自动驾驶要求检测树木，道路，行人，一般和CV领域相关。</li>
+</ol>
+<p>图神经网络在交通领域的应用</p>
+<ol>
+<li>交通状态预测<br>交通状态：交通流量、速度、时间ETA、密度等。</li>
+<li>交通需求预测<br>预测将来用户对出租车、自行车的需求</li>
+<li>交通信号预测<br>减低用户在交叉路口的等待时间，避免交通拥堵</li>
+<li>司机行为分类</li>
+</ol>
+<p>交通事故预测还没有用到图模型。</p>
+<h1><span id="4-问题定义">4. 问题定义</span></h1><p>基于图的交通预测问题，首先需要构件图G。</p>
+<ul>
+<li>图：无权图，有权图，无向图，有向图，取决于具体的任务。</li>
+<li>节点：传感器sensor，路段，道路交叉口，GPS交叉点。</li>
+<li>邻接矩阵A：非0即1，浮点数（表示2个节点的关系，例如相似性，距离）</li>
+</ul>
+<p>给定历史P个时间段所有节点的信息，维度是$\left[\mathcal{X}_{1}, \cdots, \mathcal{X}_{i}, \cdots, \mathcal{X}_{\mathbf{P}}\right] \in \mathbb{R}^{\mathbf{P} \times \mathbf{N} \times \mathbf{F}_{1}}$预测未来Q个时间段的$\mathcal{Y}=\left[\mathcal{Y}_{1}, \cdots, \mathcal{Y}_{j}, \cdots, \mathcal{Y}_{\mathrm{Q}}\right] \in \mathbb{R}^{\mathbf{Q} \times \mathbf{N} \times \mathrm{F}_{\mathrm{O}}}$</p>
+<ul>
+<li>预测的特征只有1个，即$F_O=1$，预测特征有多个，即$F_O&gt;1$</li>
+<li>预测未来时间段只有1个，单步预测，即$Q=1$，预测未来时间段有多个，多步预测，即$Q&gt;1$</li>
+<li>多步预测问题中，一般使用FC（将输出reshape成需要的维度，ASTGCN,T-GCN,），Seq2Seq（使用RNN循环输出预测结果,DCRNN,GMAN），空洞技术（WaveNet）</li>
+</ul>
+<h2><span id="41-构建图">4.1. 构建图</span></h2><p>在构建图时，一般使用3类数据：传感器，GPS轨迹，打车订单数据，</p>
+<ol>
+<li>传感器数据<br>最常用的加州PEMS数据，图中的每个节点表示一个传感器，同一条路上的传感器有边相连。</li>
+<li>GPS数据<br>GPS轨迹数据，需要将GPS匹配到最近的路段上，以路段为节点创建图，或者以交叉路口为节点创建图。这里的图可以是有向，也可以无向。</li>
+</ol>
+<p><img src="/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/3.png" alt="">  </p>
+<ol>
+<li>订单数据<br>将城市划分为网格，每个节点表示一个网格，边表示连通性。可以根据不同的特征来构件图，例如下图使用邻近区域、道路连通性、功能相似区域分别构建3个图。</li>
+</ol>
+<p><img src="/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/4.png" alt="">  </p>
+<ol>
+<li>公共交通数据<ul>
+<li>地铁图：每个地铁站表示一个节点，如果一条线上的2个地铁站相邻则有边。图信号矩阵是inflow和outflow</li>
+<li>公交车图：每个公交站是一个节点，如果一条线上的2个公交站相邻则有边。图信号矩阵进站记录</li>
+</ul>
+</li>
+</ol>
+<h2><span id="42-构造邻接矩阵">4.2. 构造邻接矩阵</span></h2><ol>
+<li>静态邻接矩阵<br>邻接矩阵不会随着时间变化。可以根据节点之间的特征构建多个邻接矩阵，例如功能相似，道路相通，时间相似。邻接矩阵中的值可以是非0即1，也可以表示节点间距离或者相似性。一般通过阈值来定义邻接矩阵，通过调整阈值来控制邻接矩阵的稀疏性。<script type="math/tex; mode=display">\mathbf{a}_{i j}=\left\{\begin{array}{l}
+\exp \left(-\frac{\mathbf{d}_{i j}^{2}}{\sigma^{2}}\right), i \neq j \text { and } \mathbf{d}_{i j} \geq \epsilon \\
+0 \quad, i=j \text { or } \mathbf{d}_{i j}<\epsilon
+\end{array}\right.</script></li>
+</ol>
+<ol>
+<li>动态邻接矩阵<br>有2种情况：1. 邻接矩阵不随着时间变化，但是邻接矩阵不是预先定义好的，而是模型先动态学习节点嵌入，然后根据学习到的节点嵌入构造邻接矩阵。2. 邻接矩阵随着时间变化。</li>
+</ol>
+<h1><span id="5-前人的模型">5. 前人的模型</span></h1><p>分析图神经网络在交通领域的应用，发现GNN通常和其他组件一起用，类似RNN,Seq2Seq，TCN等。</p>
+<h2><span id="51-gnn">5.1. GNN</span></h2><p>GNN在交通领域的应用主要有3个：谱图卷积for无向图，扩散卷积for有向图。</p>
+<ol>
+<li><p>谱图卷积</p>
+<script type="math/tex; mode=display">\begin{aligned}
+Y_{j} &=\rho\left(\Theta_{j} *_{\mathcal{G}} X\right) \\
+&=\rho\left(\sum_{i=1}^{\mathbf{F}_{\mathrm{I}}} \theta_{i, j} \tilde{\mathbf{D}}^{-\frac{1}{2}} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-\frac{1}{2}} X_{i}\right), 1 \leq j \leq \mathbf{F}_{\mathbf{O}} \\
+Y &=\rho\left(\tilde{\mathbf{D}}^{-\frac{1}{2}} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-\frac{1}{2}} X W\right)
+\end{aligned}</script><p>谱图卷积要求对称的拉普拉斯矩阵，来实现特征值分解。</p>
+</li>
+<li><p>扩散卷积<br>谱图卷积要求对称的拉普拉斯矩阵，来实现特征值分解。但是对于有向图来说，拉普拉斯矩阵不是对称的。扩散卷积对图的结构，邻接矩阵，拉普拉斯矩阵没有任何限制。扩散卷积可以看做是转移矩阵的幂次，表示从节点i到节点j的转移概率。</p>
+<script type="math/tex; mode=display">y=\Theta *_{\mathcal{G}} x=\sum_{k=0}^{\mathrm{K}-1}\left(\theta_{k, 1}\left(\mathrm{D}_{\mathrm{O}}^{-1} \mathrm{A}\right)^{k}+\theta_{k, 2}\left(\mathrm{D}_{\mathrm{I}}^{-1} \mathrm{A}^{T}\right)^{k}\right) x</script></li>
+</ol>
+<p>总结：谱图卷积和扩散卷积的不同：谱图卷积的邻接矩阵揭示中心节点和它直接邻近的节点更相关。而扩散卷积揭示空间依赖是随机且动态的。扩散卷积比谱图卷积更复杂。扩散卷积可以适用在任何交通网络上，而谱图卷积只能用在对称的图上，即无向图中。</p>
+<p>有些工作在使用SGC和DGC使用以下tricks</p>
+<ul>
+<li>使用SGC时，引入attention机制<br>S表示图信号矩阵，使用切比雪夫多项式计算图卷积时，对S求attention，计算节点之间的影响程度。</li>
+</ul>
+<script type="math/tex; mode=display">\Theta *_{\mathcal{G}} x \approx \sum_{k=0}^{K-1} \theta_{k}\left(T_{k}(\tilde{\mathbf{L}}) \odot \mathbf{S}\right) x$$ $$\mathbf{S} = W_{1} \odot \rho\left(\left(X W_{2}\right) W_{3}(W_{4} X)^{T}+b\right) \in \mathbb{R}^{N \times N}</script><ul>
+<li><p>直接使用邻接矩阵，FFR表示道路特征</p>
+<script type="math/tex; mode=display">\Theta *_{\mathcal{G}} x=\left(W \odot \tilde{\mathbf{A}}^{\mathrm{K}} \odot \mathcal{F} \mathcal{F} \mathcal{R}\right) x</script></li>
+<li><p>在邻接矩阵中引入地理位置信息</p>
+<script type="math/tex; mode=display">\mathbf{S}=\mathbf{A} \odot \omega$$$$Y=\rho\left(\tilde{\mathbf{Q}}^{-\frac{1}{2}} \tilde{\mathbf{S}} \tilde{\mathbf{Q}}^{-\frac{1}{2}} X W\right)</script></li>
+</ul>
+<h2><span id="52-rnn">5.2. RNN</span></h2><p>交通任务预测中很多都是时间序列数据，适用RNN来捕获时间相关性。这里包括三类：RNN,LSTM,GRU</p>
+<ul>
+<li>RNN：输入层，隐藏层，输出层</li>
+<li>LSTM：为了解决RNN的梯度消失和梯度爆炸问题，引入输入门，遗忘门，输出门。</li>
+<li>GRU：LSTM结构复杂，参数更多，用更简单的GRU来代替，只有2个门：重置门</li>
+</ul>
+<p>在交通预测领域中，很少用RNN，大部分都是用GRU，少数用LSTM。在用GRU或LSTM时，有很多小tricks，例如attention，门控机制，残差机制。<br>在使用RNN所用到的tricks</p>
+<ul>
+<li>在RNN中引入空间信息<script type="math/tex; mode=display">\mathbf{H}_{t} = R N N\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] \odot S\right)</script></li>
+<li>引入外部因素<script type="math/tex; mode=display">\mathbf{H}_{t}=G R U\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right], \mathbf{E}_{t}\right)+\mathbf{H}_{t-1} W</script></li>
+<li>使用空洞RNN<script type="math/tex; mode=display">\mathbf{H}_{t}=G R U\left(\mathbf{H}_{t-s}, \mathbf{X}_{t}\right)</script></li>
+<li>RNN和图卷积结合<script type="math/tex; mode=display">\begin{aligned}
+r_{t} &=\sigma\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *_{\mathcal{G}} W_{r}+b_{r}\right) \\
+u_{t} &=\boldsymbol{\sigma}\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *_{\mathcal{G}} W_{u}+b_{u}\right) \\
+\tilde{\mathbf{H}}_{t} &=\tanh \left(r_{t} \odot\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *_{\mathcal{G}} W_{h}+b_{h}\right) \\
+\mathbf{H}_{t} &=u_{t} \odot \mathbf{H}_{t-1}+\left(1-u_{t}\right) \odot \tilde{\mathbf{H}}_{t}
+\end{aligned}</script></li>
+</ul>
+<h2><span id="53-tcn">5.3. TCN</span></h2><p>虽然RNN可以捕获时间的相关性，但是其不能并行计算，耗时。与之对比，1D卷积运行更快，同样也可以捕获时间相关性。然后1D卷积与RNN相比应用更少，由于1D卷积缺少长期建模的memory机制。后来提出空洞卷积，在长期时间建模上，比RNN效果更好。之后，TCN被广泛应用在时间建模上。</p>
+<p><img src="/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/5.png" alt=""> </p>
+<p>在使用TCN时，有一些小traick</p>
+<ul>
+<li><p>堆叠不同的TCN层，每层使用不同的dilation rate</p>
+<script type="math/tex; mode=display">\mathcal{Y}^{(l+1)}=\sigma\left(\Theta^{l} *_{\mathcal{T} \mathrm{d}^{l}} \mathcal{Y}^{(l)}\right)</script></li>
+<li><p>残差，原始输入+TCN的输出</p>
+<script type="math/tex; mode=display">\mathcal{Y}^{(l+1)}=\mathcal{Y}^{(l)}+\boldsymbol{\operatorname { R e }} \boldsymbol{L} \boldsymbol{U}\left(\Theta_{1}^{l} *_{\mathcal{T}^{\mathrm{d}}}\left(\boldsymbol{\operatorname { R e }} \boldsymbol{L} \boldsymbol{U}\left(\Theta_{0}^{l} *_{\mathcal{T}^{\mathrm{d}}} \mathcal{Y}^{(l)}\right)\right)\right)</script></li>
+<li><p>使用门控机制</p>
+<script type="math/tex; mode=display">\mathcal{Y}=\rho\left(\Theta_{1} *_{\mathcal{T}^{\mathrm{d}}} \mathcal{X}+b_{1}\right) \odot \sigma\left(\Theta_{2} *_{\mathcal{T}^{\mathrm{d}}} \mathcal{X}+b_{2}\right)</script></li>
+</ul>
+<h2><span id="54-seq2seq">5.4. Seq2Seq</span></h2><p>原始的Seq2Seq模型为对输入进行建模，得到一个隐变量$C$,然后将$C$输入到解码器中，进行预测。</p>
+<p><img src="/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/6.png" alt=""> </p>
+<p>对Seq2Seq的改进主要有2点：</p>
+<ul>
+<li><p>改变隐变量C<br>原先输入到decoder的C是固定的，对decoder中所有的时间步来说都一样，然后输入中的值对不同的输出影响程度不同，这里引入attention机制，动态改变C</p>
+<script type="math/tex; mode=display">\begin{array}{l}
+\mathbf{H}_{i}=\operatorname{Encoder}\left(\mathbf{X}_{i}, \mathbf{H}_{i-1}\right) \\
+\mathbf{C}_{j}=\sum_{i=1}^{\mathbf{P}}\left(\theta_{j i} \mathbf{H}_{i}\right), \mathbf{S}_{0}=\mathbf{H}_{\mathbf{P}} \\
+\mathbf{S}_{j}=\operatorname{Decoder}\left(\mathbf{C}_{j}, \mathbf{Y}_{j-1}, \mathbf{S}_{j-1}\right) \\
+\mathbf{Y}_{j}=\mathbf{S}_{j} W
+\end{array}</script></li>
+<li><p>采样<br>在decoder在训练阶段和测试阶段的输入是不同的。在训练阶段，decoder的不同时间步输入的真实的label，而在测试阶段，因为不知道label，输入的是上一个时间步预测的结果，这样可能会造成错误累积的问题。为了解决这个问题，可以在训练阶段进行采样，即并不总是输入真实的label，以$\epsilon_{j}$输入真实babel，以$1-\epsilon_{j}$输入上个时间步的预测结果。</p>
+</li>
+</ul>
+<p>交通领域中的多步预测通常采用Seq2Seq架构。Seq2Seq中的encoder和decoder架构通常采用RNN，但是也不一定相同。</p>
+<h2><span id="55-gan">5.5. GAN</span></h2><p>这一模块看的论文较少，以后补充</p>
+<h1><span id="6-挑战">6. 挑战</span></h1><p>尽管交通领域有很多研究方向，但它们都有一些共同的挑战，如下所示，主要分为三类：空间依赖，时间依赖，外部因素。</p>
+<p><img src="/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/2.png" alt=""> </p>
+<h2><span id="61-空间依赖">6.1. 空间依赖</span></h2><p>在一个双向的道路中，R1只受R2的影响，R3对R1的影响较小。如果采用网格的形式，R3和R2对R1的影响相同，这不符合实际。如果采用图的形式，R2对R1的影响较大，R3对R1的影响较小，符合实际。</p>
+<p><img src="/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/7.png" alt=""> </p>
+<p>交通网络中空间依赖十分复杂，可以分成三类：空间局部性，多元关系，全局连通性。</p>
+<ol>
+<li>空间局部性<br>空间局部性表示邻近区域比较远的区域更相关。K阶局部谱图卷积SGCN可以聚合0~K-1跳的邻居信息。还有一些其他工作可以捕获空间局部相关性。比如动态计算邻接矩阵</li>
+<li>多元关系<br>目标区域也可能与距离较远的区域相关。例如功能相似的区域，交通连通的区域。根据这些不同的相似性来创建不同的图。</li>
+<li>全局连通性<br>以上2点更关注网络部分，而忽略了整体的结构。全局连通性表示不同区域的交通情况在整个网络上互相影响。使用扩散卷积、pooling层、self-adaptive邻接矩阵可以捕获到这种全局连通性。</li>
+</ol>
+<h2><span id="62-时间依赖">6.2. 时间依赖</span></h2><p>使用RNN或TCN来捕获时间依赖</p>
+<ol>
+<li>多粒度<br>时间有不同的周期性，例如recent，daily，weekly。</li>
+<li>不同的权重<br>历史信息对目标时间段的影响权重不同。使用Attention机制计算权重分数。</li>
+</ol>
+<h2><span id="63-时空依赖">6.3. 时空依赖</span></h2><p>以上对时间和空间依赖分别建模，如果对时空依赖同时建模，预测效果可能会更好。例如STSGCN</p>
+<h2><span id="64-外部因素">6.4. 外部因素</span></h2><p>天气（雨/温度/空气质量），时间（节假日/周几/几点），特殊时间，POI等信息都会影响交通预测。<br>对于外部因素的处理通常有2种方法：</p>
+<ol>
+<li>和其他因素拼接，输入到模型中</li>
+<li>设计外部因素处理模块，对外部因素单独处理。通常是2个FCN，第一个FCN提取重要信息，第二个FCN从低维特征映射到高维特征</li>
+</ol>
+<h1><span id="7-未来方向">7. 未来方向</span></h1><ol>
+<li>在司机行为分类，车辆/人们轨迹预测，交通事故预测使用图模型。</li>
+<li>大多使用SGCN和DGCN，很少使用GAT,GAE,RNN+GCN，可以使用以上模型解决交通问题</li>
+<li>交通问题大多是回归问题，很少有分类问题，可以使用图模型研究分类问题</li>
+<li>现有模型对外部因素处理比较简单，可以设计更复杂的模型捕获外部因素信息。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Echo 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Echo 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/时空领域/" rel="tag"># 时空领域</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/29/Leetcode之树/" rel="next" title="Leetcode之树">
+                <i class="fa fa-chevron-left"></i> Leetcode之树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/touxiang.jpg" alt="Echo">
+            
+              <p class="site-author-name" itemprop="name">Echo</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xiaohuangrenlll@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Echohhhhhh" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 研究方向</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 问题定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 构建图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.2. 构造邻接矩阵</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 前人的模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.1. GNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.2. RNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.3. TCN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.4. Seq2Seq</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.5. GAN</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 挑战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">6.1. 空间依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">6.2. 时间依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">6.3. 时空依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">6.4. 外部因素</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. 未来方向</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Echo</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "topRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+  
+</body>
+</html>
