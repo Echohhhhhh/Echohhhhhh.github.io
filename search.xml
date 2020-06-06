@@ -1,6 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Leetcode之动态规划</title>
+    <url>/2020/06/06/Leetcode%E4%B9%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</url>
+    <content><![CDATA[<h1><span id="动态规划">动态规划</span></h1><p>如果是求一个问题的最优解（通常是最大值或最小值），而且该问题可以分解成若干个子问题，并且子问题之间还有重叠的更小的子问题，可以考虑使用动态规划。</p>
+<p>在解决动态规划问题时，需要分解成子问题，这里需要将子问题的最优解保存下来（一般是一维或二维数组），作为求取大问题最优解的基础。</p>
+<p>做动态规划的三个关键：</p>
+<ol>
+<li>dp[i]表示什么意思（如果二维，dp[i][j]）</li>
+<li>根据dp[i]和dp[i-1]的关系写出状态转移矩阵</li>
+<li>确定初始条件，dp[0]</li>
+</ol>
+<h1><span id="剪绳子">剪绳子</span></h1><p>给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n&gt;1并且m&gt;1），每段绳子的长度记为 k[0],k[1]…k[m-1] 。请问 k[0]<em>k[1]</em>…*k[m-1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。</p>
+<p>注意：m&gt;1，说明必须要切分，例如长度为2，必须要切分成1+1</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/jian-sheng-zi-lcof" target="_blank" rel="noopener">https://leetcode-cn.com/problems/jian-sheng-zi-lcof</a></p>
+<p><strong>【方法一】</strong><br>使用动态规划解决。<br>状态转移公式：<code>dp[i] = max(dp[i],max(j*(i-j),j*dp[i-j]))</code>,<br>首先求不切割<code>dp[i]</code>和切割的最大值。<br>在切割中，有2种方式：（1）将i切割成j和i-j两部分，不再切割.（2）将i切割成<br>j和i-j两部分，然后再对i-j继续切割。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cuttingRope</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment">#状态转移公式</span></span><br><span class="line">        <span class="comment">#dp[i] = max(dp[i],max(j*(i-j),j*dp[i-j]))</span></span><br><span class="line">        dp = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(n+<span class="number">1</span>)]<span class="comment">#从0~n</span></span><br><span class="line">        dp[<span class="number">2</span>]=<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>,n+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i):</span><br><span class="line">                dp[i] = max(dp[i],max(j*(i-j),j*dp[i-j]))</span><br><span class="line">        <span class="keyword">return</span> dp[n]</span><br></pre></td></tr></table></figure>
+<p><strong>【方法二】</strong><br>找规律，也是贪心法则</p>
+<ul>
+<li>如果绳子长度&gt;=5,则尽可能多的切分成3</li>
+<li>绳子长度为4，分成2+2</li>
+<li>绳子长度为3，切分1+2</li>
+<li>绳子长度为2，分成1+1</li>
+</ul>
+<p>总结如下,绳子长度为L：</p>
+<ul>
+<li>L&lt;3,切分成1+(L-1)</li>
+<li>L&gt;=3<ul>
+<li>L%3==0：全部划分为3</li>
+<li>L%3==1：先划分成2+2，然后把剩下的划分为3</li>
+<li>L%3==2：先划分成1个2，然后把剩下的划分成3 </li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cuttingRope</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> n &lt;= <span class="number">3</span>:<span class="keyword">return</span> <span class="number">1</span>*(n<span class="number">-1</span>)</span><br><span class="line">        res = <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> n % <span class="number">3</span> == <span class="number">1</span>:</span><br><span class="line">            res = <span class="number">4</span></span><br><span class="line">            n -= <span class="number">4</span></span><br><span class="line">        <span class="keyword">elif</span> n % <span class="number">3</span> == <span class="number">2</span>:</span><br><span class="line">            res = <span class="number">2</span></span><br><span class="line">            n -= <span class="number">2</span></span><br><span class="line">        <span class="keyword">while</span> n:</span><br><span class="line">            res *= <span class="number">3</span></span><br><span class="line">            n -= <span class="number">3</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h1><span id="最大子序列和">最大子序列和</span></h1><p>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。<br><a href="https://leetcode-cn.com/problems/maximum-subarray/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/maximum-subarray/</a></p>
+<p><strong>【方法一】</strong><br>动态规划<br>dp[i]表示以nums[i]为结尾的最大子序列和<br>dp[0]=nums[0]<br><code>dp[i]=max(dp[i-1]+nums[i],nums[i])</code><br>dp[i]的最大值就是看当前元素nums[i]应该单独成一段，还是加入到上一段中dp[i-1]，所以需要从2个中找最大值。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSubArray</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment">#dp[i]表示nums中以i为结尾的最大和</span></span><br><span class="line">        dp = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums))]</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>]</span><br><span class="line">        <span class="comment">#dp[i] = max(dp[i-1]+nums[i],nums[i])</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(nums)):</span><br><span class="line">            dp[i] = max(dp[i<span class="number">-1</span>]+nums[i],nums[i])</span><br><span class="line">        <span class="keyword">return</span> max(dp)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+<p><strong>【优化】</strong><br>上面方法的空间复杂度是O(n),因为dp需要存储n个数的最大值。但其实在计算dp[i]的时候，只需要用到dp[i-1]，其余都没用，所以我们可以将空间复杂度降到O(1),只保留dp[i-1]的值</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSubArray</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        dp = nums[<span class="number">0</span>]</span><br><span class="line">        res = dp</span><br><span class="line">        <span class="comment">#dp[i] = max(dp[i-1]+nums[i],nums[i])</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(nums)):</span><br><span class="line">            dp = max(dp+nums[i],nums[i])</span><br><span class="line">            res = max(res,dp)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p><strong>【方法二】</strong><br>使用贪心算法，从左向右遍历，一个个数字相加，使用sum记录当前遍历的和，max记录当前遍历和的最大值。如果sum&lt;0，则将sum更新为当前元素的值，重新找新的子序串，然后将sum和max比较，将max更新为较大的值</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSubArray</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        sub_sum = nums[<span class="number">0</span>]</span><br><span class="line">        res = nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(nums)):</span><br><span class="line">            <span class="keyword">if</span> sub_sum &lt; <span class="number">0</span>:</span><br><span class="line">                sub_sum = nums[i]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                sub_sum += nums[i]</span><br><span class="line">            res = max(res,sub_sum)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h1><span id="股票问题">股票问题</span></h1><h2><span id="买卖股票的最佳时机">买卖股票的最佳时机</span></h2><p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
+<p>如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。</p>
+<p>注意：你不能在买入股票前卖出股票。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock</a></p>
+<p><strong>【方法一】</strong><br>一次遍历，记录前i天的最低价格和最大利润</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type prices: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> prices:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="comment">#对于每个价格，记录在它之前的最低价格，求差值，然后和算出来的最大利润比较</span></span><br><span class="line">        <span class="comment">#如果当前差值大于以前的利润，修改max_profile</span></span><br><span class="line">        min_pricce = prices[<span class="number">0</span>]</span><br><span class="line">        max_profile = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> price <span class="keyword">in</span> prices:</span><br><span class="line">            min_pricce = min(min_pricce,price)</span><br><span class="line">            max_profile = max(max_profile,price-min_pricce)</span><br><span class="line">        <span class="keyword">return</span> max_profile</span><br></pre></td></tr></table></figure>
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<p><strong>【方法二】</strong><br>动态规划<br>dp[i]表示前i天的最大利润<br><code>dp[i]=max(dp[i-1],prices[i]-min_price)</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type prices: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> prices:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        dp = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(len(prices))]</span><br><span class="line">        dp[<span class="number">0</span>]=<span class="number">0</span></span><br><span class="line">        min_pricce = prices[<span class="number">0</span>]<span class="comment">#记录前i天的最低价格</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(prices)):</span><br><span class="line">            min_pricce = min(min_pricce,prices[i])</span><br><span class="line">            dp[i] = max(dp[i<span class="number">-1</span>],prices[i]-min_pricce)</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+<h2><span id="买卖股票的最佳时机-ii">买卖股票的最佳时机 II</span></h2><p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
+<p>设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。</p>
+<p>注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
+<blockquote>
+<p>输入: [7,1,5,3,6,4]<br>输出: 7<br>解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格=5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。随后，在第 4 天（股票价格=3）的时候买入，在第 5 天（股票价格=6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 </p>
+</blockquote>
+<p>链接：<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii</a></p>
+<p><strong>【方法一】</strong></p>
+<p>使用贪心算法只需要一次遍历。其主要想法是逢低便买入，逢高便卖出，即只要明天的价格大于今天的价格，就在今天买下，明天卖出。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type prices: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment">#贪心算法，只遵循一个原则：低价买入，高价出售</span></span><br><span class="line">        <span class="comment">#只要明天的价格比今天高，就买今天的，然后明天卖出，获得差价利润</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(prices)<span class="number">-1</span>):</span><br><span class="line">            diff = prices[i+<span class="number">1</span>] - prices[i]</span><br><span class="line">            <span class="keyword">if</span> diff&gt;<span class="number">0</span>:</span><br><span class="line">                res+=diff</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p><strong>【方法二】</strong></p>
+<p>一般能用贪心算法解决的，都可以使用动态规划算法。</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode之回溯</title>
+    <url>/2020/06/06/Leetcode%E4%B9%8B%E5%9B%9E%E6%BA%AF/</url>
+    <content><![CDATA[<h1><span id="回溯">回溯</span></h1><p>回溯可以看做是暴力法的升级。回溯法非常适合由多个步骤组成的问题，每个步骤都有多个选项。当我们在某一步选择了其中一个选项时，就进入到下一步，然后又面临新的选项，就这样重读选择，直至达到最终的状态。</p>
+<p>在二维矩阵寻找路径的问题，基本都可以用回溯解决</p>
+<h1><span id="矩阵中单词路径搜索">矩阵中单词路径搜索</span></h1><p>请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一格开始，每一步可以在矩阵中向左、右、上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。例如，在下面的3×4的矩阵中包含一条字符串“bfce”的路径（路径中的字母用加粗标出）。</p>
+<p>[[“a”,”<strong>b</strong>“,”c”,”e”],</p>
+<p>[“s”,”<strong>f</strong>“,”<strong>c</strong>“,”s”],</p>
+<p>[“a”,”d”,”<strong>e</strong>“,”e”]]</p>
+<p>但矩阵中不包含字符串“abfb”的路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入这个格子。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof" target="_blank" rel="noopener">https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof</a></p>
+<p>【分析】</p>
+<p>使用深度有限搜索DFS+回溯方法来解决</p>
+<p>深度优先搜索：先找到一个可能的方向，朝这个方向搜到底，如果不满足，再回溯到上一个节点，沿这个方向搜索<br>回溯：在搜索中，遇到这条路不可能和目标字符串匹配的情况，则返回</p>
+<p>这道题使用递归</p>
+<ul>
+<li>递归的参数：当前元素在board的位置<code>board[i][j]</code>,当前需要匹配的字符<code>word[k]</code></li>
+<li>递归终止条件<ul>
+<li>返回false：i和j越界，当前元素board[i][j]和board[k]不相等，当前元素board[i][j]已经被访问过</li>
+<li>返回true：字符串word已经全部匹配，即k=len(word)-1<br>递推工作：</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>标记当前元素已经被访问过</li>
+<li>搜索board[i][j]的上下左右4个方向，是否和board[k+1]匹配</li>
+<li>如果匹配，返回True，如果都不匹配，回溯，说明当前元素board[i][j]行不通，将其标记为未采纳该节点</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">exist</span><span class="params">(self, board, word)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type board: List[List[str]]</span></span><br><span class="line"><span class="string">        :type word: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        rows,cols = len(board),len(board[<span class="number">0</span>])</span><br><span class="line">        <span class="comment">#标记当前是否被访问</span></span><br><span class="line">        visit = [[<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(cols)] <span class="keyword">for</span> i <span class="keyword">in</span> range(rows)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(rows):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(cols):</span><br><span class="line">                <span class="keyword">if</span> board[i][j] == word[<span class="number">0</span>]:</span><br><span class="line">                    <span class="keyword">if</span> self.dfs(i,j,<span class="number">0</span>,board,word,visit):<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(self,i,j,k,board,word,visit)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        board[i][j]</span></span><br><span class="line"><span class="string">        word[k]</span></span><br><span class="line"><span class="string">        判断board[i][j]和word[k]是否匹配，如果匹配，则判断board[i][j]的下一个元素和word[k+1]是否匹配</span></span><br><span class="line"><span class="string">        如果不匹配，直接返回false</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment">#递归结束的条件</span></span><br><span class="line">        <span class="comment">#1.board[i][j]已经访问过，返回false</span></span><br><span class="line">        <span class="comment">#2.board[i][j]与word[k]不相等，返回false</span></span><br><span class="line">        <span class="comment">#3.board[i][j]超出索引，返回false</span></span><br><span class="line">        <span class="comment">#4.word已全部匹配，即k=len(word)-1</span></span><br><span class="line">        deltas = [[<span class="number">0</span>,<span class="number">1</span>],[<span class="number">0</span>,<span class="number">-1</span>],[<span class="number">1</span>,<span class="number">0</span>],[<span class="number">-1</span>,<span class="number">0</span>]]</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="number">0</span> &lt;= i &lt; len(board) <span class="keyword">or</span> <span class="keyword">not</span> <span class="number">0</span> &lt;= j &lt; len(board[<span class="number">0</span>]) <span class="keyword">or</span> board[i][j]!= word[k] <span class="keyword">or</span> visit[i][j] == <span class="number">1</span>:<span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">if</span> k == len(word)<span class="number">-1</span>:<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        visit[i][j] = <span class="number">1</span><span class="comment">#board[i][j]和word[k]匹配</span></span><br><span class="line">        <span class="keyword">for</span> delta <span class="keyword">in</span> deltas:<span class="comment">#搜索board的上下左右是否和word[k+1]匹配</span></span><br><span class="line">            next_i = i+delta[<span class="number">0</span>]</span><br><span class="line">            next_j = j+delta[<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">if</span> self.dfs(next_i,next_j,k+<span class="number">1</span>,board,word,visit):<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        visit[i][j] = <span class="number">0</span><span class="comment">#上下左右都不匹配，回溯        </span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br></pre></td></tr></table></figure>
+<h1><span id="机器人的运动范围">机器人的运动范围</span></h1><p>地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。一个机器人从坐标 [0, 0] 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子？</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof" target="_blank" rel="noopener">https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof</a></p>
+<ul>
+<li>深度优先搜索+回溯</li>
+<li>用队列实现广度优先搜索</li>
+</ul>
+<p><strong>【方法一】</strong><br>深度优先搜搜+回溯<br>使用visit记录m行n列矩阵的遍历情况。</p>
+<ul>
+<li>递归的参数：当前元素在board的位置<code>[i][j]</code></li>
+<li>递归终止条件<ul>
+<li>返回0（当前元素没有被访问）：i和j越界，i和j位数和大于k，当前元素[i][j]已经被访问过，</li>
+</ul>
+</li>
+</ul>
+<p>递推工作：</p>
+<ol>
+<li>当前元素符合条件，标记当前元素已经被访问过</li>
+<li>搜索[i][j]的上下左右4个方向，记录每个方向走过的格子个数，</li>
+<li>返回结果+1，表示除了4个方向访问的格子，还要加上当前访问的格子[i][j]</li>
+</ol>
+<p>优化：</p>
+<ul>
+<li>其实只需要访问下和右2个方向就可以了，不需要访问4个方向</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">movingCount</span><span class="params">(self, m, n, k)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type m: int</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment">#时间复杂度：O(mn)</span></span><br><span class="line">        <span class="comment">#空间复杂度：O(mn),visit数组</span></span><br><span class="line">        <span class="comment">#优化：搜索反向其实只用向下和向右就可以了</span></span><br><span class="line">        visit = [[<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(n)] <span class="keyword">for</span> j <span class="keyword">in</span> range(m)]</span><br><span class="line">        all_sum = self.dfs(<span class="number">0</span>,<span class="number">0</span>,m,n,k,visit)</span><br><span class="line">        <span class="keyword">return</span> all_sum</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(self,i,j,m,n,k,visit)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        i和j表示机器人当前的格子</span></span><br><span class="line"><span class="string">        m和n，k是题目给定的参数</span></span><br><span class="line"><span class="string">        visit记录遍历情况</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        deltas = [[<span class="number">0</span>,<span class="number">1</span>],[<span class="number">0</span>,<span class="number">-1</span>],[<span class="number">1</span>,<span class="number">0</span>],[<span class="number">-1</span>,<span class="number">0</span>]]</span><br><span class="line">        <span class="comment">#递归结束的条件</span></span><br><span class="line">        <span class="comment">#1.i和j超过范围</span></span><br><span class="line">        <span class="comment">#2.i和j的位数之和超过k</span></span><br><span class="line">        <span class="comment">#3.i和j已经被访问过</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="number">0</span>&lt;=i&lt;m <span class="keyword">or</span> <span class="keyword">not</span> <span class="number">0</span>&lt;=j&lt;n <span class="keyword">or</span> self.digit_sum(i)+self.digit_sum(j)&gt;k <span class="keyword">or</span> visit[i][j]==<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        visit[i][j] = <span class="number">1</span></span><br><span class="line">        all_sum = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> delta <span class="keyword">in</span> deltas:</span><br><span class="line">            next_i = i + delta[<span class="number">0</span>]</span><br><span class="line">            next_j = j + delta[<span class="number">1</span>]</span><br><span class="line">            all_sum += self.dfs(next_i,next_j,m,n,k,visit)</span><br><span class="line">        <span class="keyword">return</span> all_sum + <span class="number">1</span><span class="comment">#加1是为了加上当前访问的格子i,j</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">digit_sum</span><span class="params">(self,i)</span>:</span></span><br><span class="line">        all_sum = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &gt; <span class="number">0</span>:</span><br><span class="line">            all_sum += i%<span class="number">10</span></span><br><span class="line">            i /= <span class="number">10</span></span><br><span class="line">        <span class="keyword">return</span> all_sum</span><br></pre></td></tr></table></figure>
+<p>【方法二】</p>
+<p>广度优先遍历BFS</p>
+<p>queue中保存当前待检测的格子，里面保存的值有4个元素(i,j,sum_i,sum_j)，分别表示：当前格子的下标i和j，下标的位数</p>
+<p>因为机器人要求从(0,0)出发，所以首先将(0,0,0,0)加入到queue中，遍历第一个格子，判断当前格式是否符合要求，如果不符合要求，则遍历下一个格子。如果符合要求，将当前格子(i,j)加入到visit中，然后将该格子的下和右格子加入队列中，等待遍历。最终返回visit的长度即为访问的格子数量</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">movingCount</span><span class="params">(self, m, n, k)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type m: int</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        queue = [(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)]<span class="comment">#当前元素的位置i,j和位数和</span></span><br><span class="line">        visit = set()</span><br><span class="line">        <span class="keyword">while</span> queue:</span><br><span class="line">            i,j,sum_i,sum_j = queue.pop(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> <span class="number">0</span>&lt;=i&lt;m <span class="keyword">or</span> <span class="keyword">not</span> <span class="number">0</span>&lt;=j&lt;n <span class="keyword">or</span> sum_i+sum_j&gt;k <span class="keyword">or</span> (i,j) <span class="keyword">in</span> visit:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            visit.add((i,j))</span><br><span class="line">            queue.append((i+<span class="number">1</span>,j,self.digit_sum(i+<span class="number">1</span>),sum_j))</span><br><span class="line">            queue.append((i,j+<span class="number">1</span>,sum_i,self.digit_sum(j+<span class="number">1</span>)))</span><br><span class="line">        <span class="keyword">return</span> len(visit)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">digit_sum</span><span class="params">(self,i)</span>:</span></span><br><span class="line">        all_sum = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &gt; <span class="number">0</span>:</span><br><span class="line">            all_sum += i%<span class="number">10</span></span><br><span class="line">            i /= <span class="number">10</span></span><br><span class="line">        <span class="keyword">return</span> all_sum</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>Leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>How to Build a Graph-Based Deep Learning Architecture in Traffic Domain: A Survey</title>
     <url>/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/</url>
     <content><![CDATA[<p>这篇综述性论文介绍图神经网络在交通领域的应用。</p>
@@ -197,13 +346,14 @@ u_{t} &=\boldsymbol{\sigma}\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *
 <li>左右子树深度之差&lt;=1</li>
 </ul>
 </li>
-<li><p>二叉搜索树们，需要满足以下2个条件：</p>
+<li><p>二叉搜索树，需要满足以下2个条件：</p>
 <ul>
 <li>左子树的值&lt;父节点，右子树的值&gt;父节点</li>
 <li>所有左子树和右子树是二叉搜索树</li>
 </ul>
 </li>
 </ul>
+<p>二叉树常见问题<br><a href="https://zhuanlan.zhihu.com/p/91243381" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/91243381</a></p>
 <h1><span id="2-树的前向遍历">2. 树的前向遍历</span></h1><p>给定一个二叉树，返回它的前序遍历序列。</p>
 <p><strong>【方法1】</strong></p>
 <p>前序遍历：根左右<br>迭代遍历树，使用栈的思想来实现。<br>定义一个stack数据，作为临时的存储栈。首先cur指向根节点，循环遍历所有的节点，当cur不为空时，因为先遍历根节点，所以将cur的值保存在res中，然后将cur保存至stack中，然后遍历cur的左节点，直到cur的左节点为空（cur没有左节点，或cur是叶子节点）。当cur为空时，进入到else中，从stack中弹出cur的父节点，然后遍历其右子树。</p>
@@ -791,44 +941,7 @@ u_{t} &=\boldsymbol{\sigma}\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *
 </ul>
 <a id="more"></a>
 <p>python中内置列表查找函数：index(),用的是线性查找，因为二分查找要求列表是有序的。</p>
-<!-- TOC -->
-<ul>
-<li><a href="#1-顺序查找">1. 顺序查找</a></li>
-<li><a href="#2-二分查找">2. 二分查找</a><ul>
-<li><a href="#21-二分查找拓展问题">2.1. 二分查找拓展问题</a></li>
-</ul>
-</li>
-<li><a href="#3-leetcode例题">3. LeetCode例题</a><ul>
-<li><a href="#31-查找target的索引">3.1. 查找target的索引</a><ul>
-<li><a href="#311-二分查找">3.1.1. 二分查找</a></li>
-<li><a href="#312-搜索旋转排序数组">3.1.2. 搜索旋转排序数组</a></li>
-<li><a href="#313-搜索旋转排序数组-ii">3.1.3. 搜索旋转排序数组 II</a></li>
-<li><a href="#314-寻找旋转排序数组中的最小值">3.1.4. 寻找旋转排序数组中的最小值</a></li>
-<li><a href="#315-寻找旋转排序数组中的最小值-ii">3.1.5. 寻找旋转排序数组中的最小值 II</a></li>
-<li><a href="#316-h指数-ii">3.1.6. H指数 II</a></li>
-<li><a href="#317-最长上升子序列">3.1.7. 最长上升子序列</a></li>
-<li><a href="#318-山脉数组中查找目标值">3.1.8. 山脉数组中查找目标值</a></li>
-<li><a href="#319-寻找两个有序数组的中位数">3.1.9. 寻找两个有序数组的中位数</a></li>
-</ul>
-</li>
-<li><a href="#32-在一个有上下界的区间中搜索一个整数">3.2. 在一个有上下界的区间中搜索一个整数</a><ul>
-<li><a href="#321-x-的平方根">3.2.1. x 的平方根</a></li>
-<li><a href="#322-寻找重复数">3.2.2. 寻找重复数</a></li>
-</ul>
-</li>
-<li><a href="#33-判断条件是一个函数">3.3. 判断条件是一个函数</a><ul>
-<li><a href="#331-第一个错误的版本">3.3.1. 第一个错误的版本</a></li>
-<li><a href="#332-分割数组的最大值">3.3.2. 分割数组的最大值</a></li>
-<li><a href="#333-爱吃香蕉的珂珂">3.3.3. 爱吃香蕉的珂珂</a></li>
-<li><a href="#334-找到-k-个最接近的元素">3.3.4. 找到 K 个最接近的元素</a></li>
-<li><a href="#335-转变数组后最接近目标值的数组和">3.3.5. 转变数组后最接近目标值的数组和</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#4-总结">4. 总结</a></li>
-</ul>
-<!-- /TOC -->
+<!-- TOC -->autoauto- [1. 顺序查找](#1-顺序查找)auto- [2. 二分查找](#2-二分查找)auto    - [2.1. 二分查找拓展问题](#21-二分查找拓展问题)auto- [3. LeetCode例题](#3-leetcode例题)auto    - [3.1. 查找target的索引](#31-查找target的索引)auto        - [3.1.1. 二分查找](#311-二分查找)auto        - [3.1.2. 搜索旋转排序数组](#312-搜索旋转排序数组)auto        - [3.1.3. 搜索旋转排序数组 II](#313-搜索旋转排序数组-ii)auto        - [3.1.4. 寻找旋转排序数组中的最小值](#314-寻找旋转排序数组中的最小值)auto        - [3.1.5. 寻找旋转排序数组中的最小值 II](#315-寻找旋转排序数组中的最小值-ii)auto        - [3.1.6. H指数 II](#316-h指数-ii)auto        - [3.1.7. 最长上升子序列](#317-最长上升子序列)auto        - [3.1.8. 山脉数组中查找目标值](#318-山脉数组中查找目标值)auto        - [3.1.9. 寻找两个有序数组的中位数](#319-寻找两个有序数组的中位数)auto    - [3.2. 在一个有上下界的区间中搜索一个整数](#32-在一个有上下界的区间中搜索一个整数)auto        - [3.2.1. x 的平方根](#321-x-的平方根)auto        - [3.2.2. 寻找重复数](#322-寻找重复数)auto    - [3.3. 判断条件是一个函数](#33-判断条件是一个函数)auto        - [3.3.1. 第一个错误的版本](#331-第一个错误的版本)auto        - [3.3.2. 分割数组的最大值](#332-分割数组的最大值)auto        - [3.3.3. 爱吃香蕉的珂珂](#333-爱吃香蕉的珂珂)auto        - [3.3.4. 找到 K 个最接近的元素](#334-找到-k-个最接近的元素)auto        - [3.3.5. 转变数组后最接近目标值的数组和](#335-转变数组后最接近目标值的数组和)auto- [4. 总结](#4-总结)autoauto<!-- /TOC -->
 <h1><span id="1-顺序查找">1. 顺序查找</span></h1><p>也叫做线性查找，从一个元素开始，依次遍历，直到找到指定元素或到最后一个元素</p>
 <ul>
 <li>时间复杂度：$O(n)$</li>
@@ -932,7 +1045,7 @@ u_{t} &=\boldsymbol{\sigma}\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *
 <h3><span id="314-寻找旋转排序数组中的最小值">3.1.4. 寻找旋转排序数组中的最小值</span></h3><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
 <p>( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。</p>
 <p>请找出其中最小的元素。</p>
-<p>你可以假设数组中不存在重复元素。</p>
+<p><strong>你可以假设数组中不存在重复元素。</strong></p>
 <p>虽然是要找最小数，但是数据部分有序，可以使用二分法。有2种情况，nums[mid]和左边界比较，nums[mid]和右边界比较</p>
 <ul>
 <li>nums[mid]和左边界比较<ul>
@@ -943,16 +1056,27 @@ u_{t} &=\boldsymbol{\sigma}\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *
 </ul>
 <p>根据上面2种情况，可以看出当nums[mid]大于左边界时，不知道最小值一定存在于哪个区间，所以不能用mid和左边界比较。</p>
 <ul>
-<li>nums[mid]和右边界比较<ul>
-<li>当nums[mid] &lt; nums[target],</li>
+<li><p>nums[mid]和右边界比较</p>
+<ul>
+<li>当nums[mid] &lt; nums[right],说明最小值一定在左边</li>
+<li>当nums[mid] &gt; nums[right],说明最小值一定在右边</li>
+<li>当nums[mid] = nums[right],因为题目中说不存在重复元素，所以不会出现相等的情况</li>
 </ul>
 </li>
+<li><p>时间复杂度：O(logN)</p>
+</li>
+<li>空间复杂度：O(1)</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findMin</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment">#中间元素和右边元素比较</span></span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = len(nums)<span class="number">-1</span></span><br><span class="line">        <span class="keyword">while</span> left &lt; right:</span><br><span class="line">            mid = left+(right-left)//<span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> nums[mid] &lt; nums[right]:<span class="comment">#说明右边有序，右边递增</span></span><br><span class="line">                <span class="comment">#说明最小值肯定在左区间</span></span><br><span class="line">                right = mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment">#mid大于右边，说明左边有序，左边递增，那左边的值比mid小，右边的值也比mid小，到底哪边的值更小呢？</span></span><br><span class="line">            <span class="comment">#答案是：右边的值更小，因为如果左边的值更小的话，那说明右边的值比左边的最小值大，比mid小，那这个值肯定在min和mid之间，</span></span><br><span class="line">            <span class="comment">#但现在这个值在右边，推翻前面的假设，即右边的值更小</span></span><br><span class="line">                left = mid+<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> nums[left]</span><br><span class="line"></span><br><span class="line">        <span class="comment">#尝试使用nums[mid]和左边界比较，失败</span></span><br><span class="line">        <span class="comment"># left = 0</span></span><br><span class="line">        <span class="comment"># right = len(nums)-1</span></span><br><span class="line">        <span class="comment"># while left &lt; right:</span></span><br><span class="line">        <span class="comment">#     mid = left+(right-left)//2</span></span><br><span class="line">        <span class="comment">#     if nums[mid] &lt; nums[left]:#说明右边有序,右边递增，最小值一定在做区间</span></span><br><span class="line">        <span class="comment">#         right = mid</span></span><br><span class="line">        <span class="comment">#     else:#mid比左边大，说明左边有序，左边递增，但是最小值不一定在左边</span></span><br><span class="line">        <span class="comment">#     #[1,2,3,4,5,6,7]最小值在左区间，</span></span><br><span class="line">        <span class="comment">#     #[8,9,10,11,1,2]最小值在右区间</span></span><br><span class="line">        <span class="comment">#     #不确定该缩小到哪个区间，该方法不可行</span></span><br></pre></td></tr></table></figure>
 <h3><span id="315-寻找旋转排序数组中的最小值-ii">3.1.5. 寻找旋转排序数组中的最小值 II</span></h3><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
 <p>( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。</p>
 <p>请找出其中最小的元素。</p>
 <p><strong>注意数组中可能存在重复的元素</strong>。</p>
+<ul>
+<li>时间复杂度：O(logN),但在最坏情况下，即nums[mid]==nums[right]，需要逐个遍历数组，复杂度为O(N)</li>
+<li>空间复杂度：O(1)<br>上个问题是这个问题的特例，只是上个问题永远不会进入到nums[mid]==nums[right]的分支。</li>
+</ul>
+<p>在本题中如果nums[mid]==nums[right]，会将right减1，那是否可以变成left+1呢？答案是：不可以，例如[1,3,3]，left=1，mid=3，right=3，如果变成left+1，就会跳过最小值。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findMin</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = len(nums)<span class="number">-1</span></span><br><span class="line">        <span class="keyword">while</span> left &lt; right:</span><br><span class="line">            mid = left+(right-left)//<span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> nums[mid] &lt; nums[right]:<span class="comment">#说明右边有序，最小值一定在左区间</span></span><br><span class="line">                right = mid</span><br><span class="line">            <span class="keyword">elif</span> nums[mid] &gt; nums[right]:<span class="comment">#说明左边有序，最小值一定在右区间</span></span><br><span class="line">                left = mid + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:<span class="comment">#nums[mid] == nums[right]</span></span><br><span class="line">                right -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> nums[left]</span><br></pre></td></tr></table></figure>
 <h3><span id="316-h指数-ii">3.1.6. H指数 II</span></h3><p>给定一位研究者论文被引用次数的数组（被引用次数是非负整数），数组已经按照升序排列。编写一个方法，计算出研究者的 h 指数。</p>
 <p>h 指数的定义: “h 代表“高引用次数”（high citations），一名科研人员的 h 指数是指他（她）的 （N 篇论文中）有 h 篇论文分别被引用了至少 h 次。（其余的 N - h 篇论文每篇被引用次数不多于 h 次。）”</p>

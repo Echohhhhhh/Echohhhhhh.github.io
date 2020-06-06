@@ -82,7 +82,7 @@
 <meta property="og:description" content="列表查找：从列表中查找指定元素  输出：列表 输出：元素下标，找不到返回None或-1">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/03/27/Leetcode之二分法/查找算法/binary.png">
-<meta property="og:updated_time" content="2020-04-08T09:45:56.758Z">
+<meta property="og:updated_time" content="2020-06-05T15:43:12.486Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode之二分法">
 <meta name="twitter:description" content="列表查找：从列表中查找指定元素  输出：列表 输出：元素下标，找不到返回None或-1">
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  8.1k
+                  8.6k
                 </span>
               
 
@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  35
+                  36
                 </span>
               
             </div>
@@ -431,44 +431,7 @@
 </ul>
 <a id="more"></a>
 <p>python中内置列表查找函数：index(),用的是线性查找，因为二分查找要求列表是有序的。</p>
-<!-- TOC -->
-<ul>
-<li><a href="#1-顺序查找">1. 顺序查找</a></li>
-<li><a href="#2-二分查找">2. 二分查找</a><ul>
-<li><a href="#21-二分查找拓展问题">2.1. 二分查找拓展问题</a></li>
-</ul>
-</li>
-<li><a href="#3-leetcode例题">3. LeetCode例题</a><ul>
-<li><a href="#31-查找target的索引">3.1. 查找target的索引</a><ul>
-<li><a href="#311-二分查找">3.1.1. 二分查找</a></li>
-<li><a href="#312-搜索旋转排序数组">3.1.2. 搜索旋转排序数组</a></li>
-<li><a href="#313-搜索旋转排序数组-ii">3.1.3. 搜索旋转排序数组 II</a></li>
-<li><a href="#314-寻找旋转排序数组中的最小值">3.1.4. 寻找旋转排序数组中的最小值</a></li>
-<li><a href="#315-寻找旋转排序数组中的最小值-ii">3.1.5. 寻找旋转排序数组中的最小值 II</a></li>
-<li><a href="#316-h指数-ii">3.1.6. H指数 II</a></li>
-<li><a href="#317-最长上升子序列">3.1.7. 最长上升子序列</a></li>
-<li><a href="#318-山脉数组中查找目标值">3.1.8. 山脉数组中查找目标值</a></li>
-<li><a href="#319-寻找两个有序数组的中位数">3.1.9. 寻找两个有序数组的中位数</a></li>
-</ul>
-</li>
-<li><a href="#32-在一个有上下界的区间中搜索一个整数">3.2. 在一个有上下界的区间中搜索一个整数</a><ul>
-<li><a href="#321-x-的平方根">3.2.1. x 的平方根</a></li>
-<li><a href="#322-寻找重复数">3.2.2. 寻找重复数</a></li>
-</ul>
-</li>
-<li><a href="#33-判断条件是一个函数">3.3. 判断条件是一个函数</a><ul>
-<li><a href="#331-第一个错误的版本">3.3.1. 第一个错误的版本</a></li>
-<li><a href="#332-分割数组的最大值">3.3.2. 分割数组的最大值</a></li>
-<li><a href="#333-爱吃香蕉的珂珂">3.3.3. 爱吃香蕉的珂珂</a></li>
-<li><a href="#334-找到-k-个最接近的元素">3.3.4. 找到 K 个最接近的元素</a></li>
-<li><a href="#335-转变数组后最接近目标值的数组和">3.3.5. 转变数组后最接近目标值的数组和</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#4-总结">4. 总结</a></li>
-</ul>
-<!-- /TOC -->
+<!-- TOC -->autoauto- [1. 顺序查找](#1-顺序查找)auto- [2. 二分查找](#2-二分查找)auto    - [2.1. 二分查找拓展问题](#21-二分查找拓展问题)auto- [3. LeetCode例题](#3-leetcode例题)auto    - [3.1. 查找target的索引](#31-查找target的索引)auto        - [3.1.1. 二分查找](#311-二分查找)auto        - [3.1.2. 搜索旋转排序数组](#312-搜索旋转排序数组)auto        - [3.1.3. 搜索旋转排序数组 II](#313-搜索旋转排序数组-ii)auto        - [3.1.4. 寻找旋转排序数组中的最小值](#314-寻找旋转排序数组中的最小值)auto        - [3.1.5. 寻找旋转排序数组中的最小值 II](#315-寻找旋转排序数组中的最小值-ii)auto        - [3.1.6. H指数 II](#316-h指数-ii)auto        - [3.1.7. 最长上升子序列](#317-最长上升子序列)auto        - [3.1.8. 山脉数组中查找目标值](#318-山脉数组中查找目标值)auto        - [3.1.9. 寻找两个有序数组的中位数](#319-寻找两个有序数组的中位数)auto    - [3.2. 在一个有上下界的区间中搜索一个整数](#32-在一个有上下界的区间中搜索一个整数)auto        - [3.2.1. x 的平方根](#321-x-的平方根)auto        - [3.2.2. 寻找重复数](#322-寻找重复数)auto    - [3.3. 判断条件是一个函数](#33-判断条件是一个函数)auto        - [3.3.1. 第一个错误的版本](#331-第一个错误的版本)auto        - [3.3.2. 分割数组的最大值](#332-分割数组的最大值)auto        - [3.3.3. 爱吃香蕉的珂珂](#333-爱吃香蕉的珂珂)auto        - [3.3.4. 找到 K 个最接近的元素](#334-找到-k-个最接近的元素)auto        - [3.3.5. 转变数组后最接近目标值的数组和](#335-转变数组后最接近目标值的数组和)auto- [4. 总结](#4-总结)autoauto<!-- /TOC -->
 <h1><span id="1-顺序查找">1. 顺序查找</span></h1><p>也叫做线性查找，从一个元素开始，依次遍历，直到找到指定元素或到最后一个元素</p>
 <ul>
 <li>时间复杂度：$O(n)$</li>
@@ -572,7 +535,7 @@
 <h3><span id="314-寻找旋转排序数组中的最小值">3.1.4. 寻找旋转排序数组中的最小值</span></h3><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
 <p>( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。</p>
 <p>请找出其中最小的元素。</p>
-<p>你可以假设数组中不存在重复元素。</p>
+<p><strong>你可以假设数组中不存在重复元素。</strong></p>
 <p>虽然是要找最小数，但是数据部分有序，可以使用二分法。有2种情况，nums[mid]和左边界比较，nums[mid]和右边界比较</p>
 <ul>
 <li>nums[mid]和左边界比较<ul>
@@ -583,16 +546,27 @@
 </ul>
 <p>根据上面2种情况，可以看出当nums[mid]大于左边界时，不知道最小值一定存在于哪个区间，所以不能用mid和左边界比较。</p>
 <ul>
-<li>nums[mid]和右边界比较<ul>
-<li>当nums[mid] &lt; nums[target],</li>
+<li><p>nums[mid]和右边界比较</p>
+<ul>
+<li>当nums[mid] &lt; nums[right],说明最小值一定在左边</li>
+<li>当nums[mid] &gt; nums[right],说明最小值一定在右边</li>
+<li>当nums[mid] = nums[right],因为题目中说不存在重复元素，所以不会出现相等的情况</li>
 </ul>
 </li>
+<li><p>时间复杂度：O(logN)</p>
+</li>
+<li>空间复杂度：O(1)</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findMin</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment">#中间元素和右边元素比较</span></span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = len(nums)<span class="number">-1</span></span><br><span class="line">        <span class="keyword">while</span> left &lt; right:</span><br><span class="line">            mid = left+(right-left)//<span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> nums[mid] &lt; nums[right]:<span class="comment">#说明右边有序，右边递增</span></span><br><span class="line">                <span class="comment">#说明最小值肯定在左区间</span></span><br><span class="line">                right = mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment">#mid大于右边，说明左边有序，左边递增，那左边的值比mid小，右边的值也比mid小，到底哪边的值更小呢？</span></span><br><span class="line">            <span class="comment">#答案是：右边的值更小，因为如果左边的值更小的话，那说明右边的值比左边的最小值大，比mid小，那这个值肯定在min和mid之间，</span></span><br><span class="line">            <span class="comment">#但现在这个值在右边，推翻前面的假设，即右边的值更小</span></span><br><span class="line">                left = mid+<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> nums[left]</span><br><span class="line"></span><br><span class="line">        <span class="comment">#尝试使用nums[mid]和左边界比较，失败</span></span><br><span class="line">        <span class="comment"># left = 0</span></span><br><span class="line">        <span class="comment"># right = len(nums)-1</span></span><br><span class="line">        <span class="comment"># while left &lt; right:</span></span><br><span class="line">        <span class="comment">#     mid = left+(right-left)//2</span></span><br><span class="line">        <span class="comment">#     if nums[mid] &lt; nums[left]:#说明右边有序,右边递增，最小值一定在做区间</span></span><br><span class="line">        <span class="comment">#         right = mid</span></span><br><span class="line">        <span class="comment">#     else:#mid比左边大，说明左边有序，左边递增，但是最小值不一定在左边</span></span><br><span class="line">        <span class="comment">#     #[1,2,3,4,5,6,7]最小值在左区间，</span></span><br><span class="line">        <span class="comment">#     #[8,9,10,11,1,2]最小值在右区间</span></span><br><span class="line">        <span class="comment">#     #不确定该缩小到哪个区间，该方法不可行</span></span><br></pre></td></tr></table></figure>
 <h3><span id="315-寻找旋转排序数组中的最小值-ii">3.1.5. 寻找旋转排序数组中的最小值 II</span></h3><p>假设按照升序排序的数组在预先未知的某个点上进行了旋转。</p>
 <p>( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。</p>
 <p>请找出其中最小的元素。</p>
 <p><strong>注意数组中可能存在重复的元素</strong>。</p>
+<ul>
+<li>时间复杂度：O(logN),但在最坏情况下，即nums[mid]==nums[right]，需要逐个遍历数组，复杂度为O(N)</li>
+<li>空间复杂度：O(1)<br>上个问题是这个问题的特例，只是上个问题永远不会进入到nums[mid]==nums[right]的分支。</li>
+</ul>
+<p>在本题中如果nums[mid]==nums[right]，会将right减1，那是否可以变成left+1呢？答案是：不可以，例如[1,3,3]，left=1，mid=3，right=3，如果变成left+1，就会跳过最小值。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findMin</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = len(nums)<span class="number">-1</span></span><br><span class="line">        <span class="keyword">while</span> left &lt; right:</span><br><span class="line">            mid = left+(right-left)//<span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> nums[mid] &lt; nums[right]:<span class="comment">#说明右边有序，最小值一定在左区间</span></span><br><span class="line">                right = mid</span><br><span class="line">            <span class="keyword">elif</span> nums[mid] &gt; nums[right]:<span class="comment">#说明左边有序，最小值一定在右区间</span></span><br><span class="line">                left = mid + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:<span class="comment">#nums[mid] == nums[right]</span></span><br><span class="line">                right -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> nums[left]</span><br></pre></td></tr></table></figure>
 <h3><span id="316-h指数-ii">3.1.6. H指数 II</span></h3><p>给定一位研究者论文被引用次数的数组（被引用次数是非负整数），数组已经按照升序排列。编写一个方法，计算出研究者的 h 指数。</p>
 <p>h 指数的定义: “h 代表“高引用次数”（high citations），一名科研人员的 h 指数是指他（她）的 （N 篇论文中）有 h 篇论文分别被引用了至少 h 次。（其余的 N - h 篇论文每篇被引用次数不多于 h 次。）”</p>
@@ -869,7 +843,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

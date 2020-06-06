@@ -73,19 +73,19 @@
 
 
 
-<meta name="description" content="1. 树概念介绍 二叉树一般有2种通用的遍历策略 深度优先搜索DFS 前序遍历：根左右 中序遍历：左根右 后序遍历：左右根   广度优先搜索BFS先遍历第一层，再遍历第二层    值得注意的是，在删除树中的节点时，删除过程将按照后序遍历的顺序进行，也就是先删除左节点和右节点，然后再删除节点本身。  平衡二叉树，需要满足1个条件：  左右子树深度之差&amp;lt;=1   二叉搜索树们，需要满足以下2个">
+<meta name="description" content="1. 树概念介绍 二叉树一般有2种通用的遍历策略 深度优先搜索DFS 前序遍历：根左右 中序遍历：左根右 后序遍历：左右根   广度优先搜索BFS先遍历第一层，再遍历第二层    值得注意的是，在删除树中的节点时，删除过程将按照后序遍历的顺序进行，也就是先删除左节点和右节点，然后再删除节点本身。  平衡二叉树，需要满足1个条件：  左右子树深度之差&amp;lt;=1   二叉搜索树，需要满足以下2个条">
 <meta name="keywords" content="Leetcode,树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode之树">
 <meta property="og:url" content="http://yoursite.com/2020/05/29/Leetcode之树/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="1. 树概念介绍 二叉树一般有2种通用的遍历策略 深度优先搜索DFS 前序遍历：根左右 中序遍历：左根右 后序遍历：左右根   广度优先搜索BFS先遍历第一层，再遍历第二层    值得注意的是，在删除树中的节点时，删除过程将按照后序遍历的顺序进行，也就是先删除左节点和右节点，然后再删除节点本身。  平衡二叉树，需要满足1个条件：  左右子树深度之差&amp;lt;=1   二叉搜索树们，需要满足以下2个">
+<meta property="og:description" content="1. 树概念介绍 二叉树一般有2种通用的遍历策略 深度优先搜索DFS 前序遍历：根左右 中序遍历：左根右 后序遍历：左右根   广度优先搜索BFS先遍历第一层，再遍历第二层    值得注意的是，在删除树中的节点时，删除过程将按照后序遍历的顺序进行，也就是先删除左节点和右节点，然后再删除节点本身。  平衡二叉树，需要满足1个条件：  左右子树深度之差&amp;lt;=1   二叉搜索树，需要满足以下2个条">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/05/29/Leetcode之树/7-1.png">
-<meta property="og:updated_time" content="2020-06-04T08:44:03.974Z">
+<meta property="og:updated_time" content="2020-06-05T03:26:19.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode之树">
-<meta name="twitter:description" content="1. 树概念介绍 二叉树一般有2种通用的遍历策略 深度优先搜索DFS 前序遍历：根左右 中序遍历：左根右 后序遍历：左右根   广度优先搜索BFS先遍历第一层，再遍历第二层    值得注意的是，在删除树中的节点时，删除过程将按照后序遍历的顺序进行，也就是先删除左节点和右节点，然后再删除节点本身。  平衡二叉树，需要满足1个条件：  左右子树深度之差&amp;lt;=1   二叉搜索树们，需要满足以下2个">
+<meta name="twitter:description" content="1. 树概念介绍 二叉树一般有2种通用的遍历策略 深度优先搜索DFS 前序遍历：根左右 中序遍历：左根右 后序遍历：左右根   广度优先搜索BFS先遍历第一层，再遍历第二层    值得注意的是，在删除树中的节点时，删除过程将按照后序遍历的顺序进行，也就是先删除左节点和右节点，然后再删除节点本身。  平衡二叉树，需要满足1个条件：  左右子树深度之差&amp;lt;=1   二叉搜索树，需要满足以下2个条">
 <meta name="twitter:image" content="http://yoursite.com/2020/05/29/Leetcode之树/7-1.png">
 
 
@@ -444,13 +444,14 @@
 <li>左右子树深度之差&lt;=1</li>
 </ul>
 </li>
-<li><p>二叉搜索树们，需要满足以下2个条件：</p>
+<li><p>二叉搜索树，需要满足以下2个条件：</p>
 <ul>
 <li>左子树的值&lt;父节点，右子树的值&gt;父节点</li>
 <li>所有左子树和右子树是二叉搜索树</li>
 </ul>
 </li>
 </ul>
+<p>二叉树常见问题<br><a href="https://zhuanlan.zhihu.com/p/91243381" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/91243381</a></p>
 <h1><span id="2-树的前向遍历">2. 树的前向遍历</span></h1><p>给定一个二叉树，返回它的前序遍历序列。</p>
 <p><strong>【方法1】</strong></p>
 <p>前序遍历：根左右<br>迭代遍历树，使用栈的思想来实现。<br>定义一个stack数据，作为临时的存储栈。首先cur指向根节点，循环遍历所有的节点，当cur不为空时，因为先遍历根节点，所以将cur的值保存在res中，然后将cur保存至stack中，然后遍历cur的左节点，直到cur的左节点为空（cur没有左节点，或cur是叶子节点）。当cur为空时，进入到else中，从stack中弹出cur的父节点，然后遍历其右子树。</p>
@@ -692,7 +693,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
