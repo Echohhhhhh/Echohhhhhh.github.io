@@ -298,6 +298,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/Leetcode之位运算/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Echo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/07/Leetcode之位运算/" itemprop="url">Leetcode之位运算</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-07T17:35:16+08:00">
+                2020-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  392
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1><span id="位运算">位运算</span></h1><p>位运算总共有5种运算：与，或，异或，左移，右移。<br>左移<code>m&lt;&lt;n</code>表示把m左移n位，在左移n位时，最左边的n位被丢弃，同时最右边补上n个0<br>右移<code>m&gt;&gt;n</code>表示把m右移n位，在右移n位时，最右边的n位被丢弃，在处理左边时比较复杂。如果数字是无符号数，最左边补上n个0。如果数字是一个有符号数，则用数字的符号填补左边的n位。也就是说，如果数字是整数，最左边用0填充，如果数字是负数，最左边用1填充。例如<br>00001010&gt;&gt;2=00000010<br>10001010&gt;&gt;3=11110001</p>
+<h1><span id="cd">cd</span></h1><p>请实现一个函数，输入一个整数，输出该数二进制表示中 1 的个数。例如，把 9 表示成二进制是 1001，有 2 位是 1。因此，如果输入 9，则该函数输出 2。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof" target="_blank" rel="noopener">https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof</a></p>
+<p><strong>【分析】</strong><br>将一个整数n减去1之后，再和n做与运算，可以将n中最右边的1变成0<br>比如原先n=1100，n-1=1011，n&amp;(n-1)=1000,与运算的结果1000与原先的n=1100相比，就把最后边的1变成0。然后再对1000执行相同的操作，就会变成0000。这样执行2次，说明原始的n中一共有2个1.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hammingWeight</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="comment">#n=n&amp;(n-1)可以让原先的n中的1变成0</span></span><br><span class="line">        <span class="keyword">while</span> n:</span><br><span class="line">            res+=<span class="number">1</span></span><br><span class="line">            n=n&amp;(n<span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/06/Leetcode之动态规划/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -381,7 +556,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k
+                  5.1k
                 </span>
               
 
@@ -397,7 +572,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  22
                 </span>
               
             </div>
@@ -420,7 +595,7 @@
       
         
           
-            <h1><span id="动态规划">动态规划</span></h1><p>如果是求一个问题的最优解（通常是最大值或最小值），而且该问题可以分解成若干个子问题，并且子问题之间还有重叠的更小的子问题，可以考虑使用动态规划。</p>
+            <h1><span id="1-动态规划">1. 动态规划</span></h1><p>如果是求一个问题的最优解（通常是最大值或最小值），而且该问题可以分解成若干个子问题，并且子问题之间还有重叠的更小的子问题，可以考虑使用动态规划。</p>
 <p>在解决动态规划问题时，需要分解成子问题，这里需要将子问题的最优解保存下来（一般是一维或二维数组），作为求取大问题最优解的基础。</p>
 <p>做动态规划的三个关键：</p>
 <ol>
@@ -428,7 +603,7 @@
 <li>根据dp[i]和dp[i-1]的关系写出状态转移矩阵</li>
 <li>确定初始条件，dp[0]</li>
 </ol>
-<h1><span id="剪绳子">剪绳子</span></h1><p>给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n&gt;1并且m&gt;1），每段绳子的长度记为 k[0],k[1]…k[m-1] 。请问 k[0]<em>k[1]</em>…*k[m-1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。</p>
+<h1><span id="2-剪绳子">2. 剪绳子</span></h1><p>给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n&gt;1并且m&gt;1），每段绳子的长度记为 k[0],k[1]…k[m-1] 。请问 k[0]<em>k[1]</em>…*k[m-1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。</p>
 <p>注意：m&gt;1，说明必须要切分，例如长度为2，必须要切分成1+1</p>
 <p>链接：<a href="https://leetcode-cn.com/problems/jian-sheng-zi-lcof" target="_blank" rel="noopener">https://leetcode-cn.com/problems/jian-sheng-zi-lcof</a></p>
 <p><strong>【方法一】</strong><br>使用动态规划解决。<br>状态转移公式：<code>dp[i] = max(dp[i],max(j*(i-j),j*dp[i-j]))</code>,<br>首先求不切割<code>dp[i]</code>和切割的最大值。<br>在切割中，有2种方式：（1）将i切割成j和i-j两部分，不再切割.（2）将i切割成<br>j和i-j两部分，然后再对i-j继续切割。</p>
@@ -451,7 +626,7 @@
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cuttingRope</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> n &lt;= <span class="number">3</span>:<span class="keyword">return</span> <span class="number">1</span>*(n<span class="number">-1</span>)</span><br><span class="line">        res = <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> n % <span class="number">3</span> == <span class="number">1</span>:</span><br><span class="line">            res = <span class="number">4</span></span><br><span class="line">            n -= <span class="number">4</span></span><br><span class="line">        <span class="keyword">elif</span> n % <span class="number">3</span> == <span class="number">2</span>:</span><br><span class="line">            res = <span class="number">2</span></span><br><span class="line">            n -= <span class="number">2</span></span><br><span class="line">        <span class="keyword">while</span> n:</span><br><span class="line">            res *= <span class="number">3</span></span><br><span class="line">            n -= <span class="number">3</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-<h1><span id="最大子序列和">最大子序列和</span></h1><p>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。<br><a href="https://leetcode-cn.com/problems/maximum-subarray/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/maximum-subarray/</a></p>
+<h1><span id="3-最大子序列和">3. 最大子序列和</span></h1><p>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。<br><a href="https://leetcode-cn.com/problems/maximum-subarray/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/maximum-subarray/</a></p>
 <p><strong>【方法一】</strong><br>动态规划<br>dp[i]表示以nums[i]为结尾的最大子序列和<br>dp[0]=nums[0]<br><code>dp[i]=max(dp[i-1]+nums[i],nums[i])</code><br>dp[i]的最大值就是看当前元素nums[i]应该单独成一段，还是加入到上一段中dp[i-1]，所以需要从2个中找最大值。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSubArray</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment">#dp[i]表示nums中以i为结尾的最大和</span></span><br><span class="line">        dp = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums))]</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>]</span><br><span class="line">        <span class="comment">#dp[i] = max(dp[i-1]+nums[i],nums[i])</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(nums)):</span><br><span class="line">            dp[i] = max(dp[i<span class="number">-1</span>]+nums[i],nums[i])</span><br><span class="line">        <span class="keyword">return</span> max(dp)</span><br></pre></td></tr></table></figure>
 <ul>
@@ -462,7 +637,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSubArray</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        dp = nums[<span class="number">0</span>]</span><br><span class="line">        res = dp</span><br><span class="line">        <span class="comment">#dp[i] = max(dp[i-1]+nums[i],nums[i])</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(nums)):</span><br><span class="line">            dp = max(dp+nums[i],nums[i])</span><br><span class="line">            res = max(res,dp)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 <p><strong>【方法二】</strong><br>使用贪心算法，从左向右遍历，一个个数字相加，使用sum记录当前遍历的和，max记录当前遍历和的最大值。如果sum&lt;0，则将sum更新为当前元素的值，重新找新的子序串，然后将sum和max比较，将max更新为较大的值</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSubArray</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        sub_sum = nums[<span class="number">0</span>]</span><br><span class="line">        res = nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(nums)):</span><br><span class="line">            <span class="keyword">if</span> sub_sum &lt; <span class="number">0</span>:</span><br><span class="line">                sub_sum = nums[i]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                sub_sum += nums[i]</span><br><span class="line">            res = max(res,sub_sum)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-<h1><span id="股票问题">股票问题</span></h1><h2><span id="买卖股票的最佳时机">买卖股票的最佳时机</span></h2><p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
+<h1><span id="4-股票问题">4. 股票问题</span></h1><h2><span id="41-买卖股票的最佳时机">4.1. 买卖股票的最佳时机</span></h2><p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
 <p>如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。</p>
 <p>注意：你不能在买入股票前卖出股票。</p>
 <p>链接：<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock</a></p>
@@ -472,13 +647,13 @@
 <li>时间复杂度：O(n)</li>
 <li>空间复杂度：O(1)</li>
 </ul>
-<p><strong>【方法二】</strong><br>动态规划<br>dp[i]表示前i天的最大利润<br><code>dp[i]=max(dp[i-1],prices[i]-min_price)</code></p>
+<p><strong>【方法二】</strong><br>动态规划<br>dp[i]表示前i天的最大利润，在遍历的过程中找到股票的最低价格，在第i天，看是否需要卖出。如果卖出利润为prices[i]-min_price，如果不卖，就和昨天的利润dp[i-1]一样。<br><code>dp[i]=max(dp[i-1],prices[i]-min_price)</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type prices: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> prices:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        dp = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(len(prices))]</span><br><span class="line">        dp[<span class="number">0</span>]=<span class="number">0</span></span><br><span class="line">        min_pricce = prices[<span class="number">0</span>]<span class="comment">#记录前i天的最低价格</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(prices)):</span><br><span class="line">            min_pricce = min(min_pricce,prices[i])</span><br><span class="line">            dp[i] = max(dp[i<span class="number">-1</span>],prices[i]-min_pricce)</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
 <ul>
 <li>时间复杂度：O(n)</li>
 <li>空间复杂度：O(n)</li>
 </ul>
-<h2><span id="买卖股票的最佳时机-ii">买卖股票的最佳时机 II</span></h2><p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
+<h2><span id="42-买卖股票的最佳时机-ii">4.2. 买卖股票的最佳时机 II</span></h2><p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
 <p>设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。</p>
 <p>注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
 <blockquote>
@@ -489,7 +664,141 @@
 <p>使用贪心算法只需要一次遍历。其主要想法是逢低便买入，逢高便卖出，即只要明天的价格大于今天的价格，就在今天买下，明天卖出。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type prices: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment">#贪心算法，只遵循一个原则：低价买入，高价出售</span></span><br><span class="line">        <span class="comment">#只要明天的价格比今天高，就买今天的，然后明天卖出，获得差价利润</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(prices)<span class="number">-1</span>):</span><br><span class="line">            diff = prices[i+<span class="number">1</span>] - prices[i]</span><br><span class="line">            <span class="keyword">if</span> diff&gt;<span class="number">0</span>:</span><br><span class="line">                res+=diff</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 <p><strong>【方法二】</strong></p>
-<p>一般能用贪心算法解决的，都可以使用动态规划算法。</p>
+<p>一般能用贪心算法解决的，都可以使用动态规划算法。<br>定义dp，使用二维矩阵<br>dp[i][j]:第一维dp[i]表示前i天能获得的最大利润，第二维dp[i][j]表示在第i天手里有没有股票，dp[i][0]表示没有股票，手里持有现金时的最大利润，dp[i][1]表示持有股票的最大利润<br>第一天，dp[0][0]表示持有现金，则最大利润为0，dp[0][0]=0；dp[0][1]表示持有股票，则最大利润为dp[0][1]=-prices[0]。<br>对于dp[i][0]和dp[i][1]的状态转移需要分情况讨论</p>
+<ul>
+<li><p>dp[i][0]第i天持有现金状态</p>
+<ul>
+<li>第i-1天持有股票，第i天卖出股票：dp[i][0]=dp[i-1][1]+prices[i]</li>
+<li>第i-1天没有股票，第i天也没有股票：dp[i][0]=dp[i-1][0]<br>最终dp[i][0]从以上2种情况选最大的作为最终利润 </li>
+</ul>
+</li>
+<li><p>dp[i][1]第i天持有股票状态</p>
+<ul>
+<li>第i-1天没有股票，第i天买入股票：dp[i][1]=dp[i-1][0]-prices[i]</li>
+<li>第i-1天有股票，第i天没有卖出：dp[i][1]=dp[i-1][1]<br>最终dp[i][1]从以上2种情况选最大的作为最终利润 </li>
+</ul>
+</li>
+</ul>
+<p>最终返回的结果是最后一天的最大利润，最后一天手里不能有任何股票，全都卖出，即dp[-1][0]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type prices: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment">#动态规划</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> prices:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        dp = [[<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> range(len(prices))]</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">0</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>]=-prices[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(prices)):</span><br><span class="line">            dp[i][<span class="number">0</span>] = max(dp[i<span class="number">-1</span>][<span class="number">1</span>]+prices[i],dp[i<span class="number">-1</span>][<span class="number">0</span>])</span><br><span class="line">            dp[i][<span class="number">1</span>] = max(dp[i<span class="number">-1</span>][<span class="number">0</span>]-prices[i],dp[i<span class="number">-1</span>][<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">-1</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<h2><span id="43-买卖股票的最佳时机-iii">4.3. 买卖股票的最佳时机 III</span></h2><p>给定一个数组，它的第 i 个元素是一支给定的股票在第 i 天的价格。</p>
+<p>设计一个算法来计算你所能获取的最大利润。你最多可以完成 两笔 交易。</p>
+<p>注意: 你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii</a></p>
+<p><strong>【分析一】</strong></p>
+<p>以前的dp都是一维或二维，本题因为说交易次数最多为2次，因此交易次数也需要当成一个新的维度考虑在dp中，所以dp变成三维。<code>dp[i][k][j]</code>，三个维度表示：天数i（i=0,1,…n-1），<strong>买入股票的次数</strong>（k=0,1,2），<strong>每买一次交易次数加1</strong>，是否持有股票（0表示没有股票，1表示持有股票）。买入股票的次数为k时，隐含了卖出股票的次数为k或k-1。<br>状态转移方程有2个</p>
+<ul>
+<li><code>dp[i][k][0]</code>第i天没有股票<ol>
+<li>第i-1天也没有股票，第i天什么都没做：<code>dp[i][k][0]=dp[i-1][k][0]</code></li>
+<li>第i-1天有股票，第i天卖了：<code>dp[i][k][0]=dp[i-1][k][1]+prices[i]</code></li>
+</ol>
+</li>
+<li><code>dp[i][k][1]</code>第i天有股票<ol>
+<li>第i-1天也有股票，第i天什么都没做：<code>dp[i][k][1]=dp[i-1][k][1]</code></li>
+<li>第i-1天没有股票，第i天买了股票：<code>dp[i][k][1]=dp[i-1][k-1][0]-prices[i]</code><br>定义好状态转移矩阵，上面只对第三个维度进行遍历，下面初始化dp的i和k</li>
+</ol>
+</li>
+<li>i=0，第1天<br><code>for _k in range(1,k)</code>:对每个k初始化i=0，因为下面的已经包含k=0了，这里从k=1开始遍历<ol>
+<li><code>dp[0][k][0]</code>：第1天没有买股票，<code>dp[0][k][0]=0</code></li>
+<li><code>dp[0][k][1]</code>：第1天买了股票，<code>dp[0][k][1]=-prices[0]</code></li>
+</ol>
+</li>
+<li>k=0，买入股票次数为0<br>for _i in range(i)，对每个i初始化k=0，因为i=0已经在<ol>
+<li><code>dp[i][0][0]</code>：在第i天从来没有买过股票，<code>dp[i][0][0]=0</code></li>
+<li><code>dp[i][0][1]</code>：在第i天从来没有股票，所以也不可能持股，即利润为负无穷，<code>dp[i][0][1]=-float(&#39;inf&#39;)</code></li>
+</ol>
+</li>
+</ul>
+<p>以前2种遍历有重叠的部分：</p>
+<ul>
+<li><code>dp[0][0][0]=0</code></li>
+<li><code>dp[0][0][1]=-float(&#39;inf&#39;)</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type prices: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        n = len(prices)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> prices:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        dp = [[[<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">3</span>)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line">        <span class="comment">#初始化，当i=0时</span></span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">3</span>):</span><br><span class="line">            dp[<span class="number">0</span>][k][<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">            dp[<span class="number">0</span>][k][<span class="number">1</span>] = -prices[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            dp[i][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">            dp[i][<span class="number">0</span>][<span class="number">1</span>] = -float(<span class="string">'inf'</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 状态转移</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">3</span>):</span><br><span class="line">                dp[i][k][<span class="number">0</span>]=max(dp[i<span class="number">-1</span>][k][<span class="number">0</span>],dp[i<span class="number">-1</span>][k][<span class="number">1</span>]+prices[i])</span><br><span class="line">                dp[i][k][<span class="number">1</span>]=max(dp[i<span class="number">-1</span>][k][<span class="number">1</span>],dp[i<span class="number">-1</span>][k<span class="number">-1</span>][<span class="number">0</span>]-prices[i])</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">-1</span>][<span class="number">-1</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<h2><span id="买卖股票的最佳时机-iv">买卖股票的最佳时机 IV</span></h2><p>给定一个数组，它的第 i 个元素是一支给定的股票在第 i 天的价格。</p>
+<p>设计一个算法来计算你所能获取的最大利润。你最多可以完成 k 笔交易。</p>
+<p>注意: 你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv</a></p>
+<p><strong>【分析一】</strong></p>
+<p>和上一题一样，只是把原先的2换成k，其余代码不变，但是提交时，出现内存溢出的错误，因为当k较大时，比如k=1000000000，dp占用的空间太大。所以需要对此进行优化。<br>prices中有n天的价格，题目要求需要交易k次，因为有效的交易由买入和卖出组成，至少需要2天，所以有效的交易（有买有卖）次数限制k应该&lt;=n/2，如果k&gt;n/2，就没有约束作用了，相当于k=inf，这和leetcode122题一样。<br>所以代码分成2部分，</p>
+<ul>
+<li>if k&gt;n/2，按照leetcode122的解法（贪心）</li>
+<li>else，按照leetcode123的解法（动态规划）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, k, prices)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :type prices: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        n = len(prices)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> prices:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> k&gt;n/<span class="number">2</span>:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-1</span>):</span><br><span class="line">                diff = prices[i+<span class="number">1</span>]-prices[i]</span><br><span class="line">                <span class="keyword">if</span> diff&gt;<span class="number">0</span>:</span><br><span class="line">                    res+=diff</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">else</span>:    </span><br><span class="line">            dp = [[[<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> _ <span class="keyword">in</span> range(k+<span class="number">1</span>)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line">            <span class="comment">#初始化，当i=0时</span></span><br><span class="line">            <span class="keyword">for</span> _k <span class="keyword">in</span> range(<span class="number">1</span>,k+<span class="number">1</span>):</span><br><span class="line">                dp[<span class="number">0</span>][_k][<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">                dp[<span class="number">0</span>][_k][<span class="number">1</span>] = -prices[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">                dp[i][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">                dp[i][<span class="number">0</span>][<span class="number">1</span>] = -float(<span class="string">'inf'</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 状态转移</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n):</span><br><span class="line">                <span class="keyword">for</span> _k <span class="keyword">in</span> range(<span class="number">1</span>,k+<span class="number">1</span>):</span><br><span class="line">                    dp[i][_k][<span class="number">0</span>]=max(dp[i<span class="number">-1</span>][_k][<span class="number">0</span>],dp[i<span class="number">-1</span>][_k][<span class="number">1</span>]+prices[i])</span><br><span class="line">                    dp[i][_k][<span class="number">1</span>]=max(dp[i<span class="number">-1</span>][_k][<span class="number">1</span>],dp[i<span class="number">-1</span>][_k<span class="number">-1</span>][<span class="number">0</span>]-prices[i])</span><br><span class="line">            <span class="keyword">return</span> dp[<span class="number">-1</span>][<span class="number">-1</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<h2><span id="最佳买卖股票时机含冷冻期">最佳买卖股票时机含冷冻期</span></h2><p>给定一个整数数组，其中第 i 个元素代表了第 i 天的股票价格 。​</p>
+<p>设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（多次买卖一支股票）:</p>
+<ul>
+<li>你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</li>
+<li>卖出股票后，你无法在第二天买入股票 (即冷冻期为 1 天)。</li>
+</ul>
+<p>链接：<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown</a></p>
+<blockquote>
+<p>输入: [1,2,3,0,2]<br>输出: 3<br>解释: 对应的交易状态为: [买入, 卖出, 冷冻期, 买入, 卖出]</p>
+</blockquote>
+<p><strong>【分析一】</strong></p>
+<p>该题和leetcode122类似，除了增加冷冻期。<br>同样定义dp，使用二维矩阵<br>dp[i][j]:第一维dp[i]表示前i天能获得的最大利润，第二维dp[i][j]表示在第i天手里有没有股票，dp[i][0]表示没有股票，手里持有现金时的最大利润，dp[i][1]表示持有股票的最大利润</p>
+<p>对于dp[i][0]和dp[i][1]的状态转移需要分情况讨论</p>
+<ul>
+<li>dp[i][0]第i天持有现金状态<ul>
+<li>第i-1天持有股票，第i天卖出股票：dp[i][0]=dp[i-1][1]+prices[i]</li>
+<li>第i-1天没有股票，第i天也没有股票：dp[i][0]=dp[i-1][0]<br>最终dp[i][0]从以上2种情况选最大的作为最终利润 </li>
+</ul>
+</li>
+</ul>
+<p>下面这个转移公式与122题有变化。因为增加了冷冻期，在第i天买入股票，状态要从i-2天转移，因为第i-1天是冷冻期。</p>
+<ul>
+<li>dp[i][1]第i天持有股票状态<ul>
+<li>第i-2天卖出股票，第i-1天是冷冻期，第i天买入股票：dp[i][1]=dp[i-2][0]-prices[i]</li>
+<li>第i-1天有股票，第i天没有卖出：dp[i][1]=dp[i-1][1]<br>最终dp[i][1]从以上2种情况选最大的作为最终利润 </li>
+</ul>
+</li>
+</ul>
+<p>对dp进行初始化</p>
+<ul>
+<li>第一天，dp[0][0]表示持有现金，则最大利润为0，dp[0][0]=0</li>
+<li>dp[0][1]表示第一天持有股票，则最大利润为dp[0][1]=-prices[0]</li>
+<li>dp[1][0]表示第2天持有现金，有2种可能：（1）昨天也是持有现金dp[0][0],（2）昨天持有股票，今天卖了，dp[0][1]+prices[1]</li>
+<li>dp[1][1]表示第2天持有股票，有2种情况：（1）昨天也持有股票dp[0][1]，（2）昨天持有现金，今天买了股票dp[0][0]-prices[1]</li>
+</ul>
+<p>最终返回的结果是最后一天的最大利润，最后一天手里不能有任何股票，全都卖出，即dp[-1][0]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type prices: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        n = len(prices)</span><br><span class="line">        <span class="keyword">if</span> n&lt;=<span class="number">1</span>:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        dp = [[<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">0</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>]=-prices[<span class="number">0</span>]</span><br><span class="line">        dp[<span class="number">1</span>][<span class="number">0</span>]=max(dp[<span class="number">0</span>][<span class="number">0</span>],dp[<span class="number">0</span>][<span class="number">1</span>]+prices[<span class="number">1</span>])</span><br><span class="line">        dp[<span class="number">1</span>][<span class="number">1</span>]=max(dp[<span class="number">0</span>][<span class="number">1</span>],dp[<span class="number">0</span>][<span class="number">0</span>]-prices[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,n):</span><br><span class="line">            dp[i][<span class="number">0</span>]=max(dp[i<span class="number">-1</span>][<span class="number">0</span>],dp[i<span class="number">-1</span>][<span class="number">1</span>]+prices[i])</span><br><span class="line">            dp[i][<span class="number">1</span>]=max(dp[i<span class="number">-1</span>][<span class="number">1</span>],dp[i<span class="number">-2</span>][<span class="number">0</span>]-prices[i])</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">-1</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<h2><span id="买卖股票的最佳时机含手续费">买卖股票的最佳时机含手续费</span></h2><p>给定一个整数数组 prices，其中第 i 个元素代表了第 i 天的股票价格 ；非负整数 fee 代表了交易股票的手续费用。</p>
+<p>你可以无限次地完成交易，但是你每笔交易都需要付手续费。如果你已经购买了一个股票，在卖出它之前你就不能再继续购买股票了。</p>
+<p>返回获得利润的最大值。</p>
+<p>注意：这里的一笔交易指买入持有并卖出股票的整个过程，每笔交易你只需要为支付一次手续费。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with" target="_blank" rel="noopener">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with</a></p>
+<p><strong>【分析】</strong><br>这道题在leetcode122的基础上改进，每卖出一个股票就要支付手续费。</p>
+<p>定义dp，使用二维矩阵<br>dp[i][j]:第一维dp[i]表示前i天能获得的最大利润，第二维dp[i][j]表示在第i天手里有没有股票，dp[i][0]表示没有股票，手里持有现金时的最大利润，dp[i][1]表示持有股票的最大利润<br>第一天，dp[0][0]表示持有现金，则最大利润为0，dp[0][0]=0；dp[0][1]表示持有股票，则最大利润为dp[0][1]=-prices[0]。<br>对于dp[i][0]和dp[i][1]的状态转移需要分情况讨论</p>
+<ul>
+<li><p>dp[i][0]第i天持有现金状态</p>
+<ul>
+<li>第i-1天持有股票，第i天卖出股票：dp[i][0]=dp[i-1][1]+prices[i]-fee</li>
+<li>第i-1天没有股票，第i天也没有股票：dp[i][0]=dp[i-1][0]<br>最终dp[i][0]从以上2种情况选最大的作为最终利润 </li>
+</ul>
+</li>
+<li><p>dp[i][1]第i天持有股票状态</p>
+<ul>
+<li>第i-1天没有股票，第i天买入股票：dp[i][1]=dp[i-1][0]-prices[i]</li>
+<li>第i-1天有股票，第i天没有卖出：dp[i][1]=dp[i-1][1]<br>最终dp[i][1]从以上2种情况选最大的作为最终利润 </li>
+</ul>
+</li>
+</ul>
+<p>最终返回的结果是最后一天的最大利润，最后一天手里不能有任何股票，全都卖出，即dp[-1][0]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices, fee)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type prices: List[int]</span></span><br><span class="line"><span class="string">        :type fee: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        n = len(prices)</span><br><span class="line">        <span class="keyword">if</span> n==<span class="number">0</span>:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        dp = [[<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">0</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>]=-prices[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n):</span><br><span class="line">            dp[i][<span class="number">0</span>]=max(dp[i<span class="number">-1</span>][<span class="number">0</span>],dp[i<span class="number">-1</span>][<span class="number">1</span>]+prices[i]-fee)</span><br><span class="line">            dp[i][<span class="number">1</span>]=max(dp[i<span class="number">-1</span>][<span class="number">1</span>],dp[i<span class="number">-1</span>][<span class="number">0</span>]-prices[i])</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">-1</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<h2><span id="44-总结">4.4. 总结</span></h2><p>对以上6个问题做一个分类</p>
+<ul>
+<li>Leetcode121：只交易一次（k=1，贪心或DP）</li>
+<li>Leetcode122：不限交易次数（k=inf，贪心或二维DP）<ul>
+<li>Leetcode309：不限交易次数（k=inf），但有冷冻期的条件</li>
+<li>Leetcode714：不限交易次数（k=inf），但有手续费的条件</li>
+</ul>
+</li>
+<li>Leetcode188：最多交易k次（三维DP）<ul>
+<li>Leetcode123：最多交易2次（k=2，三维DP）</li>
+</ul>
+</li>
+</ul>
 
           
         
@@ -660,7 +969,8 @@
       
         
           
-            <h1><span id="回溯">回溯</span></h1><p>回溯可以看做是暴力法的升级。回溯法非常适合由多个步骤组成的问题，每个步骤都有多个选项。当我们在某一步选择了其中一个选项时，就进入到下一步，然后又面临新的选项，就这样重读选择，直至达到最终的状态。</p>
+            <a id="more"></a>
+<h1><span id="回溯">回溯</span></h1><p>回溯可以看做是暴力法的升级。回溯法非常适合由多个步骤组成的问题，每个步骤都有多个选项。当我们在某一步选择了其中一个选项时，就进入到下一步，然后又面临新的选项，就这样重读选择，直至达到最终的状态。</p>
 <p>在二维矩阵寻找路径的问题，基本都可以用回溯解决</p>
 <h1><span id="矩阵中单词路径搜索">矩阵中单词路径搜索</span></h1><p>请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一格开始，每一步可以在矩阵中向左、右、上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。例如，在下面的3×4的矩阵中包含一条字符串“bfce”的路径（路径中的字母用加粗标出）。</p>
 <p>[[“a”,”<strong>b</strong>“,”c”,”e”],</p>
@@ -2080,182 +2390,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/09/argparse不支持bool类型/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Echo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Echo's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/09/argparse不支持bool类型/" itemprop="url">argparse不支持bool类型</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-09T16:28:29+08:00">
-                2020-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  123
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在Python中通过下列方式向程序传递bool参数时，其中<code>neg</code>参数指定类型为bool，但是无论传入的值是什么，<code>neg</code>始终为<code>True</code></p>
-<p>解决方法：<br><a href="https://blog.csdn.net/yaokai_assultmaster/article/details/77928629" target="_blank" rel="noopener">使用Python中的argparse从命令行接收boolean类型的参数</a><br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/03/09/argparse不支持bool类型/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2308,7 +2442,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="machine learning,">
+  <meta name="keywords" content="算法,Leetcode,">
 
 
 
@@ -73,29 +73,18 @@
 
 
 
-<meta name="description" content="介绍在回归问题中的主要评价指标，以及各自的特点">
-<meta name="keywords" content="machine learning">
+<meta name="description" content="位运算位运算总共有5种运算：与，或，异或，左移，右移。左移m&amp;lt;&amp;lt;n表示把m左移n位，在左移n位时，最左边的n位被丢弃，同时最右边补上n个0右移m&amp;gt;&amp;gt;n表示把m右移n位，在右移n位时，最右边的n位被丢弃，在处理左边时比较复杂。如果数字是无符号数，最左边补上n个0。如果数字是一个有符号数，则用数字的符号填补左边的n位。也就是说，如果数字是整数，最左边用0填充，如果数字是负数，">
+<meta name="keywords" content="算法,Leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="评价指标">
-<meta property="og:url" content="http://yoursite.com/2019/10/18/metrics/index.html">
+<meta property="og:title" content="Leetcode之位运算">
+<meta property="og:url" content="http://yoursite.com/2020/06/07/Leetcode之位运算/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="介绍在回归问题中的主要评价指标，以及各自的特点">
+<meta property="og:description" content="位运算位运算总共有5种运算：与，或，异或，左移，右移。左移m&amp;lt;&amp;lt;n表示把m左移n位，在左移n位时，最左边的n位被丢弃，同时最右边补上n个0右移m&amp;gt;&amp;gt;n表示把m右移n位，在右移n位时，最右边的n位被丢弃，在处理左边时比较复杂。如果数字是无符号数，最左边补上n个0。如果数字是一个有符号数，则用数字的符号填补左边的n位。也就是说，如果数字是整数，最左边用0填充，如果数字是负数，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/mae.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/mse.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/rmse.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/mape.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/hun.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/f1.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/micro.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/precison-mi.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/recall-mi.png">
-<meta property="og:image" content="http://yoursite.com/2019/10/18/metrics/f1-mi.png">
-<meta property="og:updated_time" content="2020-04-22T13:35:52.093Z">
+<meta property="og:updated_time" content="2020-06-07T15:25:04.437Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="评价指标">
-<meta name="twitter:description" content="介绍在回归问题中的主要评价指标，以及各自的特点">
-<meta name="twitter:image" content="http://yoursite.com/2019/10/18/metrics/mae.png">
+<meta name="twitter:title" content="Leetcode之位运算">
+<meta name="twitter:description" content="位运算位运算总共有5种运算：与，或，异或，左移，右移。左移m&amp;lt;&amp;lt;n表示把m左移n位，在左移n位时，最左边的n位被丢弃，同时最右边补上n个0右移m&amp;gt;&amp;gt;n表示把m右移n位，在右移n位时，最右边的n位被丢弃，在处理左边时比较复杂。如果数字是无符号数，最左边补上n个0。如果数字是一个有符号数，则用数字的符号填补左边的n位。也就是说，如果数字是整数，最左边用0填充，如果数字是负数，">
 
 
 
@@ -125,13 +114,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/10/18/metrics/">
+  <link rel="canonical" href="http://yoursite.com/2020/06/07/Leetcode之位运算/">
 
 
 
 
 
-  <title>评价指标 | Echo's blog</title>
+  <title>Leetcode之位运算 | Echo's blog</title>
   
 
 
@@ -310,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/18/metrics/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/Leetcode之位运算/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Echo">
@@ -327,7 +316,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">评价指标</h2>
+          <h2 class="post-title" itemprop="name headline">Leetcode之位运算</h2>
         
 
         <div class="post-meta">
@@ -339,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-18T10:48:03+08:00">
-                2019-10-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-07T17:35:16+08:00">
+                2020-06-07
               </time>
             
 
@@ -362,8 +351,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
 
@@ -396,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.4k
+                  392
                 </span>
               
 
@@ -412,7 +401,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  1
                 </span>
               
             </div>
@@ -433,87 +422,12 @@
       
 
       
-        <p>介绍在回归问题中的主要评价指标，以及各自的特点</p>
-<a id="more"></a>
-<!-- TOC -->
-<ul>
-<li><a href="#1-%e9%97%ae%e9%a2%98">1. 问题</a></li>
-<li><a href="#2-%e5%9b%9e%e5%bd%92%e9%97%ae%e9%a2%98">2. 回归问题</a><ul>
-<li><a href="#21-mae%e5%b9%b3%e5%9d%87%e7%bb%9d%e5%af%b9%e8%af%af%e5%b7%ae">2.1. MAE(平均绝对误差)</a></li>
-<li><a href="#22-mse%e8%af%af%e5%b7%ae%e5%b9%b3%e6%96%b9%e5%b9%b3%e5%9d%87%e5%80%bc">2.2. MSE(误差平方平均值)</a></li>
-<li><a href="#23-rmse%e5%9d%87%e6%96%b9%e6%a0%b9%e8%af%af%e5%b7%ae">2.3. RMSE(均方根误差)</a></li>
-<li><a href="#24-mape%e5%b9%b3%e5%9d%87%e7%bb%9d%e5%af%b9%e7%99%be%e5%88%86%e6%af%94%e8%af%af%e5%b7%ae">2.4. MAPE(平均绝对百分比误差)</a></li>
-<li><a href="#25-%e6%80%bb%e7%bb%93">2.5. 总结</a></li>
-</ul>
-</li>
-<li><a href="#3-%e5%88%86%e7%b1%bb%e9%97%ae%e9%a2%98">3. 分类问题</a><ul>
-<li><a href="#31-micro-f1">3.1. Micro-F1</a></li>
-<li><a href="#32-macro-f1">3.2. Macro-F1</a></li>
-</ul>
-</li>
-<li><a href="#%e6%8e%92%e5%ba%8f%e6%8c%87%e6%a0%87">排序指标</a><ul>
-<li><a href="#apaverage-precision">AP(Average Precision)</a></li>
-</ul>
-</li>
-</ul>
-<!-- /TOC -->
-<h1><span id="1-问题">1. 问题</span></h1><p>在回归问题中，标签y的分布不均衡，范围在[1,88]，其中70%的值都在1左右。解决的方法：从损失函数入手，设计不同的评价指标，让其更关注一些大的y值。</p>
-<h1><span id="2-回归问题">2. 回归问题</span></h1><p><a href="https://zhuanlan.zhihu.com/p/74627482" target="_blank" rel="noopener">Metircs参考资料</a></p>
-<h2><span id="21-mae平均绝对误差">2.1. MAE(平均绝对误差)</span></h2><p><img src="/2019/10/18/metrics/mae.png" alt=""></p>
-<p>绝对误差的平均值。</p>
-<ol>
-<li>范围在$[0,\infin]$</li>
-<li>单看MAE并不能看出这个模型的好坏，因为不知道y的平均值。比如MAE=10,y的平均值为1000，则这个模型还不错，但是如果y的平均值为1，那这个模型就非常不好。</li>
-<li>改进：$MAE/y_{mean}$</li>
-</ol>
-<h2><span id="22-mse误差平方平均值">2.2. MSE(误差平方平均值)</span></h2><p><img src="/2019/10/18/metrics/mse.png" alt=""></p>
-<ol>
-<li>范围在$[0,\infin]$,  </li>
-<li>很多算法的loss函数都是基于MSE的，因为MSE计算速度快，比RMSE更容易操作。但是我们很少把MAE作为最终的评价指标。</li>
-<li>更关注一些y比较大的值，但是它的代价是对异常点过于敏感。如果预测出的y很不合理，则它的误差比较大，从而对RMSE的值有很大的影响。</li>
-</ol>
-<h2><span id="23-rmse均方根误差">2.3. RMSE(均方根误差)</span></h2><p><img src="/2019/10/18/metrics/rmse.png" alt=""></p>
-<p>在MSE上加了根号，误差的结果和数据是一个级别，在数量级上更直观，如果RMSE=10，可以认为回归问题效果与真实结果平均相差10。</p>
-<ol>
-<li>范围在$[0,\infin]$</li>
-<li>RMSE把更大的注意力放在y更大的值上，只有更大的y值预测准确了，模型的效果才会好。</li>
-</ol>
-<h2><span id="24-mape平均绝对百分比误差">2.4. MAPE(平均绝对百分比误差)</span></h2><p><img src="/2019/10/18/metrics/mape.png" alt=""></p>
-<ol>
-<li>范围$[0,\infin]$，当MAPE=0%表示完美模型，MAPE大于100%表示劣质模型。</li>
-<li>当真实值有数据等于0时，存在分母为0的情况，该公式不可用</li>
-<li>比如将y1预测为1.5，和100预测为100.5，差值是一样的，。即1的MAPE比100的MAPE大很多。以MAPE作为loss函数时，更加关注y比较小的值。</li>
-<li>单看MAPE的大小是没有意义的，因为MAPE是个相对值，而不是绝对值。MAPE只能用来对不同模型同一组数据的评估。比如对于同一组数据，模型A的MAPE比模型B小，可以说明模型A比模型B好。但是如果说MAPE=10%，并不能判断这个模型好还是不好</li>
-</ol>
-<h2><span id="25-总结">2.5. 总结</span></h2><p>综上，在选用评价指标时，需要考虑</p>
-<ol>
-<li><p>数据中是否有0，如果有0值就不能用MPE、MAPE之类的指标；</p>
-</li>
-<li><p>数据的分布如何，如果是长尾分布可以选择带对数变换的指标，中位数指标比平均数指标更好；</p>
-</li>
-<li><p>是否存在极端值，诸如MAE、MSE、RMSE之类容易受到极端值影响的指标就不要选用；</p>
-</li>
-<li><p>得到的指标是否依赖于量纲(即绝对度量，而不是相对度量)，如果指标依赖量纲那么不同模型之间可能因为量纲不同而无法比较；</p>
-</li>
-</ol>
-<h1><span id="3-分类问题">3. 分类问题</span></h1><p>在二分类任务中，使用Precison，Recall和F1值来评价分类的效果。<br><img src="/2019/10/18/metrics/hun.png" alt=""></p>
-<p><img src="/2019/10/18/metrics/f1.png" alt=""></p>
-<p>F1是针对二分类的，对于多分类，有2个常用的指标，Marco-F1和Micro-F1.</p>
-<h2><span id="31-micro-f1">3.1. Micro-F1</span></h2><p><img src="/2019/10/18/metrics/micro.png" alt=""></p>
-<p>假设对于一个多分类问题，有三个类，分别是1，2，3</p>
-<p>$TP_i$表示分类$i$的TP<br>$FP_i$表示分类$i$的FP<br>$TN_i$表示分类$i$的TN<br>$FN_i$表示分类$i$的FN<br>接下来，我们来计算Micro的Precison</p>
-<p><img src="/2019/10/18/metrics/precison-mi.png" alt=""></p>
-<p>以及Micro的Recall</p>
-<p><img src="/2019/10/18/metrics/recall-mi.png" alt=""></p>
-<p>然后计算Micro-F1</p>
-<p><img src="/2019/10/18/metrics/f1-mi.png" alt=""></p>
-<h2><span id="32-macro-f1">3.2. Macro-F1</span></h2><p>先计算每个类的Precison和Rcall，从而计算出每个类的F1，然后将所有类的F1值平均得到Macro-F1。<br>如果数据集中各个类的分布不均衡的话，建议使用Micro-F1。<br>Macro-F1平等的看待各个类别，它的值更容易受少类别的影响Micro则更容易受常见类别的影响。</p>
-<h1><span id="排序指标">排序指标</span></h1><h2><span id="apaverage-precision">AP(Average Precision)</span></h2><p><a href="https://blog.csdn.net/simple_the_best/article/details/52296608" target="_blank" rel="noopener">推荐系统常见评测标准之MAP</a></p>
-<p>当我们用Google搜索玫瑰的图片时，返回了10个结果，从最可能到最不可能排名，最好的情况是这10个结果都是我们想要的信息，但是如果只有部分信息是相关的，比如5个，那这5个结果如果排名靠前也是一个不错的结果，但是如果这5个相关结果排在6~10名，那这种情况下就比较差。这便是AP反映的指标，与recall类似，不过是“顺序敏感的recall”</p>
-<p>【注】排名从1开始</p>
-<p>例如：搜索玫瑰，返回10个图片，从最可能到最不可能排序。这10个图片的结果分别是：1,0,0,1,1,1,0,1,0,1，其中1表示是玫瑰，0表示不是。即搜索结果中，玫瑰图片的排名分别是[1,4,5,6,8,10]，AP=(1/1+2/4+3/5+4/6+5/8+6/10)/6=0.665</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">AP</span><span class="params">(ranked_list, ground_truth)</span>:</span></span><br><span class="line">    <span class="string">"""Compute the average precision (AP) of a list of ranked items</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    hits = <span class="number">0</span></span><br><span class="line">    sum_precs = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> range(len(ranked_list)):</span><br><span class="line">        <span class="keyword">if</span> ranked_list[n] <span class="keyword">in</span> ground_truth:</span><br><span class="line">            hits += <span class="number">1</span></span><br><span class="line">            sum_precs += hits / (n + <span class="number">1.0</span>)<span class="comment">#排名从1开始，因为n从0开始，所以加1</span></span><br><span class="line">    <span class="keyword">if</span> hits &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> sum_precs / len(ground_truth)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
+        <a id="more"></a>
+<h1><span id="位运算">位运算</span></h1><p>位运算总共有5种运算：与，或，异或，左移，右移。<br>左移<code>m&lt;&lt;n</code>表示把m左移n位，在左移n位时，最左边的n位被丢弃，同时最右边补上n个0<br>右移<code>m&gt;&gt;n</code>表示把m右移n位，在右移n位时，最右边的n位被丢弃，在处理左边时比较复杂。如果数字是无符号数，最左边补上n个0。如果数字是一个有符号数，则用数字的符号填补左边的n位。也就是说，如果数字是整数，最左边用0填充，如果数字是负数，最左边用1填充。例如<br>00001010&gt;&gt;2=00000010<br>10001010&gt;&gt;3=11110001</p>
+<h1><span id="cd">cd</span></h1><p>请实现一个函数，输入一个整数，输出该数二进制表示中 1 的个数。例如，把 9 表示成二进制是 1001，有 2 位是 1。因此，如果输入 9，则该函数输出 2。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof" target="_blank" rel="noopener">https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof</a></p>
+<p><strong>【分析】</strong><br>将一个整数n减去1之后，再和n做与运算，可以将n中最右边的1变成0<br>比如原先n=1100，n-1=1011，n&amp;(n-1)=1000,与运算的结果1000与原先的n=1100相比，就把最后边的1变成0。然后再对1000执行相同的操作，就会变成0000。这样执行2次，说明原始的n中一共有2个1.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hammingWeight</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="comment">#n=n&amp;(n-1)可以让原先的n中的1变成0</span></span><br><span class="line">        <span class="keyword">while</span> n:</span><br><span class="line">            res+=<span class="number">1</span></span><br><span class="line">            n=n&amp;(n<span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -559,7 +473,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
           
         </div>
       
@@ -587,8 +503,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/07/keras基础知识/" rel="next" title="keras基础知识">
-                <i class="fa fa-chevron-left"></i> keras基础知识
+              <a href="/2020/06/06/Leetcode之动态规划/" rel="next" title="Leetcode之动态规划">
+                <i class="fa fa-chevron-left"></i> Leetcode之动态规划
               </a>
             
           </div>
@@ -596,10 +512,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/02/Transformer/" rel="prev" title="Transformer">
-                Transformer <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -745,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 回归问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. MAE(平均绝对误差)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. MSE(误差平方平均值)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. RMSE(均方根误差)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.4. MAPE(平均绝对百分比误差)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.5. 总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 分类问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. Micro-F1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. Macro-F1</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">排序指标</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">AP(Average Precision)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">位运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">cd</span></a></li></ol></div>
             
 
           </div>
