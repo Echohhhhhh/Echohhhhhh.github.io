@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="位运算位运算总共有5种运算：与，或，异或，左移，右移。左移m&amp;lt;&amp;lt;n表示把m左移n位，在左移n位时，最左边的n位被丢弃，同时最右边补上n个0右移m&amp;gt;&amp;gt;n表示把m右移n位，在右移n位时，最右边的n位被丢弃，在处理左边时比较复杂。如果数字是无符号数，最左边补上n个0。如果数字是一个有符号数，则用数字的符号填补左边的n位。也就是说，如果数字是整数，最左边用0填充，如果数字是负数，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-06-07T15:25:04.437Z">
+<meta property="og:updated_time" content="2020-06-08T07:39:25.202Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode之位运算">
 <meta name="twitter:description" content="位运算位运算总共有5种运算：与，或，异或，左移，右移。左移m&amp;lt;&amp;lt;n表示把m左移n位，在左移n位时，最左边的n位被丢弃，同时最右边补上n个0右移m&amp;gt;&amp;gt;n表示把m右移n位，在右移n位时，最右边的n位被丢弃，在处理左边时比较复杂。如果数字是无符号数，最左边补上n个0。如果数字是一个有符号数，则用数字的符号填补左边的n位。也就是说，如果数字是整数，最左边用0填充，如果数字是负数，">
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  392
+                  890
                 </span>
               
 
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  3
                 </span>
               
             </div>
@@ -428,6 +428,24 @@
 <p>链接：<a href="https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof" target="_blank" rel="noopener">https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof</a></p>
 <p><strong>【分析】</strong><br>将一个整数n减去1之后，再和n做与运算，可以将n中最右边的1变成0<br>比如原先n=1100，n-1=1011，n&amp;(n-1)=1000,与运算的结果1000与原先的n=1100相比，就把最后边的1变成0。然后再对1000执行相同的操作，就会变成0000。这样执行2次，说明原始的n中一共有2个1.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hammingWeight</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="comment">#n=n&amp;(n-1)可以让原先的n中的1变成0</span></span><br><span class="line">        <span class="keyword">while</span> n:</span><br><span class="line">            res+=<span class="number">1</span></span><br><span class="line">            n=n&amp;(n<span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h1><span id="长度">长度</span></h1><p>整数<code>n&amp;1</code>值为0或1，判断n的二进制数的最后一位是0还是1.如果n=8，n&amp;1=0，表示8的二进制1000最后一位是0。如果n=9，n&amp;1=1，表示9的二进制1001最后一位是1.<br>$x^n$中的n变换成二进制为$b_mb_{m-1}…b_2b_1$，二进制和十进制n的关系为$n=2^0b_1+2^1b_2+…+2^{m-1}b_m$,这样就可以把$x^n=x^{2^0b_1+2^1b_2+…+2^{m-1}b_m}=x^{2^0b_1}x^{2^1b_2}…x^{2^{m-1}b_m}$。其中$b_1,b_2….b_m$的值只能为0或1.如果$b_m=0$，那$x^{2^{m-1}b_m}=1$，否则$x^{2^{m-1}b_m}=x^{2^{m-1}}$<br>所以问题的关键就是计算十进制数n，转换成二进制后每一个位数是0还是1.<br>如果第一位是1，就乘上$x^1$,然后把n除以2，就是n=n&gt;&gt;1,然后再判断原始n的第二位。<br>如果第二位是1，就乘上$x^2$<br>如果第三位是1，就乘上$x^4$<br>如果第四位是1，就乘上$x^8$</p>
+<p>n=11，变换成二进制是1011,分别是1,2,4,8，其中只有1,2,8的幂次有效。理论上应该是$x.x^2.x^8$</p>
+<ul>
+<li>进入while循环，n&amp;1=1，$res=x$，然后$x=x^2$，n右移一位成5</li>
+<li>进入while循环，n&amp;1=1，$res=res*x=x^3,x=x^4$,n右移一位变成2</li>
+<li>进入while循环，n&amp;1=0，$x=x^8$,n右移一位变成1</li>
+<li>进入到while循环，n&amp;1=1，$res=x^11,x=x^16$,n右移一位变成0</li>
+<li>退出while循环，返回res</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">myPow</span><span class="params">(self, x, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type x: float</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: float</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> x==<span class="number">0</span>:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> n==<span class="number">0</span>:<span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        tmp_n = abs(n)</span><br><span class="line">        res=<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> tmp_n:</span><br><span class="line">            <span class="keyword">if</span> tmp_n&amp;<span class="number">1</span>:</span><br><span class="line">                res*=x</span><br><span class="line">            x*=x</span><br><span class="line">            tmp_n=tmp_n&gt;&gt;<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> n&gt;<span class="number">0</span>:<span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">else</span>:<span class="keyword">return</span> <span class="number">1</span>/res</span><br></pre></td></tr></table></figure>
+<ul>
+<li>时间复杂度：O(logn)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<h1><span id="总结">总结</span></h1><ol>
+<li>将二进制数字n的最右边的1变成0，n=n&amp;(n-1)<br>2.</li>
+</ol>
+
       
     </div>
     
@@ -657,7 +675,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">位运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">cd</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">位运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">cd</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">长度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

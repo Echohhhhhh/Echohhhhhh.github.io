@@ -82,7 +82,9 @@
 <meta property="og:description" content="1. 树概念介绍 二叉树一般有2种通用的遍历策略 深度优先搜索DFS 前序遍历：根左右 中序遍历：左根右 后序遍历：左右根   广度优先搜索BFS先遍历第一层，再遍历第二层    值得注意的是，在删除树中的节点时，删除过程将按照后序遍历的顺序进行，也就是先删除左节点和右节点，然后再删除节点本身。  平衡二叉树，需要满足1个条件：  左右子树深度之差&amp;lt;=1   二叉搜索树，需要满足以下2个条">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/05/29/Leetcode之树/7-1.png">
-<meta property="og:updated_time" content="2020-06-05T03:26:19.252Z">
+<meta property="og:image" content="http://yoursite.com/2020/05/29/Leetcode之树/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/29/Leetcode之树/3.png">
+<meta property="og:updated_time" content="2020-06-11T01:20:40.682Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode之树">
 <meta name="twitter:description" content="1. 树概念介绍 二叉树一般有2种通用的遍历策略 深度优先搜索DFS 前序遍历：根左右 中序遍历：左根右 后序遍历：左右根   广度优先搜索BFS先遍历第一层，再遍历第二层    值得注意的是，在删除树中的节点时，删除过程将按照后序遍历的顺序进行，也就是先删除左节点和右节点，然后再删除节点本身。  平衡二叉树，需要满足1个条件：  左右子树深度之差&amp;lt;=1   二叉搜索树，需要满足以下2个条">
@@ -387,7 +389,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.6k
+                  3.6k
                 </span>
               
 
@@ -403,7 +405,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  10
+                  15
                 </span>
               
             </div>
@@ -530,7 +532,56 @@
 <ul>
 <li>判断recur(root)返回值是否为-1，为-1则不是平衡树，否则是平衡树</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isBalanced</span><span class="params">(self, root)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">return</span> self.recur(root) != <span class="number">-1</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">recur</span><span class="params">(self,root)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        返回以root为根的树最大深度</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        left_h= self.recur(root.left)</span><br><span class="line">        <span class="keyword">if</span> left_h==<span class="number">-1</span>:<span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        right_h = self.recur(root.right)</span><br><span class="line">        <span class="keyword">if</span> right_h == <span class="number">-1</span>:<span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">return</span> max(left_h,right_h)+<span class="number">1</span> <span class="keyword">if</span> abs(left_h-right_h)&lt;=<span class="number">1</span> <span class="keyword">else</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<h1><span id="二叉树的镜像">二叉树的镜像</span></h1><p>请完成一个函数，输入一个二叉树，该函数输出它的镜像。</p>
+<p><a href="https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/</a></p>
+<p><strong>【分析一】</strong><br>使用递归</p>
+<ol>
+<li>递归终止条件：当节点root为空时，返回None</li>
+<li>递归工作<ul>
+<li>先使用tmp保存节点root的左子树</li>
+<li>给root.left赋予新的值</li>
+<li>给root.right赋予新的值</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mirrorTree</span><span class="params">(self, root)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: TreeNode</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">        <span class="comment">#不用生成新的树，直接在原始树进行修改</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">        tmp = root.left</span><br><span class="line">        root.left = self.mirrorTree(root.right)</span><br><span class="line">        root.right = self.mirrorTree(tmp)</span><br><span class="line">        <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+<p><strong>【分析二】</strong><br>使用栈stack遍历树的所有节点，并交换每个节点的左右子树</p>
+<p><img src="/2020/05/29/Leetcode之树/2.png" alt=""></p>
+<ol>
+<li>特例处理：当root为空时，直接使用return</li>
+<li>初始化栈，将root加入到栈中</li>
+<li>遍历栈，刚开始弹出节点4，并将节点2和节点7压入栈中，然后交换节点4的左右节点。然后再进入到while循环中，弹出节点7，再将节点6和节点9压入栈中，交换节点7的左右节点。然后再将节点9弹出栈，因为节点9的左右节点为空，所以没有节点压入shatck中，然后交换节点9的左右节点（交换None）。然后弹出节点6出栈…….</li>
+</ol>
+<p>使用栈，可以看做是DFS，先将右子树内部的节点交换，然后再将左子树内部的节点交换<br>如果使用队列，可以看做是BFS，先交换第一层的左右节点，再交换第二层的左右节点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mirrorTree</span><span class="params">(self, root)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: TreeNode</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">        <span class="comment">#不用生成新的树，直接在原始树进行修改</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">        stack = [root]</span><br><span class="line">        <span class="keyword">while</span> stack:</span><br><span class="line">            cur = stack.pop()</span><br><span class="line">            <span class="keyword">if</span> cur.left:stack.append(cur.left)</span><br><span class="line">            <span class="keyword">if</span> cur.right:stack.append(cur.right)</span><br><span class="line">            cur.left,cur.right = cur.right,cur.left</span><br><span class="line">        <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+<h1><span id="二叉搜索树的后序遍历序列">二叉搜索树的后序遍历序列</span></h1><p>输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历结果。如果是则返回 true，否则返回 false。假设输入的数组的任意两个数字都互不相同。</p>
+<p><a href="https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/</a></p>
+<p><strong>【分析一】</strong><br>二叉搜索树：左子树&lt;根节点，右子树&gt;根节点<br>后序遍历：左右根<br>给定序列的最后一个元素肯定是整个树的根，比它小的是左子树，比它大的是右子树</p>
+<p><img src="/2020/05/29/Leetcode之树/3.png" alt=""></p>
+<p>使用递归的方法，递归函数传入的参数是后续序列。</p>
+<ul>
+<li>递归终止条件：后续序列为空，返回True</li>
+<li>递归返回值：如果当前postorder可以构成二叉搜索树，返回True，否则返回False</li>
+<li>递归工作：<ul>
+<li>找根节点=postorder的最后一个元素</li>
+<li>找左子树的范围</li>
+<li>在右子树中，如果有小于root的值，返回false。如果没有的话，说明root的左右子树都正常</li>
+<li>下面递归判断左子树的后序序列和右子树的后序序列是否正常</li>
+<li>返回2者的and值</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">verifyPostorder</span><span class="params">(self, postorder)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type postorder: List[int]</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> postorder:<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">isTree</span><span class="params">(postorder)</span>:</span></span><br><span class="line">            <span class="string">"""</span></span><br><span class="line"><span class="string">            输入一个后续序列，判断是否是某个二叉搜索树的后续序列</span></span><br><span class="line"><span class="string">            如果是，返回True，否则返回False</span></span><br><span class="line"><span class="string">            """</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> postorder:<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">            root = postorder[<span class="number">-1</span>]</span><br><span class="line">            left,right = <span class="number">0</span>,<span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(postorder)):</span><br><span class="line">                <span class="keyword">if</span> postorder[i] &gt; root:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            <span class="comment">#跳出for循环的i指向第一个大于root的节点,左子树[0,i-1]</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i,len(postorder)<span class="number">-1</span>):</span><br><span class="line">                <span class="comment">#如果右子树中有比root小的，返回false</span></span><br><span class="line">                <span class="keyword">if</span> postorder[j] &lt; root:</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">            is_left,is_right = <span class="keyword">False</span>,<span class="keyword">False</span><span class="comment">#判断左后续序列是否能组成二叉搜索树</span></span><br><span class="line">            is_left = isTree(postorder[:i])</span><br><span class="line">            is_right = isTree(postorder[i:<span class="number">-1</span>])</span><br><span class="line">            <span class="keyword">return</span> is_left <span class="keyword">and</span> is_right</span><br><span class="line">        <span class="keyword">return</span> isTree(postorder)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>时间复杂度：O(n2)</li>
+<li>空间复杂度：O(N)0</li>
+</ul>
+<p><strong>【分析二】</strong></p>
+<h1><span id="总结">总结</span></h1><ul>
+<li>深度优先搜索DFS一般使用栈结构存储，广度优先搜索BFS一般使用队列结构存储</li>
+</ul>
+
       
     </div>
     
@@ -764,7 +815,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 树概念介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 树的前向遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 二叉树的中序遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 后序遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 树的层次遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 根据前序和中序创建二叉树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. 计算树的最大深度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 对称二叉树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. 平衡二叉树</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 树概念介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 树的前向遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 二叉树的中序遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 后序遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 树的层次遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 根据前序和中序创建二叉树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. 计算树的最大深度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 对称二叉树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. 平衡二叉树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">二叉树的镜像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">二叉搜索树的后序遍历序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
