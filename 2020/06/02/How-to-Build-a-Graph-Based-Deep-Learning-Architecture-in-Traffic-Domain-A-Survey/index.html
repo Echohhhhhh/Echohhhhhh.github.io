@@ -88,7 +88,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/6.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/2.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/7.png">
-<meta property="og:updated_time" content="2020-06-04T08:30:14.996Z">
+<meta property="og:updated_time" content="2020-06-18T02:33:30.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How to Build a Graph-Based Deep Learning Architecture in Traffic Domain: A Survey">
 <meta name="twitter:description" content="这篇综述性论文介绍图神经网络在交通领域的应用。">
@@ -432,7 +432,34 @@
       
         <p>这篇综述性论文介绍图神经网络在交通领域的应用。</p>
 <a id="more"></a>
-<!-- TOC -->autoauto- [1. 摘要](#1-摘要)auto- [2. 前言](#2-前言)auto- [3. 研究方向](#3-研究方向)auto- [4. 问题定义](#4-问题定义)auto    - [4.1. 构建图](#41-构建图)auto    - [4.2. 构造邻接矩阵](#42-构造邻接矩阵)auto- [5. 前人的模型](#5-前人的模型)auto    - [5.1. GNN](#51-gnn)auto    - [5.2. RNN](#52-rnn)auto    - [5.3. TCN](#53-tcn)auto    - [5.4. Seq2Seq](#54-seq2seq)auto    - [5.5. GAN](#55-gan)auto- [6. 挑战](#6-挑战)auto    - [6.1. 空间依赖](#61-空间依赖)auto    - [6.2. 时间依赖](#62-时间依赖)auto    - [6.3. 时空依赖](#63-时空依赖)auto    - [6.4. 外部因素](#64-外部因素)auto- [7. 未来方向](#7-未来方向)autoauto<!-- /TOC -->
+<!-- TOC -->
+<ul>
+<li><a href="#1-摘要">1. 摘要</a></li>
+<li><a href="#2-前言">2. 前言</a></li>
+<li><a href="#3-研究方向">3. 研究方向</a></li>
+<li><a href="#4-问题定义">4. 问题定义</a><ul>
+<li><a href="#41-构建图">4.1. 构建图</a></li>
+<li><a href="#42-构造邻接矩阵">4.2. 构造邻接矩阵</a></li>
+</ul>
+</li>
+<li><a href="#5-前人的模型">5. 前人的模型</a><ul>
+<li><a href="#51-gnn">5.1. GNN</a></li>
+<li><a href="#52-rnn">5.2. RNN</a></li>
+<li><a href="#53-tcn">5.3. TCN</a></li>
+<li><a href="#54-seq2seq">5.4. Seq2Seq</a></li>
+<li><a href="#55-gan">5.5. GAN</a></li>
+</ul>
+</li>
+<li><a href="#6-挑战">6. 挑战</a><ul>
+<li><a href="#61-空间依赖">6.1. 空间依赖</a></li>
+<li><a href="#62-时间依赖">6.2. 时间依赖</a></li>
+<li><a href="#63-时空依赖">6.3. 时空依赖</a></li>
+<li><a href="#64-外部因素">6.4. 外部因素</a></li>
+</ul>
+</li>
+<li><a href="#7-未来方向">7. 未来方向</a></li>
+</ul>
+<!-- /TOC -->
 <h1><span id="1-摘要">1. 摘要</span></h1><p>在交通数据中，有很多数据以图的形式存在，为了充分利用其中的空间信息，很多模型使用图神经网络来处理交通图数据。本文针对交通领域的图网络模型进行总结。</p>
 <h1><span id="2-前言">2. 前言</span></h1><p>在交通预测领域，（1）早期采用的方法有：ARIMA,VAR,Kalman过滤器等，然而，这些方法通常需要一些前提假设，例如数据是静态且线性相关，不能应用在实际数据中。（2）机器学习方法例如SVM，K近邻可以建模交通数据中的非线性相关性，但是模型结构较浅，且需要人工构造和选择特征，不能满足大量交通数据的应用需求。（3）深度学习方法，例如RNN无法捕获空间相关性，CNN无法应用在图数据中，并且CNN更关注local相关性，忽略了global相关性。（4）图神经网络，使用图神经网络来解决交通领域的预测问题。<br>贡献总结如下：</p>
 <ul>
@@ -754,7 +781,7 @@ u_{t} &=\boldsymbol{\sigma}\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

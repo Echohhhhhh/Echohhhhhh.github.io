@@ -298,6 +298,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/19/百面机器学习概述/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Echo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/19/百面机器学习概述/" itemprop="url">百面机器学习概述</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-19T23:12:34+08:00">
+                2020-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  463
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>总结《百面机器学习》有关知识点。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/06/19/百面机器学习概述/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/Leetcode之位运算/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -381,7 +556,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  890
+                  896
                 </span>
               
 
@@ -421,12 +596,18 @@
         
           
             <a id="more"></a>
-<h1><span id="位运算">位运算</span></h1><p>位运算总共有5种运算：与，或，异或，左移，右移。<br>左移<code>m&lt;&lt;n</code>表示把m左移n位，在左移n位时，最左边的n位被丢弃，同时最右边补上n个0<br>右移<code>m&gt;&gt;n</code>表示把m右移n位，在右移n位时，最右边的n位被丢弃，在处理左边时比较复杂。如果数字是无符号数，最左边补上n个0。如果数字是一个有符号数，则用数字的符号填补左边的n位。也就是说，如果数字是整数，最左边用0填充，如果数字是负数，最左边用1填充。例如<br>00001010&gt;&gt;2=00000010<br>10001010&gt;&gt;3=11110001</p>
-<h1><span id="cd">cd</span></h1><p>请实现一个函数，输入一个整数，输出该数二进制表示中 1 的个数。例如，把 9 表示成二进制是 1001，有 2 位是 1。因此，如果输入 9，则该函数输出 2。</p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-位运算">1. 位运算</a></li>
+<li><a href="#2-总结">2. 总结</a></li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-位运算">1. 位运算</span></h1><p>位运算总共有5种运算：与，或，异或，左移，右移。<br>左移<code>m&lt;&lt;n</code>表示把m左移n位，在左移n位时，最左边的n位被丢弃，同时最右边补上n个0<br>右移<code>m&gt;&gt;n</code>表示把m右移n位，在右移n位时，最右边的n位被丢弃，在处理左边时比较复杂。如果数字是无符号数，最左边补上n个0。如果数字是一个有符号数，则用数字的符号填补左边的n位。也就是说，如果数字是整数，最左边用0填充，如果数字是负数，最左边用1填充。例如<br>00001010&gt;&gt;2=00000010<br>10001010&gt;&gt;3=11110001</p>
+<p>请实现一个函数，输入一个整数，输出该数二进制表示中 1 的个数。例如，把 9 表示成二进制是 1001，有 2 位是 1。因此，如果输入 9，则该函数输出 2。</p>
 <p>链接：<a href="https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof" target="_blank" rel="noopener">https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof</a></p>
 <p><strong>【分析】</strong><br>将一个整数n减去1之后，再和n做与运算，可以将n中最右边的1变成0<br>比如原先n=1100，n-1=1011，n&amp;(n-1)=1000,与运算的结果1000与原先的n=1100相比，就把最后边的1变成0。然后再对1000执行相同的操作，就会变成0000。这样执行2次，说明原始的n中一共有2个1.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hammingWeight</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="comment">#n=n&amp;(n-1)可以让原先的n中的1变成0</span></span><br><span class="line">        <span class="keyword">while</span> n:</span><br><span class="line">            res+=<span class="number">1</span></span><br><span class="line">            n=n&amp;(n<span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-<h1><span id="长度">长度</span></h1><p>整数<code>n&amp;1</code>值为0或1，判断n的二进制数的最后一位是0还是1.如果n=8，n&amp;1=0，表示8的二进制1000最后一位是0。如果n=9，n&amp;1=1，表示9的二进制1001最后一位是1.<br>$x^n$中的n变换成二进制为$b_mb_{m-1}…b_2b_1$，二进制和十进制n的关系为$n=2^0b_1+2^1b_2+…+2^{m-1}b_m$,这样就可以把$x^n=x^{2^0b_1+2^1b_2+…+2^{m-1}b_m}=x^{2^0b_1}x^{2^1b_2}…x^{2^{m-1}b_m}$。其中$b_1,b_2….b_m$的值只能为0或1.如果$b_m=0$，那$x^{2^{m-1}b_m}=1$，否则$x^{2^{m-1}b_m}=x^{2^{m-1}}$<br>所以问题的关键就是计算十进制数n，转换成二进制后每一个位数是0还是1.<br>如果第一位是1，就乘上$x^1$,然后把n除以2，就是n=n&gt;&gt;1,然后再判断原始n的第二位。<br>如果第二位是1，就乘上$x^2$<br>如果第三位是1，就乘上$x^4$<br>如果第四位是1，就乘上$x^8$</p>
+<p>整数<code>n&amp;1</code>值为0或1，判断n的二进制数的最后一位是0还是1.如果n=8，n&amp;1=0，表示8的二进制1000最后一位是0。如果n=9，n&amp;1=1，表示9的二进制1001最后一位是1.<br>$x^n$中的n变换成二进制为$b_mb_{m-1}…b_2b_1$，二进制和十进制n的关系为$n=2^0b_1+2^1b_2+…+2^{m-1}b_m$,这样就可以把$x^n=x^{2^0b_1+2^1b_2+…+2^{m-1}b_m}=x^{2^0b_1}x^{2^1b_2}…x^{2^{m-1}b_m}$。其中$b_1,b_2….b_m$的值只能为0或1.如果$b_m=0$，那$x^{2^{m-1}b_m}=1$，否则$x^{2^{m-1}b_m}=x^{2^{m-1}}$<br>所以问题的关键就是计算十进制数n，转换成二进制后每一个位数是0还是1.<br>如果第一位是1，就乘上$x^1$,然后把n除以2，就是n=n&gt;&gt;1,然后再判断原始n的第二位。<br>如果第二位是1，就乘上$x^2$<br>如果第三位是1，就乘上$x^4$<br>如果第四位是1，就乘上$x^8$</p>
 <p>n=11，变换成二进制是1011,分别是1,2,4,8，其中只有1,2,8的幂次有效。理论上应该是$x.x^2.x^8$</p>
 <ul>
 <li>进入while循环，n&amp;1=1，$res=x$，然后$x=x^2$，n右移一位成5</li>
@@ -440,7 +621,7 @@
 <li>时间复杂度：O(logn)</li>
 <li>空间复杂度：O(1)</li>
 </ul>
-<h1><span id="总结">总结</span></h1><ol>
+<h1><span id="2-总结">2. 总结</span></h1><ol>
 <li>将二进制数字n的最右边的1变成0，n=n&amp;(n-1)<br>2.</li>
 </ol>
 
@@ -574,7 +755,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.1k
+                  9.2k
                 </span>
               
 
@@ -590,7 +771,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  22
+                  39
                 </span>
               
             </div>
@@ -614,6 +795,32 @@
         
           
             <a id="more"></a>
+<!-- TOC -->
+<ul>
+<li><a href="#1-动态规划">1. 动态规划</a></li>
+<li><a href="#2-剪绳子">2. 剪绳子</a></li>
+<li><a href="#3-最大子序列和">3. 最大子序列和</a></li>
+<li><a href="#4-股票问题">4. 股票问题</a><ul>
+<li><a href="#41-买卖股票的最佳时机">4.1. 买卖股票的最佳时机</a></li>
+<li><a href="#42-买卖股票的最佳时机-ii">4.2. 买卖股票的最佳时机 II</a></li>
+<li><a href="#43-买卖股票的最佳时机-iii">4.3. 买卖股票的最佳时机 III</a></li>
+<li><a href="#44-买卖股票的最佳时机-iv">4.4. 买卖股票的最佳时机 IV</a></li>
+<li><a href="#45-最佳买卖股票时机含冷冻期">4.5. 最佳买卖股票时机含冷冻期</a></li>
+<li><a href="#46-买卖股票的最佳时机含手续费">4.6. 买卖股票的最佳时机含手续费</a></li>
+<li><a href="#47-总结">4.7. 总结</a></li>
+</ul>
+</li>
+<li><a href="#打家劫舍">打家劫舍</a><ul>
+<li><a href="#打家劫舍-i">打家劫舍 I</a></li>
+<li><a href="#打家劫舍-ii">打家劫舍 II</a></li>
+<li><a href="#打家劫舍iii">打家劫舍III</a></li>
+<li><a href="#总结">总结</a></li>
+</ul>
+</li>
+<li><a href="#最长回文子串">最长回文子串</a></li>
+<li><a href="#总结-1">总结</a></li>
+</ul>
+<!-- /TOC -->
 <h1><span id="1-动态规划">1. 动态规划</span></h1><p>如果是求一个问题的最优解（通常是最大值或最小值），而且该问题可以分解成若干个子问题，并且子问题之间还有重叠的更小的子问题，可以考虑使用动态规划。</p>
 <p>在解决动态规划问题时，需要分解成子问题，这里需要将子问题的最优解保存下来（一般是一维或二维数组），作为求取大问题最优解的基础。</p>
 <p>做动态规划的三个关键：</p>
@@ -818,6 +1025,109 @@
 </ul>
 </li>
 </ul>
+<h1><span id="打家劫舍">打家劫舍</span></h1><h2><span id="打家劫舍-i">打家劫舍 I</span></h2><p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。</p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/house-robber" target="_blank" rel="noopener">https://leetcode-cn.com/problems/house-robber</a></p>
+<p>输入：[1,2,3,1]<br>输出：4<br>解释：偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。<br>     偷窃到的最高金额 = 1 + 3 = 4 。</p>
+<p><strong>【分析一】</strong></p>
+<p><code>dp[i]</code>表示在第i家的最大金额。<br>动态转移方程：<br><code>dp[i] = max(dp[i-2]+nums[i],dp[i-1])</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rob</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> nums:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> len(nums)&lt;=<span class="number">2</span>:<span class="keyword">return</span> max(nums)</span><br><span class="line">        <span class="comment">#dp[i]表示偷到的i个房屋所获得的最大金额</span></span><br><span class="line">        dp = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums))]</span><br><span class="line">        <span class="comment">#dp[i] = max(dp[i-2]+nums[i],dp[i-1])</span></span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>]</span><br><span class="line">        dp[<span class="number">1</span>] = max(nums[<span class="number">0</span>],nums[<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,len(nums)):</span><br><span class="line">            dp[i] = max(dp[i<span class="number">-2</span>]+nums[i],dp[i<span class="number">-1</span>])</span><br><span class="line">        <span class="keyword">return</span> max(dp)</span><br></pre></td></tr></table></figure>
+<p><strong>【优化】</strong></p>
+<p>观察动态转移方程，dp[i]只和dp[i-2]和dp[i-1]有关，所以只用2个变量来保存这2个值就可以了，不用数组来保存。<br><code>dp[i] = max(dp[i-2]+nums[i],dp[i-1])</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> nums:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> len(nums)&lt;=<span class="number">2</span>:<span class="keyword">return</span> max(nums)</span><br><span class="line">        pre_pre = nums[<span class="number">0</span>]</span><br><span class="line">        pre = max(nums[<span class="number">0</span>],nums[<span class="number">1</span>])</span><br><span class="line">        max_res = <span class="number">0</span></span><br><span class="line">        cur = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,len(nums)):</span><br><span class="line">            cur = max(pre_pre+nums[i],pre)</span><br><span class="line">            <span class="keyword">if</span> cur&gt;max_res:</span><br><span class="line">                max_res = cur</span><br><span class="line">            pre_pre = pre</span><br><span class="line">            pre = cur</span><br><span class="line">        <span class="keyword">return</span> max_res</span><br></pre></td></tr></table></figure>
+<h2><span id="打家劫舍-ii">打家劫舍 II</span></h2><p>你是一个专业的小偷，计划偷窃沿街的房屋，每间房内都藏有一定的现金。这个地方所有的房屋都围成一圈，这意味着第一个房屋和最后一个房屋是紧挨着的。同时，相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。</p>
+<p>给定一个代表每个房屋存放金额的非负整数数组，计算你在不触动警报装置的情况下，能够偷窃到的最高金额。</p>
+<p>示例 1:</p>
+<p>输入: [2,3,2]<br>输出: 3<br>解释: 你不能先偷窃 1 号房屋（金额 = 2），然后偷窃 3 号房屋（金额 = 2）, 因为他们是相邻的。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/house-robber-ii" target="_blank" rel="noopener">https://leetcode-cn.com/problems/house-robber-ii</a></p>
+<p>【注】这道题和上一题的区别是：屋子围成环形，第一个房子和最后一个房子相邻</p>
+<p>将环形问题变成单排问题来解决.第一间房子和最后一间房子相邻，有以下3种偷窃情况:</p>
+<ol>
+<li>偷第一间房子，不偷最后一间房子</li>
+<li>不偷第一间房子，偷最后一间房子</li>
+<li>2间房子都不偷<br>综合以上3种情况，可以总结为情况1和情况2，因为房子金额为非负数，多偷一间房子的钱肯定&gt;=不偷</li>
+</ol>
+<p>则环形房子偷的最大金额是情况1和情况2的最大值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rob</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">sub_rob</span><span class="params">(nums)</span>:</span></span><br><span class="line">            pre_pre = nums[<span class="number">0</span>]</span><br><span class="line">            pre = max(nums[<span class="number">0</span>],nums[<span class="number">1</span>])</span><br><span class="line">            res_max = max(pre_pre,pre)</span><br><span class="line">            cur = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,len(nums)):</span><br><span class="line">                cur = max(pre_pre+nums[i],pre)</span><br><span class="line">                <span class="keyword">if</span> cur&gt;res_max:</span><br><span class="line">                    res_max = cur</span><br><span class="line">                pre_pre = pre</span><br><span class="line">                pre = cur</span><br><span class="line">            <span class="keyword">return</span> res_max</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> nums:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> len(nums)&lt;=<span class="number">2</span>:<span class="keyword">return</span> max(nums)</span><br><span class="line">        n = len(nums)</span><br><span class="line">        <span class="keyword">return</span> max(sub_rob(nums[<span class="number">0</span>:n<span class="number">-1</span>]),sub_rob(nums[<span class="number">1</span>:n]))</span><br></pre></td></tr></table></figure>
+<h2><span id="打家劫舍iii">打家劫舍III</span></h2><p>在上次打劫完一条街道之后和一圈房屋后，小偷又发现了一个新的可行窃的地区。这个地区只有一个入口，我们称之为“根”。 除了“根”之外，每栋房子有且只有一个“父“房子与之相连。一番侦察之后，聪明的小偷意识到“这个地方的所有房屋的排列类似于一棵二叉树”。 如果两个直接相连的房子在同一天晚上被打劫，房屋将自动报警。</p>
+<p>计算在不触动警报的情况下，小偷一晚能够盗取的最高金额。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/house-robber-iii" target="_blank" rel="noopener">https://leetcode-cn.com/problems/house-robber-iii</a></p>
+<p><img src="/2020/06/06/Leetcode之动态规划/1.png" alt=""></p>
+<p><strong>【分析一】</strong></p>
+<p>这道题考察的是怎么在二叉树上进行动态规划。<br>每个节点有2个孩子。根节点称为爷爷，有2个儿子，有4个孙子。相邻节点不能同时偷的意思是爷爷偷了，那儿子就不能偷，但是孙子可以偷。那最大金额=爷爷的钱+4个孙子的钱 VS 2个儿子的钱，看哪个组合多</p>
+<p>使用递归，但是这种方法超时。因为递归会重复计算。比如在计算2个儿子的最大金额时，当这2个儿子称为爷爷时又会重新计算一遍孙子的金额。</p>
+<p>注意：递归需要从树的下面往上看，在叶子节点的金额是最少的，儿子的金额比孙子多，爷爷的金额比儿子多。可能会有这样的疑问：既然不能相邻的节点连续偷，那可以左孩子偷的钱+右孩子的2个孩子偷的钱。其实这种情况已经被2个儿子偷考虑进去了，因为左孩子+2个孙子 《 2个儿子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rob</span><span class="params">(self, root)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        root_money = root.val</span><br><span class="line">        method1 = root_money<span class="comment">#爷爷加上4个孙子的钱</span></span><br><span class="line">        method2 = <span class="number">0</span><span class="comment">#2个孩子的钱</span></span><br><span class="line">        <span class="keyword">if</span> root.left:</span><br><span class="line">            method1+=(self.rob(root.left.left)+self.rob(root.left.right))</span><br><span class="line">        <span class="keyword">if</span> root.right:</span><br><span class="line">            method1+=(self.rob(root.right.left)+self.rob(root.right.right))</span><br><span class="line">        method2 = self.rob(root.left)+self.rob(root.right)</span><br><span class="line">        <span class="keyword">return</span> max(method1,method2)</span><br></pre></td></tr></table></figure>
+<p><strong>【分析二】</strong></p>
+<p>为了解决上述重复计算的问题，使用空间换时间的方法，将已经计算的金额保存起来。二叉树不适合使用数组来当缓存，使用哈希表存储，节点作为key，当前节点的最大金额为value</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.left = None</span></span><br><span class="line"><span class="comment">#         self.right = None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rob</span><span class="params">(self, root)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">sub_rob</span><span class="params">(root,max_val)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> root <span class="keyword">in</span> max_val:<span class="keyword">return</span> max_val[root]</span><br><span class="line">            </span><br><span class="line">            method1 = root.val<span class="comment">#爷爷加上4个孙子的钱</span></span><br><span class="line">            <span class="keyword">if</span> root.left:</span><br><span class="line">                method1+=(sub_rob(root.left.left,max_val)+sub_rob(root.left.right,max_val))</span><br><span class="line">            <span class="keyword">if</span> root.right:</span><br><span class="line">                method1+=(sub_rob(root.right.left,max_val)+sub_rob(root.right.right,max_val))</span><br><span class="line">            method2 = sub_rob(root.left,max_val)+sub_rob(root.right,max_val)</span><br><span class="line">            max_val[root] = max(method1,method2)</span><br><span class="line">            <span class="keyword">return</span> max_val[root]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        max_val = dict()</span><br><span class="line">        <span class="keyword">return</span> sub_rob(root,max_val)</span><br></pre></td></tr></table></figure>
+<p>【分析三】</p>
+<p>参照买股票问题，每个节点都有2种状态：偷和不偷。dp使用二维数据组，</p>
+<ul>
+<li>dp[i][0]：节点i不偷时的最大金额。节点i不偷，那i.left和i.right可以偷也可以不偷。则<code>dp[i][0] = max(dp[i.left][1],dp[i.left][0]) + max(dp[i.right][1],dp[i.right][0])</code></li>
+<li>dp[i][1]：节点i偷时的最大金额。节点i偷，那i.left和i.right只能选择不偷，则<code>dp[i][1] = dp[i.left][0]+dp[i.right][0]+i.val</code></li>
+<li>空间优化：由于在计算dp[i]时，只需要dp[i.left]和dp[i.right]的信息，所以不需要使用dp[][]二维数组。只需要3个一维数组，left[0]和left[1]表示左节点偷和不偷的最大金额，right[0]和right[1]表示右节点偷和不偷的最大金额。root[0]和root[1]表示根节点</li>
+<li>初始化</li>
+<li>返回结果：输出根节点中2个状态的最大值</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rob</span><span class="params">(self, root)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">sub_rob</span><span class="params">(root)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> [<span class="number">0</span>,<span class="number">0</span>]</span><br><span class="line">            left = sub_rob(root.left)</span><br><span class="line">            right = sub_rob(root.right)</span><br><span class="line"></span><br><span class="line">            root_val = [<span class="number">0</span>,<span class="number">0</span>]<span class="comment">#根节点2种状态的最大金额</span></span><br><span class="line">            root_val[<span class="number">0</span>] = max(left[<span class="number">0</span>],left[<span class="number">1</span>])+max(right[<span class="number">0</span>],right[<span class="number">1</span>])</span><br><span class="line">            root_val[<span class="number">1</span>] = left[<span class="number">0</span>]+right[<span class="number">0</span>]+root.val</span><br><span class="line">            <span class="keyword">return</span> root_val</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        root_val = sub_rob(root)</span><br><span class="line">        <span class="keyword">return</span> max(root_val)</span><br></pre></td></tr></table></figure>
+<h2><span id="总结">总结</span></h2><p>第一题是单排动态规划问题<br>第二题是环形动态规划问题，可以转换为多个单排问题解决，然后求多个单排问题的最大值<br>第三题是树形动态规划问题，使用递归解决</p>
+<h1><span id="最长回文子串">最长回文子串</span></h1><p>给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。</p>
+<p>示例 1：</p>
+<p>输入: “babad”<br>输出: “bab”<br>注意: “aba” 也是一个有效答案。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/longest-palindromic-substring" target="_blank" rel="noopener">https://leetcode-cn.com/problems/longest-palindromic-substring</a></p>
+<p><strong>【分析一】</strong></p>
+<p>暴力求解</p>
+<p>先以第一个字符为头，找长度为2,3，。。。的字符串中是否是回文字符串，使用res_str记录下来。然后以第二个字符为头，找长度为2,3，。。。的字符串中是否是回文字符串。。。</p>
+<p>但是这种方法超时</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestPalindrome</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment">#暴力求解</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> s:<span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">        <span class="keyword">if</span> len(s)==<span class="number">1</span>:<span class="keyword">return</span> s</span><br><span class="line">        n = len(s)</span><br><span class="line">        res_len = <span class="number">0</span><span class="comment">#当前回文子串的最长长度</span></span><br><span class="line">        res_str = <span class="string">''</span><span class="comment">#当前最长的回文串</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#以第一个字符为头，长度为2,3，。。。的字符串中是否是回文字符串，使用res_str记录下来</span></span><br><span class="line">        <span class="comment">#然后以第二个字符为头，找长度为2,3，。。。的字符串中是否是回文字符串。。。</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,n<span class="number">-1</span>):<span class="comment">#当前开始遍历的字符下标</span></span><br><span class="line">            <span class="keyword">for</span> cur_len <span class="keyword">in</span> range(<span class="number">2</span>,n-i+<span class="number">1</span>):<span class="comment">#字符串的长度</span></span><br><span class="line">                cur_str = s[i:i+cur_len]</span><br><span class="line">                <span class="keyword">if</span> cur_str == cur_str[::<span class="number">-1</span>]:</span><br><span class="line">                    <span class="keyword">if</span> cur_len&gt;res_len:</span><br><span class="line">                        res_len = cur_len</span><br><span class="line">                        res_str = cur_str</span><br><span class="line">        <span class="keyword">return</span> s[<span class="number">0</span>] <span class="keyword">if</span> res_str==<span class="string">''</span> <span class="keyword">else</span> res_str</span><br></pre></td></tr></table></figure>
+<p><strong>【分析二】</strong></p>
+<p>动态规划的关键就是找出什么是状态和状态转移方程，<br>我们先看问题：找出最长的回文子串</p>
+<ul>
+<li>一个回文串去掉2个头后，剩下的依然是回文串</li>
+<li>如果一个字符串的头尾2个字符不相等，一定不是回文串</li>
+<li>如果一个字符串的头尾2个字符相等，才有必要继续判断下去：<ul>
+<li>如果里面的子串是回文，则整个字符串就是回文</li>
+<li>如果里面的子串不是回文，则整个字符串不是回文</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>定义状态<br><code>dp[i][j]</code>表示子串s[i..j]是否是回文串。因此dp[][]是bool类型的值。这里的s[i…j]是左闭右闭区间，包括s[i]和s[j]</li>
+<li><p>状态转移方程<br><code>dp[i][j] = (s[i]==s[j]) and dp[i+1][j-1]</code></p>
+<ul>
+<li>这里的<code>i&lt;=j</code>，因此只用填二维表的对角线和对角线以上的部分就可以了。</li>
+<li><code>dp[i+1][j-1]</code>，s[i+1..j-1]中至少有1个元素，即<code>j-1-(i+1)&gt;=1</code>,可得出<code>j-i&gt;=3</code></li>
+<li>因此当<code>j-i&gt;=3</code>时才可以使用动态转移方程。当<code>j-i&lt;3</code>时，就可以当做特殊情况单独处理。<code>j-i可以是0,1,2</code>，即子串长度分为<code>1,2,3</code>，当子串长度为1时肯定是回文，当子串长度为2和3时，如果<code>s[i]==s[j]</code>，那肯定也是回文。因此在<code>s[i]==s[j] and j-i&lt;3</code>时，可以直接下结论<code>dp[i][j]=True</code>,否则才进行状态转移。</li>
+</ul>
+</li>
+<li>初始化<br>初始化时，单个字符串一定是回文，因此对角线先初始化为True，即<code>dp[i][i]=True</code></li>
+<li>返回值<br>只要一得到<code>dp[i][j]=True</code>，即记录子串的长度和起始位置。</li>
+<li>考虑优化空间<br>在填表的过程中，dp[i][j]只和dp[i+1][j-1]有关，即和左下放的表格有关，因此是可以优化的，但是优化后可读性就会变差，这里就不优化了。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestPalindrome</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment">#暴力求解</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> s:<span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">        <span class="keyword">if</span> len(s)==<span class="number">1</span>:<span class="keyword">return</span> s</span><br><span class="line">        n = len(s)</span><br><span class="line">        dp = [[<span class="keyword">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#回文串的长度，不能为0，比如"ac"不是回文字</span></span><br><span class="line">        <span class="comment">#符串，但是只有1个字符'a'或'c'是回文字符串，</span></span><br><span class="line">        <span class="comment">#因此回文字符串的长度最小也是1</span></span><br><span class="line">        res_len = <span class="number">1</span></span><br><span class="line">        start = <span class="number">0</span><span class="comment">#回文串开始的下标</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#初始化对角线为True</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            dp[i][i] = <span class="keyword">True</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,n):</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,j):</span><br><span class="line">                <span class="keyword">if</span> s[i] == s[j]:</span><br><span class="line">                    <span class="keyword">if</span> j - i &lt;<span class="number">3</span>:</span><br><span class="line">                        dp[i][j] = <span class="keyword">True</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        <span class="comment">#2层for循环，必须是j在外循环，i在内循环</span></span><br><span class="line">                        <span class="comment">#因此dp[i][j]和dp[i+1][j-1]有关，如果i在外循环</span></span><br><span class="line">                        <span class="comment">#在遍历dp[i][:]的时候，并不知道dp[i+1][:]的值</span></span><br><span class="line">                        <span class="comment">#而如果j在外循环时，dp[:][j]可以知道dp[:][j-1]的值</span></span><br><span class="line">                        dp[i][j] = dp[i+<span class="number">1</span>][j<span class="number">-1</span>]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    dp[i][j] = <span class="keyword">False</span></span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span> dp[i][j]:</span><br><span class="line">                    <span class="keyword">if</span> j-i+<span class="number">1</span>&gt;res_len:</span><br><span class="line">                        res_len = j-i+<span class="number">1</span></span><br><span class="line">                        start = i</span><br><span class="line">        <span class="keyword">return</span> s[start:start+res_len]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>时间复杂度：O(n^2)</li>
+<li>空间复杂度：O(n^2)</li>
+</ul>
+<p><strong>【分析三】</strong></p>
+<p>中心扩散法：枚举可能出现的回文子串的中心位置，从中心位置尝试尽可能扩散出去，得到一个回文串。</p>
+<p>中心扩散法的思路是：遍历每个字符，以这个字符为中心，利用回文串左右对称的特征，向两边扩散，看最多能扩散多远。<br>枚举中心位置的时间复杂度是O(N)，从中心扩散得到回文子串的时间复杂度为O(N)，因此时间复杂度为O(N^2)</p>
+<p>注意：回文串的长度为奇数和偶数时，中心不一样</p>
+<ul>
+<li>当回文串长度为奇数时，中心是中间的具体字符，例如<code>bab</code>,中心为<code>a</code></li>
+<li>当回文串长度为偶数时，中心是中间2个字符的空隙，例如<code>baab</code>的中心是2个<code>a</code>中间的空隙</li>
+</ul>
+<p><img src="/2020/06/06/Leetcode之动态规划/2.png" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestPalindrome</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment">#暴力求解</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> s:<span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">        <span class="keyword">if</span> len(s)==<span class="number">1</span>:<span class="keyword">return</span> s</span><br><span class="line">        n = len(s)</span><br><span class="line"></span><br><span class="line">        res_len = <span class="number">1</span><span class="comment">#回文串的长度，不能为0，比如"ac"不是回文字符串，但是只有1个字符'a'或'c'是回文字符串，因此回文字符串的长度最小也是1</span></span><br><span class="line">        res_max = s[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):<span class="comment">#遍历中心节点</span></span><br><span class="line">            str_odd,len_odd = self.center_spread(s,i,i)</span><br><span class="line">            str_even,len_even = self.center_spread(s,i,i+<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment">#找到当前的最长回文子串,首先求出奇偶长度的最大值</span></span><br><span class="line">            <span class="comment">#然后看这个最大值和当前的res_len比较</span></span><br><span class="line">            tmp_len = len_odd <span class="keyword">if</span> len_odd&gt;len_even <span class="keyword">else</span> len_even</span><br><span class="line">            tmp_res = str_odd <span class="keyword">if</span> tmp_len%<span class="number">2</span>==<span class="number">1</span> <span class="keyword">else</span> str_even</span><br><span class="line">            <span class="keyword">if</span> tmp_len&gt;res_len:</span><br><span class="line">                res_len = tmp_len</span><br><span class="line">                res_max = tmp_res</span><br><span class="line">        <span class="keyword">return</span> res_max</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">center_spread</span><span class="params">(self,s,left,right)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        left,right为中心位置</span></span><br><span class="line"><span class="string">        如果left==right，说明之后找到的回文串长度为奇数</span></span><br><span class="line"><span class="string">        如果left+1=right，说明之后找到的回文串长度为偶数</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        i,j = left,right</span><br><span class="line">        n = len(s)</span><br><span class="line">        <span class="comment">#babad举例，第2个b为中心位</span></span><br><span class="line">        <span class="keyword">while</span> i&gt;=<span class="number">0</span> <span class="keyword">and</span> j&lt;n <span class="keyword">and</span> s[i] == s[j]:</span><br><span class="line">            i-=<span class="number">1</span></span><br><span class="line">            j+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> s[i+<span class="number">1</span>:j],j-i+<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h1><span id="总结">总结</span></h1><p>动态规划的思路是自底向上，先从最基本最简单的问题出发，逐步计算中间过程，最后得到需要求的解。<br>动态规划要求“后无效性”，即dp[i]依赖dp的某个值，这个值必须在dp[i]之前已经被正确求出来。<br>在做动态规划问题时，需要考虑以下问题</p>
+<ul>
+<li>状态<br>首先定义状态，看看题目问的问题可不可以作为状态。哪个状态方便转移就定义哪个状态</li>
+<li>状态转移方程<br>其实就是多个问题找最优解。将当前问题分解成多个子问题，找出子问题的解，然后再从子问题中找出最优解</li>
+<li>初始化<br>对dp进行初始化</li>
+<li>返回结果<br>通过求解dp，思考怎么返回最终的结果，有些问题并不是返回dp[-1]</li>
+<li>优化空间<br>写完代码之后，看一下是否可以优化空间，即表格，数组复用。观察状态转移矩阵，看看是否有些dp在用了之后就不再用到，可以使用变量来代替数据<br>多练习0-1背包问题</li>
+</ul>
 
           
         
@@ -949,7 +1259,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3.2k
+                  6.5k
                 </span>
               
 
@@ -965,7 +1275,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  13
+                  28
                 </span>
               
             </div>
@@ -989,11 +1299,39 @@
         
           
             <a id="more"></a>
-<h1><span id="回溯">回溯</span></h1><p>回溯可以看做是暴力法的升级。回溯法非常适合由多个步骤组成的问题，每个步骤都有多个选项。当我们在某一步选择了其中一个选项时，就进入到下一步，然后又面临新的选项，就这样重读选择，直至达到最终的状态。</p>
-<p>回溯问题可以理解成在一个树上进行深度优先遍历。例如给定[1,2,3]，求一共有多少种组合。第一个数字可以是1,2,3，有3种选择。然后第二个数字有2种选择，第三个数字有1个选择。<br>回溯就是在这个树上进行深度遍历时，从较深的节点层返回较浅的节点层，需要将状态回复到过去，这个恢复的过程就是“回溯”<br>回溯算法一般用递归实现。</p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-回溯">1. 回溯</a></li>
+<li><a href="#2-矩阵中单词路径搜索">2. 矩阵中单词路径搜索</a></li>
+<li><a href="#3-机器人的运动范围">3. 机器人的运动范围</a></li>
+<li><a href="#4-全排列">4. 全排列</a></li>
+<li><a href="#5-全排列-ii">5. 全排列 II</a></li>
+<li><a href="#6-组合">6. 组合</a></li>
+<li><a href="#7-组合总和">7. 组合总和</a></li>
+<li><a href="#8-组合总和-ii">8. 组合总和 II</a></li>
+<li><a href="#9-组合总和-iii">9. 组合总和 III</a></li>
+<li><a href="#10-括号生成">10. 括号生成</a></li>
+<li><a href="#11-n皇后">11. N皇后</a></li>
+<li><a href="#12-总结">12. 总结</a></li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-回溯">1. 回溯</span></h1><p>回溯可以看做是暴力法的升级。回溯法非常适合由多个步骤组成的问题，每个步骤都有多个选项。当我们在某一步选择了其中一个选项时，就进入到下一步，然后又面临新的选项，就这样重读选择，直至达到最终的状态。</p>
+<p>回溯问题可以理解成在一个树上进行深度优先遍历。例如给定[1,2,3]，求一共有多少种组合。第一个数字可以是1,2,3，有3种选择。然后第二个数字有2种选择，第三个数字有1个选择。<br>回溯就是在这个树上进行深度遍历时，从较深的节点层返回较浅的节点层，需要将状态回复到过去，这个恢复的过程就是“回溯”<br>回溯算法一般用递归实现。回溯算法的时间复杂度很高，因此在遍历时，如果能提前直到这一分支不可能达到满意的结果，就可以提前结束，这一操作称为“剪枝”<br>回溯+剪枝可以加快搜索速度，在这之前，一般需要做一些预处理工作来达到剪枝的目的，例如排序。但这会节省很多剪枝的时间。在回溯+剪枝时，因为时间复杂度很高，所以能用空间换时间就尽量用空间，来减少时间的消耗。</p>
 <p><img src="/2020/06/06/Leetcode之回溯/1.png" alt=""></p>
+<p>做回溯问题时，最好先画图，考虑以下问题</p>
+<ul>
+<li>分支如何产生</li>
+<li>题目需要的解在哪里，是在叶子节点，还是非叶子节点，还是在从根节点到叶子节点的路径上</li>
+<li>哪些搜索会产生不必要的解，如果知道这个分支会产生不必要的解，应该做剪枝，剪枝的条件是什么，代码怎么写。</li>
+</ul>
+<p><img src="/2020/06/06/Leetcode之回溯/3.png" alt=""></p>
 <p>在二维矩阵寻找路径的问题，基本都可以用回溯解决</p>
-<h1><span id="矩阵中单词路径搜索">矩阵中单词路径搜索</span></h1><p>请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一格开始，每一步可以在矩阵中向左、右、上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。例如，在下面的3×4的矩阵中包含一条字符串“bfce”的路径（路径中的字母用加粗标出）。</p>
+<p>【参考资料】</p>
+<p><a href="https://leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liweiw/" target="_blank" rel="noopener">从全排列问题开始理解「回溯」算法</a></p>
+<p><a href="https://leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-xiang-jie-by-labuladong-2/" target="_blank" rel="noopener">扒一扒回溯算法的裤子</a></p>
+<p><strong>【回溯算法模板】</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">result = []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backtrack</span><span class="params">(路径, 选择列表)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> 满足结束条件:</span><br><span class="line">        result.add(路径)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> 选择 <span class="keyword">in</span> 选择列表:</span><br><span class="line">        做选择</span><br><span class="line">        backtrack(路径, 选择列表)</span><br><span class="line">        撤销选择  <span class="comment">#在递归后撤销选择</span></span><br></pre></td></tr></table></figure>
+<h1><span id="2-矩阵中单词路径搜索">2. 矩阵中单词路径搜索</span></h1><p>请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一格开始，每一步可以在矩阵中向左、右、上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。例如，在下面的3×4的矩阵中包含一条字符串“bfce”的路径（路径中的字母用加粗标出）。</p>
 <p>[[“a”,”<strong>b</strong>“,”c”,”e”],</p>
 <p>[“s”,”<strong>f</strong>“,”<strong>c</strong>“,”s”],</p>
 <p>[“a”,”d”,”<strong>e</strong>“,”e”]]</p>
@@ -1017,7 +1355,7 @@
 <li>如果匹配，返回True，如果都不匹配，回溯，说明当前元素board[i][j]行不通，将其标记为未采纳该节点</li>
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">exist</span><span class="params">(self, board, word)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type board: List[List[str]]</span></span><br><span class="line"><span class="string">        :type word: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        rows,cols = len(board),len(board[<span class="number">0</span>])</span><br><span class="line">        <span class="comment">#标记当前是否被访问</span></span><br><span class="line">        visit = [[<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(cols)] <span class="keyword">for</span> i <span class="keyword">in</span> range(rows)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(rows):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(cols):</span><br><span class="line">                <span class="keyword">if</span> board[i][j] == word[<span class="number">0</span>]:</span><br><span class="line">                    <span class="keyword">if</span> self.dfs(i,j,<span class="number">0</span>,board,word,visit):<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(self,i,j,k,board,word,visit)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        board[i][j]</span></span><br><span class="line"><span class="string">        word[k]</span></span><br><span class="line"><span class="string">        判断board[i][j]和word[k]是否匹配，如果匹配，则判断board[i][j]的下一个元素和word[k+1]是否匹配</span></span><br><span class="line"><span class="string">        如果不匹配，直接返回false</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment">#递归结束的条件</span></span><br><span class="line">        <span class="comment">#1.board[i][j]已经访问过，返回false</span></span><br><span class="line">        <span class="comment">#2.board[i][j]与word[k]不相等，返回false</span></span><br><span class="line">        <span class="comment">#3.board[i][j]超出索引，返回false</span></span><br><span class="line">        <span class="comment">#4.word已全部匹配，即k=len(word)-1</span></span><br><span class="line">        deltas = [[<span class="number">0</span>,<span class="number">1</span>],[<span class="number">0</span>,<span class="number">-1</span>],[<span class="number">1</span>,<span class="number">0</span>],[<span class="number">-1</span>,<span class="number">0</span>]]</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="number">0</span> &lt;= i &lt; len(board) <span class="keyword">or</span> <span class="keyword">not</span> <span class="number">0</span> &lt;= j &lt; len(board[<span class="number">0</span>]) <span class="keyword">or</span> board[i][j]!= word[k] <span class="keyword">or</span> visit[i][j] == <span class="number">1</span>:<span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">if</span> k == len(word)<span class="number">-1</span>:<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        visit[i][j] = <span class="number">1</span><span class="comment">#board[i][j]和word[k]匹配</span></span><br><span class="line">        <span class="keyword">for</span> delta <span class="keyword">in</span> deltas:<span class="comment">#搜索board的上下左右是否和word[k+1]匹配</span></span><br><span class="line">            next_i = i+delta[<span class="number">0</span>]</span><br><span class="line">            next_j = j+delta[<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">if</span> self.dfs(next_i,next_j,k+<span class="number">1</span>,board,word,visit):<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        visit[i][j] = <span class="number">0</span><span class="comment">#上下左右都不匹配，回溯        </span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">False</span></span><br></pre></td></tr></table></figure>
-<h1><span id="机器人的运动范围">机器人的运动范围</span></h1><p>地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。一个机器人从坐标 [0, 0] 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子？</p>
+<h1><span id="3-机器人的运动范围">3. 机器人的运动范围</span></h1><p>地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。一个机器人从坐标 [0, 0] 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子？</p>
 <p>链接：<a href="https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof" target="_blank" rel="noopener">https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof</a></p>
 <ul>
 <li>深度优先搜索+回溯</li>
@@ -1047,7 +1385,7 @@
 <p>queue中保存当前待检测的格子，里面保存的值有4个元素(i,j,sum_i,sum_j)，分别表示：当前格子的下标i和j，下标的位数</p>
 <p>因为机器人要求从(0,0)出发，所以首先将(0,0,0,0)加入到queue中，遍历第一个格子，判断当前格式是否符合要求，如果不符合要求，则遍历下一个格子。如果符合要求，将当前格子(i,j)加入到visit中，然后将该格子的下和右格子加入队列中，等待遍历。最终返回visit的长度即为访问的格子数量</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">movingCount</span><span class="params">(self, m, n, k)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type m: int</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        queue = [(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)]<span class="comment">#当前元素的位置i,j和位数和</span></span><br><span class="line">        visit = set()</span><br><span class="line">        <span class="keyword">while</span> queue:</span><br><span class="line">            i,j,sum_i,sum_j = queue.pop(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> <span class="number">0</span>&lt;=i&lt;m <span class="keyword">or</span> <span class="keyword">not</span> <span class="number">0</span>&lt;=j&lt;n <span class="keyword">or</span> sum_i+sum_j&gt;k <span class="keyword">or</span> (i,j) <span class="keyword">in</span> visit:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            visit.add((i,j))</span><br><span class="line">            queue.append((i+<span class="number">1</span>,j,self.digit_sum(i+<span class="number">1</span>),sum_j))</span><br><span class="line">            queue.append((i,j+<span class="number">1</span>,sum_i,self.digit_sum(j+<span class="number">1</span>)))</span><br><span class="line">        <span class="keyword">return</span> len(visit)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">digit_sum</span><span class="params">(self,i)</span>:</span></span><br><span class="line">        all_sum = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &gt; <span class="number">0</span>:</span><br><span class="line">            all_sum += i%<span class="number">10</span></span><br><span class="line">            i /= <span class="number">10</span></span><br><span class="line">        <span class="keyword">return</span> all_sum</span><br></pre></td></tr></table></figure>
-<h1><span id="全排列">全排列</span></h1><p>给定一个 没有重复 数字的序列，返回其所有可能的全排列。</p>
+<h1><span id="4-全排列">4. 全排列</span></h1><p>给定一个 <strong>没有重复 数字</strong>的序列，返回其所有可能的全排列。</p>
 <blockquote>
 <p>输入: [1,2,3]<br>输出:<br>[<br>  [1,2,3],<br>  [1,3,2],<br>  [2,1,3],<br>  [2,3,1],<br>  [3,1,2],<br>  [3,2,1]<br>]</p>
 </blockquote>
@@ -1057,7 +1395,6 @@
 <ol>
 <li>这棵树中，除了根节点和叶子节点，其余节点做的事情都一样，都是在还未选择的数字中选一个数，可以用递归实现</li>
 <li>递归结束条件：当递归到树的最后一层时，需要一个变量<code>depth</code>来记录当前遍历到树的第几层</li>
-<li></li>
 </ol>
 <p>本题要点</p>
 <ul>
@@ -1066,12 +1403,12 @@
 <li><code>visit=[]</code>：记录<code>path</code>中哪些数据没有被遍历过。path=[1,2]，则visit[1]=ture,visit[2]=true，剩余没被遍历的节点为false，这样在path考虑下一个数字时，可以直接从visit为false的数字中选择。</li>
 <li>在path选择下一个节点时，visit中有多个未被访问的节点，使用循环遍历visit中所有未被访问的节点。</li>
 <li><code>res</code>：记录所有的组合结果，例如[[1,2,3],[1,3,2],…]</li>
-<li>``</li>
 </ul>
-<h1><span id="字符串的排列">字符串的排列</span></h1><p>输入一个字符串，打印出该字符串中字符的所有排列。</p>
-<p>你可以以任意顺序返回这个字符串数组，但里面不能有重复元素。</p>
-<p>输入：s = “abc”<br>输出：[“abc”,”acb”,”bac”,”bca”,”cab”,”cba”]</p>
-<p>链接：<a href="https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof" target="_blank" rel="noopener">https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">permutation</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: List[str]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(depth)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> depth == len(s):</span><br><span class="line">                res.append(<span class="string">''</span>.join(path[:]))</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> visit[i]:</span><br><span class="line">                    visit[i]=<span class="keyword">True</span></span><br><span class="line">                    path.append(s[i])</span><br><span class="line">                    dfs(depth+<span class="number">1</span>)</span><br><span class="line">                    visit[i]=<span class="keyword">False</span></span><br><span class="line">                    path.pop()</span><br><span class="line">        res,path = [],[]</span><br><span class="line">        visit = [<span class="keyword">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(s))]</span><br><span class="line">        dfs(depth=<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h1><span id="5-全排列-ii">5. 全排列 II</span></h1><p>给定一个可包含<strong>重复数字</strong>的序列，返回所有不重复的全排列。</p>
+<p>示例:</p>
+<p>输入: [1,1,2]<br>输出:<br>[<br>  [1,1,2],<br>  [1,2,1],<br>  [2,1,1]<br>]</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/permutations-ii" target="_blank" rel="noopener">https://leetcode-cn.com/problems/permutations-ii</a></p>
 <p><strong>【分析一】</strong></p>
 <ul>
 <li><code>depth</code>：记录当前递归遍历到树的层数</li>
@@ -1090,10 +1427,100 @@
 <p><img src="/2020/06/06/Leetcode之回溯/2.png" alt=""></p>
 <p>要点</p>
 <ul>
-<li><strong>先对s进行排序，<code>s=sorted(s)</code></strong></li>
+<li><strong>先对nums进行排序，<code>nums=sorted(nums)</code></strong></li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">permutation</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: List[str]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(depth)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> depth == len(s):</span><br><span class="line">                res.append(<span class="string">''</span>.join(path[:]))</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> visit[i]:<span class="comment">#当前字符为访问，理论上来说可以把该字符加入到path中</span></span><br><span class="line">                    <span class="comment">#但是如果当前字符和前一个字符一样，说明当前字符是重复字符</span></span><br><span class="line">                    <span class="comment">#并且visit[i-1]为false表示前面那个相同的字符之前被访问到根节点，然后被撤销</span></span><br><span class="line">                    <span class="keyword">if</span> i&gt;<span class="number">0</span> <span class="keyword">and</span> s[i] == s[i<span class="number">-1</span>] <span class="keyword">and</span> <span class="keyword">not</span> visit[i<span class="number">-1</span>]:</span><br><span class="line">                        <span class="keyword">continue</span></span><br><span class="line">                    visit[i]=<span class="keyword">True</span></span><br><span class="line">                    path.append(s[i])</span><br><span class="line">                    dfs(depth+<span class="number">1</span>)</span><br><span class="line">                    visit[i]=<span class="keyword">False</span></span><br><span class="line">                    path.pop()</span><br><span class="line">        res,path = [],[]</span><br><span class="line">        s = sorted(s)</span><br><span class="line">        visit = [<span class="keyword">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(s))]</span><br><span class="line">        dfs(depth=<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">        <span class="comment"># return list(set(res))</span></span><br></pre></td></tr></table></figure>
-<p><strong>【分析三】</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">permuteUnique</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(depth)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> depth == len(nums):</span><br><span class="line">                res.append(path[:])</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> visit[i]:<span class="comment">#当前字符为访问，理论上来说可以把该字符加入到path中</span></span><br><span class="line">                    <span class="comment">#但是如果当前字符和前一个字符一样，说明当前字符是重复字符</span></span><br><span class="line">                    <span class="comment">#并且visit[i-1]为false表示前面那个相同的字符之前被访问到根节点，然后被撤销</span></span><br><span class="line">                    <span class="keyword">if</span> i&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i]==nums[i<span class="number">-1</span>] <span class="keyword">and</span> <span class="keyword">not</span> visit[i<span class="number">-1</span>]:</span><br><span class="line">                        <span class="keyword">continue</span></span><br><span class="line">                    visit[i]=<span class="keyword">True</span></span><br><span class="line">                    path.append(nums[i])</span><br><span class="line">                    dfs(depth+<span class="number">1</span>)</span><br><span class="line">                    visit[i] = <span class="keyword">False</span></span><br><span class="line">                    path.pop()</span><br><span class="line">        res,path = [],[]</span><br><span class="line">        visit = [<span class="keyword">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(len(nums))]</span><br><span class="line">        nums = sorted(nums)</span><br><span class="line">        dfs(depth=<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h1><span id="6-组合">6. 组合</span></h1><p>给定两个整数 n 和 k，返回 1 … n 中所有可能的 k 个数的组合。</p>
+<p>示例:</p>
+<p>输入: n = 4, k = 2<br>输出:<br>[<br>  [2,4],<br>  [3,4],<br>  [2,3],<br>  [1,2],<br>  [1,3],<br>  [1,4],<br>]</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/combinations" target="_blank" rel="noopener">https://leetcode-cn.com/problems/combinations</a></p>
+<p><strong>【分析一】</strong></p>
+<p>分析可以发现，第一个选择的数假设为1，第二个选择数要严格大于第一个数，当path的长度为k时，结束递归。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">                    []</span><br><span class="line">    <span class="number">1</span>                 <span class="number">2</span>              <span class="number">3</span>              <span class="number">4</span>    </span><br><span class="line"><span class="number">12</span>   <span class="number">13</span>  <span class="number">14</span>        <span class="number">23</span>    <span class="number">24</span>          <span class="number">34</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">combine</span><span class="params">(self, n, k)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(res,path)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> len(path) == k:</span><br><span class="line">                res.append(path[:])</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,n+<span class="number">1</span>):<span class="comment">#依次选择</span></span><br><span class="line">                <span class="keyword">if</span> len(path)&gt;<span class="number">0</span> <span class="keyword">and</span> i &lt;= path[<span class="number">-1</span>]:<span class="comment">#只选择比path中大的数,如果&lt;=path[-1]，则继续遍历下一个数</span></span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                path.append(i)</span><br><span class="line">                dfs(res,path)</span><br><span class="line">                path.pop()</span><br><span class="line">        </span><br><span class="line">        res,path = [],[]</span><br><span class="line">        dfs(res,path)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p><strong>【优化一】</strong><br>对上一种方法进行优化，上一种方法中for循环遍历时，从1开始遍历，然后再使用if语句判断是否比path中的数大。这里改为在for循环中，只遍历比path大的数，即使用start来标识for从哪里开始，这样for出来的数肯定比path中大，不用再使用if语句判断。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">combine</span><span class="params">(self, n, k)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(start,res,path)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> len(path) == k:</span><br><span class="line">                res.append(path[:])</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(start,n+<span class="number">1</span>):</span><br><span class="line">                path.append(i)</span><br><span class="line">                dfs(i+<span class="number">1</span>,res,path)</span><br><span class="line">                path.pop()</span><br><span class="line">        </span><br><span class="line">        res,path = [],[]</span><br><span class="line">        dfs(<span class="number">1</span>,res,path)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p><strong>【优化二】</strong></p>
+<p>在for循环中，不但可以对开始位置进行剪枝，还可以对结束位置进行剪枝。原先i的取值为[start,n]，但其实在递归中，并不是每次递归i都会取到n，i有一个上限。<br>下面来找规律，如果n=15，k=4<br>当选定了一个元素，即len(path)=1，接下来还可以再选3个元素，i最大为13，选[13,14,15]<br>当选定了两个元素，即len(path)=2，接下来还可以选2个元素，i最大为14，选[14,15]<br>当选定了三个元素，即len(path)=3，接下来还可以选1个元素，i最大为15，选[15]<br>在每个循环中可以选择的元素个数为<code>k-len(path)</code>，i的最大值分别为13,14,15，即<code>max(i)=n-(k-len(path))+1</code></p>
+<p><img src="/2020/06/06/Leetcode之回溯/4.png" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">combine</span><span class="params">(self, n, k)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(start,res,path)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> len(path) == k:</span><br><span class="line">                res.append(path[:])</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(start,n-(k-len(path))+<span class="number">2</span>):</span><br><span class="line">                <span class="comment"># if len(path)&gt;0 and i &lt;= path[-1]:</span></span><br><span class="line">                <span class="comment">#     continue</span></span><br><span class="line">                <span class="comment">#i&gt;path[-1]</span></span><br><span class="line">                path.append(i)</span><br><span class="line">                dfs(i+<span class="number">1</span>,res,path)</span><br><span class="line">                path.pop()</span><br><span class="line">        </span><br><span class="line">        res,path = [],[]</span><br><span class="line">        dfs(<span class="number">1</span>,res,path)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h1><span id="7-组合总和">7. 组合总和</span></h1><p>给定一个<strong>无重复元素</strong>的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的数字可以无限制重复被选取。</p>
+<p>说明：<br>所有数字（包括 target）都是正整数。<br>解集不能包含重复的组合。 </p>
+<p>链接：<a href="https://leetcode-cn.com/problems/combination-sum" target="_blank" rel="noopener">https://leetcode-cn.com/problems/combination-sum</a></p>
+<p><strong>重点</strong></p>
+<ul>
+<li>candidates中没有重复元素</li>
+<li>path中元素可以重复被选取</li>
+</ul>
+<p>输入: candidates = [2,3,6,7], target = 7,<br>所求解集为:<br>[<br>  [7],<br>  [2,2,3]<br>]</p>
+<p><strong>【分析一】</strong></p>
+<p>如果path中的和等于target，则将path加入到res中。</p>
+<ul>
+<li>如果path中数字可以重复选取，则递归中开始下标为i</li>
+<li>如果path中数组不可以重复选取，则递归中开始下标为i+1</li>
+</ul>
+<p>先对candidates从小到大排序，在遍历到当前元素时，如果candidates[i]+sum(path)&gt;target，那后面的元素肯定也不可能了，使用break退出for循环进行剪枝。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">combinationSum</span><span class="params">(self, candidates, target)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type candidates: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(start,res,path)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> sum(path)==target:</span><br><span class="line">                res.append(path[:])</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(start,len(candidates)):</span><br><span class="line">                <span class="keyword">if</span> candidates[i]+sum(path)&gt;target:<span class="comment">#剪枝</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                path.append(candidates[i])</span><br><span class="line">                dfs(i,res,path)</span><br><span class="line">                path.pop()</span><br><span class="line">        candidates = sorted(candidates)</span><br><span class="line">        res,path = [],[]</span><br><span class="line">        dfs(<span class="number">0</span>,res,path)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h1><span id="8-组合总和-ii">8. 组合总和 II</span></h1><p>给定一个数组 candidates 和一个目标数 target ，candidates中<strong>有重复元素</strong>，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的每个数字在每个组合中只能使用一次。</p>
+<p>说明：</p>
+<p>所有数字（包括目标数）都是正整数。<br>解集不能包含重复的组合。 </p>
+<p>链接：<a href="https://leetcode-cn.com/problems/combination-sum-ii" target="_blank" rel="noopener">https://leetcode-cn.com/problems/combination-sum-ii</a></p>
+<p>输入: candidates = [10,1,2,7,6,1,5], target = 8,<br>所求解集为:<br>[<br>  [1, 7],<br>  [1, 2, 5],<br>  [2, 6],<br>  [1, 1, 6]<br>]</p>
+<p><strong>重点</strong></p>
+<ul>
+<li>candidates中有重复元素</li>
+<li>每个数字在path中只能使用一次</li>
+</ul>
+<p>在回溯题中，如果数组中有重复元素，在回溯的过程，需要去重，步骤如下</p>
+<ul>
+<li>先对数组排序，<code>nums = sorted(nums)</code></li>
+<li>在for循环内部，使用<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(start,len(nums)):</span><br><span class="line">    <span class="keyword">if</span> i &gt; statr <span class="keyword">and</span> nums[i]==nums[i<span class="number">-1</span>]:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">path.append(nums[i])</span><br><span class="line">dfs(...)</span><br><span class="line">path.pop()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>对candidates排完序后为[1,1,2,5,6,7,10]<br><code>i</code>是当前考察元素的下标，<code>start</code>是本层最开始的那个元素下标。<strong>这里的去重是同层去重</strong>，例如下图中，第一层的1和1<em>重复，需要将`1</em><code>去掉。在第一个分支中第一层是1，第二层是</code>1<em><code>，这2个1在不同的层，不需要去重。如果只写成</code>nums[i]==nums[i-1]<code>,在树中处于不同层的相同元素也生成不了。为了保留不同层的相同元素，使用</code>i&gt;start<code>将这种情况排除，因为在不同层第一次出现的数字</code>i=start<code>，而在同一层出现的相同的数字</code>i&gt;start<code>，这样就可以把第一层出现的</code>1</em>`给剪枝掉。</p>
+<p><img src="/2020/06/06/Leetcode之回溯/5.png" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">combinationSum2</span><span class="params">(self, candidates, target)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type candidates: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(start,res,path)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> sum(path)==target:</span><br><span class="line">                res.append(path[:])</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(start,len(candidates)):</span><br><span class="line">                <span class="keyword">if</span> candidates[i]+sum(path)&gt;target:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">if</span> i &gt; start <span class="keyword">and</span> candidates[i]==candidates[i<span class="number">-1</span>]:</span><br><span class="line">                    <span class="keyword">continue</span> </span><br><span class="line">                path.append(candidates[i])</span><br><span class="line">                dfs(i+<span class="number">1</span>,res,path)</span><br><span class="line">                path.pop()</span><br><span class="line">        res,path = [],[]</span><br><span class="line">        candidates = sorted(candidates)</span><br><span class="line">        dfs(<span class="number">0</span>,res,path)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h1><span id="9-组合总和-iii">9. 组合总和 III</span></h1><p>找出所有相加之和为 n 的 k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。</p>
+<p>说明：</p>
+<p>所有数字都是正整数。<br>解集不能包含重复的组合。 </p>
+<blockquote>
+<p>示例 1:<br>输入: k = 3, n = 7<br>输出: <code>[[1,2,4]]</code></p>
+</blockquote>
+<p>链接：<a href="https://leetcode-cn.com/problems/combination-sum-iii" target="_blank" rel="noopener">https://leetcode-cn.com/problems/combination-sum-iii</a></p>
+<p><strong>【分析一】</strong></p>
+<ul>
+<li>数组中不包含重复的数字，所以不需要去重</li>
+<li>每个数字只能用一次，所以在递归时start=i+1</li>
+</ul>
+<p>在for循环遍历所有的数字时，i的最大值为9，但并不是每次i都可以取到9，下面举例找i的最大值</p>
+<p>1~9个数，找k个数，和为n，假设k=5，n=15</p>
+<p>当len(path)=0，还可以选5个数，i的最大值为5，选[5,6,7,8,9]<br>当len(path)=1，还可以选4个数，i的最大值为6，选[6,7,8,9]<br>当len(path)=2，还可以选3个数，i的最大值为7，选[7,8,9]</p>
+<p>即i的最大值为<code>10-(k-len(path))</code>,在for循环中，<code>range(start,10-(k-len(path))+1)</code></p>
+<p>在进入<code>dfs</code>之前，先判断n是否符合实际情况，从1~9中选出k个数，最大为[9,8,…9-k+1],即和最大为(19-k)*k/2，如果n大于这个最大值，则不可能找出这k个数，所以这个提前判断一下n的值是否符合实际情况。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">combinationSum3</span><span class="params">(self, k, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(start,path,res)</span>:</span></span><br><span class="line">            <span class="keyword">if</span> sum(path)==n <span class="keyword">and</span> len(path)==k:</span><br><span class="line">                res.append(path[:])</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(start,<span class="number">10</span>-(k-len(path))+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> i+sum(path)&gt;n <span class="keyword">or</span> len(path)&gt;k:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                path.append(i)</span><br><span class="line">                dfs(i+<span class="number">1</span>,path,res)</span><br><span class="line">                path.pop()</span><br><span class="line">        <span class="keyword">if</span> k&lt;=<span class="number">0</span> <span class="keyword">or</span> n&lt;=<span class="number">0</span> <span class="keyword">or</span> k&gt;= n:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        <span class="keyword">if</span> n&gt;(<span class="number">19</span>-k)*k/<span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        res,path = [],[]</span><br><span class="line">        dfs(<span class="number">1</span>,path,res)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h1><span id="10-括号生成">10. 括号生成</span></h1><p>数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。</p>
+<p>示例：</p>
+<p>输入：n = 3<br>输出：[<br>       “((()))”,<br>       “(()())”,<br>       “(())()”,<br>       “()(())”,<br>       “()()()”<br>     ]</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/generate-parentheses" target="_blank" rel="noopener">https://leetcode-cn.com/problems/generate-parentheses</a></p>
+<p><strong>【分析一】</strong></p>
+<p>在递归中，使用left和right表示左右括号使用的个数。使用path存储当前括号的组合。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">generateParenthesis</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: List[str]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(path,res,left,right)</span>:</span></span><br><span class="line">            <span class="string">"""</span></span><br><span class="line"><span class="string">            left:左括号已经使用的个数</span></span><br><span class="line"><span class="string">            right:右括号已经使用的个数</span></span><br><span class="line"><span class="string">            """</span></span><br><span class="line">            <span class="keyword">if</span> left==n <span class="keyword">and</span> right==n:</span><br><span class="line">                res.append(<span class="string">""</span>.join(path[:]))</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">            <span class="keyword">if</span> left&lt;right:</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">            <span class="keyword">if</span> left &lt; n:</span><br><span class="line">                path.append(<span class="string">'('</span>)</span><br><span class="line">                dfs(path,res,left+<span class="number">1</span>,right)</span><br><span class="line">                path.pop()</span><br><span class="line">            <span class="keyword">if</span> right &lt; n:</span><br><span class="line">                path.append(<span class="string">')'</span>)</span><br><span class="line">                dfs(path,res,left,right+<span class="number">1</span>)</span><br><span class="line">                path.pop()</span><br><span class="line">        res,path = [],[]</span><br><span class="line">        dfs(path,res,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p>这个方法和上面的区别是使用path是字符串类型。并且递归时，在传入的参数中对path进行改变，在外部path并没有变化，所以不需要回溯。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">generateParenthesis</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: List[str]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(path,res,left,right)</span>:</span></span><br><span class="line">            <span class="string">"""</span></span><br><span class="line"><span class="string">            left:左括号已经使用的个数</span></span><br><span class="line"><span class="string">            right:右括号已经使用的个数</span></span><br><span class="line"><span class="string">            """</span></span><br><span class="line">            <span class="keyword">if</span> left==n <span class="keyword">and</span> right==n:</span><br><span class="line">                res.append(path)</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">            <span class="keyword">if</span> left&lt;right:</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">            <span class="keyword">if</span> left &lt; n:</span><br><span class="line">                dfs(path+<span class="string">'('</span>,res,left+<span class="number">1</span>,right)</span><br><span class="line">            <span class="keyword">if</span> right &lt; n:</span><br><span class="line">                dfs(path+<span class="string">')'</span>,res,left,right+<span class="number">1</span>)</span><br><span class="line">        res,path = [],<span class="string">''</span></span><br><span class="line">        dfs(path,res,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h1><span id="11-n皇后">11. N皇后</span></h1><p>n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。即任意2个皇后不能除以同一行，同一列，或者同一对角线上。给定一个整数 n，返回所有不同的 n 皇后问题的解决方案。</p>
+<p>每一种解法包含一个明确的 n 皇后问题的棋子放置方案，该方案中 ‘Q’ 和 ‘.’ 分别代表了皇后和空位。</p>
+<p>链接：<a href="https://leetcode-cn.com/problems/n-queens" target="_blank" rel="noopener">https://leetcode-cn.com/problems/n-queens</a></p>
+<p><strong>【分析一】</strong></p>
+<p>首先board表示某一种摆放方案。先摆放row_start=0的第一行，将皇后摆放在某一列，然后再摆放下一行，因为一行只摆放了一个皇后，所以行没有冲突，在递归中，我们只需要判断列，左上对角线，右上对角线是否有冲突。如果不冲突，在该位置上摆放皇后，即<code>board[row][col]=&#39;Q&#39;</code>,否则回溯<code>board[row][col]=&#39;.&#39;</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">solveNQueens</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: List[List[str]]</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(row_start,res,board)</span>:</span></span><br><span class="line">            <span class="string">"""</span></span><br><span class="line"><span class="string">            row_start:当前在row_start行的哪一列摆放皇后，取值0~n-1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            """</span></span><br><span class="line">            <span class="keyword">if</span> row_start==n:</span><br><span class="line">                res.append([<span class="string">''</span>.join(board[i]) <span class="keyword">for</span> i <span class="keyword">in</span> range(n)])</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">            </span><br><span class="line">            cols = len(board[<span class="number">0</span>])</span><br><span class="line">            <span class="keyword">for</span> col <span class="keyword">in</span> range(cols):</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> is_valid(board,row_start,col):</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                board[row_start][col]=<span class="string">'Q'</span></span><br><span class="line">                dfs(row_start+<span class="number">1</span>,res,board)</span><br><span class="line">                board[row_start][col]=<span class="string">'.'</span></span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">is_valid</span><span class="params">(borad,row_start,col)</span>:</span></span><br><span class="line">            <span class="string">"""</span></span><br><span class="line"><span class="string">            判断将皇后放在board[row_start][col]是否合理</span></span><br><span class="line"><span class="string">            即判断在col列上是否已经有皇后</span></span><br><span class="line"><span class="string">            判断row_start以上的左上方和右上方的对角线上是否有皇后</span></span><br><span class="line"><span class="string">            """</span></span><br><span class="line">            n = len(board)</span><br><span class="line"></span><br><span class="line">            <span class="comment">#判断所有行在col列是否有皇后</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">if</span> board[i][col] == <span class="string">'Q'</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">#判断左上方是否有皇后</span></span><br><span class="line">            i,j = row_start<span class="number">-1</span>,col+<span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> i&gt;=<span class="number">0</span> <span class="keyword">and</span> j&lt;=n<span class="number">-1</span>:</span><br><span class="line">                <span class="keyword">if</span> board[i][j]==<span class="string">'Q'</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">                i-=<span class="number">1</span></span><br><span class="line">                j+=<span class="number">1</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">#p判断右上方是否有皇后</span></span><br><span class="line">            i,j = row_start<span class="number">-1</span>,col<span class="number">-1</span></span><br><span class="line">            <span class="keyword">while</span> i&gt;=<span class="number">0</span> <span class="keyword">and</span> j&gt;=<span class="number">0</span>:</span><br><span class="line">                <span class="keyword">if</span> board[i][j]==<span class="string">'Q'</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">                i-=<span class="number">1</span></span><br><span class="line">                j-=<span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        res = []</span><br><span class="line">        board = [[<span class="string">'.'</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(n) ] <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">        dfs(<span class="number">0</span>,res,board)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h1><span id="12-总结">12. 总结</span></h1><p>在回溯题中，需要判断给定数组中是否有重复元素，如果有重复元素，在回溯的过程，需要去重，步骤如下</p>
+<ul>
+<li>先对数组排序，<code>nums = sorted(nums)</code></li>
+<li>在for循环内部，使用<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(start,len(nums)):</span><br><span class="line">    <span class="keyword">if</span> i &gt; statr <span class="keyword">and</span> nums[i]==nums[i<span class="number">-1</span>]:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">path.append(nums[i])</span><br><span class="line">dfs(...)</span><br><span class="line">path.pop()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
           
         
@@ -1400,7 +1827,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3.6k
+                  3.7k
                 </span>
               
 
@@ -1440,6 +1867,22 @@
         
           
             <a id="more"></a>
+<!-- TOC -->
+<ul>
+<li><a href="#1-树概念介绍">1. 树概念介绍</a></li>
+<li><a href="#2-树的前向遍历">2. 树的前向遍历</a></li>
+<li><a href="#3-二叉树的中序遍历">3. 二叉树的中序遍历</a></li>
+<li><a href="#4-后序遍历">4. 后序遍历</a></li>
+<li><a href="#5-树的层次遍历">5. 树的层次遍历</a></li>
+<li><a href="#6-根据前序和中序创建二叉树">6. 根据前序和中序创建二叉树</a></li>
+<li><a href="#7-计算树的最大深度">7. 计算树的最大深度</a></li>
+<li><a href="#8-对称二叉树">8. 对称二叉树</a></li>
+<li><a href="#9-平衡二叉树">9. 平衡二叉树</a></li>
+<li><a href="#10-二叉树的镜像">10. 二叉树的镜像</a></li>
+<li><a href="#11-二叉搜索树的后序遍历序列">11. 二叉搜索树的后序遍历序列</a></li>
+<li><a href="#12-总结">12. 总结</a></li>
+</ul>
+<!-- /TOC -->
 <h1><span id="1-树概念介绍">1. 树概念介绍</span></h1><ul>
 <li>二叉树一般有2种通用的遍历策略<ul>
 <li>深度优先搜索DFS<ol>
@@ -1546,7 +1989,7 @@
 <li>判断recur(root)返回值是否为-1，为-1则不是平衡树，否则是平衡树</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isBalanced</span><span class="params">(self, root)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">return</span> self.recur(root) != <span class="number">-1</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">recur</span><span class="params">(self,root)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        返回以root为根的树最大深度</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        left_h= self.recur(root.left)</span><br><span class="line">        <span class="keyword">if</span> left_h==<span class="number">-1</span>:<span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        right_h = self.recur(root.right)</span><br><span class="line">        <span class="keyword">if</span> right_h == <span class="number">-1</span>:<span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">return</span> max(left_h,right_h)+<span class="number">1</span> <span class="keyword">if</span> abs(left_h-right_h)&lt;=<span class="number">1</span> <span class="keyword">else</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
-<h1><span id="二叉树的镜像">二叉树的镜像</span></h1><p>请完成一个函数，输入一个二叉树，该函数输出它的镜像。</p>
+<h1><span id="10-二叉树的镜像">10. 二叉树的镜像</span></h1><p>请完成一个函数，输入一个二叉树，该函数输出它的镜像。</p>
 <p><a href="https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/</a></p>
 <p><strong>【分析一】</strong><br>使用递归</p>
 <ol>
@@ -1568,7 +2011,7 @@
 </ol>
 <p>使用栈，可以看做是DFS，先将右子树内部的节点交换，然后再将左子树内部的节点交换<br>如果使用队列，可以看做是BFS，先交换第一层的左右节点，再交换第二层的左右节点。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mirrorTree</span><span class="params">(self, root)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: TreeNode</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">        <span class="comment">#不用生成新的树，直接在原始树进行修改</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">        stack = [root]</span><br><span class="line">        <span class="keyword">while</span> stack:</span><br><span class="line">            cur = stack.pop()</span><br><span class="line">            <span class="keyword">if</span> cur.left:stack.append(cur.left)</span><br><span class="line">            <span class="keyword">if</span> cur.right:stack.append(cur.right)</span><br><span class="line">            cur.left,cur.right = cur.right,cur.left</span><br><span class="line">        <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
-<h1><span id="二叉搜索树的后序遍历序列">二叉搜索树的后序遍历序列</span></h1><p>输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历结果。如果是则返回 true，否则返回 false。假设输入的数组的任意两个数字都互不相同。</p>
+<h1><span id="11-二叉搜索树的后序遍历序列">11. 二叉搜索树的后序遍历序列</span></h1><p>输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历结果。如果是则返回 true，否则返回 false。假设输入的数组的任意两个数字都互不相同。</p>
 <p><a href="https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/</a></p>
 <p><strong>【分析一】</strong><br>二叉搜索树：左子树&lt;根节点，右子树&gt;根节点<br>后序遍历：左右根<br>给定序列的最后一个元素肯定是整个树的根，比它小的是左子树，比它大的是右子树</p>
 <p><img src="/2020/05/29/Leetcode之树/3.png" alt=""></p>
@@ -1591,7 +2034,7 @@
 <li>空间复杂度：O(N)0</li>
 </ul>
 <p><strong>【分析二】</strong></p>
-<h1><span id="总结">总结</span></h1><ul>
+<h1><span id="12-总结">12. 总结</span></h1><ul>
 <li>深度优先搜索DFS一般使用栈结构存储，广度优先搜索BFS一般使用队列结构存储</li>
 </ul>
 
@@ -1725,7 +2168,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.1k
+                  2k
                 </span>
               
 
@@ -1741,7 +2184,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  9
+                  8
                 </span>
               
             </div>
@@ -1836,7 +2279,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/03/30/Leetcode之排序/" itemprop="url">排序算法</a></h2>
+                <a class="post-title-link" href="/2020/03/30/Leetcode之排序/" itemprop="url">Leetcode之排序</a></h2>
         
 
         <div class="post-meta">
@@ -1900,7 +2343,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  10.8k
+                  13.3k
                 </span>
               
 
@@ -1916,7 +2359,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  44
+                  54
                 </span>
               
             </div>
@@ -2250,7 +2693,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  8.6k
+                  8.3k
                 </span>
               
 
@@ -2333,186 +2776,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/13/Leetcode之Array/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Echo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/touxiang.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Echo's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/13/Leetcode之Array/" itemprop="url">Leetcode之Array</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-13T15:02:20+08:00">
-                2020-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  7.5k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  33
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近要开始准备刷Leetcode了，在这里记录下刷题的心得</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/03/13/Leetcode之Array/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2560,7 +2828,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -121,7 +121,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/02/27/时空论文阅读笔记/BiLSTM-Enc-Dec.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/27/时空论文阅读笔记/BiLSTM-Enc-Dec1.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/27/时空论文阅读笔记/神经网络踩坑/y-norm.png">
-<meta property="og:updated_time" content="2020-06-04T08:43:50.937Z">
+<meta property="og:updated_time" content="2020-06-18T02:36:57.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="时空论文阅读笔记">
 <meta name="twitter:description" content="因为疫情推迟开学，在家把以前看的论文又看了一遍，每重新看一次都有新的收获，在此整理下。">
@@ -426,7 +426,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  9.9k
+                  10.2k
                 </span>
               
 
@@ -442,7 +442,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  39
+                  41
                 </span>
               
             </div>
@@ -465,6 +465,52 @@
       
         <p>因为疫情推迟开学，在家把以前看的论文又看了一遍，每重新看一次都有新的收获，在此整理下。</p>
 <a id="more"></a>
+<!-- TOC -->
+<ul>
+<li><a href="#1-流量速度预测">1. 流量/速度预测</a><ul>
+<li><a href="#11-deep-spatio-temporal-residual-networks-for-citywide-crowd-flows-predictionaaai2017">1.1. Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction(AAAI2017)</a></li>
+<li><a href="#12-deepstn-context-aware-spatial-temporal-neural-network-for-crowd-flow-prediction-in-metropolisaaai2019">1.2. DeepSTN+: Context-aware Spatial-Temporal Neural Network for Crowd Flow Prediction in Metropolis(AAAI2019)</a></li>
+<li><a href="#13-urbanfm-inferring-fine-grained-urban-flowskdd2019">1.3. UrbanFM: Inferring Fine-Grained Urban Flows(KDD2019)</a></li>
+<li><a href="#14-attention-based-spatial-temporal-graph-convolutional-networks-for-traffic-flow-forecastingaaai2019">1.4. Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting(AAAI2019)</a></li>
+<li><a href="#15-spatial-temporal-synchronous-graph-convolutional-networks-a-new-framework-for-spatial-temporal-network-data-forecastingaaai2020">1.5. Spatial-Temporal Synchronous Graph Convolutional Networks: A New Framework for Spatial-Temporal Network Data Forecasting(AAAI2020)</a></li>
+<li><a href="#16-hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">1.6. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting(2019AAAI)</a></li>
+<li><a href="#17-urban-traffic-prediction-from-spatio-temporal-data-using-deep-meta-learning2019kdd">1.7. Urban Traffic Prediction from Spatio-Temporal Data Using Deep Meta Learning(2019KDD)</a></li>
+<li><a href="#18-stepdeep-a-novel-spatial-temporal-mobility-event-prediction-framework-based-on-deep-neural-networkkdd2018">1.8. StepDeep: A Novel Spatial-temporal Mobility Event Prediction Framework based on Deep Neural Network(KDD2018)</a></li>
+<li><a href="#19-stgrat-a-spatio-temporal-graph-attention-network-for-traffic-forecastingaaai2020">1.9. STGRAT: A Spatio-Temporal Graph Attention Network for Traffic Forecasting(AAAI2020)</a></li>
+<li><a href="#110-connecting-the-dots-multivariate-time-series-forecasting-with-graph-neural-networks">1.10. Connecting the Dots: Multivariate Time Series Forecasting with Graph Neural Networks</a></li>
+</ul>
+</li>
+<li><a href="#2-eta预测">2. ETA预测</a><ul>
+<li><a href="#21-when-will-you-arrive-estimating-travel-time-based-on-deep-neural-networksaaai20">2.1. When Will You Arrive? Estimating Travel Time Based on Deep Neural Networks(AAAI20)</a></li>
+</ul>
+</li>
+<li><a href="#3-出租车需求预测">3. 出租车需求预测</a><ul>
+<li><a href="#31-deep-multi-view-spatial-temporal-network-for-taxi-demand-predictionaaai2018">3.1. Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction(AAAI2018)</a></li>
+<li><a href="#32-revisiting-spatial-temporal-similarity-a-deep-learning-framework-for-traffic-predictionaaai2019">3.2. Revisiting Spatial-Temporal Similarity: A Deep Learning Framework for Traffic Prediction(AAAI2019)</a></li>
+<li><a href="#33-spatiotemporal-multi-graph-convolution-network-for-ride-hailing-demand-forecastingaaai2019">3.3. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting(AAAI2019)</a></li>
+<li><a href="#34-passenger-demand-forecasting-with-multi-task-convolutional-recurrent-neural-networkspakdd2019">3.4. Passenger Demand Forecasting with Multi-Task Convolutional Recurrent Neural Networks(PAKDD2019)</a></li>
+<li><a href="#35-stg2seq-spatial-temporal-graph-to-sequence-model-for-multi-step-passenger-demand-forecasting2019ijcai">3.5. STG2Seq: Spatial-temporal Graph to Sequence Model for Multi-step Passenger Demand Forecasting(2019IJCAI)</a></li>
+</ul>
+</li>
+<li><a href="#4-时间序列预测">4. 时间序列预测</a><ul>
+<li><a href="#41-restful-resolution-aware-forecasting-of-behavioral-time-series-data2018cikm">4.1. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data(2018CIKM)</a></li>
+<li><a href="#42-multi-horizon-time-series-forecasting-with-temporal-attention-learningkdd2019">4.2. Multi-Horizon Time Series Forecasting with Temporal Attention Learning(KDD2019)</a></li>
+</ul>
+</li>
+<li><a href="#5-总结">5. 总结</a><ul>
+<li><a href="#51-网格--图">5.1. 网格—&gt;图</a></li>
+<li><a href="#52-动态图">5.2. 动态图</a></li>
+<li><a href="#53-计算2个区域的相似性">5.3. 计算2个区域的相似性</a></li>
+<li><a href="#54-poi">5.4. POI</a></li>
+<li><a href="#55-时间相关性">5.5. 时间相关性</a></li>
+<li><a href="#56-lstm共t个隐藏状态整合">5.6. LSTM共T个隐藏状态整合</a></li>
+<li><a href="#57-外部因素嵌入">5.7. 外部因素嵌入</a></li>
+<li><a href="#58-mask">5.8. mask</a></li>
+<li><a href="#59-max-min归一化">5.9. Max-min归一化</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
 <h1><span id="1-流量速度预测">1. 流量/速度预测</span></h1><h2><span id="11-deep-spatio-temporal-residual-networks-for-citywide-crowd-flows-predictionaaai2017">1.1. Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction(AAAI2017)</span></h2><blockquote>
 <p>张钧波(京东)<br>郑宇(京东)<br><a href="https://github.com/lucktroy/DeepST" target="_blank" rel="noopener">https://github.com/lucktroy/DeepST</a> Keras</p>
 </blockquote>
@@ -1075,7 +1121,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

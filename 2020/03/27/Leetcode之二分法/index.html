@@ -82,7 +82,7 @@
 <meta property="og:description" content="列表查找：从列表中查找指定元素  输出：列表 输出：元素下标，找不到返回None或-1">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/03/27/Leetcode之二分法/查找算法/binary.png">
-<meta property="og:updated_time" content="2020-06-05T15:43:12.486Z">
+<meta property="og:updated_time" content="2020-06-18T02:34:35.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode之二分法">
 <meta name="twitter:description" content="列表查找：从列表中查找指定元素  输出：列表 输出：元素下标，找不到返回None或-1">
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  8.6k
+                  8.3k
                 </span>
               
 
@@ -430,8 +430,45 @@
 <li>输出：元素下标，找不到返回None或-1</li>
 </ul>
 <a id="more"></a>
+<!-- TOC -->
+<ul>
+<li><a href="#1-顺序查找">1. 顺序查找</a></li>
+<li><a href="#2-二分查找">2. 二分查找</a><ul>
+<li><a href="#21-二分查找拓展问题">2.1. 二分查找拓展问题</a></li>
+</ul>
+</li>
+<li><a href="#3-leetcode例题">3. LeetCode例题</a><ul>
+<li><a href="#31-查找target的索引">3.1. 查找target的索引</a><ul>
+<li><a href="#311-二分查找">3.1.1. 二分查找</a></li>
+<li><a href="#312-搜索旋转排序数组">3.1.2. 搜索旋转排序数组</a></li>
+<li><a href="#313-搜索旋转排序数组-ii">3.1.3. 搜索旋转排序数组 II</a></li>
+<li><a href="#314-寻找旋转排序数组中的最小值">3.1.4. 寻找旋转排序数组中的最小值</a></li>
+<li><a href="#315-寻找旋转排序数组中的最小值-ii">3.1.5. 寻找旋转排序数组中的最小值 II</a></li>
+<li><a href="#316-h指数-ii">3.1.6. H指数 II</a></li>
+<li><a href="#317-最长上升子序列">3.1.7. 最长上升子序列</a></li>
+<li><a href="#318-山脉数组中查找目标值">3.1.8. 山脉数组中查找目标值</a></li>
+<li><a href="#319-寻找两个有序数组的中位数">3.1.9. 寻找两个有序数组的中位数</a></li>
+</ul>
+</li>
+<li><a href="#32-在一个有上下界的区间中搜索一个整数">3.2. 在一个有上下界的区间中搜索一个整数</a><ul>
+<li><a href="#321-x-的平方根">3.2.1. x 的平方根</a></li>
+<li><a href="#322-寻找重复数">3.2.2. 寻找重复数</a></li>
+</ul>
+</li>
+<li><a href="#33-判断条件是一个函数">3.3. 判断条件是一个函数</a><ul>
+<li><a href="#331-第一个错误的版本">3.3.1. 第一个错误的版本</a></li>
+<li><a href="#332-分割数组的最大值">3.3.2. 分割数组的最大值</a></li>
+<li><a href="#333-爱吃香蕉的珂珂">3.3.3. 爱吃香蕉的珂珂</a></li>
+<li><a href="#334-找到-k-个最接近的元素">3.3.4. 找到 K 个最接近的元素</a></li>
+<li><a href="#335-转变数组后最接近目标值的数组和">3.3.5. 转变数组后最接近目标值的数组和</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#4-总结">4. 总结</a></li>
+</ul>
+<!-- /TOC -->
 <p>python中内置列表查找函数：index(),用的是线性查找，因为二分查找要求列表是有序的。</p>
-<!-- TOC -->autoauto- [1. 顺序查找](#1-顺序查找)auto- [2. 二分查找](#2-二分查找)auto    - [2.1. 二分查找拓展问题](#21-二分查找拓展问题)auto- [3. LeetCode例题](#3-leetcode例题)auto    - [3.1. 查找target的索引](#31-查找target的索引)auto        - [3.1.1. 二分查找](#311-二分查找)auto        - [3.1.2. 搜索旋转排序数组](#312-搜索旋转排序数组)auto        - [3.1.3. 搜索旋转排序数组 II](#313-搜索旋转排序数组-ii)auto        - [3.1.4. 寻找旋转排序数组中的最小值](#314-寻找旋转排序数组中的最小值)auto        - [3.1.5. 寻找旋转排序数组中的最小值 II](#315-寻找旋转排序数组中的最小值-ii)auto        - [3.1.6. H指数 II](#316-h指数-ii)auto        - [3.1.7. 最长上升子序列](#317-最长上升子序列)auto        - [3.1.8. 山脉数组中查找目标值](#318-山脉数组中查找目标值)auto        - [3.1.9. 寻找两个有序数组的中位数](#319-寻找两个有序数组的中位数)auto    - [3.2. 在一个有上下界的区间中搜索一个整数](#32-在一个有上下界的区间中搜索一个整数)auto        - [3.2.1. x 的平方根](#321-x-的平方根)auto        - [3.2.2. 寻找重复数](#322-寻找重复数)auto    - [3.3. 判断条件是一个函数](#33-判断条件是一个函数)auto        - [3.3.1. 第一个错误的版本](#331-第一个错误的版本)auto        - [3.3.2. 分割数组的最大值](#332-分割数组的最大值)auto        - [3.3.3. 爱吃香蕉的珂珂](#333-爱吃香蕉的珂珂)auto        - [3.3.4. 找到 K 个最接近的元素](#334-找到-k-个最接近的元素)auto        - [3.3.5. 转变数组后最接近目标值的数组和](#335-转变数组后最接近目标值的数组和)auto- [4. 总结](#4-总结)autoauto<!-- /TOC -->
 <h1><span id="1-顺序查找">1. 顺序查找</span></h1><p>也叫做线性查找，从一个元素开始，依次遍历，直到找到指定元素或到最后一个元素</p>
 <ul>
 <li>时间复杂度：$O(n)$</li>
@@ -482,7 +519,7 @@
 <li>在nums中找第一个出现target的下标，需要把mid分到左边，不符合条件写成<code>if nums[mid] &lt; target</code></li>
 <li>在nums中找最后一个出现target的下标，需要把mid分到右边，不符合条件写成<code>if nums[mid] &gt; target</code></li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#找左侧边界</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_first</span><span class="params">(nums,target)</span>:</span></span><br><span class="line">    left = <span class="number">0</span></span><br><span class="line">    right = len(nums)<span class="number">-1</span></span><br><span class="line">    <span class="keyword">while</span> left &lt; right:</span><br><span class="line">        mid = left+(right-left)//<span class="number">2</span><span class="comment">#取左中位数</span></span><br><span class="line">        <span class="keyword">if</span> nums[mid] &lt; target:</span><br><span class="line">            left = mid+<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            right = mid</span><br><span class="line">    <span class="keyword">if</span> nums[left] == target:</span><br><span class="line">        <span class="keyword">return</span> left</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#找左侧边界</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_first</span><span class="params">(nums,target)</span>:</span></span><br><span class="line">    left = <span class="number">0</span></span><br><span class="line">    right = len(nums)<span class="number">-1</span></span><br><span class="line">    <span class="keyword">while</span> left &lt; right:</span><br><span class="line">        mid = left+(right-left)//<span class="number">2</span><span class="comment">#取左中位数</span></span><br><span class="line">        <span class="comment">#从左边缩小搜索空间</span></span><br><span class="line">        <span class="keyword">if</span> nums[mid] &lt; target:</span><br><span class="line">            left = mid+<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            right = mid</span><br><span class="line">    <span class="keyword">if</span> nums[left] == target:</span><br><span class="line">        <span class="keyword">return</span> left</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#找右侧边界</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_last</span><span class="params">(nums,target)</span>:</span></span><br><span class="line">    left = <span class="number">0</span></span><br><span class="line">    right = len(nums)<span class="number">-1</span></span><br><span class="line">    <span class="keyword">while</span> left &lt; right:</span><br><span class="line">        mid = left+(right-left+<span class="number">1</span>)//<span class="number">2</span><span class="comment">#取右中位数</span></span><br><span class="line">        <span class="keyword">if</span> nums[mid] &gt; target:</span><br><span class="line">            right = mid - <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            left = mid</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">if</span> nums[left] == target:</span><br><span class="line">        <span class="keyword">return</span> left</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
 <h2><span id="21-二分查找拓展问题">2.1. 二分查找拓展问题</span></h2><ol>
 <li>在有序数组中查找等于目标元素的第1个或最后1个下标</li>
@@ -843,7 +880,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
