@@ -81,10 +81,12 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="总结《百面机器学习》有关知识点。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-06-19T15:59:45.520Z">
+<meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/PR曲线和ROC曲线.png">
+<meta property="og:updated_time" content="2020-06-25T15:34:59.074Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百面机器学习概述">
 <meta name="twitter:description" content="总结《百面机器学习》有关知识点。">
+<meta name="twitter:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/PR曲线和ROC曲线.png">
 
 
 
@@ -385,7 +387,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  463
+                  1.9k
                 </span>
               
 
@@ -401,7 +403,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  6
                 </span>
               
             </div>
@@ -424,35 +426,120 @@
       
         <p>总结《百面机器学习》有关知识点。</p>
 <a id="more"></a>
-<h1><span id="特征工程">特征工程</span></h1><h2><span id="特征归一化">特征归一化</span></h2><ul>
+<!-- TOC -->
+<ul>
+<li><a href="#1-特征工程">1. 特征工程</a><ul>
+<li><a href="#11-特征归一化">1.1. 特征归一化</a></li>
+<li><a href="#12-类别型特征">1.2. 类别型特征</a></li>
+<li><a href="#13-文本表示模型">1.3. 文本表示模型</a></li>
+<li><a href="#14-word2vec">1.4. Word2Vec</a></li>
+<li><a href="#15-图像不足时处理方法">1.5. 图像不足时处理方法</a></li>
+</ul>
+</li>
+<li><a href="#2-模型评估">2. 模型评估</a><ul>
+<li><a href="#21-常见评估指标">2.1. 常见评估指标</a></li>
+<li><a href="#22-p-r曲线和roc曲线">2.2. P-R曲线和ROC曲线</a></li>
+<li><a href="#23-余弦距离">2.3. 余弦距离</a></li>
+<li><a href="#24-ab测试">2.4. A/B测试</a></li>
+<li><a href="#25-模型评估方法">2.5. 模型评估方法</a></li>
+<li><a href="#26-过拟合和欠拟合">2.6. 过拟合和欠拟合</a></li>
+</ul>
+</li>
+<li><a href="#经典算法">经典算法</a><ul>
+<li><a href="#svm">SVM</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-特征工程">1. 特征工程</span></h1><h2><span id="11-特征归一化">1.1. 特征归一化</span></h2><ul>
 <li>目的：消除特征之间量纲的影响，防止学习到的结果向数值大的特征倾斜。</li>
 <li>Max-Min归一化：将数据归一化到[0,1]之间，等比缩放。</li>
 <li>Z-Score归一化（零均值归一化）：将数据归一化到均值为0，标准差为1的分布上。</li>
 <li>需要归一化：线性回归、逻辑回归、SVM、深度神经网络。不需要归一化：基于决策树模型。</li>
 </ul>
-<h2><span id="类别型特征">类别型特征</span></h2><p>将类别特征—&gt;数值特征，有以下方法</p>
+<h2><span id="12-类别型特征">1.2. 类别型特征</span></h2><p>将类别特征—&gt;数值特征，有以下方法</p>
 <ul>
 <li>序号编码：有大小关系的，比如低中高，可以编码成1,2,3</li>
 <li>one-hot编码：没有大小关系，问题：高维稀疏，需要将其嵌入成低维稠密向量</li>
 <li>二进制编码：先编码再转换成二进制</li>
 </ul>
-<h2><span id="文本表示模型">文本表示模型</span></h2><ul>
+<h2><span id="13-文本表示模型">1.3. 文本表示模型</span></h2><ul>
 <li>词袋模型：将文章按照词分割，使用每个词的权重来表示文章</li>
 <li>TF-IDF：用来计算一个词的权重，TF=一个词w在文章d中出现的频率，IDF：特属词的特征，逆文档频率</li>
 <li>N-gram模型：将连续的n个词作为一个特征放在向量中。</li>
 <li>词嵌入模型：将词映射成低维稠密向量(50~300维度)，Word2Vec是最常用的词嵌入模型。</li>
 </ul>
-<h2><span id="word2vec">Word2Vec</span></h2><p>Word2Vec有2种网络结构：CBOW，skip-gram</p>
+<h2><span id="14-word2vec">1.4. Word2Vec</span></h2><p>Word2Vec有2种网络结构：CBOW，skip-gram</p>
 <ul>
 <li>CBOW：多预测一</li>
 <li>skip-gram：一预测多</li>
 </ul>
-<h2><span id="图像不足时处理方法">图像不足时处理方法</span></h2><p>图像不足易出现过拟合问题。解决图像不足有2种方法：</p>
+<h2><span id="15-图像不足时处理方法">1.5. 图像不足时处理方法</span></h2><p>图像不足易出现过拟合问题。解决图像不足有2种方法：</p>
 <ul>
 <li>基于模型：采用一些措施降低过拟合。例如简化模型，L1L2正则化、Dropout，集成学习。</li>
 <li>基于数据：通过一些方法增加数据。平移、旋转、裁剪、修改图片亮度，锐度、添加噪声等方法。</li>
 </ul>
-
+<h1><span id="2-模型评估">2. 模型评估</span></h1><h2><span id="21-常见评估指标">2.1. 常见评估指标</span></h2><ul>
+<li>准确率(Accuracy)</li>
+<li>精确率(Precision)</li>
+<li>召回率(Recall)</li>
+</ul>
+<p>其中这些指标都有一定的局限性。对于一个排序模型，怎么评估排序模型的好坏：</p>
+<ul>
+<li>设置不同的N，计算P@N,R@N</li>
+<li>设置更综合的评价指标，PR曲线，ROC曲线，F1值</li>
+</ul>
+<p>RMSE：回归问题的评价指标。如果在一个问题上，RMSE非常高，但是观察预测值和真实值，发现90%的预测值都很接近真实值，为什么RMSE还是这么高。分析由于剩下的10%存在非常大的异常值，即使90%预测很准，但是这10%导致最终的RMSE差别很大。解决方案：</p>
+<ul>
+<li>如果10%是噪声数据，提前去除噪声</li>
+<li>如果10%不是噪声数据，需要对异常数据进行建模</li>
+<li>换一个对异常值不敏感的指标，例如MAPE</li>
+</ul>
+<h2><span id="22-p-r曲线和roc曲线">2.2. P-R曲线和ROC曲线</span></h2><ul>
+<li>P-R曲线</li>
+</ul>
+<p>P-R曲线横坐标是召回率，纵坐标是准确率。<br>为什么要有P-R曲线？因为精确率precision和召回率recall指标都有一定的局限性，所以使用P-R曲线可以综合地评估一个模型的效果。<br>在P-R曲线中，通过改变正负样本间的阈值来改变precision和recall。当判定为正样本的阈值很大时，说明选出的正样本都是很有把握的，precision较大，recall较小。当判定为正样本的阈值很小时，即尽可能不漏掉正样本，导致precision降低，recall变大。</p>
+<ul>
+<li>ROC曲线<br>横坐标是假阳率FPR，纵坐标是真阳率TPR。</li>
+</ul>
+<script type="math/tex; mode=display">假阳率=\frac{负例被判为正例}{真正的负例}\quad
+真阳率=\frac{正例被判为正例}{真正的正例}</script><p>可以看出真阳率也就是召回率。<br>同P-R曲线类似，ROC曲线也是通过不断改变正负样本的阈值生成的。</p>
+<ul>
+<li>P-R曲线和ROC曲线有什么不同</li>
+</ul>
+<p>当测试集中的负样本数量增加10倍时，P-R曲线发生了明显的变化，ROC曲线几乎不变。ROC曲线能够尽量降低测试集带来的干扰，适用于正负样本不均衡的数据集中。ROC适用的场景更多，被广泛应用在排序，推荐，广告等领域。</p>
+<p><img src="/2020/06/19/百面机器学习概述/PR曲线和ROC曲线.png" alt=""></p>
+<h2><span id="23-余弦距离">2.3. 余弦距离</span></h2><p>余弦相似度：</p>
+<script type="math/tex; mode=display">\cos (A, B)=\frac{A \cdot B}{\|A\|_{2}\|B\|_{2}}</script><p>余弦距离体现方向上的相对差异，欧式距离体现数值上的绝对差异。</p>
+<h2><span id="24-ab测试">2.4. A/B测试</span></h2><p>划分实验组和对照组<br>实验组和对照组：选取样本时要求独立性和无偏性。</p>
+<h2><span id="25-模型评估方法">2.5. 模型评估方法</span></h2><p>通常将数据划分为训练集和测试集，但在<strong>样本划分</strong>和<strong>模型验证</strong>的过程中，存在着不同的方法。</p>
+<ol>
+<li>Holdout验证<br>随机将数据划分为训练集和测试集，在测试集上进行模型验证。<br>缺点：模型的效果取决于样本划分，具有随机性</li>
+<li>k折交叉验证<br>将样本划分为k个大小相等的子集，一个子集作为测试集，k-1个子集作为训练集。将k次评估结果平均作为该模型最终的结果。<br>优点：（1）解决当数据量较小时，模型评估不准确的问题（2）消除数据对评估结果的随机性影响（3）可以用来选择超参数<br>缺点：耗时，需要训练多个模型求评估结果的平均值</li>
+<li>自助法<br>如果数据比较小，holdout和k折交叉验证都需要划分数据集，导致训练集变小。自助发采用随机抽样，在全部样本中进行n次有放回的抽样，得到大小为n的训练集。这n个样本中有的样本是重复的，有的样本没有被抽到，这些没有抽到的样本作为测试集。</li>
+</ol>
+<h2><span id="26-过拟合和欠拟合">2.6. 过拟合和欠拟合</span></h2><ul>
+<li>过拟合<br>模型在训练数据上loss很小，在测试集上loss大</li>
+<li>欠拟合<br>模型在训练集和测试集上loss都很大，效果都不好</li>
+<li><p>降低过拟合的方法</p>
+<ol>
+<li>增加数据集，减少噪声的影响。如果没有这么多数据，可以生成一些数据。例如图像可以通过平移，旋转等生成数据</li>
+<li>正则化，在loss中添加L1或L2正则，防止参数过大</li>
+<li>集成学习，将多个模型集成在一起，降低单一模型的过拟合风险</li>
+<li>降低模型复杂度，例如减少网络参数，神经元个数等。</li>
+<li>早停，当模型在验证机上的loss连续N次没有提升时，停止训练</li>
+<li>Dropout，在训练过程中按照给定的概率随机删除隐藏层的一些神经单元。由于模型训练的随机性，减轻了不同特征之间的协同效应。<strong>Dropout只能在训练时使用，在测试集上不能使用</strong></li>
+</ol>
+</li>
+<li><p>降低欠拟合的方法</p>
+<ol>
+<li>添加新的特征，当特征少时容易出现欠拟合，模型对训练数据的拟合程度不好。</li>
+<li>增加模型复杂度</li>
+<li>减少正则化系数</li>
+</ol>
+</li>
+</ul>
+<h1><span id="经典算法">经典算法</span></h1><h2><span id="svm">SVM</span></h2>
       
     </div>
     
@@ -684,7 +771,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">特征归一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">类别型特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">文本表示模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Word2Vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">图像不足时处理方法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. 特征归一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. 类别型特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.3. 文本表示模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.4. Word2Vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.5. 图像不足时处理方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 模型评估</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 常见评估指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. P-R曲线和ROC曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. 余弦距离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.4. A/B测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.5. 模型评估方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.6. 过拟合和欠拟合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">经典算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">SVM</span></a></li></ol></li></ol></div>
             
 
           </div>
