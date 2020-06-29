@@ -82,7 +82,16 @@
 <meta property="og:description" content="总结《百面机器学习》有关知识点。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/PR曲线和ROC曲线.png">
-<meta property="og:updated_time" content="2020-06-25T15:34:59.074Z">
+<meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/百面机器学习概述/linear.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/百面机器学习概述/linear1.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/sigmoid.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/logistic.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/sigmoid.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/sigmoid1.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/sigmoid2.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/softmax.png">
+<meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/softmax1.png">
+<meta property="og:updated_time" content="2020-06-29T15:44:52.686Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百面机器学习概述">
 <meta name="twitter:description" content="总结《百面机器学习》有关知识点。">
@@ -387,7 +396,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k
+                  5.8k
                 </span>
               
 
@@ -403,7 +412,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  21
                 </span>
               
             </div>
@@ -443,10 +452,21 @@
 <li><a href="#24-ab测试">2.4. A/B测试</a></li>
 <li><a href="#25-模型评估方法">2.5. 模型评估方法</a></li>
 <li><a href="#26-过拟合和欠拟合">2.6. 过拟合和欠拟合</a></li>
+<li><a href="#27-正则化">2.7. 正则化</a></li>
 </ul>
 </li>
-<li><a href="#经典算法">经典算法</a><ul>
-<li><a href="#svm">SVM</a></li>
+<li><a href="#3-经典算法">3. 经典算法</a><ul>
+<li><a href="#31-回归模型">3.1. 回归模型</a><ul>
+<li><a href="#311-单变量线性回归">3.1.1. 单变量线性回归</a></li>
+<li><a href="#312-多变量线性回归">3.1.2. 多变量线性回归</a></li>
+<li><a href="#面试问题">面试问题</a></li>
+</ul>
+</li>
+<li><a href="#32-逻辑回归">3.2. 逻辑回归</a><ul>
+<li><a href="#逻辑回归常见问题">逻辑回归常见问题</a></li>
+</ul>
+</li>
+<li><a href="#softmax回归">Softmax回归</a></li>
 </ul>
 </li>
 </ul>
@@ -539,7 +559,174 @@
 </ol>
 </li>
 </ul>
-<h1><span id="经典算法">经典算法</span></h1><h2><span id="svm">SVM</span></h2>
+<h2><span id="27-正则化">2.7. 正则化</span></h2><p>正则化为了避免过拟合，即在损失函数后加上一个正则项（惩罚项），模型越复杂，正则化值就越大。</p>
+<script type="math/tex; mode=display">\min _{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^{N} L\left(y_{i}, f\left(x_{i}\right)\right)+\lambda J(f)</script><p>第一项是损失值，第二项是正则化项，$\lambda$调整两者的权重。下面拿回归问题举例，损失值为平方损失。</p>
+<ul>
+<li>L1正则<br>惩罚项为权重绝对值的和</li>
+</ul>
+<script type="math/tex; mode=display">L(w)=\frac{1}{N} \sum_{i=1}^{N}\left(f\left(x_{i} ; w\right)-y_{i}\right)^{2}+\lambda\|w\|_{1}</script><ul>
+<li>L2正则</li>
+</ul>
+<p>惩罚项为权重的平方和</p>
+<script type="math/tex; mode=display">L(w)=\frac{1}{N} \sum_{i=1}^{N}\left(f\left(x_{i} ; w\right)-y_{i}\right)^{2}+\frac{\lambda}{2}\|w\|^{2}</script><h1><span id="3-经典算法">3. 经典算法</span></h1><h2><span id="31-回归模型">3.1. 回归模型</span></h2><p>回归模型分为线性回归和非线性回归。</p>
+<p>线性回归又分为单变量线性回归和多变量线性回归。</p>
+<h3><span id="311-单变量线性回归">3.1.1. 单变量线性回归</span></h3><p>使用房子面积和房价举例。训练集中x表示房子面积，y表示房价。使用$(x,y)$表示一个训练样，其中$(x^{(i)},y^{(i)})$表示第$i$个训练样本。。</p>
+<ul>
+<li>$h(x)=w_0+w_1x$，通过训练集学习$w_0,w_1$，使得$x$可以得到对应的$y$。因为这里没有激活函数，$x和y$是线性关系，所以成为单变量线性回归模型，因为输入的特征$x$只有1个特征（房子面积）</li>
+<li>损失函数：$Loss = \frac{1}{2m}\sum_{i=1}^{i=m}(h(x^{i})-y^{i})^2$<br>求得是平均损失，有m个样本，所以前面损失除以m，这里的1/2是为了求导简化添加的。</li>
+</ul>
+<p><img src="/2020/06/19/百面机器学习概述/百面机器学习/../百面机器学习概述/linear.jpg" alt=""></p>
+<h3><span id="312-多变量线性回归">3.1.2. 多变量线性回归</span></h3><p>输入的x有多个特征，上面单变量回归问题中，x只表示房子面积，在多变量线性回归中，x1=房子面积，x2=卧室个数，x3=房子楼层，x4=房子年龄</p>
+<ul>
+<li>$h(x)=w_0+w_1x_1+w_2x_2+w_3x_3+w_4x_4$<br>令$x=[x_1,x_2,x_3,x_4]$为列向量，$w=[w_1,w_2,w_3,w_4]$为列向量，则$h(x)=w^Tx$</li>
+</ul>
+<p><img src="/2020/06/19/百面机器学习概述/百面机器学习/../百面机器学习概述/linear1.jpg" alt=""></p>
+<h3><span id="面试问题">面试问题</span></h3><ol>
+<li><p>简单介绍以下线性回归</p>
+<ul>
+<li>线性：输入x和输出y的关系是线性的，即图像是直线</li>
+<li>非线性：输入x和输出y的关系不是一次函数，图像不是直线</li>
+<li>线性回归就是利用已有的样本，通过监督学习，学习由x到y的映射，然后利用学到的映射函数对未知的x进行预测。由于预测的值是连续值，所以是回归问题。</li>
+</ul>
+</li>
+<li><p>线性回归的损失函数</p>
+<script type="math/tex; mode=display">J(w)=\frac{1}{2m}\sum_{i=1}^{i=m}(h(x^i)-y^i)^2</script></li>
+</ol>
+<ol>
+<li><p>简述岭回归和Lasso回归<br>这两种回归为了<strong>解决线性回归出现过拟合</strong>的问题。通过<strong>在损失函数中引入正则化项</strong>来解决</p>
+<ul>
+<li><p>岭回归损失函数<br>添加L2正则项</p>
+<script type="math/tex; mode=display">J(w)=\frac{1}{2m}\sum_{i=1}^{i=m}(h(x^i)-y^i)^2+\lambda\sum_{j=1}^{j=n}w_j^2</script></li>
+<li><p>Lasso回归损失函数<br>添加L1正则项</p>
+<script type="math/tex; mode=display">J(w)=\frac{1}{2m}\sum_{i=1}^{i=m}(h(x^i)-y^i)^2+\lambda\sum_{j=1}^{j=n}|w_j|</script></li>
+</ul>
+</li>
+<li><p>线性回归的假设<br>线性回归假设因变量y符合正太分布   </p>
+</li>
+</ol>
+<h2><span id="32-逻辑回归">3.2. 逻辑回归</span></h2><p>逻辑回归是分类模型，虽然名字中有回归二字，但却是分类模型，用来二分类任务。<br>二分类的y有正负样本，即$y\in{(0,1)}$，$y$只有2个取值，一般将我们想要找的样本作为正样本。例如垃圾邮件分类中，想要找垃圾邮件，所以将垃圾邮件划分为正样本，非垃圾邮件为负样本。肿瘤良性判断中将恶性肿瘤设置为正样本，良性肿瘤设置为负样本。</p>
+<ul>
+<li><p>如何用连续的数组预测离散的y</p>
+<p>线性回归输出的是连续值，而分类问题的标签y是离散值，属于{0,1}。怎么用回归模型预测离散的标签呢？<br>一个直观的办法是设定一个阈值，比如0，如果预测的值&gt;0，则属于正样本，否则属于负样本。<br>另一种方法是不去直接预测标签，而是预测样本属于正样本的概率。概率是连续值，并且在[0,1]之间。但是回归问题的输出值并不是在[0,1]之间，为了限制回归问题的值域，使用sigmoid函数，又成为logistic函数。因为sigmoid函数可以将输入$x\in[-\infty,\infty]$映射到$[0,1]$之间，输出的$h(x)$正好可以作为样本属于正例的概率。这种方法成为逻辑回归模型=logistic函数+回归模型</p>
+</li>
+</ul>
+<p>sigmoid函数：</p>
+<script type="math/tex; mode=display">g(x)=\frac{1}{1+e^{-x}}</script><p><img src="/2020/06/19/百面机器学习概述/sigmoid.png" alt=""></p>
+<p>输出值在<code>0~1</code>之间。原先的回归问题的假设函数简化为$h(x)=w^Tx$，为了让$h(x)$的输出在0~1之间，在外面套上sigmoid函数。</p>
+<script type="math/tex; mode=display">h(x)=\frac{1}{1+e^{-w^{T}x}}</script><p>求得的$h(x)$表示样本$x$被判为正样本的概率，例如$h(x)=0.7$表示邮件是垃圾邮件的概率是0.7。因为真实标签值$y$只能为0和1，所以需要将$h(x)$和$y$对应起来。<br>如果$h(x)&gt;=0.5$，也就是$w^Tx&gt;=0$，则预测$y=1$<br>如果$h(x)&lt;0.5$，也就是$w^Tx&lt;0$，则预测$y=0$</p>
+<ul>
+<li>逻辑回归损失函数</li>
+</ul>
+<p><img src="/2020/06/19/百面机器学习概述/logistic.png" alt=""></p>
+<ol>
+<li><p>求单个样本预测正确的概率<br>$h(x)$表示样本为正例$(y=1)$的概率$P(y=1|x,w)=h(x)$<br>则样本为负例的概率为$P(y=0|x,w)=1-h(x)$</p>
+</li>
+<li><p>将上述公式整合</p>
+<script type="math/tex; mode=display">P(y \mid {x})=\left\{\begin{array}{r}
+h(x), y=1 \\
+1-h(x), y=0
+\end{array}\right.</script><p>将上述2种情况整合成一个公式为</p>
+<script type="math/tex; mode=display">P(y^i|x^i)=h(x^i)^{y_i}*(1-h(x^i))^{1-y^i}</script><p>对于样本$(x^i,y^i)$，如果$y^i=1$，则概率为$h(x^i)$，如果$y^i=0$，则概率为$1-h(x^i)$</p>
+</li>
+<li><p>求$m$个样本的似然函数</p>
+<blockquote>
+<p>极大似然估计：利用已知的样本结果，反推最有可能（最大概率）导致这些样本结果出现的模型参数，即在模型已知的情况下，求参数。</p>
+</blockquote>
+<p>如果有$m$个样本，分别为$(x^1,y^1),(x^2,y^2),…,(x^m,y^m)$，这m个样本假设相互独立，组合概率为每个样本概率的乘积，即最大似然估计为：</p>
+<script type="math/tex; mode=display">P_总=P(y^1|x^1)P(y^2|x^2)...P(y^m|x^m)\\
+=\prod_{i=1}^{i=m}h(x^i)^{y_i}*(1-h(x^i))^{1-y^i}</script><p>其中<script type="math/tex">h(x)=\frac{1}{1+e^{-w^Tx}}</script></p>
+</li>
+<li><p>求对数似然<br>模型需要做的就是该概率最大，即连乘的乘积最大，但是连乘很复杂，通过<strong>对两边取对数将连乘变成累加的形式</strong></p>
+<script type="math/tex; mode=display">log(P_总)=log(\prod_{i=1}^{i=m}h(x^i)^{y_i}*(1-h(x^i))^{1-y^i})\\
+=\sum_{i=1}^{i=m}log(h(x^i)^{y_i}*(1-h(x^i))^{1-y^i})\\=\sum_{i=1}^{i=m}(y^ilog(h(x^i))+(1-y^i)log(1-h(x^i)))</script></li>
+<li><p>求逻辑回归损失函数<br>上面的最大化$P_总$其实是我们的目标函数，但是如果在最大化目标函数时，对参数$w$进行求导时，非常复杂，所以就先取对数，将连乘换成累加。然后为了迎合一般都是最小化损失函数，所以加上一个符号。<br>模型最好的效果是让$log(P_总)$越大越好，但是损失函数却是越小越好，所以我们将其取负数作为损失函数，应为损失函数求的是平均误差，所以需要除以样本个数$m$,即逻辑回归的损失函数为交叉熵损失函数</p>
+<script type="math/tex; mode=display">Loss(w)=-\frac{1}{m}\sum_{i=1}^{i=m}(y^ilog(h(x^i))+(1-y^i)log(1-h(x^i)))</script><ul>
+<li><p>为什么可以用似然函数<br>因为逻辑回归的目标是让预测为正的概率最大，且预测为负的概率最大，即每个样本都要保证得到最大的概率，将所有样本预测后的概率相乘就最大，即得到似然函数。</p>
+</li>
+<li><p>为什么损失函数要取对数</p>
+<ul>
+<li>线性回归模型的平方损失函数对sigmoid函数求导无法保证是凸函数，在优化求$w$的过程中，求得的解有可能是局部最优，而不是全局最优</li>
+<li>取对数后，方便后续的求导</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>梯度下降</p>
+<p>首先先看sigmoid的导数</p>
+<script type="math/tex; mode=display">g(x)=\frac{1}{1+e^{-x}}</script><p><img src="/2020/06/19/百面机器学习概述/sigmoid.jpg" alt=""></p>
+<p><img src="/2020/06/19/百面机器学习概述/sigmoid1.jpg" alt=""></p>
+<p>得到导数之后，更新参数$w_j$<br><img src="/2020/06/19/百面机器学习概述/sigmoid2.jpg" alt=""></p>
+<ol>
+<li>梯度下降公式中的$m$如果是样本总数，则每次更新参数时需要考虑所有的样本，称为批量梯度下降(BGD)。这种方法容易求得全局最优解，但是由于样本个数太多，训练过程非常慢。</li>
+<li>如果$m=1$，即每次更新参数时只考虑一个样本，称为随机梯度下降(SGD)。这种方法训练速度快，但是准确率下降，并不是全局最优。</li>
+<li>综上所述，当m为所有样本的一小部分时，比如m=32，即每次更新参数时只考虑一小部分样本，称为小批量梯度下降(MBGD)。它克服了上述两种方法的缺点又兼顾它们的优点，在实际中最常使用。</li>
+</ol>
+</li>
+</ul>
+<h3><span id="逻辑回归常见问题">逻辑回归常见问题</span></h3><ol>
+<li><p>用一句话概括逻辑回归<br>逻辑回归假设数据服从伯努利分布，通过极大化似然函数，使用梯度下降求解参数，达到二分类的目的。</p>
+</li>
+<li><p>逻辑回归的目的<br>进行二分类<br>逻辑回归作为回归，输出值是连续的，怎么应用在分类上呢？这里的y确实是一个连续的值，但是它的输出值在[0,1]之间，可以选定一个阈值来进行划分，如果输出值大于0.5，则判定为正样本，否则判定为负样本。</p>
+</li>
+<li><p>逻辑回归的基本假设</p>
+<ul>
+<li><p>逻辑回归假设数据服从伯努利分布。伯努利分布就是抛硬币，正面的概率为$p$，反面的概率为$1-p$<br>在逻辑回归中，样本被判定为正例的概率为$h(x)$，则被判为负例的概率为$1-h(x)$</p>
+</li>
+<li><p>第二个假设是样本为正的概率是</p>
+</li>
+</ul>
+<script type="math/tex; mode=display">p=\frac{1}{1+e^{-w^Tx}}</script></li>
+<li><p>逻辑回归的损失函数<br>逻辑回归的损失函数是它的极大对数似然函数的相反数</p>
+<script type="math/tex; mode=display">Loss(w)=-\frac{1}{m}\sum_{i=1}^{i=m}(y^ilog(h(x^i))+(1-y^i)log(1-h(x^i)))</script></li>
+<li><p>随机梯度下降、批量梯度下降、小批量梯度下降的优缺点</p>
+<ul>
+<li>梯度下降公式中的$m$如果是样本总数，则每次更新参数时需要考虑所有的样本，称为批量梯度下降(BGD)。这种方法容易求得全局最优解，但是由于样本个数太多，训练过程非常慢。</li>
+<li>如果$m=1$，即每次更新参数时只考虑一个样本，称为随机梯度下降(SGD)。这种方法训练速度快，但是准确率下降，并不是全局最优。</li>
+<li>综上所述，当m为所有样本的一小部分时，比如m=32，即每次更新参数时只考虑一小部分样本，称为小批量梯度下降(MBGD)。它克服了上述两种方法的缺点又兼顾它们的优点，在实际中最常使用。</li>
+</ul>
+</li>
+<li><p>逻辑回归的优缺点<br>优点：</p>
+<ul>
+<li>形式简单，模型可解释性好。模型的权重$w$表示不同特征对最终结果的影响，如果$w_j$大，说明第$j$个特征的权重比较高，对最终的结果影响较大</li>
+<li>模型效果不错。在工程上可以接受，如果特征工作做的好，效果不会太差。</li>
+<li>训练速度快。在分类时，计算两仅仅和特征的数目有关</li>
+<li>资源占用小，尤其是内存。因为只需要存储各个维度的特征值</li>
+<li>方便输出结果。逻辑回归可以很方便的得到最后的分类结果，因为输出的结果表示每个样本属于正例的概率，可以很容易的对概率进行划分阈值。<br>缺点</li>
+<li>准确率不是很高，因为形式简单</li>
+<li>很难处理不平衡的数据。距离：如果正负样本比例1:1000，则将所有的样本都预测为负样本，模型的损失值就很小，但是这样的模型对于正样本的召回率并不高</li>
+<li>处理非线性数据较麻烦。逻辑回归一般只处理线性可分的数据，一般用于二分类</li>
+<li>无法筛选特征，需要提前做特征工程。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>逻辑回归的输出是真实概率吗<br>如果数据满足以上的2个假设，则输出的数据表示样本属于正例的概率。但是这2个假设并不是那么容易满足，所以很多情况下，逻辑回归的输出值无法作为真实的概率，只能看做置信度。</p>
+</li>
+<li><p>使用逻辑回归怎么进行多分类<br>可以将多分类问题转换成二分类问题</p>
+</li>
+<li><p>逻辑回归和线性回归的区别</p>
+<ol>
+<li>线性回归阈值$[-\infty,\infty]$,逻辑回归的阈值$[0,1]$</li>
+<li>拟合函数不同，线性回归$h(x)=w^Tx$，逻辑回归$h(x)=\frac{1}{1+e^{-w^Tx}}$</li>
+<li>损失函数形式不同。线性回归是最小二乘法（平方损失），逻辑回归是极大似然估计</li>
+</ol>
+</li>
+</ul>
+<h2><span id="softmax回归">Softmax回归</span></h2><p>逻辑回归用来解决二分类问题，softmax回归用来解决多分类问题。</p>
+<p>假设对一个2*2的图像进行分类，判断图像是狗、猫、鸡的哪一种。即输入x有4个特征$x_1,x_2,x_3,x_4$，真实标签$y=1,2,3$。</p>
+<p>softmax回归和线性回归一样，也是一个单层全连接层。输入有4个，输出有3个，所以参数有12个。</p>
+<p><img src="/2020/06/19/百面机器学习概述/softmax.png" alt=""></p>
+<p>像上面的线性回归，输出的y值是连续的，我们可以把输出的y值看做样本属于某一类值置信度。例如$o_1=o_3=10,o_2=1000$，则图片被预测为猫。但是由于输出的值不稳定，并且连续的预测值和真实的离散值误差难以衡量。<br>为了解决这个问题，这里用到softmax运算。softmax将原先输出的连续值$o$转换为概率。</p>
+<p><img src="/2020/06/19/百面机器学习概述/softmax1.png" alt=""></p>
+<p>最终softmax回归模型函数为</p>
+<script type="math/tex; mode=display">o^i=W^Tx+b\\y^i=softmax(o^i)</script><p>逻辑回归和softmax回归的不同</p>
+<ol>
+<li>逻辑回归最后的输出层只有1个神经元，输出的结果表示样本属于正例的概率。softmax回归最后的输出层有n个神经元(n为类别数)，输出样本属于每个类别的概率。即sigmoid输出的是一个数，softmax输出的是一个向量。</li>
+<li>逻辑回归最后输出用sigmoid将连续值转换为属于正例的概率。softmax回归最后输出用softmax将连续值转换为属于各类的概率。都是将连续值转换为概率。</li>
+</ol>
+
       
     </div>
     
@@ -771,7 +958,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. 特征归一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. 类别型特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.3. 文本表示模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.4. Word2Vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.5. 图像不足时处理方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 模型评估</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 常见评估指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. P-R曲线和ROC曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. 余弦距离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.4. A/B测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.5. 模型评估方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.6. 过拟合和欠拟合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">经典算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">SVM</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. 特征归一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. 类别型特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.3. 文本表示模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.4. Word2Vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.5. 图像不足时处理方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 模型评估</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 常见评估指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. P-R曲线和ROC曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. 余弦距离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.4. A/B测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.5. 模型评估方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.6. 过拟合和欠拟合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.7. 正则化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 经典算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. 回归模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.1. 单变量线性回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.2. 多变量线性回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">面试问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. 逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">逻辑回归常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Softmax回归</span></a></li></ol></li></ol></div>
             
 
           </div>
