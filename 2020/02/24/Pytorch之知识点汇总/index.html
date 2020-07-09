@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="1. 简介汇总Pytorch的一些知识点">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-06-17T07:53:06.914Z">
+<meta property="og:updated_time" content="2020-07-08T03:23:00.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pytorch之知识点汇总">
 <meta name="twitter:description" content="1. 简介汇总Pytorch的一些知识点">
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.5k
+                  1.7k
                 </span>
               
 
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  7
                 </span>
               
             </div>
@@ -438,6 +438,7 @@
 <li><a href="#10-bn和dropout在训练和测试的不同">10. BN和Dropout在训练和测试的不同</a></li>
 <li><a href="#11-linear">11. Linear</a></li>
 <li><a href="#12-embedding">12. Embedding</a></li>
+<li><a href="#13-linear参数维度">13. Linear参数维度</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="2-查看网络参数">2. 查看网络参数</span></h1><ul>
@@ -450,7 +451,8 @@
 </ul>
 <h1><span id="3-分类问题">3. 分类问题</span></h1><p>例如Fashion-MNIST分类任务中，一共有10类。假设batch_size=16,每个batch的feature维度为(16,1,28,28)，label的维度(16,)，经过模型最终输出的预测结果维度(16,10)，然后我们使用<code>argmax()</code>来得出最终的预测类别。然后可以和真实label比较，看预测结果的正确性,计算预测正确的个数</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>)</span><br><span class="line">tensor([<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">4</span>])</span><br><span class="line"></span><br><span class="line">&gt; labels</span><br><span class="line">tensor([<span class="number">9</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">5</span>])</span><br><span class="line"></span><br><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>).eq(labels)</span><br><span class="line">tensor([<span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">False</span>, <span class="keyword">True</span>, <span class="keyword">False</span>], dtype=torch.bool)</span><br><span class="line"></span><br><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>).eq(labels).sum()</span><br><span class="line">tensor(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">&gt; preds.argmax(dim=<span class="number">1</span>).eq(labels).sum().item()</span><br><span class="line"><span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#得到每个batch预测正确的样本</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_num_correct</span><span class="params">(preds, labels)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> preds.argmax(dim=<span class="number">1</span>).eq(labels).sum().item()</span><br></pre></td></tr></table></figure>
-<h1><span id="4-crossentropyloss和nllloss-区别">4. CrossEntropyLoss()和NLLLoss() 区别</span></h1><p><a href="https://blog.csdn.net/zwqjoy/article/details/96282788" target="_blank" rel="noopener">Pytorch nn.CrossEntropyLoss()和nn.NLLLoss() 区别</a></p>
+<h1><span id="4-crossentropyloss和nllloss-区别">4. CrossEntropyLoss()和NLLLoss() 区别</span></h1><p><code>CrossEntropyLoss()=log_softmax() + NLLLoss()</code></p>
+<p><a href="https://blog.csdn.net/zwqjoy/article/details/96282788" target="_blank" rel="noopener">Pytorch nn.CrossEntropyLoss()和nn.NLLLoss() 区别</a></p>
 <p><a href="https://www.cnblogs.com/marsggbo/p/10401215.html" target="_blank" rel="noopener">Pytorch里的CrossEntropyLoss详解</a>  </p>
 <p><a href="https://www.zhihu.com/question/66782101" target="_blank" rel="noopener">PyTorch 中，nn 与 nn.functional 有什么区别</a></p>
 <h1><span id="5-模型训练示例">5. 模型训练示例</span></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">network = Network()</span><br><span class="line"></span><br><span class="line">train_loader = torch.utils.data.DataLoader(train_set, batch_size=<span class="number">100</span>)</span><br><span class="line">optimizer = optim.Adam(network.parameters(), lr=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    </span><br><span class="line">    total_loss = <span class="number">0</span></span><br><span class="line">    total_correct = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> train_loader: <span class="comment"># Get Batch</span></span><br><span class="line">        images, labels = batch </span><br><span class="line"></span><br><span class="line">        preds = network(images) <span class="comment"># Pass Batch</span></span><br><span class="line">        loss = F.cross_entropy(preds, labels) <span class="comment"># Calculate Loss</span></span><br><span class="line"></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        loss.backward() <span class="comment"># Calculate Gradients</span></span><br><span class="line">        optimizer.step() <span class="comment"># Update Weights</span></span><br><span class="line"></span><br><span class="line">        total_loss += loss.item()</span><br><span class="line">        total_correct += get_num_correct(preds, labels)</span><br><span class="line"></span><br><span class="line">    print(</span><br><span class="line">        <span class="string">"epoch"</span>, epoch, </span><br><span class="line">        <span class="string">"total_correct:"</span>, total_correct, </span><br><span class="line">        <span class="string">"loss:"</span>, total_loss</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
@@ -493,6 +495,14 @@
 <p>在时空领域中，经常需要考虑外部因素，例如时间，天气，holiday等，需要对外部因素进行Embedding，例如<a href="https://github.com/UrbComp/DeepTTE" target="_blank" rel="noopener">https://github.com/UrbComp/DeepTTE</a></p>
 </li>
 </ul>
+<hr>
+<p>2020.7.8更新</p>
+<h1><span id="13-linear参数维度">13. Linear参数维度</span></h1><p>做全连接时，我们平时看到的公式有以下形式：<br>$Y=XW+b$<br>$Y=XW^T+b$<br>$Y=W^TX+b$</p>
+<p>因为不同的公式，此时的$W$形状也不同，假设$X\in\mathbb{R}^{100\times2}$表示100个样本，每个样本有2维，假设输出维度5<br>$y=XW+b$，$W\in\mathbb{R}^{2\times5}$<br>$y=XW^T+b$，$W\in\mathbb{R}^{5\times2}$<br>$y=W^TX+b$，对于这种情况，默认$X$中每个样本是列向量，即$X\in\mathbb{R}^{2\times100}$，$W\in\mathbb{R}^{5\times2}$</p>
+<p>在Pytorch中的<code>Linear</code>中采用的是公式2，参数形状$W\in\mathbb{R}^{输出维度\times输入维度}$</p>
+<p>但在实际使用中，为了方便，一般用公式1，此时$W\in\mathbb{R}^{输入维度\times输出维度}$</p>
+<p>在写公式时，需要注意公式的大写还是小写</p>
+<p>$Y=XW+b$这里的$X,Y$表示所有样本<br>$y=xW+b$这里的$x,y$表示一个样本<br>但这两种情况中，$W$始终是大写</p>
 
       
     </div>
@@ -654,7 +664,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">63</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -725,7 +735,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 查看网络参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 分类问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. CrossEntropyLoss()和NLLLoss() 区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 模型训练示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 关闭梯度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 多GPU运行程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. Tensor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">10. BN和Dropout在训练和测试的不同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">11. Linear</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">12. Embedding</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 查看网络参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 分类问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. CrossEntropyLoss()和NLLLoss() 区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 模型训练示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 关闭梯度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 多GPU运行程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. Tensor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">10. BN和Dropout在训练和测试的不同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">11. Linear</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">12. Embedding</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">13. Linear参数维度</span></a></li></ol></div>
             
 
           </div>
