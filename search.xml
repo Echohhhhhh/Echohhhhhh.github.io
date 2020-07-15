@@ -2746,7 +2746,8 @@ u_{t} &=\boldsymbol{\sigma}\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *
   <entry>
     <title>Leetcode之树</title>
     <url>/2020/05/29/Leetcode%E4%B9%8B%E6%A0%91/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<p>二叉树相关知识介绍</p>
+<a id="more"></a>
 <!-- TOC -->
 <ul>
 <li><a href="#1-树概念介绍">1. 树概念介绍</a></li>
@@ -5953,8 +5954,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
         <category>Deep Learning</category>
       </categories>
       <tags>
-        <tag>GPU</tag>
         <tag>Mxnet</tag>
+        <tag>GPU</tag>
         <tag>Pytorch</tag>
       </tags>
   </entry>
@@ -8583,8 +8584,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>论文阅读笔记</category>
       </categories>
       <tags>
-        <tag>时空领域</tag>
         <tag>GCN</tag>
+        <tag>时空领域</tag>
       </tags>
   </entry>
   <entry>
