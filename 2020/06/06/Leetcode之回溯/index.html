@@ -73,13 +73,13 @@
 
 
 
-<meta name="description" content="1. 回溯 2. 矩阵中单词路径搜索 3. 机器人的运动范围 4. 全排列 5. 全排列 II 6. 组合 7. 组合总和 8. 组合总和 II 9. 组合总和 III 10. 括号生成 11. N皇后 12. 总结   1. 回溯回溯可以看做是暴力法的升级。回溯法非常适合由多个步骤组成的问题，每个步骤都有多个选项。当我们在某一步选择了其中一个选项时，就进入到下一步，然后又面临新的选项，就这">
+<meta name="description" content="回溯可以看做是暴力法的升级。回溯法非常适合由多个步骤组成的问题，每个步骤都有多个选项。当我们在某一步选择了其中一个选项时，就进入到下一步，然后又面临新的选项，就这样重读选择，直至达到最终的状态。">
 <meta name="keywords" content="算法,Leetcode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode之回溯">
 <meta property="og:url" content="http://yoursite.com/2020/06/06/Leetcode之回溯/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="1. 回溯 2. 矩阵中单词路径搜索 3. 机器人的运动范围 4. 全排列 5. 全排列 II 6. 组合 7. 组合总和 8. 组合总和 II 9. 组合总和 III 10. 括号生成 11. N皇后 12. 总结   1. 回溯回溯可以看做是暴力法的升级。回溯法非常适合由多个步骤组成的问题，每个步骤都有多个选项。当我们在某一步选择了其中一个选项时，就进入到下一步，然后又面临新的选项，就这">
+<meta property="og:description" content="回溯可以看做是暴力法的升级。回溯法非常适合由多个步骤组成的问题，每个步骤都有多个选项。当我们在某一步选择了其中一个选项时，就进入到下一步，然后又面临新的选项，就这样重读选择，直至达到最终的状态。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/06/06/Leetcode之回溯/1.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/06/Leetcode之回溯/3.png">
@@ -87,10 +87,10 @@
 <meta property="og:image" content="http://yoursite.com/2020/06/06/Leetcode之回溯/2.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/06/Leetcode之回溯/4.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/06/Leetcode之回溯/5.png">
-<meta property="og:updated_time" content="2020-06-18T02:35:03.769Z">
+<meta property="og:updated_time" content="2020-07-15T01:58:26.961Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode之回溯">
-<meta name="twitter:description" content="1. 回溯 2. 矩阵中单词路径搜索 3. 机器人的运动范围 4. 全排列 5. 全排列 II 6. 组合 7. 组合总和 8. 组合总和 II 9. 组合总和 III 10. 括号生成 11. N皇后 12. 总结   1. 回溯回溯可以看做是暴力法的升级。回溯法非常适合由多个步骤组成的问题，每个步骤都有多个选项。当我们在某一步选择了其中一个选项时，就进入到下一步，然后又面临新的选项，就这">
+<meta name="twitter:description" content="回溯可以看做是暴力法的升级。回溯法非常适合由多个步骤组成的问题，每个步骤都有多个选项。当我们在某一步选择了其中一个选项时，就进入到下一步，然后又面临新的选项，就这样重读选择，直至达到最终的状态。">
 <meta name="twitter:image" content="http://yoursite.com/2020/06/06/Leetcode之回溯/1.png">
 
 
@@ -429,7 +429,8 @@
       
 
       
-        <a id="more"></a>
+        <p>回溯可以看做是暴力法的升级。回溯法非常适合由多个步骤组成的问题，每个步骤都有多个选项。当我们在某一步选择了其中一个选项时，就进入到下一步，然后又面临新的选项，就这样重读选择，直至达到最终的状态。</p>
+<a id="more"></a>
 <!-- TOC -->
 <ul>
 <li><a href="#1-回溯">1. 回溯</a></li>
@@ -446,8 +447,7 @@
 <li><a href="#12-总结">12. 总结</a></li>
 </ul>
 <!-- /TOC -->
-<h1><span id="1-回溯">1. 回溯</span></h1><p>回溯可以看做是暴力法的升级。回溯法非常适合由多个步骤组成的问题，每个步骤都有多个选项。当我们在某一步选择了其中一个选项时，就进入到下一步，然后又面临新的选项，就这样重读选择，直至达到最终的状态。</p>
-<p>回溯问题可以理解成在一个树上进行深度优先遍历。例如给定[1,2,3]，求一共有多少种组合。第一个数字可以是1,2,3，有3种选择。然后第二个数字有2种选择，第三个数字有1个选择。<br>回溯就是在这个树上进行深度遍历时，从较深的节点层返回较浅的节点层，需要将状态回复到过去，这个恢复的过程就是“回溯”<br>回溯算法一般用递归实现。回溯算法的时间复杂度很高，因此在遍历时，如果能提前直到这一分支不可能达到满意的结果，就可以提前结束，这一操作称为“剪枝”<br>回溯+剪枝可以加快搜索速度，在这之前，一般需要做一些预处理工作来达到剪枝的目的，例如排序。但这会节省很多剪枝的时间。在回溯+剪枝时，因为时间复杂度很高，所以能用空间换时间就尽量用空间，来减少时间的消耗。</p>
+<h1><span id="1-回溯">1. 回溯</span></h1><p>回溯问题可以理解成在一个树上进行深度优先遍历。例如给定[1,2,3]，求一共有多少种组合。第一个数字可以是1,2,3，有3种选择。然后第二个数字有2种选择，第三个数字有1个选择。<br>回溯就是在这个树上进行深度遍历时，从较深的节点层返回较浅的节点层，需要将状态回复到过去，这个恢复的过程就是“回溯”<br>回溯算法一般用递归实现。回溯算法的时间复杂度很高，因此在遍历时，如果能提前直到这一分支不可能达到满意的结果，就可以提前结束，这一操作称为“剪枝”<br>回溯+剪枝可以加快搜索速度，在这之前，一般需要做一些预处理工作来达到剪枝的目的，例如排序。但这会节省很多剪枝的时间。在回溯+剪枝时，因为时间复杂度很高，所以能用空间换时间就尽量用空间，来减少时间的消耗。</p>
 <p><img src="/2020/06/06/Leetcode之回溯/1.png" alt=""></p>
 <p>做回溯问题时，最好先画图，考虑以下问题</p>
 <ul>
@@ -649,7 +649,8 @@
 <h1><span id="12-总结">12. 总结</span></h1><p>在回溯题中，需要判断给定数组中是否有重复元素，如果有重复元素，在回溯的过程，需要去重，步骤如下</p>
 <ul>
 <li>先对数组排序，<code>nums = sorted(nums)</code></li>
-<li>在for循环内部，使用<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(start,len(nums)):</span><br><span class="line">    <span class="keyword">if</span> i &gt; statr <span class="keyword">and</span> nums[i]==nums[i<span class="number">-1</span>]:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">path.append(nums[i])</span><br><span class="line">dfs(...)</span><br><span class="line">path.pop()</span><br></pre></td></tr></table></figure>
+<li><p>在for循环内部，使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(start,len(nums)):</span><br><span class="line">    <span class="keyword">if</span> i &gt; statr <span class="keyword">and</span> nums[i]==nums[i<span class="number">-1</span>]:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">path.append(nums[i])</span><br><span class="line">dfs(...)</span><br><span class="line">path.pop()</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 
@@ -815,7 +816,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
