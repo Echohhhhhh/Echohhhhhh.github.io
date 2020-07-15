@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-07-14T16:35:40.262Z</updated>
+  <updated>2020-07-15T01:53:47.007Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,31 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>面试之海量数据处理</title>
-    <link href="http://yoursite.com/2020/07/15/%E9%9D%A2%E8%AF%95%E4%B9%8B%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/"/>
-    <id>http://yoursite.com/2020/07/15/面试之海量数据处理/</id>
-    <published>2020-07-14T16:07:09.000Z</published>
-    <updated>2020-07-14T16:35:40.262Z</updated>
-    
-    <content type="html"><![CDATA[<h1><span id="b树和b树">B树和B+树</span></h1><p>为了减少磁盘I/O，磁盘上的数据通常以树的形式存储。<strong>树中每个节点对应一次磁盘I/O</strong>，为了减少搜索时间，因此需要控制树的高度，像二叉树就不适合了，因为二叉树每个节点只有2个子树，导致树的层数很深。这里使用B树和B+树。<br>B树和B+树是多叉搜索树。</p><p>B树</p><ul><li>所有叶子节点位于同一层</li><li>多叉搜索树</li><li>B树的中间节点和叶子节点都表示实际的数据</li></ul><p><img src="/2020/07/15/面试之海量数据处理/B树.jpg" alt=""></p><p>B树的查找顺序为：</p><ol><li>从根节点开始，如果查找的数据比根节点小，就去左子树中找，否则去右子树找</li><li>和子树的多个关键字比较，找出目标所处的范围，然后去范围对应的子树中继续查找</li><li>以此循环，直到找到</li></ol><p>B+树</p><ul><li>叶子节点都在同一层</li><li>多叉搜索树</li><li>B+数的中间节点不保存数据，只用来索引，所有的数据保存在叶子节点上</li></ul><p><img src="/2020/07/15/面试之海量数据处理/B+树.jpg" alt=""></p><p>从图可以看出，B+树的中间节点和叶子节点有重复的数据，这是因为中间节点保存的只是子树数据中的指针，并不是真正的数据。<br>因为中间节点存储的是指针，而指针占用的空间比较少，所以一个节点可以保存很多个指针，使得B+数比B数矮胖，相对而言，读取I/O次数更少。</p><p><strong>磁盘存储的知识</strong></p><ol><li>磁盘I/O比在内存中操作慢非常非常非常多，因此需要尽量减少磁盘I/O操作，即不要过多的读取磁盘</li><li>磁盘I/O时间=寻道+磁盘旋转+数据传输时间<br>从磁盘中读取数据时，系统会将逻辑地址发给磁盘，磁盘将逻辑地址转换为物理地址（哪个磁道，哪个扇区），然后磁头转到相应的磁道，再找到该磁道对应的扇区。</li><li><p>扇区是磁盘的最小存储单元。一次磁盘I/O会读出一个扇<br>区的数据，因此读1个字节和读4k（一个扇区）需要的时间几乎一样</p><p><img src="/2020/07/15/面试之海量数据处理/磁道.jpg" alt=""></p></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1&gt;&lt;span id=&quot;b树和b树&quot;&gt;B树和B+树&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;为了减少磁盘I/O，磁盘上的数据通常以树的形式存储。&lt;strong&gt;树中每个节点对应一次磁盘I/O&lt;/strong&gt;，为了减少搜索时间，因此需要控制树的高度，像二叉树就不适合了，因为二叉树每个节点
-      
-    
-    </summary>
-    
-      <category term="算法" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
   
   <entry>
     <title>百面机器学习概述二</title>
@@ -467,6 +442,28 @@
       <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
     
       <category term="NNI" scheme="http://yoursite.com/tags/NNI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Deep Learning for Spatio-Temporal Data Mining: A Survey</title>
+    <link href="http://yoursite.com/2019/11/08/Deep-Learning-for-Spatio-Temporal-Data-Mining-A-Survey/"/>
+    <id>http://yoursite.com/2019/11/08/Deep-Learning-for-Spatio-Temporal-Data-Mining-A-Survey/</id>
+    <published>2019-11-08T07:49:36.000Z</published>
+    <updated>2020-01-23T13:06:45.571Z</updated>
+    
+    <content type="html"><![CDATA[<p>&ensp;&ensp;&ensp;&ensp;<a href="https://arxiv.org/pdf/1906.04928.pdf" target="_blank" rel="noopener">Deep Learning for Spatio-Temporal Data Mining: A Survey</a><br>这篇论文是时空领域的综述论文，介绍了近几年时空领域的发展。<br><a id="more"></a></p><p>一些比较好的GitHub<br><a href="https://github.com/xuehaouwa/Awesome-Trajectory-Prediction" target="_blank" rel="noopener">https://github.com/xuehaouwa/Awesome-Trajectory-Prediction</a></p><h1><span id="引言">引言</span></h1><p>时空领域的数据的应用很广泛，包括环境和气候预测（风预测，降雨预测等），公共安全预测（crime预测），智能交通预测（交通流量预测），人类活动（人类轨迹模式挖掘）。本文将时空数据的类型，和广泛应用的深度学习模型，以及现有的研究进展.</p><h1><span id="时空数据分类">时空数据分类</span></h1><ol><li>Even data<br>事件数据由离散的事件组成，有location和time信息，例如cirme事件和traffic accident事件，疾病爆发事件，社会事件。</li><li>Trajectory data<br>轨迹数据是一系列随着时间变化的经纬度序列组成。有人的轨迹和车的轨迹。  </li><li>Point reference data<br>一般都是气象数据，测量一个区域的温度，植被等。  </li><li>Raster data（栅格数据）<br>有固定的m个区域，每个区域有n个时间段，可以用一个$R^{m \times n}$来表示。例如traffic flow数据。</li><li>Vedio data<br>视频数据和时空数据类似，相邻的像素可以表示相似的RGB，在时间上，特征变化平缓。可以用三维张量表示。  </li></ol><p>以上的5类数据可以用下图的方式表示。</p><p><img src="/2019/11/08/Deep-Learning-for-Spatio-Temporal-Data-Mining-A-Survey/stdata.png" alt=""></p><p>(1)轨迹和时间序列都可以表示成序列的形式。<br>(2)有时轨迹也可以表示成2维矩阵，矩阵的行和列是网格的长和宽，矩阵的值表示轨迹走的网格。这个表示形式通常使用CNN模型。例如：<a href="https://arxiv.org/pdf/1705.09436.pdf" target="_blank" rel="noopener">（2017NIPS）Human Trajectory Prediction using Spatially aware Deep Attention Models</a><br>(3)空间地图可以表示为Graph和2维矩阵。至于使用图还是2D矩阵根据应用而定。例如在城市交通流预测，交通网络中的交通数据使用Graph表示，例如<a href="https://arxiv.org/pdf/1707.01926.pdf" target="_blank" rel="noopener">(2018ICLR)Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting</a><br>(4)网格数据，通常使用2D或3D张量表示，如果是2D矩阵，行和列分别表示区域和时间。如果是3D张量，分别表示区域的行和列，时间。</p><p><img src="/2019/11/08/Deep-Learning-for-Spatio-Temporal-Data-Mining-A-Survey/model.png" alt=""><br>未完待续。。。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&lt;a href=&quot;https://arxiv.org/pdf/1906.04928.pdf&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Deep Learning for Spatio-Temporal Data Mining: A Survey&lt;/a&gt;&lt;br&gt;这篇论文是时空领域的综述论文，介绍了近几年时空领域的发展。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="论文阅读笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="时空领域" scheme="http://yoursite.com/tags/%E6%97%B6%E7%A9%BA%E9%A2%86%E5%9F%9F/"/>
     
   </entry>
   
