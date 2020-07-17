@@ -81,6 +81,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="总结《百面机器学习》有关知识点。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/归一化.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/PR曲线和ROC曲线.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/百面机器学习概述/linear.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/百面机器学习概述/linear1.jpg">
@@ -123,11 +124,11 @@
 <meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/kmeans3.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/贝叶斯1.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/贝叶斯2.png">
-<meta property="og:updated_time" content="2020-07-15T01:26:36.490Z">
+<meta property="og:updated_time" content="2020-07-16T16:24:06.806Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百面机器学习概述一">
 <meta name="twitter:description" content="总结《百面机器学习》有关知识点。">
-<meta name="twitter:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/PR曲线和ROC曲线.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/归一化.jpg">
 
 
 
@@ -428,7 +429,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  24.3k
+                  24.7k
                 </span>
               
 
@@ -444,7 +445,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  92
+                  93
                 </span>
               
             </div>
@@ -485,7 +486,7 @@
 <li><a href="#25-模型评估方法">2.5. 模型评估方法</a></li>
 <li><a href="#26-过拟合和欠拟合">2.6. 过拟合和欠拟合</a></li>
 <li><a href="#27-正则化">2.7. 正则化</a></li>
-<li><a href="#梯度消失和梯度爆炸">梯度消失和梯度爆炸</a></li>
+<li><a href="#28-梯度消失和梯度爆炸">2.8. 梯度消失和梯度爆炸</a></li>
 </ul>
 </li>
 <li><a href="#3-经典算法">3. 经典算法</a><ul>
@@ -553,9 +554,19 @@
 <!-- /TOC -->
 <h1><span id="1-特征工程">1. 特征工程</span></h1><h2><span id="11-特征归一化">1.1. 特征归一化</span></h2><ul>
 <li>目的：消除特征之间量纲的影响，防止学习到的结果向数值大的特征倾斜。</li>
-<li>Max-Min归一化：将数据归一化到[0,1]之间，等比缩放。</li>
-<li>Z-Score归一化（零均值归一化）：将数据归一化到均值为0，标准差为1的分布上。</li>
-<li>需要归一化：线性回归、逻辑回归、SVM、深度神经网络。不需要归一化：基于决策树模型。</li>
+<li><p>Max-Min归一化：将数据归一化到[0,1]之间，等比缩放。</p>
+<script type="math/tex; mode=display">\frac{X_{i}-X_{\min }}{X_{\max }-X_{\min }}</script></li>
+<li><p>Z-Score归一化（零均值归一化）：将数据归一化到均值为0，标准差为1的分布上。</p>
+<script type="math/tex; mode=display">x^{\prime}=\frac{x-\bar{x}}{\sigma}</script></li>
+<li><p><strong>数据标准化的目的</strong></p>
+<ol>
+<li>避免量纲大的特征对模型起决定性作用，归一化有可能提高精度<br>比如房子的面积和房子个数，一个范围可能是[100,10000]，另一个可能是[1,5]，在进行距离有关的计算时，导致计算得到的距离依赖于房子的面积，房子面积越相近，计算得到的距离越小，但这并不代表房间个数就不重要。为了消除特征间数据量的差异，对每一维进行归一化，对每个特征同等看待。</li>
+<li>在梯度下降时，不同特征的参数下降变得更稳定，加速模型参数找到最优解<br>因为在梯度下降中需要损失函数对w求偏导，这个偏导中肯定有x，因此w的梯度下降速度就会受到x的影响。因为在更新的时候不同的w使用的是一个学习率，所以x可能会导致不同的w的下降速度相差很大，下降过程不稳定，通过归一化可以对不同特征的参数下降速度有所控制，使得下降过程相对稳定。体现的图像上就是<br><img src="/2020/06/19/百面机器学习概述/归一化.jpg" alt=""></li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>什么时候需要归一化<br>需要使用梯度下降和计算距离的模型需要归一化。因为例如：线性回归、逻辑回归、SVM、深度神经网络，KNN,K-Means，<br>概率模型和树形模型不需要归一化，因为它们不关心变量的值，只关心变量的分布和变量之间的条件概率。例如决策树，随机森林。</li>
 </ul>
 <h2><span id="12-类别型特征">1.2. 类别型特征</span></h2><p>将类别特征—&gt;数值特征，有以下方法</p>
 <ul>
@@ -654,7 +665,7 @@
 <li>L2正则</li>
 </ul>
 <p>惩罚项为权重的平方和</p>
-<script type="math/tex; mode=display">L(w)=\frac{1}{N} \sum_{i=1}^{N}\left(f\left(x_{i} ; w\right)-y_{i}\right)^{2}+\frac{\lambda}{2}\|w\|^{2}</script><h2><span id="梯度消失和梯度爆炸">梯度消失和梯度爆炸</span></h2><p>梯度消失和梯度爆炸经常出现在较深的网络中。反向传播用到链式法则，导数连乘。如果激活函数求导后与权重相乘的积大于1，层数增多时，求出的梯度将以指数增加，发生梯度爆炸。如果小于1，梯度将以指数衰减，发生梯度消失。<br>sigmoid的导数最大为0.25，易发生梯度消失问题</p>
+<script type="math/tex; mode=display">L(w)=\frac{1}{N} \sum_{i=1}^{N}\left(f\left(x_{i} ; w\right)-y_{i}\right)^{2}+\frac{\lambda}{2}\|w\|^{2}</script><h2><span id="28-梯度消失和梯度爆炸">2.8. 梯度消失和梯度爆炸</span></h2><p>梯度消失和梯度爆炸经常出现在较深的网络中。反向传播用到链式法则，导数连乘。如果激活函数求导后与权重相乘的积大于1，层数增多时，求出的梯度将以指数增加，发生梯度爆炸。如果小于1，梯度将以指数衰减，发生梯度消失。<br>sigmoid的导数最大为0.25，易发生梯度消失问题</p>
 <p>如何解决梯度消失和梯度爆炸：</p>
 <ol>
 <li>使用ReLU代替sigmoid解决梯度消失问题。Relu的正数部分导数为1，不存在梯度消失和梯度爆炸的问题</li>
@@ -677,7 +688,7 @@
 <p><img src="/2020/06/19/百面机器学习概述/百面机器学习/../百面机器学习概述/linear1.jpg" alt=""></p>
 <h3><span id="313-带有激活函数的反向传播">3.1.3. 带有激活函数的反向传播</span></h3><p>上面介绍的单变量和多变量回归都是线性的，没有激活函数，这里介绍带有激活函数的回归问题。</p>
 <p>首先定义损失函数</p>
-<script type="math/tex; mode=display">L=\frac{1}{2m}\sum_{i=1}^{i=m}(h(x^i),y^i)^2\\h(x)=f(xW+b)</script><p>这里的$f$表示激活函数，可以是Sigmoid，Tanh，ReLU</p>
+<script type="math/tex; mode=display">L=\frac{1}{2m}\sum_{i=1}^{i=m}(h(x^i),y^i)^2</script><script type="math/tex; mode=display">h(x)=f(xW+b)</script><p>这里的$f$表示激活函数，可以是Sigmoid，Tanh，ReLU</p>
 <p><img src="/2020/06/19/百面机器学习概述/BP1.jpg" alt=""></p>
 <p><img src="/2020/06/19/百面机器学习概述/BP2.jpg" alt=""></p>
 <p><strong>不同激活函数的导数</strong></p>
@@ -710,9 +721,7 @@
 </ul>
 <p>问题：</p>
 <ol>
-<li>什么时候用L1正则化，什么时候用L2正则化？<br>如果想让参数变得稀疏，即很多参数都为0，意味着模型使用的特征没有那么多，就用L1正则。<br>如果想用所有的特征，同时特征的参数又不这么大，用L2正则。</li>
-<li>L1正则中实现参数稀疏有什么好处？<br>参数稀疏，说明有些参数为0，这样就可以实现特征的选择，参数为0的那些特征不会参与到模型计算中。一般而言，大部分特征对模型是没有贡献的，有些无用的特征虽然可以减少训练集的误差，但是在测试集上，反而会产生干扰。通过引入稀疏参数，可以将无用特征的权重设置为0.</li>
-<li>L2正则中为什么参数越小表示模型越简单<br>越是复杂的模型，越想要对训练集中所有的点都要拟合，包括异常点，这就会造成在较小的区间中产生较大的波动，这个较大的波动也会反映在这个区间的导数比较大。而只有较大的参数才会有较大的导数，因此参数越小，模型越简单。</li>
+<li><strong>什么时候用L1正则化，什么时候用L2正则化？</strong><br>如果想让参数变得稀疏，即很多参数都为0，意味着模型使用的特征没有那么多，就用L1正则。<br>如果想用所有的特征，同时特征的参数又不这么大，用L2正则。<br><strong>2. L1正则中实现参数稀疏有什么好处？</strong><br>参数稀疏，说明有些参数为0，这样就可以实现特征的选择，参数为0的那些特征不会参与到模型计算中。一般而言，大部分特征对模型是没有贡献的，有些无用的特征虽然可以减少训练集的误差，但是在测试集上，反而会产生干扰。通过引入稀疏参数，可以将无用特征的权重设置为0.<br><strong>3. L2正则中为什么参数越小表示模型越简单</strong><br>越是复杂的模型，越想要对训练集中所有的点都要拟合，包括异常点，这就会造成在较小的区间中产生较大的波动，这个较大的波动也会反映在这个区间的导数比较大。而只有较大的参数才会有较大的导数，因此参数越小，模型越简单。</li>
 </ol>
 <h3><span id="315-面试问题">3.1.5. 面试问题</span></h3><p><strong>1. 简单介绍以下线性回归</strong></p>
 <ul>
@@ -1617,7 +1626,7 @@ C-\alpha_{i}-\mu_{i}=0 \\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. 特征归一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. 类别型特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.3. 文本表示模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.4. Word2Vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.5. 图像不足时处理方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 模型评估</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 常见评估指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. P-R曲线和ROC曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. 余弦距离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.4. A/B测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.5. 模型评估方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.6. 过拟合和欠拟合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.7. 正则化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">梯度消失和梯度爆炸</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 经典算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. 回归模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.1. 单变量线性回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.2. 多变量线性回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.3. 带有激活函数的反向传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.4. L1正则和L2正则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.5. 面试问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. 逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.2.1. 逻辑回归推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.2.2. 逻辑回归常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. Softmax回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.4. 回归和分类总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.5. 数据不平衡问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.5.1. SMOTE算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.6. SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.1. 线性可分SVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.2. 近似线性SVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.3. 核函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.4. 面试问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.7. 决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1. 基础树(ID3/C4.5/CART)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.1. ID3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.2. C4.5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.3. CART(分类回归树)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.4. 总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.2. 树的剪枝</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.8. K近邻(KNN)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.8.1. KNN原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.8.2. KD树</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. K-Means聚类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.2. K-Means的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.2.1. K-Means++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.2.2. ISODATA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.3. 聚类评价指标</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 贝叶斯分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.1. 朴素贝叶斯分类器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.2. 半朴素贝叶斯分类器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 生成模型和判别模型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. 特征归一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. 类别型特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.3. 文本表示模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.4. Word2Vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.5. 图像不足时处理方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 模型评估</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 常见评估指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. P-R曲线和ROC曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. 余弦距离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.4. A/B测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.5. 模型评估方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.6. 过拟合和欠拟合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.7. 正则化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.8. 梯度消失和梯度爆炸</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 经典算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. 回归模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.1. 单变量线性回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.2. 多变量线性回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.3. 带有激活函数的反向传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.4. L1正则和L2正则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.5. 面试问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. 逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.2.1. 逻辑回归推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.2.2. 逻辑回归常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. Softmax回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.4. 回归和分类总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.5. 数据不平衡问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.5.1. SMOTE算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.6. SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.1. 线性可分SVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.2. 近似线性SVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.3. 核函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.4. 面试问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.7. 决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1. 基础树(ID3/C4.5/CART)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.1. ID3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.2. C4.5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.3. CART(分类回归树)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.4. 总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.2. 树的剪枝</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.8. K近邻(KNN)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.8.1. KNN原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.8.2. KD树</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. K-Means聚类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.2. K-Means的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.2.1. K-Means++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.2.2. ISODATA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.3. 聚类评价指标</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 贝叶斯分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.1. 朴素贝叶斯分类器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.2. 半朴素贝叶斯分类器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 生成模型和判别模型</span></a></li></ol></div>
             
 
           </div>
