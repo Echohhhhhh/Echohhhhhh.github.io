@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="记录Leetcode遇到的字符串相关题目">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-07-20T15:07:33.153Z">
+<meta property="og:updated_time" content="2020-07-23T02:15:48.529Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode之字符串">
 <meta name="twitter:description" content="记录Leetcode遇到的字符串相关题目">
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k
+                  1.8k
                 </span>
               
 
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  7
                 </span>
               
             </div>
@@ -424,7 +424,13 @@
       
         <p>记录Leetcode遇到的字符串相关题目</p>
 <a id="more"></a>
-<h1><span id="把字符串转换成整数">把字符串转换成整数</span></h1><p>写一个函数 StrToInt，实现把字符串转换成整数这个功能。不能使用 atoi 或者其他类似的库函数。</p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-把字符串转换成整数">1. 把字符串转换成整数</a></li>
+<li><a href="#2-最长不重复子串">2. 最长不重复子串</a></li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-把字符串转换成整数">1. 把字符串转换成整数</span></h1><p>写一个函数 StrToInt，实现把字符串转换成整数这个功能。不能使用 atoi 或者其他类似的库函数。</p>
 <p>首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。</p>
 <p>当我们寻找到的第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字组合起来，作为该整数的正负号；假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成整数。</p>
 <p>该字符串除了有效的整数部分之后也可能会存在多余的字符，这些字符可以被忽略，它们对于函数不应该造成影响。</p>
@@ -450,6 +456,40 @@
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">strToInt</span><span class="params">(self, str)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type str: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        str=str.strip()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> str:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        INT_MAX,INT_MIN=<span class="number">2</span>**<span class="number">31</span><span class="number">-1</span>,<span class="number">-2</span>**<span class="number">31</span></span><br><span class="line">        valid_num = []<span class="comment">#记录当前有效的数字</span></span><br><span class="line">        minus = <span class="keyword">False</span><span class="comment">#判断这个数是正还是负</span></span><br><span class="line"></span><br><span class="line">        strs = str.split()[<span class="number">0</span>]<span class="comment">#切分后第一个连续字符串</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#如果第一个字符不在[0,9]之间，且不是'-'或'+'，肯定不符合要求</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (<span class="string">'0'</span>&lt;=strs[<span class="number">0</span>]&lt;=<span class="string">'9'</span> <span class="keyword">or</span> strs[<span class="number">0</span>]==<span class="string">'-'</span> <span class="keyword">or</span> strs[<span class="number">0</span>]==<span class="string">'+'</span>):<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="comment">#如果第一个字符为'-'或'+'，但是后面没数字了，返回0</span></span><br><span class="line">        <span class="keyword">if</span> len(strs)==<span class="number">1</span> <span class="keyword">and</span> (strs[<span class="number">0</span>]==<span class="string">'-'</span> <span class="keyword">or</span> strs[<span class="number">0</span>]==<span class="string">'+'</span>):<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> strs[<span class="number">0</span>]==<span class="string">'-'</span>:</span><br><span class="line">            minus = <span class="keyword">True</span><span class="comment">#负数</span></span><br><span class="line">            start = <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> strs[<span class="number">0</span>]==<span class="string">'+'</span>:</span><br><span class="line">            minus = <span class="keyword">False</span><span class="comment">#正数</span></span><br><span class="line">            start = <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            minus = <span class="keyword">False</span><span class="comment">#正数</span></span><br><span class="line">            start = <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(start,len(strs)):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">'0'</span>&lt;=strs[i]&lt;=<span class="string">'9'</span>:</span><br><span class="line">                valid_num.append(strs[i])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> len(valid_num)==<span class="number">0</span>:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        str_num = <span class="string">''</span>.join(valid_num)</span><br><span class="line">        <span class="keyword">if</span> minus==<span class="keyword">False</span>:<span class="comment">#正数</span></span><br><span class="line">            <span class="keyword">return</span> min(INT_MAX,int(str_num))</span><br><span class="line">        <span class="keyword">else</span>:<span class="comment">#负数</span></span><br><span class="line">            <span class="keyword">return</span> max(INT_MIN,<span class="number">0</span>-int(str_num))</span><br></pre></td></tr></table></figure>
+<h1><span id="2-最长不重复子串">2. 最长不重复子串</span></h1><p>请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。</p>
+<blockquote>
+<p>示例 1:<br>输入: “abcabcbb”<br>输出: 3<br>解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。</p>
+</blockquote>
+<p>链接：<a href="https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof" target="_blank" rel="noopener">https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof</a></p>
+<p><strong>【分析一】</strong><br>双指针。<br>abcabcbb</p>
+<p>head指向不重复子串的头，tail指向不重复子串尾的下一个元素。<br>res表示不重复子串的长度。</p>
+<ul>
+<li>首先head先指向a，tail指向b。如果b不在a中，则将b加入到不重复列表中，此时tail向后移一位，res取tail-head和res的最大值，即res=2。</li>
+<li>此时head指向a，tail指向c，此时c不在ab中，然后tail后移，res=3</li>
+<li>此时head指向a，tail指向a，a在abc中，则head需要往后移，直到不含a</li>
+<li>此时head指向b，tail指向a，a不在bc中，然后tail后移，res保持3</li>
+<li>此时head指向b，tail指向b，b在bca中，则head需要往后移，直到不含b</li>
+<li>此时head指向c，tail指向b，b不在ca中，然后tail后移，res保持3</li>
+<li>…</li>
+</ul>
+<ul>
+<li>时间复杂度：O(n^2)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> s:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="comment">#使用双指针</span></span><br><span class="line">        head,tail = <span class="number">0</span>,<span class="number">1</span></span><br><span class="line">        res = <span class="number">1</span></span><br><span class="line">        n = len(s)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> tail &lt; n:</span><br><span class="line">            <span class="keyword">if</span> s[tail] <span class="keyword">not</span> <span class="keyword">in</span> s[head:tail]:</span><br><span class="line">                tail+=<span class="number">1</span></span><br><span class="line">                res = max(tail-head,res)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">while</span> s[tail] <span class="keyword">in</span> s[head:tail]:</span><br><span class="line">                    head+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p><strong>【优化】</strong></p>
+<p>使用dic来记录每个字符的下标<br>head：不重复字符的第一个元素下标<br>tail：不重复字符最后一个元素的下一个元素下标</p>
+<p>使用dic来记录每个字符的下标</p>
+<p>当tail不在dic中，说明tail没有和前面的字符重复，则将tail加入到dict中，并把res和tail加1<br>如果tail已经在dict中，说明tail和前面的某个字符重复，则将head直接移到s[tail]的下一个元素，并把当前s[tail]的下标更新。</p>
+<p>abcabcbb</p>
+<ul>
+<li>刚开始head指向a，tail指向b，dict={‘a’:0}，res=1</li>
+<li>此时b不再a中，则将b加入到不重复子串，dict={‘a’:0,’b’:1}，tail指向c，res=2</li>
+<li>此时c不在ab中，将c加入到不重复子串中，dict={‘a’:0,’b’:1,’c’:2}，tail指向a，res=3</li>
+<li>此时a已经在dict中，然后需要移动head，直接将head移动到原先a的下一个位置，即head=b，此时再把现在a的位置更新到dict中，即’a’:3</li>
+<li>依次类推</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> s:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        n = len(s)</span><br><span class="line">        <span class="comment">#使用双指针</span></span><br><span class="line">        head,tail = <span class="number">0</span>,<span class="number">1</span></span><br><span class="line">        res = <span class="number">1</span></span><br><span class="line">        dic = &#123;s[head]:<span class="number">0</span>&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> tail &lt; n:</span><br><span class="line">            <span class="keyword">if</span> s[tail] <span class="keyword">not</span> <span class="keyword">in</span> dic:</span><br><span class="line">                dic[s[tail]] = tail  </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment">#head调到重复指针的下一位</span></span><br><span class="line">                head = max(dic[s[tail]]+<span class="number">1</span>,head)</span><br><span class="line">                <span class="comment">#更新被重复字符的下标</span></span><br><span class="line">                dic[s[tail]] = tail</span><br><span class="line">            tail+=<span class="number">1</span></span><br><span class="line">            res = max(tail-head,res)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -613,7 +653,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -624,7 +664,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -635,7 +675,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -684,7 +724,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">把字符串转换成整数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 把字符串转换成整数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 最长不重复子串</span></a></li></ol></div>
             
 
           </div>

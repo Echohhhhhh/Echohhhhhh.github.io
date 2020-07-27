@@ -1,6 +1,343 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>latex安装与配置</title>
+    <url>/2020/07/27/latex%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>最近开始使用Latex写论文，在此记录下Latex的安装和配置</p>
+<a id="more"></a>
+<!-- TOC -->
+<ul>
+<li><a href="#1-软件准备">1. 软件准备</a></li>
+<li><a href="#2-安装texlive">2. 安装TexLive</a></li>
+<li><a href="#3-配置latex-workshop">3. 配置LaTEX Workshop</a></li>
+<li><a href="#4-vscode界面使用">4. VSCode界面使用</a><ul>
+<li><a href="#41-编译latex">4.1. 编译latex</a></li>
+<li><a href="#42-查看pdf">4.2. 查看pdf</a></li>
+<li><a href="#43-查看日志">4.3. 查看日志</a></li>
+</ul>
+</li>
+<li><a href="#5-快捷键">5. 快捷键</a></li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-软件准备">1. 软件准备</span></h1><ol>
+<li>TexLive<br>Latex的编译器，安装之后，就可以打开记事本，然后写latex语句，然后使用TEXLive编译，但是这种方法不太友好</li>
+<li>VSCode<br>为了更好的编辑Latex，使用宇宙第一编辑器VSCode</li>
+<li>LaTEX Workshop<br>安装完VSCode之后，在VSCode中安装一个插件：LaTEX Workshop</li>
+</ol>
+<h1><span id="2-安装texlive">2. 安装TexLive</span></h1><ol>
+<li>在<a href="https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/" target="_blank" rel="noopener">清华源</a>上下载texlive.iso镜像，大约有3.7G，等呀等…..等呀等…..终于下完了。</li>
+<li>安装<br>这个过程比较漫长，需要从网上下载需要的文件<br><img src="/2020/07/27/latex安装与配置/1.jpg" alt=""></li>
+</ol>
+<h1><span id="3-配置latex-workshop">3. 配置LaTEX Workshop</span></h1><ol>
+<li>文件—&gt;首选项—&gt;配置</li>
+<li>输入<code>latex-workshop.latex.recipes</code>进行搜索，编辑<code>settings.json</code></li>
+<li><p>配置</p>
+<ul>
+<li><code>latex-workshop.latex.tools</code>:编译工具,”xelatex”,”pdflatex”,”bibtex”是三个常用的编译工具。如果安装路径中包括中文的话，可以将<code>&quot;latex-workshop.latex.tools&quot;</code>:中的<code>%DOC%</code>更改为<code>%DOCFILE%</code>。</li>
+<li><code>latex-workshop.latex.recipes</code>:latex编译的方案。可以使用”xelatex”，也可以使用”pdflatex”，或”xe-&gt;bib-&gt;xe-&gt;xe”,”pdf-&gt;bib-&gt;pdf-&gt;pdf”连续多次编译。其中”pdf-&gt;bib-&gt;pdf-&gt;pdf”适合英文期刊模板，默认使用<code>latexmk</code>。我们配置的这些在左边菜单栏的”build Latex project”中都可以看到<br><img src="/2020/07/27/latex安装与配置/2.jpg" alt=""> </li>
+<li><code>&quot;latex-workshop.view.pdf.viewer&quot;: &quot;tab&quot;</code>表示使用vscode内嵌的pdf来查看编译后的pdf文件</li>
+<li><code>&quot;latex-workshop.latex.autoBuild.run&quot;: &quot;onFileChange&quot;或&quot;never&quot;</code>，表示在保存tex文件时是否自动编译</li>
+<li><code>&quot;latex-workshop.latex.autoClean.run&quot;: &quot;onBuilt&quot;</code>表示在生成pdf后自动清除辅助文件</li>
+</ul>
+<pre><code class="lang-json">{
+ &quot;remote.SSH.remotePlatform&quot;: {
+     &quot;gpu27&quot;: &quot;linux&quot;,
+     &quot;gpu28&quot;: &quot;linux&quot;,
+     &quot;gpu-test&quot;: &quot;linux&quot;,
+     &quot;gpu29&quot;: &quot;linux&quot;
+ },
+ &quot;editor.fontSize&quot;: 18,
+ &quot;editor.suggestSelection&quot;: &quot;first&quot;,
+ &quot;vsintellicode.modify.editor.suggestSelection&quot;: &quot;automaticallyOverrodeDefaultValue&quot;,
+ &quot;python.jediEnabled&quot;: false,
+ &quot;files.eol&quot;: &quot;\n&quot;,
+ &quot;files.autoSave&quot;: &quot;afterDelay&quot;,
+ &quot;python.languageServer&quot;: &quot;Microsoft&quot;,
+ &quot;latex-workshop.view.pdf.viewer&quot;: &quot;tab&quot;,
+ &quot;latex-workshop.latex.autoBuild.run&quot;: &quot;never&quot;,
+ &quot;latex-workshop.latex.autoClean.run&quot;: &quot;onBuilt&quot;,
+ &quot;latex-workshop.latex.clean.fileTypes&quot;: [
+     &quot;*.aux&quot;,
+     &quot;*.bbl&quot;,
+     &quot;*.blg&quot;,
+     &quot;*.idx&quot;,
+     &quot;*.ind&quot;,
+     &quot;*.lof&quot;,
+     &quot;*.lot&quot;,
+     &quot;*.out&quot;,
+     &quot;*.toc&quot;,
+     &quot;*.acn&quot;,
+     &quot;*.acr&quot;,
+     &quot;*.alg&quot;,
+     &quot;*.glg&quot;,
+     &quot;*.glo&quot;,
+     &quot;*.gls&quot;,
+     &quot;*.ist&quot;,
+     &quot;*.fls&quot;,
+     &quot;*.log&quot;,
+     &quot;*.fdb_latexmk&quot;
+     ],
+
+ &quot;latex-workshop.latex.recipes&quot;: [
+     {
+         &quot;name&quot;: &quot;pdflatex-&gt;bibtex-&gt;pdflatex × 2&quot;,
+         &quot;tools&quot;: [
+             &quot;pdflatex&quot;,
+             &quot;bibtex&quot;,
+             &quot;pdflatex&quot;,
+             &quot;pdflatex&quot;
+         ]
+     },
+     {
+         &quot;name&quot;: &quot;xelatex&quot;,
+         &quot;tools&quot;: [
+             &quot;xelatex&quot;
+         ],
+     },
+     {
+         &quot;name&quot;: &quot;latexmk&quot;,
+         &quot;tools&quot;: [
+             &quot;latexmk&quot;
+         ]
+     },
+     {
+         &quot;name&quot;: &quot;pdflatex&quot;,
+         &quot;tools&quot;: [
+             &quot;pdflatex&quot;
+         ]
+     },
+     {
+         &quot;name&quot;: &quot;xe-&gt;bib-&gt;xe-&gt;xe&quot;,
+         &quot;tools&quot;: [
+             &quot;xelatex&quot;,
+             &quot;bibtex&quot;,
+             &quot;xelatex&quot;,
+             &quot;xelatex&quot;
+         ]
+     },
+     {
+         &quot;name&quot;: &quot;Compile Rnw files&quot;,
+         &quot;tools&quot;: [
+             &quot;rnw2tex&quot;,
+             &quot;latexmk&quot;
+         ]
+     },
+     {
+         &quot;name&quot;: &quot;Compile Jnw files&quot;,
+         &quot;tools&quot;: [
+             &quot;jnw2tex&quot;,
+             &quot;latexmk&quot;
+         ]
+     }
+ ],
+ &quot;latex-workshop.latex.tools&quot;: [
+     {
+         &quot;name&quot;: &quot;xelatex&quot;,
+         &quot;command&quot;: &quot;xelatex&quot;,
+         &quot;args&quot;: [
+             &quot;-synctex=1&quot;,
+             &quot;-interaction=nonstopmode&quot;,
+             &quot;-file-line-error&quot;,
+             &quot;%DOC%&quot;
+         ]
+     },
+     {
+       &quot;name&quot;: &quot;latexmk&quot;,
+       &quot;command&quot;: &quot;latexmk&quot;,
+       &quot;args&quot;: [
+         &quot;-synctex=1&quot;,
+         &quot;-interaction=nonstopmode&quot;,
+         &quot;-file-line-error&quot;,
+         &quot;-pdf&quot;,
+         &quot;%DOC%&quot;
+       ]
+     },
+     {
+       &quot;name&quot;: &quot;pdflatex&quot;,
+       &quot;command&quot;: &quot;pdflatex&quot;,
+       &quot;args&quot;: [
+         &quot;-synctex=1&quot;,
+         &quot;-interaction=nonstopmode&quot;,
+         &quot;-file-line-error&quot;,
+         &quot;%DOC%&quot;
+       ]
+     },
+     {
+       &quot;name&quot;: &quot;bibtex&quot;,
+       &quot;command&quot;: &quot;bibtex&quot;,
+       &quot;args&quot;: [
+         &quot;%DOCFILE%&quot;
+       ]
+     }
+   ],
+ &quot;tabnine.experimentalAutoImports&quot;: true
+}
+</code></pre>
+</li>
+</ol>
+<h1><span id="4-vscode界面使用">4. VSCode界面使用</span></h1><p>安装了LaTEX Workshop,左下角就会出现<code>TEX</code>这个菜单。我们点进去，就可以看到右边的这些功能。其中前三个是比较常用的功能。<br>第一个是编译latex，称为pdf<br>第二个是展示pdf<br>第三个是打开日志查错</p>
+<h2><span id="41-编译latex">4.1. 编译latex</span></h2><p><img src="/2020/07/27/latex安装与配置/4.jpg" alt=""></p>
+<p>如果直接点击<code>Build LaTex project</code>，而不是点”下三角”展开，会默认执行离行首最近的第一条相关命令，这里是<code>latexmk</code>编译（现在还没有配置，默认是pdflatex编译文件）</p>
+<p><img src="/2020/07/27/latex安装与配置/5.jpg" alt=""></p>
+<h2><span id="42-查看pdf">4.2. 查看pdf</span></h2><p>在编译成功后，会生成pdf文件，我们可以在VSCode内部来查看生成的pdf，点击左侧的<code>view in vscode tab</code>，就会生成左右2个窗口。也可以在用一些外部的pdf查看器来查看，这样就不是在vscode内部查看了，通常用<code>SumatraPDF</code>来查看，这个软件需要单独下载。这里就不介绍这种方式了<br><img src="/2020/07/27/latex安装与配置/6.jpg" alt=""></p>
+<h2><span id="43-查看日志">4.3. 查看日志</span></h2><p>当编译latex出错时，我们可以点击左侧的<code>view latex compilier log</code>来查看日志。</p>
+<p><img src="/2020/07/27/latex安装与配置/7.jpg" alt=""></p>
+<h1><span id="5-快捷键">5. 快捷键</span></h1><ol>
+<li><code>Ctrl+Alt+B</code>对tex进行编译,然后在VSCode的左下角就可以看到编译的状态。<br><img src="/2020/07/27/latex安装与配置/3.jpg" alt=""></li>
+<li>在编译完之后，按<code>Ctrl+Alt+V</code>预览生成的pdf文件</li>
+</ol>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>Latex</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>推荐系统学习</title>
+    <url>/2020/07/25/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>开始学习推荐系统的相关内容</p>
+<a id="more"></a>
+<!-- TOC -->
+<ul>
+<li><a href="#1-推荐系统和搜索的区别">1. 推荐系统和搜索的区别</a></li>
+<li><a href="#2-推荐系统lambda架构">2. 推荐系统Lambda架构</a></li>
+<li><a href="#3-推荐算法流程">3. 推荐算法流程</a></li>
+<li><a href="#4-推荐模型的构建流程">4. 推荐模型的构建流程</a></li>
+<li><a href="#5-相似度计算">5. 相似度计算</a><ul>
+<li><a href="#51-余弦相似度">5.1. 余弦相似度</a></li>
+<li><a href="#52-皮尔逊相关系数">5.2. 皮尔逊相关系数</a></li>
+<li><a href="#53-杰卡德jaccard相似度">5.3. 杰卡德Jaccard相似度</a></li>
+</ul>
+</li>
+<li><a href="#6-推荐算法">6. 推荐算法</a><ul>
+<li><a href="#61-协同过滤cf推荐算法">6.1. 协同过滤CF推荐算法</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-推荐系统和搜索的区别">1. 推荐系统和搜索的区别</span></h1><ul>
+<li>推荐系统个性化强，用户被动的接受，希望能提供持续的服务，推荐主要是信息过滤系统。</li>
+<li>搜索个性化弱，用户主动搜索，快速满足用户的需求。主要是构建稳定的信息流通通道</li>
+</ul>
+<h1><span id="2-推荐系统lambda架构">2. 推荐系统Lambda架构</span></h1><p>推荐系统要素：</p>
+<ol>
+<li>前段界面</li>
+<li>数据（Lambda架构）</li>
+<li>业务知识</li>
+<li>推荐算法</li>
+</ol>
+<ul>
+<li><p><strong>推荐系统整体架构</strong></p>
+<p><img src="/2020/07/25/推荐系统学习/推荐系统整体架构.jpg" alt=""></p>
+</li>
+</ul>
+<p>下面介绍<strong>大数据Labmda架构</strong></p>
+<ul>
+<li>Lambda架构结合实时数据和Hadoop平台，提供实时的数据视图。简单说将离线计算和实时计算结合起来。</li>
+<li><p>实时和离线的分层操作</p>
+<ul>
+<li><p>离线：</p>
+<ul>
+<li>分布式计算：Hadoop MapReduce、Spark</li>
+<li>数据存储：HBase、Redis、MySQL</li>
+</ul>
+</li>
+<li><p>实时</p>
+<ul>
+<li>流式处理数据</li>
+<li>实时数据收集：Flume、Kafka</li>
+<li>实时数据分析：Spark Streaming / storm、flink</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>下面是Lambda的架构图。首先数据源从flume中得到。一部分做批处理，一部分做实时处理。批处理把数据放在数据库上，然后经过MapReduce算出一个阶段，缓存起来。然后实时这部分也会做实时计算，然后将这2部分的计算结果汇总，为推荐系统提供服务。</p>
+<p>这2部分的相辅相成。离线服务算的时间比较长，比如10分钟得出一次结果，那在前端用户看到的结果10分钟都不会变。然后实时计算是基于离线计算的结果做一些微调。这样用户看到的推荐结果就会实时变化。</p>
+<p><img src="/2020/07/25/推荐系统学习/lambda.jpg" alt=""></p>
+<h1><span id="3-推荐算法流程">3. 推荐算法流程</span></h1><p>上面讲了整个推荐系统的架构，下面我们只关注推荐算法。推荐算法只有有3个阶段：</p>
+<ol>
+<li>召回阶段<ul>
+<li>这里的召回不要和分类问题的召回率混淆，这2者是不同的概念。推荐算法的召回是海选，就是先从很多内容中选出一些内容，作为接下来推荐的候选人。也就是说我们后面推荐的结果都是从这些候选内容中选的。所以召回阶段决定了最终推荐结果的天花板</li>
+<li>召回阶段常用算法<ul>
+<li>协同过滤 CF（基于物品和基于用户）</li>
+<li>基于内容（根据用户的行为总结出用户的喜好，根据文本挖掘技术找到相似的商品）</li>
+<li>基于隐语义</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>排序阶段<ul>
+<li>对召回阶段找到候选内容进行排序</li>
+<li>CTR估计(点击率估计)，可以使用逻辑回归，输出用户对某个物品点击的概率，然后将概率进行排序，选出topK的物品做为最终的推荐结果</li>
+</ul>
+</li>
+<li>策略调整</li>
+</ol>
+<p><img src="/2020/07/25/推荐系统学习/推荐算法.jpg" alt=""></p>
+<h1><span id="4-推荐模型的构建流程">4. 推荐模型的构建流程</span></h1><p><img src="/2020/07/25/推荐系统学习/推荐算法1.jpg" alt=""></p>
+<ol>
+<li>数据清洗阶段<ul>
+<li>数据来源<ul>
+<li>显性数据：打分，评论</li>
+<li>隐性数据：历史订单、加购物车、页面浏览</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>特征工程<ul>
+<li>user-item的评分矩阵</li>
+<li>如果没有显式的评分矩阵，可以用一些用户的行为，比如加入购物车，单曲循环，页面停留时间等。</li>
+</ul>
+</li>
+<li>算法<ul>
+<li>计算相似度</li>
+<li>矩阵分解</li>
+</ul>
+</li>
+<li>产生推荐结果<ul>
+<li>交叉推荐：买了手机，推荐手机壳</li>
+<li>向上推荐：买了自行车，推荐跑车</li>
+</ul>
+</li>
+</ol>
+<h1><span id="5-相似度计算">5. 相似度计算</span></h1><p>相似度计算根据数据来选择。</p>
+<ul>
+<li>数据是实数值，评分情况</li>
+<li>数据是布尔值，是否消费</li>
+</ul>
+<h2><span id="51-余弦相似度">5.1. 余弦相似度</span></h2><p>余弦相似度就是看2个向量夹角的cos值。余弦相似度范围[-1,1]，从负相关到正相关。</p>
+<p>缺点：只和夹角有关，不关心向量长度。可能会有误差。对2个电影打分，一个人打分向量(5,8)，另一个人打分向量(0.5,1)，这2个向量虽然夹角很小，但是长度差别很大。</p>
+<p><img src="/2020/07/25/推荐系统学习/余弦相似度.jpg" alt=""></p>
+<h2><span id="52-皮尔逊相关系数">5.2. 皮尔逊相关系数</span></h2><p>对余弦相似度的优化，对向量做中心化，将向量a和b减去向量均值，在计算余弦相似度</p>
+<p><img src="/2020/07/25/推荐系统学习/皮尔逊.jpg" alt=""></p>
+<h2><span id="53-杰卡德jaccard相似度">5.3. 杰卡德Jaccard相似度</span></h2><p>Jaccard = 交集/并集</p>
+<p>比如用户2喜欢物品(2,7,10),用户4喜欢物品(2,5,7,9)，2个用户的交集是物品(2,7)，所以交集个数为2，2个用户喜欢用品的并集是(2,5,7,9,10)，所以并集个数为5.则这2个用户的jaccard相似度=0.4</p>
+<p><img src="/2020/07/25/推荐系统学习/杰卡德.jpg" alt=""></p>
+<p>杰卡德相似度适合评分是0/1的情况</p>
+<h1><span id="6-推荐算法">6. 推荐算法</span></h1><h2><span id="61-协同过滤cf推荐算法">6.1. 协同过滤CF推荐算法</span></h2><p>协同过滤(Collaborative Filtering)的算法思想：物以类聚，人以群分</p>
+<p>协同过滤推荐算法分为2类：</p>
+<ul>
+<li>基于用户的协同过滤user-based CF：和你喜好相似的人，那他喜欢的东西你也可能喜欢</li>
+<li>基于物品的协同过滤item-based CF：和你喜欢的东西相似的东西，你也可能喜欢</li>
+</ul>
+<p>实现协同过滤的步骤：</p>
+<ol>
+<li>首先计算用户与用户、物品与物品的相似程度<br>比如下图中，我们计算出用户1和用户3最相似</li>
+<li>根据相似的人或物品产生推荐结果<br>然后我们根据用户3的内容给用户1来推荐，用户3喜欢物品(1,4,8)，然后过滤到用户1已经喜欢的商品1，然后给用户1推荐物品4和8</li>
+</ol>
+<p><img src="/2020/07/25/推荐系统学习/评分矩阵.jpg" alt=""></p>
+]]></content>
+      <categories>
+        <category>推荐系统</category>
+      </categories>
+      <tags>
+        <tag>推荐系统</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AUC在推荐系统中的应用</title>
     <url>/2020/07/21/AUC%E5%9C%A8%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</url>
     <content><![CDATA[<p><a href="https://mp.weixin.qq.com/s/uVZOfFayOzba5mALR5lHRQ" target="_blank" rel="noopener">参考资料</a></p>
@@ -31,7 +368,13 @@
     <url>/2020/07/20/Leetcode%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
     <content><![CDATA[<p>记录Leetcode遇到的字符串相关题目</p>
 <a id="more"></a>
-<h1><span id="把字符串转换成整数">把字符串转换成整数</span></h1><p>写一个函数 StrToInt，实现把字符串转换成整数这个功能。不能使用 atoi 或者其他类似的库函数。</p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-把字符串转换成整数">1. 把字符串转换成整数</a></li>
+<li><a href="#2-最长不重复子串">2. 最长不重复子串</a></li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-把字符串转换成整数">1. 把字符串转换成整数</span></h1><p>写一个函数 StrToInt，实现把字符串转换成整数这个功能。不能使用 atoi 或者其他类似的库函数。</p>
 <p>首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。</p>
 <p>当我们寻找到的第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字组合起来，作为该整数的正负号；假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成整数。</p>
 <p>该字符串除了有效的整数部分之后也可能会存在多余的字符，这些字符可以被忽略，它们对于函数不应该造成影响。</p>
@@ -57,6 +400,40 @@
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">strToInt</span><span class="params">(self, str)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type str: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        str=str.strip()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> str:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        INT_MAX,INT_MIN=<span class="number">2</span>**<span class="number">31</span><span class="number">-1</span>,<span class="number">-2</span>**<span class="number">31</span></span><br><span class="line">        valid_num = []<span class="comment">#记录当前有效的数字</span></span><br><span class="line">        minus = <span class="keyword">False</span><span class="comment">#判断这个数是正还是负</span></span><br><span class="line"></span><br><span class="line">        strs = str.split()[<span class="number">0</span>]<span class="comment">#切分后第一个连续字符串</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#如果第一个字符不在[0,9]之间，且不是'-'或'+'，肯定不符合要求</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (<span class="string">'0'</span>&lt;=strs[<span class="number">0</span>]&lt;=<span class="string">'9'</span> <span class="keyword">or</span> strs[<span class="number">0</span>]==<span class="string">'-'</span> <span class="keyword">or</span> strs[<span class="number">0</span>]==<span class="string">'+'</span>):<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="comment">#如果第一个字符为'-'或'+'，但是后面没数字了，返回0</span></span><br><span class="line">        <span class="keyword">if</span> len(strs)==<span class="number">1</span> <span class="keyword">and</span> (strs[<span class="number">0</span>]==<span class="string">'-'</span> <span class="keyword">or</span> strs[<span class="number">0</span>]==<span class="string">'+'</span>):<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> strs[<span class="number">0</span>]==<span class="string">'-'</span>:</span><br><span class="line">            minus = <span class="keyword">True</span><span class="comment">#负数</span></span><br><span class="line">            start = <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> strs[<span class="number">0</span>]==<span class="string">'+'</span>:</span><br><span class="line">            minus = <span class="keyword">False</span><span class="comment">#正数</span></span><br><span class="line">            start = <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            minus = <span class="keyword">False</span><span class="comment">#正数</span></span><br><span class="line">            start = <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(start,len(strs)):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">'0'</span>&lt;=strs[i]&lt;=<span class="string">'9'</span>:</span><br><span class="line">                valid_num.append(strs[i])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> len(valid_num)==<span class="number">0</span>:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        str_num = <span class="string">''</span>.join(valid_num)</span><br><span class="line">        <span class="keyword">if</span> minus==<span class="keyword">False</span>:<span class="comment">#正数</span></span><br><span class="line">            <span class="keyword">return</span> min(INT_MAX,int(str_num))</span><br><span class="line">        <span class="keyword">else</span>:<span class="comment">#负数</span></span><br><span class="line">            <span class="keyword">return</span> max(INT_MIN,<span class="number">0</span>-int(str_num))</span><br></pre></td></tr></table></figure>
+<h1><span id="2-最长不重复子串">2. 最长不重复子串</span></h1><p>请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。</p>
+<blockquote>
+<p>示例 1:<br>输入: “abcabcbb”<br>输出: 3<br>解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。</p>
+</blockquote>
+<p>链接：<a href="https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof" target="_blank" rel="noopener">https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof</a></p>
+<p><strong>【分析一】</strong><br>双指针。<br>abcabcbb</p>
+<p>head指向不重复子串的头，tail指向不重复子串尾的下一个元素。<br>res表示不重复子串的长度。</p>
+<ul>
+<li>首先head先指向a，tail指向b。如果b不在a中，则将b加入到不重复列表中，此时tail向后移一位，res取tail-head和res的最大值，即res=2。</li>
+<li>此时head指向a，tail指向c，此时c不在ab中，然后tail后移，res=3</li>
+<li>此时head指向a，tail指向a，a在abc中，则head需要往后移，直到不含a</li>
+<li>此时head指向b，tail指向a，a不在bc中，然后tail后移，res保持3</li>
+<li>此时head指向b，tail指向b，b在bca中，则head需要往后移，直到不含b</li>
+<li>此时head指向c，tail指向b，b不在ca中，然后tail后移，res保持3</li>
+<li>…</li>
+</ul>
+<ul>
+<li>时间复杂度：O(n^2)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> s:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="comment">#使用双指针</span></span><br><span class="line">        head,tail = <span class="number">0</span>,<span class="number">1</span></span><br><span class="line">        res = <span class="number">1</span></span><br><span class="line">        n = len(s)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> tail &lt; n:</span><br><span class="line">            <span class="keyword">if</span> s[tail] <span class="keyword">not</span> <span class="keyword">in</span> s[head:tail]:</span><br><span class="line">                tail+=<span class="number">1</span></span><br><span class="line">                res = max(tail-head,res)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">while</span> s[tail] <span class="keyword">in</span> s[head:tail]:</span><br><span class="line">                    head+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p><strong>【优化】</strong></p>
+<p>使用dic来记录每个字符的下标<br>head：不重复字符的第一个元素下标<br>tail：不重复字符最后一个元素的下一个元素下标</p>
+<p>使用dic来记录每个字符的下标</p>
+<p>当tail不在dic中，说明tail没有和前面的字符重复，则将tail加入到dict中，并把res和tail加1<br>如果tail已经在dict中，说明tail和前面的某个字符重复，则将head直接移到s[tail]的下一个元素，并把当前s[tail]的下标更新。</p>
+<p>abcabcbb</p>
+<ul>
+<li>刚开始head指向a，tail指向b，dict={‘a’:0}，res=1</li>
+<li>此时b不再a中，则将b加入到不重复子串，dict={‘a’:0,’b’:1}，tail指向c，res=2</li>
+<li>此时c不在ab中，将c加入到不重复子串中，dict={‘a’:0,’b’:1,’c’:2}，tail指向a，res=3</li>
+<li>此时a已经在dict中，然后需要移动head，直接将head移动到原先a的下一个位置，即head=b，此时再把现在a的位置更新到dict中，即’a’:3</li>
+<li>依次类推</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> s:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        n = len(s)</span><br><span class="line">        <span class="comment">#使用双指针</span></span><br><span class="line">        head,tail = <span class="number">0</span>,<span class="number">1</span></span><br><span class="line">        res = <span class="number">1</span></span><br><span class="line">        dic = &#123;s[head]:<span class="number">0</span>&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> tail &lt; n:</span><br><span class="line">            <span class="keyword">if</span> s[tail] <span class="keyword">not</span> <span class="keyword">in</span> dic:</span><br><span class="line">                dic[s[tail]] = tail  </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment">#head调到重复指针的下一位</span></span><br><span class="line">                head = max(dic[s[tail]]+<span class="number">1</span>,head)</span><br><span class="line">                <span class="comment">#更新被重复字符的下标</span></span><br><span class="line">                dic[s[tail]] = tail</span><br><span class="line">            tail+=<span class="number">1</span></span><br><span class="line">            res = max(tail-head,res)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>算法</category>
@@ -745,9 +1122,10 @@ h_{i}=\frac{\partial^2 l \left(y_i,\hat{y}_i^{(t-1)}\right)}{\partial\hat{y}_i^{
 <li><a href="#23-余弦距离">2.3. 余弦距离</a></li>
 <li><a href="#24-ab测试">2.4. A/B测试</a></li>
 <li><a href="#25-模型评估方法">2.5. 模型评估方法</a></li>
-<li><a href="#26-过拟合和欠拟合">2.6. 过拟合和欠拟合</a></li>
-<li><a href="#27-正则化">2.7. 正则化</a></li>
-<li><a href="#28-梯度消失和梯度爆炸">2.8. 梯度消失和梯度爆炸</a></li>
+<li><a href="#26-模型中特征选择">2.6. 模型中特征选择</a></li>
+<li><a href="#27-过拟合和欠拟合">2.7. 过拟合和欠拟合</a></li>
+<li><a href="#28-正则化">2.8. 正则化</a></li>
+<li><a href="#29-梯度消失和梯度爆炸">2.9. 梯度消失和梯度爆炸</a></li>
 </ul>
 </li>
 <li><a href="#3-经典算法">3. 经典算法</a><ul>
@@ -827,7 +1205,11 @@ h_{i}=\frac{\partial^2 l \left(y_i,\hat{y}_i^{(t-1)}\right)}{\partial\hat{y}_i^{
 </li>
 </ul>
 <ul>
-<li>什么时候需要归一化<br>需要使用梯度下降和计算距离的模型需要归一化。因为例如：线性回归、逻辑回归、SVM、深度神经网络，KNN,K-Means，<br>概率模型和树形模型不需要归一化，因为它们不关心变量的值，只关心变量的分布和变量之间的条件概率。例如决策树，随机森林。</li>
+<li><strong>什么时候需要归一化</strong><ul>
+<li>需要使用梯度下降和计算距离的模型需要归一化。例如：线性回归、逻辑回归、SVM、深度神经网络，KNN,K-Means，</li>
+<li>概率模型和树形模型不需要归一化，因为它们不关心变量的值，只关心变量的分布和变量之间的条件概率。例如决策树，随机森林。</li>
+</ul>
+</li>
 </ul>
 <h2><span id="12-类别型特征">1.2. 类别型特征</span></h2><p>将类别特征—&gt;数值特征，有以下方法</p>
 <ul>
@@ -837,7 +1219,11 @@ h_{i}=\frac{\partial^2 l \left(y_i,\hat{y}_i^{(t-1)}\right)}{\partial\hat{y}_i^{
 </ul>
 <h2><span id="13-文本表示模型">1.3. 文本表示模型</span></h2><ul>
 <li>词袋模型：将文章按照词分割，使用每个词的权重来表示文章</li>
-<li>TF-IDF：用来计算一个词的权重，TF=一个词w在文章d中出现的频率，IDF：特属词的特征，逆文档频率</li>
+<li><p>TF-IDF：用来计算一个词在文章中的权重，TF=一个词t在文章d中出现的频率，IDF：特属词的特征，逆文档频率</p>
+<script type="math/tex; mode=display">TF-IDF(t,d)=TF(t,d)\times IDF(t)</script><script type="math/tex; mode=display">IDF(t)=log \frac{文章总数}{包含单词t的文章总数+1}</script><p>如果一个单词在非常多的文章中出现，说明这个词可能是比较通用的词汇，对区分某篇文章的特殊语义贡献很小。</p>
+</li>
+</ul>
+<ul>
 <li>N-gram模型：将连续的n个词作为一个特征放在向量中。</li>
 <li>词嵌入模型：将词映射成低维稠密向量(50~300维度)，Word2Vec是最常用的词嵌入模型。</li>
 </ul>
@@ -896,7 +1282,41 @@ h_{i}=\frac{\partial^2 l \left(y_i,\hat{y}_i^{(t-1)}\right)}{\partial\hat{y}_i^{
 <li>k折交叉验证<br>将样本划分为k个大小相等的子集，一个子集作为测试集，k-1个子集作为训练集。将k次评估结果平均作为该模型最终的结果。<br>优点：（1）解决当数据量较小时，模型评估不准确的问题（2）消除数据对评估结果的随机性影响（3）可以用来选择超参数<br>缺点：耗时，需要训练多个模型求评估结果的平均值</li>
 <li>自助法<br>如果数据比较小，holdout和k折交叉验证都需要划分数据集，导致训练集变小。自助发采用随机抽样，在全部样本中进行n次有放回的抽样，得到大小为n的训练集。这n个样本中有的样本是重复的，有的样本没有被抽到，这些没有抽到的样本作为测试集。</li>
 </ol>
-<h2><span id="26-过拟合和欠拟合">2.6. 过拟合和欠拟合</span></h2><ul>
+<h2><span id="26-模型中特征选择">2.6. 模型中特征选择</span></h2><p>在sklearn中有很多特征选择的方法</p>
+<ol>
+<li>移除低方差的特征<br>如果在所有的样本中，这个特征的取值方差很低，基本都取的差不多，那这个特征可以认为对结果影响不大。首先先移除0方差的特征。这种方法简单但是不太好用</li>
+<li><p>单变量特征选择<br>对每一个特征单单进行训练，然后看这个特征训练好的模型在测试集上的效果。找出最好的模型所使用的那个特征。<br>在<code>sklearn.feature_selection</code>中已经有现成的算法来对每个特征进行测试，然后选择效果最好的K个特征<br><code>SelectKBest</code>是保留最高分数的L个特征。这个函数需要传入2个参数，</p>
+<ul>
+<li>模型好坏的评价指标</li>
+<li>K的大小</li>
+</ul>
+</li>
+</ol>
+   <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> SelectKBest</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> chi2 <span class="comment"># 卡方检验</span></span><br><span class="line">iris = load_iris()</span><br><span class="line">X,y = iris.data, iris.target</span><br><span class="line">X.shape <span class="comment"># (150, 4)</span></span><br><span class="line"><span class="comment"># 基于卡方并选出两个最优特征</span></span><br><span class="line">X_new = SelectKBest(chi2, k=<span class="number">2</span>).fit_transform(X,y)</span><br><span class="line">X_new.shape <span class="comment"># (150, 2)</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>递归消除特征<br>将全部特征都输入到模型中，模型会输出每个特征的重要性，然后删除那些不太重要的特征，把剩下的特征再次丢到模型中，然后又输出各个特征的重要性，再次删除。如此循环，直到剩下的特征等于给定的个数。<br><code>sklearn.feature_selection.RFE</code>用来做特征选择，传入2个参数</p>
+<ul>
+<li>模型</li>
+<li>需要保留特征个数</li>
+<li>每次删除特征的个数</li>
+</ul>
+<p>这个方法的缺点是需要重复训练很多次</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_friedman1</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> RFE</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVR</span><br><span class="line">X, y = make_friedman1(n_samples=<span class="number">50</span>, n_features=<span class="number">10</span>, random_state=<span class="number">0</span>)</span><br><span class="line">estimator = SVR(kernel=<span class="string">"linear"</span>)<span class="comment">#5个特征被选中，每次迭代去除1个特征。</span></span><br><span class="line">selector = RFE(estimator, <span class="number">5</span>, step=<span class="number">1</span>)</span><br><span class="line">selector = selector.fit(X, y)</span><br><span class="line">print(selector.support_) <span class="comment">##所选特征的掩码</span></span><br><span class="line"><span class="comment">#特征排名，使得rank_ [i]对应于第i个特征的排名位置。</span></span><br><span class="line"><span class="comment">#所选择的（重要性最高的）特征被分配为等级1，被删除的特征显示其原始的位置。</span></span><br><span class="line">selector.ranking_</span><br><span class="line">print(selector.fit(X,y))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用SelectFromModel选取特征</p>
+<p>这种方法只需要训练一次模型。</p>
+<ul>
+<li>基于L1正则化选择特征<br>L1正则化会让参数变得稀疏，也就是让很多参数为0，即在模型训练的时候丢弃掉一部分特征，因为L1正则化也可以用来做特征选择。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> LinearSVC</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> SelectFromModel</span><br><span class="line">iris = load_iris()</span><br><span class="line">X, y = iris.data, iris.target</span><br><span class="line">lsvc = LinearSVC(C=<span class="number">0.01</span>, penalty=<span class="string">"l1"</span>, dual=<span class="keyword">False</span>).fit(X, y)</span><br><span class="line">model = SelectFromModel(lsvc, prefit=<span class="keyword">True</span>)</span><br><span class="line">X_new = model.transform(X)</span><br><span class="line">X_new.shape</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li><p>基于树模型选择特征<br>我们知道树模型的建立过程就是一个特征选择的过程，他会根据信息增益的准则来选择信息增益最大的特征来进行建模，输出各个特征的<code>feature_importances_</code>，然后传入<code>SelectFromModel</code>进行特征选择</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> ExtraTreesClassifierfrom sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> SelectFromModel</span><br><span class="line">iris = load_iris()</span><br><span class="line">X, y = iris.data, iris.target</span><br><span class="line">clf = ExtraTreesClassifier()</span><br><span class="line">clf = clf.fit(X, y)</span><br><span class="line"><span class="comment">#输出特征重程度</span></span><br><span class="line">clf.feature_importances_  </span><br><span class="line">model = SelectFromModel(clf, prefit=<span class="keyword">True</span>)</span><br><span class="line">X_new = model.transform(X)</span><br><span class="line">X_new.shape</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2><span id="27-过拟合和欠拟合">2.7. 过拟合和欠拟合</span></h2><ul>
 <li>过拟合<br>模型在训练数据上loss很小，在测试集上loss大</li>
 <li>欠拟合<br>模型在训练集和测试集上loss都很大，效果都不好</li>
 <li><p>降低过拟合的方法</p>
@@ -917,7 +1337,7 @@ h_{i}=\frac{\partial^2 l \left(y_i,\hat{y}_i^{(t-1)}\right)}{\partial\hat{y}_i^{
 </ol>
 </li>
 </ul>
-<h2><span id="27-正则化">2.7. 正则化</span></h2><p>正则化为了避免过拟合，即在损失函数后加上一个正则项（惩罚项），模型越复杂，正则化值就越大。</p>
+<h2><span id="28-正则化">2.8. 正则化</span></h2><p>正则化为了避免过拟合，即在损失函数后加上一个正则项（惩罚项），模型越复杂，正则化值就越大。</p>
 <script type="math/tex; mode=display">\min _{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^{N} L\left(y_{i}, f\left(x_{i}\right)\right)+\lambda J(f)</script><p>第一项是损失值，第二项是正则化项，$\lambda$调整两者的权重。下面拿回归问题举例，损失值为平方损失。</p>
 <ul>
 <li>L1正则<br>惩罚项为权重绝对值的和</li>
@@ -926,7 +1346,7 @@ h_{i}=\frac{\partial^2 l \left(y_i,\hat{y}_i^{(t-1)}\right)}{\partial\hat{y}_i^{
 <li>L2正则</li>
 </ul>
 <p>惩罚项为权重的平方和</p>
-<script type="math/tex; mode=display">L(w)=\frac{1}{N} \sum_{i=1}^{N}\left(f\left(x_{i} ; w\right)-y_{i}\right)^{2}+\frac{\lambda}{2}\|w\|^{2}</script><h2><span id="28-梯度消失和梯度爆炸">2.8. 梯度消失和梯度爆炸</span></h2><p>梯度消失和梯度爆炸经常出现在较深的网络中。反向传播用到链式法则，导数连乘。如果激活函数求导后与权重相乘的积大于1，层数增多时，求出的梯度将以指数增加，发生梯度爆炸。如果小于1，梯度将以指数衰减，发生梯度消失。<br>sigmoid的导数最大为0.25，易发生梯度消失问题</p>
+<script type="math/tex; mode=display">L(w)=\frac{1}{N} \sum_{i=1}^{N}\left(f\left(x_{i} ; w\right)-y_{i}\right)^{2}+\frac{\lambda}{2}\|w\|^{2}</script><h2><span id="29-梯度消失和梯度爆炸">2.9. 梯度消失和梯度爆炸</span></h2><p>梯度消失和梯度爆炸经常出现在较深的网络中。反向传播用到链式法则，导数连乘。如果激活函数求导后与权重相乘的积大于1，层数增多时，求出的梯度将以指数增加，发生梯度爆炸。如果小于1，梯度将以指数衰减，发生梯度消失。<br>sigmoid的导数最大为0.25，易发生梯度消失问题</p>
 <p>如何解决梯度消失和梯度爆炸：</p>
 <ol>
 <li>使用ReLU代替sigmoid解决梯度消失问题。Relu的正数部分导数为1，不存在梯度消失和梯度爆炸的问题</li>
@@ -1188,7 +1608,7 @@ log(P_总)=log(\prod_{i=1}^{i=m}h(x^i)^{y_i}*(1-h(x^i))^{1-y^i})\\
 <li>数据近似线性可分：软间隔SVM/近似线性可分SVM</li>
 <li>数据线性不可分：核方法</li>
 </ol>
-<h3><span id="361-线性可分svm">3.6.1. 线性可分SVM</span></h3><p>SVM就是解决二分类问题，分类学习最基本的想法就是找到一个划分超平面，将不同类别的数据集分开。目的就是找到一个最优的分割线将两类分开。</p>
+<h3><span id="361-线性可分svm">3.6.1. 线性可分SVM</span></h3><p>SVM就是解决二分类问题，分类学习最基本的想法就是找到一个划分超平面，将不同类别的数据集分开。<strong>SVM的目的就是找到一个最优的分割线将两类分开</strong>。</p>
 <p>分类问题有线性可分和线性不可分。线性可分就是在二维空间中能找到一条直线将2类样本划分开。线性不可分就是不能找到一条直线。对于线性不可分的样本通常是通过高斯核函数将样本映射到高维空间，然后转换为高维空间线性可分的问题。<br>下图中的直线都可以将2类样本分开，但是哪个才是好的分割线呢？分类器的价值不在于它多么擅长分割训练样本，而是对于哪些未知的样本它的分类效果怎么样。下图中中间较粗的那条线，在正确划分训练样本的前提下，尽可能地同时远离两个聚类。而其他的线都是有些“倾斜”，一头远离一类，另一头靠近另一类。</p>
 <p><img src="/2020/06/19/百面机器学习概述/SVM1.png" alt=""></p>
 <p>假设划分超平面的公式为</p>
@@ -1203,32 +1623,33 @@ w^{T} x+b \geq 1 \quad y=1 \\
 w^{T} x+b \leq-1 \quad y=-1
 \end{array}\right.</script><p>上面我们简单的介绍下SVM和逻辑回归的不同，下面我们将详细介绍SVM</p>
 <p>假设SVM中的分割超平面为<script type="math/tex">w^Tx+b=0</script></p>
-<p>$w=(w_1,w_2,…w_d)$是有个列向量，拆分开就是$w_1x_1+w_2x_2+…+w_dx_d+b=0$</p>
+<p>$w=(w_1,w_2,…w_d)$是个列向量，上式拆分开就是$w_1x_1+w_2x_2+…+w_dx_d+b=0$</p>
 <p>超平面有以下几个性质</p>
-<p><strong>性质1</strong>：等比例缩放$w,b$，超平面不变，仍然是同一条直线或超平面<br><strong>性质2</strong>：点$x=(x_1,x_2,…,x_d)$到超平面的距离为</p>
-<script type="math/tex; mode=display">\frac{|w_1x_1+w_2x_2+...+w_dx_d+b|}{\sqrt{w_1^2+w_2^2+...+w_d^2}}
-=\frac{|w^Tx+b|}{||w||}</script><p>下面介绍2个概念：<strong>函数间隔、几何间隔</strong></p>
 <blockquote>
 <p>二维平面中点$(x,y)$到$AX+By+c=0$的距离为$\frac{|Ax+By+c|}{\sqrt{A^2+B^2}}$</p>
 </blockquote>
+<p><strong>性质1</strong>：等比例缩放$w,b$，超平面不变，仍然是同一条直线或超平面。例如wx+b=0和2w+2b=0是同一条线<br><strong>性质2</strong>：点$x=(x_1,x_2,…,x_d)$到超平面的距离为</p>
+<script type="math/tex; mode=display">\frac{|w_1x_1+w_2x_2+...+w_dx_d+b|}{\sqrt{w_1^2+w_2^2+...+w_d^2}}
+=\frac{|w^Tx+b|}{||w||}</script><p>下面介绍2个概念：<strong>函数间隔、几何间隔</strong></p>
 <p>  <strong>超平面</strong>：$w^Tx+b=0$<br>  <strong>函数间隔</strong>：$\hat{\gamma}=y(w^Tx+b)=yf(x)=|f(x)|$<br>  函数间隔就是标签$y$乘上$f(x)$的值，函数间隔永远为正。但是由于SVM中$y$的取值只能为1和-1，所以函数间隔的值就是$|f(x)|$<br>  几何间隔表示点到超平面的距离，在SVM中点到超平面的距离为$\frac{|w^Tx+b|}{||w||}=\frac{|f(x)|}{||w||}=\frac{\hat{\gamma}}{||w||}$<br>  <strong>几何间隔</strong>：$\gamma=\frac{|w^Tx+b|}{||w||}=\frac{y(w^Tx+b)}{||w||}=\frac{\hat{\gamma}}{||w||}$</p>
-<p>  函数间隔$y(w^Tx+b)$可以表示分类预测的准确性和置信度，值越大越好，说明模型将样本分正确的概率越大，但函数间隔并不表示点到超平面的距离，因为假如将$w,b$成比例变成$2w,2b$，超平面的位置没有变，但是$f(x)$却变成原来的2倍，即函数间隔变成原来的2倍。在实际中，定义点到直线的距离时，用的是几何间隔。$w,b$成倍数增加时，几何间隔不变。函数间隔是几何间隔没有除以$||w||$的表示，几何间隔是函数间隔归一化的结果。函数间隔是我们自己定义的，而几何间隔是客观存在的，无论$w,b$扩大几倍，对几何间隔没有影响。</p>
+<p>  函数间隔$y(w^Tx+b)$可以表示分类预测的准确性和置信度，值越大越好，说明模型将样本分正确的概率越大，但函数间隔并不表示点到超平面的距离，因为假如将$w,b$成比例变成$2w,2b$，超平面的位置没有变，但是$f(x)$却变成原来的2倍，即函数间隔变成原来的2倍。在实际中，定义点到直线的距离时，用的是几何间隔。$w,b$成倍数增加时，几何间隔不变。几何间隔是函数间隔归一化（除以$||w||$）的结果。函数间隔是我们自己定义的，而几何间隔是客观存在的，无论$w,b$扩大几倍，对几何间隔没有影响。</p>
 <p><strong>SVM的目标</strong></p>
-<p>SVM的目标是找到一个最优的划分超平面。那怎么定义最优呢？在SVM中评价指标就是几何间隔。在下图中，我们直观的感觉图a的分类效果比b和c好，因为在图a中，与分割线最近的样本点相比b和c来说，这个样本点距离分割线最远。SVM正是遵循这一思想，在众多分割超平面中，找样本点（超平面附近的点）与分割超平面距离最大的那个超平面，即最小几何间隔中，最大的那个。</p>
+<p>SVM的目标是找到一个最优的划分超平面。那怎么定义最优呢？<strong>在SVM中评价指标就是几何间隔</strong>。在下图中，我们直观的感觉图a的分类效果比b和c好，因为在图a中，与分割线最近的样本点相比b和c来说，这个样本点距离分割线最远。SVM正是遵循这一思想，在众多分割超平面中，找样本点（超平面附近的点）与分割超平面距离最大的那个超平面，即最小几何间隔中，最大的那个。</p>
 <p><img src="/2020/06/19/百面机器学习概述/SVM3.png" alt=""></p>
-<p>SVM的最佳划分超平面需要满足2个条件：（1）能够将所有的正负样本划分正确，即函数间隔大于0，（2）离超平面最近的样本点与超平面的几何距离最大</p>
-<p>第一个条件公式为$\hat{\gamma}=y(w^Tx+b)&gt;0$<br>第二个条件为首先找到最近的样本点，即最小的函数间距，然后再最大化函数间距。</p>
+<p>SVM的最佳划分超平面需要满足2个条件：<br>（1）能够将所有的正负样本划分正确，即函数间隔大于0<br>（2）离超平面最近的样本点与超平面的几何距离最大</p>
+<p>第一个条件公式为$\hat{\gamma}=y(w^Tx+b)&gt;0$<br>第二个条件为首先找到最近的样本点，即最小的几何间距，然后再最大化几何间距。</p>
 <script type="math/tex; mode=display">\begin{array}{l}
-\min\tilde{\gamma}^{i}=\min \frac{y^{i}\left(w^{T} \mathbf{x}^{i}+b\right)}{\| w \mid}=\frac{1}{\|w\|} \min y^{i}\left(w^{T} \mathbf{x}^{i}+b\right), i=1,2, \ldots, m \\
+先找到最小的几何间隔\\
+\min\tilde{\gamma}^{i}=\min \frac{y^{i}\left(w^{T} \mathbf{x}^{i}+b\right)}{\| w \| \mid}=\frac{1}{\|w\|} \min y^{i}\left(w^{T} \mathbf{x}^{i}+b\right), i=1,2, \ldots, m \\\\再最大化这个几何间隔\\
 \max _{w, b} \frac{1}{\|w\|} \min y^{i}\left(w^{T} \mathbf{x}^{i}+b\right), i=1,2, \ldots, m
 \end{array}</script><p>结合上面的2个条件，求解最优划分超平面的公式为</p>
 <script type="math/tex; mode=display">\begin{aligned}
 \max _{w, b} \frac{1}{\|w\|} \min y^{i}\left(w^{T} \mathbf{x}^{i}+b\right), i=1,2, \ldots, m \\
 \text { subject to } y^{i}\left(w^{T} \mathbf{x}^{i}+b\right)>0
-\end{aligned}</script><p>但是上面这个目标函数太复杂了，需要对其进行简化。这里就需要用到超平面的性质1：对$w,b$进行缩放，超平面不变。如果在求解的过程中，继续保持这个性质的话，就算上面的公式可以求得最优的划分超平面，但是$w,b$的取值却有无数个，即解不唯一。但是我们要求一个固定的超平面，对应的$w,b$是唯一的，就需要添加限制条件。限制条件可以有多种选择：</p>
-<p>选择1：限制$||w||=1$，即超平面的法向量模长为1，这样就消除了等比缩放的影响。但是添加了这个限制对上面公式的简化没有什么帮助<br>选择2：$miny^i(w^Tx^i+b)=1$，限制最小的函数间隔等于1，这也是SVM所采取的方式。如果$\hat{\gamma}=1$，假设将$w,b$放大为$kw,kb$，理论上来说缩放后的函数间隔$\hat{\gamma}_{i+1}=k\hat{\gamma}$，但是我们限制了函数间隔只能为1，即$\hat{\gamma}_{i+1}=\hat{\gamma}=1$，那$k$也只能为1，即不存在等比缩放的问题。</p>
+\end{aligned}</script><p>但是上面这个目标函数太复杂了，需要对其进行简化。这里就需要用到超平面的性质1：对$w,b$进行缩放，超平面不变。如果在求解的过程中，继续保持这个性质的话，就算上面的公式可以求得最优的划分超平面，但是$w,b$的取值却有无数个，即解不唯一。但是我们要得到一个固定的超平面，即对应的$w,b$是唯一的，就需要添加限制条件。限制条件可以有多种选择：</p>
+<p>选择1：限制$||w||=1$，即超平面的法向量模长为1，这样就消除了等比缩放的影响。但是添加了这个限制对上面公式的简化没有什么帮助<br>选择2：$miny^i(w^Tx^i+b)=1$，限制最小的函数间隔等于1，这也是SVM所采取的方式。如果$\hat{\gamma}=1$，假设将$w,b$放大为$kw,kb$，理论上来说缩放后的函数间隔也变为原来的k倍：$\hat{\gamma}_{i+1}=k\hat{\gamma}$，但是我们限制了函数间隔只能为1，即$\hat{\gamma}_{i+1}=\hat{\gamma}=1$，那$k$也只能为1，即不存在等比缩放的问题。</p>
 <blockquote>
-<p>注意：SVM中将$miny^i(w^Tx^i+b)=1$，其实将值限制为2,3,4…，限制为多少都没关系，都可以消除等比缩放带来的影响，但是不可以不限制。</p>
+<p>注意：SVM中将$miny^i(w^Tx^i+b)=1$，其实将值限制为2,3,4…，限制为多少都没关系，都可以消除等比缩放带来的影响。SVM中限制为1只是为了更简单。但是如果不限制$miny^i(w^Tx^i+b)$这个值是不行的，一定需要限制。</p>
 </blockquote>
 <p>有了这个限制条件，原先的目标就需要变了</p>
 <p><strong>原先的目标函数</strong>：</p>
@@ -1242,7 +1663,7 @@ w^{T} x+b \leq-1 \quad y=-1
 \text { subject to } y^{i}\left(w^{T} \mathbf{x}^{i}+b\right)>=1
 \end{aligned}</script><p>于是我们得到了3个平面：最优划分超平面$w^Tx+b=0$，与划分超平面间隔平行的2个超平面$w^Tx+b=1$和$w^Tx+b=-1$</p>
 <p><img src="/2020/06/19/百面机器学习概述/SVM2.png" alt=""></p>
-<p>这是一个凸二次规划的问题，对于一个优化问题，通常可以从2个角度考虑：主问题和对偶问题。常常利用拉格朗日对偶性将主问题转换为对偶问题，通过求解对偶问题的解来得到原始问题的解，这是因为对偶问题的复杂度往往低于原始问题。</p>
+<p>这是一个凸二次规划的问题，对于一个优化问题，通常可以从2个角度考虑：主问题和对偶问题。常常<strong>利用拉格朗日对偶性将主问题转换为对偶问题</strong>，通过求解对偶问题的解来得到原始问题的解，这是因为对偶问题的复杂度往往低于原始问题。</p>
 <blockquote>
 <p>拉格朗日乘子法知识点<br>拉格朗日乘子法将原问题转换为对偶问题进行求解，主问题有等式约束和不等式约束<br>主问题：</p>
 <script type="math/tex; mode=display">\begin{array}{c}
@@ -1259,40 +1680,62 @@ g_{j}(x) \leq 0 \\
 <p>根据上面的知识，我们得到<strong>SVM的拉格朗日函数</strong></p>
 <p>[<br>L(\omega, b, \alpha)=\frac{1}{2}|\omega|^{2}+\sum_{i=1}^{m} \alpha_{i}\left(1-y_{i}\left(\omega^{T} x_{i}+b\right)\right)<br>]</p>
 <script type="math/tex; mode=display">L(w, b, \alpha)=\frac{1}{2}\|w\|^{2}-\sum_{i=1}^{m} \alpha_{i} y_{i}\left(\omega^{T} x_{i}+b\right)+\sum_{i=1}^{N} \alpha_{i}</script><p>其中 $\alpha=\left(\alpha_{1} ; \alpha_{2} ; \ldots ; \alpha_{m}\right)$,拉格朗日乘子 $\alpha_{i} \geq 0$</p>
-<p>一个优化问题可以从两个角度考虑：主问题和对偶问题。在约束最优化问题中，常常利用拉格朗日对偶性将原问题转化为对偶问题，通过对偶问题来得到原始问题的解。<br>根据拉格朗日对偶性，原始问题的对偶问题是极大极小问题：</p>
+<p>根据拉格朗日对偶性，原始问题的对偶问题是极大极小问题：</p>
 <script type="math/tex; mode=display">\max _{\alpha} \min _{w, b} L(w, b, \alpha)</script><p>所以为了求得对偶问题的解，需要先求$L(w,b,\alpha)$对$w,b$的极小，再求对$\alpha$的极大。</p>
 <p>（1）求$\min _{w, b} L(w, b, \alpha)$<br>将拉格朗日函数$L(w,b,\alpha)$分别对$w,b$求偏导，并令其为0</p>
 <script type="math/tex; mode=display">\begin{array}{l}
-\nabla_{w} L(w, b, \alpha)=w-\sum_{i=1}^{m} \alpha_{i} y_{i} x_{i}=0 \\
+\nabla_{w} L(w, b, \alpha)=w-\sum_{i=1}^{m} \alpha_{i} y_{i} x_{i}=0 \\\\
 \nabla_{b} L(w, b, \alpha)=-\sum_{i=1}^{m} \alpha_{i} y_{i}=0
 \end{array}</script><p>得到：</p>
 <script type="math/tex; mode=display">\begin{array}{l}
-w=\sum_{j=1}^{m} \alpha_{i} y_{i} x_{i} \\
+w=\sum_{j=1}^{m} \alpha_{i} y_{i} x_{i} \\\\
 \sum_{i=1}^{m} \alpha_{i} y_{i}=0
 \end{array}</script><p>将求得$w$带入到拉格朗日函数中</p>
 <script type="math/tex; mode=display">\begin{aligned}
-L(w, b, \alpha) &=\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \alpha_{i} y_{i}\left(\left(\sum_{j=1}^{m} \alpha_{j} y_{j} x_{j}^T\right) x_{i}+b\right)+\sum_{i=1}^{m} \alpha_{i} \\
-&=\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \alpha_{i} y_{i}b+\sum_{i=1}^{m} \alpha_{i} \\
+L(w, b, \alpha) &=\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \alpha_{i} y_{i}\left(\left(\sum_{j=1}^{m} \alpha_{j} y_{j} x_{j}^T\right) x_{i}+b\right)+\sum_{i=1}^{m} \alpha_{i} \\\\
+&=\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \alpha_{i} y_{i}b+\sum_{i=1}^{m} \alpha_{i} \\\\
 &=-\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)+\sum_{i=1}^{m} \alpha_{i}
 \end{aligned}</script><p>即</p>
 <script type="math/tex; mode=display">\min _{w, b} L(w, b, \alpha)=-\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}+\sum_{i=1}^{m} \alpha_{i}</script><p>（2）求$\min _{w, b} L(w, b, \alpha)$关于$\alpha$的极大，即是对偶问题</p>
 <script type="math/tex; mode=display">\begin{array}{ll}
-\max _{\alpha} & -\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}+\sum_{i=1}^{m} \alpha_{i} \\
-\text { s.t. } & \sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\
+\max _{\alpha} & -\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}+\sum_{i=1}^{m} \alpha_{i} \\\\
+\text { s.t. } & \sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\\\
 & \alpha_{i} \geqslant 0, \quad i=1,2, \cdots, m
 \end{array}</script><p>将上面的求极大变成下面的求极小问题</p>
 <script type="math/tex; mode=display">\begin{array}{ll}
-\min _{\alpha} & \frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \alpha_{i} \\
-\text { s.t. } & \sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\
+\min _{\alpha} & \frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \alpha_{i} \\\\
+\text { s.t. } & \sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\\\
 & \alpha_{i} \geqslant 0, \quad i=1,2, \cdots, m
-\end{array}</script><p>最终求得的$w,b$只和支持向量有关。因此SVM的一个重要性质是：SVM训练完之后，大部分的训练样本不需要保留，最终模型只和支持向量有关。</p>
+\end{array}</script><p>好，看到这我们来做一个总结，看一下原始问题和最终的对偶问题是什么？</p>
+<p><strong>原始问题</strong></p>
+<script type="math/tex; mode=display">\begin{aligned}
+\min _{w, b} \frac{1}{2}||w||^2 , i=1,2, \ldots, m \\
+\text { subject to } y^{i}\left(w^{T} \mathbf{x}^{i}+b\right)>=1
+\end{aligned}</script><p><strong>对偶问题</strong></p>
+<script type="math/tex; mode=display">\begin{array}{ll}
+\min _{\alpha} & \frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \alpha_{i} \\\\
+\text { s.t. } & \sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\\\
+& \alpha_{i} \geqslant 0, \quad i=1,2, \cdots, m
+\end{array}</script><p>原始问题是求$w,b$，对偶问题是求$\alpha$</p>
+<p>现在引入一个定理</p>
+<blockquote>
+<p>设$\alpha^<em>=(\alpha_1^</em>,\alpha_2^<em>,…,\alpha_l^</em>)$是对偶问题的解，则存在下标$j$，使得$\alpha_j^*&gt;0$，并按照下列公式可以求得原始问题的解</p>
+</blockquote>
+<script type="math/tex; mode=display">\begin{array}{ll}
+w^*=\sum_{i=1}^N\alpha_i^*y_ix_i\\\\
+b^*=y_j-\sum_{i=1}^{N}\alpha_i^*y_i(x_i^Tx_j)
+\end{array}</script><p>最终求得的分类决策函数：</p>
+<script type="math/tex; mode=display">\begin{array}{ll}
+f(x)=sign(w^{*T}x+b^*)\\\\
+=sign(\sum_{i=1}^N\alpha_i^*y_ix^Tx_i+b^*)
+\end{array}</script><p>在线性可分SVM中，$w^<em>,b^</em>$只取决于寻训数据中对应与$\alpha_i^<em>&gt;0$的样本点$(x_i,y_i)$，而其他样本点对$w^</em>,b^<em>$没有影响。我们将训练数据中对应于$\alpha_i^</em>&gt;0$的样本点叫做<strong>支持向量</strong>。因此<strong>SVM的一个重要性质是：SVM训练完之后，大部分的训练样本不需要保留，最终模型只和支持向量有关</strong>。</p>
 <h3><span id="362-近似线性svm">3.6.2. 近似线性SVM</span></h3><p>在实际应用中，完全线性可分是很少的，例如下图中，没有一条直线可以将2类完全分开。</p>
 <p><img src="/2020/06/19/百面机器学习概述/SVM4.png" alt=""></p>
 <p>于是就有了软间隔，与线性可分的硬间隔相比，条件没有那么苛刻，我们允许个别样本点出现在隔离带里面，例如下</p>
 <p><img src="/2020/06/19/百面机器学习概述/SVM5.png" alt=""></p>
 <p>硬间隔要求所有样本点都满足</p>
-<script type="math/tex; mode=display">y^i(w^Tx^i+b)>=1</script><p>软间隔引入松弛变量，允许部分样本点满足</p>
-<script type="math/tex; mode=display">y^i(w^Tx^i+b)+\xi_{i}>=1</script><p>当$\xi_{i}=0$时，样本分类正确<br>当0&lt;$\xi_{i}<1$时，样本分类正确 当$\xi_{i}="">=1$时，样本分类正确</1$时，样本分类正确></p>
+<script type="math/tex; mode=display">y^i(w^Tx^i+b)>=1</script><p><strong>软间隔引入松弛变量</strong>，允许部分样本点满足</p>
+<script type="math/tex; mode=display">y^i(w^Tx^i+b)+\xi_{i}>=1</script><p>当$\xi_{i}=0$时，样本分类正确<br>当0&lt;$\xi_{i}<1$时，样本分类正确 当$\xi_{i}="">=1$时，样本分类错误</1$时，样本分类正确></p>
 <p>增加松弛变量后，SVM的目标变成：</p>
 <script type="math/tex; mode=display">\begin{aligned}
 &\min _{w} \frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{m} \xi_{i}\\
@@ -1303,13 +1746,13 @@ L(w, b, \alpha) &=\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j
 <script type="math/tex; mode=display">L(w, b, \xi, \alpha, \mu)=\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{m} \xi_{i}-\sum_{i=1}^{m} \alpha_{i}\left(y_{i}\left(w^T x_{i}+b\right)-1+\xi_{i}\right)-\sum_{i=1}^{m} \mu_{i} \xi_{i}</script><script type="math/tex; mode=display">\alpha_{i} \geqslant 0, \mu_{i} \geqslant 0</script><p>对偶问题是拉格朗日的极大极小问题，所以对偶问题为</p>
 <script type="math/tex; mode=display">\max _{\alpha,\mu} \min _{w, b,\xi} L(w, b, \xi, \alpha, \mu)</script><p>（1）极小化$\min _{w, b,\xi} L(w, b, \xi, \alpha, \mu)$，对$w, b,\xi$求导使其为0</p>
 <script type="math/tex; mode=display">\begin{array}{l}
-\nabla_{w} L(w, b, \xi, \alpha, \mu)=w-\sum_{i=1}^{m} \alpha_{i} y_{i} x_{i}=0 \\
-\nabla_{b} L(w, b, \xi, \alpha, \mu)=-\sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\
+\nabla_{w} L(w, b, \xi, \alpha, \mu)=w-\sum_{i=1}^{m} \alpha_{i} y_{i} x_{i}=0 \\\\
+\nabla_{b} L(w, b, \xi, \alpha, \mu)=-\sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\\\
 \nabla_{\xi_{i}} L(w, b, \xi, \alpha, \mu)=C-\alpha_{i}-\mu_{i}=0
 \end{array}</script><p>得到</p>
 <script type="math/tex; mode=display">\begin{array}{c}
-w=\sum_{i=1}^{m} \alpha_{i} y_{i} x_{i} \\
-\sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\
+w=\sum_{i=1}^{m} \alpha_{i} y_{i} x_{i} \\\\
+\sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\\\
 C-\alpha_{i}-\mu_{i}=0
 \end{array}</script><p>将上述公式带入到拉格朗日函数中，得到</p>
 <script type="math/tex; mode=display">\min _{w, b, \xi} L(w, b, \xi, \alpha, \mu)=-\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}+\sum_{i=1}^{m} \alpha_{i}</script><p>（2）对$\min _{w, b, \xi} L(w, b, \xi, \alpha, \mu)$求$\alpha$的极大，得到对偶问题</p>
@@ -1327,7 +1770,22 @@ C-\alpha_{i}-\mu_{i}=0 \\
 <p><img src="/2020/06/19/百面机器学习概述/SVM6.png" alt=""></p>
 <p>解决方案：将样本使用核函数，向高维空间转化，使得在高维空间中线性可分。</p>
 <p><img src="/2020/06/19/百面机器学习概述/SVM7.png" alt=""></p>
+<p>用线性分类方法求解非线性分类问题有2步：</p>
+<ol>
+<li>将原空间的数据映射到新空间</li>
+<li>然后在新空间里用线性分类器对数据进行线性分类</li>
+</ol>
+<p>核函数就是有一个映射函数$\phi$将原始空间的数据$x,z$映射到另一个空间中。<br>并且还需要满足一个条件$K(x,z)=\phi(x) \cdot \phi(z)$<br>其中$K(x,z)$为核函数，$\phi$是映射函数。$\phi(x) \cdot \phi(z)$为点乘。</p>
+<p>核技巧就是：在学习中只定义核函数$K(x,z)$，而不显示定义映射函数$\phi$。通常直接计算$K(x,z)$比较容易，而通过$\phi(x)$和$\phi(z)$计算$K(x,z)$并不容易。我们一般在映射时，一般将原始数据映射到高维，甚至无穷维。</p>
+<p><strong>核技巧在SVM中的应用</strong></p>
+<p>在SVM中的对偶问题中，无论是目标函数还是决策函数（分离超平面）都只涉及到x之间的内积，$x_i^Tx_j=x_i \cdot x_j$。在对偶问题的目标函数中内积$x_i \cdot x_j$可以用核函数$K(x,z)=\phi(x) \cdot \phi(z)$来代替。此时的对偶问题就变成</p>
+<script type="math/tex; mode=display">\begin{array}{ll}
+\min _{\alpha} & \frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}K(x_i,x_j)-\sum_{i=1}^{m} \alpha_{i} \\\\
+\text { s.t. } & \sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\\\
+& \alpha_{i} \geqslant 0, \quad i=1,2, \cdots, m
+\end{array}</script><p>这就相当于在新的特征空间中求分类决策面。学习是 隐式地在特征空间中进行的忙不需要显示地定义特征空间和映射函数。</p>
 <p>核函数的好坏对SVM至关重要。若核函数选择不合适，将样本映射到一个不合适的特征空间，很有可能分类效果不佳。</p>
+<p><strong>常用的核函数</strong></p>
 <p><img src="/2020/06/19/百面机器学习概述/SVM8.png" alt=""></p>
 <h3><span id="364-面试问题">3.6.4. 面试问题</span></h3><ul>
 <li><p><strong>介绍函数间隔和几何间隔</strong></p>

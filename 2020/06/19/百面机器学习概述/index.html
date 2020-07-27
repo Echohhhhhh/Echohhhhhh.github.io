@@ -124,7 +124,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/kmeans3.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/贝叶斯1.png">
 <meta property="og:image" content="http://yoursite.com/2020/06/19/百面机器学习概述/贝叶斯2.png">
-<meta property="og:updated_time" content="2020-07-16T16:24:06.806Z">
+<meta property="og:updated_time" content="2020-07-22T12:08:37.133Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="百面机器学习概述一">
 <meta name="twitter:description" content="总结《百面机器学习》有关知识点。">
@@ -429,7 +429,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  24.7k
+                  26.2k
                 </span>
               
 
@@ -445,7 +445,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  93
+                  100
                 </span>
               
             </div>
@@ -484,9 +484,10 @@
 <li><a href="#23-余弦距离">2.3. 余弦距离</a></li>
 <li><a href="#24-ab测试">2.4. A/B测试</a></li>
 <li><a href="#25-模型评估方法">2.5. 模型评估方法</a></li>
-<li><a href="#26-过拟合和欠拟合">2.6. 过拟合和欠拟合</a></li>
-<li><a href="#27-正则化">2.7. 正则化</a></li>
-<li><a href="#28-梯度消失和梯度爆炸">2.8. 梯度消失和梯度爆炸</a></li>
+<li><a href="#26-模型中特征选择">2.6. 模型中特征选择</a></li>
+<li><a href="#27-过拟合和欠拟合">2.7. 过拟合和欠拟合</a></li>
+<li><a href="#28-正则化">2.8. 正则化</a></li>
+<li><a href="#29-梯度消失和梯度爆炸">2.9. 梯度消失和梯度爆炸</a></li>
 </ul>
 </li>
 <li><a href="#3-经典算法">3. 经典算法</a><ul>
@@ -566,7 +567,11 @@
 </li>
 </ul>
 <ul>
-<li>什么时候需要归一化<br>需要使用梯度下降和计算距离的模型需要归一化。因为例如：线性回归、逻辑回归、SVM、深度神经网络，KNN,K-Means，<br>概率模型和树形模型不需要归一化，因为它们不关心变量的值，只关心变量的分布和变量之间的条件概率。例如决策树，随机森林。</li>
+<li><strong>什么时候需要归一化</strong><ul>
+<li>需要使用梯度下降和计算距离的模型需要归一化。例如：线性回归、逻辑回归、SVM、深度神经网络，KNN,K-Means，</li>
+<li>概率模型和树形模型不需要归一化，因为它们不关心变量的值，只关心变量的分布和变量之间的条件概率。例如决策树，随机森林。</li>
+</ul>
+</li>
 </ul>
 <h2><span id="12-类别型特征">1.2. 类别型特征</span></h2><p>将类别特征—&gt;数值特征，有以下方法</p>
 <ul>
@@ -576,7 +581,11 @@
 </ul>
 <h2><span id="13-文本表示模型">1.3. 文本表示模型</span></h2><ul>
 <li>词袋模型：将文章按照词分割，使用每个词的权重来表示文章</li>
-<li>TF-IDF：用来计算一个词的权重，TF=一个词w在文章d中出现的频率，IDF：特属词的特征，逆文档频率</li>
+<li><p>TF-IDF：用来计算一个词在文章中的权重，TF=一个词t在文章d中出现的频率，IDF：特属词的特征，逆文档频率</p>
+<script type="math/tex; mode=display">TF-IDF(t,d)=TF(t,d)\times IDF(t)</script><script type="math/tex; mode=display">IDF(t)=log \frac{文章总数}{包含单词t的文章总数+1}</script><p>如果一个单词在非常多的文章中出现，说明这个词可能是比较通用的词汇，对区分某篇文章的特殊语义贡献很小。</p>
+</li>
+</ul>
+<ul>
 <li>N-gram模型：将连续的n个词作为一个特征放在向量中。</li>
 <li>词嵌入模型：将词映射成低维稠密向量(50~300维度)，Word2Vec是最常用的词嵌入模型。</li>
 </ul>
@@ -635,7 +644,41 @@
 <li>k折交叉验证<br>将样本划分为k个大小相等的子集，一个子集作为测试集，k-1个子集作为训练集。将k次评估结果平均作为该模型最终的结果。<br>优点：（1）解决当数据量较小时，模型评估不准确的问题（2）消除数据对评估结果的随机性影响（3）可以用来选择超参数<br>缺点：耗时，需要训练多个模型求评估结果的平均值</li>
 <li>自助法<br>如果数据比较小，holdout和k折交叉验证都需要划分数据集，导致训练集变小。自助发采用随机抽样，在全部样本中进行n次有放回的抽样，得到大小为n的训练集。这n个样本中有的样本是重复的，有的样本没有被抽到，这些没有抽到的样本作为测试集。</li>
 </ol>
-<h2><span id="26-过拟合和欠拟合">2.6. 过拟合和欠拟合</span></h2><ul>
+<h2><span id="26-模型中特征选择">2.6. 模型中特征选择</span></h2><p>在sklearn中有很多特征选择的方法</p>
+<ol>
+<li>移除低方差的特征<br>如果在所有的样本中，这个特征的取值方差很低，基本都取的差不多，那这个特征可以认为对结果影响不大。首先先移除0方差的特征。这种方法简单但是不太好用</li>
+<li><p>单变量特征选择<br>对每一个特征单单进行训练，然后看这个特征训练好的模型在测试集上的效果。找出最好的模型所使用的那个特征。<br>在<code>sklearn.feature_selection</code>中已经有现成的算法来对每个特征进行测试，然后选择效果最好的K个特征<br><code>SelectKBest</code>是保留最高分数的L个特征。这个函数需要传入2个参数，</p>
+<ul>
+<li>模型好坏的评价指标</li>
+<li>K的大小</li>
+</ul>
+</li>
+</ol>
+   <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> SelectKBest</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> chi2 <span class="comment"># 卡方检验</span></span><br><span class="line">iris = load_iris()</span><br><span class="line">X,y = iris.data, iris.target</span><br><span class="line">X.shape <span class="comment"># (150, 4)</span></span><br><span class="line"><span class="comment"># 基于卡方并选出两个最优特征</span></span><br><span class="line">X_new = SelectKBest(chi2, k=<span class="number">2</span>).fit_transform(X,y)</span><br><span class="line">X_new.shape <span class="comment"># (150, 2)</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>递归消除特征<br>将全部特征都输入到模型中，模型会输出每个特征的重要性，然后删除那些不太重要的特征，把剩下的特征再次丢到模型中，然后又输出各个特征的重要性，再次删除。如此循环，直到剩下的特征等于给定的个数。<br><code>sklearn.feature_selection.RFE</code>用来做特征选择，传入2个参数</p>
+<ul>
+<li>模型</li>
+<li>需要保留特征个数</li>
+<li>每次删除特征的个数</li>
+</ul>
+<p>这个方法的缺点是需要重复训练很多次</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_friedman1</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> RFE</span><br><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVR</span><br><span class="line">X, y = make_friedman1(n_samples=<span class="number">50</span>, n_features=<span class="number">10</span>, random_state=<span class="number">0</span>)</span><br><span class="line">estimator = SVR(kernel=<span class="string">"linear"</span>)<span class="comment">#5个特征被选中，每次迭代去除1个特征。</span></span><br><span class="line">selector = RFE(estimator, <span class="number">5</span>, step=<span class="number">1</span>)</span><br><span class="line">selector = selector.fit(X, y)</span><br><span class="line">print(selector.support_) <span class="comment">##所选特征的掩码</span></span><br><span class="line"><span class="comment">#特征排名，使得rank_ [i]对应于第i个特征的排名位置。</span></span><br><span class="line"><span class="comment">#所选择的（重要性最高的）特征被分配为等级1，被删除的特征显示其原始的位置。</span></span><br><span class="line">selector.ranking_</span><br><span class="line">print(selector.fit(X,y))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用SelectFromModel选取特征</p>
+<p>这种方法只需要训练一次模型。</p>
+<ul>
+<li>基于L1正则化选择特征<br>L1正则化会让参数变得稀疏，也就是让很多参数为0，即在模型训练的时候丢弃掉一部分特征，因为L1正则化也可以用来做特征选择。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> LinearSVC</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> SelectFromModel</span><br><span class="line">iris = load_iris()</span><br><span class="line">X, y = iris.data, iris.target</span><br><span class="line">lsvc = LinearSVC(C=<span class="number">0.01</span>, penalty=<span class="string">"l1"</span>, dual=<span class="keyword">False</span>).fit(X, y)</span><br><span class="line">model = SelectFromModel(lsvc, prefit=<span class="keyword">True</span>)</span><br><span class="line">X_new = model.transform(X)</span><br><span class="line">X_new.shape</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li><p>基于树模型选择特征<br>我们知道树模型的建立过程就是一个特征选择的过程，他会根据信息增益的准则来选择信息增益最大的特征来进行建模，输出各个特征的<code>feature_importances_</code>，然后传入<code>SelectFromModel</code>进行特征选择</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> ExtraTreesClassifierfrom sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> SelectFromModel</span><br><span class="line">iris = load_iris()</span><br><span class="line">X, y = iris.data, iris.target</span><br><span class="line">clf = ExtraTreesClassifier()</span><br><span class="line">clf = clf.fit(X, y)</span><br><span class="line"><span class="comment">#输出特征重程度</span></span><br><span class="line">clf.feature_importances_  </span><br><span class="line">model = SelectFromModel(clf, prefit=<span class="keyword">True</span>)</span><br><span class="line">X_new = model.transform(X)</span><br><span class="line">X_new.shape</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2><span id="27-过拟合和欠拟合">2.7. 过拟合和欠拟合</span></h2><ul>
 <li>过拟合<br>模型在训练数据上loss很小，在测试集上loss大</li>
 <li>欠拟合<br>模型在训练集和测试集上loss都很大，效果都不好</li>
 <li><p>降低过拟合的方法</p>
@@ -656,7 +699,7 @@
 </ol>
 </li>
 </ul>
-<h2><span id="27-正则化">2.7. 正则化</span></h2><p>正则化为了避免过拟合，即在损失函数后加上一个正则项（惩罚项），模型越复杂，正则化值就越大。</p>
+<h2><span id="28-正则化">2.8. 正则化</span></h2><p>正则化为了避免过拟合，即在损失函数后加上一个正则项（惩罚项），模型越复杂，正则化值就越大。</p>
 <script type="math/tex; mode=display">\min _{f \in \mathcal{F}} \frac{1}{N} \sum_{i=1}^{N} L\left(y_{i}, f\left(x_{i}\right)\right)+\lambda J(f)</script><p>第一项是损失值，第二项是正则化项，$\lambda$调整两者的权重。下面拿回归问题举例，损失值为平方损失。</p>
 <ul>
 <li>L1正则<br>惩罚项为权重绝对值的和</li>
@@ -665,7 +708,7 @@
 <li>L2正则</li>
 </ul>
 <p>惩罚项为权重的平方和</p>
-<script type="math/tex; mode=display">L(w)=\frac{1}{N} \sum_{i=1}^{N}\left(f\left(x_{i} ; w\right)-y_{i}\right)^{2}+\frac{\lambda}{2}\|w\|^{2}</script><h2><span id="28-梯度消失和梯度爆炸">2.8. 梯度消失和梯度爆炸</span></h2><p>梯度消失和梯度爆炸经常出现在较深的网络中。反向传播用到链式法则，导数连乘。如果激活函数求导后与权重相乘的积大于1，层数增多时，求出的梯度将以指数增加，发生梯度爆炸。如果小于1，梯度将以指数衰减，发生梯度消失。<br>sigmoid的导数最大为0.25，易发生梯度消失问题</p>
+<script type="math/tex; mode=display">L(w)=\frac{1}{N} \sum_{i=1}^{N}\left(f\left(x_{i} ; w\right)-y_{i}\right)^{2}+\frac{\lambda}{2}\|w\|^{2}</script><h2><span id="29-梯度消失和梯度爆炸">2.9. 梯度消失和梯度爆炸</span></h2><p>梯度消失和梯度爆炸经常出现在较深的网络中。反向传播用到链式法则，导数连乘。如果激活函数求导后与权重相乘的积大于1，层数增多时，求出的梯度将以指数增加，发生梯度爆炸。如果小于1，梯度将以指数衰减，发生梯度消失。<br>sigmoid的导数最大为0.25，易发生梯度消失问题</p>
 <p>如何解决梯度消失和梯度爆炸：</p>
 <ol>
 <li>使用ReLU代替sigmoid解决梯度消失问题。Relu的正数部分导数为1，不存在梯度消失和梯度爆炸的问题</li>
@@ -927,7 +970,7 @@ log(P_总)=log(\prod_{i=1}^{i=m}h(x^i)^{y_i}*(1-h(x^i))^{1-y^i})\\
 <li>数据近似线性可分：软间隔SVM/近似线性可分SVM</li>
 <li>数据线性不可分：核方法</li>
 </ol>
-<h3><span id="361-线性可分svm">3.6.1. 线性可分SVM</span></h3><p>SVM就是解决二分类问题，分类学习最基本的想法就是找到一个划分超平面，将不同类别的数据集分开。目的就是找到一个最优的分割线将两类分开。</p>
+<h3><span id="361-线性可分svm">3.6.1. 线性可分SVM</span></h3><p>SVM就是解决二分类问题，分类学习最基本的想法就是找到一个划分超平面，将不同类别的数据集分开。<strong>SVM的目的就是找到一个最优的分割线将两类分开</strong>。</p>
 <p>分类问题有线性可分和线性不可分。线性可分就是在二维空间中能找到一条直线将2类样本划分开。线性不可分就是不能找到一条直线。对于线性不可分的样本通常是通过高斯核函数将样本映射到高维空间，然后转换为高维空间线性可分的问题。<br>下图中的直线都可以将2类样本分开，但是哪个才是好的分割线呢？分类器的价值不在于它多么擅长分割训练样本，而是对于哪些未知的样本它的分类效果怎么样。下图中中间较粗的那条线，在正确划分训练样本的前提下，尽可能地同时远离两个聚类。而其他的线都是有些“倾斜”，一头远离一类，另一头靠近另一类。</p>
 <p><img src="/2020/06/19/百面机器学习概述/SVM1.png" alt=""></p>
 <p>假设划分超平面的公式为</p>
@@ -942,32 +985,33 @@ w^{T} x+b \geq 1 \quad y=1 \\
 w^{T} x+b \leq-1 \quad y=-1
 \end{array}\right.</script><p>上面我们简单的介绍下SVM和逻辑回归的不同，下面我们将详细介绍SVM</p>
 <p>假设SVM中的分割超平面为<script type="math/tex">w^Tx+b=0</script></p>
-<p>$w=(w_1,w_2,…w_d)$是有个列向量，拆分开就是$w_1x_1+w_2x_2+…+w_dx_d+b=0$</p>
+<p>$w=(w_1,w_2,…w_d)$是个列向量，上式拆分开就是$w_1x_1+w_2x_2+…+w_dx_d+b=0$</p>
 <p>超平面有以下几个性质</p>
-<p><strong>性质1</strong>：等比例缩放$w,b$，超平面不变，仍然是同一条直线或超平面<br><strong>性质2</strong>：点$x=(x_1,x_2,…,x_d)$到超平面的距离为</p>
-<script type="math/tex; mode=display">\frac{|w_1x_1+w_2x_2+...+w_dx_d+b|}{\sqrt{w_1^2+w_2^2+...+w_d^2}}
-=\frac{|w^Tx+b|}{||w||}</script><p>下面介绍2个概念：<strong>函数间隔、几何间隔</strong></p>
 <blockquote>
 <p>二维平面中点$(x,y)$到$AX+By+c=0$的距离为$\frac{|Ax+By+c|}{\sqrt{A^2+B^2}}$</p>
 </blockquote>
+<p><strong>性质1</strong>：等比例缩放$w,b$，超平面不变，仍然是同一条直线或超平面。例如wx+b=0和2w+2b=0是同一条线<br><strong>性质2</strong>：点$x=(x_1,x_2,…,x_d)$到超平面的距离为</p>
+<script type="math/tex; mode=display">\frac{|w_1x_1+w_2x_2+...+w_dx_d+b|}{\sqrt{w_1^2+w_2^2+...+w_d^2}}
+=\frac{|w^Tx+b|}{||w||}</script><p>下面介绍2个概念：<strong>函数间隔、几何间隔</strong></p>
 <p>  <strong>超平面</strong>：$w^Tx+b=0$<br>  <strong>函数间隔</strong>：$\hat{\gamma}=y(w^Tx+b)=yf(x)=|f(x)|$<br>  函数间隔就是标签$y$乘上$f(x)$的值，函数间隔永远为正。但是由于SVM中$y$的取值只能为1和-1，所以函数间隔的值就是$|f(x)|$<br>  几何间隔表示点到超平面的距离，在SVM中点到超平面的距离为$\frac{|w^Tx+b|}{||w||}=\frac{|f(x)|}{||w||}=\frac{\hat{\gamma}}{||w||}$<br>  <strong>几何间隔</strong>：$\gamma=\frac{|w^Tx+b|}{||w||}=\frac{y(w^Tx+b)}{||w||}=\frac{\hat{\gamma}}{||w||}$</p>
-<p>  函数间隔$y(w^Tx+b)$可以表示分类预测的准确性和置信度，值越大越好，说明模型将样本分正确的概率越大，但函数间隔并不表示点到超平面的距离，因为假如将$w,b$成比例变成$2w,2b$，超平面的位置没有变，但是$f(x)$却变成原来的2倍，即函数间隔变成原来的2倍。在实际中，定义点到直线的距离时，用的是几何间隔。$w,b$成倍数增加时，几何间隔不变。函数间隔是几何间隔没有除以$||w||$的表示，几何间隔是函数间隔归一化的结果。函数间隔是我们自己定义的，而几何间隔是客观存在的，无论$w,b$扩大几倍，对几何间隔没有影响。</p>
+<p>  函数间隔$y(w^Tx+b)$可以表示分类预测的准确性和置信度，值越大越好，说明模型将样本分正确的概率越大，但函数间隔并不表示点到超平面的距离，因为假如将$w,b$成比例变成$2w,2b$，超平面的位置没有变，但是$f(x)$却变成原来的2倍，即函数间隔变成原来的2倍。在实际中，定义点到直线的距离时，用的是几何间隔。$w,b$成倍数增加时，几何间隔不变。几何间隔是函数间隔归一化（除以$||w||$）的结果。函数间隔是我们自己定义的，而几何间隔是客观存在的，无论$w,b$扩大几倍，对几何间隔没有影响。</p>
 <p><strong>SVM的目标</strong></p>
-<p>SVM的目标是找到一个最优的划分超平面。那怎么定义最优呢？在SVM中评价指标就是几何间隔。在下图中，我们直观的感觉图a的分类效果比b和c好，因为在图a中，与分割线最近的样本点相比b和c来说，这个样本点距离分割线最远。SVM正是遵循这一思想，在众多分割超平面中，找样本点（超平面附近的点）与分割超平面距离最大的那个超平面，即最小几何间隔中，最大的那个。</p>
+<p>SVM的目标是找到一个最优的划分超平面。那怎么定义最优呢？<strong>在SVM中评价指标就是几何间隔</strong>。在下图中，我们直观的感觉图a的分类效果比b和c好，因为在图a中，与分割线最近的样本点相比b和c来说，这个样本点距离分割线最远。SVM正是遵循这一思想，在众多分割超平面中，找样本点（超平面附近的点）与分割超平面距离最大的那个超平面，即最小几何间隔中，最大的那个。</p>
 <p><img src="/2020/06/19/百面机器学习概述/SVM3.png" alt=""></p>
-<p>SVM的最佳划分超平面需要满足2个条件：（1）能够将所有的正负样本划分正确，即函数间隔大于0，（2）离超平面最近的样本点与超平面的几何距离最大</p>
-<p>第一个条件公式为$\hat{\gamma}=y(w^Tx+b)&gt;0$<br>第二个条件为首先找到最近的样本点，即最小的函数间距，然后再最大化函数间距。</p>
+<p>SVM的最佳划分超平面需要满足2个条件：<br>（1）能够将所有的正负样本划分正确，即函数间隔大于0<br>（2）离超平面最近的样本点与超平面的几何距离最大</p>
+<p>第一个条件公式为$\hat{\gamma}=y(w^Tx+b)&gt;0$<br>第二个条件为首先找到最近的样本点，即最小的几何间距，然后再最大化几何间距。</p>
 <script type="math/tex; mode=display">\begin{array}{l}
-\min\tilde{\gamma}^{i}=\min \frac{y^{i}\left(w^{T} \mathbf{x}^{i}+b\right)}{\| w \mid}=\frac{1}{\|w\|} \min y^{i}\left(w^{T} \mathbf{x}^{i}+b\right), i=1,2, \ldots, m \\
+先找到最小的几何间隔\\
+\min\tilde{\gamma}^{i}=\min \frac{y^{i}\left(w^{T} \mathbf{x}^{i}+b\right)}{\| w \| \mid}=\frac{1}{\|w\|} \min y^{i}\left(w^{T} \mathbf{x}^{i}+b\right), i=1,2, \ldots, m \\\\再最大化这个几何间隔\\
 \max _{w, b} \frac{1}{\|w\|} \min y^{i}\left(w^{T} \mathbf{x}^{i}+b\right), i=1,2, \ldots, m
 \end{array}</script><p>结合上面的2个条件，求解最优划分超平面的公式为</p>
 <script type="math/tex; mode=display">\begin{aligned}
 \max _{w, b} \frac{1}{\|w\|} \min y^{i}\left(w^{T} \mathbf{x}^{i}+b\right), i=1,2, \ldots, m \\
 \text { subject to } y^{i}\left(w^{T} \mathbf{x}^{i}+b\right)>0
-\end{aligned}</script><p>但是上面这个目标函数太复杂了，需要对其进行简化。这里就需要用到超平面的性质1：对$w,b$进行缩放，超平面不变。如果在求解的过程中，继续保持这个性质的话，就算上面的公式可以求得最优的划分超平面，但是$w,b$的取值却有无数个，即解不唯一。但是我们要求一个固定的超平面，对应的$w,b$是唯一的，就需要添加限制条件。限制条件可以有多种选择：</p>
-<p>选择1：限制$||w||=1$，即超平面的法向量模长为1，这样就消除了等比缩放的影响。但是添加了这个限制对上面公式的简化没有什么帮助<br>选择2：$miny^i(w^Tx^i+b)=1$，限制最小的函数间隔等于1，这也是SVM所采取的方式。如果$\hat{\gamma}=1$，假设将$w,b$放大为$kw,kb$，理论上来说缩放后的函数间隔$\hat{\gamma}_{i+1}=k\hat{\gamma}$，但是我们限制了函数间隔只能为1，即$\hat{\gamma}_{i+1}=\hat{\gamma}=1$，那$k$也只能为1，即不存在等比缩放的问题。</p>
+\end{aligned}</script><p>但是上面这个目标函数太复杂了，需要对其进行简化。这里就需要用到超平面的性质1：对$w,b$进行缩放，超平面不变。如果在求解的过程中，继续保持这个性质的话，就算上面的公式可以求得最优的划分超平面，但是$w,b$的取值却有无数个，即解不唯一。但是我们要得到一个固定的超平面，即对应的$w,b$是唯一的，就需要添加限制条件。限制条件可以有多种选择：</p>
+<p>选择1：限制$||w||=1$，即超平面的法向量模长为1，这样就消除了等比缩放的影响。但是添加了这个限制对上面公式的简化没有什么帮助<br>选择2：$miny^i(w^Tx^i+b)=1$，限制最小的函数间隔等于1，这也是SVM所采取的方式。如果$\hat{\gamma}=1$，假设将$w,b$放大为$kw,kb$，理论上来说缩放后的函数间隔也变为原来的k倍：$\hat{\gamma}_{i+1}=k\hat{\gamma}$，但是我们限制了函数间隔只能为1，即$\hat{\gamma}_{i+1}=\hat{\gamma}=1$，那$k$也只能为1，即不存在等比缩放的问题。</p>
 <blockquote>
-<p>注意：SVM中将$miny^i(w^Tx^i+b)=1$，其实将值限制为2,3,4…，限制为多少都没关系，都可以消除等比缩放带来的影响，但是不可以不限制。</p>
+<p>注意：SVM中将$miny^i(w^Tx^i+b)=1$，其实将值限制为2,3,4…，限制为多少都没关系，都可以消除等比缩放带来的影响。SVM中限制为1只是为了更简单。但是如果不限制$miny^i(w^Tx^i+b)$这个值是不行的，一定需要限制。</p>
 </blockquote>
 <p>有了这个限制条件，原先的目标就需要变了</p>
 <p><strong>原先的目标函数</strong>：</p>
@@ -981,7 +1025,7 @@ w^{T} x+b \leq-1 \quad y=-1
 \text { subject to } y^{i}\left(w^{T} \mathbf{x}^{i}+b\right)>=1
 \end{aligned}</script><p>于是我们得到了3个平面：最优划分超平面$w^Tx+b=0$，与划分超平面间隔平行的2个超平面$w^Tx+b=1$和$w^Tx+b=-1$</p>
 <p><img src="/2020/06/19/百面机器学习概述/SVM2.png" alt=""></p>
-<p>这是一个凸二次规划的问题，对于一个优化问题，通常可以从2个角度考虑：主问题和对偶问题。常常利用拉格朗日对偶性将主问题转换为对偶问题，通过求解对偶问题的解来得到原始问题的解，这是因为对偶问题的复杂度往往低于原始问题。</p>
+<p>这是一个凸二次规划的问题，对于一个优化问题，通常可以从2个角度考虑：主问题和对偶问题。常常<strong>利用拉格朗日对偶性将主问题转换为对偶问题</strong>，通过求解对偶问题的解来得到原始问题的解，这是因为对偶问题的复杂度往往低于原始问题。</p>
 <blockquote>
 <p>拉格朗日乘子法知识点<br>拉格朗日乘子法将原问题转换为对偶问题进行求解，主问题有等式约束和不等式约束<br>主问题：</p>
 <script type="math/tex; mode=display">\begin{array}{c}
@@ -998,40 +1042,62 @@ g_{j}(x) \leq 0 \\
 <p>根据上面的知识，我们得到<strong>SVM的拉格朗日函数</strong></p>
 <p>[<br>L(\omega, b, \alpha)=\frac{1}{2}|\omega|^{2}+\sum_{i=1}^{m} \alpha_{i}\left(1-y_{i}\left(\omega^{T} x_{i}+b\right)\right)<br>]</p>
 <script type="math/tex; mode=display">L(w, b, \alpha)=\frac{1}{2}\|w\|^{2}-\sum_{i=1}^{m} \alpha_{i} y_{i}\left(\omega^{T} x_{i}+b\right)+\sum_{i=1}^{N} \alpha_{i}</script><p>其中 $\alpha=\left(\alpha_{1} ; \alpha_{2} ; \ldots ; \alpha_{m}\right)$,拉格朗日乘子 $\alpha_{i} \geq 0$</p>
-<p>一个优化问题可以从两个角度考虑：主问题和对偶问题。在约束最优化问题中，常常利用拉格朗日对偶性将原问题转化为对偶问题，通过对偶问题来得到原始问题的解。<br>根据拉格朗日对偶性，原始问题的对偶问题是极大极小问题：</p>
+<p>根据拉格朗日对偶性，原始问题的对偶问题是极大极小问题：</p>
 <script type="math/tex; mode=display">\max _{\alpha} \min _{w, b} L(w, b, \alpha)</script><p>所以为了求得对偶问题的解，需要先求$L(w,b,\alpha)$对$w,b$的极小，再求对$\alpha$的极大。</p>
 <p>（1）求$\min _{w, b} L(w, b, \alpha)$<br>将拉格朗日函数$L(w,b,\alpha)$分别对$w,b$求偏导，并令其为0</p>
 <script type="math/tex; mode=display">\begin{array}{l}
-\nabla_{w} L(w, b, \alpha)=w-\sum_{i=1}^{m} \alpha_{i} y_{i} x_{i}=0 \\
+\nabla_{w} L(w, b, \alpha)=w-\sum_{i=1}^{m} \alpha_{i} y_{i} x_{i}=0 \\\\
 \nabla_{b} L(w, b, \alpha)=-\sum_{i=1}^{m} \alpha_{i} y_{i}=0
 \end{array}</script><p>得到：</p>
 <script type="math/tex; mode=display">\begin{array}{l}
-w=\sum_{j=1}^{m} \alpha_{i} y_{i} x_{i} \\
+w=\sum_{j=1}^{m} \alpha_{i} y_{i} x_{i} \\\\
 \sum_{i=1}^{m} \alpha_{i} y_{i}=0
 \end{array}</script><p>将求得$w$带入到拉格朗日函数中</p>
 <script type="math/tex; mode=display">\begin{aligned}
-L(w, b, \alpha) &=\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \alpha_{i} y_{i}\left(\left(\sum_{j=1}^{m} \alpha_{j} y_{j} x_{j}^T\right) x_{i}+b\right)+\sum_{i=1}^{m} \alpha_{i} \\
-&=\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \alpha_{i} y_{i}b+\sum_{i=1}^{m} \alpha_{i} \\
+L(w, b, \alpha) &=\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \alpha_{i} y_{i}\left(\left(\sum_{j=1}^{m} \alpha_{j} y_{j} x_{j}^T\right) x_{i}+b\right)+\sum_{i=1}^{m} \alpha_{i} \\\\
+&=\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \alpha_{i} y_{i}b+\sum_{i=1}^{m} \alpha_{i} \\\\
 &=-\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}\left(x_{i} \cdot x_{j}\right)+\sum_{i=1}^{m} \alpha_{i}
 \end{aligned}</script><p>即</p>
 <script type="math/tex; mode=display">\min _{w, b} L(w, b, \alpha)=-\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}+\sum_{i=1}^{m} \alpha_{i}</script><p>（2）求$\min _{w, b} L(w, b, \alpha)$关于$\alpha$的极大，即是对偶问题</p>
 <script type="math/tex; mode=display">\begin{array}{ll}
-\max _{\alpha} & -\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}+\sum_{i=1}^{m} \alpha_{i} \\
-\text { s.t. } & \sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\
+\max _{\alpha} & -\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}+\sum_{i=1}^{m} \alpha_{i} \\\\
+\text { s.t. } & \sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\\\
 & \alpha_{i} \geqslant 0, \quad i=1,2, \cdots, m
 \end{array}</script><p>将上面的求极大变成下面的求极小问题</p>
 <script type="math/tex; mode=display">\begin{array}{ll}
-\min _{\alpha} & \frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \alpha_{i} \\
-\text { s.t. } & \sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\
+\min _{\alpha} & \frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \alpha_{i} \\\\
+\text { s.t. } & \sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\\\
 & \alpha_{i} \geqslant 0, \quad i=1,2, \cdots, m
-\end{array}</script><p>最终求得的$w,b$只和支持向量有关。因此SVM的一个重要性质是：SVM训练完之后，大部分的训练样本不需要保留，最终模型只和支持向量有关。</p>
+\end{array}</script><p>好，看到这我们来做一个总结，看一下原始问题和最终的对偶问题是什么？</p>
+<p><strong>原始问题</strong></p>
+<script type="math/tex; mode=display">\begin{aligned}
+\min _{w, b} \frac{1}{2}||w||^2 , i=1,2, \ldots, m \\
+\text { subject to } y^{i}\left(w^{T} \mathbf{x}^{i}+b\right)>=1
+\end{aligned}</script><p><strong>对偶问题</strong></p>
+<script type="math/tex; mode=display">\begin{array}{ll}
+\min _{\alpha} & \frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}-\sum_{i=1}^{m} \alpha_{i} \\\\
+\text { s.t. } & \sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\\\
+& \alpha_{i} \geqslant 0, \quad i=1,2, \cdots, m
+\end{array}</script><p>原始问题是求$w,b$，对偶问题是求$\alpha$</p>
+<p>现在引入一个定理</p>
+<blockquote>
+<p>设$\alpha^<em>=(\alpha_1^</em>,\alpha_2^<em>,…,\alpha_l^</em>)$是对偶问题的解，则存在下标$j$，使得$\alpha_j^*&gt;0$，并按照下列公式可以求得原始问题的解</p>
+</blockquote>
+<script type="math/tex; mode=display">\begin{array}{ll}
+w^*=\sum_{i=1}^N\alpha_i^*y_ix_i\\\\
+b^*=y_j-\sum_{i=1}^{N}\alpha_i^*y_i(x_i^Tx_j)
+\end{array}</script><p>最终求得的分类决策函数：</p>
+<script type="math/tex; mode=display">\begin{array}{ll}
+f(x)=sign(w^{*T}x+b^*)\\\\
+=sign(\sum_{i=1}^N\alpha_i^*y_ix^Tx_i+b^*)
+\end{array}</script><p>在线性可分SVM中，$w^<em>,b^</em>$只取决于寻训数据中对应与$\alpha_i^<em>&gt;0$的样本点$(x_i,y_i)$，而其他样本点对$w^</em>,b^<em>$没有影响。我们将训练数据中对应于$\alpha_i^</em>&gt;0$的样本点叫做<strong>支持向量</strong>。因此<strong>SVM的一个重要性质是：SVM训练完之后，大部分的训练样本不需要保留，最终模型只和支持向量有关</strong>。</p>
 <h3><span id="362-近似线性svm">3.6.2. 近似线性SVM</span></h3><p>在实际应用中，完全线性可分是很少的，例如下图中，没有一条直线可以将2类完全分开。</p>
 <p><img src="/2020/06/19/百面机器学习概述/SVM4.png" alt=""></p>
 <p>于是就有了软间隔，与线性可分的硬间隔相比，条件没有那么苛刻，我们允许个别样本点出现在隔离带里面，例如下</p>
 <p><img src="/2020/06/19/百面机器学习概述/SVM5.png" alt=""></p>
 <p>硬间隔要求所有样本点都满足</p>
-<script type="math/tex; mode=display">y^i(w^Tx^i+b)>=1</script><p>软间隔引入松弛变量，允许部分样本点满足</p>
-<script type="math/tex; mode=display">y^i(w^Tx^i+b)+\xi_{i}>=1</script><p>当$\xi_{i}=0$时，样本分类正确<br>当0&lt;$\xi_{i}<1$时，样本分类正确 当$\xi_{i}="">=1$时，样本分类正确</1$时，样本分类正确></p>
+<script type="math/tex; mode=display">y^i(w^Tx^i+b)>=1</script><p><strong>软间隔引入松弛变量</strong>，允许部分样本点满足</p>
+<script type="math/tex; mode=display">y^i(w^Tx^i+b)+\xi_{i}>=1</script><p>当$\xi_{i}=0$时，样本分类正确<br>当0&lt;$\xi_{i}<1$时，样本分类正确 当$\xi_{i}="">=1$时，样本分类错误</1$时，样本分类正确></p>
 <p>增加松弛变量后，SVM的目标变成：</p>
 <script type="math/tex; mode=display">\begin{aligned}
 &\min _{w} \frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{m} \xi_{i}\\
@@ -1042,13 +1108,13 @@ L(w, b, \alpha) &=\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j
 <script type="math/tex; mode=display">L(w, b, \xi, \alpha, \mu)=\frac{1}{2}\|w\|^{2}+C \sum_{i=1}^{m} \xi_{i}-\sum_{i=1}^{m} \alpha_{i}\left(y_{i}\left(w^T x_{i}+b\right)-1+\xi_{i}\right)-\sum_{i=1}^{m} \mu_{i} \xi_{i}</script><script type="math/tex; mode=display">\alpha_{i} \geqslant 0, \mu_{i} \geqslant 0</script><p>对偶问题是拉格朗日的极大极小问题，所以对偶问题为</p>
 <script type="math/tex; mode=display">\max _{\alpha,\mu} \min _{w, b,\xi} L(w, b, \xi, \alpha, \mu)</script><p>（1）极小化$\min _{w, b,\xi} L(w, b, \xi, \alpha, \mu)$，对$w, b,\xi$求导使其为0</p>
 <script type="math/tex; mode=display">\begin{array}{l}
-\nabla_{w} L(w, b, \xi, \alpha, \mu)=w-\sum_{i=1}^{m} \alpha_{i} y_{i} x_{i}=0 \\
-\nabla_{b} L(w, b, \xi, \alpha, \mu)=-\sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\
+\nabla_{w} L(w, b, \xi, \alpha, \mu)=w-\sum_{i=1}^{m} \alpha_{i} y_{i} x_{i}=0 \\\\
+\nabla_{b} L(w, b, \xi, \alpha, \mu)=-\sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\\\
 \nabla_{\xi_{i}} L(w, b, \xi, \alpha, \mu)=C-\alpha_{i}-\mu_{i}=0
 \end{array}</script><p>得到</p>
 <script type="math/tex; mode=display">\begin{array}{c}
-w=\sum_{i=1}^{m} \alpha_{i} y_{i} x_{i} \\
-\sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\
+w=\sum_{i=1}^{m} \alpha_{i} y_{i} x_{i} \\\\
+\sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\\\
 C-\alpha_{i}-\mu_{i}=0
 \end{array}</script><p>将上述公式带入到拉格朗日函数中，得到</p>
 <script type="math/tex; mode=display">\min _{w, b, \xi} L(w, b, \xi, \alpha, \mu)=-\frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}x_{i}^T x_{j}+\sum_{i=1}^{m} \alpha_{i}</script><p>（2）对$\min _{w, b, \xi} L(w, b, \xi, \alpha, \mu)$求$\alpha$的极大，得到对偶问题</p>
@@ -1066,7 +1132,22 @@ C-\alpha_{i}-\mu_{i}=0 \\
 <p><img src="/2020/06/19/百面机器学习概述/SVM6.png" alt=""></p>
 <p>解决方案：将样本使用核函数，向高维空间转化，使得在高维空间中线性可分。</p>
 <p><img src="/2020/06/19/百面机器学习概述/SVM7.png" alt=""></p>
+<p>用线性分类方法求解非线性分类问题有2步：</p>
+<ol>
+<li>将原空间的数据映射到新空间</li>
+<li>然后在新空间里用线性分类器对数据进行线性分类</li>
+</ol>
+<p>核函数就是有一个映射函数$\phi$将原始空间的数据$x,z$映射到另一个空间中。<br>并且还需要满足一个条件$K(x,z)=\phi(x) \cdot \phi(z)$<br>其中$K(x,z)$为核函数，$\phi$是映射函数。$\phi(x) \cdot \phi(z)$为点乘。</p>
+<p>核技巧就是：在学习中只定义核函数$K(x,z)$，而不显示定义映射函数$\phi$。通常直接计算$K(x,z)$比较容易，而通过$\phi(x)$和$\phi(z)$计算$K(x,z)$并不容易。我们一般在映射时，一般将原始数据映射到高维，甚至无穷维。</p>
+<p><strong>核技巧在SVM中的应用</strong></p>
+<p>在SVM中的对偶问题中，无论是目标函数还是决策函数（分离超平面）都只涉及到x之间的内积，$x_i^Tx_j=x_i \cdot x_j$。在对偶问题的目标函数中内积$x_i \cdot x_j$可以用核函数$K(x,z)=\phi(x) \cdot \phi(z)$来代替。此时的对偶问题就变成</p>
+<script type="math/tex; mode=display">\begin{array}{ll}
+\min _{\alpha} & \frac{1}{2} \sum_{i=1}^{m} \sum_{j=1}^{m} \alpha_{i} \alpha_{j} y_{i} y_{j}K(x_i,x_j)-\sum_{i=1}^{m} \alpha_{i} \\\\
+\text { s.t. } & \sum_{i=1}^{m} \alpha_{i} y_{i}=0 \\\\
+& \alpha_{i} \geqslant 0, \quad i=1,2, \cdots, m
+\end{array}</script><p>这就相当于在新的特征空间中求分类决策面。学习是 隐式地在特征空间中进行的忙不需要显示地定义特征空间和映射函数。</p>
 <p>核函数的好坏对SVM至关重要。若核函数选择不合适，将样本映射到一个不合适的特征空间，很有可能分类效果不佳。</p>
+<p><strong>常用的核函数</strong></p>
 <p><img src="/2020/06/19/百面机器学习概述/SVM8.png" alt=""></p>
 <h3><span id="364-面试问题">3.6.4. 面试问题</span></h3><ul>
 <li><p><strong>介绍函数间隔和几何间隔</strong></p>
@@ -1555,7 +1636,7 @@ C-\alpha_{i}-\mu_{i}=0 \\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1566,7 +1647,7 @@ C-\alpha_{i}-\mu_{i}=0 \\
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1577,7 +1658,7 @@ C-\alpha_{i}-\mu_{i}=0 \\
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1626,7 +1707,7 @@ C-\alpha_{i}-\mu_{i}=0 \\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. 特征归一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. 类别型特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.3. 文本表示模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.4. Word2Vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.5. 图像不足时处理方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 模型评估</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 常见评估指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. P-R曲线和ROC曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. 余弦距离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.4. A/B测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.5. 模型评估方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.6. 过拟合和欠拟合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.7. 正则化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.8. 梯度消失和梯度爆炸</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 经典算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. 回归模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.1. 单变量线性回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.2. 多变量线性回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.3. 带有激活函数的反向传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.4. L1正则和L2正则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.5. 面试问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. 逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.2.1. 逻辑回归推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.2.2. 逻辑回归常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. Softmax回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.4. 回归和分类总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.5. 数据不平衡问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.5.1. SMOTE算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.6. SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.1. 线性可分SVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.2. 近似线性SVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.3. 核函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.4. 面试问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.7. 决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1. 基础树(ID3/C4.5/CART)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.1. ID3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.2. C4.5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.3. CART(分类回归树)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.4. 总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.2. 树的剪枝</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.8. K近邻(KNN)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.8.1. KNN原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.8.2. KD树</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. K-Means聚类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.2. K-Means的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.2.1. K-Means++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.2.2. ISODATA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.3. 聚类评价指标</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 贝叶斯分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.1. 朴素贝叶斯分类器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.2. 半朴素贝叶斯分类器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 生成模型和判别模型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. 特征归一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. 类别型特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.3. 文本表示模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.4. Word2Vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.5. 图像不足时处理方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 模型评估</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 常见评估指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. P-R曲线和ROC曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. 余弦距离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.4. A/B测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.5. 模型评估方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.6. 模型中特征选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.7. 过拟合和欠拟合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.8. 正则化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.9. 梯度消失和梯度爆炸</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 经典算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. 回归模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.1. 单变量线性回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.2. 多变量线性回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.3. 带有激活函数的反向传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.4. L1正则和L2正则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.5. 面试问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. 逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.2.1. 逻辑回归推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.2.2. 逻辑回归常见问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. Softmax回归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.4. 回归和分类总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.5. 数据不平衡问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.5.1. SMOTE算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.6. SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.1. 线性可分SVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.2. 近似线性SVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.3. 核函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.6.4. 面试问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.7. 决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1. 基础树(ID3/C4.5/CART)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.1. ID3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.2. C4.5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.3. CART(分类回归树)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.1.4. 总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.7.2. 树的剪枝</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.8. K近邻(KNN)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.8.1. KNN原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.8.2. KD树</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. K-Means聚类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.2. K-Means的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.2.1. K-Means++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.2.2. ISODATA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.3. 聚类评价指标</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 贝叶斯分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.1. 朴素贝叶斯分类器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.2. 半朴素贝叶斯分类器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 生成模型和判别模型</span></a></li></ol></div>
             
 
           </div>
