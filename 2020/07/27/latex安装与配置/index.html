@@ -82,13 +82,16 @@
 <meta property="og:description" content="最近开始使用Latex写论文，在此记录下Latex的安装和配置">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/8.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/9.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/2.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/4.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/5.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/6.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/7.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/3.jpg">
-<meta property="og:updated_time" content="2020-07-27T07:24:20.362Z">
+<meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/10.jpg">
+<meta property="og:updated_time" content="2020-07-27T08:06:10.776Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="latex安装与配置">
 <meta name="twitter:description" content="最近开始使用Latex写论文，在此记录下Latex的安装和配置">
@@ -393,7 +396,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k
+                  1.4k
                 </span>
               
 
@@ -409,7 +412,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  6
                 </span>
               
             </div>
@@ -444,6 +447,7 @@
 </ul>
 </li>
 <li><a href="#5-快捷键">5. 快捷键</a></li>
+<li><a href="#6-错误解决">6. 错误解决</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="1-软件准备">1. 软件准备</span></h1><ol>
@@ -453,7 +457,15 @@
 </ol>
 <h1><span id="2-安装texlive">2. 安装TexLive</span></h1><ol>
 <li>在<a href="https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/" target="_blank" rel="noopener">清华源</a>上下载texlive.iso镜像，大约有3.7G，等呀等…..等呀等…..终于下完了。</li>
-<li>安装<br>这个过程比较漫长，需要从网上下载需要的文件<br><img src="/2020/07/27/latex安装与配置/1.jpg" alt=""></li>
+<li><p>安装<br>这个过程比较漫长，需要从网上下载需要的文件</p>
+<p><img src="/2020/07/27/latex安装与配置/1.jpg" alt=""></p>
+</li>
+<li><p>验证是否安装成功<br>使用<code>Win+R</code>，输出<code>cmd</code>，然后使用下面的命令查看latex是否安装成功</p>
+<p><img src="/2020/07/27/latex安装与配置/8.jpg" alt=""></p>
+</li>
+<li><p>查看环境变量<br>TexLive在安装的时候，会<code>Path</code>中自动写入环境变量的值，如果没有写入，需要自己手动添加。</p>
+<p><img src="/2020/07/27/latex安装与配置/9.jpg" alt=""></p>
+</li>
 </ol>
 <h1><span id="3-配置latex-workshop">3. 配置LaTEX Workshop</span></h1><ol>
 <li>文件—&gt;首选项—&gt;配置</li>
@@ -461,7 +473,7 @@
 <li><p>配置</p>
 <ul>
 <li><code>latex-workshop.latex.tools</code>:编译工具,”xelatex”,”pdflatex”,”bibtex”是三个常用的编译工具。如果安装路径中包括中文的话，可以将<code>&quot;latex-workshop.latex.tools&quot;</code>:中的<code>%DOC%</code>更改为<code>%DOCFILE%</code>。</li>
-<li><code>latex-workshop.latex.recipes</code>:latex编译的方案。可以使用”xelatex”，也可以使用”pdflatex”，或”xe-&gt;bib-&gt;xe-&gt;xe”,”pdf-&gt;bib-&gt;pdf-&gt;pdf”连续多次编译。其中”pdf-&gt;bib-&gt;pdf-&gt;pdf”适合英文期刊模板，默认使用<code>latexmk</code>。我们配置的这些在左边菜单栏的”build Latex project”中都可以看到<br><img src="/2020/07/27/latex安装与配置/2.jpg" alt=""> </li>
+<li><code>latex-workshop.latex.recipes</code>:latex编译的方案。可以使用”xelatex”，也可以使用”pdflatex”，或”xe-&gt;bib-&gt;xe-&gt;xe”,”pdf-&gt;bib-&gt;pdf-&gt;pdf”连续多次编译。<strong>其中”pdf-&gt;bib-&gt;pdf-&gt;pdf”适合英文期刊模板</strong>，我使用的也是这个。默认使用<code>latexmk</code>。我们配置的这些在左边菜单栏的”build Latex project”中都可以看到<br><img src="/2020/07/27/latex安装与配置/2.jpg" alt=""> </li>
 <li><code>&quot;latex-workshop.view.pdf.viewer&quot;: &quot;tab&quot;</code>表示使用vscode内嵌的pdf来查看编译后的pdf文件</li>
 <li><code>&quot;latex-workshop.latex.autoBuild.run&quot;: &quot;onFileChange&quot;或&quot;never&quot;</code>，表示在保存tex文件时是否自动编译</li>
 <li><code>&quot;latex-workshop.latex.autoClean.run&quot;: &quot;onBuilt&quot;</code>表示在生成pdf后自动清除辅助文件</li>
@@ -613,6 +625,8 @@
 <li><code>Ctrl+Alt+B</code>对tex进行编译,然后在VSCode的左下角就可以看到编译的状态。<br><img src="/2020/07/27/latex安装与配置/3.jpg" alt=""></li>
 <li>在编译完之后，按<code>Ctrl+Alt+V</code>预览生成的pdf文件</li>
 </ol>
+<h1><span id="6-错误解决">6. 错误解决</span></h1><p>在完成上面的操作时，将一个AAAI的tex文件进行编译，然后报错<code>aaai2020.sty not found</code>，去AAAI的官网上下载论文latex模板，其中模板文件夹中有<code>aaai.bst,aaai20.sty</code>这2个文件，把这2个文件拷贝到tex所在的文件夹中，重新编译就成功啦。</p>
+<p><img src="/2020/07/27/latex安装与配置/10.jpg" alt=""></p>
 
       
     </div>
@@ -841,7 +855,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 软件准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 安装TexLive</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 配置LaTEX Workshop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. VSCode界面使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 编译latex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.2. 查看pdf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.3. 查看日志</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 快捷键</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 软件准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 安装TexLive</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 配置LaTEX Workshop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. VSCode界面使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 编译latex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.2. 查看pdf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.3. 查看日志</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 快捷键</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 错误解决</span></a></li></ol></div>
             
 
           </div>
