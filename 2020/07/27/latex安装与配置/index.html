@@ -89,9 +89,12 @@
 <meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/5.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/6.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/7.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/11.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/12.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/13.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/3.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/27/latex安装与配置/10.jpg">
-<meta property="og:updated_time" content="2020-07-27T08:06:10.776Z">
+<meta property="og:updated_time" content="2020-07-27T08:37:22.578Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="latex安装与配置">
 <meta name="twitter:description" content="最近开始使用Latex写论文，在此记录下Latex的安装和配置">
@@ -396,7 +399,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.4k
+                  1.6k
                 </span>
               
 
@@ -412,7 +415,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  7
                 </span>
               
             </div>
@@ -444,6 +447,9 @@
 <li><a href="#41-编译latex">4.1. 编译latex</a></li>
 <li><a href="#42-查看pdf">4.2. 查看pdf</a></li>
 <li><a href="#43-查看日志">4.3. 查看日志</a></li>
+<li><a href="#44-正向搜索">4.4. 正向搜索</a></li>
+<li><a href="#45-latex符号搜索">4.5. latex符号搜索</a></li>
+<li><a href="#46-查看参考文献">4.6. 查看参考文献</a></li>
 </ul>
 </li>
 <li><a href="#5-快捷键">5. 快捷键</a></li>
@@ -621,12 +627,20 @@
 <h2><span id="42-查看pdf">4.2. 查看pdf</span></h2><p>在编译成功后，会生成pdf文件，我们可以在VSCode内部来查看生成的pdf，点击左侧的<code>view in vscode tab</code>，就会生成左右2个窗口。也可以在用一些外部的pdf查看器来查看，这样就不是在vscode内部查看了，通常用<code>SumatraPDF</code>来查看，这个软件需要单独下载。这里就不介绍这种方式了<br><img src="/2020/07/27/latex安装与配置/6.jpg" alt=""></p>
 <h2><span id="43-查看日志">4.3. 查看日志</span></h2><p>当编译latex出错时，我们可以点击左侧的<code>view latex compilier log</code>来查看日志。</p>
 <p><img src="/2020/07/27/latex安装与配置/7.jpg" alt=""></p>
+<h2><span id="44-正向搜索">4.4. 正向搜索</span></h2><p>点击<code>syntex from cursor</code>可以进行正向搜索。在tex文件中，鼠标的游标停留在某个位置，然后点击<code>syntex from cursor</code>，在右侧的pdf中会定位到鼠标所有在位置。</p>
+<p><img src="/2020/07/27/latex安装与配置/11.jpg" alt=""></p>
+<h2><span id="45-latex符号搜索">4.5. latex符号搜索</span></h2><p>有一些公式涉及到复杂的符号，可以点击左侧的<code>snippet panel</code>，在右侧会出现常用的符号，点击某一个符号，就会在tex文件中插入相应的latex表示。</p>
+<p><img src="/2020/07/27/latex安装与配置/12.jpg" alt=""></p>
+<h2><span id="46-查看参考文献">4.6. 查看参考文献</span></h2><p>在文件中提前写好<code>bib</code>参考文件，然后点击<code>open citation browser</code>,就会出现bib文件中所有的参考文献，然后点击某个参考文献，就可以在tex文件中插入参考文献。</p>
+<p><img src="/2020/07/27/latex安装与配置/13.jpg" alt=""></p>
 <h1><span id="5-快捷键">5. 快捷键</span></h1><ol>
 <li><code>Ctrl+Alt+B</code>对tex进行编译,然后在VSCode的左下角就可以看到编译的状态。<br><img src="/2020/07/27/latex安装与配置/3.jpg" alt=""></li>
 <li>在编译完之后，按<code>Ctrl+Alt+V</code>预览生成的pdf文件</li>
 </ol>
 <h1><span id="6-错误解决">6. 错误解决</span></h1><p>在完成上面的操作时，将一个AAAI的tex文件进行编译，然后报错<code>aaai2020.sty not found</code>，去AAAI的官网上下载论文latex模板，其中模板文件夹中有<code>aaai.bst,aaai20.sty</code>这2个文件，把这2个文件拷贝到tex所在的文件夹中，重新编译就成功啦。</p>
 <p><img src="/2020/07/27/latex安装与配置/10.jpg" alt=""></p>
+<p>参考资料</p>
+<p><a href="https://blog.csdn.net/aiwei169/article/details/81431363" target="_blank" rel="noopener">TeX Live安装教程</a><br><a href="https://blog.csdn.net/qq280929090/article/details/104357697?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.channel_param&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.channel_param" target="_blank" rel="noopener">基于Visual Studio Code的 LaTeX环境配置及使用示例</a><br><a href="https://blog.csdn.net/david394/article/details/107165422" target="_blank" rel="noopener">在VSCode中配置Latex编译环境</a></p>
 
       
     </div>
@@ -784,7 +798,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -855,7 +869,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 软件准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 安装TexLive</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 配置LaTEX Workshop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. VSCode界面使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 编译latex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.2. 查看pdf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.3. 查看日志</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 快捷键</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 错误解决</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 软件准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 安装TexLive</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 配置LaTEX Workshop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. VSCode界面使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 编译latex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.2. 查看pdf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.3. 查看日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.4. 正向搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.5. latex符号搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.6. 查看参考文献</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 快捷键</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 错误解决</span></a></li></ol></div>
             
 
           </div>
