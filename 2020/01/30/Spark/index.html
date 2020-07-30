@@ -73,18 +73,26 @@
 
 
 
-<meta name="description" content="详细整理下Spark的原理 Spark简介Spark是什么Spark是基于内存计算的大数据局并行计算框架。Spark基于内存计算，提高了数据处理的速度，同时具有高容错性和高伸缩性，允许用户将Spark部署在廉价的硬件之上，形成集群。">
+<meta name="description" content="详细整理下Spark的原理">
 <meta name="keywords" content="Spark">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark">
 <meta property="og:url" content="http://yoursite.com/2020/01/30/Spark/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="详细整理下Spark的原理 Spark简介Spark是什么Spark是基于内存计算的大数据局并行计算框架。Spark基于内存计算，提高了数据处理的速度，同时具有高容错性和高伸缩性，允许用户将Spark部署在廉价的硬件之上，形成集群。">
+<meta property="og:description" content="详细整理下Spark的原理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-07-30T01:43:18.658Z">
+<meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/spark架构图.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/RDD.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/spark1.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/spark2.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/窄依赖.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/宽依赖.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/sparkstreaming.jpg">
+<meta property="og:updated_time" content="2020-07-30T12:45:21.358Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark">
-<meta name="twitter:description" content="详细整理下Spark的原理 Spark简介Spark是什么Spark是基于内存计算的大数据局并行计算框架。Spark基于内存计算，提高了数据处理的速度，同时具有高容错性和高伸缩性，允许用户将Spark部署在廉价的硬件之上，形成集群。">
+<meta name="twitter:description" content="详细整理下Spark的原理">
+<meta name="twitter:image" content="http://yoursite.com/2020/01/30/Spark/spark架构图.jpg">
 
 
 
@@ -385,7 +393,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  83
+                  2.2k
                 </span>
               
 
@@ -401,7 +409,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  8
                 </span>
               
             </div>
@@ -422,8 +430,120 @@
       
 
       
-        <p>详细整理下Spark的原理</p>
-<h1><span id="spark简介">Spark简介</span></h1><h2><span id="spark是什么">Spark是什么</span></h2><p>Spark是<strong>基于内存计算</strong>的大数据局并行<strong>计算框架</strong>。Spark基于内存计算，提高了数据处理的速度，同时具有高容错性和高伸缩性，允许用户将Spark部署在廉价的硬件之上，形成集群。</p>
+        <p>详细整理下Spark的原理<br><a id="more"></a></p>
+<!-- TOC -->
+<ul>
+<li><a href="#1-spark简介">1. Spark简介</a><ul>
+<li><a href="#11-spark是什么">1.1. Spark是什么</a></li>
+<li><a href="#12-spark架构">1.2. Spark架构</a></li>
+</ul>
+</li>
+<li><a href="#2-spark计算模型">2. Spark计算模型</a><ul>
+<li><a href="#21-rdd介绍">2.1. RDD介绍</a></li>
+</ul>
+</li>
+<li><a href="#3-spark工作机制详解">3. Spark工作机制详解</a><ul>
+<li><a href="#31-spark中术语概念">3.1. Spark中术语概念</a></li>
+<li><a href="#32-spark资源分配">3.2. Spark资源分配</a></li>
+<li><a href="#33-spark中job的调度">3.3. Spark中Job的调度</a></li>
+</ul>
+</li>
+<li><a href="#4-spark-io机制">4. Spark I/O机制</a><ul>
+<li><a href="#41-序列化">4.1. 序列化</a></li>
+</ul>
+</li>
+<li><a href="#5-容错机制">5. 容错机制</a><ul>
+<li><a href="#501-checkpoint机制">5.0.1. CheckPoint机制</a></li>
+</ul>
+</li>
+<li><a href="#6-spark-streaming">6. Spark Streaming</a></li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-spark简介">1. Spark简介</span></h1><h2><span id="11-spark是什么">1.1. Spark是什么</span></h2><p>Spark是<strong>基于内存计算</strong>的大数据局并行<strong>计算框架</strong>。Spark基于内存计算，提高了数据处理的速度，同时具有高容错性和高伸缩性，允许用户将Spark部署在廉价的硬件之上，形成集群。</p>
+<p>Spark和 Hadoop Map Reduce的优势：</p>
+<ol>
+<li>中间结果输出在内存中<br>MapReduce将中间结果写入到磁盘中。而Spark在计算过程抽象成有向无环图DAG，执行的时候使用内存来存储中间结果。</li>
+<li>数据格式<br>Spark使用弹性分布式数据集RDD，来进行数据的存储。在RDD上可以对数据进行分区，将数据分布在不同节点上。</li>
+<li>任务调度<br>MapReduce是为了运行数小时的批量作业而设计的，在某些情况下，延迟非常高。<br>Spark采用事件驱动的类库AKKA来启动任务，通过线程池来避免线程启动和切换的开销。</li>
+</ol>
+<h2><span id="12-spark架构">1.2. Spark架构</span></h2><p>Spark架构采用了分布式计算中的Master-Slave模型。将具有Master进程的节点视为Master，将含有Worker进程的节点视为Slave。<br>在搭建集群的时候已经分配好Master和Worker了。</p>
+<ul>
+<li>Master作为整个集群的控制器，负责整个集群的正常运行。</li>
+</ul>
+<p>在运行Spakr程序时，分为Driver和Worker。</p>
+<ul>
+<li>Client用户端提交应用</li>
+<li>Driver是提交程序的那个节点，即运行<code>main()</code>函数的那个节点，负责作业的调度。</li>
+<li>Worker是计算节点，用来接收主节点命令，执行任务。</li>
+<li>Executor：执行器，在worker节点上执行任务的组件。</li>
+</ul>
+<p><img src="/2020/01/30/Spark/spark架构图.jpg" alt=""></p>
+<p>Spark的执行流程：<br>Client提交应用，Mater会找到一个Worker来启动Driver，Driver向Master申请资源，然后将RDD的一系列操作转换为DAG，然后调度器将DAG中的一系列操作切分成不同的stage，然后将这些stage分发给Executor执行。</p>
+<h1><span id="2-spark计算模型">2. Spark计算模型</span></h1><h2><span id="21-rdd介绍">2.1. RDD介绍</span></h2><p>Spark的核心数据结构:弹性分布式数据集（resilient distributed dataset）RDD，通过RDD的依赖关系形成有向无环图。</p>
+<p>RDD的2种创建方式：</p>
+<ol>
+<li>从HDFS，HBase，Hive中读取数据创建</li>
+<li>从父RDD转换得到新的RDD</li>
+</ol>
+<p>RDD的2种操作算子：</p>
+<ol>
+<li>转换算法Transformation<br>转换算子不是立即执行，等到Action之后才会被触发。</li>
+<li>行动算子Action<br>Action算子触发Spark提交作业。</li>
+</ol>
+<p>一个RDD有多个分区，每个分区上的数据存储在不同的节点上。</p>
+<p><img src="/2020/01/30/Spark/RDD.jpg" alt=""></p>
+<h1><span id="3-spark工作机制详解">3. Spark工作机制详解</span></h1><p>Spark的执行流程：<br>Client提交应用，Mater会找到一个Worker来启动Driver，Driver向Master申请资源，然后将RDD的一系列操作转换为DAG，然后调度器将DAG中的一系列操作切分成不同的stage，然后将这些stage分发给Executor执行。Executor会创建线程池，executor将需要执行的任务通过线程池并发执行。</p>
+<p><img src="/2020/01/30/Spark/spark1.jpg" alt=""></p>
+<h2><span id="31-spark中术语概念">3.1. Spark中术语概念</span></h2><p>Spark应用Application是用户提交的应用程序。执行模式有Local，Standalone，YARN。</p>
+<p><img src="/2020/01/30/Spark/spark2.jpg" alt=""></p>
+<ul>
+<li>Application：用户自定义的Spark程序，用户提交后，Spark为App分配资源</li>
+<li>Driver Program：运行App的main函数，并创建SparkContext</li>
+<li>RDD Graph：RDD是Spark核心结构，RDD所有算子操作组成一个有向无环图DAG</li>
+<li>Job：一个RDD Graph触发的作业，一般由Action触发，在SparkContext通过runJob方法向Spark提交Job</li>
+<li>Stage：每个Job会根据RDD的宽依赖关系被切分成很多stage，每个stage中包含一组相同的task，这一组Task也叫做TaskSet</li>
+<li>Task：一个分区对应一个Task，Task执行RDD中的算子，Task被封装好后放在Executor中的线程池中执行。</li>
+</ul>
+<h2><span id="32-spark资源分配">3.2. Spark资源分配</span></h2><p>Spark有多种运行模型：Local，Standalone模型，YARN模式。</p>
+<p>下面根据不同的运行模式介绍配置调度：</p>
+<ol>
+<li>Stansalone模式<br>默认情况下，用户以standalone模式提交应用使用FIFO的顺序进行调度。每个应用会独占所有可用节点的资源。用户可以通过配置参数<code>spark.cores.max</code>来决定一个应用可以<strong>在整个集群</strong>申请的CPU core数，而不是一个节点的核数。如果没有设置这个值，则使用默认参数。</li>
+<li>YARN模式<br>当Spark在YARN平台上提交时，用户可以在YARN的客户端通过配置<br><code>--num-executors</code>:应用分到的executor个数<br><code>--executor-memory</code>：每个executor的内存大小<br><code>--executor-cores</code>：每个executor的cpu核数<br>这样可以限制用户提交的应用不会占用过多的资源，让不同用户可以共享整个集群资源。</li>
+</ol>
+<h2><span id="33-spark中job的调度">3.3. Spark中Job的调度</span></h2><p>在Spark应用程序内部，用户通过不同线程提交的Job可以并行运行。这里所说的Job是action算子触发的一个job。<br>Spark的调度器是线程安全的，有以下3种调度方法：默认是FIFO</p>
+<ol>
+<li>FIFO<br>在默认情况下，Spark使用FIFO方式调度Job执行。有多个Job时，第一个Job优先获取所有的资源，第一个job还行结束后，才开始执行第二个job。但是如果第一个Job运行很长时间的话，第二个job就需要等很久。</li>
+<li>FAIR<br>Spark在多个Job进行轮询来分配资源，所有的Job获取资源的优先级是一样的。当一个长任务在执行时，短任务也可以分配到资源。这种调度适合多用户的场景。</li>
+<li>配置调度池<br>用户可以通过配置文件自定义调度池的属性。通过设置权重，控制整个集群的资源分配上。如果一个调度池的权重为3，则该调度池将会比权重为1的调度池优先获取资源。</li>
+</ol>
+<h1><span id="4-spark-io机制">4. Spark I/O机制</span></h1><p>Spark的数据分布在多个节点上，不仅要考虑本机的I/O开销，还要考虑不同节点之间的传输开销。</p>
+<h2><span id="41-序列化">4.1. 序列化</span></h2><p>序列化：将对象转换成字节流。将链表存储的非连续空间的数据转换成连续空间存储的数据，这样就可以将数据进行流传输或块传输。<br>在Spark中，传输的数据都需要进行序列化，序列化后的数据影响数据传输速度，影响集群计算效率。序列化方式有Java序列化库，Kyro序列化库，自定义序列化方法。</p>
+<h1><span id="5-容错机制">5. 容错机制</span></h1><p>分布式数据集的容错性有2种方式：</p>
+<ol>
+<li>数据检查点，成本高</li>
+<li>记录数据的更新，Spark使用该方式。但是如果更新粒度太细太多，更新成本也很高，所以RDD只支持粗粒度转换，即在大量记录上执行的单个操作。将创建RDD的一系列Lineage（血统）记录下来，以便恢复丢失的分区。Lineage本质上很类似数据库中重做日志（redo log），只不过这个重做日志粒度很大。</li>
+</ol>
+<p>RDD的Lineage记录的转换算子行为，当这个RDD的部分分区数据丢失时，它可以通过Lineage重新运算和恢复丢失的数据分区。</p>
+<p><strong>2种依赖</strong></p>
+<p>RDD在Lineage依赖方面有2种：窄依赖和宽依赖，用来解决数据容错的高效性。</p>
+<ul>
+<li><p><strong>窄依赖：一个父分区对应一个子分区</strong>，即父RDD的分区对应于一个子RDD的一个分区。</p>
+<p><img src="/2020/01/30/Spark/窄依赖.jpg" alt=""></p>
+</li>
+<li><p><strong>宽依赖：一个父分区对应多个子分区子</strong>，即父RDD的分区对应于一个子RDD的多个分区。</p>
+<p><img src="/2020/01/30/Spark/宽依赖.jpg" alt=""></p>
+</li>
+</ul>
+<h3><span id="501-checkpoint机制">5.0.1. CheckPoint机制</span></h3><p>RDD需要加检查点：</p>
+<ol>
+<li>DAG中的Lineage过长，如果重算，开销太大</li>
+<li>在宽依赖上做CheckPoint获得的收益更大</li>
+</ol>
+<p>可以通过<code>SparkContext.setCheckPointDir()</code>设置检查点数据的存储路径，进而将数据存储备份，然后Spark删除已经做检查点的RDD的祖先RDD依赖。<br><strong>检查点本质是通过将RDD写入Disk做检查点</strong>，为了通过Lineage做容错的辅助，lineage过长会导致容错成本过高。在检查点之后如果丢失分区，则从做检查点的RDD开始重做Lineage。</p>
+<h1><span id="6-spark-streaming">6. Spark Streaming</span></h1><p>Spark Streaming是一个批处理的流式计算框架，适合处理实时数据与历史数据混合处理的场景，并保证容错性。<strong>Spark Streaming是一个实时计算框架</strong></p>
+<p>Spark Streaming将数据流以时间片为单位分割成RDD，然后对每个RDD都会生成一个spark job进行处理。</p>
+<p><img src="/2020/01/30/Spark/sparkstreaming.jpg" alt=""></p>
+<p>在spark streaming程序中，需要注意批量窗口的大小。如果窗口过大，可能处理的速度低于数据进来的速度，导致数据堆积，阻塞。</p>
 
       
     </div>
@@ -656,7 +776,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">Spark简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Spark是什么</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. Spark简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. Spark是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. Spark架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. Spark计算模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. RDD介绍</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. Spark工作机制详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. Spark中术语概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. Spark资源分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. Spark中Job的调度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. Spark I/O机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 序列化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 容错机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">5.0.1. CheckPoint机制</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. Spark Streaming</span></a></li></div>
             
 
           </div>

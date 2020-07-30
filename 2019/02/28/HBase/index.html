@@ -82,7 +82,9 @@
 <meta property="og:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在做项目的过程中用到了HBase，遇到了一些问题，当数据过大的时候，向HBase中会出现热点问题。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/02/28/HBase/table.png">
-<meta property="og:updated_time" content="2020-01-23T13:07:05.991Z">
+<meta property="og:image" content="http://yoursite.com/2019/02/28/HBase/keyvalue1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/02/28/HBase/keyvalue.jpg">
+<meta property="og:updated_time" content="2020-07-30T14:05:41.361Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HBase">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;在做项目的过程中用到了HBase，遇到了一些问题，当数据过大的时候，向HBase中会出现热点问题。">
@@ -387,7 +389,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.7k
+                  2.2k
                 </span>
               
 
@@ -403,7 +405,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  8
                 </span>
               
             </div>
@@ -426,10 +428,15 @@
       
         <p>&ensp;&ensp;&ensp;&ensp;在做项目的过程中用到了HBase，遇到了一些问题，当数据过大的时候，向HBase中会出现热点问题。<br><a id="more"></a><br><!-- TOC --></p>
 <ul>
-<li><a href="#1-%e9%97%ae%e9%a2%98%e6%8f%8f%e8%bf%b0">1. 问题描述</a></li>
-<li><a href="#2-%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88">2. 解决方案</a><ul>
-<li><a href="#21-%e9%94%99%e8%af%af%e7%9a%84%e9%a2%84%e5%88%86%e5%8c%ba">2.1. 错误的预分区</a></li>
-<li><a href="#22-%e6%ad%a3%e7%a1%ae%e7%9a%84%e9%a2%84%e5%88%86%e5%8c%ba">2.2. 正确的预分区</a></li>
+<li><a href="#1-问题描述">1. 问题描述</a></li>
+<li><a href="#2-解决方案">2. 解决方案</a><ul>
+<li><a href="#21-错误的预分区">2.1. 错误的预分区</a></li>
+<li><a href="#22-正确的预分区">2.2. 正确的预分区</a></li>
+</ul>
+</li>
+<li><a href="#hbase行健设计原则">HBase行健设计原则</a><ul>
+<li><a href="#rowkey避免热点的方法">Rowkey避免热点的方法</a></li>
+<li><a href="#行健设计经验">行健设计经验</a></li>
 </ul>
 </li>
 </ul>
@@ -447,6 +454,28 @@
 <p>需要注意的是，在上面的代码中用treeset对rowkey进行排序，必须要对rowkey排序，否则在调用admin.createTable(tableDescriptor,splitKeys)的时候会出错。创建表的代码如下:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 创建预分区hbase表</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> tableName 表名</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> columnFamily 列簇</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@SuppressWarnings</span>(<span class="string">"resource"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">createTableBySplitKeys</span><span class="params">(String tableName, List&lt;String&gt; columnFamily)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (StringUtils.isBlank(tableName) || columnFamily == <span class="keyword">null</span></span><br><span class="line">					|| columnFamily.size() &lt; <span class="number">0</span>) &#123;</span><br><span class="line">				log.error(<span class="string">"===Parameters tableName|columnFamily should not be null,Please check!==="</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			HBaseAdmin admin = <span class="keyword">new</span> HBaseAdmin(conf);</span><br><span class="line">			<span class="keyword">if</span> (admin.tableExists(tableName)) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				HTableDescriptor tableDescriptor = <span class="keyword">new</span> HTableDescriptor(</span><br><span class="line">						TableName.valueOf(tableName));</span><br><span class="line">				<span class="keyword">for</span> (String cf : columnFamily) &#123;</span><br><span class="line">					tableDescriptor.addFamily(<span class="keyword">new</span> HColumnDescriptor(cf));</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">byte</span>[][] splitKeys = getSplitKeys();</span><br><span class="line">				admin.createTable(tableDescriptor,splitKeys);<span class="comment">//指定splitkeys</span></span><br><span class="line">				log.info(<span class="string">"===Create Table "</span> + tableName</span><br><span class="line">						+ <span class="string">" Success!columnFamily:"</span> + columnFamily.toString()</span><br><span class="line">						+ <span class="string">"==="</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (MasterNotRunningException e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			log.error(e);</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (ZooKeeperConnectionException e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			log.error(e);</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			log.error(e);</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 <p>&ensp;&ensp;&ensp;&ensp;HBase中出现热点问题带来的影响是：（1）在我们的项目中，原先使用一个分区，等到这个分区容量达到阈值时，这个分区开始split，然后数据来的时候就会向第二个分区写数据，不会向第一个region中写数据，所以在某一时候只能向一个region中写数据，这样写的速度会变慢。（2）在读数据的时候，因为行键设置的时间，连续的时间一般存储在一个region中，所以读数据的时候也是从一个region中读取数据，读取的速度也会变慢。项目原先应对取数据慢的问题解决方案使用HBase的scan函数，设置起始和终止的行键，使用scan查询数据。<br>&ensp;&ensp;&ensp;&ensp;按秒对表进行预分区时，就相当于把数据均匀分布在60个region中，存储一段时间的数据时，会同时向60个region中写入数据，取数据的时候也会同时从60个region中取数据。这样取数据的时候就不能使用起止行键用scan来查询数据了，只能使用getRow来查询数据，但是这样查询的性能也不会很差，因为是从60个region中同时查询数据，使用scan的时候是从1个region中查询数据。</p>
+<h1><span id="hbase行健设计原则">HBase行健设计原则</span></h1><p>HBase是面向列的存储结构，实际存储单元里存储的都是KeyValue结构。<br>KeyValue的整体结构为：<br><code>Key Length + Value Length + Key + Value</code></p>
+<p>其中<code>Key</code>包括以下7部分。</p>
+<p><img src="/2019/02/28/HBase/keyvalue1.jpg" alt=""></p>
+<p><img src="/2019/02/28/HBase/keyvalue.jpg" alt=""></p>
+<p>在HBase中，每一个单元格都是用KeyValue存储，对于一行数据，有n个列，则会有n个KeyValue数据结构来存储。虽然这n个列的行健是一样的，所以行健会存储n份。</p>
+<p><strong>HBase中的数据按照行健的ASCII字典顺序进行全局排序的</strong>。举例说明：假如有 5 个 Rowkey：”012”, “0”, “123”, “234”, “3”，按 ASCII 字典排序后的结为：”0”, “012”, “123”, “234”, “3”。</p>
+<ul>
+<li><strong>行健长度原则</strong>：建议在10~100个字节</li>
+<li><strong>行健散列原则</strong>：在行健的开始几个字符作为散列字段，用来分区使用。设计的行健应该使数据均匀的分布在各个HBase的节点上。</li>
+<li><strong>行健唯一性原则</strong></li>
+</ul>
+<h2><span id="rowkey避免热点的方法">Rowkey避免热点的方法</span></h2><ol>
+<li>加盐<br>如果行健前面几个字符相等，导致数据往一个region中存储，我们可以在Rowkey前面随机添加一个字符串。加盐是在Rowkey前面添加随机数，使得数据分布在不同的region中。</li>
+<li>Hash散列或Mode取模<br>将行健做散列，可以将负载分散到整个集群中。<br>如果行健是数字，可以用取模的方式。</li>
+<li>反转<br>将rowkey反转，增加rowkey的随机性，但是牺牲了rowkey的有序性。</li>
+<li>时间戳反转<br>比如使用<code>Long.Max_Value - timestamp</code>作为行健，这样第一条数据就是最后录入的数据。</li>
+</ol>
+<h2><span id="行健设计经验">行健设计经验</span></h2><ol>
+<li>可枚举较少的值放在rowkey前面<br>数量较少，可控的属性放在rowkey的前面</li>
+<li>业务经常访问的属性放在前面<br>例如业务经常访问某一天内所有的URL，经常使用date来查询，则在主键中，可以将date放在前面</li>
+<li>时间属性经常在rowkey中使用</li>
+</ol>
 
       
     </div>
@@ -679,7 +708,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 错误的预分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. 正确的预分区</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 错误的预分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. 正确的预分区</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">HBase行健设计原则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Rowkey避免热点的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">行健设计经验</span></a></li></ol></li></ol></div>
             
 
           </div>
