@@ -1017,7 +1017,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <li><strong>本模型比Transformer多了一个空间Attention层，其余都一样，因为时间Attention层、FFN和Transformer的一样</strong></li>
 </ul>
 <h2><span id="110-connecting-the-dots-multivariate-time-series-forecasting-with-graph-neural-networks">1.10. Connecting the Dots: Multivariate Time Series Forecasting with Graph Neural Networks</span></h2><p>该模型使用图网络模型捕获交通数据或其他领域数据中的时间和空间相关性。</p>
-<p><img src="/2020/02/27/时空论文阅读笔记/论文总结/MTGNN-1.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记/MTGNN-1.png" alt=""></p>
 <p>该模型有2个模块，图卷积模块和时间模块。其中图卷积模块主要解决4个问题：</p>
 <ol>
 <li>节点间的空间相关性</li>
@@ -1025,14 +1025,14 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <li>如何解决图卷积过度平滑问题</li>
 <li>大图如何训练问题</li>
 </ol>
-<p><img src="/2020/02/27/时空论文阅读笔记/论文总结/MTGNN-2.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记/MTGNN-2.png" alt=""></p>
 <p>首先图信号矩阵，输入到图结构学习模块，构造图的邻接矩阵。注意这里的邻接矩阵不是预先定义好的，而是根据网络模块学习得到，据此构建图，然后输入到GCN中捕获时间相关性，然后输入到时间卷积捕获时间相关性，最后预测结果。</p>
-<p><img src="/2020/02/27/时空论文阅读笔记/论文总结/MTGNN-3.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记/MTGNN-3.png" alt=""></p>
 <p>在构造图时，通过模型学习节点的嵌入矩阵，然后根据嵌入矩阵计算节点的相似性，为每个节点选取相似性前k的节点作为其一阶邻居。邻接矩阵不随着时间变化。</p>
 <script type="math/tex; mode=display">\begin{array}{l}\mathbf{M}_{1}=\tanh \left(\alpha \mathrm{E}_{1} \Theta_{1}\right) \\ \mathbf{M}_{2}=\tanh \left(\alpha \mathrm{E}_{2} \mathbf{\Theta}_{2}\right) \\ \mathbf{A}=\operatorname{ReL} U\left(\tanh \left(\alpha\left(\mathbf{M}_{1} \mathbf{M}_{2}^{T}-\mathbf{M}_{2} \mathbf{M}_{1}^{T}\right)\right)\right) \\ \text { for } i=1,2, \cdots, N \\ \text { idx }=\operatorname{argtop} k(\mathrm{A}[i,:]) \\ \quad \mathrm{A}[i,-\mathrm{idx}]=0\end{array}</script><p>在图卷积模块，参考Min-hop架构，每个GCN层的输入会加上原始的图信号矩阵，避免图过度平滑问题，然后再将所有GCN层的输出加起来，进行融合。为了解决大图训练的问题，在进行GCN时，每次随机选取几个节点进行GCN运算，而不是使用所有的节点。</p>
 <script type="math/tex; mode=display">
 \mathbf{H}^{(k)}=\beta \mathbf{H}_{i n}+(1-\beta) \tilde{\mathbf{A}} \mathbf{H}^{(k-1)}</script><script type="math/tex; mode=display">
-\mathbf{H}_{o u t}=\sum_{i=0}^{K} \mathbf{H}^{(k)} \mathbf{W}^{(k)}</script><p><img src="/2020/02/27/时空论文阅读笔记/论文总结/MTGNN-4.png" alt=""></p>
+\mathbf{H}_{o u t}=\sum_{i=0}^{K} \mathbf{H}^{(k)} \mathbf{W}^{(k)}</script><p><img src="/2020/02/27/时空论文阅读笔记/MTGNN-4.png" alt=""></p>
 <p>在时间模块，使用一维空洞卷积，捕获长期的时间依赖，同时参照Inception结构，设置不同的卷积核，来捕获不同力度的周期性，例如小时周期，天周期，周周期。</p>
 <p>总结：</p>
 <ol>
@@ -2218,8 +2218,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
         <category>Deep Learning</category>
       </categories>
       <tags>
-        <tag>GPU</tag>
         <tag>Mxnet</tag>
+        <tag>GPU</tag>
         <tag>Pytorch</tag>
       </tags>
   </entry>
@@ -4910,8 +4910,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>论文阅读笔记</category>
       </categories>
       <tags>
-        <tag>时空领域</tag>
         <tag>GCN</tag>
+        <tag>时空领域</tag>
       </tags>
   </entry>
   <entry>
