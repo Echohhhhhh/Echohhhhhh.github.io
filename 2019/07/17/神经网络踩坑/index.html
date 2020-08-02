@@ -73,13 +73,13 @@
 
 
 
-<meta name="description" content="参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e">
+<meta name="description" content="参考资料">
 <meta name="keywords" content="调参经验">
 <meta property="og:type" content="article">
 <meta property="og:title" content="神经网络踩坑">
 <meta property="og:url" content="http://yoursite.com/2019/07/17/神经网络踩坑/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e">
+<meta property="og:description" content="参考资料">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/norm.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/y-norm.png">
@@ -87,10 +87,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/conv.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/sigmoid.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/gpu.png">
-<meta property="og:updated_time" content="2020-07-16T13:38:06.311Z">
+<meta property="og:updated_time" content="2020-07-31T15:07:05.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="神经网络踩坑">
-<meta name="twitter:description" content="参考资料:https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;amp;mid=2650729285&amp;amp;idx=1&amp;amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e">
+<meta name="twitter:description" content="参考资料">
 <meta name="twitter:image" content="http://yoursite.com/2019/07/17/神经网络踩坑/norm.png">
 
 
@@ -429,7 +429,7 @@
       
 
       
-        <p>参考资料:<br><a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650729285&amp;idx=1&amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e6f79daaeed&amp;mpshare=1&amp;scene=1&amp;srcid=07263lmMeeAcHLPSZpJXJI3L#rd" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650729285&amp;idx=1&amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e6f79daaeed&amp;mpshare=1&amp;scene=1&amp;srcid=07263lmMeeAcHLPSZpJXJI3L#rd</a>   </p>
+        <p><a href="https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&amp;mid=2650729285&amp;idx=1&amp;sn=8f78edc716bbd2198cd7b14f62a93298&amp;chksm=871b2f3bb06ca62d60632da0faebbee63068405a5841934ebec300dc4bbace4b5e6f79daaeed&amp;mpshare=1&amp;scene=1&amp;srcid=07263lmMeeAcHLPSZpJXJI3L#rd" target="_blank" rel="noopener">参考资料</a>   </p>
 <a id="more"></a>
 <!-- TOC -->
 <ul>
@@ -496,12 +496,13 @@
 </ul>
 <h1><span id="7-conv输入和输出维度">7. Conv输入和输出维度</span></h1><ol>
 <li>在gloun中Dense的输入是二维的，(batch_size,feature)，比如输入是(64,120)表示一个batch有64个样本，每个样本有120个特征。如果训练集中的X不是二维的，可以使用reshape()将X变换成(-1,全连接输入单元个数)</li>
-<li>卷积神经网络，卷积的输入和输出形状是(batch_size,通道,高,宽)，如果后面接的是全连接，就要转换成二维(batch_size,每个样本特征=通道*高*宽)，但是不需要人去手动转换形状，Dense会自动转换。如果是keras，从卷积层到全连接层，形状不会自动转变，所以需要自己加一个<code>Flatten()</code>层。  </li>
+<li>卷积神经网络，卷积的输入和输出形状是<code>(batch_size,通道,高,宽)</code>，如果后面接的是全连接，就要转换成二维<code>(batch_size,每个样本特征=通道\*高*宽)</code>，但是不需要人去手动转换形状，Dense会自动转换。如果是keras，从卷积层到全连接层，形状不会自动转变，所以需要自己加一个<code>Flatten()</code>层。  </li>
 <li>如果是一个分类问题，比如mnist数字识别，最后一层是一个神经单元个数为10的全连接层，然后把输送入到softmax，将每一行的10个值都变成在[0,1]之间小数。损失函数是交叉熵损失损失。在gluon中，最后一层Dense只需要指定输出神经单元个数即可，即<code>Dense(10)</code>，在预测的时候，输出predict，这时的predict并没有归一化到[0,1]的范围内，我们直接把predict和true_label输入到loss中，在loss函数中，才会对predict进行softmax计算，将predict归一化到[0,1]范围内。   </li>
 <li><p>在keras中，和gluon不同，会在最后一层的输出指定softmax激活函数，即<code>Dense(10,activation=&#39;softmax&#39;)</code>。</p>
-<p><img src="/2019/07/17/神经网络踩坑/conv.png" alt="">  </p>
+<p><img src="/2019/07/17/神经网络踩坑/conv.png" alt=""></p>
 </li>
-<li>循环神经网络的输入形状为(时间步数，batch_size，特征个数)<br><a href="https://www.zhihu.com/question/41949741" target="_blank" rel="noopener">通俗易懂的RNN图解</a></li>
+<li><p>循环神经网络的输入形状为<code>(时间步数，batch_size，特征个数)</code><br><a href="https://www.zhihu.com/question/41949741" target="_blank" rel="noopener">通俗易懂的RNN图解</a></p>
+</li>
 </ol>
 <h1><span id="8-激活函数">8. 激活函数</span></h1><p>   在使用激活函数的时候，一般都是<br>   net.add(nn.Dense(10,activation=’relu’)),在定义层的时候直接加上activation，<br>   也可以使用,但是不常用<br>   net.add(nn.Dense(10),<br>           nn.Activation(‘relu’)<br>    )<br>    或者net.add(nn.Conv2D(channels=6, kernel_size=5, activation=’sigmoid’))<br>    只有当在该层和激活函数之间有其余的操作时，才会分开写，例如在卷积计算之后，激活函数之前加上批量归一化层，写成</p>
 <pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">net.add(nn.Conv2D(<span class="number">6</span>, kernel_size=<span class="number">5</span>),</span><br><span class="line">    BatchNorm(),</span><br><span class="line">    nn.Activation(<span class="string">'sigmoid'</span>))  </span><br><span class="line">    或者  </span><br><span class="line">    n.Dense(<span class="number">120</span>),</span><br><span class="line">    BatchNorm(),</span><br><span class="line">    nn.Activation(<span class="string">'sigmoid'</span>)</span><br></pre></td></tr></table></figure>
