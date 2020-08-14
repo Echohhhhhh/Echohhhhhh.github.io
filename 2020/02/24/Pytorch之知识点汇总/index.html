@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="1. 简介汇总Pytorch的一些知识点">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-07-08T03:23:00.354Z">
+<meta property="og:updated_time" content="2020-08-09T08:09:56.691Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pytorch之知识点汇总">
 <meta name="twitter:description" content="1. 简介汇总Pytorch的一些知识点">
@@ -497,8 +497,8 @@
 </ul>
 <hr>
 <p>2020.7.8更新</p>
-<h1><span id="13-linear参数维度">13. Linear参数维度</span></h1><p>做全连接时，我们平时看到的公式有以下形式：<br>$Y=XW+b$<br>$Y=XW^T+b$<br>$Y=W^TX+b$</p>
-<p>因为不同的公式，此时的$W$形状也不同，假设$X\in\mathbb{R}^{100\times2}$表示100个样本，每个样本有2维，假设输出维度5<br>$y=XW+b$，$W\in\mathbb{R}^{2\times5}$<br>$y=XW^T+b$，$W\in\mathbb{R}^{5\times2}$<br>$y=W^TX+b$，对于这种情况，默认$X$中每个样本是列向量，即$X\in\mathbb{R}^{2\times100}$，$W\in\mathbb{R}^{5\times2}$</p>
+<h1><span id="13-linear参数维度">13. Linear参数维度</span></h1><p>做全连接时，我们平时看到的公式有以下形式：<br>$Y=XW+b$（实际方便使用）<br>$Y=XW^T+b$（Pytorch封装）<br>$Y=W^TX+b$</p>
+<p>因为不同的公式，此时的$W$形状也不同，假设$X\in\mathbb{R}^{100\times2}$表示100个样本，每个样本有2维，假设输出维度5<br>$y=XW+b$，$W\in\mathbb{R}^{2\times5}$<br>$y=XW^T+b$，$W\in\mathbb{R}^{5\times2}$<br>$y=W^TX+b$，对于这种情况，默认$X$中每个样本是列向量，即$X\in\mathbb{R}^{2\times100}$，$W\in\mathbb{R}^{2\times5}$</p>
 <p>在Pytorch中的<code>Linear</code>中采用的是公式2，参数形状$W\in\mathbb{R}^{输出维度\times输入维度}$</p>
 <p>但在实际使用中，为了方便，一般用公式1，此时$W\in\mathbb{R}^{输入维度\times输出维度}$</p>
 <p>在写公式时，需要注意公式的大写还是小写</p>
@@ -664,7 +664,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
