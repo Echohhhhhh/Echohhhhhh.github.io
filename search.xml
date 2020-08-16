@@ -5,6 +5,31 @@
     <url>/2020/08/14/Excel%E8%BD%AC%E6%8D%A2%E4%B8%BALatex/</url>
     <content><![CDATA[<p>转载</p>
 <p><a href="https://blog.csdn.net/Jiajikang_jjk/article/details/80788501" target="_blank" rel="noopener">使用Excel中导出latex代码的表格</a></p>
+<p>使用Latex创建表格的一些语法</p>
+<p><a href="https://cloud.tencent.com/developer/article/1635392" target="_blank" rel="noopener">Latex论文表格画法</a></p>
+<ul>
+<li><p>表格占2列或1列</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\begin&#123;table*&#125;[htb]</span><br><span class="line">  \centering</span><br><span class="line">  \caption&#123;Performance comparison of different approaches for traffic flow forecasting.&#125;</span><br><span class="line">  \resizebox&#123;0.95\textwidth&#125;&#123;!&#125;&#123; % If your table exceeds the column or page width, use this command to reduce it slightly</span><br><span class="line">  \begin&#123;tabular&#125;&#123;c|c|ccccccccc&#125;</span><br><span class="line">  .....</span><br><span class="line">  .....</span><br><span class="line">  \end&#123;tabular&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  \label&#123;table2&#125;</span><br><span class="line">\end&#123;table*&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>其中<code>*</code>表示表格占2列</strong>,如果表格太宽，即使占了2列，表格还是溢出边界，<strong>使用<code>\resizebox</code>来调整表格的宽度</strong>，这里将表格变成原来的<code>0.95</code>倍，这样表格中的字体就会自动变小，表格左右宽度也会变窄。</p>
+<p>在<strong>表格后面有<code>[htb]</code></strong>，完整的版本应该是<code>[htbp]</code>，表示表格的浮动</p>
+<ul>
+<li><code>[h]</code>:<code>here</code>表格放在当前位置</li>
+<li><code>[t]</code>:<code>top</code>表格放在页面的首部</li>
+<li><code>[b]</code>:<code>bottom</code>表格放在页面的底部</li>
+<li><code>[p]</code>:将表格放在浮动对象的页面上</li>
+</ul>
+<p><strong>如果表格只占1列，不使用<code>*</code></strong>,同时表格的宽度可以变成<code>0.45</code>，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">\begin&#123;table&#125;[htb]</span><br><span class="line">  \centering</span><br><span class="line">  \caption&#123;Performance comparison of different approaches for traffic flow forecasting.&#125;</span><br><span class="line">  \resizebox&#123;0.45\textwidth&#125;&#123;!&#125;&#123; % If your table exceeds the column or page width, use this command to reduce it slightly</span><br><span class="line">  \begin&#123;tabular&#125;&#123;c|c|ccccccccc&#125;</span><br><span class="line">  .....</span><br><span class="line">  .....</span><br><span class="line">  \end&#123;tabular&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  \label&#123;table2&#125;</span><br><span class="line">\end&#123;table&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>列设置<br><code>{c|c|ccccccccc}</code>其中1个<code>c</code>表示一列，格式为居中，这是列必选参数。下面是对齐方式：</p>
+<ul>
+<li><code>l</code>表示左对齐</li>
+<li><code>c</code>表示居中对齐</li>
+<li><code>r</code>表示右对齐</li>
+</ul>
+<p><code>|</code>表示是否需要绘制竖线，<code>||</code>表示画两条紧相邻的竖线。</p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>工具</category>
