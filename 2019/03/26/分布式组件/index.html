@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="Echo&#39;s blog">
 <meta property="og:description" content="介绍Spark，HDFS，HBase，Hive的内容">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-23T13:08:55.421Z">
+<meta property="og:updated_time" content="2020-08-19T03:27:54.399Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式组件介绍">
 <meta name="twitter:description" content="介绍Spark，HDFS，HBase，Hive的内容">
@@ -447,8 +447,8 @@
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">value</span>&gt;</span>3<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h1><span id="3-hive和hbase">3. Hive和HBase</span></h1><ul>
-<li>Hive：通俗地讲，Hive是构建在Hadoop之上的数据仓库。是因为（1）数据存储在HDFS上，并不是存储在Hive中，（2）数据计算时使用MapReduce。Hive是一种构建在Hadoop文件系统上的数据仓库框架，并对存储在HDFS中的数据进行分析和管理。它可以将结构化的数据文件映射成一张数据库表，并提供完整的SQL查询功能，就是把写好的hql转换为map-reduce程序操作用来查询存放在HDFS上的数据。HQL是一种类SQL语言。</li>
-<li>HBase：通俗地讲，HBase可以认为是HDFS的一个包装，HBase的本质是数据存储，是一个Nosql数据库。HBase部署在HDFS之上，并且克服了HDFS在随机读写方面的缺点。HBase是一种Key/Value系统，它运行在HDFS之上。和Hive不一样，HBase能够在它的数据库上实时运行，而不是运行MapReduce任务。</li>
+<li><strong>Hive</strong>：通俗地讲，Hive是构建在Hadoop之上的数据仓库。是因为（1）数据存储在HDFS上，并不是存储在Hive中，（2）数据计算时使用MapReduce。Hive是一种构建在Hadoop文件系统上的数据仓库框架，并对存储在HDFS中的数据进行分析和管理。它可以将结构化的数据文件映射成一张数据库表，并提供完整的SQL查询功能，就是把写好的hql转换为map-reduce程序操作用来查询存放在HDFS上的数据。HQL是一种类SQL语言。</li>
+<li><strong>HBase</strong>：通俗地讲，HBase可以认为是HDFS的一个包装，HBase的本质是数据存储，是一个Nosql数据库。HBase部署在HDFS之上，并且克服了HDFS在随机读写方面的缺点。HBase是一种Key/Value系统，它运行在HDFS之上。和Hive不一样，HBase能够在它的数据库上实时运行，而不是运行MapReduce任务。</li>
 </ul>
 <h2><span id="31-应用场景">3.1. 应用场景</span></h2><p>&ensp;&ensp;&ensp;&ensp;Hive用于对一段时间内的数据进行分析查询。例如，用于计算趋势或者网站的日志。<strong>Hive不适合用来进行实时查询，因为它需要很长时间才可以返回结果</strong>。Hive本身不存储和计算数据，它完全依赖HDFS和MapReduce，Hive中的表只是逻辑的表。Hive很适合数据仓库的统计分析，Hive的最佳使用场合是大数据集的批处理作业。例如网络日志分析，一般按照天、周、月、年来进行数据统计。不适合实时查询。例如Hive在几百兆的数据集上执行查询一般都有分钟级别的时间延迟。因此Hive不适合低延迟的应用，例如：联机事务处理。<br>&ensp;&ensp;&ensp;&ensp;<strong>HBase非常适合用来进行大数据的实时查询</strong>。Facebook用HBase进行消息和实时的分析。HBase中的表是物理表，不是逻辑表，提供一个超大的内存Hash表，搜索引擎通过它来存储索引，方便查询操作。<br>&ensp;&ensp;&ensp;&ensp;HDFS作为底层存储，是存储文件的系统，而HBase负责组织文件。Hive需要用到HDFS存储文件，需要用到MapReduce计算框架。</p>
 
@@ -640,7 +640,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

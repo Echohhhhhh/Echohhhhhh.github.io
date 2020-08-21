@@ -88,7 +88,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/窄依赖.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/宽依赖.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/sparkstreaming.jpg">
-<meta property="og:updated_time" content="2020-07-30T12:45:21.358Z">
+<meta property="og:updated_time" content="2020-08-21T02:55:50.069Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark">
 <meta name="twitter:description" content="详细整理下Spark的原理">
@@ -460,7 +460,7 @@
 </ul>
 <!-- /TOC -->
 <h1><span id="1-spark简介">1. Spark简介</span></h1><h2><span id="11-spark是什么">1.1. Spark是什么</span></h2><p>Spark是<strong>基于内存计算</strong>的大数据局并行<strong>计算框架</strong>。Spark基于内存计算，提高了数据处理的速度，同时具有高容错性和高伸缩性，允许用户将Spark部署在廉价的硬件之上，形成集群。</p>
-<p>Spark和 Hadoop Map Reduce的优势：</p>
+<p><strong>Spark和 Hadoop Map Reduce的优势：</strong></p>
 <ol>
 <li>中间结果输出在内存中<br>MapReduce将中间结果写入到磁盘中。而Spark在计算过程抽象成有向无环图DAG，执行的时候使用内存来存储中间结果。</li>
 <li>数据格式<br>Spark使用弹性分布式数据集RDD，来进行数据的存储。在RDD上可以对数据进行分区，将数据分布在不同节点上。</li>
@@ -468,7 +468,7 @@
 </ol>
 <h2><span id="12-spark架构">1.2. Spark架构</span></h2><p>Spark架构采用了分布式计算中的Master-Slave模型。将具有Master进程的节点视为Master，将含有Worker进程的节点视为Slave。<br>在搭建集群的时候已经分配好Master和Worker了。</p>
 <ul>
-<li>Master作为整个集群的控制器，负责整个集群的正常运行。</li>
+<li><strong>Master作为整个集群的控制器，负责整个集群的正常运行</strong>。</li>
 </ul>
 <p>在运行Spakr程序时，分为Driver和Worker。</p>
 <ul>
@@ -478,37 +478,37 @@
 <li>Executor：执行器，在worker节点上执行任务的组件。</li>
 </ul>
 <p><img src="/2020/01/30/Spark/spark架构图.jpg" alt=""></p>
-<p>Spark的执行流程：<br>Client提交应用，Mater会找到一个Worker来启动Driver，Driver向Master申请资源，然后将RDD的一系列操作转换为DAG，然后调度器将DAG中的一系列操作切分成不同的stage，然后将这些stage分发给Executor执行。</p>
-<h1><span id="2-spark计算模型">2. Spark计算模型</span></h1><h2><span id="21-rdd介绍">2.1. RDD介绍</span></h2><p>Spark的核心数据结构:弹性分布式数据集（resilient distributed dataset）RDD，通过RDD的依赖关系形成有向无环图。</p>
+<p><strong>Spark的执行流程：</strong><br>Client提交应用，Mater会找到一个Worker来启动Driver，Driver向Master申请资源，然后将RDD的一系列操作转换为DAG，然后调度器将DAG中的一系列操作切分成不同的stage，然后将这些stage分发给Executor执行。</p>
+<h1><span id="2-spark计算模型">2. Spark计算模型</span></h1><h2><span id="21-rdd介绍">2.1. RDD介绍</span></h2><p>Spark的核心数据结构:<strong>弹性分布式数据集</strong>（resilient distributed dataset）RDD，通过RDD的依赖关系形成有向无环图。</p>
 <p>RDD的2种创建方式：</p>
 <ol>
 <li>从HDFS，HBase，Hive中读取数据创建</li>
 <li>从父RDD转换得到新的RDD</li>
 </ol>
-<p>RDD的2种操作算子：</p>
+<p><strong>RDD的2种操作算子</strong>：</p>
 <ol>
 <li>转换算法Transformation<br>转换算子不是立即执行，等到Action之后才会被触发。</li>
 <li>行动算子Action<br>Action算子触发Spark提交作业。</li>
 </ol>
 <p>一个RDD有多个分区，每个分区上的数据存储在不同的节点上。</p>
 <p><img src="/2020/01/30/Spark/RDD.jpg" alt=""></p>
-<h1><span id="3-spark工作机制详解">3. Spark工作机制详解</span></h1><p>Spark的执行流程：<br>Client提交应用，Mater会找到一个Worker来启动Driver，Driver向Master申请资源，然后将RDD的一系列操作转换为DAG，然后调度器将DAG中的一系列操作切分成不同的stage，然后将这些stage分发给Executor执行。Executor会创建线程池，executor将需要执行的任务通过线程池并发执行。</p>
+<h1><span id="3-spark工作机制详解">3. Spark工作机制详解</span></h1><p><strong>Spark的执行流程：</strong><br>Client提交应用，Mater会找到一个Worker来启动Driver，Driver向Master申请资源，然后将RDD的一系列操作转换为DAG，然后调度器将DAG中的一系列操作切分成不同的stage，然后将这些stage分发给Executor执行。Executor会创建线程池，executor将需要执行的任务通过线程池并发执行。</p>
 <p><img src="/2020/01/30/Spark/spark1.jpg" alt=""></p>
-<h2><span id="31-spark中术语概念">3.1. Spark中术语概念</span></h2><p>Spark应用Application是用户提交的应用程序。执行模式有Local，Standalone，YARN。</p>
+<h2><span id="31-spark中术语概念">3.1. Spark中术语概念</span></h2><p>Spark应用Application是用户提交的应用程序。<strong>执行模式有Local，Standalone，YARN</strong>。</p>
 <p><img src="/2020/01/30/Spark/spark2.jpg" alt=""></p>
 <ul>
 <li>Application：用户自定义的Spark程序，用户提交后，Spark为App分配资源</li>
 <li>Driver Program：运行App的main函数，并创建SparkContext</li>
 <li>RDD Graph：RDD是Spark核心结构，RDD所有算子操作组成一个有向无环图DAG</li>
 <li>Job：一个RDD Graph触发的作业，一般由Action触发，在SparkContext通过runJob方法向Spark提交Job</li>
-<li>Stage：每个Job会根据RDD的宽依赖关系被切分成很多stage，每个stage中包含一组相同的task，这一组Task也叫做TaskSet</li>
+<li>Stage：<strong>每个Job会根据RDD的宽依赖关系被切分成很多stage</strong>，每个stage中包含一组相同的task，这一组Task也叫做TaskSet</li>
 <li>Task：一个分区对应一个Task，Task执行RDD中的算子，Task被封装好后放在Executor中的线程池中执行。</li>
 </ul>
 <h2><span id="32-spark资源分配">3.2. Spark资源分配</span></h2><p>Spark有多种运行模型：Local，Standalone模型，YARN模式。</p>
 <p>下面根据不同的运行模式介绍配置调度：</p>
 <ol>
 <li>Stansalone模式<br>默认情况下，用户以standalone模式提交应用使用FIFO的顺序进行调度。每个应用会独占所有可用节点的资源。用户可以通过配置参数<code>spark.cores.max</code>来决定一个应用可以<strong>在整个集群</strong>申请的CPU core数，而不是一个节点的核数。如果没有设置这个值，则使用默认参数。</li>
-<li>YARN模式<br>当Spark在YARN平台上提交时，用户可以在YARN的客户端通过配置<br><code>--num-executors</code>:应用分到的executor个数<br><code>--executor-memory</code>：每个executor的内存大小<br><code>--executor-cores</code>：每个executor的cpu核数<br>这样可以限制用户提交的应用不会占用过多的资源，让不同用户可以共享整个集群资源。</li>
+<li>YARN模式<br>当Spark在YARN平台上提交时，用户可以在YARN的客户端通过配置<br><code>--num-executors</code>:应用分到的executor个数<br><code>--executor-memory</code>：每个executor的内存大小<br><code>--executor-cores</code>：每个executor的cpu核数<br>这样可以<strong>限制用户提交的应用不会占用过多的资源</strong>，让不同用户可以共享整个集群资源。</li>
 </ol>
 <h2><span id="33-spark中job的调度">3.3. Spark中Job的调度</span></h2><p>在Spark应用程序内部，用户通过不同线程提交的Job可以并行运行。这里所说的Job是action算子触发的一个job。<br>Spark的调度器是线程安全的，有以下3种调度方法：默认是FIFO</p>
 <ol>
@@ -727,7 +727,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

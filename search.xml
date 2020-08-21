@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>稀疏数据处理</title>
+    <url>/2020/08/19/%E7%A8%80%E7%96%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<p>在实际数据中，经常会遇到数据稀疏的问题，即数据中存在大量的0，且非零元素呈不规律分布。这就是稀疏矩阵。</p>
+<p><img src="/2020/08/19/稀疏数据处理/系数矩阵.jpg" alt=""></p>
+<h1><span id="稀疏矩阵处理">稀疏矩阵处理</span></h1><p>通常，为了处理稀疏性矩阵，我们通常会压缩行和列；或者通过PCA/SVD进行降维。</p>
+<p>矩阵压缩</p>
+<p>降维</p>
+]]></content>
+      <categories>
+        <category>Machine Learning</category>
+      </categories>
+      <tags>
+        <tag>数据稀疏</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Excel转换为Latex</title>
     <url>/2020/08/14/Excel%E8%BD%AC%E6%8D%A2%E4%B8%BALatex/</url>
     <content><![CDATA[<p>转载</p>
 <p><a href="https://blog.csdn.net/Jiajikang_jjk/article/details/80788501" target="_blank" rel="noopener">使用Excel中导出latex代码的表格</a></p>
+<a id="more"></a>
 <p>使用Latex创建表格的一些语法</p>
 <p><a href="https://cloud.tencent.com/developer/article/1635392" target="_blank" rel="noopener">Latex论文表格画法</a></p>
 <ul>
@@ -512,86 +529,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Leetcode之字符串</title>
-    <url>/2020/07/20/Leetcode%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
-    <content><![CDATA[<p>记录Leetcode遇到的字符串相关题目</p>
-<a id="more"></a>
-<!-- TOC -->
-<ul>
-<li><a href="#1-把字符串转换成整数">1. 把字符串转换成整数</a></li>
-<li><a href="#2-最长不重复子串">2. 最长不重复子串</a></li>
-</ul>
-<!-- /TOC -->
-<h1><span id="1-把字符串转换成整数">1. 把字符串转换成整数</span></h1><p>写一个函数 StrToInt，实现把字符串转换成整数这个功能。不能使用 atoi 或者其他类似的库函数。</p>
-<p>首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。</p>
-<p>当我们寻找到的第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字组合起来，作为该整数的正负号；假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成整数。</p>
-<p>该字符串除了有效的整数部分之后也可能会存在多余的字符，这些字符可以被忽略，它们对于函数不应该造成影响。</p>
-<p>注意：假如该字符串中的第一个非空格字符不是一个有效整数字符、字符串为空或字符串仅包含空白字符时，则你的函数不需要进行转换。</p>
-<p>在任何情况下，若函数不能进行有效的转换时，请返回 0。</p>
-<p>说明：</p>
-<p>假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−231,  231 − 1]。如果数值超过这个范围，请返回  INT_MAX (231 − 1) 或 INT_MIN (−231) 。</p>
-<blockquote>
-<p><strong>示例 1:</strong><br>输入: “42”<br>输出: 42<br><strong>示例 2:</strong><br>输入: “   -42”<br>输出: -42<br>解释: 第一个非空白字符为 ‘-‘, 它是一个负号。我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 -42 。<br><strong>示例 3:</strong><br>输入: “4193 with words”<br>输出: 4193<br>解释: 转换截止于数字 ‘3’ ，因为它的下一个字符不为数字。<br><strong>示例 4:</strong><br>输入: “words and 987”<br>输出: 0<br>解释: 第一个非空字符是 ‘w’, 但它不是数字或正、负号.因此无法执行有效的转换。<br><strong>示例 5:</strong><br>输入: “-91283472332”<br>输出: -2147483648<br>解释: 数字 “-91283472332” 超过 32 位有符号整数范围。因此返回 INT_MIN (−231) 。</p>
-</blockquote>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof" target="_blank" rel="noopener">https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<p><strong>【分析一】</strong></p>
-<ul>
-<li>对于一个字符串，如果这个字符串中只有空格，则返回0</li>
-<li>否则将这个字符串进行分割，我们只看第一个子串是否可以组成数字<ul>
-<li>首先看第一个字符，如果第一个字符不在[0,9]之间，且不是’-‘,’+’，则返回0</li>
-<li>如果第一个字符是’-‘或’+’,但是后面没有数字了，也不能组成数字，返回0</li>
-<li>下面开始遍历strs，首先看第一个字符是’-‘还是’+’，还是其余值。如果是’-‘或’+’，则数字从start=1开始遍历，否则数字从start=0开始遍历</li>
-<li>遍历strs，判断这个字符是不是数字，如果是则加入到valid_num数组中，如果不是则跳出循环</li>
-<li>判断valid_num长度是否为0，如果为0，说明没有有效数字，返回0</li>
-<li>否则将valid_num转换为数字，然后和INT_MAX和INT_MIN比较并返回</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">strToInt</span><span class="params">(self, str)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type str: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        str=str.strip()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> str:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        INT_MAX,INT_MIN=<span class="number">2</span>**<span class="number">31</span><span class="number">-1</span>,<span class="number">-2</span>**<span class="number">31</span></span><br><span class="line">        valid_num = []<span class="comment">#记录当前有效的数字</span></span><br><span class="line">        minus = <span class="keyword">False</span><span class="comment">#判断这个数是正还是负</span></span><br><span class="line"></span><br><span class="line">        strs = str.split()[<span class="number">0</span>]<span class="comment">#切分后第一个连续字符串</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#如果第一个字符不在[0,9]之间，且不是'-'或'+'，肯定不符合要求</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (<span class="string">'0'</span>&lt;=strs[<span class="number">0</span>]&lt;=<span class="string">'9'</span> <span class="keyword">or</span> strs[<span class="number">0</span>]==<span class="string">'-'</span> <span class="keyword">or</span> strs[<span class="number">0</span>]==<span class="string">'+'</span>):<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="comment">#如果第一个字符为'-'或'+'，但是后面没数字了，返回0</span></span><br><span class="line">        <span class="keyword">if</span> len(strs)==<span class="number">1</span> <span class="keyword">and</span> (strs[<span class="number">0</span>]==<span class="string">'-'</span> <span class="keyword">or</span> strs[<span class="number">0</span>]==<span class="string">'+'</span>):<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> strs[<span class="number">0</span>]==<span class="string">'-'</span>:</span><br><span class="line">            minus = <span class="keyword">True</span><span class="comment">#负数</span></span><br><span class="line">            start = <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> strs[<span class="number">0</span>]==<span class="string">'+'</span>:</span><br><span class="line">            minus = <span class="keyword">False</span><span class="comment">#正数</span></span><br><span class="line">            start = <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            minus = <span class="keyword">False</span><span class="comment">#正数</span></span><br><span class="line">            start = <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(start,len(strs)):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">'0'</span>&lt;=strs[i]&lt;=<span class="string">'9'</span>:</span><br><span class="line">                valid_num.append(strs[i])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> len(valid_num)==<span class="number">0</span>:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        str_num = <span class="string">''</span>.join(valid_num)</span><br><span class="line">        <span class="keyword">if</span> minus==<span class="keyword">False</span>:<span class="comment">#正数</span></span><br><span class="line">            <span class="keyword">return</span> min(INT_MAX,int(str_num))</span><br><span class="line">        <span class="keyword">else</span>:<span class="comment">#负数</span></span><br><span class="line">            <span class="keyword">return</span> max(INT_MIN,<span class="number">0</span>-int(str_num))</span><br></pre></td></tr></table></figure>
-<h1><span id="2-最长不重复子串">2. 最长不重复子串</span></h1><p>请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。</p>
-<blockquote>
-<p>示例 1:<br>输入: “abcabcbb”<br>输出: 3<br>解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。</p>
-</blockquote>
-<p>链接：<a href="https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof" target="_blank" rel="noopener">https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof</a></p>
-<p><strong>【分析一】</strong><br>双指针。<br>abcabcbb</p>
-<p>head指向不重复子串的头，tail指向不重复子串尾的下一个元素。<br>res表示不重复子串的长度。</p>
-<ul>
-<li>首先head先指向a，tail指向b。如果b不在a中，则将b加入到不重复列表中，此时tail向后移一位，res取tail-head和res的最大值，即res=2。</li>
-<li>此时head指向a，tail指向c，此时c不在ab中，然后tail后移，res=3</li>
-<li>此时head指向a，tail指向a，a在abc中，则head需要往后移，直到不含a</li>
-<li>此时head指向b，tail指向a，a不在bc中，然后tail后移，res保持3</li>
-<li>此时head指向b，tail指向b，b在bca中，则head需要往后移，直到不含b</li>
-<li>此时head指向c，tail指向b，b不在ca中，然后tail后移，res保持3</li>
-<li>…</li>
-</ul>
-<ul>
-<li>时间复杂度：O(n^2)</li>
-<li>空间复杂度：O(1)</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> s:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="comment">#使用双指针</span></span><br><span class="line">        head,tail = <span class="number">0</span>,<span class="number">1</span></span><br><span class="line">        res = <span class="number">1</span></span><br><span class="line">        n = len(s)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> tail &lt; n:</span><br><span class="line">            <span class="keyword">if</span> s[tail] <span class="keyword">not</span> <span class="keyword">in</span> s[head:tail]:</span><br><span class="line">                tail+=<span class="number">1</span></span><br><span class="line">                res = max(tail-head,res)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">while</span> s[tail] <span class="keyword">in</span> s[head:tail]:</span><br><span class="line">                    head+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-<p><strong>【优化】</strong></p>
-<p>使用dic来记录每个字符的下标<br>head：不重复字符的第一个元素下标<br>tail：不重复字符最后一个元素的下一个元素下标</p>
-<p>使用dic来记录每个字符的下标</p>
-<p>当tail不在dic中，说明tail没有和前面的字符重复，则将tail加入到dict中，并把res和tail加1<br>如果tail已经在dict中，说明tail和前面的某个字符重复，则将head直接移到s[tail]的下一个元素，并把当前s[tail]的下标更新。</p>
-<p>abcabcbb</p>
-<ul>
-<li>刚开始head指向a，tail指向b，dict={‘a’:0}，res=1</li>
-<li>此时b不再a中，则将b加入到不重复子串，dict={‘a’:0,’b’:1}，tail指向c，res=2</li>
-<li>此时c不在ab中，将c加入到不重复子串中，dict={‘a’:0,’b’:1,’c’:2}，tail指向a，res=3</li>
-<li>此时a已经在dict中，然后需要移动head，直接将head移动到原先a的下一个位置，即head=b，此时再把现在a的位置更新到dict中，即’a’:3</li>
-<li>依次类推</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> s:<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        n = len(s)</span><br><span class="line">        <span class="comment">#使用双指针</span></span><br><span class="line">        head,tail = <span class="number">0</span>,<span class="number">1</span></span><br><span class="line">        res = <span class="number">1</span></span><br><span class="line">        dic = &#123;s[head]:<span class="number">0</span>&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> tail &lt; n:</span><br><span class="line">            <span class="keyword">if</span> s[tail] <span class="keyword">not</span> <span class="keyword">in</span> dic:</span><br><span class="line">                dic[s[tail]] = tail  </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment">#head调到重复指针的下一位</span></span><br><span class="line">                head = max(dic[s[tail]]+<span class="number">1</span>,head)</span><br><span class="line">                <span class="comment">#更新被重复字符的下标</span></span><br><span class="line">                dic[s[tail]] = tail</span><br><span class="line">            tail+=<span class="number">1</span></span><br><span class="line">            res = max(tail-head,res)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>Leetcode</tag>
-        <tag>字符串</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python输入怎么写</title>
     <url>/2020/06/21/python%E8%BE%93%E5%85%A5%E6%80%8E%E4%B9%88%E5%86%99/</url>
     <content><![CDATA[<p>Leetcode刷多了不太记得python的输入怎么写了。在实际笔试或面试时，需要自己写输入和输出函数，所以在此记录下怎么使用Python读取数据。<br><a id="more"></a></p>
@@ -927,7 +864,7 @@ u_{t} &=\boldsymbol{\sigma}\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *
 <li><a href="#17-urban-traffic-prediction-from-spatio-temporal-data-using-deep-meta-learning2019kdd">1.7. Urban Traffic Prediction from Spatio-Temporal Data Using Deep Meta Learning(2019KDD)</a></li>
 <li><a href="#18-stepdeep-a-novel-spatial-temporal-mobility-event-prediction-framework-based-on-deep-neural-networkkdd2018">1.8. StepDeep: A Novel Spatial-temporal Mobility Event Prediction Framework based on Deep Neural Network(KDD2018)</a></li>
 <li><a href="#19-stgrat-a-spatio-temporal-graph-attention-network-for-traffic-forecastingaaai2020">1.9. STGRAT: A Spatio-Temporal Graph Attention Network for Traffic Forecasting(AAAI2020)</a></li>
-<li><a href="#110-connecting-the-dots-multivariate-time-series-forecasting-with-graph-neural-networks">1.10. Connecting the Dots: Multivariate Time Series Forecasting with Graph Neural Networks</a></li>
+<li><a href="#110-connecting-the-dots-multivariate-time-series-forecasting-with-graph-neural-networks2020kdd">1.10. Connecting the Dots: Multivariate Time Series Forecasting with Graph Neural Networks(2020KDD)</a></li>
 </ul>
 </li>
 <li><a href="#2-eta预测">2. ETA预测</a><ul>
@@ -1142,7 +1079,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <li>Decoder layer有4个sublayer：空间Attention层，mask时间Attention层，Encoder-Decoder Attention层，point-wise FFN层。整个Decoder层=1个嵌入层+4个Decoder层。</li>
 <li><strong>本模型比Transformer多了一个空间Attention层，其余都一样，因为时间Attention层、FFN和Transformer的一样</strong></li>
 </ul>
-<h2><span id="110-connecting-the-dots-multivariate-time-series-forecasting-with-graph-neural-networks">1.10. Connecting the Dots: Multivariate Time Series Forecasting with Graph Neural Networks</span></h2><p>该模型使用图网络模型捕获交通数据或其他领域数据中的时间和空间相关性。</p>
+<h2><span id="110-connecting-the-dots-multivariate-time-series-forecasting-with-graph-neural-networks2020kdd">1.10. Connecting the Dots: Multivariate Time Series Forecasting with Graph Neural Networks(2020KDD)</span></h2><p>该模型使用图网络模型捕获交通数据或其他领域数据中的时间和空间相关性。</p>
 <p><img src="/2020/02/27/时空论文阅读笔记/MTGNN-1.png" alt=""></p>
 <p>该模型有2个模块，图卷积模块和时间模块。其中图卷积模块主要解决4个问题：</p>
 <ol>
@@ -1959,7 +1896,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 </ul>
 <!-- /TOC -->
 <h1><span id="1-spark简介">1. Spark简介</span></h1><h2><span id="11-spark是什么">1.1. Spark是什么</span></h2><p>Spark是<strong>基于内存计算</strong>的大数据局并行<strong>计算框架</strong>。Spark基于内存计算，提高了数据处理的速度，同时具有高容错性和高伸缩性，允许用户将Spark部署在廉价的硬件之上，形成集群。</p>
-<p>Spark和 Hadoop Map Reduce的优势：</p>
+<p><strong>Spark和 Hadoop Map Reduce的优势：</strong></p>
 <ol>
 <li>中间结果输出在内存中<br>MapReduce将中间结果写入到磁盘中。而Spark在计算过程抽象成有向无环图DAG，执行的时候使用内存来存储中间结果。</li>
 <li>数据格式<br>Spark使用弹性分布式数据集RDD，来进行数据的存储。在RDD上可以对数据进行分区，将数据分布在不同节点上。</li>
@@ -1967,7 +1904,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 </ol>
 <h2><span id="12-spark架构">1.2. Spark架构</span></h2><p>Spark架构采用了分布式计算中的Master-Slave模型。将具有Master进程的节点视为Master，将含有Worker进程的节点视为Slave。<br>在搭建集群的时候已经分配好Master和Worker了。</p>
 <ul>
-<li>Master作为整个集群的控制器，负责整个集群的正常运行。</li>
+<li><strong>Master作为整个集群的控制器，负责整个集群的正常运行</strong>。</li>
 </ul>
 <p>在运行Spakr程序时，分为Driver和Worker。</p>
 <ul>
@@ -1977,37 +1914,37 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <li>Executor：执行器，在worker节点上执行任务的组件。</li>
 </ul>
 <p><img src="/2020/01/30/Spark/spark架构图.jpg" alt=""></p>
-<p>Spark的执行流程：<br>Client提交应用，Mater会找到一个Worker来启动Driver，Driver向Master申请资源，然后将RDD的一系列操作转换为DAG，然后调度器将DAG中的一系列操作切分成不同的stage，然后将这些stage分发给Executor执行。</p>
-<h1><span id="2-spark计算模型">2. Spark计算模型</span></h1><h2><span id="21-rdd介绍">2.1. RDD介绍</span></h2><p>Spark的核心数据结构:弹性分布式数据集（resilient distributed dataset）RDD，通过RDD的依赖关系形成有向无环图。</p>
+<p><strong>Spark的执行流程：</strong><br>Client提交应用，Mater会找到一个Worker来启动Driver，Driver向Master申请资源，然后将RDD的一系列操作转换为DAG，然后调度器将DAG中的一系列操作切分成不同的stage，然后将这些stage分发给Executor执行。</p>
+<h1><span id="2-spark计算模型">2. Spark计算模型</span></h1><h2><span id="21-rdd介绍">2.1. RDD介绍</span></h2><p>Spark的核心数据结构:<strong>弹性分布式数据集</strong>（resilient distributed dataset）RDD，通过RDD的依赖关系形成有向无环图。</p>
 <p>RDD的2种创建方式：</p>
 <ol>
 <li>从HDFS，HBase，Hive中读取数据创建</li>
 <li>从父RDD转换得到新的RDD</li>
 </ol>
-<p>RDD的2种操作算子：</p>
+<p><strong>RDD的2种操作算子</strong>：</p>
 <ol>
 <li>转换算法Transformation<br>转换算子不是立即执行，等到Action之后才会被触发。</li>
 <li>行动算子Action<br>Action算子触发Spark提交作业。</li>
 </ol>
 <p>一个RDD有多个分区，每个分区上的数据存储在不同的节点上。</p>
 <p><img src="/2020/01/30/Spark/RDD.jpg" alt=""></p>
-<h1><span id="3-spark工作机制详解">3. Spark工作机制详解</span></h1><p>Spark的执行流程：<br>Client提交应用，Mater会找到一个Worker来启动Driver，Driver向Master申请资源，然后将RDD的一系列操作转换为DAG，然后调度器将DAG中的一系列操作切分成不同的stage，然后将这些stage分发给Executor执行。Executor会创建线程池，executor将需要执行的任务通过线程池并发执行。</p>
+<h1><span id="3-spark工作机制详解">3. Spark工作机制详解</span></h1><p><strong>Spark的执行流程：</strong><br>Client提交应用，Mater会找到一个Worker来启动Driver，Driver向Master申请资源，然后将RDD的一系列操作转换为DAG，然后调度器将DAG中的一系列操作切分成不同的stage，然后将这些stage分发给Executor执行。Executor会创建线程池，executor将需要执行的任务通过线程池并发执行。</p>
 <p><img src="/2020/01/30/Spark/spark1.jpg" alt=""></p>
-<h2><span id="31-spark中术语概念">3.1. Spark中术语概念</span></h2><p>Spark应用Application是用户提交的应用程序。执行模式有Local，Standalone，YARN。</p>
+<h2><span id="31-spark中术语概念">3.1. Spark中术语概念</span></h2><p>Spark应用Application是用户提交的应用程序。<strong>执行模式有Local，Standalone，YARN</strong>。</p>
 <p><img src="/2020/01/30/Spark/spark2.jpg" alt=""></p>
 <ul>
 <li>Application：用户自定义的Spark程序，用户提交后，Spark为App分配资源</li>
 <li>Driver Program：运行App的main函数，并创建SparkContext</li>
 <li>RDD Graph：RDD是Spark核心结构，RDD所有算子操作组成一个有向无环图DAG</li>
 <li>Job：一个RDD Graph触发的作业，一般由Action触发，在SparkContext通过runJob方法向Spark提交Job</li>
-<li>Stage：每个Job会根据RDD的宽依赖关系被切分成很多stage，每个stage中包含一组相同的task，这一组Task也叫做TaskSet</li>
+<li>Stage：<strong>每个Job会根据RDD的宽依赖关系被切分成很多stage</strong>，每个stage中包含一组相同的task，这一组Task也叫做TaskSet</li>
 <li>Task：一个分区对应一个Task，Task执行RDD中的算子，Task被封装好后放在Executor中的线程池中执行。</li>
 </ul>
 <h2><span id="32-spark资源分配">3.2. Spark资源分配</span></h2><p>Spark有多种运行模型：Local，Standalone模型，YARN模式。</p>
 <p>下面根据不同的运行模式介绍配置调度：</p>
 <ol>
 <li>Stansalone模式<br>默认情况下，用户以standalone模式提交应用使用FIFO的顺序进行调度。每个应用会独占所有可用节点的资源。用户可以通过配置参数<code>spark.cores.max</code>来决定一个应用可以<strong>在整个集群</strong>申请的CPU core数，而不是一个节点的核数。如果没有设置这个值，则使用默认参数。</li>
-<li>YARN模式<br>当Spark在YARN平台上提交时，用户可以在YARN的客户端通过配置<br><code>--num-executors</code>:应用分到的executor个数<br><code>--executor-memory</code>：每个executor的内存大小<br><code>--executor-cores</code>：每个executor的cpu核数<br>这样可以限制用户提交的应用不会占用过多的资源，让不同用户可以共享整个集群资源。</li>
+<li>YARN模式<br>当Spark在YARN平台上提交时，用户可以在YARN的客户端通过配置<br><code>--num-executors</code>:应用分到的executor个数<br><code>--executor-memory</code>：每个executor的内存大小<br><code>--executor-cores</code>：每个executor的cpu核数<br>这样可以<strong>限制用户提交的应用不会占用过多的资源</strong>，让不同用户可以共享整个集群资源。</li>
 </ol>
 <h2><span id="33-spark中job的调度">3.3. Spark中Job的调度</span></h2><p>在Spark应用程序内部，用户通过不同线程提交的Job可以并行运行。这里所说的Job是action算子触发的一个job。<br>Spark的调度器是线程安全的，有以下3种调度方法：默认是FIFO</p>
 <ol>
@@ -4906,8 +4843,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 </ul>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">value</span>&gt;</span>3<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h1><span id="3-hive和hbase">3. Hive和HBase</span></h1><ul>
-<li>Hive：通俗地讲，Hive是构建在Hadoop之上的数据仓库。是因为（1）数据存储在HDFS上，并不是存储在Hive中，（2）数据计算时使用MapReduce。Hive是一种构建在Hadoop文件系统上的数据仓库框架，并对存储在HDFS中的数据进行分析和管理。它可以将结构化的数据文件映射成一张数据库表，并提供完整的SQL查询功能，就是把写好的hql转换为map-reduce程序操作用来查询存放在HDFS上的数据。HQL是一种类SQL语言。</li>
-<li>HBase：通俗地讲，HBase可以认为是HDFS的一个包装，HBase的本质是数据存储，是一个Nosql数据库。HBase部署在HDFS之上，并且克服了HDFS在随机读写方面的缺点。HBase是一种Key/Value系统，它运行在HDFS之上。和Hive不一样，HBase能够在它的数据库上实时运行，而不是运行MapReduce任务。</li>
+<li><strong>Hive</strong>：通俗地讲，Hive是构建在Hadoop之上的数据仓库。是因为（1）数据存储在HDFS上，并不是存储在Hive中，（2）数据计算时使用MapReduce。Hive是一种构建在Hadoop文件系统上的数据仓库框架，并对存储在HDFS中的数据进行分析和管理。它可以将结构化的数据文件映射成一张数据库表，并提供完整的SQL查询功能，就是把写好的hql转换为map-reduce程序操作用来查询存放在HDFS上的数据。HQL是一种类SQL语言。</li>
+<li><strong>HBase</strong>：通俗地讲，HBase可以认为是HDFS的一个包装，HBase的本质是数据存储，是一个Nosql数据库。HBase部署在HDFS之上，并且克服了HDFS在随机读写方面的缺点。HBase是一种Key/Value系统，它运行在HDFS之上。和Hive不一样，HBase能够在它的数据库上实时运行，而不是运行MapReduce任务。</li>
 </ul>
 <h2><span id="31-应用场景">3.1. 应用场景</span></h2><p>&ensp;&ensp;&ensp;&ensp;Hive用于对一段时间内的数据进行分析查询。例如，用于计算趋势或者网站的日志。<strong>Hive不适合用来进行实时查询，因为它需要很长时间才可以返回结果</strong>。Hive本身不存储和计算数据，它完全依赖HDFS和MapReduce，Hive中的表只是逻辑的表。Hive很适合数据仓库的统计分析，Hive的最佳使用场合是大数据集的批处理作业。例如网络日志分析，一般按照天、周、月、年来进行数据统计。不适合实时查询。例如Hive在几百兆的数据集上执行查询一般都有分钟级别的时间延迟。因此Hive不适合低延迟的应用，例如：联机事务处理。<br>&ensp;&ensp;&ensp;&ensp;<strong>HBase非常适合用来进行大数据的实时查询</strong>。Facebook用HBase进行消息和实时的分析。HBase中的表是物理表，不是逻辑表，提供一个超大的内存Hash表，搜索引擎通过它来存储索引，方便查询操作。<br>&ensp;&ensp;&ensp;&ensp;HDFS作为底层存储，是存储文件的系统，而HBase负责组织文件。Hive需要用到HDFS存储文件，需要用到MapReduce计算框架。</p>
 ]]></content>
