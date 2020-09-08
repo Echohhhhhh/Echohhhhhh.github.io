@@ -1,11 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Graph WaveNet for Deep Spatial-Temporal Graph Modeling</title>
+    <url>/2020/08/23/Graph-WaveNet-for-Deep-Spatial-Temporal-Graph-Modeling/</url>
+    <content><![CDATA[<p>论文地址：<a href="https://arxiv.org/pdf/1906.00121.pdf" target="_blank" rel="noopener">Graph WaveNet for Deep Spatial-Temporal Graph Modeling</a></p>
+<a id="more"></a>
+<!-- TOC -->
+<ul>
+<li><a href="#1-动机">1. 动机</a></li>
+<li><a href="#2-问题定义">2. 问题定义</a></li>
+<li><a href="#3-模型设计">3. 模型设计</a><ul>
+<li><a href="#31-图卷积层">3.1. 图卷积层</a></li>
+<li><a href="#32-时间卷积层">3.2. 时间卷积层</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-动机">1. 动机</span></h1><p>现在的时空图建模都是在一个静态图上进行建模，即图的邻接矩阵不变，并且现有的方法一般使用RNN或CNN来捕获时间特征，不能捕获长期的时间依赖。为了解决这2个限制，提出Graph WaveNet，图的邻接矩阵随时间变化，在时间维度上使用1D空洞卷积来捕获长期依赖。</p>
+<p>为了捕获时空数据，现在一般有2种方法：</p>
+<ol>
+<li>GCN+RNN</li>
+<li>GCN+CNN</li>
+</ol>
+<p>但是这2种方法中2个节点的相互依赖都建立在连接的基础上，但有些节点不连接仍然存在相互依赖的关系；当前的这种方法没有很有效的学习到时间依赖，RNN耗时且存在梯度消失问题，CNN可以并行，但需要堆叠很多层。</p>
+<h1><span id="2-问题定义">2. 问题定义</span></h1><p>定义图$G=(V,E)$,其中邻接矩阵$A$非0即1，在第$t$个时间步，图信号矩阵$X^{(t)}\in \mathbb{R}^{N \times D}$</p>
+<p>给定图$G$和历史$S$个时间段的图信号矩阵，预测未来$T$个时间段的图信号矩阵。</p>
+<p><img src="/2020/08/23/Graph-WaveNet-for-Deep-Spatial-Temporal-Graph-Modeling/问题定义.jpg" alt=""></p>
+<h1><span id="3-模型设计">3. 模型设计</span></h1><p><img src="/2020/08/23/Graph-WaveNet-for-Deep-Spatial-Temporal-Graph-Modeling/模型图.jpg" alt=""></p>
+<h2><span id="31-图卷积层">3.1. 图卷积层</span></h2><p>在介绍之前，我们先看一下DCRNN提出的扩散矩阵操作：</p>
+<p><strong>1. 无向图</strong></p>
+<script type="math/tex; mode=display">\mathbf{Z}=\sum_{k=0}^{K} \mathbf{P}^{k} \mathbf{X} \mathbf{W}_{\mathbf{k}}</script><p>其中$\mathbf{P}$是转移矩阵，如果是无向图的话，$\mathbf{P}=\mathbf{A} / \operatorname{rowsum}(\mathbf{A})$</p>
+<p><strong>2. 有向图</strong></p>
+<p>如果是有向图的话，需要计算入的方向和出的方向。<br>$\mathbf{P}_{f}=\mathbf{A} / \operatorname{rowsum}(\mathbf{A})$，$\mathbf{P}_{b}=\mathbf{A}^{\mathbf{T}} /$rowsum$\left(\mathbf{A}^{\mathbf{T}}\right)$</p>
+<p>此时的图卷积操作就变成：</p>
+<script type="math/tex; mode=display">\mathbf{Z}=\sum_{k=0}^{K} \mathbf{P}_{f}^{k} \mathbf{X} \mathbf{W}_{k 1}+\mathbf{P}_{b}^{k} \mathbf{X} \mathbf{W}_{k 2}</script><p>在本文中，提出一个<strong>自适应的邻接矩阵</strong>$\tilde{A}_{adp}$，即邻接矩阵是学出来的，并不是提前定义好的。</p>
+<p>首先初始化2个节点嵌入矩阵$E_1,E_2 \in \mathbb{R}^{N \times c}$，</p>
+<script type="math/tex; mode=display">\tilde{\mathbf{A}}_{a d p}=\operatorname{SoftMax}\left(\operatorname{ReLU}\left(\mathbf{E}_{1} \mathbf{E}_{2}^{T}\right)\right)</script><p>通过上面的式子，可以得到自适应的邻接矩阵$\tilde{A}_{adp}$，下面定义图卷积层的操作。</p>
+<p><strong>1. 如果图的结构已知</strong><br>   参考DCRNN的扩散卷积的操作</p>
+<ul>
+<li><p>无向图</p>
+<script type="math/tex; mode=display">\mathbf{Z}=\sum_{k=0}^{K} \mathbf{P}^{k} \mathbf{X} \mathbf{W}_{k 1}+\tilde{\mathbf{A}}_{a p t}^{k} \mathbf{X} \mathbf{W}_{k 3}</script></li>
+<li><p>有向图</p>
+<script type="math/tex; mode=display">\mathbf{Z}=\sum_{k=0}^{K} \mathbf{P}_{f}^{k} \mathbf{X} \mathbf{W}_{k 1}+\mathbf{P}_{b}^{k} \mathbf{X} \mathbf{W}_{k 2}+\tilde{\mathbf{A}}_{a p t}^{k} \mathbf{X} \mathbf{W}_{k 3}</script></li>
+</ul>
+<p><strong>2. 图的结构未知</strong></p>
+<script type="math/tex; mode=display">\mathbf{Z}=\sum_{k=0}^{K} \tilde{\mathbf{A}}_{a p t}^{k} \mathbf{X} \mathbf{W}_{k}</script><p>通过自适应的图卷积得到图中节点嵌入</p>
+<h2><span id="32-时间卷积层">3.2. 时间卷积层</span></h2><p>使用1D空洞卷积TCN来捕获长期的时间依赖，因为空洞卷积可以扩大感受野的范围，可以捕获到更长的时间。同时，这里使用了门控TCN，</p>
+<script type="math/tex; mode=display">\mathbf{h}=g\left(\boldsymbol{\Theta}_{1} \star \mathcal{X}+\mathbf{b}\right) \odot \sigma\left(\boldsymbol{\Theta}_{2} \star \mathcal{X}+\mathbf{c}\right)</script><p>输入数据$\mathcal{X} \in \mathbb{R}^{N \times D \times S}$，$\star$表示1D空洞卷积操作。$g(\cdot)$使用Tanh激活函数。</p>
+<p>下面介绍模型的步骤</p>
+<p><img src="/2020/08/23/Graph-WaveNet-for-Deep-Spatial-Temporal-Graph-Modeling/模型图.jpg" alt=""></p>
+<p>求自适应邻接矩阵—&gt;T-GCN—&gt;GCN</p>
+<ol>
+<li>首先模型的输入维度是(batch_size,D,N,T),首先经过$1*1$的2D卷积层，将节点特征D转换维度，变成(batch_size,D1,N,T)</li>
+<li>计算自适应邻接矩阵，首先初始化2个可学习的节点嵌入矩阵$\mathbf{E}_1,\mathbf{E}_2$,维度都是$\mathbb{R}^{N \times 10}$,然后使用下面的式子计算$\mathbf{A}_{adp}=F.softmax(F.relu(torch.mm(E1, E2)), dim=1)$</li>
+<li><p>将(batch_size,D1,N,T)输入到Gated-TCN中，首先输入到TCN-a（2D卷积当1D卷积用，卷积核中有1维为1）中，2D卷积的输入维度是D1，输出维度是D2，卷积核大小为(1,k)，然后再经过Tanh，输出维度(batch_size,D2,N,T)</p>
+<script type="math/tex; mode=display">Tanh \left(\boldsymbol{\Theta}_{1} \star \mathcal{X}+\mathbf{b}\right)</script></li>
+<li>将(batch_size,D1,N,T)输入到TCN-b（2D卷积当1D卷积用，卷积核中有1维为1）中，2D卷积的输入维度是D1，输出维度是D2，卷积核大小为(1,k)，然后再经过Sigmoid，输出维度(batch_size,D2,N,T)<script type="math/tex; mode=display">\sigma\left(\boldsymbol{\Theta}_{2} \star \mathcal{X}+\mathbf{c}\right)</script></li>
+<li>将步骤3和步骤4的输出逐元素相乘<script type="math/tex; mode=display">\mathbf{h}=Tanh \left(\boldsymbol{\Theta}_{1} \star \mathcal{X}+\mathbf{b}\right) \odot \sigma\left(\boldsymbol{\Theta}_{2} \star \mathcal{X}+\mathbf{c}\right)</script></li>
+<li>将步骤5的输出(batch_size,D2,N,T)，输入到skip-conv（1D卷积），改变通道维度为(batch_size,D3,N,T)存储在skip变量中，一共有K层，将K层G-TCN的输出加起来得到(batch_size,D3,N,T)</li>
+<li><p>下面进行GCN操作，将步骤5的输出(batch_size,D2,N,T)=x，假设有2个邻接矩阵，一个是已知的邻接矩阵$\mathbf{P}$,一个是自适应邻接矩阵$\mathbf{A}_{a p t}$，先遍历第一个邻接矩阵，$\mathbf{P}X$保存取来，然后在$\mathbf{P}^2X$，直到$\mathbf{P}^kX$，然后再求$\mathbf{A}_{a p t}X,\mathbf{A}_{a p t}^2X,\mathbf{A}_{a p t}^kX$。一共有2个邻接矩阵，每个邻接矩阵都有K个值，将这2K个值在通道维上拼接，得到$(batch_size,2<em>K</em>D2,N,T)$，然后在经过一个全连接，将维度映射成D1，即(batch_size,D1,N,T)</p>
+<script type="math/tex; mode=display">\mathbf{Z}=\sum_{k=0}^{K} \mathbf{P}^{k} \mathbf{X} \mathbf{W}_{k 1}+\tilde{\mathbf{A}}_{a p t}^{k} \mathbf{X} \mathbf{W}_{k 3}</script></li>
+<li>将步骤7的输出和步骤1的输出做残差连接，直接相加，再经过一个BN层，完成一个block。接下来就再次经过G-TCN和GCN，重复步骤3-7</li>
+<li>所有的block完成之后，输出维度(batch_size,D1,N,T),但我们并不是要GCN的输出，而是需要每个TGCN的输出保存在skip中，维度(batch_size,D3,N,T)，先使用ReLU激活，然后使用$1<em>1$的2D卷积，变成维度(batch_size,D4,N,T),再ReLU，然后是$1</em>1$卷积</li>
+</ol>
+]]></content>
+      <categories>
+        <category>论文阅读笔记</category>
+      </categories>
+      <tags>
+        <tag>时空领域</tag>
+        <tag>GCN</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>稀疏数据处理</title>
     <url>/2020/08/19/%E7%A8%80%E7%96%8F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</url>
     <content><![CDATA[<p>在实际数据中，经常会遇到数据稀疏的问题，即数据中存在大量的0，且非零元素呈不规律分布。这就是稀疏矩阵。</p>
+<a id="more"></a>
 <p><img src="/2020/08/19/稀疏数据处理/系数矩阵.jpg" alt=""></p>
-<h1><span id="稀疏矩阵处理">稀疏矩阵处理</span></h1><p>通常，为了处理稀疏性矩阵，我们通常会压缩行和列；或者通过PCA/SVD进行降维。</p>
+<h1><span id="1-稀疏矩阵处理">1. 稀疏矩阵处理</span></h1><p>通常，为了处理稀疏性矩阵，我们通常会压缩行和列；或者通过PCA/SVD进行降维。</p>
 <p>矩阵压缩</p>
 <p>降维</p>
 ]]></content>
@@ -305,19 +378,26 @@
 </li>
 </ul>
 </li>
+<li><a href="#基于内容的召回算法">基于内容的召回算法</a></li>
 </ul>
 </li>
 <li><a href="#7-排序算法">7. 排序算法</a><ul>
-<li><a href="#71-lr">7.1. LR</a></li>
+<li><a href="#71-逻辑回归lr">7.1. 逻辑回归LR</a></li>
 <li><a href="#72-fm">7.2. FM</a></li>
 </ul>
 </li>
+<li><a href="#推荐系统的评价">推荐系统的评价</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="1-推荐系统和搜索的区别">1. 推荐系统和搜索的区别</span></h1><ul>
 <li>推荐系统个性化强，用户被动的接受，希望能提供持续的服务，推荐主要是信息过滤系统。</li>
 <li>搜索个性化弱，用户主动搜索，快速满足用户的需求。主要是构建稳定的信息流通通道</li>
 </ul>
+<p>什么时候才需要推荐：</p>
+<ol>
+<li>信息过载</li>
+<li>需求不明确</li>
+</ol>
 <h1><span id="2-推荐系统lambda架构">2. 推荐系统Lambda架构</span></h1><p>推荐系统要素：</p>
 <ol>
 <li>前段界面</li>
@@ -421,7 +501,7 @@
 </ul>
 </li>
 <li>算法<ul>
-<li>计算相似度</li>
+<li>协同过滤：计算相似度</li>
 <li>矩阵分解</li>
 </ul>
 </li>
@@ -456,12 +536,12 @@
 <p>召回结果的候选item限定在用户的历史行为类目中，导致推荐结果越推越窄，难以发现长尾商品。</p>
 <h3><span id="611-基于用户的协同过滤">6.1.1. 基于用户的协同过滤</span></h3><p>实现协同过滤的步骤：</p>
 <ol>
-<li>首先计算用户与用户的相似程度<br>比如下图中，我们计算出用户1和用户3最相似</li>
+<li>首先计算<strong>用户与用户的相似程度</strong><br>比如下图中，我们计算出用户1和用户3最相似</li>
 <li>根据相似的人产生推荐结果<br>然后我们根据用户3的内容给用户1来推荐，用户3喜欢物品(1,4,8)，然后过滤到用户1已经喜欢的商品1，然后给用户1推荐物品4和8</li>
 </ol>
 <p><img src="/2020/07/25/推荐系统学习/评分矩阵.jpg" alt=""></p>
 <h3><span id="612-基于物品的协同过滤">6.1.2. 基于物品的协同过滤</span></h3><ol>
-<li>首先计算物品与物品的相似程度<br>比如物品A和物品B相似</li>
+<li>首先计算<strong>物品与物品的相似程度</strong><br>比如物品A和物品B相似</li>
 <li>根据相似的物品产生推荐结果<br>用户A原先买过物品A，然后就给推荐物品B</li>
 </ol>
 <h3><span id="613-基于模型的协同过滤">6.1.3. 基于模型的协同过滤</span></h3><h4><span id="6131-矩阵分解mf">6.1.3.1. 矩阵分解MF</span></h4><p>MF（Matrix Factorization，矩阵分解）是一个简单的Embedding模型。给定用户和物品矩阵$A \in \mathbb{R}^{m \times n}$,然后对其进行分解成用户嵌入矩阵$U \in \mathcal{R}^{m \times d}$和商品矩阵$V \in \mathcal{R}^{n \times d}$。$d &lt;&lt; m和n$</p>
@@ -476,7 +556,13 @@
 <li>随机梯度下降SGD</li>
 <li>加权交替最小二乘法WALS<br>在2个矩阵U和V中，对U和V进行交替更新。（1）固定U求解V，（2）固定V求解U</li>
 </ol>
-<h1><span id="7-排序算法">7. 排序算法</span></h1><h2><span id="71-lr">7.1. LR</span></h2><p>LR最早可以用在点击率预测中，LR是一个二分类，输出的概率表示用户点击的概率。</p>
+<h2><span id="基于内容的召回算法">基于内容的召回算法</span></h2><p>一般步骤是：</p>
+<ol>
+<li>先分词，</li>
+<li>然后计算词的权重(TF-IDF)，即提取关键字</li>
+<li>然后使用word2vec得到词向量，从词向量构建物品向量</li>
+</ol>
+<h1><span id="7-排序算法">7. 排序算法</span></h1><h2><span id="71-逻辑回归lr">7.1. 逻辑回归LR</span></h2><p>LR最早可以用在点击率预测中，LR是一个二分类，输出的概率表示用户点击的概率。</p>
 <p>步骤如下：</p>
 <ol>
 <li><p>构造特征<br>将所有特征进行离散化,变成one-hot输入</p>
@@ -494,6 +580,21 @@
 </ol>
 <p><img src="/2020/07/25/推荐系统学习/FM.jpg" alt=""></p>
 <p>FM在LR的基础上，引入任意2个特征的二阶特征组合，为每个特征，学习一个大小为k的一维向量。于是2个特征$x_i,x_j$的特征组合的权重值，通过特征对应的向量$v_i,v_j$的内积$<v_i,v_j>$来表示。</v_i,v_j></p>
+<h1><span id="推荐系统的评价">推荐系统的评价</span></h1><ol>
+<li><p>准确率</p>
+<ul>
+<li>学术角度：RMSE,MAE,点击预估</li>
+<li>工程角度：A/B test对比不同的算法，在线上运行对关键指标的影响</li>
+</ul>
+</li>
+<li><p>覆盖率<br>尽量照顾到大部分的产品</p>
+</li>
+<li>探索和利用<ul>
+<li>利用：利用用户的历史行为，只给他推荐他曾经消费过的相似物品</li>
+<li>探索：发现用户的新兴趣</li>
+</ul>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>推荐系统</category>
@@ -1488,41 +1589,41 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
   <entry>
     <title>RiskOracle-A Minute-level Citywide Traffic Accident Forecasting Framework</title>
     <url>/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/</url>
-    <content><![CDATA[<p>AAAI2020原文链接：<a href="https://github.com/zzyy0929/AAAI2020-RiskOracle" target="_blank" rel="noopener">RiskOracle-A Minute-level Citywide Traffic Accident Forecasting Framework</a><br>中国科大发<br><a id="more"></a></p>
+    <content><![CDATA[<p>AAAI2020原文链接：<a href="https://github.com/zzyy0929/AAAI2020-RiskOracle" target="_blank" rel="noopener">RiskOracle-A Minute-level Citywide Traffic Accident Forecasting Framework</a><br>中国科大一个团队发表<br><a id="more"></a></p>
 <!-- TOC -->
 <ul>
-<li><a href="#1-%e6%91%98%e8%a6%81">1. 摘要</a></li>
-<li><a href="#2-%e4%bb%8b%e7%bb%8d">2. 介绍</a></li>
-<li><a href="#%e8%b4%a1%e7%8c%ae">贡献</a></li>
-<li><a href="#3-%e9%97%ae%e9%a2%98%e5%ae%9a%e4%b9%89">3. 问题定义</a></li>
+<li><a href="#1-摘要">1. 摘要</a></li>
+<li><a href="#2-介绍">2. 介绍</a></li>
+<li><a href="#贡献">贡献</a></li>
+<li><a href="#3-问题定义">3. 问题定义</a></li>
 <li><a href="#4-minute-level-real-time-traffic-accident-forecasting">4. Minute-level Real-time Traffic Accident Forecasting</a><ul>
 <li><a href="#41-framework-overview">4.1. Framework Overview</a></li>
 <li><a href="#42-data-preprocessing">4.2. Data Preprocessing</a></li>
 <li><a href="#43-multi-task-dtgn-for-accident-risk-prediction">4.3. Multi-task DTGN for Accident Risk Prediction</a></li>
 </ul>
 </li>
-<li><a href="#5-%e5%ae%9e%e9%aa%8c">5. 实验</a><ul>
-<li><a href="#51-%e6%95%b0%e6%8d%ae%e5%87%86%e5%a4%87">5.1. 数据准备</a></li>
-<li><a href="#52-%e5%ae%9e%e7%8e%b0%e7%bb%86%e8%8a%82">5.2. 实现细节</a></li>
-<li><a href="#53-%e8%af%84%e4%bb%b7%e6%8c%87%e6%a0%87">5.3. 评价指标</a></li>
+<li><a href="#5-实验">5. 实验</a><ul>
+<li><a href="#51-数据准备">5.1. 数据准备</a></li>
+<li><a href="#52-实现细节">5.2. 实现细节</a></li>
+<li><a href="#53-评价指标">5.3. 评价指标</a></li>
 <li><a href="#54-baseline">5.4. Baseline</a></li>
-<li><a href="#55-%e5%ae%9e%e9%aa%8c%e7%bb%93%e6%9e%9c">5.5. 实验结果</a></li>
-<li><a href="#56-%e8%b6%85%e5%8f%82%e6%95%b0">5.6. 超参数</a></li>
-<li><a href="#57-%e6%a1%88%e4%be%8b%e5%88%86%e6%9e%90">5.7. 案例分析</a></li>
+<li><a href="#55-实验结果">5.5. 实验结果</a></li>
+<li><a href="#56-超参数">5.6. 超参数</a></li>
+<li><a href="#57-案例分析">5.7. 案例分析</a></li>
 </ul>
 </li>
-<li><a href="#6-%e6%80%bb%e7%bb%93">6. 总结</a></li>
-<li><a href="#7-%e7%9f%a5%e8%af%86%e8%a1%a5%e5%85%85">7. 知识补充</a></li>
+<li><a href="#6-总结">6. 总结</a></li>
+<li><a href="#7-知识补充">7. 知识补充</a></li>
 </ul>
 <!-- /TOC -->
-<p>论文总结：</p>
+<p><strong>论文总结</strong>：</p>
 <ol>
 <li>根据网格构建图，将NYC划分了27*27个网格，但是其中只有354个网格有道路，所以图中有354个节点。</li>
 <li>根据网格之间道路相似性和历史一周交通的动态相似性来构建图中边的权重。构建的是全连通图，计算任意2个子区域的相似性</li>
 <li>多任务学习。主任务：预测m个子区域的risk，辅助任务1：预测m个子区域的flow，辅助任务2：预测q个中等区域的事故次数count</li>
 <li>在训练时，将risk=0替换为对应的负值，使用全部的数据。在测试时，只计算高频时间段和高频区域的评价指标</li>
 </ol>
-<h1><span id="1-摘要">1. 摘要</span></h1><p>&ensp;&ensp;&ensp;&ensp;实时交通事故预测对公共安全和城市管理意义重大（例如.实时路径规划和应急响应部署）。之前的事故预测是在小时级别上，利用神经网络和静态的区域关系。然而，随着道路网络的高度动态性和交通师傅的稀有性，提高预测的粒度仍然是一个挑战，这将会导致结果偏差和零膨胀问题。在这篇论文中，我们提出一个新颖的RiskOracle框架，提高预测的粒度到分钟级别。具体来说，我们首先将0风险值转换为适合网络训练的值，然后，我们提出差分时变图神经网络(DTGN)来捕获交通状态的即时变化和子区间之间的动态相关性，并且，我们采用多任务和区域选择方案来突出显示全市范围内最可能发生事故的子区域，弥合了偏差的风险值和稀疏的事故分布。在2个真实数据集上做了大量实验证明了我们的RiskOracle框架的有效性和可扩展性。</p>
+<h1><span id="1-摘要">1. 摘要</span></h1><p>&ensp;&ensp;&ensp;&ensp;实时交通事故预测对公共安全和城市管理意义重大（例如，实时路径规划和应急响应部署）。之前的事故预测是在小时级别上，利用神经网络和静态的区域关系。然而，随着道路网络的高度动态性和交通师傅的稀有性，提高预测的粒度仍然是一个挑战，这将会导致结果偏差和零膨胀问题。在这篇论文中，我们提出一个新颖的RiskOracle框架，提高预测的粒度到分钟级别。具体来说，我们首先将0风险值转换为适合网络训练的值，然后，我们提出差分时变图神经网络(DTGN)来捕获交通状态的即时变化和子区间之间的动态相关性，并且，我们采用多任务和区域选择方案来突出显示全市范围内最可能发生事故的子区域，弥合了偏差的风险值和稀疏的事故分布。在2个真实数据集上做了大量实验证明了我们的RiskOracle框架的有效性和可扩展性。</p>
 <h1><span id="2-介绍">2. 介绍</span></h1><p>&ensp;&ensp;&ensp;&ensp;交通事故预测对城市安全非常重要。构建一个细粒度级的事故预测模型，为乘客提供及时的安全路径规划，为新兴应用(智能交通和自动驾驶)提供准确的应急响应的需求越来越大。<br>&ensp;&ensp;&ensp;&ensp;关于事故预测周期的长短，现有的工作主要分为2类：长期（天级别预测）和中期（小时级别预测）。我们在表1中总结了所有相关的工作。即使最近关于天级别的预测模型通过建模时空异质数据取得了很好的效果，但是对于紧急的情况并没有意义。<br>&ensp;&ensp;&ensp;&ensp;在小时级别上的中期事故预测可以进一步划分为：传统方法和深度学习。传统方法包括：基于聚类，基于频率树，基于非负矩阵分解。但是，这些方法忽略了时间关系，不能建模复杂非线性的时空关系。深度学习方法例如，仅仅将历史交通事故数据输入到模型中，利用LSTM学习时间相关性，缺少了多源实时交通数据，效果不好。还有一些工作利用深度学习框架SDAE/SDCAE和ConvLSTM，结合人类实时移动数据，来学习交通事故模式，但是它们都不能提取区域间和区域内随时间变化的关系。<br>&ensp;&ensp;&ensp;&ensp;即使深度学习模型的进展为小时级别的事故预测带了可喜的结果，但是我们认为其忽略了3个重要的问题，使得在分钟级别的预测效果较差。第一，在2019中提到的，当预测任务的时空分辨率提高时，会出现零膨胀问题，将预测所有的结果都为0。由于没有方法来解决这个问题，稀少的非零值在训练时使模型无法生效。第二，尽管CNN可以学习静态的子区域相关性，但是随时间变化的子区域相关性在城市短期事故预测有着重要的作用，例如，由于潮汐流，2个子区域在早上相关性强，在下午相关性弱。第三，在同一子区域相邻时间段内交通状况的异常变化通常会诱发交通事故或其他事件。没有考虑以上3个时空因素，小时级别的预测模型能力将受到严重阻碍。</p>
 <p><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/Summarization.png" alt=""></p>
 <p>表中的论文<br><a href="https://echohhhhhh.github.io/2019/07/21/traffic-accident/#11-learning-deep-representation-from-big-and-heterogeneous-data-for-traffic-accident-inference2016aaai" target="_blank" rel="noopener">Learning Deep Representation from Big and Heterogeneous Data for Traffic Accident Inference(2016AAAI)</a></p>
@@ -1566,7 +1667,8 @@ e_{i j}=\left\{\begin{array}{ll}{1} & {\text { if the traffic elements within tw
 <p>其中b1和b2的值是反复试出来的。为了保证事故强度的绝对值和真实风险范围对称。假设真实风险在1至25之间，那事故强度的值要在-25至-1之间，通过设置b1和b2强度值在-25~-1</p>
 </blockquote>
 <p><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/nyc-map.png" alt=""></p>
-<p><strong>补充稀疏的传感数据</strong>。实时交通信息的通常收集不足来进行事故预测，动态交通信息通常和静态空间路网结构相互影响，因此，我们提出了一个协同感知策略，利用FM的交互操作，修改<code>xDeepFM</code>为时空深度因式分解(ST-DFM)。<br>我们首先通过静态关联矩阵$\mathcal{A}_s$来提取2个子区域间的路网相似性和连接性。其中关联矩阵affinity matrix中的元素$\alpha_s(i,j)$表示子区域$v_i和v_j$间的静态相关性。</p>
+<p><strong>补充稀疏的传感数据</strong>。实时交通信息的通常收集不足来进行事故预测，动态交通信息通常和静态空间路网结构相互影响，因此，我们提出了一个协同感知策略，利用FM的交互操作，修改<code>xDeepFM</code>为时空深度因式分解(ST-DFM)。</p>
+<p>我们首先通过静态关联矩阵$\mathcal{A}_s$来提取2个子区域间的路网相似性和连接性。其中关联矩阵affinity matrix中的元素$\alpha_s(i,j)$表示子区域$v_i和v_j$间的静态相关性。</p>
 <script type="math/tex; mode=display">
 \alpha_{s}(i, j)=\left\{\begin{array}{cc}
 {1} & {\text { if subregion } v_{i} \text { and }} {v_{j}} {\text { are adjacent }} \\
@@ -1876,6 +1978,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 </li>
 <li><a href="#2-spark计算模型">2. Spark计算模型</a><ul>
 <li><a href="#21-rdd介绍">2.1. RDD介绍</a></li>
+<li><a href="#rdd的2种操作算子">RDD的2种操作算子</a></li>
+<li><a href="#oom或数据倾斜">OOM或数据倾斜</a></li>
 </ul>
 </li>
 <li><a href="#3-spark工作机制详解">3. Spark工作机制详解</a><ul>
@@ -1889,7 +1993,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 </ul>
 </li>
 <li><a href="#5-容错机制">5. 容错机制</a><ul>
-<li><a href="#501-checkpoint机制">5.0.1. CheckPoint机制</a></li>
+<li><a href="#51-checkpoint机制">5.1. CheckPoint机制</a></li>
 </ul>
 </li>
 <li><a href="#6-spark-streaming">6. Spark Streaming</a></li>
@@ -1921,14 +2025,49 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <li>从HDFS，HBase，Hive中读取数据创建</li>
 <li>从父RDD转换得到新的RDD</li>
 </ol>
-<p><strong>RDD的2种操作算子</strong>：</p>
-<ol>
-<li>转换算法Transformation<br>转换算子不是立即执行，等到Action之后才会被触发。</li>
-<li>行动算子Action<br>Action算子触发Spark提交作业。</li>
+<h2><span id="rdd的2种操作算子">RDD的2种操作算子</span></h2><ol>
+<li><p>转换算法Transformation<br>转换算子不是立即执行，等到Action之后才会被触发。</p>
+<p><img src="/2020/01/30/Spark/转换算子1.jpg" alt=""></p>
+<p><img src="/2020/01/30/Spark/转换算子2.jpg" alt=""></p>
+</li>
+<li><p>行动算子Action<br>Action算子触发Spark提交作业。</p>
+<p><img src="/2020/01/30/Spark/action.jpg" alt=""></p>
+</li>
 </ol>
 <p>一个RDD有多个分区，每个分区上的数据存储在不同的节点上。</p>
 <p><img src="/2020/01/30/Spark/RDD.jpg" alt=""></p>
-<h1><span id="3-spark工作机制详解">3. Spark工作机制详解</span></h1><p><strong>Spark的执行流程：</strong><br>Client提交应用，Mater会找到一个Worker来启动Driver，Driver向Master申请资源，然后将RDD的一系列操作转换为DAG，然后调度器将DAG中的一系列操作切分成不同的stage，然后将这些stage分发给Executor执行。Executor会创建线程池，executor将需要执行的任务通过线程池并发执行。</p>
+<ol>
+<li>Transform算子和Action算子的区别<br>转换算子不触发提交作业，只是完成作业中间过程处理。转换算子的操作是延迟执行的，必须等到action算子才会真正触发。Action算子触发SparkContext来提交job作业，并将数据输出到Spark系统中。</li>
+<li><p>reduceByKey和groupByKey的区别</p>
+<p>会在数据移动之前，进行一次reduce操作，然后再进行数据传输，但是groupByKey并不会提前进行reduce，导致集群中节点间开销很大，传输延时。<br>在对大数据进行复杂计算时，reduceByKey优先groupByKey<br><img src="/2020/01/30/Spark/reducebykey.jpg" alt=""></p>
+<p><img src="/2020/01/30/Spark/groupByKey.jpg" alt=""></p>
+<ul>
+<li>groupByKey对RDD中所有数据做shuffle，根据不同的key映射到不同partition中再进行aggregate</li>
+<li>reduceByKey先对每个partition中的数据根据不同的key进行聚合，然后再将结果shuffle，完成不同partition之间的聚合，这个aggregateByKey一样</li>
+<li>aggregateByKey相对reduceByKey还多了一些操作，aggregateByKey允许返回不同类型的结果，例如输入(1,2)和(1,4)，可以输出(1,”six”)，而reduceByKey只能输出相同类型的值</li>
+</ul>
+</li>
+</ol>
+<h2><span id="oom或数据倾斜">OOM或数据倾斜</span></h2><h1><span id="3-spark工作机制详解">3. Spark工作机制详解</span></h1><p><strong>Spark的执行流程：</strong></p>
+<ol>
+<li><p>Spark Application的运行环境：创建SparkConf对象</p>
+<ul>
+<li>设置Application Name</li>
+<li>设置运行模式及资源需求</li>
+</ul>
+</li>
+<li>创建SparkContext对象<ul>
+<li>SparkContext向资源管理器申请运行Executor资源</li>
+<li>SparkContext将程序发给Executor</li>
+<li>SparkContext构建DAG图，将DAG图分解成stage，将task set发送给task scheduler，最后由task scheduler将task发送给Executor运行</li>
+<li>Task在Executor上运行，运行完释放所有的资源</li>
+</ul>
+</li>
+<li>基于Spark的上下文创建一个RDD，对RDD进行处理</li>
+<li>使用Action算子触发转换算子运行</li>
+<li>关闭spark上下文对象sparkContext</li>
+</ol>
+<p>Client提交应用，Mater会找到一个Worker来启动Driver，Driver向Master申请资源，然后将RDD的一系列操作转换为DAG，然后调度器将DAG中的一系列操作切分成不同的stage，然后将这些stage分发给Executor执行。Executor会创建线程池，executor将需要执行的任务通过线程池并发执行。</p>
 <p><img src="/2020/01/30/Spark/spark1.jpg" alt=""></p>
 <h2><span id="31-spark中术语概念">3.1. Spark中术语概念</span></h2><p>Spark应用Application是用户提交的应用程序。<strong>执行模式有Local，Standalone，YARN</strong>。</p>
 <p><img src="/2020/01/30/Spark/spark2.jpg" alt=""></p>
@@ -1970,7 +2109,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <p><img src="/2020/01/30/Spark/宽依赖.jpg" alt=""></p>
 </li>
 </ul>
-<h3><span id="501-checkpoint机制">5.0.1. CheckPoint机制</span></h3><p>RDD需要加检查点：</p>
+<h2><span id="51-checkpoint机制">5.1. CheckPoint机制</span></h2><p>RDD需要加检查点：</p>
 <ol>
 <li>DAG中的Lineage过长，如果重算，开销太大</li>
 <li>在宽依赖上做CheckPoint获得的收益更大</li>

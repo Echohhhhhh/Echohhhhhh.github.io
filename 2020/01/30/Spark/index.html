@@ -82,13 +82,18 @@
 <meta property="og:description" content="详细整理下Spark的原理">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/spark架构图.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/转换算子1.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/转换算子2.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/action.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/RDD.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/reducebykey.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/groupByKey.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/spark1.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/spark2.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/窄依赖.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/宽依赖.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/sparkstreaming.jpg">
-<meta property="og:updated_time" content="2020-08-21T02:55:50.069Z">
+<meta property="og:updated_time" content="2020-09-07T06:29:23.212Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark">
 <meta name="twitter:description" content="详细整理下Spark的原理">
@@ -393,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.2k
+                  2.6k
                 </span>
               
 
@@ -409,7 +414,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  9
                 </span>
               
             </div>
@@ -440,6 +445,8 @@
 </li>
 <li><a href="#2-spark计算模型">2. Spark计算模型</a><ul>
 <li><a href="#21-rdd介绍">2.1. RDD介绍</a></li>
+<li><a href="#rdd的2种操作算子">RDD的2种操作算子</a></li>
+<li><a href="#oom或数据倾斜">OOM或数据倾斜</a></li>
 </ul>
 </li>
 <li><a href="#3-spark工作机制详解">3. Spark工作机制详解</a><ul>
@@ -453,7 +460,7 @@
 </ul>
 </li>
 <li><a href="#5-容错机制">5. 容错机制</a><ul>
-<li><a href="#501-checkpoint机制">5.0.1. CheckPoint机制</a></li>
+<li><a href="#51-checkpoint机制">5.1. CheckPoint机制</a></li>
 </ul>
 </li>
 <li><a href="#6-spark-streaming">6. Spark Streaming</a></li>
@@ -485,14 +492,49 @@
 <li>从HDFS，HBase，Hive中读取数据创建</li>
 <li>从父RDD转换得到新的RDD</li>
 </ol>
-<p><strong>RDD的2种操作算子</strong>：</p>
-<ol>
-<li>转换算法Transformation<br>转换算子不是立即执行，等到Action之后才会被触发。</li>
-<li>行动算子Action<br>Action算子触发Spark提交作业。</li>
+<h2><span id="rdd的2种操作算子">RDD的2种操作算子</span></h2><ol>
+<li><p>转换算法Transformation<br>转换算子不是立即执行，等到Action之后才会被触发。</p>
+<p><img src="/2020/01/30/Spark/转换算子1.jpg" alt=""></p>
+<p><img src="/2020/01/30/Spark/转换算子2.jpg" alt=""></p>
+</li>
+<li><p>行动算子Action<br>Action算子触发Spark提交作业。</p>
+<p><img src="/2020/01/30/Spark/action.jpg" alt=""></p>
+</li>
 </ol>
 <p>一个RDD有多个分区，每个分区上的数据存储在不同的节点上。</p>
 <p><img src="/2020/01/30/Spark/RDD.jpg" alt=""></p>
-<h1><span id="3-spark工作机制详解">3. Spark工作机制详解</span></h1><p><strong>Spark的执行流程：</strong><br>Client提交应用，Mater会找到一个Worker来启动Driver，Driver向Master申请资源，然后将RDD的一系列操作转换为DAG，然后调度器将DAG中的一系列操作切分成不同的stage，然后将这些stage分发给Executor执行。Executor会创建线程池，executor将需要执行的任务通过线程池并发执行。</p>
+<ol>
+<li>Transform算子和Action算子的区别<br>转换算子不触发提交作业，只是完成作业中间过程处理。转换算子的操作是延迟执行的，必须等到action算子才会真正触发。Action算子触发SparkContext来提交job作业，并将数据输出到Spark系统中。</li>
+<li><p>reduceByKey和groupByKey的区别</p>
+<p>会在数据移动之前，进行一次reduce操作，然后再进行数据传输，但是groupByKey并不会提前进行reduce，导致集群中节点间开销很大，传输延时。<br>在对大数据进行复杂计算时，reduceByKey优先groupByKey<br><img src="/2020/01/30/Spark/reducebykey.jpg" alt=""></p>
+<p><img src="/2020/01/30/Spark/groupByKey.jpg" alt=""></p>
+<ul>
+<li>groupByKey对RDD中所有数据做shuffle，根据不同的key映射到不同partition中再进行aggregate</li>
+<li>reduceByKey先对每个partition中的数据根据不同的key进行聚合，然后再将结果shuffle，完成不同partition之间的聚合，这个aggregateByKey一样</li>
+<li>aggregateByKey相对reduceByKey还多了一些操作，aggregateByKey允许返回不同类型的结果，例如输入(1,2)和(1,4)，可以输出(1,”six”)，而reduceByKey只能输出相同类型的值</li>
+</ul>
+</li>
+</ol>
+<h2><span id="oom或数据倾斜">OOM或数据倾斜</span></h2><h1><span id="3-spark工作机制详解">3. Spark工作机制详解</span></h1><p><strong>Spark的执行流程：</strong></p>
+<ol>
+<li><p>Spark Application的运行环境：创建SparkConf对象</p>
+<ul>
+<li>设置Application Name</li>
+<li>设置运行模式及资源需求</li>
+</ul>
+</li>
+<li>创建SparkContext对象<ul>
+<li>SparkContext向资源管理器申请运行Executor资源</li>
+<li>SparkContext将程序发给Executor</li>
+<li>SparkContext构建DAG图，将DAG图分解成stage，将task set发送给task scheduler，最后由task scheduler将task发送给Executor运行</li>
+<li>Task在Executor上运行，运行完释放所有的资源</li>
+</ul>
+</li>
+<li>基于Spark的上下文创建一个RDD，对RDD进行处理</li>
+<li>使用Action算子触发转换算子运行</li>
+<li>关闭spark上下文对象sparkContext</li>
+</ol>
+<p>Client提交应用，Mater会找到一个Worker来启动Driver，Driver向Master申请资源，然后将RDD的一系列操作转换为DAG，然后调度器将DAG中的一系列操作切分成不同的stage，然后将这些stage分发给Executor执行。Executor会创建线程池，executor将需要执行的任务通过线程池并发执行。</p>
 <p><img src="/2020/01/30/Spark/spark1.jpg" alt=""></p>
 <h2><span id="31-spark中术语概念">3.1. Spark中术语概念</span></h2><p>Spark应用Application是用户提交的应用程序。<strong>执行模式有Local，Standalone，YARN</strong>。</p>
 <p><img src="/2020/01/30/Spark/spark2.jpg" alt=""></p>
@@ -534,7 +576,7 @@
 <p><img src="/2020/01/30/Spark/宽依赖.jpg" alt=""></p>
 </li>
 </ul>
-<h3><span id="501-checkpoint机制">5.0.1. CheckPoint机制</span></h3><p>RDD需要加检查点：</p>
+<h2><span id="51-checkpoint机制">5.1. CheckPoint机制</span></h2><p>RDD需要加检查点：</p>
 <ol>
 <li>DAG中的Lineage过长，如果重算，开销太大</li>
 <li>在宽依赖上做CheckPoint获得的收益更大</li>
@@ -705,7 +747,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -776,7 +818,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. Spark简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. Spark是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. Spark架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. Spark计算模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. RDD介绍</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. Spark工作机制详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. Spark中术语概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. Spark资源分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. Spark中Job的调度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. Spark I/O机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 序列化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 容错机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">5.0.1. CheckPoint机制</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. Spark Streaming</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. Spark简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. Spark是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. Spark架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. Spark计算模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. RDD介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">RDD的2种操作算子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">OOM或数据倾斜</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. Spark工作机制详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. Spark中术语概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. Spark资源分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. Spark中Job的调度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. Spark I/O机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 序列化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 容错机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.1. CheckPoint机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. Spark Streaming</span></a></li></ol></div>
             
 
           </div>
