@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/窄依赖.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/宽依赖.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/01/30/Spark/sparkstreaming.jpg">
-<meta property="og:updated_time" content="2020-09-07T06:29:23.212Z">
+<meta property="og:updated_time" content="2020-09-09T08:45:48.007Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark">
 <meta name="twitter:description" content="详细整理下Spark的原理">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.6k
+                  2.7k
                 </span>
               
 
@@ -445,8 +445,8 @@
 </li>
 <li><a href="#2-spark计算模型">2. Spark计算模型</a><ul>
 <li><a href="#21-rdd介绍">2.1. RDD介绍</a></li>
-<li><a href="#rdd的2种操作算子">RDD的2种操作算子</a></li>
-<li><a href="#oom或数据倾斜">OOM或数据倾斜</a></li>
+<li><a href="#22-rdd的2种操作算子">2.2. RDD的2种操作算子</a></li>
+<li><a href="#23-oom或数据倾斜">2.3. OOM或数据倾斜</a></li>
 </ul>
 </li>
 <li><a href="#3-spark工作机制详解">3. Spark工作机制详解</a><ul>
@@ -492,7 +492,7 @@
 <li>从HDFS，HBase，Hive中读取数据创建</li>
 <li>从父RDD转换得到新的RDD</li>
 </ol>
-<h2><span id="rdd的2种操作算子">RDD的2种操作算子</span></h2><ol>
+<h2><span id="22-rdd的2种操作算子">2.2. RDD的2种操作算子</span></h2><ol>
 <li><p>转换算法Transformation<br>转换算子不是立即执行，等到Action之后才会被触发。</p>
 <p><img src="/2020/01/30/Spark/转换算子1.jpg" alt=""></p>
 <p><img src="/2020/01/30/Spark/转换算子2.jpg" alt=""></p>
@@ -515,7 +515,7 @@
 </ul>
 </li>
 </ol>
-<h2><span id="oom或数据倾斜">OOM或数据倾斜</span></h2><h1><span id="3-spark工作机制详解">3. Spark工作机制详解</span></h1><p><strong>Spark的执行流程：</strong></p>
+<h2><span id="23-oom或数据倾斜">2.3. OOM或数据倾斜</span></h2><h1><span id="3-spark工作机制详解">3. Spark工作机制详解</span></h1><p><strong>Spark的执行流程：</strong></p>
 <ol>
 <li><p>Spark Application的运行环境：创建SparkConf对象</p>
 <ul>
@@ -818,7 +818,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. Spark简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. Spark是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. Spark架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. Spark计算模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. RDD介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">RDD的2种操作算子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">OOM或数据倾斜</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. Spark工作机制详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. Spark中术语概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. Spark资源分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. Spark中Job的调度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. Spark I/O机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 序列化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 容错机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.1. CheckPoint机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. Spark Streaming</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. Spark简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.1. Spark是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.2. Spark架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. Spark计算模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. RDD介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. RDD的2种操作算子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. OOM或数据倾斜</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. Spark工作机制详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. Spark中术语概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. Spark资源分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. Spark中Job的调度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. Spark I/O机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 序列化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 容错机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.1. CheckPoint机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. Spark Streaming</span></a></li></ol></div>
             
 
           </div>

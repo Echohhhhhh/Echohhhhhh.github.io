@@ -68,8 +68,8 @@
         <category>论文阅读笔记</category>
       </categories>
       <tags>
-        <tag>GCN</tag>
         <tag>时空领域</tag>
+        <tag>GCN</tag>
       </tags>
   </entry>
   <entry>
@@ -613,14 +613,29 @@
 <ul>
 <li><a href="#1-介绍auc">1. 介绍AUC</a></li>
 <li><a href="#2-排序问题中的auc">2. 排序问题中的AUC</a></li>
+<li><a href="#3-auc的计算">3. AUC的计算</a></li>
 </ul>
 <!-- /TOC -->
-<h1><span id="1-介绍auc">1. 介绍AUC</span></h1><p>关于AUC，通常说是ROC线下面积。ROC横坐标假阳率，纵坐标真阳率。<br>如下图中AUC=0.5，表示不论样本真实label是0还是1，模型将以0.5的概率将其预测为正样本。这就和抛硬币没区别，这说明模型对正负样本没有区分能力。<br>我们训练的目标是让AUC越大越好。</p>
+<h1><span id="1-介绍auc">1. 介绍AUC</span></h1><p><a href="https://tracholar.github.io/machine-learning/2018/01/26/auc.html" target="_blank" rel="noopener">深入理解AUC</a></p>
+<p>关于AUC，通常说是ROC线下面积。ROC横坐标假阳率，纵坐标真阳率。<br>如下图中AUC=0.5，表示不论样本真实label是0还是1，模型将以0.5的概率将其预测为正样本。这就和抛硬币没区别，这说明模型对正负样本没有区分能力。<br>我们训练的目标是让AUC越大越好。</p>
+<p>在统计和机器学习中，常用AUC来评估二分类模型的性能。AUC全称是Area Under the Curve。</p>
 <p><img src="/2020/07/21/AUC在推荐系统中的应用/roc.jpg" alt=""></p>
 <p>AUC同时考虑了分类器对正例和负例的分类能力，在样本不均衡时，分类器依然能做出合理的评价。</p>
 <p>另一种解释是：基于概率的解释，评估模型的排序能力。</p>
 <h1><span id="2-排序问题中的auc">2. 排序问题中的AUC</span></h1><p>假如AUC=0.7，表示给定一个正样本和一个负样本，在70%的情况下，模型对正样本的打分高于负样本的打分。可以看出，我们只关心正负样本之间的分数高低，并不在乎具体的概率值。</p>
 <p>对于Precision，Recall等指标，AUC只关注排序结果，不关注模型输出的概率值，所以适合排序业务。<br>正负样本被预测的gap越大，AUC越大。</p>
+<h1><span id="3-auc的计算">3. AUC的计算</span></h1><p>将测试样本得到的概率从小到大排序，对于<strong>第$j$个正样本</strong>，假设它的排名是$r_j$，那就说明在这个正样本之前有$r_j-1$个样本，其中正样本个数为$j-1$个（因为这个正样本在所有正样本中排第j），那排在第j个正样本前面的负样本个数有$(r_j-1-(j-1))=r_j-j$个，也就是说，低于第$j$个正样本来说，其得分比随机取的一个负样本大（正样本的排名靠后）的概率是$\frac{r_j-j}{N_-}$,其中$N_-$是标签中负样本的个数，所以平均下来，随机取的正样本得到比负样本大的概率为：</p>
+<script type="math/tex; mode=display">AUC=\frac{1}{N_+}\sum_{j=1}^{N_+}\frac{r_j-j}{N_-}=\frac{\sum_{j=1}^{N_+}r_j-N_+(N_++1)/2}{N_+N_-}</script><p>即需要求出以下3个值：</p>
+<ol>
+<li>所有正样本的排名，排名相加$\sum_{j=1}^{N_+}r_j$</li>
+<li>label中正样本个数$N_+$</li>
+<li>label中负样本个数$N_-$</li>
+</ol>
+<p>$prob=[0.4,0.5,0.2,0.8,0.7,0.9,0.6]$<br>$label=[0^{0.4},0^{0.5},1^{0.2},1^{0.8},1^{0.7},0^{0.9},1^{0.6}]$</p>
+<p>首先对prob从小到大排序，并同时调整prob的顺序<br>$prob=[0.2,0.4,0.5,0.6,0.7,0.8,0.9,]$<br>$label=[1^{0.2},0^{0.4},0^{0.5},1^{0.6},1^{0.7},1^{0.8},0^{0.9}]$</p>
+<p>其中正样本的排名分别是1,4,5,6，排名相加是16。<br>label正样本个数有4个，负样本个数有3个，</p>
+<p>$AUC=\frac{16-4<em>5/2}{4</em>3}=0.5$</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calAUC</span><span class="params">(prob,labels)</span>:</span></span><br><span class="line">    f = list(zip(prob,labels))</span><br><span class="line">    <span class="comment">#按照prob从小到大排序，对labels进行排序</span></span><br><span class="line">    rank = [cur_label <span class="keyword">for</span> cur_pro,cur_label <span class="keyword">in</span> sorted(f,key=<span class="keyword">lambda</span> x:x[<span class="number">0</span>])]</span><br><span class="line">    <span class="comment">#找出正样本在排名</span></span><br><span class="line">    rankList = [i+<span class="number">1</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(len(rank)) <span class="keyword">if</span> rank[i]==<span class="number">1</span>]</span><br><span class="line">    posNum = <span class="number">0</span><span class="comment">#正样本的个数</span></span><br><span class="line">    negNum = <span class="number">0</span><span class="comment">#负样本的个数</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(labels)):</span><br><span class="line">        <span class="keyword">if</span>(labels[i]==<span class="number">1</span>):</span><br><span class="line">            posNum+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            negNum+=<span class="number">1</span></span><br><span class="line">    auc = <span class="number">0</span></span><br><span class="line">    auc = (sum(rankList)- (posNum*(posNum+<span class="number">1</span>))/<span class="number">2</span>)/(posNum*negNum)</span><br><span class="line">    print(auc)</span><br><span class="line">    <span class="keyword">return</span> auc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    prob=[<span class="number">0.4</span>,<span class="number">0.5</span>,<span class="number">0.2</span>,<span class="number">0.8</span>,<span class="number">0.7</span>,<span class="number">0.9</span>,<span class="number">0.6</span>]</span><br><span class="line">    label=[<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>]</span><br><span class="line">    calAUC(prob,label)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Deep Learning</category>
@@ -1978,8 +1993,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 </li>
 <li><a href="#2-spark计算模型">2. Spark计算模型</a><ul>
 <li><a href="#21-rdd介绍">2.1. RDD介绍</a></li>
-<li><a href="#rdd的2种操作算子">RDD的2种操作算子</a></li>
-<li><a href="#oom或数据倾斜">OOM或数据倾斜</a></li>
+<li><a href="#22-rdd的2种操作算子">2.2. RDD的2种操作算子</a></li>
+<li><a href="#23-oom或数据倾斜">2.3. OOM或数据倾斜</a></li>
 </ul>
 </li>
 <li><a href="#3-spark工作机制详解">3. Spark工作机制详解</a><ul>
@@ -2025,7 +2040,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <li>从HDFS，HBase，Hive中读取数据创建</li>
 <li>从父RDD转换得到新的RDD</li>
 </ol>
-<h2><span id="rdd的2种操作算子">RDD的2种操作算子</span></h2><ol>
+<h2><span id="22-rdd的2种操作算子">2.2. RDD的2种操作算子</span></h2><ol>
 <li><p>转换算法Transformation<br>转换算子不是立即执行，等到Action之后才会被触发。</p>
 <p><img src="/2020/01/30/Spark/转换算子1.jpg" alt=""></p>
 <p><img src="/2020/01/30/Spark/转换算子2.jpg" alt=""></p>
@@ -2048,7 +2063,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 </ul>
 </li>
 </ol>
-<h2><span id="oom或数据倾斜">OOM或数据倾斜</span></h2><h1><span id="3-spark工作机制详解">3. Spark工作机制详解</span></h1><p><strong>Spark的执行流程：</strong></p>
+<h2><span id="23-oom或数据倾斜">2.3. OOM或数据倾斜</span></h2><h1><span id="3-spark工作机制详解">3. Spark工作机制详解</span></h1><p><strong>Spark的执行流程：</strong></p>
 <ol>
 <li><p>Spark Application的运行环境：创建SparkConf对象</p>
 <ul>
@@ -2532,9 +2547,9 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
         <category>Deep Learning</category>
       </categories>
       <tags>
-        <tag>GPU</tag>
         <tag>Mxnet</tag>
         <tag>Pytorch</tag>
+        <tag>GPU</tag>
       </tags>
   </entry>
   <entry>
@@ -5235,8 +5250,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>论文阅读笔记</category>
       </categories>
       <tags>
-        <tag>GCN</tag>
         <tag>时空领域</tag>
+        <tag>GCN</tag>
       </tags>
   </entry>
   <entry>
