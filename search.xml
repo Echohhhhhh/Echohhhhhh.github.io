@@ -1044,8 +1044,8 @@ u_{t} &=\boldsymbol{\sigma}\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *
       </tags>
   </entry>
   <entry>
-    <title>时空论文阅读笔记</title>
-    <url>/2020/02/27/%E6%97%B6%E7%A9%BA%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</url>
+    <title>时空论文阅读笔记二</title>
+    <url>/2020/02/27/%E6%97%B6%E7%A9%BA%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E4%BA%8C/</url>
     <content><![CDATA[<p>因为疫情推迟开学，在家把以前看的论文又看了一遍，每重新看一次都有新的收获，在此整理下。</p>
 <a id="more"></a>
 <!-- TOC -->
@@ -1100,7 +1100,7 @@ u_{t} &=\boldsymbol{\sigma}\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *
 <ul>
 <li>给定所有区域历史T个时间段的inflow和outflow，预测下一个时间段所有区域的inflow和outflow</li>
 </ul>
-<p><img src="/2020/02/27/时空论文阅读笔记/ST-ResNet.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/ST-ResNet.png" alt=""></p>
 <ul>
 <li>每个时间段所有区域的输入是$I<em>J</em>2$,将输入分为recent，daily，weekly周期，预测第t个时间段的infow和outflow：<ul>
 <li>recent：当天前r个时间段</li>
@@ -1130,7 +1130,7 @@ u_{t} &=\boldsymbol{\sigma}\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *
 </ul>
 </li>
 </ul>
-<p><img src="/2020/02/27/时空论文阅读笔记/DeepSTN+.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/DeepSTN+.png" alt=""></p>
 <ul>
 <li><p>假设预测周四第5个时间段的flow，输入的数据有：</p>
 <ul>
@@ -1165,13 +1165,13 @@ u_{t} &=\boldsymbol{\sigma}\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *
 <li>基于粗粒度级的flow，实时推测整个城市细粒度级的flow，提出模型<strong>Urban</strong> <strong>F</strong>low <strong>M</strong>agnifier (<strong>UrbanFM</strong>)</li>
 <li>有2个挑战：粗粒度和细粒度的flow在空间上的相关性、复杂的外部因素。</li>
 </ul>
-<p><img src="/2020/02/27/时空论文阅读笔记/UrbanFM1.png" alt=""></p>
-<p><img src="/2020/02/27/时空论文阅读笔记/UrbanFM.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/UrbanFM1.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/UrbanFM.png" alt=""></p>
 <h2><span id="14-attention-based-spatial-temporal-graph-convolutional-networks-for-traffic-flow-forecastingaaai2019">1.4. Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting(AAAI2019)</span></h2><blockquote>
 <p>郭晟楠(北京交通大学)<br>冯宁(北京交通大学)<br>宋超(北京交通大学)<br>万怀宇(北京交通大学)<br><a href="https://github.com/Davidham3/ASTGCN" target="_blank" rel="noopener">https://github.com/Davidham3/ASTGCN</a> Mxnet</p>
 </blockquote>
 <p>根据所有节点历史T个时间段traffic flow，occupy，speed，预测所有节点未来T_p个时间段的traffic flow。</p>
-<p><img src="/2020/02/27/时空论文阅读笔记/ASTGCN.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/ASTGCN.png" alt=""></p>
 <ul>
 <li>三个独立的组件，分别对recent，daily，weekly周期进行建模</li>
 <li>比如说预测6.14 8:00-8:55的flow，传入的样本是<br>时：6.14号6:00~7:55（前2个小时）的数据，<br>天：6.13和6.12（前2天）的8:00-8:55，<br>周：上周6.17，上上周5.31（前2周）的8:00-8:55</li>
@@ -1185,7 +1185,7 @@ u_{t} &=\boldsymbol{\sigma}\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *
 <li>提出<strong>S</strong>patial-<strong>T</strong>emporal <strong>S</strong>ynchronous <strong>G</strong>raph <strong>C</strong>onvolutional <strong>N</strong>etworks (<strong>STSGCN</strong>)</li>
 <li><strong>对于图中的每个节点，它的影响范围有3种</strong>，这是该文章提出的一个新观点，以前的研究中通常只考虑前2种。</li>
 </ul>
-<p><img src="/2020/02/27/时空论文阅读笔记/STSGCN1.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/STSGCN1.png" alt=""></p>
 <ul>
 <li>本文强调的内容有2点：<ul>
 <li>局部的时空关系，称作localized spatial-temporal correlations</li>
@@ -1194,15 +1194,15 @@ u_{t} &=\boldsymbol{\sigma}\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *
 </li>
 <li><strong>使用连续3个时间步的图数据来构建localized spatial-temporal graph，local指的是在时间上局部</strong><br>假设原先一个图中有N个节点，图信号矩阵为$N \times C$,邻接矩阵为$N \times N$，现在3个图来构建一个局部时空图，图信号矩阵为$3N \times C$,邻接矩阵为$3N \times 3N$,邻接矩阵中非0即1</li>
 </ul>
-<p><img src="/2020/02/27/时空论文阅读笔记/STSGCN2.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/STSGCN2.png" alt=""></p>
 <ul>
 <li>但是把3个图构成1个图失去了图之间的时间关系，模型可能会认为这是一个有3N个节点在一个时间步的信息，为了区域这3个图的时间关系，受ConvS2S启发，为时空网络序列$N \times C \times T$添加位置嵌入，增加时间嵌入矩阵$C \times T$,空间嵌入矩阵$N \times C$,这2个矩阵是通过模型学习的，当模型训练好之后，这2个矩阵可以包含图的时间和空间信息。然后把这2个嵌入矩阵和原始的图信号矩阵相加，这样图中就包含了时间和位置信息。</li>
 </ul>
-<p><img src="/2020/02/27/时空论文阅读笔记/STSGCN.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/STSGCN.png" alt=""></p>
 <ul>
 <li>图中模型框架：多个STSGCM构成STSGCL，多个STSGCL构成STSGCN。STSGCN就是多层图卷积，从局部时空图中捕获邻居信息。STSGCL一层中有多个STSGCM，一个样本中每个时间段的局部时空图都用一个STSGCM来建模。</li>
 <li><strong>第一个FCN成将输入转换到高维空间，提高模型的表示能力</strong></li>
-<li>【<strong>STSGCM</strong>】中包含多层图卷积，使用GLU作为激活函数，其中sigmoid作为门控机制，控制哪个节点的信息可以流入到下一层。<strong>图卷积计算定义在顶点域，意味着不需要计算图的拉普拉斯矩阵</strong><br><img src="/2020/02/27/时空论文阅读笔记/STSGCN3.png" alt=""><br>STSGCM的架构如下：参考JK-net，一共有L个图卷积层，每一层的输出都输入到AGG层中，AGG层将接收到的L个输出进行max聚合，最终得到一个输出$3N \times C_{out}$,然后进行裁剪，将前中后3个时间步的数据只保留中间时间步，即$N \times C_out$<br><img src="/2020/02/27/时空论文阅读笔记/STSGCN4.png" alt=""></li>
+<li>【<strong>STSGCM</strong>】中包含多层图卷积，使用GLU作为激活函数，其中sigmoid作为门控机制，控制哪个节点的信息可以流入到下一层。<strong>图卷积计算定义在顶点域，意味着不需要计算图的拉普拉斯矩阵</strong><br><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/STSGCN3.png" alt=""><br>STSGCM的架构如下：参考JK-net，一共有L个图卷积层，每一层的输出都输入到AGG层中，AGG层将接收到的L个输出进行max聚合，最终得到一个输出$3N \times C_{out}$,然后进行裁剪，将前中后3个时间步的数据只保留中间时间步，即$N \times C_out$<br><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/STSGCN4.png" alt=""></li>
 <li>【<strong>STSGCL</strong>】多个STSGCM组成一个STSGCL层，其输入维度$T \times N \times C$,使用滑动窗口每次取3个时间段段的图构成$3N \times C$,一共构成$T-2$个局部时空图，然后需要$T-2$个STSGCM，最终输出$T-2个N \times C_{out}$，将其拼接为$(T-2) \times N \times C_{out}$，再输入到下一个STSGCL中。<strong>【注意】每个局部时空图是通过滑动窗口获得，每个时空局部图的邻接矩阵是不变的，而不是提前处理好局部图输入到模型中，这样会省空间</strong></li>
 <li>上面使用的邻接矩阵$3N \times 3N$中的值非0即1，每个邻居聚合的权重相等，聚合能力会受到限制，这里对此做出改进，将邻接矩阵乘上一个Mask矩阵，对每个邻居赋予不同的权重，其中Mask矩阵是可学习参数，维度$3N \times 3N$<script type="math/tex; mode=display">
 A_{\text {adjusted}}^{\prime}=W_{\text {mask}} \otimes A^{\prime} \in \mathbb{R}^{3 N \times 3 N}</script></li>
@@ -1218,7 +1218,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <p>潘哲逸(上海交通大学)<br>梁宇轩(西安电子科技大学)<br>张钧波(京东)<br>易修文(京东)<br>郑宇(京东)</p>
 </blockquote>
 <p>论文声称第一个考虑<strong>空间和时间内在因果关系</strong>的深度框架。</p>
-<p><img src="/2020/02/27/时空论文阅读笔记/HyperST_Net.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/HyperST_Net.png" alt=""></p>
 <ul>
 <li>该论文提出的只是一个HyperNetwork框架，并不是一个具体的模型。</li>
 <li><strong>HyperNetwork</strong>：和以往不同，以前都是一个网络的输出，输入到下一个网络中，<strong>超网络是一个网络的输出作为另一个网络的参数</strong>。</li>
@@ -1231,14 +1231,14 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <ul>
 <li>使用图中所有节点历史T个时间段的flow或speed，预测所有节点未来</li>
 </ul>
-<p><img src="/2020/02/27/时空论文阅读笔记/ST-MetaNet.png" alt=""></p>
-<p><img src="/2020/02/27/时空论文阅读笔记/ST-MetaNet1.png" alt=""></p>
-<p><img src="/2020/02/27/时空论文阅读笔记/ST-MetaNet2.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/ST-MetaNet.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/ST-MetaNet1.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/ST-MetaNet2.png" alt=""></p>
 <ul>
 <li>本论文用的图，但是实验中有一个$I \times J$的网格数据，将网格数据构建成图</li>
 <li>本论文来表示1张图有2个矩阵：图信号矩阵(N,D)和边特征矩阵(N,N,C)。对于网格数据来说，图信号矩阵表示每个网格POI个数，道路个数。边特征表示2个两个网格的道路个数。这都是静态数据，不随着时间变化。</li>
 </ul>
-<p>【总结】发现上面这2个论文都是一个网络生成另一个网络的参数，查阅资料发现这叫做<code>meta-learning</code>，先记录一下以后再自己看<br><img src="/2020/02/27/时空论文阅读笔记/Meta-learning.png" alt=""></p>
+<p>【总结】发现上面这2个论文都是一个网络生成另一个网络的参数，查阅资料发现这叫做<code>meta-learning</code>，先记录一下以后再自己看<br><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/Meta-learning.png" alt=""></p>
 <h2><span id="18-stepdeep-a-novel-spatial-temporal-mobility-event-prediction-framework-based-on-deep-neural-networkkdd2018">1.8. StepDeep: A Novel Spatial-temporal Mobility Event Prediction Framework based on Deep Neural Network(KDD2018)</span></h2><blockquote>
 <p>Bilong Shen(清华大学)<br>梁晓丹(卡耐基梅隆)</p>
 </blockquote>
@@ -1247,8 +1247,8 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <li>网格区域中的flow随时间变化，可以看做一个视频(T,C,W,H)，进而看做是视频预测任务</li>
 <li>数据集NYC出租车轨迹数据，将NYC网格划分，计算每个区域的inflow和outflow，</li>
 </ul>
-<p><img src="/2020/02/27/时空论文阅读笔记/StepDeep.png" alt=""></p>
-<p><img src="/2020/02/27/时空论文阅读笔记/StepDeep1.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/StepDeep.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/StepDeep1.png" alt=""></p>
 <ul>
 <li>提出3种卷积：时间卷积，空间卷积，时空卷积。将输入(T,C,H,W)输入到以上7层卷积中，最终输出(C,H,W)表示下一个时间段所有区域的inflow和outflow，</li>
 </ul>
@@ -1258,7 +1258,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <ul>
 <li>根据所有节点历史T个时间段的交通速度，预测所有节点未来T个时间段的交通速度(T=12)，时间多预测多，Seq2Seq架构</li>
 </ul>
-<p><img src="/2020/02/27/时空论文阅读笔记/STGRAT.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/STGRAT.png" alt=""></p>
 <ul>
 <li>Encoder layer中有3个sublayer：空间Attention层，时间Attention层和point-wise FCN。<ul>
 <li>空间Attention：关注每个时间步上空间邻近的节点</li>
@@ -1267,7 +1267,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 </li>
 <li>整个Encoder = 1个嵌入层 + 4个Encoder layer，使用LINE对图节点进行嵌入</li>
 </ul>
-<p><img src="/2020/02/27/时空论文阅读笔记/STGRAT1.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/STGRAT1.png" alt=""></p>
 <ul>
 <li>空间Attention层：参考Transformer，中心结点作为query，其邻居作为key和value，计算每个节点新的表示。</li>
 <li>时间Attention==Transformer，输入维度(batch_size,T,N,D),计算时间步之间的attention分数，输出维度(batch_size,T,N,D)</li>
@@ -1276,7 +1276,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <li><strong>本模型比Transformer多了一个空间Attention层，其余都一样，因为时间Attention层、FFN和Transformer的一样</strong></li>
 </ul>
 <h2><span id="110-connecting-the-dots-multivariate-time-series-forecasting-with-graph-neural-networks2020kdd">1.10. Connecting the Dots: Multivariate Time Series Forecasting with Graph Neural Networks(2020KDD)</span></h2><p>该模型使用图网络模型捕获交通数据或其他领域数据中的时间和空间相关性。</p>
-<p><img src="/2020/02/27/时空论文阅读笔记/MTGNN-1.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/MTGNN-1.png" alt=""></p>
 <p>该模型有2个模块，图卷积模块和时间模块。其中图卷积模块主要解决4个问题：</p>
 <ol>
 <li>节点间的空间相关性</li>
@@ -1284,14 +1284,14 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <li>如何解决图卷积过度平滑问题</li>
 <li>大图如何训练问题</li>
 </ol>
-<p><img src="/2020/02/27/时空论文阅读笔记/MTGNN-2.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/MTGNN-2.png" alt=""></p>
 <p>首先图信号矩阵，输入到图结构学习模块，构造图的邻接矩阵。注意这里的邻接矩阵不是预先定义好的，而是根据网络模块学习得到，据此构建图，然后输入到GCN中捕获时间相关性，然后输入到时间卷积捕获时间相关性，最后预测结果。</p>
-<p><img src="/2020/02/27/时空论文阅读笔记/MTGNN-3.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/MTGNN-3.png" alt=""></p>
 <p>在构造图时，通过模型学习节点的嵌入矩阵，然后根据嵌入矩阵计算节点的相似性，为每个节点选取相似性前k的节点作为其一阶邻居。邻接矩阵不随着时间变化。</p>
 <script type="math/tex; mode=display">\begin{array}{l}\mathbf{M}_{1}=\tanh \left(\alpha \mathrm{E}_{1} \Theta_{1}\right) \\ \mathbf{M}_{2}=\tanh \left(\alpha \mathrm{E}_{2} \mathbf{\Theta}_{2}\right) \\ \mathbf{A}=\operatorname{ReL} U\left(\tanh \left(\alpha\left(\mathbf{M}_{1} \mathbf{M}_{2}^{T}-\mathbf{M}_{2} \mathbf{M}_{1}^{T}\right)\right)\right) \\ \text { for } i=1,2, \cdots, N \\ \text { idx }=\operatorname{argtop} k(\mathrm{A}[i,:]) \\ \quad \mathrm{A}[i,-\mathrm{idx}]=0\end{array}</script><p>在图卷积模块，参考Min-hop架构，每个GCN层的输入会加上原始的图信号矩阵，避免图过度平滑问题，然后再将所有GCN层的输出加起来，进行融合。为了解决大图训练的问题，在进行GCN时，每次随机选取几个节点进行GCN运算，而不是使用所有的节点。</p>
 <script type="math/tex; mode=display">
 \mathbf{H}^{(k)}=\beta \mathbf{H}_{i n}+(1-\beta) \tilde{\mathbf{A}} \mathbf{H}^{(k-1)}</script><script type="math/tex; mode=display">
-\mathbf{H}_{o u t}=\sum_{i=0}^{K} \mathbf{H}^{(k)} \mathbf{W}^{(k)}</script><p><img src="/2020/02/27/时空论文阅读笔记/MTGNN-4.png" alt=""></p>
+\mathbf{H}_{o u t}=\sum_{i=0}^{K} \mathbf{H}^{(k)} \mathbf{W}^{(k)}</script><p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/MTGNN-4.png" alt=""></p>
 <p>在时间模块，使用一维空洞卷积，捕获长期的时间依赖，同时参照Inception结构，设置不同的卷积核，来捕获不同力度的周期性，例如小时周期，天周期，周周期。</p>
 <p>总结：</p>
 <ol>
@@ -1305,7 +1305,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <li>原先的工作都是预测travel中单个路段的耗时，然后再把每个路段的时间加起来，缺点是没有考虑到道路交叉口，红绿灯等影响，错误累积</li>
 </ul>
 </blockquote>
-<p><img src="/2020/02/27/时空论文阅读笔记/DeepTTE.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/DeepTTE.png" alt=""></p>
 <ul>
 <li>DeepTTE提出geo-convolution，将地理信息加入到传统Conv中，捕获空间相关性</li>
 <li>多任务学习，同时预测local path和entir path的时间，在loss中限制2者的权重</li>
@@ -1315,7 +1315,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <li>Attribute组件：外部因素：天气(one-hot)，司机ID(one-hot)，weekID和timeID(one-hot)，都是类别值，不能直接输入到网络中，需要先嵌入层低维向量，参考<a href="https://arxiv.org/abs/1512.05287" target="_blank" rel="noopener">(2016NIPS)A Theoretically Grounded Application of Dropout in Recurrent Neural Networks</a>,然后再和整个path的距离拼接作为该组件的输出</li>
 <li>Geo-Conv层，历史轨迹是一个GPS序列，为了捕获空间依赖使用1D卷积，将历史轨迹序列先经过FCN变成一个矩阵$T \times V$,T个轨迹点，每个轨迹点有V个特征，然后使用C个k*V的1D卷积，卷积输出的时间维度变成$T-k+1$,将C个卷积核输出的结果拼接，然后再拼接上local path的距离,输出结果为$T-k+1 \times D$</li>
 </ul>
-<p><img src="/2020/02/27/时空论文阅读笔记/DeepTTE2.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/DeepTTE2.png" alt=""></p>
 <ul>
 <li>然后将$T-k+1 \times D$的序列拼接外部因素输入到LSTM中，每个时间步表示一个local path，将<strong>隐藏状态用来预测每个local path的时间作为辅助任务</strong></li>
 <li>LTSM输出$T-k+1$个时间步，将其整合成1个向量，通过和外部因素做Attention，对每个local path赋予不同的权重，然后再和外部因素拼接，用来预测entir path的时间</li>
@@ -1323,7 +1323,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 </li>
 <li><p><strong>训练阶段预测local path和entir path的时间，在测试阶段只预测entir path的时间</strong></p>
 </li>
-<li><p>在训练时，使用MAPE作为loss，包含辅助任务和主任务的loss<br><img src="/2020/02/27/时空论文阅读笔记/DeepTTE-loss.png" alt=""></p>
+<li><p>在训练时，使用MAPE作为loss，包含辅助任务和主任务的loss<br><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/DeepTTE-loss.png" alt=""></p>
 </li>
 <li><p>这篇文章也是经典的CNN+LSTM的架构，只是这里的CNN是1D卷积。在融合外部因素上也是CNN的输出和外部因素拼接，送入到LSTM中。</p>
 </li>
@@ -1334,16 +1334,16 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <ul>
 <li><strong>出租车需求预测</strong>，根据S<em>S的小区域，历史T个时间段的出租车订单数据，预测下一个时间段中心区域的订单。<em>*空间和时间都是多预测一</em></em></li>
 </ul>
-<p><img src="/2020/02/27/时空论文阅读笔记/DMVST_Net.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/DMVST_Net.png" alt=""></p>
 <ul>
 <li>现有的研究都是使用CNN对空间建模，LSTM对时间建模，时间和空间分开建模，本文的模型是对时间和空间同时建模</li>
 <li>本文提出DMVST-Net，有3个view：<strong>时间view</strong>（通过LSTM建模时间关系），<strong>空间view</strong>（使用local CNN建模邻近空间关系），<strong>语义view</strong>（建模功能相似的区域）</li>
 <li>local CNN只考虑空间邻近的区域，但是不能考虑离得较远，但出租车需求模型相似的区域，所以又加了语义view</li>
-<li><img src="/2020/02/27/时空论文阅读笔记/DMVST_Net-1.jpg" alt=""></li>
+<li><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/DMVST_Net-1.jpg" alt=""></li>
 <li><strong>输入是S*S的邻居区域，如果是边界区域，其邻居用0填充</strong></li>
 <li>在LSTM每个时间步的特征中拼接天气等外部因素</li>
 <li>local CNN和LSTM对时间和空间建模，然后再构建图，表示区域之间需求相似性(功能相似性)。求出2个区域每周的需求量，形成一个时间序列，使用DTW计算2个序列的相似性，即<strong>2个区域的相似性，作为图中的边，创建一个全连接图(任意2个区域都相连)</strong>,使用LINE对图中节点进行嵌入。</li>
-<li><img src="/2020/02/27/时空论文阅读笔记/DMVST_Net-2.png" alt=""><br>损失函数由MSE和MAPE组成，MSE更关注大值，为了避免模型偏向大值的方向训练，又添加了MAPE，但是使用MAPE时，真实值中不能有0</li>
+<li><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/DMVST_Net-2.png" alt=""><br>损失函数由MSE和MAPE组成，MSE更关注大值，为了避免模型偏向大值的方向训练，又添加了MAPE，但是使用MAPE时，真实值中不能有0</li>
 <li>Max-Min激活，最终输出值在[0,1]之间，反归一化</li>
 <li>最后一层FCN用sigmoid激活，其余的FCN用ReLU激活</li>
 </ul>
@@ -1355,7 +1355,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <li>提出模型<strong>S</strong>patial-<strong>T</strong>emporal <strong>D</strong>ynamic <strong>N</strong>etwork(<strong>STDN</strong>)来traffic prediction</li>
 <li>根据S<em>S小区域历史T个时间段的volume和flow，预测下一个时间段中心区域的volume，<em>*空间和时间都是多预测一</em></em></li>
 </ul>
-<p><img src="/2020/02/27/时空论文阅读笔记/STDN.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/STDN.png" alt=""></p>
 <ul>
 <li>将交通量分为2种<ul>
 <li>traffic volume：无方向，一个区域进来和出去的流量。</li>
@@ -1380,7 +1380,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <h2><span id="33-spatiotemporal-multi-graph-convolution-network-for-ride-hailing-demand-forecastingaaai2019">3.3. Spatiotemporal Multi-Graph Convolution Network for Ride-hailing Demand Forecasting(AAAI2019)</span></h2><blockquote>
 <p>Xu Geng(香港大学)<br>Yaguang Li(南加利福尼亚)<br>Lingyu Zhang(滴滴AI)<br>杨强(香港大学)<br>叶杰平(滴滴)</p>
 </blockquote>
-<p><img src="/2020/02/27/时空论文阅读笔记/ST_MGCN.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/ST_MGCN.png" alt=""></p>
 <ul>
 <li>问题：根据所有区域历史T个时间段的订单数，预测所有区域下一个时间段的订单数</li>
 <li>将研究区域划分为网格，根据网格构建3个图，这3个图的图信号矩阵一样，只是邻接矩阵不一样。分别<ul>
@@ -1399,7 +1399,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <ul>
 <li>根据历史T个时间段<strong>相似区域</strong>出租车demand和人流量，预测下一个时间段中心区域的出租车demand。<strong>时间和空间都是多预测一</strong></li>
 </ul>
-<p><img src="/2020/02/27/时空论文阅读笔记/MT-CRNN.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/MT-CRNN.png" alt=""></p>
 <ul>
 <li>根据路网来划分区域</li>
 <li>多任务预测：<ul>
@@ -1419,7 +1419,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 </li>
 <li><p>将城市划分为N个小区域，基于网格或道路划分都可以</p>
 </li>
-<li><p>给定历史h个时间段的D(需求量，维度$N \times D_{in}$)和所有时间段的时间信息E，预测未来$\tau$个时间段的需求量<br><img src="/2020/02/27/时空论文阅读笔记/STG2Seq1.png" alt=""></p>
+<li><p>给定历史h个时间段的D(需求量，维度$N \times D_{in}$)和所有时间段的时间信息E，预测未来$\tau$个时间段的需求量<br><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/STG2Seq1.png" alt=""></p>
 </li>
 <li><p>图中每个节点表示一个小区域，图的邻接矩阵A中非0即1，根据区域demand的模式，计算2个区域的皮尔森相似度，如果相似度大于某个阈值，邻接矩阵为1，否则设置为0</p>
 </li>
@@ -1430,9 +1430,9 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <li>Attention模块：在历史时间段中，找出对预测时间段的重要性</li>
 </ul>
 </li>
-<li><p>长期encoder和短期encoder都是由GGCM组成，一个GGCM中有多个GCN。拿长期encoder举例，输入维度(h,N,D),每k个时间段(k,N,D)输入到GCN中，h个时间段一共有h-k+1个GCN，即经过一个GGCM，输入维度变成(h-k+1,N,D1)，每经过一个GGCM，时间维度都会变小，为了防止时间维度变小，会拼接上一个(k-1,N,D1)的全0padding，让其变成(h,N,D1)的维度，然后再输入到下一个GGCM中。<br>  <img src="/2020/02/27/时空论文阅读笔记/STG2Seq3.png" alt=""><br>  <img src="/2020/02/27/时空论文阅读笔记/STG2Seq4.png" alt=""></p>
+<li><p>长期encoder和短期encoder都是由GGCM组成，一个GGCM中有多个GCN。拿长期encoder举例，输入维度(h,N,D),每k个时间段(k,N,D)输入到GCN中，h个时间段一共有h-k+1个GCN，即经过一个GGCM，输入维度变成(h-k+1,N,D1)，每经过一个GGCM，时间维度都会变小，为了防止时间维度变小，会拼接上一个(k-1,N,D1)的全0padding，让其变成(h,N,D1)的维度，然后再输入到下一个GGCM中。<br>  <img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/STG2Seq3.png" alt=""><br>  <img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/STG2Seq4.png" alt=""></p>
 </li>
-<li>对于一个GCN中，输入维度是(k,N,D),reshape成(N,k*D),然后使用下面的公式。下面这个公式用到了残差连接，在经过GCN后，加上原来的$X^l$，同时和后面的sigmoid逐元素相乘，控制线性转换的哪部分可以通过门。<br><img src="/2020/02/27/时空论文阅读笔记/STG2Seq2.png" alt=""></li>
+<li>对于一个GCN中，输入维度是(k,N,D),reshape成(N,k*D),然后使用下面的公式。下面这个公式用到了残差连接，在经过GCN后，加上原来的$X^l$，同时和后面的sigmoid逐元素相乘，控制线性转换的哪部分可以通过门。<br><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/STG2Seq2.png" alt=""></li>
 <li>在经过长期encoder和短期encoder后，将输出拼接，得到$(h+q,N,d_{out})$</li>
 <li><strong>时间Attention</strong>：历史h+q个时间段对target时间段的影响不同，为了求出不同的影响程度，使用Attention机制。将$Y_{h+q}$reshape成$(h+q) \times (N \times d_{out})$<script type="math/tex; mode=display">\boldsymbol{\alpha}=\operatorname{softmax}\left(\tanh \left(Y_{h+q} W_{3}^{Y}+E_{T} W_{4}^{E}+b_{1}\right)\right)</script>其中$W_{3}^{Y} \in \mathbb{R}^{(h+q) \times\left(N \times d_{\text {out }}\right) \times 1}, W_{4}^{E} \in \mathbb{R}^{d_{e} \times(h+q)}$，$b_{1} \in \mathbb{R}^{(h+q)}$ 得到的Attention分数$\boldsymbol{\alpha} \in \mathbb{R}^{(h+q)}$<script type="math/tex; mode=display">Y_{\alpha}=\sum_{i=1}^{h+q} \alpha^{i} y_{i} \quad \in \mathbb{R}^{N \times d_{o u t}}</script></li>
 <li><strong>通道Attention</strong>：经过上一步的时间Attention，得到的结果$Y_{\alpha}$维度为$N \times d_{out}$，然后再经过通道Attention，将$Y_{\alpha}$reshape成$N \times d_{out}$<script type="math/tex; mode=display">\boldsymbol{\beta}=\operatorname{softmax}\left(\tanh \left(Y_{\alpha} W_{5}^{Y}+E_{T} W_{6}^{E}+b_{2}\right)\right)</script>其中$W_{5}^{Y} \in \mathbb{R}^{d_{\text {out}} \times N \times 1}, W_{6}^{E} \in \mathbb{R}^{d_{e} \times d_{\text {out}}}, b_{2} \in \mathbb{R}^{d_{out}}$，$\boldsymbol{\beta} \in \mathbb{R}^{d_{\text {out }}}$<script type="math/tex; mode=display">Y_{\beta}=\sum_{i=1}^{d_{\text {out}}} \beta^{i} \mathscr{Y}_{i} \in \mathbb{R}^{N}</script></li>
@@ -1450,7 +1450,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <p>吴宪(University of Notre Dame)<br>史宝旭(University of Notre Dame)<br>Yuxiao Dong(微软)<br>黄超(University of Notre Dame)</p>
 </blockquote>
 <p>本文使用<strong>多种时间粒度</strong>的<strong>时间序列数据</strong>来预测。<br>模型为<strong>RES</strong>olution-aware <strong>T</strong>ime <strong>S</strong>eries Forecasting (RESTFul)<br>第一个使用多种时间粒度来进行行为时间序列预测</p>
-<p><img src="/2020/02/27/时空论文阅读笔记/RESTFul.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/RESTFul.png" alt=""></p>
 <ul>
 <li>有2个参数$\alpha和\beta$，取值{day,week}，限制α&gt;=β，<br>$\alpha$=1week,$\beta$=1day,表示1周测量1次，1次测1天。<br>$\alpha$=1week,$\beta$=1week,表示1周测量1次，1次测1周。<br>有一个完整的时间序列，要从中隔抽取不同时间粒度的时间序列。$X=\left[x_{1}, \ldots, x_{t}, \ldots, x_{T-1}, x_{T}\right]$，不同的$\alpha和\beta$就构成不同时间粒度的序列，序列长度为k，这里设置为5。</li>
 <li>对于每一个时间序列都用GRU来捕获时间相关性，得到一个隐藏状态，那么n个时间序列就有n个隐藏状态</li>
@@ -1464,8 +1464,8 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <li>使用前T个时间段的销售数据，预测未来<code>T&#39;</code>个时间段的销售数据</li>
 <li>传统的encoder-decoder架构使用rnn,本文的一个改进是在decoder中使用BiLSTM</li>
 </ul>
-<p><img src="/2020/02/27/时空论文阅读笔记/BiLSTM-Enc-Dec.png" alt=""></p>
-<p><img src="/2020/02/27/时空论文阅读笔记/BiLSTM-Enc-Dec1.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/BiLSTM-Enc-Dec.png" alt=""></p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/时空论文阅读笔记/BiLSTM-Enc-Dec1.png" alt=""></p>
 <ul>
 <li><strong>时间Attention</strong>:在decoder中第$t+1$个时间步生成的隐藏状态，对encoder中的隐藏状态进行attention，这里并不是对所有的历史时间段做attention，而是对历史$T_h$个时间段(可划分为M个period)做attention。例如上图中M=2，然后形成M个$c$向量，再经过FCN转换成$d$，然后再将M个$d$向量融合，这里使用attention融合，通过decoder的隐藏状态$h_{t+1}$对M个向量d做attention，将其融合成1个向量，然后再和$h_{t+1}$拼接，输入到FCN中预测第$t+1$个时间步的$y_{t+1}$，decoder中每个时间步都输出该时间步的预测值$y$。</li>
 <li>本文的创新点就是：BILSTM和时间local Attention(只和局部时间段做Attention)</li>
@@ -1540,7 +1540,7 @@ L(Y, \hat{Y})=\left\{\begin{array}{ll}
 <li><strong>只对特征进行归一化，y不进行归一化</strong>，模型预测的结果和真实y是同一量纲，模型的loss会偏大，计算评价指标时，不需要反归一化</li>
 <li><strong>对特征和y都归一化</strong>，y归一化到[0,1]之间，在计算loss时，不需要反归一化，loss相对方法1会偏小，在计算评价指标时，需要对真实y和预测y进行反归一化，再计算MAE等指标</li>
 <li><p>关于上面是否需要对y进行归一化。如果模型收敛(loss一直在下降)，可以不对y进行归一化。如果模型不收敛(数值过大)，则需要对y进行归一化。</p>
-<p><img src="/2020/02/27/时空论文阅读笔记/神经网络踩坑/y-norm.png" alt=""><br>如果对y进行归一化，loss初始值很小，模型训练时很快就会收敛loss不再下降。不对y归一化，loss初始值很大，在训练过程中，训练很多轮loss才开始收敛，可能还会造成训练过程不稳定，loss上下震荡。</p>
+<p><img src="/2020/02/27/时空论文阅读笔记二/神经网络踩坑/y-norm.png" alt=""><br>如果对y进行归一化，loss初始值很小，模型训练时很快就会收敛loss不再下降。不对y归一化，loss初始值很大，在训练过程中，训练很多轮loss才开始收敛，可能还会造成训练过程不稳定，loss上下震荡。</p>
 </li>
 </ol>
 ]]></content>
@@ -3236,8 +3236,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
       </tags>
   </entry>
   <entry>
-    <title>时空领域论文总结</title>
-    <url>/2019/08/02/%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/</url>
+    <title>时空论文阅读笔记二</title>
+    <url>/2019/08/02/%E6%97%B6%E7%A9%BA%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E4%B8%80/</url>
     <content><![CDATA[<p>&ensp;&ensp;&ensp;&ensp;这学期看了很多论文，下面把看过的论文总结一下。<br><a id="more"></a></p>
 <!-- TOC -->
 <ul>
@@ -3297,30 +3297,30 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <li>贡献<br><strong>第一篇使用基于attention的自编码器在POI推荐上</strong></li>
 <li><strong>目标</strong><br><strong>根据用户check-in的记录，向用户推荐一系列从未去过的POIS</strong></li>
 <li><p>Definitoin<br>POI(类型，经纬度)<br>Check-in(用户id，POI ID，时间)</p>
-<p><img src="/2019/08/02/论文总结/时空论文阅读笔记/1.png" alt=""></p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/1.png" alt=""></p>
 </li>
 </ul>
 <p>&ensp;&ensp;&ensp;&ensp;使用stack autoencoder（堆叠自编码器）学习用户隐藏表示。输出是一个用户去过和没去过的POI，一个n维的0/1向量，其中的$l_2,l_4,l_6$表示去过的POI下标，根据去过POI的下标在POI嵌入矩阵$W^{(1)}$中取出对应的POI向量组成矩阵$W^{(1)_{[L_u]}}$，得到用户已经去过区域的POI嵌入，这n个POI有些POI更能表示用户的喜好，用到self-attentive机制，为$W^{(1)_{[L_u]}}$中的每个POI嵌入学习不同的权重，来构成user hidden representation。一般的attention给每个POI嵌入学习一个分数，这个分数只能反映POI在一方面的重要性。例如饭店，在味道方面这个用户喜欢这家饭店，但是在环境方面用户不喜欢，为了从不同方面捕获用户的喜好，使用multiple-dimension attention，分别对不同方面进行打分。</p>
-<p><img src="/2019/08/02/论文总结/时空论文阅读笔记/2.png" alt=""><br><img src="/2019/08/02/论文总结/时空论文阅读笔记/3.png" alt=""></p>
-<p>这n个POI嵌入向量，从$d_a$个方面进行打分，得到的$A_u \in R^{d_a \times n}$ ,然后把n个POI嵌入乘上分数再相加，得到第u个用户隐藏表示$Z^{(1)}_u \in R^{d_a  times H_1}$，从$d_a$个方面来表示这个用户，为了让这个矩阵输入到encoder中，通过全连接将$d_a$个方面整合成一个方面，从一个矩阵变成一个向量。 然后经过2个encoder得到$z^{(3)}_u$<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/4.png" alt=""></p>
-<p>&ensp;&ensp;&ensp;&ensp;用户访问过的POI会对没访问过的POI有影响，影响程度有着2个POI的相似性和距离决定。和已访问过的POI相似或邻近的POI用户访问的概率比较大。使用内积的方式求2个POI的相似性，但是这没有考虑到2个POI之间的距离，我们采用RBF kernel根据2个POI之间的距离计算2个POI之间的相关性，得到一个N*N的矩阵。然后把相似性和距离相关性相乘，得到2个POI的最终区域相关性，<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/6.png" alt=""></p>
-<p>解码器阶段：将用户隐藏进行解码。其中$z^{(3)}_u$表示根据用户去过的POI得到的用户表示，$p_u$表示去过的POI对未去过的POI的影响。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/7.png" alt=""></p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/2.png" alt=""><br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/3.png" alt=""></p>
+<p>这n个POI嵌入向量，从$d_a$个方面进行打分，得到的$A_u \in R^{d_a \times n}$ ,然后把n个POI嵌入乘上分数再相加，得到第u个用户隐藏表示$Z^{(1)}_u \in R^{d_a  times H_1}$，从$d_a$个方面来表示这个用户，为了让这个矩阵输入到encoder中，通过全连接将$d_a$个方面整合成一个方面，从一个矩阵变成一个向量。 然后经过2个encoder得到$z^{(3)}_u$<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/4.png" alt=""></p>
+<p>&ensp;&ensp;&ensp;&ensp;用户访问过的POI会对没访问过的POI有影响，影响程度有着2个POI的相似性和距离决定。和已访问过的POI相似或邻近的POI用户访问的概率比较大。使用内积的方式求2个POI的相似性，但是这没有考虑到2个POI之间的距离，我们采用RBF kernel根据2个POI之间的距离计算2个POI之间的相关性，得到一个N*N的矩阵。然后把相似性和距离相关性相乘，得到2个POI的最终区域相关性，<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/6.png" alt=""></p>
+<p>解码器阶段：将用户隐藏进行解码。其中$z^{(3)}_u$表示根据用户去过的POI得到的用户表示，$p_u$表示去过的POI对未去过的POI的影响。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/7.png" alt=""></p>
 <ul>
 <li>总结<br>根据一个用户之前去过的POI对这个用户进行表示，不同的POI有不同的权重，同一个POI在不同的方面也有不同的权重，得到一个user hidden representation，将用户表示经过2层encoder，然后在解码的时候，用到邻居信息，去过的POI对未去过的POI有影响，影响大小根据这2个POI之间的相似性和距离决定。</li>
 </ul>
-<h2><span id="22-hst-lstm-a-hierarchical-spatial-temporal-long-short-term-memory-network-for-location-prediction2018ijcai">2.2. HST-LSTM: A Hierarchical Spatial-Temporal Long-Short Term Memory Network for Location Prediction（2018IJCAI）</span></h2><p>这篇论文没怎么看懂<br>弱实时预测，向用户推荐下一分钟或小时要去的地点。 在LSTM中使用时空信息。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/8.png" alt=""></p>
+<h2><span id="22-hst-lstm-a-hierarchical-spatial-temporal-long-short-term-memory-network-for-location-prediction2018ijcai">2.2. HST-LSTM: A Hierarchical Spatial-Temporal Long-Short Term Memory Network for Location Prediction（2018IJCAI）</span></h2><p>这篇论文没怎么看懂<br>弱实时预测，向用户推荐下一分钟或小时要去的地点。 在LSTM中使用时空信息。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/8.png" alt=""></p>
 <ul>
 <li>贡献<br>提出HST-LSTM结合时空影响到LSTM中，来解决位置预测中数据稀疏的问题。<br>HST-LSTM建模用户的历史访问序列，使用encoder-decoder的方式来提高预测性能。</li>
 <li>模型<br><strong>HST-LSTM model</strong><br>AOI:具有一种功能的区域，例如购物中心，工作区<br>Visit Record：用户在一段时间内（几周或几个月）访问的所有AOIS<br>Visit Session：一个用户在在一个时间段（一天）访问的AOI序列，在一个session中的AOI有强烈的相关性，揭示了用户的运动模式。<br>Visit Session Sequence：一个用户连续的visit sessions，可以作为上下文信息预测下一个AOI。<br>多个AOI组成一个visit session，多个visit session组成visit record，</li>
 <li>目标<br>用户在一段时间内访问了N个AOI，这N个AOI按照时间排序（AOI可能有重复），给定前j个用户去过的AOI，预测接下来用户要去的N-j个AOI，是一个多对多的预测。</li>
 </ul>
-<p><img src="/2019/08/02/论文总结/时空论文阅读笔记/9.png" alt=""><br>在LSTM中3个门控机制中，输入门，遗忘门，输出门加入时空因素。其中s和q都是d维的向量，分别表示空间和时间的影响因素。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/10.png" alt=""><br>基于提出的ST-LSTM，对每个visit session建模。使用STLSTM，每一个时间步输入的信息是一个visit session中的AOI嵌入，使用一个STLSTM对一个session进行建模，输出最后一个时间步的隐藏状态$h^i_e$作为第$i$个session的表示。对$n-1$个session进行建模得到n-1个隐藏状态，将这n-1个隐藏状态使用Contextual LSTM建模长期的visit sequence，在global context encoding阶段，每个时间步输入的是上一个STLSTM中session的表示。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/11.png" alt=""><br><img src="/2019/08/02/论文总结/时空论文阅读笔记/12.png" alt=""><br>在Decoding阶段，使用前i-1个session的推断接下来要去的AOI。</p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/9.png" alt=""><br>在LSTM中3个门控机制中，输入门，遗忘门，输出门加入时空因素。其中s和q都是d维的向量，分别表示空间和时间的影响因素。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/10.png" alt=""><br>基于提出的ST-LSTM，对每个visit session建模。使用STLSTM，每一个时间步输入的信息是一个visit session中的AOI嵌入，使用一个STLSTM对一个session进行建模，输出最后一个时间步的隐藏状态$h^i_e$作为第$i$个session的表示。对$n-1$个session进行建模得到n-1个隐藏状态，将这n-1个隐藏状态使用Contextual LSTM建模长期的visit sequence，在global context encoding阶段，每个时间步输入的是上一个STLSTM中session的表示。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/11.png" alt=""><br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/12.png" alt=""><br>在Decoding阶段，使用前i-1个session的推断接下来要去的AOI。</p>
 <ul>
 <li>总结<br>在LSTM阶段加入时空信息，提出STLSTM。<br>使用encoder-decoder来实现POI推荐，encoder和decoder都是LSTM</li>
 </ul>
-<h1><span id="3-时空数据预测">3. 时空数据预测</span></h1><h2><span id="31-hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">3.1. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting（2019AAAI）</span></h2><p>题目：超时空网络预测<br>以前的方法分别对时间和空间分别建模，没有考虑到时间和空间内在的因果关系。空间的属性（POI或路网）影响空间的特征（工作区或居民区），从而影响时间特征（inflow trend）<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/13.png" alt=""></p>
+<h1><span id="3-时空数据预测">3. 时空数据预测</span></h1><h2><span id="31-hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">3.1. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting（2019AAAI）</span></h2><p>题目：超时空网络预测<br>以前的方法分别对时间和空间分别建模，没有考虑到时间和空间内在的因果关系。空间的属性（POI或路网）影响空间的特征（工作区或居民区），从而影响时间特征（inflow trend）<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/13.png" alt=""></p>
 <ul>
-<li>目标<br>预测一个区域。根据这个区域的空间和时间特征，预测ST数据，例如空气质量预测，交通流量预测。<br>本篇论文提出一个框架，包含3部分：空间模块，时间模块，演绎模块（deduction module）。<br><strong>这是第一篇考虑空间和时间特征内在因果关系的框架。</strong><br>使用spatial module从spatial attribute建模spatial characteristic，然后使用deduction module从spatial characteristic建模temporal characteristic.<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/14.png" alt=""><br>Spatial module：两阶段模块，在第一阶段，将spatial attribute建模成spatial characteristic。在第二阶段，生成多个独立的因素，deduction module使用它们来建模时间模块中对应神经网络的参数。例如a—》A，b—》B，c—》C。空间模块像一个hypernetwork。<br>Temporal module：应用不同的HyperST层，HyperST层的参数由deduction module计算得到，可以被看做object的时间characteristic。<br>Deduction module：连接空间和时间模块，空间和时间的内在因果关系被考虑进去。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/15.png" alt=""> </li>
+<li>目标<br>预测一个区域。根据这个区域的空间和时间特征，预测ST数据，例如空气质量预测，交通流量预测。<br>本篇论文提出一个框架，包含3部分：空间模块，时间模块，演绎模块（deduction module）。<br><strong>这是第一篇考虑空间和时间特征内在因果关系的框架。</strong><br>使用spatial module从spatial attribute建模spatial characteristic，然后使用deduction module从spatial characteristic建模temporal characteristic.<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/14.png" alt=""><br>Spatial module：两阶段模块，在第一阶段，将spatial attribute建模成spatial characteristic。在第二阶段，生成多个独立的因素，deduction module使用它们来建模时间模块中对应神经网络的参数。例如a—》A，b—》B，c—》C。空间模块像一个hypernetwork。<br>Temporal module：应用不同的HyperST层，HyperST层的参数由deduction module计算得到，可以被看做object的时间characteristic。<br>Deduction module：连接空间和时间模块，空间和时间的内在因果关系被考虑进去。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/15.png" alt=""> </li>
 </ul>
 <h2><span id="32-restful-resolution-aware-forecasting-of-behavioral-time-series-data2018cikm">3.2. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data（2018CIKM）</span></h2><p>基于不同粒度的行为时间序列数据预测<br>行为数据，例如购买行为，邮件行为。<br>现在的预测方法经常仅仅使用一种时间粒度（天或周），然而现在的行为时间数据经常有多重时间粒度模式，每种时间模式之间相互依赖。本篇论文提出RESolution-aware Time series Forecasting（RESTFul），使用循环神经网络来编码不同粒度的时间模式成一个低维表示。不同时间粒度的表示在融合阶段，使用卷积融合框架。最终学到的conclusive embedding向量输入到MLP中用来预测行为时间序列数据。<br><strong>这是第一篇使用多时间粒度来预测时间序列数据。</strong><br>不同粒度的时间序列长度是一样的，比如为5，就表示最近3天，5周。</p>
 <ul>
@@ -3332,7 +3332,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <li>限制$\alpha &gt;= \beta$  如果$\alpha=1week,\beta=1day,表示1周测量1次，1次测1天。 \alpha=1week,\beta=1week,表示1周测量1次，1次测1周。其中x_t = g(x_t,x_{t+1}…x_{x+\beta})的聚合值，例如一周的平均值或最大值$ </li>
 </ol>
 </li>
-<li>模型<br>RESTFul有2个阶段，第一个阶段，使用循环神经网络来编码不同时间粒度的时间模式。第2个阶段，使用卷积融合模块来融合不同时间粒度的表示。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/16.png" alt="">  </li>
+<li>模型<br>RESTFul有2个阶段，第一个阶段，使用循环神经网络来编码不同时间粒度的时间模式。第2个阶段，使用卷积融合模块来融合不同时间粒度的表示。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/16.png" alt="">  </li>
 </ul>
 <p>$\alpha,\beta \in {day:1,week:7},这样&lt;\alpha,\beta&gt;就有3种组合，分别是<1,1>,<7,1>,<7,7>$，对于每种组合都有一组行为时间序列数据，对于每组时间序列数据，都使用GRU来这个序列进行时间建模，得到最后一个时间步的隐藏状态向量。将每种组合得到的隐藏状态拼接起来，最终得到一个张量，维度是$R^{|\alpha|\times|\beta|\times d_s}$。然后使用卷积操作，先使用2次2*2的卷积，同时使用padding保证得到的结果大小不变，只改变通道的大小，最终得到的结果是$R^{|\alpha|\times|\beta|\times d_s/4}$,然后展开得到一个$|\alpha|\times|\beta|\times d_s/4$的向量，输入到MLP中，最终可以用来预测回归任务和分类任务。回归任务的损失函数是均方差，分类任务的损失函数是交叉熵。</7,7></7,1></1,1></p>
 <ul>
@@ -3345,27 +3345,27 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <li>模型：Spatial-Temporal Dynamic Network（STDN），流量门控机制学习location之间动态相似性，periodically shifting attention机制捕获长期周期时间shifting。</li>
 <li>将一个城市划分成a*b=n个网格，将一个时间段（eg.一个月）划分成m个长度相等的时间段。<br>traffic volume：区域$i$的start流量$y^s_{i,t}$：在第$t$个时间段离开这个区域的trip个数，区域$i$的end流量$y^e_{i,t}$：在第$t$个时间段到达这个区域的trip个数。<br>traffic flow：从在第$t$个时间段从区域$i$出发，在第$\tau$个时间段到达$j$区域的traffic flow使用$f^{j,\tau}_{i,t}$表示。</li>
 <li>目标：给定时间段t及其之前的traffic volume和traffic flow，预测第$t+1$个时间段的start and end traffic volume。</li>
-<li>模型：使用Local CNN和LSTM捕获时间和空间关系。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/STDN.png" alt=""><br>在提出本文的组件之前，先介绍一下2个base model。</li>
-<li>空间 Local CNN<br>使用traffic volume来获取空间相关性，使用local CNN得到区域表示。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/volume.png" alt=""></li>
-<li>Short-term 时间依赖，短期比如说预测今天9:00~9:30的traffic volume，输入是今天7:00~8:30。<br>使用LSTM来获取短期时间依赖。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/short-term.png" alt="">  </li>
+<li>模型：使用Local CNN和LSTM捕获时间和空间关系。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/STDN.png" alt=""><br>在提出本文的组件之前，先介绍一下2个base model。</li>
+<li>空间 Local CNN<br>使用traffic volume来获取空间相关性，使用local CNN得到区域表示。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/volume.png" alt=""></li>
+<li>Short-term 时间依赖，短期比如说预测今天9:00~9:30的traffic volume，输入是今天7:00~8:30。<br>使用LSTM来获取短期时间依赖。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/short-term.png" alt="">  </li>
 <li>下面提取本文的改进，<br><strong>Local CNN—》Flow Gate Mechanism<br>Short-term temporal—》Periodically Shifted Attention Mechanism</strong></li>
 </ul>
 <p><strong>Spatial Dynamic Similarity: Flow Gating Mechanism(空间动态相似性)</strong><br>在local CNN中，local spatial dependency主要是traffic volume。Y表示traffic volume。  但是traffic volume是静态的，不能完全反映目标区域和周围邻居的关系，traffic flow可以更加直接的反应区域之间的联系。两个区域之间的flow越多表示2个区域联系越强（eg.这2个区域越相似）。设计Flow Gating Mechanism(FGM)捕获区域间的dynamic spatial dependency。<br>traffic flow分为2种：inflow和outflow。<br>给定一个目标区域$i$，获取该区域历史$l$个时间段的traffic flow(从$t-l+1到t$),将历史$l$个时间段的inflow和outflow拼接在一起，形成一个三维张量$F_{i,t} \in \mathbb{R}^{S \times S \times 2l}$，其中$S$表示邻近区域，使用CNN建模区域之间的空间相关性。其中$F_{i,j}$作为第一层的输入。  </p>
-<p><img src="/2019/08/02/论文总结/时空论文阅读笔记/cnn.png" alt=""><br>在每一个卷积层，<strong>使用traffic flow信息来捕获区域之间的动态相似性</strong>，通过一个流量门来限制空间信息。每一层的输出是空间表示$Y^{i,k}_t$，受流量门调整。<br>即对上式的traffic volume，通过traffic flow来控制。 $\sigma$的取值是[0,1]，对traffic volume起到门控机制。  </p>
-<p><img src="/2019/08/02/论文总结/时空论文阅读笔记/gate.png" alt=""><br><strong>Temporal Dynamic Similarity：Periodically Shifted Attention Mechanism(时间动态相似性)</strong><br>以前的LSTM没有考虑长期依赖(例如：周期)，比如预测第$t$天9点的volume，考虑昨天或前天这个时间段的数据。但是traffic volume并不是严格周期的，在时间上会有平移，图a显示了在天之间的时间平移，图b显示了在周之间的时间平移。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/shifting.png" alt=""><br>因为时间具有shifting，因此设计了Periodically Shifted Attention Mechanism（PSAM），这里只考虑天周期性，不考虑周周期。从前P天对应时间段的数据来预测，为了解决time shifting，获取每一天的$Q$个时间段,假设预测的时间段是9:00~9:30，$Q=5$,则获取该时间段前后1个小时的数据8:00~10:30。<br>即获取前P天的数据，并且从每天中获取Q个时间段。如模型图所示，对于每一天都有Q个时间段，可以获取每个时间段的traffic volume和traffic flow，然后使用图卷积，即可以得到一个区域每个时间段的表示。每一天都有一个自己的LSTM，每个LSTM都有Q个时间步，每个时间步都会得到一个隐藏状态向量，即会得到Q个隐藏状态，使用Attention，将Q个隐藏状态整合成一个隐藏状态，用$h^p_{i,t}$表示。其中attention中的$\alpha^{p,q}_{i,t}$表示在第$p$天，第$q$个时间段的重要性。$\alpha^{p,q}_{i,t}$根据长期的隐藏状态和被预测天的短期隐藏状态$h_{i,t}$计算得到。 </p>
-<p><img src="/2019/08/02/论文总结/时空论文阅读笔记/lstm.png" alt=""><br><img src="/2019/08/02/论文总结/时空论文阅读笔记/attention.png" alt=""><br>经过attention之后，P天会得到P个隐藏状态，然后再经过一个LSTM来保存周期的序列信息，最终得到长期依赖表示$\hat{h}^p_{i,t}$。  </p>
-<p><img src="/2019/08/02/论文总结/时空论文阅读笔记/periodic.png" alt=""><br><strong>Joint Traning</strong><br>将短期表示$h_{i,t}$和长期依赖$\hat{h}^p_{i,t}$拼接得到$h^c_{i,t}$，送到一个全连接神经网络中，得到最终的输出，表示为$y^i_{s,t+1}$$y^i_{e,t+1}$作为start volume和end volume。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/output.png" alt=""></p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/cnn.png" alt=""><br>在每一个卷积层，<strong>使用traffic flow信息来捕获区域之间的动态相似性</strong>，通过一个流量门来限制空间信息。每一层的输出是空间表示$Y^{i,k}_t$，受流量门调整。<br>即对上式的traffic volume，通过traffic flow来控制。 $\sigma$的取值是[0,1]，对traffic volume起到门控机制。  </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/gate.png" alt=""><br><strong>Temporal Dynamic Similarity：Periodically Shifted Attention Mechanism(时间动态相似性)</strong><br>以前的LSTM没有考虑长期依赖(例如：周期)，比如预测第$t$天9点的volume，考虑昨天或前天这个时间段的数据。但是traffic volume并不是严格周期的，在时间上会有平移，图a显示了在天之间的时间平移，图b显示了在周之间的时间平移。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/shifting.png" alt=""><br>因为时间具有shifting，因此设计了Periodically Shifted Attention Mechanism（PSAM），这里只考虑天周期性，不考虑周周期。从前P天对应时间段的数据来预测，为了解决time shifting，获取每一天的$Q$个时间段,假设预测的时间段是9:00~9:30，$Q=5$,则获取该时间段前后1个小时的数据8:00~10:30。<br>即获取前P天的数据，并且从每天中获取Q个时间段。如模型图所示，对于每一天都有Q个时间段，可以获取每个时间段的traffic volume和traffic flow，然后使用图卷积，即可以得到一个区域每个时间段的表示。每一天都有一个自己的LSTM，每个LSTM都有Q个时间步，每个时间步都会得到一个隐藏状态向量，即会得到Q个隐藏状态，使用Attention，将Q个隐藏状态整合成一个隐藏状态，用$h^p_{i,t}$表示。其中attention中的$\alpha^{p,q}_{i,t}$表示在第$p$天，第$q$个时间段的重要性。$\alpha^{p,q}_{i,t}$根据长期的隐藏状态和被预测天的短期隐藏状态$h_{i,t}$计算得到。 </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/lstm.png" alt=""><br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/attention.png" alt=""><br>经过attention之后，P天会得到P个隐藏状态，然后再经过一个LSTM来保存周期的序列信息，最终得到长期依赖表示$\hat{h}^p_{i,t}$。  </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/periodic.png" alt=""><br><strong>Joint Traning</strong><br>将短期表示$h_{i,t}$和长期依赖$\hat{h}^p_{i,t}$拼接得到$h^c_{i,t}$，送到一个全连接神经网络中，得到最终的输出，表示为$y^i_{s,t+1}$$y^i_{e,t+1}$作为start volume和end volume。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/output.png" alt=""></p>
 <h2><span id="35-deep-spatio-temporal-residual-networks-for-citywide-crowd-flows-predictionaaai2017">3.5. Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction（AAAI2017）</span></h2><p>预测flow of crowd，提出ST-ResNet，使用残差网络来建模traffic crowd的时间邻近，周期，区域属性，对每一种属性，设计一个残差卷积单元，建模traffic crowd的空间属性。ST-ResNet对3个残差神经网络的输出分配不同的权重，动态地结合3个输出，在整合3个输出的时候同时考虑外部因素，例如天气，day of week。在这篇论文中，预测2种crowd flow：inflow和outflow。inflow是在一个时间段内从其他区域进行到目标区域的crowds。outflow是在一个时间段内离开目标区域的corwds。inflow和outflow是行人数量、车的数据、公共交通系统上的人数量或者3个的总和。</p>
 <ul>
-<li>gloal：给定历史t个时间段所有区域的inflow和outflow，预测第t+1个时间段所有区域的inflow和outflow。<br>将一个city网格划分成$I<em>J$，下面定义inflow和outflow<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/inflow.png" alt=""><br>inflow：从其他区域进入到(i,j)<br>outflow：从(i,j)出发到其他区域<br>其中$Tr:g1—&gt;g2…—&gt;g_{|Tr|}$<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/X.png" alt=""><br>其中X是所有区域的inflow和outflow矩阵。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/problem.png" alt=""><br><img src="/2019/08/02/论文总结/时空论文阅读笔记/ST-ResNet.png" alt=""><br>这个模型由4个组件构成：temporal closeness，period，trend和external。<br>每个时间段内都有一个网格图，2通道，表示所有区域的inflow和outflow。多个时间段按照时间排列会有多个图。在时间段上划分为3部分：recnet、near、distant，分别送到3个模块中：closeness，period，trend，然后对三个模块的输出分配不同的权重融合，再和external信息融合送到Tanh中。<br><strong>Conv-ResNet</strong><br>前3个模块内部是相同的结构，由2部分组成：卷积和残差单元<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/conv-resnet.png" alt=""><br>拿closeness模块举例，首先使用Conv来捕获near和distant区域的关系。  将closeness的图拼接在一起，closeness一共有$l_c$个时间段，每个时间段有2个通道，将这$l_c$时间段的图拼接在一起，变成$2</em>l_c <em> I </em> J$的数据送入到第一层卷积层。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/closeness.png" alt=""><br><img src="/2019/08/02/论文总结/时空论文阅读笔记/resnet.png" alt=""><br>根据上述结构分别对period和trend进行编码<br><strong>External Component</strong><br>主要考虑以下的外部因素，使用2层全连接提取外部因素。第一层是嵌入层，第二层是转换低维到高维，和$X_t$的维度一样。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/external.png" alt=""><br><strong>Fusion</strong><br>所有的区域都被closeness，period，trend影响，但是不同的区域影响程度不同，<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/fusion.png" alt=""><br><strong>Fusion the external component</strong><br>将3个closeness，period，trend的输出融合，然后再和被预测时间段t的外部因素融合。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/fusion-external.png" alt=""> </li>
+<li>gloal：给定历史t个时间段所有区域的inflow和outflow，预测第t+1个时间段所有区域的inflow和outflow。<br>将一个city网格划分成$I<em>J$，下面定义inflow和outflow<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/inflow.png" alt=""><br>inflow：从其他区域进入到(i,j)<br>outflow：从(i,j)出发到其他区域<br>其中$Tr:g1—&gt;g2…—&gt;g_{|Tr|}$<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/X.png" alt=""><br>其中X是所有区域的inflow和outflow矩阵。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/problem.png" alt=""><br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/ST-ResNet.png" alt=""><br>这个模型由4个组件构成：temporal closeness，period，trend和external。<br>每个时间段内都有一个网格图，2通道，表示所有区域的inflow和outflow。多个时间段按照时间排列会有多个图。在时间段上划分为3部分：recnet、near、distant，分别送到3个模块中：closeness，period，trend，然后对三个模块的输出分配不同的权重融合，再和external信息融合送到Tanh中。<br><strong>Conv-ResNet</strong><br>前3个模块内部是相同的结构，由2部分组成：卷积和残差单元<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/conv-resnet.png" alt=""><br>拿closeness模块举例，首先使用Conv来捕获near和distant区域的关系。  将closeness的图拼接在一起，closeness一共有$l_c$个时间段，每个时间段有2个通道，将这$l_c$时间段的图拼接在一起，变成$2</em>l_c <em> I </em> J$的数据送入到第一层卷积层。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/closeness.png" alt=""><br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/resnet.png" alt=""><br>根据上述结构分别对period和trend进行编码<br><strong>External Component</strong><br>主要考虑以下的外部因素，使用2层全连接提取外部因素。第一层是嵌入层，第二层是转换低维到高维，和$X_t$的维度一样。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/external.png" alt=""><br><strong>Fusion</strong><br>所有的区域都被closeness，period，trend影响，但是不同的区域影响程度不同，<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/fusion.png" alt=""><br><strong>Fusion the external component</strong><br>将3个closeness，period，trend的输出融合，然后再和被预测时间段t的外部因素融合。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/fusion-external.png" alt=""> </li>
 </ul>
 <h2><span id="36-attention-based-spatial-temporal-graph-convolutional-networks-for-traffic-flow-forecasting2019aaai">3.6. Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting（2019AAAI）</span></h2><p>&ensp;&ensp;&ensp;&ensp;使用时空图卷积预测所有节点在未来n个时间步的traffic flow。将traffic flow分为3个时间粒度级别：recent，daily，weekly，3个时间粒度的数据使用3个相同的module来建模，每个module有2个submodule：时空Attention和时空GCN</p>
-<h2><span id="37-urbanfm-inferring-fine-grained-urban-flows2019kdd">3.7. UrbanFM: Inferring Fine-Grained Urban Flows（2019KDD）</span></h2><p>从粗粒度级的flow推断细粒度级的flow。比如给出的是3<em>3区域的flow，需要推断6\</em>6区域的flow.大的区域称为superregion，划分的小区域称为subregion，同时考虑superregion和subregion的flow约束关系，加起来和superregion的flow相等。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/fine-grain.png" alt=""><br>模型的总体框架如下：<br>主要分为2个部分：inference network和external factor subnet。其中推断网络由2个模块组成，特征提取模块和分布上采样模块。<br>在推断网络中，输入是I*J的flow，先经过卷积和M个残差块，捕获空间相关性。在分布上采样模块，每个网格区域需要划分为N<em>N个区域，所以分布上采样主要是改变特征图的大小，从原来的$F</em>I<em>J变成F</em>NI<em>NJ$，对于每个网格区域，经过分布上采样模块，输出的$N</em>N$的flow分布概率。原始的输入$X_c的维度是I<em>J$，经过近邻上采样，会将原始的输入$变成维度为NI</em>NJ$,就是将每个区域的$flow复制N<em>N份$，然后和分布上采样输出的概率相乘，得到每个细粒度区域的flow。<br>**需要注意外部因素，输入是一个向量，经过特征提取模块，输出也是一个向量，为了将外部因素和粗粒度级的flow和细粒度级的flow拼接，也需要将外部因素reshape成$I</em>J或NI<em>NJ$的形状。我原先以为是将外部因素复制$I</em>J或NJ<em>NJ$份，其实并不是，是使用reshape函数。*</em>  </p>
-<p><img src="/2019/08/02/论文总结/时空论文阅读笔记/urbanFM.png" alt=""></p>
-<h2><span id="38-deep-multi-view-spatial-temporal-network-for-taxi-demand-prediction2018aaai">3.8. Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction（2018AAAI）</span></h2><p>将一个城市进行网格划分，时间段：30min。预测一个网格区域的taxi demand。<br><strong>注意：根据多个区域，多个时间段，预测一个区域，一个区域的taxi demand</strong><br>根据前$t-h,….t$个时间段的taxi demand和外部因素，预测第$t+1$个时间段的taxi demand。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/taxi-demand.png" alt=""><br>文章的标题是multi-view分别是spatial view、temporal view和semantic view(城市功能)，其中spatial view考虑的是target的邻近区域，但是有些区域离target很远，但是城市功能（居民区、商业区）和target相似，通过semantic view来捕获。<br><strong>1. Spatial view：Local CNN</strong><br>仅考虑空间近邻的区域，邻居区域大小$S<em>S,例如7</em>7$，通道数为1，表示taxi demand，表示为$Y^{i,0}_t \in R^{S \times S \times 1}$，经过K个卷积层，输出变成$Y^{i,K}_t \in R^{S \times S \times \lambda}$，然后reshape成一个向量维度为$S^2\lambda$，输入到全连接$FC中，输出一个d维的向量$。时间段有$t-h,….t$，每个时间段的$S<em>S</em>1$的网格都输入到Conv中，然后再经过全连接$FC$,所以最终输出$t-h,….t$个时间步，每个时间步是$d维。$<br><strong>细节：对于城市的边界区域，使用0来填充邻居。</strong><br><strong>2. Temporal view：LSTM</strong><br>经过spatial view输出每个时间步的表示，再和每个时间步的外部信息(天气，hour of day，day of week)拼接，共同输入到LSTM中，最终输出最后一个时间步的隐藏状态。<br><strong>3. Semantic View：Structural Embedding</strong><br>根据区域之间的城市功能相似性来构建graph，图中的节点是所有的区域，共$L个$，边：2个区域之间的相似性。相似性的计算是通过$Dynamic \quad Time \quad Warping \quad (DTW)$。 下图中给出了2个区域相似性的计算公式。根据区域$i 和 j$在工作日的taxi demand的时间序列，计算2个时间序列的相似性，即2个区域的相似性。根据区域间的相关性构建了一个全连接图$G$,使用$Embed$嵌入层,本文使用$LINE对图中的节点进行嵌入$，得到每个节点的低维特征表示，然后再次送入全连接中。<br><strong>注意：构建的是一个全连接图，即任意2个节点之间都有边，因为任意2个节点都可以达到。</strong><br><img src="/2019/08/02/论文总结/时空论文阅读笔记/DTW.png" alt=""><br><strong>4. Prediction Component</strong><br>将LSTM中最后一个时间步的隐藏状态和target区域的节点表示$m^i$拼接，送入到全连接中，经过$sigmoid函数，$最终输出的值在[0,1]之间，然后再反归一化得到真实的taxi demand。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/prediction.png" alt=""></p>
+<h2><span id="37-urbanfm-inferring-fine-grained-urban-flows2019kdd">3.7. UrbanFM: Inferring Fine-Grained Urban Flows（2019KDD）</span></h2><p>从粗粒度级的flow推断细粒度级的flow。比如给出的是3<em>3区域的flow，需要推断6\</em>6区域的flow.大的区域称为superregion，划分的小区域称为subregion，同时考虑superregion和subregion的flow约束关系，加起来和superregion的flow相等。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/fine-grain.png" alt=""><br>模型的总体框架如下：<br>主要分为2个部分：inference network和external factor subnet。其中推断网络由2个模块组成，特征提取模块和分布上采样模块。<br>在推断网络中，输入是I*J的flow，先经过卷积和M个残差块，捕获空间相关性。在分布上采样模块，每个网格区域需要划分为N<em>N个区域，所以分布上采样主要是改变特征图的大小，从原来的$F</em>I<em>J变成F</em>NI<em>NJ$，对于每个网格区域，经过分布上采样模块，输出的$N</em>N$的flow分布概率。原始的输入$X_c的维度是I<em>J$，经过近邻上采样，会将原始的输入$变成维度为NI</em>NJ$,就是将每个区域的$flow复制N<em>N份$，然后和分布上采样输出的概率相乘，得到每个细粒度区域的flow。<br>**需要注意外部因素，输入是一个向量，经过特征提取模块，输出也是一个向量，为了将外部因素和粗粒度级的flow和细粒度级的flow拼接，也需要将外部因素reshape成$I</em>J或NI<em>NJ$的形状。我原先以为是将外部因素复制$I</em>J或NJ<em>NJ$份，其实并不是，是使用reshape函数。*</em>  </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/urbanFM.png" alt=""></p>
+<h2><span id="38-deep-multi-view-spatial-temporal-network-for-taxi-demand-prediction2018aaai">3.8. Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction（2018AAAI）</span></h2><p>将一个城市进行网格划分，时间段：30min。预测一个网格区域的taxi demand。<br><strong>注意：根据多个区域，多个时间段，预测一个区域，一个区域的taxi demand</strong><br>根据前$t-h,….t$个时间段的taxi demand和外部因素，预测第$t+1$个时间段的taxi demand。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/taxi-demand.png" alt=""><br>文章的标题是multi-view分别是spatial view、temporal view和semantic view(城市功能)，其中spatial view考虑的是target的邻近区域，但是有些区域离target很远，但是城市功能（居民区、商业区）和target相似，通过semantic view来捕获。<br><strong>1. Spatial view：Local CNN</strong><br>仅考虑空间近邻的区域，邻居区域大小$S<em>S,例如7</em>7$，通道数为1，表示taxi demand，表示为$Y^{i,0}_t \in R^{S \times S \times 1}$，经过K个卷积层，输出变成$Y^{i,K}_t \in R^{S \times S \times \lambda}$，然后reshape成一个向量维度为$S^2\lambda$，输入到全连接$FC中，输出一个d维的向量$。时间段有$t-h,….t$，每个时间段的$S<em>S</em>1$的网格都输入到Conv中，然后再经过全连接$FC$,所以最终输出$t-h,….t$个时间步，每个时间步是$d维。$<br><strong>细节：对于城市的边界区域，使用0来填充邻居。</strong><br><strong>2. Temporal view：LSTM</strong><br>经过spatial view输出每个时间步的表示，再和每个时间步的外部信息(天气，hour of day，day of week)拼接，共同输入到LSTM中，最终输出最后一个时间步的隐藏状态。<br><strong>3. Semantic View：Structural Embedding</strong><br>根据区域之间的城市功能相似性来构建graph，图中的节点是所有的区域，共$L个$，边：2个区域之间的相似性。相似性的计算是通过$Dynamic \quad Time \quad Warping \quad (DTW)$。 下图中给出了2个区域相似性的计算公式。根据区域$i 和 j$在工作日的taxi demand的时间序列，计算2个时间序列的相似性，即2个区域的相似性。根据区域间的相关性构建了一个全连接图$G$,使用$Embed$嵌入层,本文使用$LINE对图中的节点进行嵌入$，得到每个节点的低维特征表示，然后再次送入全连接中。<br><strong>注意：构建的是一个全连接图，即任意2个节点之间都有边，因为任意2个节点都可以达到。</strong><br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/DTW.png" alt=""><br><strong>4. Prediction Component</strong><br>将LSTM中最后一个时间步的隐藏状态和target区域的节点表示$m^i$拼接，送入到全连接中，经过$sigmoid函数，$最终输出的值在[0,1]之间，然后再反归一化得到真实的taxi demand。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/prediction.png" alt=""></p>
 <p><strong>5. Loss Function</strong><br><strong>注意：损失函数有参考意义。</strong>   </p>
-<p>损失函数中包含2部分，一个是输出的taxi demand的均方差，一个是MAPE，前面更关注一些大的值，为了避免模型被一些大的值控制，后面加入MAPE。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/loss.png" alt=""> </p>
-<p><img src="/2019/08/02/论文总结/时空论文阅读笔记/DMVST-Net.png" alt=""><br><strong>6. 数据集</strong><br>使用广州2个月的taxi数据，$区域划分20<em>20，每个区域700m</em>700m$，<br>（1）使用$Min-Max归一化为[0,1]之间，同时也对y进行归一化到[0,1]之间。$模型预测的输出也在$[0,1]之间，$然后对$y$使用反归一化得到真实的taxi demand。<br>（2）邻居大小设置为$9*9$<br>（3）时间段：30min，根据前8个时间段(4h)预测下一个时间段<br>（4）最后FC的激活函数是$Sigmoid$，其余FC的激活函数是$Relu$</p>
+<p>损失函数中包含2部分，一个是输出的taxi demand的均方差，一个是MAPE，前面更关注一些大的值，为了避免模型被一些大的值控制，后面加入MAPE。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/loss.png" alt=""> </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/DMVST-Net.png" alt=""><br><strong>6. 数据集</strong><br>使用广州2个月的taxi数据，$区域划分20<em>20，每个区域700m</em>700m$，<br>（1）使用$Min-Max归一化为[0,1]之间，同时也对y进行归一化到[0,1]之间。$模型预测的输出也在$[0,1]之间，$然后对$y$使用反归一化得到真实的taxi demand。<br>（2）邻居大小设置为$9*9$<br>（3）时间段：30min，根据前8个时间段(4h)预测下一个时间段<br>（4）最后FC的激活函数是$Sigmoid$，其余FC的激活函数是$Relu$</p>
 <h2><span id="39-urban-traffic-prediction-from-spatio-temporal-data-using-deep-meta-learning2019kdd郑宇">3.9. Urban Traffic Prediction from Spatio-Temporal Data Using Deep Meta Learning（2019KDD郑宇）</span></h2><p>通过时空数据，使用深度元学习，进行城市交通预测<br>论文代码：<a href="https://github.com/panzheyi/ST-MetaNet" target="_blank" rel="noopener">https://github.com/panzheyi/ST-MetaNet</a><br><strong>Abstract</strong><br>&ensp;&ensp;&ensp;&ensp;预测城市traffic有以下挑战：（1）复杂的时空相关性，（2）时空相关性的多样性，每个location的POI和路网信息都不一样。提出deep-meta-learning模型（深度元学习），叫做ST-MetaNet，同时预测所有location的traffic，使用seq2seq架构，包含encoder来学习历史信息，decoder来一步接一步的预测，encoder和decoder有相同的架构，都包含RNN来编码历史traffic数据，一个meta graph attention来捕获各种的空间关系，一个meta RNN来考虑各种的时间相关性。</p>
 <p><strong>Introduction</strong></p>
 <ol>
@@ -3374,11 +3374,11 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <li><p>ST相关性的Diversity：<br>&ensp;&ensp;&ensp;&ensp;在上面构建的geo-graph中，有节点特征和边特征。节点：location，节点特征：这个location的POI、路的密度。边：location之间的关系。边特征：location的连通性和距离。比如图1(b)和(c)中，$R1和R3$有相同的POI，都是商业区，$R2$是住宅区，所以它们的flow的时间模式也不一样。  </p>
 </li>
 </ol>
-<p><img src="/2019/08/02/论文总结/时空论文阅读笔记/Urban-Traffic-Prediction-from-Spatio-Temporal-Data-Using-Deep-Meta-Learning-1.png" alt="">     </p>
-<p>&ensp;&ensp;&ensp;&ensp;为了解决以上的挑战，提出<strong>ST-MetaNet</strong>,首先从geo-graph中的节点和边的特征中提取meta knowledge，从中生成预测网络的权重。<br><img src="/2019/08/02/论文总结/时空论文阅读笔记/Urban-Traffic-Prediction-from-Spatio-Temporal-Data-Using-Deep-Meta-Learning-2.png" alt=""><br>文章的贡献有4个：<br>（1）提出一个新颖的deep meta learning模型，预测城市traffic，ST-MetaNet利用从geo-graph中提取的meta knowledge，生成graph attention network和RNN seq2seq的权重。<br>（2）提出一个meta graph attention网络来建模空间相关性，Attention机制可以捕获location之间的动态关系，attention网络中的权重是从geo-graph的meta knowledge中提取出来的。<br>（3）提出meta gated RNN，生成<br>（4）在traffic flow和traffic speed做实验<br><strong>Preliminaries</strong><br>&ensp;&ensp;&ensp;&ensp;一共有$N_l个location，每个location有N_t个时间步，traffic一共有D_t类$<br>Ubran Traffic：可以表示为以下的张量</p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/Urban-Traffic-Prediction-from-Spatio-Temporal-Data-Using-Deep-Meta-Learning-1.png" alt="">     </p>
+<p>&ensp;&ensp;&ensp;&ensp;为了解决以上的挑战，提出<strong>ST-MetaNet</strong>,首先从geo-graph中的节点和边的特征中提取meta knowledge，从中生成预测网络的权重。<br><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/Urban-Traffic-Prediction-from-Spatio-Temporal-Data-Using-Deep-Meta-Learning-2.png" alt=""><br>文章的贡献有4个：<br>（1）提出一个新颖的deep meta learning模型，预测城市traffic，ST-MetaNet利用从geo-graph中提取的meta knowledge，生成graph attention network和RNN seq2seq的权重。<br>（2）提出一个meta graph attention网络来建模空间相关性，Attention机制可以捕获location之间的动态关系，attention网络中的权重是从geo-graph的meta knowledge中提取出来的。<br>（3）提出meta gated RNN，生成<br>（4）在traffic flow和traffic speed做实验<br><strong>Preliminaries</strong><br>&ensp;&ensp;&ensp;&ensp;一共有$N_l个location，每个location有N_t个时间步，traffic一共有D_t类$<br>Ubran Traffic：可以表示为以下的张量</p>
 <script type="math/tex; mode=display">
 X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \times D_{t}}</script><p>其中$X_{t}=\left(x_{t}^{(1)}, \ldots, x_{t}^{\left(N_{l}\right)}\right)$表示在时间步$t$所有区域的traffic信息。<br>&ensp;&ensp;&ensp;&ensp;Geo-Graph 特征：分为节点特征和边特征，其中 $G=\{\mathcal{V}, \mathcal{E}\}$ 表示一个有向图，$\mathcal{V} = \{v^{(1)},\ldots,v^{(N_l)}\}$表示所有节点，$\mathcal{E} = \{e^{(ij)} | 1 \leq i, j \leq N_l\}$表示所有的边，使用$\mathcal{N}_i表示节点i的邻居。$<br>&ensp;&ensp;&ensp;&ensp;问题定义：给定前$\tau_{in}$个时间段的$\left(X_{t-\tau_{i n}+1}, \ldots, X_{t}\right)$所有location在所有时间段的traffic特征，和geo-graph特征$\mathcal{G}$，预测在接下来$\tau_{out}$个时间段所有节点的traffic信息，表示为$\left(\hat{Y}_{t+1}, \ldots, \hat{Y}_{t+\tau_{o u t}}\right)$。<br><strong>Methodologies</strong><br>&ensp;&ensp;&ensp;&ensp;ST-MetaNet是Seq2Seq结构，由encoder(蓝色)和decoder(绿色)组成, encoder编码输入序列$\left(X_{t-\tau_{i n}+1}, \ldots, X_{t}\right)$，生成隐藏状态$\{H_{RNN},H_{Meta-RNN}\}$,用来初始化decoder的状态，预测输出序列$\left(\hat{Y}_{t+1}, \ldots, \hat{Y}_{t+\tau_{o u t}}\right)$。<br>&ensp;&ensp;&ensp;&ensp;encoder和decoder有相同的网络架构，包含以下4个组件。<br>（1）RNN：使用RNN来对历史traffic进行嵌入，捕获长期的时间依赖。<br>（2）Meta-knowledge learner：使用2个全连接FCNs，分分别叫做NMK-Learner和EMK-Learner，从节点特征(POI和GPS位置)和边特征(location的道路连通性和距离)学习meta-knowledge，得到的meta-knowledge用来学习GAT和RNN的权重。<br>（3）Meta-GAT：由Meta-Learner和GAT组成，使用FCN作为Meta-Learner，它的输入是所有节点和边的meta knowledge，输出是GAT的权重。Meta-GAT可以捕获多样的空间相关性。<br>（4）Meta-RNN：由Meta-Learner和RNN组成，Meta-Learner是FCN，输入是所有节点的meta knowledge，输出是每一个节点在RNN的权重，Meta-RNN可以捕获多样的时间相关性。</p>
-<p><img src="/2019/08/02/论文总结/时空论文阅读笔记/Urban-Traffic-Prediction-from-Spatio-Temporal-Data-Using-Deep-Meta-Learning-3.png" alt=""></p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/时空论文阅读笔记/Urban-Traffic-Prediction-from-Spatio-Temporal-Data-Using-Deep-Meta-Learning-3.png" alt=""></p>
 <ol>
 <li>RNN(GRU)组件<br>编码所有的location的traffic信息，RNN网络对所有的location共享相同的参数，每次GRU输入的是一个location所有时间步的traffic信息，输出这个location的隐藏状态，下一次再输入另一个location所有时间步的traffic，所有的location共享GRU的参数。GRU输出所有location的隐藏状态$H_{t}=\left(h_{t}^{(1)}, \ldots, h_{t}^{\left(N_{l}\right)}\right)$  <script type="math/tex; mode=display">
  h_{t}^{(i)}=\operatorname{GRU}\left(z_{t}^{(i)}, h_{t-1}^{(i)} | W_{\Omega}, U_{\Omega}, b_{\Omega}\right), \quad \forall i \in\left\{1, \ldots, N_{l}\right\}</script></li>
