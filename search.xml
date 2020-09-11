@@ -44,7 +44,7 @@
 <script type="math/tex; mode=display">\mathcal{P}=\sum_{k=0}^{\infty} \alpha(1-\alpha)^{k}\left(\boldsymbol{D}_{O}^{-1} \boldsymbol{W}\right)^{k}</script><p>其中$k$表示转移的次数，我们通常使用有限次的$K$步转移矩阵。</p>
 <p><strong>扩散卷积</strong></p>
 <p>下面给出扩散卷积的计算公式：</p>
-<script type="math/tex; mode=display">\boldsymbol{X}_{:, p} \star_{\mathcal{G}} f_{\boldsymbol{\theta}}=\sum_{k=0}^{K-1}\left(\theta_{k, 1}\left(\boldsymbol{D}_{O}^{-1} \boldsymbol{W}\right)^{k}+\theta_{k, 2}\left(\boldsymbol{D}_{I}^{-1} \boldsymbol{W}^{\top}\right)^{k}\right) \boldsymbol{X}_{:, p} \quad \text { for } p \in\{1, \cdots, P\}</script><p>这是一个特征的扩散卷积操作。根绝这个特征进行</p>
+<script type="math/tex; mode=display">\boldsymbol{X}_{:, p} \star_{\mathcal{G}} f_{\boldsymbol{\theta}}=\sum_{k=0}^{K-1}\left(\theta_{k, 1}\left(\boldsymbol{D}_{O}^{-1} \boldsymbol{W}\right)^{k}+\theta_{k, 2}\left(\boldsymbol{D}_{I}^{-1} \boldsymbol{W}^{\top}\right)^{k}\right) \boldsymbol{X}_{:, p} \quad \text { for } p \in\{1, \cdots, P\}</script><p>这是<strong>一个特征</strong>的扩散卷积操作。</p>
 <p>其中$p$表示第$p$个特征，为每个特征计算一个扩散性。$\theta \in \mathbb{R}^{K \times 2}$是扩散卷积核参数，$\boldsymbol{D}_{O}^{-1} \boldsymbol{W}$和$\boldsymbol{D}_{I}^{-1} \boldsymbol{W}^{\top}$表示扩散过程中的转移矩阵和逆转移矩阵。</p>
 <p><strong>扩散卷积层</strong></p>
 <p>基于上面的扩散卷积操作，定义扩散卷积层，将每个节点$P$维特征映射成$Q$维特征。</p>
