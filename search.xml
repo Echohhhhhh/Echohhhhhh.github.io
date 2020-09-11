@@ -4,6 +4,7 @@
     <title>Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting</title>
     <url>/2020/09/11/Diffusion-Convolutional-Recurrent-Neural-Network-Data-Driven-Traffic-Forecasting/</url>
     <content><![CDATA[<p>2018ICLR的一篇论文：<a href="https://arxiv.org/abs/1707.01926" target="_blank" rel="noopener">Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting</a></p>
+<a id="more"></a>
 <p>时空预测主要有以下挑战：</p>
 <ol>
 <li>基于道路网络，存在复杂的空间依赖</li>
@@ -11,7 +12,6 @@
 <li>long-term预测比较困难</li>
 </ol>
 <p>基于以上问题，本文根据交通流量的扩散过程，构建一个有向图，并且引入扩散卷积+RNN=DCRNN，融合时间和空间依赖，预测交通流量。DCRNN通过在图上进行双向随机游走来捕获空间依赖，使用encoder-decoder来捕获时间依赖。</p>
-<a id="more"></a>
 <!-- TOC -->
 <ul>
 <li><a href="#1-介绍">1. 介绍</a></li>
@@ -147,8 +147,8 @@
         <category>论文阅读笔记</category>
       </categories>
       <tags>
-        <tag>时空领域</tag>
         <tag>GCN</tag>
+        <tag>时空领域</tag>
       </tags>
   </entry>
   <entry>
@@ -2626,8 +2626,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
         <category>Deep Learning</category>
       </categories>
       <tags>
-        <tag>GPU</tag>
         <tag>Mxnet</tag>
+        <tag>GPU</tag>
         <tag>Pytorch</tag>
       </tags>
   </entry>
@@ -5329,8 +5329,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>论文阅读笔记</category>
       </categories>
       <tags>
-        <tag>时空领域</tag>
         <tag>GCN</tag>
+        <tag>时空领域</tag>
       </tags>
   </entry>
   <entry>

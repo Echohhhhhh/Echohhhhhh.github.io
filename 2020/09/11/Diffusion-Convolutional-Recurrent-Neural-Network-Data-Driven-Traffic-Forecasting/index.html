@@ -73,23 +73,23 @@
 
 
 
-<meta name="description" content="2018ICLR的一篇论文：Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting 时空预测主要有以下挑战：  基于道路网络，存在复杂的空间依赖 交通状态会随着时间变化，存在动态性 long-term预测比较困难  基于以上问题，本文根据交通流量的扩散过程，构建一个有向图，并且引入扩散卷积+">
+<meta name="description" content="2018ICLR的一篇论文：Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting">
 <meta name="keywords" content="时空领域">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting">
 <meta property="og:url" content="http://yoursite.com/2020/09/11/Diffusion-Convolutional-Recurrent-Neural-Network-Data-Driven-Traffic-Forecasting/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="2018ICLR的一篇论文：Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting 时空预测主要有以下挑战：  基于道路网络，存在复杂的空间依赖 交通状态会随着时间变化，存在动态性 long-term预测比较困难  基于以上问题，本文根据交通流量的扩散过程，构建一个有向图，并且引入扩散卷积+">
+<meta property="og:description" content="2018ICLR的一篇论文：Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/09/11/Diffusion-Convolutional-Recurrent-Neural-Network-Data-Driven-Traffic-Forecasting/road.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/09/11/Diffusion-Convolutional-Recurrent-Neural-Network-Data-Driven-Traffic-Forecasting/scrnn.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/09/11/Diffusion-Convolutional-Recurrent-Neural-Network-Data-Driven-Traffic-Forecasting/dcrnn.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/09/11/Diffusion-Convolutional-Recurrent-Neural-Network-Data-Driven-Traffic-Forecasting/sensor.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/09/11/Diffusion-Convolutional-Recurrent-Neural-Network-Data-Driven-Traffic-Forecasting/result.jpg">
-<meta property="og:updated_time" content="2020-09-11T10:53:55.465Z">
+<meta property="og:updated_time" content="2020-09-11T11:33:38.072Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting">
-<meta name="twitter:description" content="2018ICLR的一篇论文：Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting 时空预测主要有以下挑战：  基于道路网络，存在复杂的空间依赖 交通状态会随着时间变化，存在动态性 long-term预测比较困难  基于以上问题，本文根据交通流量的扩散过程，构建一个有向图，并且引入扩散卷积+">
+<meta name="twitter:description" content="2018ICLR的一篇论文：Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting">
 <meta name="twitter:image" content="http://yoursite.com/2020/09/11/Diffusion-Convolutional-Recurrent-Neural-Network-Data-Driven-Traffic-Forecasting/road.jpg">
 
 
@@ -429,6 +429,7 @@
 
       
         <p>2018ICLR的一篇论文：<a href="https://arxiv.org/abs/1707.01926" target="_blank" rel="noopener">Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting</a></p>
+<a id="more"></a>
 <p>时空预测主要有以下挑战：</p>
 <ol>
 <li>基于道路网络，存在复杂的空间依赖</li>
@@ -436,7 +437,6 @@
 <li>long-term预测比较困难</li>
 </ol>
 <p>基于以上问题，本文根据交通流量的扩散过程，构建一个有向图，并且引入扩散卷积+RNN=DCRNN，融合时间和空间依赖，预测交通流量。DCRNN通过在图上进行双向随机游走来捕获空间依赖，使用encoder-decoder来捕获时间依赖。</p>
-<a id="more"></a>
 <!-- TOC -->
 <ul>
 <li><a href="#1-介绍">1. 介绍</a></li>
