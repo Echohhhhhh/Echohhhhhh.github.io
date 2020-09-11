@@ -84,7 +84,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/08/23/Graph-WaveNet-for-Deep-Spatial-Temporal-Graph-Modeling/问题定义.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/08/23/Graph-WaveNet-for-Deep-Spatial-Temporal-Graph-Modeling/模型图.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/08/23/Graph-WaveNet-for-Deep-Spatial-Temporal-Graph-Modeling/模型图.jpg">
-<meta property="og:updated_time" content="2020-08-25T02:48:48.571Z">
+<meta property="og:updated_time" content="2020-09-11T11:48:43.039Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Graph WaveNet for Deep Spatial-Temporal Graph Modeling">
 <meta name="twitter:description" content="论文地址：Graph WaveNet for Deep Spatial-Temporal Graph Modeling">
@@ -483,8 +483,9 @@
 <li>将步骤5的输出(batch_size,D2,N,T)，输入到skip-conv（1D卷积），改变通道维度为(batch_size,D3,N,T)存储在skip变量中，一共有K层，将K层G-TCN的输出加起来得到(batch_size,D3,N,T)</li>
 <li><p>下面进行GCN操作，将步骤5的输出(batch_size,D2,N,T)=x，假设有2个邻接矩阵，一个是已知的邻接矩阵$\mathbf{P}$,一个是自适应邻接矩阵$\mathbf{A}_{a p t}$，先遍历第一个邻接矩阵，$\mathbf{P}X$保存取来，然后在$\mathbf{P}^2X$，直到$\mathbf{P}^kX$，然后再求$\mathbf{A}_{a p t}X,\mathbf{A}_{a p t}^2X,\mathbf{A}_{a p t}^kX$。一共有2个邻接矩阵，每个邻接矩阵都有K个值，将这2K个值在通道维上拼接，得到$(batch_size,2<em>K</em>D2,N,T)$，然后在经过一个全连接，将维度映射成D1，即(batch_size,D1,N,T)</p>
 <script type="math/tex; mode=display">\mathbf{Z}=\sum_{k=0}^{K} \mathbf{P}^{k} \mathbf{X} \mathbf{W}_{k 1}+\tilde{\mathbf{A}}_{a p t}^{k} \mathbf{X} \mathbf{W}_{k 3}</script></li>
-<li>将步骤7的输出和步骤1的输出做残差连接，直接相加，再经过一个BN层，完成一个block。接下来就再次经过G-TCN和GCN，重复步骤3-7</li>
-<li>所有的block完成之后，输出维度(batch_size,D1,N,T),但我们并不是要GCN的输出，而是需要每个TGCN的输出保存在skip中，维度(batch_size,D3,N,T)，先使用ReLU激活，然后使用$1<em>1$的2D卷积，变成维度(batch_size,D4,N,T),再ReLU，然后是$1</em>1$卷积</li>
+<li><p>将步骤7的输出和步骤1的输出做残差连接，直接相加，再经过一个BN层，完成一个block。接下来就再次经过G-TCN和GCN，重复步骤3-7</p>
+</li>
+<li>所有的block完成之后，输出维度(batch_size,D1,N,T),但我们并不是要GCN的输出，而是需要每个TGCN的输出保存在skip中，维度(batch_size,D3,N,T)，先使用ReLU激活，然后使用$1 \times 1$的2D卷积，变成维度$(batch_size,D4,N,T)$,再ReLU，然后是$1 \times 1$卷积</li>
 </ol>
 
       
