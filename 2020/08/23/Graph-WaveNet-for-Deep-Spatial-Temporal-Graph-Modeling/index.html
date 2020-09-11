@@ -84,7 +84,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/08/23/Graph-WaveNet-for-Deep-Spatial-Temporal-Graph-Modeling/问题定义.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/08/23/Graph-WaveNet-for-Deep-Spatial-Temporal-Graph-Modeling/模型图.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/08/23/Graph-WaveNet-for-Deep-Spatial-Temporal-Graph-Modeling/模型图.jpg">
-<meta property="og:updated_time" content="2020-09-11T11:48:43.039Z">
+<meta property="og:updated_time" content="2020-09-11T11:49:09.219Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Graph WaveNet for Deep Spatial-Temporal Graph Modeling">
 <meta name="twitter:description" content="论文地址：Graph WaveNet for Deep Spatial-Temporal Graph Modeling">
@@ -485,7 +485,7 @@
 <script type="math/tex; mode=display">\mathbf{Z}=\sum_{k=0}^{K} \mathbf{P}^{k} \mathbf{X} \mathbf{W}_{k 1}+\tilde{\mathbf{A}}_{a p t}^{k} \mathbf{X} \mathbf{W}_{k 3}</script></li>
 <li><p>将步骤7的输出和步骤1的输出做残差连接，直接相加，再经过一个BN层，完成一个block。接下来就再次经过G-TCN和GCN，重复步骤3-7</p>
 </li>
-<li>所有的block完成之后，输出维度(batch_size,D1,N,T),但我们并不是要GCN的输出，而是需要每个TGCN的输出保存在skip中，维度(batch_size,D3,N,T)，先使用ReLU激活，然后使用$1 \times 1$的2D卷积，变成维度$(batch_size,D4,N,T)$,再ReLU，然后是$1 \times 1$卷积</li>
+<li>所有的block完成之后，输出维度(batch_size,D1,N,T),但我们并不是要GCN的输出，而是需要每个TGCN的输出保存在skip中，维度(batch_size,D3,N,T)，先使用ReLU激活，然后使用$1 \times 1$的2D卷积，变成维度(batch_size,D4,N,T),再ReLU，然后是$1 \times 1$卷积</li>
 </ol>
 
       
