@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="时空领域,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Multi-Range Attentive Bicomponent Graph Convolutional Network for Traffic Forecasting 发表于AAAI2020">
+<meta name="keywords" content="时空领域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Multi-Range Attentive Bicomponent Graph Convolutional Network for Traffic Forecasting">
+<meta property="og:url" content="http://yoursite.com/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/index.html">
+<meta property="og:site_name" content="Echo&#39;s blog">
+<meta property="og:description" content="Multi-Range Attentive Bicomponent Graph Convolutional Network for Traffic Forecasting 发表于AAAI2020">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f1.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f2.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f3.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f4.png">
+<meta property="og:image" content="http://yoursite.com/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f5.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f4.jpg">
+<meta property="og:updated_time" content="2020-09-17T13:46:46.756Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Multi-Range Attentive Bicomponent Graph Convolutional Network for Traffic Forecasting">
+<meta name="twitter:description" content="Multi-Range Attentive Bicomponent Graph Convolutional Network for Traffic Forecasting 发表于AAAI2020">
+<meta name="twitter:image" content="http://yoursite.com/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/">
+
+
+
+
+
+  <title>Multi-Range Attentive Bicomponent Graph Convolutional Network for Traffic Forecasting | Echo's blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b759ac2a7fa45129e3ef060bf68259f0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Echo's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">远方到底有多远</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Echo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Multi-Range Attentive Bicomponent Graph Convolutional Network for Traffic Forecasting</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-17T14:35:17+08:00">
+                2020-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文阅读笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文阅读笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://arxiv.org/ftp/arxiv/papers/1911/1911.12093.pdf" target="_blank" rel="noopener">Multi-Range Attentive Bicomponent Graph Convolutional Network for Traffic Forecasting</a></p>
+<p>发表于AAAI2020</p>
+<a id="more"></a>
+<!-- TOC -->
+<ul>
+<li><a href="#1-介绍">1. 介绍</a></li>
+<li><a href="#2-相关工作">2. 相关工作</a></li>
+<li><a href="#3-问题定义">3. 问题定义</a></li>
+<li><a href="#4-mra-bgcn">4. MRA-BGCN</a><ul>
+<li><a href="#41-bicomponent-gcn">4.1. Bicomponent GCN</a></li>
+<li><a href="#42-multi-range-attention">4.2. Multi-Range Attention</a></li>
+<li><a href="#43-结合rnn">4.3. 结合RNN</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-介绍">1. 介绍</span></h1><p>本文的任务是给定一个道路图历史的交通数据，预测未来的交通状况。该任务主要有以下2个挑战：</p>
+<ol>
+<li>不规则的路网导致交通数据间存在复杂时空依赖</li>
+<li>各种各样不可预测的交通状况，使得交通数据具有不确定性</li>
+</ol>
+<p>以前的工作一般使用CNN来处理网格数据，使用GCN+RNN(DCRNN)或GCN+CNN(STGCN)来处理图数据。但是这些方法仍然忽略了以下2方面：</p>
+<ol>
+<li>原先的方法使用GCN都是基于一个固定的权重矩阵。如下图所示，图中有3个节点，其中节点1和3，节点2和3通过道路连接，现在的方法基本都是根据节点之间的距离来创建图，图的权重权重是不变的，但节点之间的权重并不是一成不变的，这种构图方法忽略了节点之间复杂的影响关系。</li>
+</ol>
+<p>   <img src="/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f1.jpg" alt=""></p>
+<ol>
+<li>构建完图后，原先的方法一般使用GCN融合K跳邻居的信息进行聚合，但是却忽略了多个范围(multiple range)的信息。不同范围的信息反映了不同的交通属性。小范围的邻居揭示了局部依赖，大范围的邻居揭示了全局模式。并且不同范围的信息应该有不同的贡献。例如在一次交通事故中，目标区域主要受邻接区域的影响，所以模型也应该更关注这些区域，而不是对所有的K跳邻居都赋予相同的权重。</li>
+</ol>
+<p>为了解决以上2个问题，我们提出Multi-Range Attentive Bicomponent Graph Convolutional Network (MRA-BGCN),不仅考虑了节点信息，而且把边作为实体，考虑边之间的交互。如图1(C)所示。该文章的共享如下：</p>
+<ol>
+<li><p>提出MRA-BGCN，引入bicomponent图卷积，同时建模节点和边的相关性。节点图根据路网距离来构架，边图的构建考虑了2种模式：stream连通性、竞争关系。</p>
+</li>
+<li><p>为bicomponent图卷积提出多范围的attention机制，可以聚合不同范围的邻居信息并学到它们的权重</p>
+</li>
+<li>在METR-LA和PEMS-BAY这2个数据集上进行实验</li>
+</ol>
+<h1><span id="2-相关工作">2. 相关工作</span></h1><p>DCRNN和STGCN使用固定的图结构<br>Graph WaveNet通过学习自适应的邻接矩阵来解决这个问题，但是隐藏的空间依赖是以数据驱动的方式来学习的，缺乏领域知识的指导，可能会出现过拟合的问题。</p>
+<p>现有的方法无法对边之间的交互进行建模。</p>
+<h1><span id="3-问题定义">3. 问题定义</span></h1><p>$G=(V,E,A),|V|=N$，其中$A \in \mathbb{R}^{N \times N}$表示邻接矩阵，邻接矩阵通过路网的距离构建。图信号矩阵$X^{(t)} \in \mathbb{R}^{N \times P}$。预测任务是给定历史$T’$个时间段的图信号矩阵，预测未来$T$个时间段的图信号矩阵</p>
+<script type="math/tex; mode=display">\left[X^{\left(t-T^{\prime}+1\right): t}, G\right] \stackrel{f}{\rightarrow}\left[X^{(t+1):(t+T)}\right]</script><p>$X^{\left(t-T^{\prime}+1\right): t} \in \mathbb{R}^{N \times P \times T’}$，$X^{(t+1):(t+T)} \in \mathbb{R}^{N \times P \times T}$</p>
+<p>本文中用到的图卷积定义如下：</p>
+<script type="math/tex; mode=display">\boldsymbol{\theta}_{\star G} \boldsymbol{X}=\rho\left(\tilde{\boldsymbol{D}}^{-1} \tilde{\boldsymbol{A}} \boldsymbol{X} \boldsymbol{\theta}\right)</script><h1><span id="4-mra-bgcn">4. MRA-BGCN</span></h1><p>该模型包括2部分：bicomponent图卷积模块、多范围attention模块。</p>
+<ul>
+<li>bicomponent图卷积模块包括节点图卷积、边图卷积，可以显式建模节点和边的相关性。</li>
+<li>多范围attention层聚合不同范围的邻居信息，并学习它们的重要性权重。</li>
+<li>除此之外，我们还将MRA-BGCN和RNN结合起来建模时间依赖。</li>
+</ul>
+<p><img src="/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f2.jpg" alt=""></p>
+<h2><span id="41-bicomponent-gcn">4.1. Bicomponent GCN</span></h2><p>首次创建2个图：节点图、边图</p>
+<p>$G=(V,E,A)$表示<strong>节点图</strong>，$|V|=N$，每个节点表示sensor，边表示sensor之间的距离，邻接矩阵是权重邻接矩阵。</p>
+<p>$G_e=(V_e,E_e,A_e)$表示<strong>边图</strong>,其中$|V_e|=|E|$，每个节点表示$E$中一条边。在邻接矩阵$A_e$中，有2种边的连接模式。</p>
+<ul>
+<li><p>上下游连接：如下图a所示，边(i,j)是边(j,k)的上游边，因此这2条边是相关的。如果点j有很多邻接，也就是说点j的度很大，则边(i,j)和边(j,k)的相关性就变得很弱。我们使用下面的公式计算这2条边的相关性。</p>
+<script type="math/tex; mode=display">\begin{array}{c}
+A_{e,(i \rightarrow j),(j \rightarrow k)}=A_{e,(j \rightarrow k),(i \rightarrow j)}=
+\exp \left(-\frac{\left(\mathrm{deg}^{-}(j)+\mathrm{deg}^{+}(j)-2\right)^{2}}{\sigma^{2}}\right)
+\end{array}</script><p>其中$\mathrm{deg}^{-}(j)$和$\mathrm{deg}^{+}(j)$表示点j的入度和出度。$\sigma$表示节点度的标准差。</p>
+</li>
+<li><p>竞争连接：当2个节点共享一个源节点或目标节点，可能会争夺交通资源，使得这2条边产生竞争关系。如下图b所示。边(j,k)和边(i,k)共享目标节点k，如果源节点有很多邻居，则(j,k)和(i,k)的竞争连接就会变强。使用下面的公式计算这2条边的连接权重：</p>
+<script type="math/tex; mode=display">\begin{array}{l}
+A_{e,(i \rightarrow k),(j \rightarrow k)}=A_{e,(j \rightarrow k),(i \rightarrow k)}= 
+\exp \left(-\frac{\left(\mathrm{deg}^{+}(i)+\mathrm{deg}^{+}(j)-2\right)^{2}}{\sigma^{2}}\right)
+\end{array}</script></li>
+</ul>
+<p><img src="/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f3.jpg" alt=""></p>
+<p>根据上面2种连接，构建好边图$G_e$，如图2所示，bicomponent图卷积可以建模节点和边的相关性。</p>
+<p><img src="/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f4.png" alt=""></p>
+<p>$X^{(l-1)}$是第$l$层节点图卷积层的输入，$Z^{(l-1)}$是第$l$层边图卷积的输入。$M \in \mathbb{R}^{|V| \times |E|}$表示节点和边的关联矩阵。$M_{i,(i,j)}=M_{j,(i,j)}=1$，通过$MZ^{(\cdot)}$聚合每个节点的边的表示。$M^TX^{(\cdot)}$聚合每条边的节点表示。$W_b$是可学习的矩阵，从原始的节点输入$X^{(0)}$转换成边输入$Z^{(0)}$</p>
+<h2><span id="42-multi-range-attention">4.2. Multi-Range Attention</span></h2><p>提出多范围attention机制来自动学习不同范围邻居的权重。</p>
+<p>通过bicomponent图卷积，我们可以得到不同范围邻居的节点表示：$\boldsymbol{X}=\left\{\boldsymbol{X}^{(1)}, \boldsymbol{X}^{(2)}, \cdots, \boldsymbol{X}^{(k)}\right\}, \boldsymbol{X}^{(l)} \in \mathbb{R}^{|V| \times F}$。多范围attention层主要是就是不同范围的邻居信息，形成一个整合的节点表示。为了实现这个目标，首先一个共享的线性变换成$W_a \in \mathbb{R}^{F \times F’}$，作用在不同层的节点表示$X^{(l)}$上。</p>
+<p>对于节点$i$，首先进行线性变换$W_aX^{(l)}_i$，$u$表示邻居上下文嵌入向量，是可学习参数。</p>
+<script type="math/tex; mode=display">\begin{array}{c}
+e_{i}^{(l)}=\left(\boldsymbol{W}_{\mathrm{a}} \boldsymbol{X}_{i}^{(l)}\right)^{\mathrm{T}} \boldsymbol{u} \\\\
+a_{i}^{(l)}=\operatorname{SoftMax}_{l}\left(e_{i}^{(l)}\right)=\frac{\exp \left(e_{i}^{(l)}\right)}{\sum_{l=1}^{k} \exp \left(e_{i}^{(l)}\right)}\\\\
+\boldsymbol{h}_{i}=\sum_{l=1}^{k} a_{i}^{(l)} \boldsymbol{X}_{i}^{(l)}
+\end{array}</script><p>通过多范围Attention机制，对不同跳的邻居赋予不同的权重，得到最终的图信号矩阵。</p>
+<h2><span id="43-结合rnn">4.3. 结合RNN</span></h2><p>参考DCRNN，把GRU中的全连接操作全都换成MRA-BGCN操作。</p>
+<p><img src="/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f5.jpg" alt=""></p>
+<p><img src="/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f4.jpg" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Echo 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Echo 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/时空领域/" rel="tag"># 时空领域</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/11/Diffusion-Convolutional-Recurrent-Neural-Network-Data-Driven-Traffic-Forecasting/" rel="next" title="Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting">
+                <i class="fa fa-chevron-left"></i> Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/touxiang.jpg" alt="Echo">
+            
+              <p class="site-author-name" itemprop="name">Echo</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xiaohuangrenlll@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Echohhhhhh" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 相关工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 问题定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. MRA-BGCN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. Bicomponent GCN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.2. Multi-Range Attention</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.3. 结合RNN</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Echo</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "topRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+  
+</body>
+</html>

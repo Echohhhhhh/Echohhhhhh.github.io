@@ -1,6 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Multi-Range Attentive Bicomponent Graph Convolutional Network for Traffic Forecasting</title>
+    <url>/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/</url>
+    <content><![CDATA[<p><a href="https://arxiv.org/ftp/arxiv/papers/1911/1911.12093.pdf" target="_blank" rel="noopener">Multi-Range Attentive Bicomponent Graph Convolutional Network for Traffic Forecasting</a></p>
+<p>发表于AAAI2020</p>
+<a id="more"></a>
+<!-- TOC -->
+<ul>
+<li><a href="#1-介绍">1. 介绍</a></li>
+<li><a href="#2-相关工作">2. 相关工作</a></li>
+<li><a href="#3-问题定义">3. 问题定义</a></li>
+<li><a href="#4-mra-bgcn">4. MRA-BGCN</a><ul>
+<li><a href="#41-bicomponent-gcn">4.1. Bicomponent GCN</a></li>
+<li><a href="#42-multi-range-attention">4.2. Multi-Range Attention</a></li>
+<li><a href="#43-结合rnn">4.3. 结合RNN</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-介绍">1. 介绍</span></h1><p>本文的任务是给定一个道路图历史的交通数据，预测未来的交通状况。该任务主要有以下2个挑战：</p>
+<ol>
+<li>不规则的路网导致交通数据间存在复杂时空依赖</li>
+<li>各种各样不可预测的交通状况，使得交通数据具有不确定性</li>
+</ol>
+<p>以前的工作一般使用CNN来处理网格数据，使用GCN+RNN(DCRNN)或GCN+CNN(STGCN)来处理图数据。但是这些方法仍然忽略了以下2方面：</p>
+<ol>
+<li>原先的方法使用GCN都是基于一个固定的权重矩阵。如下图所示，图中有3个节点，其中节点1和3，节点2和3通过道路连接，现在的方法基本都是根据节点之间的距离来创建图，图的权重权重是不变的，但节点之间的权重并不是一成不变的，这种构图方法忽略了节点之间复杂的影响关系。</li>
+</ol>
+<p>   <img src="/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f1.jpg" alt=""></p>
+<ol>
+<li>构建完图后，原先的方法一般使用GCN融合K跳邻居的信息进行聚合，但是却忽略了多个范围(multiple range)的信息。不同范围的信息反映了不同的交通属性。小范围的邻居揭示了局部依赖，大范围的邻居揭示了全局模式。并且不同范围的信息应该有不同的贡献。例如在一次交通事故中，目标区域主要受邻接区域的影响，所以模型也应该更关注这些区域，而不是对所有的K跳邻居都赋予相同的权重。</li>
+</ol>
+<p>为了解决以上2个问题，我们提出Multi-Range Attentive Bicomponent Graph Convolutional Network (MRA-BGCN),不仅考虑了节点信息，而且把边作为实体，考虑边之间的交互。如图1(C)所示。该文章的共享如下：</p>
+<ol>
+<li><p>提出MRA-BGCN，引入bicomponent图卷积，同时建模节点和边的相关性。节点图根据路网距离来构架，边图的构建考虑了2种模式：stream连通性、竞争关系。</p>
+</li>
+<li><p>为bicomponent图卷积提出多范围的attention机制，可以聚合不同范围的邻居信息并学到它们的权重</p>
+</li>
+<li>在METR-LA和PEMS-BAY这2个数据集上进行实验</li>
+</ol>
+<h1><span id="2-相关工作">2. 相关工作</span></h1><p>DCRNN和STGCN使用固定的图结构<br>Graph WaveNet通过学习自适应的邻接矩阵来解决这个问题，但是隐藏的空间依赖是以数据驱动的方式来学习的，缺乏领域知识的指导，可能会出现过拟合的问题。</p>
+<p>现有的方法无法对边之间的交互进行建模。</p>
+<h1><span id="3-问题定义">3. 问题定义</span></h1><p>$G=(V,E,A),|V|=N$，其中$A \in \mathbb{R}^{N \times N}$表示邻接矩阵，邻接矩阵通过路网的距离构建。图信号矩阵$X^{(t)} \in \mathbb{R}^{N \times P}$。预测任务是给定历史$T’$个时间段的图信号矩阵，预测未来$T$个时间段的图信号矩阵</p>
+<script type="math/tex; mode=display">\left[X^{\left(t-T^{\prime}+1\right): t}, G\right] \stackrel{f}{\rightarrow}\left[X^{(t+1):(t+T)}\right]</script><p>$X^{\left(t-T^{\prime}+1\right): t} \in \mathbb{R}^{N \times P \times T’}$，$X^{(t+1):(t+T)} \in \mathbb{R}^{N \times P \times T}$</p>
+<p>本文中用到的图卷积定义如下：</p>
+<script type="math/tex; mode=display">\boldsymbol{\theta}_{\star G} \boldsymbol{X}=\rho\left(\tilde{\boldsymbol{D}}^{-1} \tilde{\boldsymbol{A}} \boldsymbol{X} \boldsymbol{\theta}\right)</script><h1><span id="4-mra-bgcn">4. MRA-BGCN</span></h1><p>该模型包括2部分：bicomponent图卷积模块、多范围attention模块。</p>
+<ul>
+<li>bicomponent图卷积模块包括节点图卷积、边图卷积，可以显式建模节点和边的相关性。</li>
+<li>多范围attention层聚合不同范围的邻居信息，并学习它们的重要性权重。</li>
+<li>除此之外，我们还将MRA-BGCN和RNN结合起来建模时间依赖。</li>
+</ul>
+<p><img src="/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f2.jpg" alt=""></p>
+<h2><span id="41-bicomponent-gcn">4.1. Bicomponent GCN</span></h2><p>首次创建2个图：节点图、边图</p>
+<p>$G=(V,E,A)$表示<strong>节点图</strong>，$|V|=N$，每个节点表示sensor，边表示sensor之间的距离，邻接矩阵是权重邻接矩阵。</p>
+<p>$G_e=(V_e,E_e,A_e)$表示<strong>边图</strong>,其中$|V_e|=|E|$，每个节点表示$E$中一条边。在邻接矩阵$A_e$中，有2种边的连接模式。</p>
+<ul>
+<li><p>上下游连接：如下图a所示，边(i,j)是边(j,k)的上游边，因此这2条边是相关的。如果点j有很多邻接，也就是说点j的度很大，则边(i,j)和边(j,k)的相关性就变得很弱。我们使用下面的公式计算这2条边的相关性。</p>
+<script type="math/tex; mode=display">\begin{array}{c}
+A_{e,(i \rightarrow j),(j \rightarrow k)}=A_{e,(j \rightarrow k),(i \rightarrow j)}=
+\exp \left(-\frac{\left(\mathrm{deg}^{-}(j)+\mathrm{deg}^{+}(j)-2\right)^{2}}{\sigma^{2}}\right)
+\end{array}</script><p>其中$\mathrm{deg}^{-}(j)$和$\mathrm{deg}^{+}(j)$表示点j的入度和出度。$\sigma$表示节点度的标准差。</p>
+</li>
+<li><p>竞争连接：当2个节点共享一个源节点或目标节点，可能会争夺交通资源，使得这2条边产生竞争关系。如下图b所示。边(j,k)和边(i,k)共享目标节点k，如果源节点有很多邻居，则(j,k)和(i,k)的竞争连接就会变强。使用下面的公式计算这2条边的连接权重：</p>
+<script type="math/tex; mode=display">\begin{array}{l}
+A_{e,(i \rightarrow k),(j \rightarrow k)}=A_{e,(j \rightarrow k),(i \rightarrow k)}= 
+\exp \left(-\frac{\left(\mathrm{deg}^{+}(i)+\mathrm{deg}^{+}(j)-2\right)^{2}}{\sigma^{2}}\right)
+\end{array}</script></li>
+</ul>
+<p><img src="/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f3.jpg" alt=""></p>
+<p>根据上面2种连接，构建好边图$G_e$，如图2所示，bicomponent图卷积可以建模节点和边的相关性。</p>
+<p><img src="/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f4.png" alt=""></p>
+<p>$X^{(l-1)}$是第$l$层节点图卷积层的输入，$Z^{(l-1)}$是第$l$层边图卷积的输入。$M \in \mathbb{R}^{|V| \times |E|}$表示节点和边的关联矩阵。$M_{i,(i,j)}=M_{j,(i,j)}=1$，通过$MZ^{(\cdot)}$聚合每个节点的边的表示。$M^TX^{(\cdot)}$聚合每条边的节点表示。$W_b$是可学习的矩阵，从原始的节点输入$X^{(0)}$转换成边输入$Z^{(0)}$</p>
+<h2><span id="42-multi-range-attention">4.2. Multi-Range Attention</span></h2><p>提出多范围attention机制来自动学习不同范围邻居的权重。</p>
+<p>通过bicomponent图卷积，我们可以得到不同范围邻居的节点表示：$\boldsymbol{X}=\left\{\boldsymbol{X}^{(1)}, \boldsymbol{X}^{(2)}, \cdots, \boldsymbol{X}^{(k)}\right\}, \boldsymbol{X}^{(l)} \in \mathbb{R}^{|V| \times F}$。多范围attention层主要是就是不同范围的邻居信息，形成一个整合的节点表示。为了实现这个目标，首先一个共享的线性变换成$W_a \in \mathbb{R}^{F \times F’}$，作用在不同层的节点表示$X^{(l)}$上。</p>
+<p>对于节点$i$，首先进行线性变换$W_aX^{(l)}_i$，$u$表示邻居上下文嵌入向量，是可学习参数。</p>
+<script type="math/tex; mode=display">\begin{array}{c}
+e_{i}^{(l)}=\left(\boldsymbol{W}_{\mathrm{a}} \boldsymbol{X}_{i}^{(l)}\right)^{\mathrm{T}} \boldsymbol{u} \\\\
+a_{i}^{(l)}=\operatorname{SoftMax}_{l}\left(e_{i}^{(l)}\right)=\frac{\exp \left(e_{i}^{(l)}\right)}{\sum_{l=1}^{k} \exp \left(e_{i}^{(l)}\right)}\\\\
+\boldsymbol{h}_{i}=\sum_{l=1}^{k} a_{i}^{(l)} \boldsymbol{X}_{i}^{(l)}
+\end{array}</script><p>通过多范围Attention机制，对不同跳的邻居赋予不同的权重，得到最终的图信号矩阵。</p>
+<h2><span id="43-结合rnn">4.3. 结合RNN</span></h2><p>参考DCRNN，把GRU中的全连接操作全都换成MRA-BGCN操作。</p>
+<p><img src="/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f5.jpg" alt=""></p>
+<p><img src="/2020/09/17/Multi-Range-Attentive-Bicomponent-Graph-Convolutional-Network-for-Traffic-Forecasting/f4.jpg" alt=""></p>
+]]></content>
+      <categories>
+        <category>论文阅读笔记</category>
+      </categories>
+      <tags>
+        <tag>时空领域</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting</title>
     <url>/2020/09/11/Diffusion-Convolutional-Recurrent-Neural-Network-Data-Driven-Traffic-Forecasting/</url>
     <content><![CDATA[<p>2018ICLR的一篇论文：<a href="https://arxiv.org/abs/1707.01926" target="_blank" rel="noopener">Diffusion Convolutional Recurrent Neural Network: Data-Driven Traffic Forecasting</a></p>
@@ -5508,7 +5599,7 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 </ul>
 <font color="#dd0000">3. $f(H^{(l)},A) = \sigma(D^{-1}AH^{(l)}W^{(l)})$</font>
 
-<p>   解决方案：原先邻接矩阵$A$中的值非0即1，现在<strong>对邻接矩阵$A$做归一化，使得每一行之和为1</strong>，使得$AH$获得的是<code>weighted sum</code>，做法是：将$A$的每一行除以行的和(即每个节点的度)，这就可以得到<code>normalized</code>的$A$,则新的邻接矩阵表示为$A=D^{-1}A$，对于邻接矩阵中的每个值变成$A_{ij}=\frac{A_{ij}}{d_i}$</p>
+<p>   解决方案：原先邻接矩阵$A$中的值非0即1，现在<strong>对邻接矩阵$A$做归一化，使得每一行之和为1</strong>，使得$AH$获得的是<code>weighted sum</code>，做法是：将$A$的每一行除以行的和(即每个节点的度)，这就可以得到<code>normalized</code>的$A$,则新的邻接矩阵表示为$A=D^{-1}A$，对于邻接矩阵中的每个值变成$A_{ij}=\frac{A_{ij}}{d_i}$。$\boldsymbol{D}^{-1} \boldsymbol{A}$表示扩散卷积中的转移矩阵。$(\boldsymbol{D}^{-1} \boldsymbol{A})^k$表示$k$步转移</p>
 <font color="#dd0000">4. $f(H^{(l)},A) = \sigma(D^{-\frac{1}{2}}AD^{-\frac{1}{2}}H^{(l)}W^{(l)})$</font>
 
 <ul>
