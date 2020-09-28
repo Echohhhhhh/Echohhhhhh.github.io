@@ -62,7 +62,7 @@
 
 
 
-  <meta name="keywords" content="默默努力">
+  <meta name="keywords" content="时空领域,">
 
 
 
@@ -74,6 +74,7 @@
 
 
 <meta name="description" content="最近读论文，发现在交通领域中可以使用Tucker进行数据补全和降维，于是在网上查了下，下面是对于该技术简单记录。">
+<meta name="keywords" content="时空领域">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tucker分解">
 <meta property="og:url" content="http://yoursite.com/2020/09/28/Tucker分解/index.html">
@@ -81,7 +82,7 @@
 <meta property="og:description" content="最近读论文，发现在交通领域中可以使用Tucker进行数据补全和降维，于是在网上查了下，下面是对于该技术简单记录。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/09/28/Tucker分解/tucker分解.jpg">
-<meta property="og:updated_time" content="2020-09-28T13:22:17.832Z">
+<meta property="og:updated_time" content="2020-09-28T13:33:49.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tucker分解">
 <meta name="twitter:description" content="最近读论文，发现在交通领域中可以使用Tucker进行数据补全和降维，于是在网上查了下，下面是对于该技术简单记录。">
@@ -340,9 +341,29 @@
           </span>
 
           
-
-          
+            <span class="post-category">
             
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
           
 
           
@@ -470,6 +491,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/时空领域/" rel="tag"># 时空领域</a>
+          
+        </div>
+      
 
       
       
@@ -530,15 +557,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODU3Mi8xNTEwMA=="></div>
-    </div>
-
-  
-
-
 
         </div>
         
@@ -835,17 +853,6 @@
 
 
 
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
   
 
 
@@ -1224,11 +1231,31 @@
       
       new needShareButton('#needsharebutton-float', flOptions);
     
-  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </script>
 
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

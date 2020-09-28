@@ -27,6 +27,12 @@
 </a></p>
 <p><a href="https://xueshu.baidu.com/usercenter/paper/show?paperid=698f76f981a87d8dc1643a0f7cd1989b" target="_blank" rel="noopener">基于位置聚类和张量分解的Web服务推荐研究与应用</a></p>
 ]]></content>
+      <categories>
+        <category>Machine Learning</category>
+      </categories>
+      <tags>
+        <tag>时空领域</tag>
+      </tags>
   </entry>
   <entry>
     <title>GMAN: A Graph Multi-Attention Network for Traffic Prediction</title>
@@ -2879,8 +2885,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
       </categories>
       <tags>
         <tag>Mxnet</tag>
-        <tag>Pytorch</tag>
         <tag>GPU</tag>
+        <tag>Pytorch</tag>
       </tags>
   </entry>
   <entry>
