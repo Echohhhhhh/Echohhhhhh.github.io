@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Factorization meets the neighborhood: a multifaceted collaborative filtering model</title>
+    <url>/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/</url>
+    <content><![CDATA[<p>发表在2008KDD上的一篇论文，对user-based CF和item-based CF进行改进。</p>
+]]></content>
+      <categories>
+        <category>推荐系统</category>
+      </categories>
+      <tags>
+        <tag>推荐系统</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Matrix Factorization Techniques for Recommender Systems</title>
     <url>/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/</url>
     <content><![CDATA[<p>这个论文是推荐算法中的经典论文，介绍的是矩阵分解FM，雅虎团队提出来的，发表在IEEE2009的computer期刊上，算法有效但非常简单。</p>
@@ -15,7 +27,7 @@
 <li><a href="#23-添加偏差">2.3. 添加偏差</a></li>
 <li><a href="#24-丰富用户表示">2.4. 丰富用户表示</a></li>
 <li><a href="#25-时间动态性">2.5. 时间动态性</a></li>
-<li><a href="#26-变化的权重">2.6. 变化的权重</a></li>
+<li><a href="#26-带权正则矩阵分解">2.6. 带权正则矩阵分解</a></li>
 </ul>
 </li>
 </ul>
@@ -71,8 +83,10 @@
 <script type="math/tex; mode=display">\hat{r}_{ui}=\mu + b_i + b_u + q^T_i (p_u+|N(u)|^{-0.5} \sum_{i \in N(u)}x_i+\sum_{a \in A(u)}y_a)</script><p>上面增强了用户表示，同样也可以丰富物品的表示。</p>
 <h2><span id="25-时间动态性">2.5. 时间动态性</span></h2><p>现在为止，提出的模型都是静态的，实际上，用户的兴趣会随着时间变化。因此在考虑用户-物品的交互中需要考虑到时间动态性。</p>
 <p>为了体现时间动态性，偏差都变成时间的函数，即物品偏差$b_i(t)$，用户偏差$b_u(t)$，用户偏好$p_u(t)$，不像人的喜好随时间变化，物品的特征一般是静态的，因此$q_i$不随着时间变化，现在用户$u$对物品$i$的评分变成：</p>
-<script type="math/tex; mode=display">\hat{r}_{ui}(t)=\mu + b_i(t)+b_u(t)+q^T_ip_u(t)</script><h2><span id="26-变化的权重">2.6. 变化的权重</span></h2><p>并不是现在所有的评分都赋予相同的权重，例如大量的广告可能会影响对某个商品的打分，后者系统中有些商品被恶意打分或刷好评等。</p>
-<p>在矩阵分解中很容易嵌入变化的权重，只需要乘上权重即可，如下所示：</p>
+<script type="math/tex; mode=display">\hat{r}_{ui}(t)=\mu + b_i(t)+b_u(t)+q^T_ip_u(t)</script><h2><span id="26-带权正则矩阵分解">2.6. 带权正则矩阵分解</span></h2><p>并不是现在所有的评分都赋予相同的权重，例如大量的广告可能会影响对某个商品的打分，后者系统中有些商品被恶意打分或刷好评等。</p>
+<p>在有些场景下，虽然没有得到用户具体的评分，但是能够得到一些类似于“置信度”的信息（也称为隐式反馈信息），例如用户的游戏时长、观看时长等数据。虽然时长信息不能直接体现用户的喜好，但是能够说明用户喜欢的概率更大。</p>
+<p>“带权”就是根据置信度计算每条记录对应损失的权重，优化的目标函数如下：</p>
+<p>当没有得到用户具体的评分，但是能够得到一些类似于隐式反馈信息时，就可使用带权正则矩阵分解</p>
 <script type="math/tex; mode=display">J(p_u,q_i,b^*)= \frac{1}{2}(c_{ui}\sum_{r_{ui} \neq0}(r_{ui}-\mu-b_u-b_i-q^T_ip_u)^2+\lambda(||q_i||^2+||p_u||^2+b^2_u+b^2_i))</script>]]></content>
       <categories>
         <category>推荐系统</category>
@@ -3097,8 +3111,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
       </categories>
       <tags>
         <tag>Mxnet</tag>
-        <tag>Pytorch</tag>
         <tag>GPU</tag>
+        <tag>Pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -5051,8 +5065,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>分布式平台</category>
       </categories>
       <tags>
-        <tag>Python</tag>
         <tag>Spark</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
