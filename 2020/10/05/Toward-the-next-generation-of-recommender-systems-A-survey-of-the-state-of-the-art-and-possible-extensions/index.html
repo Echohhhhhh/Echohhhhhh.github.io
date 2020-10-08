@@ -84,7 +84,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/10/05/Toward-the-next-generation-of-recommender-systems-A-survey-of-the-state-of-the-art-and-possible-extensions/sim1.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/10/05/Toward-the-next-generation-of-recommender-systems-A-survey-of-the-state-of-the-art-and-possible-extensions/sim2.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/10/05/Toward-the-next-generation-of-recommender-systems-A-survey-of-the-state-of-the-art-and-possible-extensions/r1.jpg">
-<meta property="og:updated_time" content="2020-10-06T13:18:00.621Z">
+<meta property="og:updated_time" content="2020-10-07T13:14:01.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Toward the next generation of recommender systems: A survey of the state-of-the-art and possible extensions">
 <meta name="twitter:description" content="论文地址 该论文发表于2005年IEEE TKDE，是推荐系统经典的综述论文。该论文主要对当时的技术进行总结。">
@@ -389,7 +389,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.8k
+                  3.3k
                 </span>
               
 
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  10
+                  12
                 </span>
               
             </div>
@@ -450,6 +450,7 @@
 <li><a href="#23-混合方法">2.3. 混合方法</a></li>
 </ul>
 </li>
+<li><a href="#3-推荐算法扩展">3. 推荐算法扩展</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="1-引言">1. 引言</span></h1><p>推荐系统可以帮助用户处理信息过载，提供个性化的推荐服务。<br>在下面的章节中，作者首先对当前的推荐算法进行总结，并列出他们的limitation。</p>
@@ -519,7 +520,25 @@ u(c, s) &=\cos \left(\vec{w}_{c}, \vec{w}_{s}\right)=\frac{\vec{w}_{c} \cdot \ve
 <li>新物品问题：当系统中增加一些新物品，没有用户针对这个物品打分，通常也使用混合推荐解决</li>
 <li>数据稀疏问题：用户对物品的打分矩阵是非常稀疏的，有些物品只被很少的用户打分，即使分数很高，这些物品也很少被推荐。解决这个问题的方法是计算用户相似度时，不仅仅使用打分数据，还可以使用用户的画像信息，例如性别，年龄，教育等信息。或者使用SVD进行降维。</li>
 </ol>
-<h2><span id="23-混合方法">2.3. 混合方法</span></h2>
+<h2><span id="23-混合方法">2.3. 混合方法</span></h2><p>一些推荐系统使用混合方法，结合基于内容的推荐和协同过滤。在这2种方法的结合方式上有以下几种：</p>
+<ol>
+<li>分别使用这2种方法，然后把他们的预测结果结合在一起<br>使用线性组合或投票的方式将2个方法的输出结合在一起。</li>
+<li>把基于内容的一些特征结合到协同过滤中<br>使用协同过滤进行推荐，但是保留用户画像信息，使用用户信息计算2个用户的相似性，而不是用历史打分来计算相似性。</li>
+<li>把协同过滤的一些特征结合到基于内容的推荐中<br>在基于内容的用户画像上进行降维</li>
+<li>构建一个综合模型，结合基于内容和协同过滤</li>
+</ol>
+<h1><span id="3-推荐算法扩展">3. 推荐算法扩展</span></h1><ol>
+<li><p>丰富用户信息<br>以前的基于内容的推荐和协同过滤是基于用户和物品的画像信息，没有充分利用用户交易记录和其他有价值的信息，在推荐的时候应该使用更先进的用户画像技术。</p>
+</li>
+<li><p>多维度推荐</p>
+<p>现在的推荐都是基于用户和物品的，不考虑上下文信息。然而很多时候，用户对某物品的喜爱程度很大程度上和时间有关，也可能取决与和谁一起消费。在这种情况下，仅仅就需要考虑上下文信息，例如时间，地点，公司等。</p>
+</li>
+<li><p>多规则打分<br>现在的推荐系统很多是单一规则打分。然而在一些应用中，比如餐厅推荐，用户可能喜欢这个餐厅的事物，环境，价格，服务等，因此需要从不同的规则来对这个餐厅进行打分。</p>
+</li>
+<li><p>评价指标<br>覆盖率，准确率，召回率，F1，ROC，MAE,MSE</p>
+</li>
+</ol>
+
       
     </div>
     
@@ -603,6 +622,10 @@ u(c, s) &=\cos \left(\vec{w}_{c}, \vec{w}_{s}\right)=\frac{\vec{w}_{c} \cdot \ve
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/" rel="prev" title="Matrix Factorization Techniques for Recommender Systems">
+                Matrix Factorization Techniques for Recommender Systems <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -676,7 +699,7 @@ u(c, s) &=\cos \left(\vec{w}_{c}, \vec{w}_{s}\right)=\frac{\vec{w}_{c} \cdot \ve
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -747,7 +770,7 @@ u(c, s) &=\cos \left(\vec{w}_{c}, \vec{w}_{s}\right)=\frac{\vec{w}_{c} \cdot \ve
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 推荐算法综述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 基于内容的推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.1.1. 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.1.2. 限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. 协同过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.1. 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.1.1. 基于内存的协同过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.1.2. 基于模型的协同过滤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.2. 限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. 混合方法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 推荐算法综述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 基于内容的推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.1.1. 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.1.2. 限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. 协同过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.1. 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.1.1. 基于内存的协同过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.1.2. 基于模型的协同过滤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.2. 限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. 混合方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 推荐算法扩展</span></a></li></ol></div>
             
 
           </div>
