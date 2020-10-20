@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Factorization meets the neighborhood: a multifaceted collaborative filtering model</title>
+    <title>SVD++介绍Factorization meets the neighborhood: a multifaceted collaborative filtering model</title>
     <url>/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/</url>
     <content><![CDATA[<p>Yehuda Koren发表在2008KDD上的一篇论文。他也是Netflix Prize的冠军队成员，是推荐系统领域的大神级人物。他带领的团队在 Netflix Prize 比赛中拿到过两次进步奖（progress award），参与的团队拿到过 2009 年 Netflix Prize 比赛的百万美金大奖。当年比赛的题目是 netflix 电影评分预测，Yehuda Koren 所在团队提出的算法在测试集上的均方根误差为 0.8567，比比赛开始时的最高成绩提高了 10.06%。Yehuda Koren 等人当年做出的算法是基于矩阵分解的算法，优于传统的最近邻基础，已经成为现在几乎所有推荐系统的基础。</p>
 <a id="more"></a>
@@ -22,6 +22,7 @@
 <li><a href="#6-总结">6. 总结</a></li>
 </ul>
 <!-- /TOC -->
+<p><a href="https://mp.weixin.qq.com/s/ks6Vvg7j35-uKgAncq63eQ" target="_blank" rel="noopener">推荐系统 | 一文带你了解协同过滤的前世今生</a></p>
 <h1><span id="1-引言">1. 引言</span></h1><p>实现协同过滤CF的2个比较成功的方法：<strong>邻居模型</strong>（user-based和item-based）和<strong>潜在因子模型</strong>，本篇论文对以上两种方法进行融合。</p>
 <p>邻居方法是计算item或user的相似性。</p>
 <p>潜在因子模型，例如奇异值分解(SVD)，使用多个因素来表示item</p>
@@ -112,7 +113,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Matrix Factorization Techniques for Recommender Systems</title>
+    <title>矩阵分解MF论文Matrix Factorization Techniques for Recommender Systems</title>
     <url>/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/</url>
     <content><![CDATA[<p>这个论文是推荐算法中的经典论文，介绍的是矩阵分解FM，雅虎团队提出来的，发表在IEEE2009的computer期刊上，算法有效但非常简单。</p>
 <p>作者Yehuda Koren是Netflix Prize的冠军队成员，是推荐系统领域的大神级人物。他带领的团队在 Netflix Prize 比赛中拿到过两次进步奖（progress award），参与的团队拿到过 2009 年 Netflix Prize 比赛的百万美金大奖。当年比赛的题目是 netflix 电影评分预测，Yehuda Koren 所在团队提出的算法在测试集上的均方根误差为 0.8567，比比赛开始时的最高成绩提高了 10.06%。Yehuda Koren在这篇论文中提出基于矩阵分解的算法，优于传统的最近邻基础，已经成为现在几乎所有推荐系统的基础。</p>
@@ -195,7 +196,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Toward the next generation of recommender systems: A survey of the state-of-the-art and possible extensions</title>
+    <title>推荐系统综述Toward the next generation of recommender systems: A survey of the state-of-the-art and possible extensions</title>
     <url>/2020/10/05/Toward-the-next-generation-of-recommender-systems-A-survey-of-the-state-of-the-art-and-possible-extensions/</url>
     <content><![CDATA[<p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=1423975" target="_blank" rel="noopener">论文地址</a></p>
 <p>该论文发表于2005年IEEE TKDE，是推荐系统经典的综述论文。该论文主要对当时的技术进行总结。</p>
@@ -3214,8 +3215,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
       </categories>
       <tags>
         <tag>Mxnet</tag>
-        <tag>Pytorch</tag>
         <tag>GPU</tag>
+        <tag>Pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -5168,8 +5169,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>分布式平台</category>
       </categories>
       <tags>
-        <tag>Spark</tag>
         <tag>Python</tag>
+        <tag>Spark</tag>
       </tags>
   </entry>
   <entry>
