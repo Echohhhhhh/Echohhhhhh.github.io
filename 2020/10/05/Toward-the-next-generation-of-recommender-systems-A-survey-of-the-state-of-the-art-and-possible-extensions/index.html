@@ -84,7 +84,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/10/05/Toward-the-next-generation-of-recommender-systems-A-survey-of-the-state-of-the-art-and-possible-extensions/sim1.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/10/05/Toward-the-next-generation-of-recommender-systems-A-survey-of-the-state-of-the-art-and-possible-extensions/sim2.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/10/05/Toward-the-next-generation-of-recommender-systems-A-survey-of-the-state-of-the-art-and-possible-extensions/r1.jpg">
-<meta property="og:updated_time" content="2020-10-07T13:14:01.309Z">
+<meta property="og:updated_time" content="2020-10-09T02:44:55.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Toward the next generation of recommender systems: A survey of the state-of-the-art and possible extensions">
 <meta name="twitter:description" content="论文地址 该论文发表于2005年IEEE TKDE，是推荐系统经典的综述论文。该论文主要对当时的技术进行总结。">
@@ -438,7 +438,7 @@
 <li><a href="#212-限制">2.1.2. 限制</a></li>
 </ul>
 </li>
-<li><a href="#22-协同过滤">2.2. 协同过滤</a><ul>
+<li><a href="#22-协同过滤cf">2.2. 协同过滤CF</a><ul>
 <li><a href="#221-介绍">2.2.1. 介绍</a><ul>
 <li><a href="#2211-基于内存的协同过滤">2.2.1.1. 基于内存的协同过滤</a></li>
 <li><a href="#2212-基于模型的协同过滤">2.2.1.2. 基于模型的协同过滤</a></li>
@@ -487,7 +487,8 @@ u(c, s) &=\cos \left(\vec{w}_{c}, \vec{w}_{s}\right)=\frac{\vec{w}_{c} \cdot \ve
 </li>
 </ol>
 <p><strong>推荐系统的理想状态是多样性</strong>，为用户推荐一系列不同的内容，而不是全是同一系列的内容。</p>
-<h2><span id="22-协同过滤">2.2. 协同过滤</span></h2><h3><span id="221-介绍">2.2.1. 介绍</span></h3><p>协同过滤是根据与该用户相似用户的喜好物品来进行推荐。</p>
+<h2><span id="22-协同过滤cf">2.2. 协同过滤CF</span></h2><p>协同过滤Collaborative Filtering</p>
+<h3><span id="221-介绍">2.2.1. 介绍</span></h3><p>协同过滤是根据与该用户相似用户的喜好物品来进行推荐。</p>
 <p>形式化定义：效益函数$u(c,s)$基于$u(c_j,s)$，其中$c_j$表示和用户$c$相似的用户。</p>
 <p>协同过滤算法可以分为2类：基于内存的、基于模型的。</p>
 <h4><span id="2211-基于内存的协同过滤">2.2.1.1. 基于内存的协同过滤</span></h4><p>基于内存的表示用户$c$对物品$s$的喜爱程度$r_{c,s}$基于系统中以前其他用户$c’$对物品$s$的评分$r_{c’,s}$,$c’$通常是与$c$最相似的$N$个用户$\hat{C}$，$r_{c,s}$通常是$r_{c’,s}$的聚合函数。</p>
@@ -770,7 +771,7 @@ u(c, s) &=\cos \left(\vec{w}_{c}, \vec{w}_{s}\right)=\frac{\vec{w}_{c} \cdot \ve
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 推荐算法综述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 基于内容的推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.1.1. 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.1.2. 限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. 协同过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.1. 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.1.1. 基于内存的协同过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.1.2. 基于模型的协同过滤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.2. 限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. 混合方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 推荐算法扩展</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 推荐算法综述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.1. 基于内容的推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.1.1. 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.1.2. 限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.2. 协同过滤CF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.1. 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.1.1. 基于内存的协同过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.1.2. 基于模型的协同过滤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.2. 限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.3. 混合方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 推荐算法扩展</span></a></li></ol></div>
             
 
           </div>

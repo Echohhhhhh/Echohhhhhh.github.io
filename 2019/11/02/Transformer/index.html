@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/11/02/Transformer/a7.png">
 <meta property="og:image" content="http://yoursite.com/2019/11/02/Transformer/a8.png">
 <meta property="og:image" content="http://yoursite.com/2019/11/02/Transformer/pytorch.png">
-<meta property="og:updated_time" content="2020-09-09T06:00:07.793Z">
+<meta property="og:updated_time" content="2020-10-13T05:30:17.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Transformer">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;《Attention is all you need》是Google Brain在2017年发表在NIPS的一篇文章。虽然在这篇文章之前，也在用Attention，但在这篇文章中，正式提出了Attention的概念，从此Attention在各个领域得到了广泛的应用。 论文地址   你应该知道的transformer">
@@ -487,15 +487,15 @@
 <h2><span id="11-位置嵌入">1.1. 位置嵌入</span></h2><p><img src="/2019/11/02/Transformer/PE.png" alt=""></p>
 <p>其中<br>$pos$：字在句子中的位置，比如一句话有10个字，pos从0~9<br>$i$：embedding dimension的维度，比如一个字的字向量有256维，则$i$的取值为0~255。<br>$d_{model}$：总共字向量的维度，即256.<br>如果一句话中有10个字，pos从0至9，一个字向量维度是256，从0~255.则<br>第0个字的position embedding为$PE_{(0,0)},PE_{(0,1)},…,PE_{(0,254)},PE_{(0,255)}$.如果字向量维度的下标是偶数使用$sin$，为奇数使用$cos$。使用以上公式可以区分字与字之间的位置信息。<br>在输入的时候将每个字的词嵌入和位置嵌入相加，作为总体的输入。</p>
 <h2><span id="12-self-attention">1.2. self-attention</span></h2><ol>
-<li><p>经过Embedding-lookup查表得到字向量，和position embedding得到位置嵌入，两者相加，得到一个字的最终嵌入表示，输入的维度为$X \in R^{batch_size \quad <em> \quad seq_len \quad </em> \quad embedding_dim}$<br>比如一个batch中有32个句子，每个句子有10个单词，embedding_dim=100，则输入的维度为$X \in R^{32<em>10</em>100}$</p>
+<li><p>经过Embedding-lookup查表得到字向量，和position embedding得到位置嵌入，两者相加，得到一个字的最终嵌入表示，输入的维度为$X \in R^{batch_size \times seq_len \times embedding_dim}$<br>比如一个batch中有32个句子，每个句子有10个单词，embedding_dim=100，则输入的维度为$X \in R^{32 \times 10 \times 100}$</p>
 </li>
-<li><p>然后将$X_{embedding}$进行3次线性变换，$W_QX_{embedding},W_KX_{embedding},W_VX_{embedding}$得到$Q,K,V$,维度都是$R^{batch_size \quad <em> \quad seq_len \quad </em> \quad embedding_dim}$  </p>
+<li><p>然后将$X_{embedding}$进行3次线性变换，$W_QX_{embedding},W_KX_{embedding},W_VX_{embedding}$得到$Q,K,V$,维度都是$R^{batch_size \times seq_len \times embedding_dim}$  </p>
 </li>
-<li>对$Q,K,V$进行分割，即多头注意力机制，其中head的个数是一个超参数，注意：$embedding \quad dimension必须能够整除head$,即一个矩阵变成$h$个矩阵，分割之后$Q,K,V$的维度为$[batch_size,seq_len,h,embedding_dimension/h]$,之后把$Q,K,V$的$seq_len,h$的维度进行转置，为了方面后面的计算，转置之后的$Q,K,V$的维度为$[batch_size,h,seq_len,embedding_dimension/h]$  </li>
+<li>对$Q,K,V$进行分割，即多头注意力机制，其中head的个数是一个超参数，注意：$embedding_dimension$必须能够整除$head$,即一个矩阵变成$h$个小矩阵，分割之后$Q,K,V$的维度为$R^{batch_size \times seq_len \times h \times \frac{embedding_dimension}{h}}$,之后把$Q,K,V$的$seq_len,h$的维度进行转置，为了方面后面的计算，转置之后的$Q,K,V$的维度为$R^{batch_size \times h \times seq_len \times \frac{embedding_dimension}{h}}$  </li>
 <li>拿出一个$head$，即$Q*K^T$,得到的维度是$[batch_size,h,seq_len,seq_len]$,每个字与每个字之间的注意力，每一行表示当前这个字和所有字的关系。如果2个字之间的意思越相近，得到的注意力也越大。对每一行做softmax归一化，即每一行的和为1，得到归一化之后的注意力矩阵。</li>
 <li>将注意力矩阵给$V$加权，即让所有字的信息融入到当前字中，得到当前字的一个加权表示。最终让每一个字都融合所有字的信息。得到的$V$的维度为$[batch_size,h,seq_len,embedding_dimension/h]$.</li>
-<li>在训练的时候，通常多句话进行计算，即形成一个mini-batch。mini-batch中的句子的长度不一样，找出句子的最大长度max_seq_len，将短的句子补成和最大句子一样的长度，使用0padding。假设max_seq_len=10，一个句子的长度为7，即得到的attention矩阵，下面3行和右边3列都是0。在对attention矩阵做softmax会出问题，因为softmax计算涉及到指数计算，$e^0=1$,即经过softmax计算attention不为0，让无效的部分参与了计算。为了解决这个问题，需要用一个mask让这些无效的区域不参与计算，一般给无效的区域加一个很大的负数的偏置，$Z_{illegal}$表示无效的区域，加上一个很大的负数，变成负数，即通过softmax指数计算结果还是0。  </li>
-<li>不同的head得到的结果concat起来，才能恢复到原来的维度$[batch_size,seq_len,embedding_dimension]$。不同的head关注的点不一样，可能有的head关注的local的关系，有的head关注的是global的关系。  </li>
+<li>在训练的时候，通常多句话进行计算，即形成一个mini-batch。mini-batch中的句子的长度不一样，找出句子的最大长度max_seq_len，<strong>将短的句子补成和最大句子一样的长度，使用0padding</strong>。假设max_seq_len=10，一个句子的长度为7，即得到的attention矩阵，下面3行和右边3列都是0。在对attention矩阵做softmax会出问题，因为softmax计算涉及到指数计算，$e^0=1$,即经过softmax计算attention不为0，让无效的部分参与了计算。为了解决这个问题，<strong>需要用一个mask让这些无效的区域不参与计算，一般给无效的区域加一个很大的负数的偏置</strong>，$Z_{illegal}$表示无效的区域，加上一个很大的负数，变成负数，即通过softmax指数计算结果还是0。  </li>
+<li><strong>不同的head得到的结果concat起来</strong>，才能恢复到原来的维度$[batch_size,seq_len,embedding_dimension]$。不同的head关注的点不一样，可能有的head关注的local的关系，有的head关注的是global的关系。  </li>
 <li>最后一步是Position-wise FFN，其实就是2层全连接，对输出$[batch_size,seq_len,embedding_dimension]$，经过2次线性变换和一个Relu激活函数。$Relu=max(0,x)$</li>
 </ol>
 <p><img src="/2019/11/02/Transformer/FFN.png" alt=""></p>

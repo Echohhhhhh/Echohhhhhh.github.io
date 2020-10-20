@@ -3,7 +3,106 @@
   <entry>
     <title>Factorization meets the neighborhood: a multifaceted collaborative filtering model</title>
     <url>/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/</url>
-    <content><![CDATA[<p>发表在2008KDD上的一篇论文，对user-based CF和item-based CF进行改进。</p>
+    <content><![CDATA[<p>Yehuda Koren发表在2008KDD上的一篇论文。他也是Netflix Prize的冠军队成员，是推荐系统领域的大神级人物。他带领的团队在 Netflix Prize 比赛中拿到过两次进步奖（progress award），参与的团队拿到过 2009 年 Netflix Prize 比赛的百万美金大奖。当年比赛的题目是 netflix 电影评分预测，Yehuda Koren 所在团队提出的算法在测试集上的均方根误差为 0.8567，比比赛开始时的最高成绩提高了 10.06%。Yehuda Koren 等人当年做出的算法是基于矩阵分解的算法，优于传统的最近邻基础，已经成为现在几乎所有推荐系统的基础。</p>
+<a id="more"></a>
+<!-- TOC -->
+<ul>
+<li><a href="#1-引言">1. 引言</a></li>
+<li><a href="#2-定义">2. 定义</a><ul>
+<li><a href="#21-baseline">2.1. baseline</a></li>
+<li><a href="#22-邻居方法">2.2. 邻居方法</a></li>
+<li><a href="#23-潜在因子模型">2.3. 潜在因子模型</a></li>
+<li><a href="#24-netflix数据集">2.4. Netflix数据集</a></li>
+<li><a href="#25-隐式反馈">2.5. 隐式反馈</a></li>
+</ul>
+</li>
+<li><a href="#3-邻居模型">3. 邻居模型</a></li>
+<li><a href="#4-隐式因子模型">4. 隐式因子模型</a></li>
+<li><a href="#5-整合模型">5. 整合模型</a></li>
+<li><a href="#6-总结">6. 总结</a></li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-引言">1. 引言</span></h1><p>实现协同过滤CF的2个比较成功的方法：<strong>邻居模型</strong>（user-based和item-based）和<strong>潜在因子模型</strong>，本篇论文对以上两种方法进行融合。</p>
+<p>邻居方法是计算item或user的相似性。</p>
+<p>潜在因子模型，例如奇异值分解(SVD)，使用多个因素来表示item</p>
+<p>这篇文章首次提出将邻居方法和潜在因子模型进行融合。</p>
+<p>作者发现整合不同形式的输入到模型中是非常重要的，传统的方法一般输入的都是高质量的显示反馈，例如user-item评分矩阵，然后显示反馈有时无法获取到，一些隐式信息也能反映用户的喜好，隐式信息包括：购买历史，浏览记录，搜索模式，甚至鼠标移动。在本篇模型中，融合显示和隐式信息。</p>
+<h1><span id="2-定义">2. 定义</span></h1><ul>
+<li>用户$u,v$</li>
+<li>物品$i,j$</li>
+<li>评分$r_{ui}$，所有的评分$\mathcal<br>{K}=\{(u,i)|r_{ui}已知\}$</li>
+<li>需要预测的值$\hat{r_{ui}}$</li>
+</ul>
+<p>在评分矩阵中，大部分的值缺失，为了避免过度拟合稀疏的数据，添加正则化</p>
+<h2><span id="21-baseline">2.1. baseline</span></h2><p>普通的协同过滤方法CF，$b_{ui}$是基准推荐模型给出的评分：</p>
+<script type="math/tex; mode=display">b_{ui}=\mu + b_u + b_i</script><p>其中$\mu$表示所有物品的平均评分，$b_u$表示用户$u$评分的偏差，$b_i$表示物品$i$评分的偏差。假设要对电影《泰坦尼克号》评分，所有电影的评分$\mu=3.7$，天威这个电影比较好，评分比一般的电影高$b_i=0.5$分，而用户$u$在电影上比较挑剔，评分比一般评分低$b_u=0.3$分，则《泰坦尼克号》的评分为$3.7-0.3+0.5=3.9$分。</p>
+<p>为了求$b_i,b_u$，使用下面的目标函数</p>
+<script type="math/tex; mode=display">\mathop{min} \limits_{b*} \sum_{(u,i) \in \mathcal{K}} (r_{ui}-\mu-b_i-b_u)^2+\lambda_1(\sum_\mu b_u^2 + \sum_{i}b_i^2)</script><h2><span id="22-邻居方法">2.2. 邻居方法</span></h2><p>基于邻居方法来实现协同过滤CF。先出现基于用户的CF，后提出基于物品的CF。在预测中，面向物品的CF更容易解释，因为我们更容易解释物品之间的相似性，而用户之间的相似性不容易解释。下面以面向物品的CF为例。</p>
+<p>面向物品的CF核心是计算相似性。可以使用皮尔森系数，但由于评分矩阵非常系数，可以对皮尔森系数进行修正：</p>
+<script type="math/tex; mode=display">s_{ij}=\frac{n_{ij}}{n_{ij}+\lambda_2}\rho_{ij}</script><p>其中$n_{ij}$表示同时给物品$i,j$都进行评分的用户个数，$\lambda_2$通常为100</p>
+<p>为了求出用户$u$对未见过的物品$i$的评分$r_{ui}$，首先从用户$u$已经评分过的物品中找出与物品$i$最相似的$k$个物品，表示为$S^k(i;u)$，被预测的值$\hat{r}_{ui}$为这$k$个物品评分的加权平均</p>
+<p><img src="/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/sim.jpg" alt=""> (3)</p>
+<p>但是这种方法不能通过正式模型来证明，此外该相似性度量没有分析所有邻居间的相互作用，而权重和为1的事实导致该方法完全依赖邻居，即使在没有邻居的情况下。</p>
+<p>为了解决以上问题，本文提出新的插值权重$\theta^u_{ij}$</p>
+<script type="math/tex; mode=display">\hat{r}_{ui}=b_{ui}+\sum_{j \in S^k(i;u)}\theta^u_{ij}(r_{uj}-b_{uj})\quad \quad (4)</script><p>至于$\theta^u_{ij}$怎么得到的，参考《Scalable Collaborative Filtering with Jointly Derived Neighborhood Interpolation Weights》</p>
+<h2><span id="23-潜在因子模型">2.3. 潜在因子模型</span></h2><p>潜在因子模型感觉就是矩阵分解MF，通常可以使用奇异值分解来实现，使用向量$p_u \in \mathbb{R}^f$表示用户$u$，使用向量$q_i \in \mathbb{R}^f$表示物品$i$。通过$\hat{r}_{ui}=b_{ui}+p_u^Tq_i$来进行预测。</p>
+<p>在信息检索中，通常使用SVD进行矩阵分解，然而评分矩阵中通常比较稀疏，会造成过拟合的问题。早期的方法通过插值的方法来构造稠密矩阵，但这种代价太大。因此最近的额工作通常直接对评分矩阵进行建模，采用正则化来避免过拟合。</p>
+<p><img src="/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/2.jpg" alt=""></p>
+<p>Paterek提出使用NSVD，这种方法避免显式参数化每个用户，而是根据用户评价的物品对用户进行建模。对于每个物品，使用2个向量表示$q_i,x_i$，根据用户所评价的物品来表示用户向量，其中$R(u)$是用户评价的物品集合，用户向量为$(\sum_{j \in R(u)}x_j)/\sqrt{|R(u)|}$，最终的预测评分：</p>
+<script type="math/tex; mode=display">\hat{r}_{ui}=b_{ui}+q_i^T (\sum_{j \in R(u)}x_j)/\sqrt{|R(u)|}</script><p>本篇论文在此基础上进行扩展。</p>
+<h2><span id="24-netflix数据集">2.4. Netflix数据集</span></h2><p>使用Netfix电影评分数据，评价指标</p>
+<p><img src="/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/rmse.jpg" alt=""></p>
+<p>测试集中包含140万个最新电影评分，这里面包含较多的对电影评分不多的用户，很难预测，更符合实际情况。</p>
+<p>Netflix数据集是现在Netflix Prize竞赛使用的数据集，该竞赛的基准是Netflix的专有系统，测试集的RMSE为0.9514，大奖将办法给将RMSE降低至0.8563以下(提升10%)的团队。本篇论文的RMSE为0.887</p>
+<h2><span id="25-隐式反馈">2.5. 隐式反馈</span></h2><p>像Netflix这样的数据，隐式数据是用户的电影租赁记录，并不需要用户显示的评分，但是这样的数据并不能获取到，现在所能获取到的数据就是显示评分数据。</p>
+<p>在本篇模型中，不限制使用隐式数据的类型，每个用户有2个向量表示，一个显式数据$R(u)$，例如用户$u$所评分的物品；一个隐式数据$N(u)$</p>
+<h1><span id="3-邻居模型">3. 邻居模型</span></h1><p>在本篇论文中，我们引入了新的邻居模型，该模型不仅提升了准确率，并且整合了隐式信息。</p>
+<p>之前的模型使用$\theta^u_{ij}$或$\frac{s_{ij}}{\sum_{j \in S^k(i;u)}s_{ij}}$将物品$i$和它的邻居$S^k(i;u)$联系起来.</p>
+<p>为了促进全局优化，我们抛弃特定用户的权重，使用全局权重，该权重独立于特定的用户。从物品$j$到物品$i$的权重表示为$w_{ij}$，该权重通过优化学习得到，预测得分$\hat{r}_{ui}$公式如下：</p>
+<script type="math/tex; mode=display">\hat{r}_{ui} = b_{ui}+\sum_{j \in R(u)}(r_{uj}-b_{uj})w_{ij} \quad \quad (6)</script><p>我们提出的公式6和公式4不同，公式6中的$w_{ij}$不是针对特定用户的。$R(u)$是用户评价的物品集合。公式6是对$R(u)$求和，公式4是对$S^k(i;u)$求和。用户$u$已经评分过的物品中找出与物品$i$最相似的$k$个物品，表示为$S^k(i;u)$</p>
+<p>在邻居模型中，权重通常表示未知物品和已知物品的插值系数，也表示和baseline评估分数的偏差。残差$r_{uj}-b_{uj}$和这些偏差$w_{ij}$相乘。对于2个相关的物品$i,j$，希望$w_{ij}$越大越好。如果用户$u$对物品$j$评分高于期望值$(r_{uj}-b_{uj})$时，我们也希望增加用户$u$对物品$i$的评分，通过加上$(r_{uj}-b_{uj})\times w_{ij}$。我们的评估不会和baseline差太多。主要有以下2个原因：(1)如果用户$u$对物品$j$的评分和期望值差不不大，则$r_{uj}-b_{uj}$基本为0。(2)如果物品$j$对物品$i$来说是未知的，则$w_{ij}$基本为0。通过这种考虑对公式(6)进行改进。首先我们使用隐式反馈，通过这可学习用户偏好。最终，我们在后面添加一组权重来重写公式(6)</p>
+<script type="math/tex; mode=display">\hat{r}_{ui} = b_{ui}+\sum_{j \in R(u)}(r_{uj}-b_{uj})w_{ij}+\sum_{j \in N(u)}c_{ij} \quad \quad (7)</script><p>$c_{ij}$和$w_{ij}$都是权重，对于物品$i$和物品$j$，用户$u$对物品$j$的隐式偏好会主导用户修改对物品$i$的评分$r_{ui}$,通过加上偏差$c_{ij}$。</p>
+<p>上式中的权重是全局的偏差，而不是针对某个特定用户，这种方式强调了缺失值的影响。换句话说，用户的偏好不仅仅取决于他的评分，还取决于他没有评分的东西。例如要预测用户对“指环王3”的评分，如果用户对“指环王1和2”评分也比较高，则从指环王1和2到指环王3的权重就比较大，但是如果用户没有对指环王1和2进行评分，则对指环王3进行评分时，就需要进行惩罚。</p>
+<p>下面给出更一般的公式</p>
+<script type="math/tex; mode=display">\hat{r}_{ui} = \mu + b_i + b_u + \sum_{j \in R(u)}(r_{uj}-b_{uj})w_{ij}+\sum_{j \in N(u)}c_{ij} \quad \quad (7)</script><p>其中$\mu + b_i + b_u$是其他模型的预测值。</p>
+<p>当前的方案中，对那些评分数据较多(具有高的$|R(u)|$)或隐式数据较多(具有高的$N(u)$)的的用户，鼓励生成较大偏差的评分结果，与baseline相比。也就是说对于那些输入数据较多的用户，我们更愿意预测更奇怪和不太常见的建议，对于那些少量输入数据的用户更希望给出接近baseline的估计值。但是，根据我们的经验可知，当前的模型在某种程度上过分强调了较多评分者和较少评分者之间的二分法，为了缓和这种情况，将预测规则修改如下：</p>
+<p><img src="/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/3.jpg" alt=""></p>
+<p>可以通过修剪与不太相关的项目来减少参数，使用$R^k(i;u)$表示在用户$u$评价的物品中，与物品$i$最相似的$k$个物品。$N^k(i;u)$表示在用户$u$隐式偏好的物品中，与物品$i$最相似的$k$个物品</p>
+<p><img src="/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/4.jpg" alt=""></p>
+<p>下面是我们提出方案的最终版，新的邻居模型的主要目标是利用有效的全局优化过程。在下面的优化过程中，加上正则项。</p>
+<p><img src="/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/5.jpg" alt=""></p>
+<h1><span id="4-隐式因子模型">4. 隐式因子模型</span></h1><p>隐式因子模型中较流行的是SVD，对评分矩阵进行分解，每个用户$u$使用向量$p_u \in \mathbb{R}^f$表示，每个物品$i$使用向量$q_i \in \mathbb{R}^f$，通过下式得到预测结果：</p>
+<script type="math/tex; mode=display">\hat{r}_{ui}=b_{ui}+p^T_uq_i \quad \quad (12)</script><p>通过下面的公式进行优化求解：</p>
+<p><img src="/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/2.jpg" alt=""></p>
+<p>下面我们通过添加隐式信息对SVD进行扩展，预测公式如下所示：</p>
+<p><img src="/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/6.jpg" alt=""></p>
+<p>在上式中，每个物品$i$都有3个向量$q_i,x_i,y_i \in \mathbb{R}^f$。在这里我们并没有对用户$u$给出一个显示的向量表示，而是使用该用户过去评分的商品来表示用户$u$的喜好。使用下面的公式代替用户向量$p_i$</p>
+<script type="math/tex; mode=display">|R(u)^{-\frac{1}{2}}|\sum_{j \in R(u)}(r_{uj}-b_{uj})x_j+|N(u)|^{-\frac{1}{2}}\sum_{j \in N(u)}y_j</script><p>带有正则项的损失函数就变成：</p>
+<p><img src="/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/7.jpg" alt=""></p>
+<p>本文提出的SVD被称为“<strong>非对称SVD</strong>”，主要有以下优点：</p>
+<ol>
+<li>更少的参数。通常用户的数量远大于商品的数量。因此使用物品参数代替用户参数降低模型复杂度</li>
+<li>冷启动问题。因为非对称SVD中没有用户参数，只要用户在系统中有反馈，我们就可以处理新用户问题，并不需要重新训练模型。需要注意的是对于新的物品，我们需要学习新的参数。换句话说：系统对于新用户可以给出即时的推荐，对于新物品的推荐，需要等待一些时间。</li>
+<li>可解释性。以前的SVD是通过对用户过去的行为进行抽象，抽象为用户向量，无法直接解释哪个历史行为对当前的预测结果更重要。非对称SVD算法没有对用户进行超互相，最终的预测结果是用户历史反馈的直接函数，所以可以直观的看出历史哪个行为对当前预测更重要，解释性更强。面向物品的协同过滤也有这个优点。</li>
+<li>有效地整合隐式反馈。隐式反馈提供了额外的用户爱好，可能提升推荐准确率。在公式(13)中，当$|N(u)|$变大时，隐式反馈更重要。当$R(u)$变大时，显示反馈更重要。</li>
+</ol>
+<p>实际上，对隐式信息进行整合，我们可以通过更直接的方式来获取更准确的结果，公式如下：</p>
+<script type="math/tex; mode=display">\hat{r}_{ui} = b_{ui}+q^T_i(p_u+|N(u)|^{-\frac{1}{2}}\sum_{j \in N(u)}y_j) \quad \quad (15)</script><p>以上面相比，在用户表示上添加$p_u$，其中$p_u$从用户显示评分数据中得到。使用$p_u+|N(u)|^{-\frac{1}{2}}\sum_{j \in N(u)}y_j$既有显示表示，又有隐式表示，我们称这种模型为<strong>SVD++</strong></p>
+<p>SVD++虽然没有参数更少，解释性更强的优点，但在Netflix数据上效果更好。</p>
+<p><img src="/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/SVD.jpg" alt=""></p>
+<h1><span id="5-整合模型">5. 整合模型</span></h1><p>将邻居模型和SVD++融合</p>
+<p>一种融合方式是将公式10和公式15的预测结果相加</p>
+<p><img src="/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/8.jpg" alt=""></p>
+<p>公式(16)提供了3层模型。</p>
+<ul>
+<li>第一层$\mu+b_i + b_u$描述了商品和用户的一般属性，不考虑任何的交互。例如电影《指环王》拍的很好，用户Joe对所有电影的评分都是平均水平。</li>
+<li>第二层$q^T_i(p_u+|N(u)|^{-\frac{1}{2}}\sum_{j \in N(u)}y_j)$提供了用户和物品的交互。例如用户Joe对《指环王》的科幻电影里评分较高</li>
+<li>第三层邻域层贡，对其进行细粒度的调整，这种调整很难描述，例如用户Joe在“励志”标签的电影中评分较低。</li>
+</ul>
+<p>模型参数通过梯度下降来更新。</p>
+<p><img src="/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/9.jpg" alt=""></p>
+<h1><span id="6-总结">6. 总结</span></h1><p>我们提出了新的邻居模型，该模型通过全局损失函数进行优化，具有可解释性强，并且可应对新用户，不用重新训练的问题。同时对SVD方法进行扩展，通过整合隐式反馈来提升准确率。</p>
+<p>推荐系统的性能从不同的维度体现，例如准确率，多样性，推荐意想不到的物品的能力，可解释性，topK推荐，计算效率等。</p>
 ]]></content>
       <categories>
         <category>推荐系统</category>
@@ -16,6 +115,7 @@
     <title>Matrix Factorization Techniques for Recommender Systems</title>
     <url>/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/</url>
     <content><![CDATA[<p>这个论文是推荐算法中的经典论文，介绍的是矩阵分解FM，雅虎团队提出来的，发表在IEEE2009的computer期刊上，算法有效但非常简单。</p>
+<p>作者Yehuda Koren是Netflix Prize的冠军队成员，是推荐系统领域的大神级人物。他带领的团队在 Netflix Prize 比赛中拿到过两次进步奖（progress award），参与的团队拿到过 2009 年 Netflix Prize 比赛的百万美金大奖。当年比赛的题目是 netflix 电影评分预测，Yehuda Koren 所在团队提出的算法在测试集上的均方根误差为 0.8567，比比赛开始时的最高成绩提高了 10.06%。Yehuda Koren在这篇论文中提出基于矩阵分解的算法，优于传统的最近邻基础，已经成为现在几乎所有推荐系统的基础。</p>
 <p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=5197422" target="_blank" rel="noopener">论文地址</a></p>
 <a id="more"></a>
 <!-- TOC -->
@@ -33,14 +133,13 @@
 </ul>
 <!-- /TOC -->
 <p>电子零售商给消费者提供了大量的商品供用户选择，造成信息过载，向用户推荐匹配的商品可以提升用户的满意度和忠诚度，零售商通过分析用户在商品的兴趣模式，提供个性化推荐。</p>
-<h1><span id="1-推荐系统策略">1. 推荐系统策略</span></h1><p>广义上讲，推荐系统基于2个策略：</p>
-<ol>
-<li><p>基于内容的策略。<br>内容过滤策略给每个用户和商品创建一个画像表示其属性。例如电影画像包括主题，主演，票房等。用户画像包括人口统计信息或问卷调查信息。这些画像允许程序将用户和商品进行匹配。<br>一种替代方法是基于用户的协同过滤，先找出用户-商品的评分矩阵，然后计算2个用户对商品的评分向量的相似性，而不是基于用户画像计算相似性。<br>但是基于用户的协同过滤需要用户对商品的评分计算相似性，因此会遇到冷启动的问题。在这方面，基于内容的推荐更胜一筹。</p>
-</li>
-<li><p>潜在因子模型<br>根据评分模式推断出20~100个因子来表示商品或用户</p>
-<p><img src="/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/1.jpg" alt=""></p>
-</li>
-</ol>
+<h1><span id="1-推荐系统策略">1. 推荐系统策略</span></h1><p><img src="/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/cf.jpg" alt=""></p>
+<p><img src="/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/优缺点.jpg" alt=""></p>
+<p>广义上讲，推荐系统基于2个策略：</p>
+<p><strong>1. 基于内容的策略</strong><br>   内容过滤策略给每个用户和商品创建一个画像表示其属性。例如电影画像包括主题，主演，票房等。用户画像包括人口统计信息或问卷调查信息。这些画像允许程序将用户和商品进行匹配。</p>
+<p><strong>2. 协同过滤</strong><br>   协同过滤又分为邻居模型和潜在因子模型。邻居模型有user-based和item-based，潜在因子模型有矩阵分解，例如SVD，SVD++等。<br>   一种替代方法是基于用户的协同过滤，先找出用户-商品的评分矩阵，然后计算2个用户对商品的评分向量的相似性，而不是基于用户画像计算相似性。<br>   但是基于用户的协同过滤需要用户对商品的评分计算相似性，因此会遇到冷启动的问题。在这方面，基于内容的推荐更胜一筹。</p>
+<p>   潜在因子模型根据评分模式推断出20~100个因子来表示商品或用户</p>
+<p>   <img src="/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/1.jpg" alt=""></p>
 <h1><span id="2-矩阵分解">2. 矩阵分解</span></h1><p>Matrix Factorization矩阵分解通过对用户-物品评分矩阵进行分解，使用因子向量表示用户和物品。</p>
 <p>矩阵分解使用的是用户-物品的评分矩阵，但这个矩阵是很稀疏的，因为一个用户可能只评价了一小部分物品。</p>
 <p>矩阵分解MF的一个优点是可以使用额外的信息。有时候显示的评分没法获取到，但我们可以使用一些隐式的信息来表示用户的兴趣，例如用户的浏览，购买记录，鼠标停留时间等。</p>
@@ -110,7 +209,7 @@
 <li><a href="#212-限制">2.1.2. 限制</a></li>
 </ul>
 </li>
-<li><a href="#22-协同过滤">2.2. 协同过滤</a><ul>
+<li><a href="#22-协同过滤cf">2.2. 协同过滤CF</a><ul>
 <li><a href="#221-介绍">2.2.1. 介绍</a><ul>
 <li><a href="#2211-基于内存的协同过滤">2.2.1.1. 基于内存的协同过滤</a></li>
 <li><a href="#2212-基于模型的协同过滤">2.2.1.2. 基于模型的协同过滤</a></li>
@@ -159,7 +258,8 @@ u(c, s) &=\cos \left(\vec{w}_{c}, \vec{w}_{s}\right)=\frac{\vec{w}_{c} \cdot \ve
 </li>
 </ol>
 <p><strong>推荐系统的理想状态是多样性</strong>，为用户推荐一系列不同的内容，而不是全是同一系列的内容。</p>
-<h2><span id="22-协同过滤">2.2. 协同过滤</span></h2><h3><span id="221-介绍">2.2.1. 介绍</span></h3><p>协同过滤是根据与该用户相似用户的喜好物品来进行推荐。</p>
+<h2><span id="22-协同过滤cf">2.2. 协同过滤CF</span></h2><p>协同过滤Collaborative Filtering</p>
+<h3><span id="221-介绍">2.2.1. 介绍</span></h3><p>协同过滤是根据与该用户相似用户的喜好物品来进行推荐。</p>
 <p>形式化定义：效益函数$u(c,s)$基于$u(c_j,s)$，其中$c_j$表示和用户$c$相似的用户。</p>
 <p>协同过滤算法可以分为2类：基于内存的、基于模型的。</p>
 <h4><span id="2211-基于内存的协同过滤">2.2.1.1. 基于内存的协同过滤</span></h4><p>基于内存的表示用户$c$对物品$s$的喜爱程度$r_{c,s}$基于系统中以前其他用户$c’$对物品$s$的评分$r_{c’,s}$,$c’$通常是与$c$最相似的$N$个用户$\hat{C}$，$r_{c,s}$通常是$r_{c’,s}$的聚合函数。</p>
@@ -1099,13 +1199,16 @@ a_{i}^{(l)}=\operatorname{SoftMax}_{l}\left(e_{i}^{(l)}\right)=\frac{\exp \left(
 <p>召回结果的候选item限定在用户的历史行为类目中，导致推荐结果越推越窄，难以发现长尾商品。</p>
 <h3><span id="621-基于用户的协同过滤">6.2.1. 基于用户的协同过滤</span></h3><p>实现协同过滤的步骤：</p>
 <ol>
-<li>首先计算<strong>用户与用户的相似程度</strong><br>比如下图中，我们计算出用户1和用户3最相似</li>
-<li>根据相似的人产生推荐结果<br>然后我们根据用户3的内容给用户1来推荐，用户3喜欢物品(1,4,8)，然后过滤到用户1已经喜欢的商品1，然后给用户1推荐物品4和8</li>
+<li>首先计算<strong>用户与用户的相似程度</strong><br>比如下图中，我们计算出用户1和用户2，3最相似</li>
+<li>根据相似的人产生推荐结果<br>然后我们根据用户2，3的内容给用户1来推荐，用户3喜欢物品AC，用户2喜欢ADE，则向用户1初始推荐AC+ADE，而用户1已经消费过ACD，过滤掉用户1已经消费过的商品，最终推荐商品E</li>
 </ol>
-<p><img src="/2020/07/25/推荐系统学习/评分矩阵.jpg" alt=""></p>
+<p><img src="/2020/07/25/推荐系统学习/基于用户.jpg" alt=""></p>
 <h3><span id="622-基于物品的协同过滤">6.2.2. 基于物品的协同过滤</span></h3><ol>
 <li>首先计算<strong>物品与物品的相似程度</strong><br>比如物品A和物品B相似</li>
-<li>根据相似的物品产生推荐结果<br>用户A原先买过物品A，然后就给推荐物品B</li>
+<li><p>根据相似的物品产生推荐结果<br>用户A原先买过物品A，然后就给推荐物品B</p>
+<p>物品A被4个用户消费过，物品B被2个用户消费过，其中用户5是2个物品共同的消费用户，对物品B来说这个用户5占所有用户的0.5，对物品A来说这个用户5占所有用户的0.25，所以物品A和B之间的相似度为0.5*0.25。按照这样方式计算所有物品之间的相似度，发现物品A和物品C</p>
+<p><img src="/2020/07/25/推荐系统学习/基于物品.jpg" alt=""></p>
+</li>
 </ol>
 <h3><span id="623-基于模型的协同过滤">6.2.3. 基于模型的协同过滤</span></h3><h4><span id="6231-矩阵分解mf">6.2.3.1. 矩阵分解MF</span></h4><p>MF（Matrix Factorization，矩阵分解）是一个简单的Embedding模型。给定用户和物品矩阵$A \in \mathbb{R}^{m \times n}$,然后对其进行分解成用户嵌入矩阵$U \in \mathcal{R}^{m \times d}$和商品矩阵$V \in \mathcal{R}^{n \times d}$。$d &lt;&lt; m和n$</p>
 <p>矩阵分解的目标就是让$UV^T$的结果和$A$尽可能的相似。</p>
@@ -3111,8 +3214,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
       </categories>
       <tags>
         <tag>Mxnet</tag>
-        <tag>GPU</tag>
         <tag>Pytorch</tag>
+        <tag>GPU</tag>
       </tags>
   </entry>
   <entry>
@@ -3475,15 +3578,15 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <h2><span id="11-位置嵌入">1.1. 位置嵌入</span></h2><p><img src="/2019/11/02/Transformer/PE.png" alt=""></p>
 <p>其中<br>$pos$：字在句子中的位置，比如一句话有10个字，pos从0~9<br>$i$：embedding dimension的维度，比如一个字的字向量有256维，则$i$的取值为0~255。<br>$d_{model}$：总共字向量的维度，即256.<br>如果一句话中有10个字，pos从0至9，一个字向量维度是256，从0~255.则<br>第0个字的position embedding为$PE_{(0,0)},PE_{(0,1)},…,PE_{(0,254)},PE_{(0,255)}$.如果字向量维度的下标是偶数使用$sin$，为奇数使用$cos$。使用以上公式可以区分字与字之间的位置信息。<br>在输入的时候将每个字的词嵌入和位置嵌入相加，作为总体的输入。</p>
 <h2><span id="12-self-attention">1.2. self-attention</span></h2><ol>
-<li><p>经过Embedding-lookup查表得到字向量，和position embedding得到位置嵌入，两者相加，得到一个字的最终嵌入表示，输入的维度为$X \in R^{batch_size \quad <em> \quad seq_len \quad </em> \quad embedding_dim}$<br>比如一个batch中有32个句子，每个句子有10个单词，embedding_dim=100，则输入的维度为$X \in R^{32<em>10</em>100}$</p>
+<li><p>经过Embedding-lookup查表得到字向量，和position embedding得到位置嵌入，两者相加，得到一个字的最终嵌入表示，输入的维度为$X \in R^{batch_size \times seq_len \times embedding_dim}$<br>比如一个batch中有32个句子，每个句子有10个单词，embedding_dim=100，则输入的维度为$X \in R^{32 \times 10 \times 100}$</p>
 </li>
-<li><p>然后将$X_{embedding}$进行3次线性变换，$W_QX_{embedding},W_KX_{embedding},W_VX_{embedding}$得到$Q,K,V$,维度都是$R^{batch_size \quad <em> \quad seq_len \quad </em> \quad embedding_dim}$  </p>
+<li><p>然后将$X_{embedding}$进行3次线性变换，$W_QX_{embedding},W_KX_{embedding},W_VX_{embedding}$得到$Q,K,V$,维度都是$R^{batch_size \times seq_len \times embedding_dim}$  </p>
 </li>
-<li>对$Q,K,V$进行分割，即多头注意力机制，其中head的个数是一个超参数，注意：$embedding \quad dimension必须能够整除head$,即一个矩阵变成$h$个矩阵，分割之后$Q,K,V$的维度为$[batch_size,seq_len,h,embedding_dimension/h]$,之后把$Q,K,V$的$seq_len,h$的维度进行转置，为了方面后面的计算，转置之后的$Q,K,V$的维度为$[batch_size,h,seq_len,embedding_dimension/h]$  </li>
+<li>对$Q,K,V$进行分割，即多头注意力机制，其中head的个数是一个超参数，注意：$embedding_dimension$必须能够整除$head$,即一个矩阵变成$h$个小矩阵，分割之后$Q,K,V$的维度为$R^{batch_size \times seq_len \times h \times \frac{embedding_dimension}{h}}$,之后把$Q,K,V$的$seq_len,h$的维度进行转置，为了方面后面的计算，转置之后的$Q,K,V$的维度为$R^{batch_size \times h \times seq_len \times \frac{embedding_dimension}{h}}$  </li>
 <li>拿出一个$head$，即$Q*K^T$,得到的维度是$[batch_size,h,seq_len,seq_len]$,每个字与每个字之间的注意力，每一行表示当前这个字和所有字的关系。如果2个字之间的意思越相近，得到的注意力也越大。对每一行做softmax归一化，即每一行的和为1，得到归一化之后的注意力矩阵。</li>
 <li>将注意力矩阵给$V$加权，即让所有字的信息融入到当前字中，得到当前字的一个加权表示。最终让每一个字都融合所有字的信息。得到的$V$的维度为$[batch_size,h,seq_len,embedding_dimension/h]$.</li>
-<li>在训练的时候，通常多句话进行计算，即形成一个mini-batch。mini-batch中的句子的长度不一样，找出句子的最大长度max_seq_len，将短的句子补成和最大句子一样的长度，使用0padding。假设max_seq_len=10，一个句子的长度为7，即得到的attention矩阵，下面3行和右边3列都是0。在对attention矩阵做softmax会出问题，因为softmax计算涉及到指数计算，$e^0=1$,即经过softmax计算attention不为0，让无效的部分参与了计算。为了解决这个问题，需要用一个mask让这些无效的区域不参与计算，一般给无效的区域加一个很大的负数的偏置，$Z_{illegal}$表示无效的区域，加上一个很大的负数，变成负数，即通过softmax指数计算结果还是0。  </li>
-<li>不同的head得到的结果concat起来，才能恢复到原来的维度$[batch_size,seq_len,embedding_dimension]$。不同的head关注的点不一样，可能有的head关注的local的关系，有的head关注的是global的关系。  </li>
+<li>在训练的时候，通常多句话进行计算，即形成一个mini-batch。mini-batch中的句子的长度不一样，找出句子的最大长度max_seq_len，<strong>将短的句子补成和最大句子一样的长度，使用0padding</strong>。假设max_seq_len=10，一个句子的长度为7，即得到的attention矩阵，下面3行和右边3列都是0。在对attention矩阵做softmax会出问题，因为softmax计算涉及到指数计算，$e^0=1$,即经过softmax计算attention不为0，让无效的部分参与了计算。为了解决这个问题，<strong>需要用一个mask让这些无效的区域不参与计算，一般给无效的区域加一个很大的负数的偏置</strong>，$Z_{illegal}$表示无效的区域，加上一个很大的负数，变成负数，即通过softmax指数计算结果还是0。  </li>
+<li><strong>不同的head得到的结果concat起来</strong>，才能恢复到原来的维度$[batch_size,seq_len,embedding_dimension]$。不同的head关注的点不一样，可能有的head关注的local的关系，有的head关注的是global的关系。  </li>
 <li>最后一步是Position-wise FFN，其实就是2层全连接，对输出$[batch_size,seq_len,embedding_dimension]$，经过2次线性变换和一个Relu激活函数。$Relu=max(0,x)$</li>
 </ol>
 <p><img src="/2019/11/02/Transformer/FFN.png" alt=""></p>

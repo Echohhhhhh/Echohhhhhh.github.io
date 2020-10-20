@@ -73,20 +73,22 @@
 
 
 
-<meta name="description" content="这个论文是推荐算法中的经典论文，介绍的是矩阵分解FM，雅虎团队提出来的，发表在IEEE2009的computer期刊上，算法有效但非常简单。 论文地址">
+<meta name="description" content="这个论文是推荐算法中的经典论文，介绍的是矩阵分解FM，雅虎团队提出来的，发表在IEEE2009的computer期刊上，算法有效但非常简单。 作者Yehuda Koren是Netflix Prize的冠军队成员，是推荐系统领域的大神级人物。他带领的团队在 Netflix Prize 比赛中拿到过两次进步奖（progress award），参与的团队拿到过 2009 年 Netflix Prize">
 <meta name="keywords" content="推荐系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Matrix Factorization Techniques for Recommender Systems">
 <meta property="og:url" content="http://yoursite.com/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="这个论文是推荐算法中的经典论文，介绍的是矩阵分解FM，雅虎团队提出来的，发表在IEEE2009的computer期刊上，算法有效但非常简单。 论文地址">
+<meta property="og:description" content="这个论文是推荐算法中的经典论文，介绍的是矩阵分解FM，雅虎团队提出来的，发表在IEEE2009的computer期刊上，算法有效但非常简单。 作者Yehuda Koren是Netflix Prize的冠军队成员，是推荐系统领域的大神级人物。他带领的团队在 Netflix Prize 比赛中拿到过两次进步奖（progress award），参与的团队拿到过 2009 年 Netflix Prize">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/cf.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/优缺点.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/1.jpg">
-<meta property="og:updated_time" content="2020-10-08T13:30:13.835Z">
+<meta property="og:updated_time" content="2020-10-20T03:47:14.455Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Matrix Factorization Techniques for Recommender Systems">
-<meta name="twitter:description" content="这个论文是推荐算法中的经典论文，介绍的是矩阵分解FM，雅虎团队提出来的，发表在IEEE2009的computer期刊上，算法有效但非常简单。 论文地址">
-<meta name="twitter:image" content="http://yoursite.com/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/1.jpg">
+<meta name="twitter:description" content="这个论文是推荐算法中的经典论文，介绍的是矩阵分解FM，雅虎团队提出来的，发表在IEEE2009的computer期刊上，算法有效但非常简单。 作者Yehuda Koren是Netflix Prize的冠军队成员，是推荐系统领域的大神级人物。他带领的团队在 Netflix Prize 比赛中拿到过两次进步奖（progress award），参与的团队拿到过 2009 年 Netflix Prize">
+<meta name="twitter:image" content="http://yoursite.com/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/cf.jpg">
 
 
 
@@ -387,7 +389,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.2k
+                  2.4k
                 </span>
               
 
@@ -403,7 +405,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  9
                 </span>
               
             </div>
@@ -425,6 +427,7 @@
 
       
         <p>这个论文是推荐算法中的经典论文，介绍的是矩阵分解FM，雅虎团队提出来的，发表在IEEE2009的computer期刊上，算法有效但非常简单。</p>
+<p>作者Yehuda Koren是Netflix Prize的冠军队成员，是推荐系统领域的大神级人物。他带领的团队在 Netflix Prize 比赛中拿到过两次进步奖（progress award），参与的团队拿到过 2009 年 Netflix Prize 比赛的百万美金大奖。当年比赛的题目是 netflix 电影评分预测，Yehuda Koren 所在团队提出的算法在测试集上的均方根误差为 0.8567，比比赛开始时的最高成绩提高了 10.06%。Yehuda Koren在这篇论文中提出基于矩阵分解的算法，优于传统的最近邻基础，已经成为现在几乎所有推荐系统的基础。</p>
 <p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=5197422" target="_blank" rel="noopener">论文地址</a></p>
 <a id="more"></a>
 <!-- TOC -->
@@ -442,14 +445,13 @@
 </ul>
 <!-- /TOC -->
 <p>电子零售商给消费者提供了大量的商品供用户选择，造成信息过载，向用户推荐匹配的商品可以提升用户的满意度和忠诚度，零售商通过分析用户在商品的兴趣模式，提供个性化推荐。</p>
-<h1><span id="1-推荐系统策略">1. 推荐系统策略</span></h1><p>广义上讲，推荐系统基于2个策略：</p>
-<ol>
-<li><p>基于内容的策略。<br>内容过滤策略给每个用户和商品创建一个画像表示其属性。例如电影画像包括主题，主演，票房等。用户画像包括人口统计信息或问卷调查信息。这些画像允许程序将用户和商品进行匹配。<br>一种替代方法是基于用户的协同过滤，先找出用户-商品的评分矩阵，然后计算2个用户对商品的评分向量的相似性，而不是基于用户画像计算相似性。<br>但是基于用户的协同过滤需要用户对商品的评分计算相似性，因此会遇到冷启动的问题。在这方面，基于内容的推荐更胜一筹。</p>
-</li>
-<li><p>潜在因子模型<br>根据评分模式推断出20~100个因子来表示商品或用户</p>
-<p><img src="/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/1.jpg" alt=""></p>
-</li>
-</ol>
+<h1><span id="1-推荐系统策略">1. 推荐系统策略</span></h1><p><img src="/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/cf.jpg" alt=""></p>
+<p><img src="/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/优缺点.jpg" alt=""></p>
+<p>广义上讲，推荐系统基于2个策略：</p>
+<p><strong>1. 基于内容的策略</strong><br>   内容过滤策略给每个用户和商品创建一个画像表示其属性。例如电影画像包括主题，主演，票房等。用户画像包括人口统计信息或问卷调查信息。这些画像允许程序将用户和商品进行匹配。</p>
+<p><strong>2. 协同过滤</strong><br>   协同过滤又分为邻居模型和潜在因子模型。邻居模型有user-based和item-based，潜在因子模型有矩阵分解，例如SVD，SVD++等。<br>   一种替代方法是基于用户的协同过滤，先找出用户-商品的评分矩阵，然后计算2个用户对商品的评分向量的相似性，而不是基于用户画像计算相似性。<br>   但是基于用户的协同过滤需要用户对商品的评分计算相似性，因此会遇到冷启动的问题。在这方面，基于内容的推荐更胜一筹。</p>
+<p>   潜在因子模型根据评分模式推断出20~100个因子来表示商品或用户</p>
+<p>   <img src="/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/1.jpg" alt=""></p>
 <h1><span id="2-矩阵分解">2. 矩阵分解</span></h1><p>Matrix Factorization矩阵分解通过对用户-物品评分矩阵进行分解，使用因子向量表示用户和物品。</p>
 <p>矩阵分解使用的是用户-物品的评分矩阵，但这个矩阵是很稀疏的，因为一个用户可能只评价了一小部分物品。</p>
 <p>矩阵分解MF的一个优点是可以使用额外的信息。有时候显示的评分没法获取到，但我们可以使用一些隐式的信息来表示用户的兴趣，例如用户的浏览，购买记录，鼠标停留时间等。</p>
