@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-10-21T03:18:16.294Z</updated>
+  <updated>2020-10-27T12:28:25.246Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Netflix推荐系统</title>
+    <link href="http://yoursite.com/2020/10/27/Netflix%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://yoursite.com/2020/10/27/Netflix推荐系统/</id>
+    <published>2020-10-27T11:39:41.000Z</published>
+    <updated>2020-10-27T12:28:25.246Z</updated>
+    
+    <content type="html"><![CDATA[<p>Netflix是一家提供在线视频流媒体服务和DVD租赁业务的公司，用户只需要每月支付8,9美元，就可以无限制的观赏视频、电影和电视。</p><p>2006年，Netflix大奖赛开始，Netflix拿出100万美元让开发者为他们优化电影推荐算法。</p><a id="more"></a><p>个性化推荐是Netflix最先开始的，他们从最开始就十分重视数据，开始收集用户数据，他们会在邮寄的信封里附上问卷让用户对电影评分，这些打分是Netflix推荐系统的重要基石之一。</p><p>2012年，Netflix的推荐系统经历一次重大的策略变化，官方技术博客（下面2篇）阐述了这种变化的前因后果。<br>在邮寄租赁DVD的时代，Netflix能够获得用户的评分，但是用户观看电影的过程对平台是隐形的。但是随着<strong>流媒体业务</strong>的开展，Netflix终于有机会看到用户的更多方面，于是他们认识到：一切都是推荐。</p><p>转型流媒体后，用户的所有行为全部在平台内完成，Netflix可以通过平台观察用户，可以知道用户看过什么电影，什么时候看的，看了多长时间，这些行为都可以体现用户的喜好。通过分析这些数据，让Netflix的推荐系统更准确。</p><hr><p>Netflix的牛人Xavier Amatriain写的介绍Netflix推荐系统的一篇博客</p><p>原文链接：</p><p><a href="https://netflixtechblog.com/netflix-recommendations-beyond-the-5-stars-part-1-55838468f429" target="_blank" rel="noopener">Netflix Recommendations: Beyond the 5 stars (Part 1)</a></p><p><a href="https://netflixtechblog.com/netflix-recommendations-beyond-the-5-stars-part-2-d9b96aa399f5" target="_blank" rel="noopener">Netflix Recommendations: Beyond the 5 stars (Part 2)</a></p><p>在这2篇博客中，我们将介绍Netflix最重要资产：推荐系统。</p><h1><span id="netflix大赛和推荐问题">Netflix大赛和推荐问题</span></h1><p>在2006年，我们发起<a href="https://www.netflixprize.com/" target="_blank" rel="noopener">Netflix大赛</a>，是一个电影评分预测的比赛，我们提供1百万奖金给评价指标提升10%的团队。推荐算法是Netflix的关键，我们使用RMSE作为评价指标，我们的系统RMSE=0.9525，获胜的团队需要降低到0.8572或更低。</p><p>第一年，Korbell团队以8.43%的提升获得了大奖，他们融合了107种算法，并把源代码提供给我们，我们发现其中2种最有效的方法：矩阵分解（SVD）和受限玻尔兹曼机（RBM）。为了将这两种方法用到实际中，我们需要克服一些限制，比如他们的算法是基于一亿评分，但我们实际上有50亿评分，并且他们没考虑用户不断产生新评分的情况。最终我们克服了这个挑战，将这2个算法用在实际中，现在仍作为我们推荐系统的一部分。</p><h1><span id="从dvd到流媒体">从DVD到流媒体</span></h1><p>在推荐算法中，我们的关注点发生转换的一个原因是Netflix在2007年发布了流媒体服务，流媒体服务不仅改变了用户与系统的交互方式，也改变了推荐算法的数据来源。对DVD租赁，我们的目标是帮助用户找到电影，并在接下来的几天或几周中发到他们邮箱，从选择到观看到反馈的时间比较长。然而对于流媒体服务，用户选好一部电影之后就可以马上观看，甚至可以在短时间观看多部电影，同时，我们也直到用户是否完整观看了电影还是只看了一部分。</p><p>另一个巨大的变化是网站从单纯的web端扩展到成百上千的不同设备，</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Netflix是一家提供在线视频流媒体服务和DVD租赁业务的公司，用户只需要每月支付8,9美元，就可以无限制的观赏视频、电影和电视。&lt;/p&gt;
+&lt;p&gt;2006年，Netflix大奖赛开始，Netflix拿出100万美元让开发者为他们优化电影推荐算法。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="推荐系统" scheme="http://yoursite.com/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="推荐系统" scheme="http://yoursite.com/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>推荐系统冷启动问题</title>
@@ -446,30 +469,6 @@
     
     
       <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>深度学习优秀代码示例</title>
-    <link href="http://yoursite.com/2020/03/03/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%BC%98%E7%A7%80%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B/"/>
-    <id>http://yoursite.com/2020/03/03/深度学习优秀代码示例/</id>
-    <published>2020-03-03T03:30:18.000Z</published>
-    <updated>2020-03-07T05:14:24.731Z</updated>
-    
-    <content type="html"><![CDATA[<p>&ensp;&ensp;&ensp;&ensp;曾经一段时间很苦恼，对于深度学习算法不知道怎么上手，看了很多深度学习教程，依然不会写。后来就看论文公开的源代码，对照着论文模型，一点点看，多看几篇代码，逐渐有种开窍的感觉。其次是看Mxnet和Pytorch的源代码(我主要用这2个框架)，Mxnet和Pytorch的Github上给了很多示例代码，写的非常规范，从中可以学到用法，从而也可以规范自己的代码。<br>&ensp;&ensp;&ensp;&ensp;下面整理一下，在我学习过程中，对我帮助很大的教程和代码。</p><a id="more"></a><ol><li><a href="http://zh.gluon.ai/" target="_blank" rel="noopener">《动手学深度学习》Mxnet版</a><br>Mxnet的入门教程，沐神写的，来来回回看了2~3遍，每次看都有新的收货</li><li><a href="https://tangshusen.me/Dive-into-DL-PyTorch/#/" target="_blank" rel="noopener">《动手学深度学习》Pytorch版</a><br>将Mxnet改写为Pytorch版本，非常好的Pytorch入门教程</li><li><a href="https://github.com/Davidham3/ASTGCN" target="_blank" rel="noopener">ASTGCN</a><br>AAAI2019论文公开代码，用Mxnet写的</li><li><a href="https://yjucho1.github.io/spatio-temporal%20data/deep%20learning%20paper/ST-resnet/" target="_blank" rel="noopener">ST-ResNet</a><br>AAAI2017论文公开代码，用Keras，看这篇代码主要是学习模型架构，然后自己用mxnet复现了一下</li><li><a href="https://github.com/panzheyi/ST-MetaNet" target="_blank" rel="noopener">ST-MetaNet</a><br>KDD2019论文公开代码，用Mxnet写的，学到了很多高级用法，例如EarlyStopping，Encoder和Decoder，getattr，DGL</li><li><p><a href="https://github.com/pytorch/examples/tree/master/word_language_model" target="_blank" rel="noopener">Pytorch Transformer</a><br>学习怎么使用Transformer，Dropout和BN在训练和测试的不同，PositionEmbedding，getattr等用法。学习Transformer最好去看Pytorch关于Tranformer的源代码。</p></li><li><p><a href="https://github.com/pytorch/examples" target="_blank" rel="noopener">Pytorch示例代码</a><br>Pytorch Github中的示例代码</p></li><li><a href="https://github.com/apache/incubator-mxnet/tree/master/example" target="_blank" rel="noopener">Mxnet示例代码</a><br>Mxnet Github中的示例代码</li></ol><p>觉得自己最大的变化是喜欢去读源代码了，遇到问题去官网看教程，读源码，帮助很大。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;曾经一段时间很苦恼，对于深度学习算法不知道怎么上手，看了很多深度学习教程，依然不会写。后来就看论文公开的源代码，对照着论文模型，一点点看，多看几篇代码，逐渐有种开窍的感觉。其次是看Mxnet和Pytorch的源代码(我主要用这2个框架)，Mxnet和Pytorch的Github上给了很多示例代码，写的非常规范，从中可以学到用法，从而也可以规范自己的代码。&lt;br&gt;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;下面整理一下，在我学习过程中，对我帮助很大的教程和代码。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Deep Learning" scheme="http://yoursite.com/categories/Deep-Learning/"/>
-    
-    
-      <category term="Mxnet" scheme="http://yoursite.com/tags/Mxnet/"/>
-    
-      <category term="Pyotrch" scheme="http://yoursite.com/tags/Pyotrch/"/>
     
   </entry>
   

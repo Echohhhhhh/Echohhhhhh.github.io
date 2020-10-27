@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Netflix推荐系统</title>
+    <url>/2020/10/27/Netflix%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<p>Netflix是一家提供在线视频流媒体服务和DVD租赁业务的公司，用户只需要每月支付8,9美元，就可以无限制的观赏视频、电影和电视。</p>
+<p>2006年，Netflix大奖赛开始，Netflix拿出100万美元让开发者为他们优化电影推荐算法。</p>
+<a id="more"></a>
+<p>个性化推荐是Netflix最先开始的，他们从最开始就十分重视数据，开始收集用户数据，他们会在邮寄的信封里附上问卷让用户对电影评分，这些打分是Netflix推荐系统的重要基石之一。</p>
+<p>2012年，Netflix的推荐系统经历一次重大的策略变化，官方技术博客（下面2篇）阐述了这种变化的前因后果。<br>在邮寄租赁DVD的时代，Netflix能够获得用户的评分，但是用户观看电影的过程对平台是隐形的。但是随着<strong>流媒体业务</strong>的开展，Netflix终于有机会看到用户的更多方面，于是他们认识到：一切都是推荐。</p>
+<p>转型流媒体后，用户的所有行为全部在平台内完成，Netflix可以通过平台观察用户，可以知道用户看过什么电影，什么时候看的，看了多长时间，这些行为都可以体现用户的喜好。通过分析这些数据，让Netflix的推荐系统更准确。</p>
+<hr>
+<p>Netflix的牛人Xavier Amatriain写的介绍Netflix推荐系统的一篇博客</p>
+<p>原文链接：</p>
+<p><a href="https://netflixtechblog.com/netflix-recommendations-beyond-the-5-stars-part-1-55838468f429" target="_blank" rel="noopener">Netflix Recommendations: Beyond the 5 stars (Part 1)</a></p>
+<p><a href="https://netflixtechblog.com/netflix-recommendations-beyond-the-5-stars-part-2-d9b96aa399f5" target="_blank" rel="noopener">Netflix Recommendations: Beyond the 5 stars (Part 2)</a></p>
+<p>在这2篇博客中，我们将介绍Netflix最重要资产：推荐系统。</p>
+<h1><span id="netflix大赛和推荐问题">Netflix大赛和推荐问题</span></h1><p>在2006年，我们发起<a href="https://www.netflixprize.com/" target="_blank" rel="noopener">Netflix大赛</a>，是一个电影评分预测的比赛，我们提供1百万奖金给评价指标提升10%的团队。推荐算法是Netflix的关键，我们使用RMSE作为评价指标，我们的系统RMSE=0.9525，获胜的团队需要降低到0.8572或更低。</p>
+<p>第一年，Korbell团队以8.43%的提升获得了大奖，他们融合了107种算法，并把源代码提供给我们，我们发现其中2种最有效的方法：矩阵分解（SVD）和受限玻尔兹曼机（RBM）。为了将这两种方法用到实际中，我们需要克服一些限制，比如他们的算法是基于一亿评分，但我们实际上有50亿评分，并且他们没考虑用户不断产生新评分的情况。最终我们克服了这个挑战，将这2个算法用在实际中，现在仍作为我们推荐系统的一部分。</p>
+<h1><span id="从dvd到流媒体">从DVD到流媒体</span></h1><p>在推荐算法中，我们的关注点发生转换的一个原因是Netflix在2007年发布了流媒体服务，流媒体服务不仅改变了用户与系统的交互方式，也改变了推荐算法的数据来源。对DVD租赁，我们的目标是帮助用户找到电影，并在接下来的几天或几周中发到他们邮箱，从选择到观看到反馈的时间比较长。然而对于流媒体服务，用户选好一部电影之后就可以马上观看，甚至可以在短时间观看多部电影，同时，我们也直到用户是否完整观看了电影还是只看了一部分。</p>
+<p>另一个巨大的变化是网站从单纯的web端扩展到成百上千的不同设备，</p>
+]]></content>
+      <categories>
+        <category>推荐系统</category>
+      </categories>
+      <tags>
+        <tag>推荐系统</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>推荐系统冷启动问题</title>
     <url>/2020/10/21/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%86%B7%E5%90%AF%E5%8A%A8%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p>推荐系统冷启动</p>
@@ -3374,8 +3401,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
       </categories>
       <tags>
         <tag>Mxnet</tag>
-        <tag>Pytorch</tag>
         <tag>GPU</tag>
+        <tag>Pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -5387,8 +5414,8 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
         <category>分布式平台</category>
       </categories>
       <tags>
-        <tag>Python</tag>
         <tag>Spark</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
