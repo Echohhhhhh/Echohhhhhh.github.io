@@ -1,6 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>推荐系统冷启动问题</title>
+    <url>/2020/10/21/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%86%B7%E5%90%AF%E5%8A%A8%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>推荐系统冷启动</p>
+<ul>
+<li>新用户。该怎么给新用户推荐，才能让用户满意</li>
+<li>新物品。怎么将新物品推荐出去，才能推荐给喜欢的人</li>
+<li>系统冷启动。新用户+新物品</li>
+</ul>
+<a id="more"></a>
+<!-- TOC -->
+<ul>
+<li><a href="#1-用户冷启动">1. 用户冷启动</a></li>
+<li><a href="#2-物品冷启动">2. 物品冷启动</a></li>
+<li><a href="#3-系统冷启动">3. 系统冷启动</a></li>
+<li><a href="#4-总结">4. 总结</a></li>
+</ul>
+<!-- /TOC -->
+<h1><span id="1-用户冷启动">1. 用户冷启动</span></h1><ol>
+<li>推荐热门产品或者必需品。这些物品往往是热点或购买最多的产品。</li>
+<li>基于用户的信息来做推荐。比如年龄、性别等，但这需要提前知道用户的部分信息，可能比较难获取到</li>
+<li>多样性和区分行，将库中的物品进行聚类，给新用户每个类中都推荐几个，总有一款是你喜欢的</li>
+<li>当用户有很少的行为记录时，这时很多算法（例如协同过滤）等还无法给用户做推荐，可以采用基于内容的推荐算法</li>
+<li>当产品在拓展过程中，比如原先只做长视频推荐，后来拓展到短视频，那么可以根据长视频的观看历史计算用户的相似度，然后根据用户相似度对新用户推荐短视频</li>
+<li>当用户注册时，让用户选择自己的兴趣，可以做一些诙谐幽默的问题，让用户选择。</li>
+<li>利用社交信息做冷启动，将好友喜欢的物品推荐给新用户</li>
+<li>利用用户在其他地方已经沉淀的数组做冷启动。比如现在很多应用在注册的时候都会选择是否使用微信/QQ/微博等账号登录，通过该用户在其他应用上数据进行推荐</li>
+</ol>
+<h1><span id="2-物品冷启动">2. 物品冷启动</span></h1><ol>
+<li>基于物品的属性推荐。一般新上线的物品都有些属性，根据这些属性找到与该物品最相似的物品，这些相似的物品被哪些用户消费过，可以把这个新物品推荐给消费过的用户</li>
+</ol>
+<h1><span id="3-系统冷启动">3. 系统冷启动</span></h1><ol>
+<li>系统先收集一段时间的用户行为数据，先不调用推荐结果。</li>
+<li>历史数据迁移。</li>
+</ol>
+<h1><span id="4-总结">4. 总结</span></h1><ul>
+<li><strong>用户冷启动</strong>往往采用多样性和探索推荐的方式，融合实时受欢迎，热门，跨数据平台等多种方式。</li>
+<li><strong>物品冷启动</strong>以语义相似推荐为主，通过时间权重干预的方式帮助新物品获得更多的曝光量</li>
+<li><strong>系统冷启动</strong>可以先积累用户数据，或历史数据导入的方式将系统冷启动问题转化为用户冷启动或物品冷启动。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>推荐系统</category>
+      </categories>
+      <tags>
+        <tag>推荐系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>今日头条推荐算法原理介绍</title>
+    <url>/2020/10/20/%E4%BB%8A%E6%97%A5%E5%A4%B4%E6%9D%A1%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<p>今天看到今日头条的推荐算法原理介绍，非常感兴趣，在此记录下。</p>
+<a id="more"></a>
+<!-- TOC -->
+<ul>
+<li><a href="#1-推荐系统概述">1. 推荐系统概述</a></li>
+<li><a href="#2-评价指标">2. 评价指标</a></li>
+<li><a href="#3-典型推荐算法">3. 典型推荐算法</a></li>
+<li><a href="#4-典型的推荐特征">4. 典型的推荐特征</a></li>
+<li><a href="#5-大规模模型训练">5. 大规模模型训练</a></li>
+<li><a href="#6-内容分析">6. 内容分析</a></li>
+<li><a href="#7-用户标签">7. 用户标签</a></li>
+<li><a href="#8-评估分析">8. 评估分析</a></li>
+</ul>
+<!-- /TOC -->
+<p>参考资料：<a href="https://36kr.com/p/1722189037569" target="_blank" rel="noopener">36氪首发 | 今日头条推荐算法原理全文详解</a></p>
+<h1><span id="1-推荐系统概述">1. 推荐系统概述</span></h1><p>推荐系统就是需要去拟合一个用户对内容满意度的函数，这个函数需要输入三个维度的变量：</p>
+<ol>
+<li>内容维度。头条中有图片，视频，新闻等信息，每种内容都有自己的特征。</li>
+<li>用户特征。包括用户的兴趣标签，职业，年龄，性别等，还有很多表示用户喜好的隐式特征</li>
+<li>环境特征。用户随时随地移动，在工作场合，通勤，旅游三个不同的环境中，喜好会发生偏移。</li>
+</ol>
+<p>结合以上三个维度，模型会给出一个预估，在这个场景下用户对这个内容是否感兴趣。</p>
+<h1><span id="2-评价指标">2. 评价指标</span></h1><p>推荐模型中，点击率，阅读时间，点赞（离散指标），评论等都是可以量化的目标，能够用模型进行预测。但当用户过多时，不能完全由指标进行评估，引入数据指标以外的要素也很重要。</p>
+<h1><span id="3-典型推荐算法">3. 典型推荐算法</span></h1><p><img src="/2020/10/20/今日头条推荐算法原理介绍/推荐.jpg" alt=""></p>
+<h1><span id="4-典型的推荐特征">4. 典型的推荐特征</span></h1><p>看完典型推荐模型，我们再看看典型的推荐模型中用到的特征，主要有4类特征。</p>
+<p><img src="/2020/10/20/今日头条推荐算法原理介绍/特征.jpg" alt=""></p>
+<ol>
+<li>相关性特征。就是评估内容的属性和用户是否匹配。显性的匹配包括关键词匹配、来源匹配、分类匹配、主题匹配等。向FM模型中也有一些隐式匹配，从用户向量和物品向量的距离得出。</li>
+<li>环境特征。地理位置和时间</li>
+<li>热度特征。包括全局热度，分类热度，主题热度，以及关键词热度。其中内容热度信息在推荐系统冷启动问题非常有效。</li>
+<li>协同特征。可以在部分程度上帮助解决算法越推越窄的问题。协同过滤并非考虑用户已有的历史，而是通过用户行为分析不同用户间的相似性，比如点击相似性，兴趣分类相似等，从而扩展模型的探索能力</li>
+</ol>
+<h1><span id="5-大规模模型训练">5. 大规模模型训练</span></h1><p>头条大部分推荐产品采用实时训练。实时训练省资源并且反馈快。用户的行为信息可以被模型快速捕捉并反馈给下一刷的推荐结果。头条线上目前基于storm集群实时处理样本数据，包括点击收藏等动作。</p>
+<p>整体的训练过程是线上服务器记录实时特征，导入到kafka文件队列中，然后进一步导入storm集群消费kafka数据，客户端回传推荐的label构造训练样本，随后根据最新样本进行在线训练更新模型参数，最终线上模型得到更新。这个过程主要的延迟在用户的动作反馈延时，因为文章推荐后用户不一定马上看，不考虑这部分时间，整个系统几乎是实时的。</p>
+<p><img src="/2020/10/20/今日头条推荐算法原理介绍/召回.jpg" alt=""></p>
+<p>头条的内容量非常大，推荐系统不可能所有的内容全部由模型预测，所以需要设计一些召回策略，每次推荐时从海量内容中筛选出千级别的内容库。召回策略最重要的要求是性能要极致，一般超时不能超过50毫秒。</p>
+<p><img src="/2020/10/20/今日头条推荐算法原理介绍/倒排.jpg" alt=""></p>
+<p>召回策略有很多，头条采用的是倒排的思想。离线维护一个倒排，根据用户标签或topic，来源等，拉去对应的文章并对其排序。线上召回可以迅速的从倒排中根据用户兴趣标签对内容做截断，高效的从很大的内容库中筛选比较靠谱的一小部分内容。</p>
+<h1><span id="6-内容分析">6. 内容分析</span></h1><p>内容分析包括文本分析、图片分析和视频分析。这里主要将文本分析，文本分析在推荐系统中很重要的作用是用户兴趣建模。没有内容和文本标签，无法得知用户兴趣标签。举个例子，只有知道文档标签是互联网，用户看了互联网标签的文章，才能知道用户有互联网标签。所以<strong>内容分析和用户标签是推荐系统的基石</strong>。</p>
+<p>下面是今日头条一个实际文本的例子，可以看到这篇文章有分类，关键词，topic等文本特征。</p>
+<p><img src="/2020/10/20/今日头条推荐算法原理介绍/文本特征.jpg" alt=""></p>
+<p>今日头条推荐系统<strong>文本的特征</strong>主要有以下几类：</p>
+<ul>
+<li>语义标签类特征：显示为文章打上语义标签。这部分标签是人定义的特征，每个标签有明确的意义，标签体系是预定义的。</li>
+<li>topic特征和关键词特征：隐式语义特征。其中topic特征描述词概率分布，无明确意义；关键词特征会基于一些统一的特征描述，无明确集合。</li>
+</ul>
+<p>下面是头条语义标签的特征和使用场景。他们之间层级不同，要求不同。</p>
+<p>分层是为了每个层级粒度不同，要求也有区别。</p>
+<ul>
+<li>分类：要求覆盖全，希望每篇文章都有分类，精确性要求不高。</li>
+<li>概念：表达比较精确，但又属于抽象概念的语义，也不要求覆盖全。</li>
+<li>实体：不要求覆盖全，只要覆盖每个领域热门的人物、机构、作品即可。</li>
+</ul>
+<p><img src="/2020/10/20/今日头条推荐算法原理介绍/语义.jpg" alt=""></p>
+<p>头条线上分类采用层次分类。最上面是root，下面第一层的分类像科技，体育，娱乐这样的大类，下面细分足球，篮球，网球等，足球再细分国际足球，中国足球，中国足球又分为中甲，中超，国家队等。相比单独的分类器，利用层次文本分类算法能更好地解决数据倾斜问题。</p>
+<p>每个元分类器可以异构，像有些分类器SVM效果很好，有些要结合CNN，有些要结合RNN</p>
+<p><img src="/2020/10/20/今日头条推荐算法原理介绍/分类.jpg" alt=""></p>
+<h1><span id="7-用户标签">7. 用户标签</span></h1><p>用户分析和用户标签是推荐系统的两大基石。内容分析涉及到的机器学习多一些，相比而言，用户标签工程挑战更大。</p>
+<p>用户标签包括：</p>
+<ul>
+<li><p>用户感兴趣的类别和主题、关键词、来源。基于兴趣的用户聚类和各种垂直兴趣特征</p>
+</li>
+<li><p>性别、年龄、地点等信息。性别信息通过用户第三方社交账号登录得到。年龄信息通常由模型预测，通过机型、阅读时间分布预估。常驻地来自用户授权访问位置信息，在位置信息的基础上通过传统聚类方法拿到常驻点，常驻点结合其他信息，可以推断用户的工作地点、出差地点、旅游地点。这些用户标签非常有助于推荐。</p>
+</li>
+</ul>
+<p><img src="/2020/10/20/今日头条推荐算法原理介绍/用户.jpg" alt=""></p>
+<p>最简单的用户标签是浏览过的内容标签，但这里涉及到一些数据处理的策略。主要包括:</p>
+<ul>
+<li>过滤噪声。通过停留时间短的点击，过滤标题党。</li>
+<li>热点惩罚。对用户在一些热门文章上的动作做降权处理。理论上，传播范围较大的内容，置信度会下降。</li>
+<li>时间衰减。用户兴趣会发生偏移，因此策略更偏向新的用户行为。因此，随着用户动作的增加，老的特征权重会随时间衰减，新动作贡献的权重会更大。</li>
+<li>惩罚展现。如果一篇推荐给用户的文章没有被点击，相关特征（类别、关键词、来源）权重会被惩罚。</li>
+</ul>
+<p><img src="/2020/10/20/今日头条推荐算法原理介绍/用户1.jpg" alt=""></p>
+<p>用户标签总体相对简单，主要还是工程上的挑战。头条用户标签第一版是批量计算框架，流程比较简单，每天抽取昨天的日活用户过去两个月的动作数据，在Hadoop集群上批量计算结果。</p>
+<p>但随着用户增加，兴趣模型种类和其他批量处理任务都在增加，计算量太大，集群计算资源紧张，集中写入分布式存储系统的压力也开始增大，用户兴趣标签更新延迟越来越高。</p>
+<p><img src="/2020/10/20/今日头条推荐算法原理介绍/工程挑战.jpg" alt=""></p>
+<p>2014年，头条上线了用户标签storm集群流式计算系统，只要有用户动作更新，就更新标签，CPU代价较小，大大降低了计算资源开销，特征更新速度也很快</p>
+<p><img src="/2020/10/20/今日头条推荐算法原理介绍/流式.jpg" alt=""></p>
+<h1><span id="8-评估分析">8. 评估分析</span></h1><p>介绍了推荐系统的整体架构，怎么评估推荐效果好不好呢？</p>
+<p>全面的评估推荐系统，需要完备的评估体系，并非单一的指标，不能只看点击率和停留时长，需要综合评估。</p>
+<p><img src="/2020/10/20/今日头条推荐算法原理介绍/评估.jpg" alt=""></p>
+<p>一个良好的评估体系需要遵循几个原则，首先是兼顾短期和长期指标，检录用户指标和生态指标。今日头条作为内容创作平台，既要为内容创作者提供价值，也有义务满足用户，这两者要平衡。还有广告主利益也要考虑，这是多方博弈和平衡的过程。</p>
+<p><img src="/2020/10/20/今日头条推荐算法原理介绍/评估1.jpg" alt=""></p>
+]]></content>
+      <categories>
+        <category>推荐系统</category>
+      </categories>
+      <tags>
+        <tag>推荐系统</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SVD++介绍Factorization meets the neighborhood: a multifaceted collaborative filtering model</title>
     <url>/2020/10/08/Factorization-meets-the-neighborhood-a-multifaceted-collaborative-filtering-model/</url>
     <content><![CDATA[<p>Yehuda Koren发表在2008KDD上的一篇论文。他也是Netflix Prize的冠军队成员，是推荐系统领域的大神级人物。他带领的团队在 Netflix Prize 比赛中拿到过两次进步奖（progress award），参与的团队拿到过 2009 年 Netflix Prize 比赛的百万美金大奖。当年比赛的题目是 netflix 电影评分预测，Yehuda Koren 所在团队提出的算法在测试集上的均方根误差为 0.8567，比比赛开始时的最高成绩提高了 10.06%。Yehuda Koren 等人当年做出的算法是基于矩阵分解的算法，优于传统的最近邻基础，已经成为现在几乎所有推荐系统的基础。</p>
@@ -1015,42 +1158,43 @@ a_{i}^{(l)}=\operatorname{SoftMax}_{l}\left(e_{i}^{(l)}\right)=\frac{\exp \left(
 <ul>
 <li><a href="#1-推荐系统和搜索的区别">1. 推荐系统和搜索的区别</a></li>
 <li><a href="#2-推荐系统lambda架构">2. 推荐系统Lambda架构</a></li>
-<li><a href="#3-推荐算法流程">3. 推荐算法流程</a><ul>
-<li><a href="#31-长尾效应和推荐系统">3.1. 长尾效应和推荐系统</a></li>
-<li><a href="#32-召回">3.2. 召回</a></li>
-<li><a href="#33-排序">3.3. 排序</a><ul>
-<li><a href="#331-lr">3.3.1. LR</a></li>
+<li><a href="#3-推荐算法模型历程">3. 推荐算法模型历程</a></li>
+<li><a href="#4-推荐算法流程">4. 推荐算法流程</a><ul>
+<li><a href="#41-长尾效应和推荐系统">4.1. 长尾效应和推荐系统</a></li>
+<li><a href="#42-召回">4.2. 召回</a></li>
+<li><a href="#43-排序">4.3. 排序</a><ul>
+<li><a href="#431-lr">4.3.1. LR</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#4-推荐模型的构建流程">4. 推荐模型的构建流程</a></li>
-<li><a href="#5-相似度计算">5. 相似度计算</a><ul>
-<li><a href="#51-余弦相似度">5.1. 余弦相似度</a></li>
-<li><a href="#52-皮尔逊相关系数">5.2. 皮尔逊相关系数</a></li>
-<li><a href="#53-杰卡德jaccard相似度">5.3. 杰卡德Jaccard相似度</a></li>
+<li><a href="#5-推荐模型的构建流程">5. 推荐模型的构建流程</a></li>
+<li><a href="#6-相似度计算">6. 相似度计算</a><ul>
+<li><a href="#61-余弦相似度">6.1. 余弦相似度</a></li>
+<li><a href="#62-皮尔逊相关系数">6.2. 皮尔逊相关系数</a></li>
+<li><a href="#63-杰卡德jaccard相似度">6.3. 杰卡德Jaccard相似度</a></li>
 </ul>
 </li>
-<li><a href="#6-召回算法">6. 召回算法</a><ul>
-<li><a href="#61-基于内容的召回算法">6.1. 基于内容的召回算法</a></li>
-<li><a href="#62-协同过滤cf">6.2. 协同过滤CF</a><ul>
-<li><a href="#621-基于用户的协同过滤">6.2.1. 基于用户的协同过滤</a></li>
-<li><a href="#622-基于物品的协同过滤">6.2.2. 基于物品的协同过滤</a></li>
-<li><a href="#623-基于模型的协同过滤">6.2.3. 基于模型的协同过滤</a><ul>
-<li><a href="#6231-矩阵分解mf">6.2.3.1. 矩阵分解MF</a></li>
+<li><a href="#7-召回算法">7. 召回算法</a><ul>
+<li><a href="#71-基于内容的召回算法">7.1. 基于内容的召回算法</a></li>
+<li><a href="#72-协同过滤cf">7.2. 协同过滤CF</a><ul>
+<li><a href="#721-基于用户的协同过滤">7.2.1. 基于用户的协同过滤</a></li>
+<li><a href="#722-基于物品的协同过滤">7.2.2. 基于物品的协同过滤</a></li>
+<li><a href="#723-基于模型的协同过滤">7.2.3. 基于模型的协同过滤</a><ul>
+<li><a href="#7231-矩阵分解mf">7.2.3.1. 矩阵分解MF</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#基于内容推荐和协同过滤的区别">基于内容推荐和协同过滤的区别</a></li>
+<li><a href="#73-基于内容推荐和协同过滤的区别">7.3. 基于内容推荐和协同过滤的区别</a></li>
 </ul>
 </li>
-<li><a href="#7-排序算法">7. 排序算法</a><ul>
-<li><a href="#71-逻辑回归lr">7.1. 逻辑回归LR</a></li>
-<li><a href="#72-fm">7.2. FM</a></li>
+<li><a href="#8-排序算法">8. 排序算法</a><ul>
+<li><a href="#81-逻辑回归lr">8.1. 逻辑回归LR</a></li>
+<li><a href="#82-fm">8.2. FM</a></li>
 </ul>
 </li>
-<li><a href="#8-推荐系统的评价">8. 推荐系统的评价</a></li>
+<li><a href="#9-推荐系统的评价">9. 推荐系统的评价</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="1-推荐系统和搜索的区别">1. 推荐系统和搜索的区别</span></h1><ul>
@@ -1098,7 +1242,9 @@ a_{i}^{(l)}=\operatorname{SoftMax}_{l}\left(e_{i}^{(l)}\right)=\frac{\exp \left(
 <p>下面是Lambda的架构图。首先数据源从flume中得到。一部分做批处理，一部分做实时处理。批处理把数据放在数据库上，然后经过MapReduce算出一个阶段，缓存起来。然后实时这部分也会做实时计算，然后将这2部分的计算结果汇总，为推荐系统提供服务。</p>
 <p>这2部分的相辅相成。离线服务算的时间比较长，比如10分钟得出一次结果，那在前端用户看到的结果10分钟都不会变。然后实时计算是基于离线计算的结果做一些微调。这样用户看到的推荐结果就会实时变化。</p>
 <p><img src="/2020/07/25/推荐系统学习/lambda.jpg" alt=""></p>
-<h1><span id="3-推荐算法流程">3. 推荐算法流程</span></h1><p>上面讲了整个推荐系统的架构，下面我们只关注推荐算法。推荐算法只有3个阶段：</p>
+<h1><span id="3-推荐算法模型历程">3. 推荐算法模型历程</span></h1><p><a href="https://mp.weixin.qq.com/s/-e9M_rGaE2oGcxE-p1U5Tw" target="_blank" rel="noopener">推荐系统-传统推荐模型之协同过滤</a></p>
+<p><img src="/2020/07/25/推荐系统学习/流程.png" alt=""></p>
+<h1><span id="4-推荐算法流程">4. 推荐算法流程</span></h1><p>上面讲了整个推荐系统的架构，下面我们只关注推荐算法。推荐算法只有3个阶段：</p>
 <ol>
 <li>召回阶段<ul>
 <li>这里的召回不要和分类问题的召回率混淆，这2者是不同的概念。推荐算法的召回是海选，就是先从很多内容中选出一些内容，作为接下来推荐的候选人。也就是说我们后面推荐的结果都是从这些候选内容中选的。所以召回阶段决定了最终推荐结果的天花板</li>
@@ -1128,11 +1274,11 @@ a_{i}^{(l)}=\operatorname{SoftMax}_{l}\left(e_{i}^{(l)}\right)=\frac{\exp \left(
 <p><img src="/2020/07/25/推荐系统学习/推荐算法3.jpg" alt=""></p>
 <p>召回目的如上所述；有时候因为每个用户召回环节返回的物品数量还是太多，怕排序环节速度跟不上，所以可以在召回和精排之间加入一个粗排环节，通过少量用户和物品特征，简单模型，来对召回的结果进行个粗略的排序，在保证一定精准的前提下，进一步减少往后传送的物品数量，粗排往往是可选的，可用可不同，跟场景有关。之后，是精排环节，使用你能想到的任何特征，可以上你能承受速度极限的复杂模型，尽量精准地对物品进行个性化排序。排序完成后，传给重排环节，传统地看，这里往往会上各种技术及业务策略，比如去已读、去重、打散、多样性保证、固定类型物品插入等等，主要是技术产品策略主导或者为了改进用户体验的。</p>
 <p><img src="/2020/07/25/推荐系统学习/推荐系统.jpg" alt=""></p>
-<h2><span id="31-长尾效应和推荐系统">3.1. 长尾效应和推荐系统</span></h2><p><a href="https://cloud.tencent.com/developer/ask/68639" target="_blank" rel="noopener">长尾效应与推荐系统的关系？</a></p>
+<h2><span id="41-长尾效应和推荐系统">4.1. 长尾效应和推荐系统</span></h2><p><a href="https://cloud.tencent.com/developer/ask/68639" target="_blank" rel="noopener">长尾效应与推荐系统的关系？</a></p>
 <p><strong>长尾效应</strong>往往用来解释现实生活中的商业理论，将所有非流行的市场累加起来就会形成一个比流行市场还要大的市场。</p>
 <p><strong>长尾效应和推荐系统的关系：</strong><br>目前的推荐系统或推荐算法，很难发现用户的隐性需求，也是目前推荐算法所追求的。目前而言，现在的推荐系统只能发现你的主观需求，比如你在B站上搜索一个关键词后，系统往往会推荐和这个关键词有关的内容，但是却很难发现你目前不知道，但是心里感兴趣的东西。所以这是一个很大的难点。</p>
 <p>在推荐系统中，可以把长尾效应看做是一种目标，即向用户推荐他喜欢，但是不会自己发现的物品。由于长尾中的物品比较肺腑，推荐系统可能会有很大的收益。</p>
-<h2><span id="32-召回">3.2. 召回</span></h2><p>召回是推荐系统的第一步，根据用户和商品的部分特征，从海量的物品中找出用户潜在感兴趣的物品，交给排序阶段。<strong>召回阶段需要快，所以模型不能太复杂</strong>。</p>
+<h2><span id="42-召回">4.2. 召回</span></h2><p>召回是推荐系统的第一步，根据用户和商品的部分特征，从海量的物品中找出用户潜在感兴趣的物品，交给排序阶段。<strong>召回阶段需要快，所以模型不能太复杂</strong>。</p>
 <p>现在召回环节一般采用多路召回，随便想到一个策略就可以做一路召回。</p>
 <p><img src="/2020/07/25/推荐系统学习/召回.jpg" alt=""></p>
 <p><strong>传统的召回思路：</strong></p>
@@ -1144,7 +1290,7 @@ a_{i}^{(l)}=\operatorname{SoftMax}_{l}\left(e_{i}^{(l)}\right)=\frac{\exp \left(
 <li>图神经网络模型召回<br>上面知识图谱是图神经网络的一个特例，但是知识图谱因为编码的是静态知识，而不是用户比较直接的行为数据，和具体应用距离较远。图中的节点是用户和商品，通过用户行为来建立边，边还可以带上权重，然后使用图神经网络，例如GraphSAGE来获取节点的嵌入。</li>
 </ol>
 <p><img src="/2020/07/25/推荐系统学习/召回模型.jpg" alt=""></p>
-<h2><span id="33-排序">3.3. 排序</span></h2><h3><span id="331-lr">3.3.1. LR</span></h3><p>LR最早可以用在点击率预测中，LR是一个二分类，输出的概率表示用户点击的概率。</p>
+<h2><span id="43-排序">4.3. 排序</span></h2><h3><span id="431-lr">4.3.1. LR</span></h3><p>LR最早可以用在点击率预测中，LR是一个二分类，输出的概率表示用户点击的概率。</p>
 <p>步骤如下：</p>
 <ol>
 <li><p>构造特征<br>将所有特征进行离散化,变成one-hot输入</p>
@@ -1153,7 +1299,7 @@ a_{i}^{(l)}=\operatorname{SoftMax}_{l}\left(e_{i}^{(l)}\right)=\frac{\exp \left(
 <li>模型训练<br>根据输入的特征和label（用户点击1或者不点击0）来训练LR分类器</li>
 <li>模型推荐<br>给定一个用户u，以及一批候选商品，对用户u如何推荐商品。通过上述方法计算用户u对候选商品中每个商品的点击点击得分，然后按照得分从大大小排序，推荐前N个物品。</li>
 </ol>
-<h1><span id="4-推荐模型的构建流程">4. 推荐模型的构建流程</span></h1><p><img src="/2020/07/25/推荐系统学习/推荐算法1.jpg" alt=""></p>
+<h1><span id="5-推荐模型的构建流程">5. 推荐模型的构建流程</span></h1><p><img src="/2020/07/25/推荐系统学习/推荐算法1.jpg" alt=""></p>
 <ol>
 <li>数据清洗阶段<ul>
 <li>数据来源<ul>
@@ -1179,28 +1325,30 @@ a_{i}^{(l)}=\operatorname{SoftMax}_{l}\left(e_{i}^{(l)}\right)=\frac{\exp \left(
 </ul>
 </li>
 </ol>
-<h1><span id="5-相似度计算">5. 相似度计算</span></h1><p>相似度计算根据数据来选择。</p>
+<h1><span id="6-相似度计算">6. 相似度计算</span></h1><p>相似度计算根据数据来选择。</p>
 <ul>
 <li>数据是实数值，评分情况</li>
 <li>数据是布尔值，是否消费</li>
 </ul>
-<h2><span id="51-余弦相似度">5.1. 余弦相似度</span></h2><p>余弦相似度就是看2个向量夹角的cos值。余弦相似度范围[-1,1]，从负相关到正相关。</p>
+<h2><span id="61-余弦相似度">6.1. 余弦相似度</span></h2><p>余弦相似度就是看2个向量夹角的cos值。余弦相似度范围[-1,1]，从负相关到正相关。</p>
 <p>缺点：只和夹角有关，不关心向量长度。可能会有误差。对2个电影打分，一个人打分向量(5,8)，另一个人打分向量(0.5,1)，这2个向量虽然夹角很小，但是长度差别很大。</p>
 <p><img src="/2020/07/25/推荐系统学习/余弦相似度.jpg" alt=""></p>
-<h2><span id="52-皮尔逊相关系数">5.2. 皮尔逊相关系数</span></h2><p>对余弦相似度的优化，对向量做中心化，将向量a和b减去向量均值，在计算余弦相似度</p>
+<h2><span id="62-皮尔逊相关系数">6.2. 皮尔逊相关系数</span></h2><p>对余弦相似度的优化，对向量做中心化，将向量a和b减去向量均值，在计算余弦相似度</p>
 <p><img src="/2020/07/25/推荐系统学习/皮尔逊.jpg" alt=""></p>
-<h2><span id="53-杰卡德jaccard相似度">5.3. 杰卡德Jaccard相似度</span></h2><p>Jaccard = 交集/并集</p>
+<p><img src="/2020/07/25/推荐系统学习/相似性.png" alt=""></p>
+<h2><span id="63-杰卡德jaccard相似度">6.3. 杰卡德Jaccard相似度</span></h2><p>Jaccard = 交集/并集</p>
 <p>比如用户2喜欢物品(2,7,10),用户4喜欢物品(2,5,7,9)，2个用户的交集是物品(2,7)，所以交集个数为2，2个用户喜欢用品的并集是(2,5,7,9,10)，所以并集个数为5.则这2个用户的jaccard相似度=0.4</p>
 <p><img src="/2020/07/25/推荐系统学习/杰卡德.jpg" alt=""></p>
 <p>杰卡德相似度适合评分是0/1的情况</p>
-<h1><span id="6-召回算法">6. 召回算法</span></h1><h2><span id="61-基于内容的召回算法">6.1. 基于内容的召回算法</span></h2><p>基于内容的推荐一般是文本类型的特征，需要提取关键词，计算关键词的权重。</p>
+<p>问题：无法反映具体用户的评分喜好信息，所以经常用来评估用户是否会对某商品进行打分，而不是预估用户对某商品打多少分。</p>
+<h1><span id="7-召回算法">7. 召回算法</span></h1><h2><span id="71-基于内容的召回算法">7.1. 基于内容的召回算法</span></h2><p>基于内容的推荐一般是文本类型的特征，需要提取关键词，计算关键词的权重。</p>
 <p>一般步骤是：</p>
 <ol>
 <li>先分词，</li>
 <li>然后计算词的权重(TF-IDF)，即提取关键字</li>
 <li>然后使用word2vec得到词向量，从词向量构建物品向量</li>
 </ol>
-<h2><span id="62-协同过滤cf">6.2. 协同过滤CF</span></h2><p><strong>协同过滤(Collaborative Filtering)的算法思想：物以类聚，人以群分</strong></p>
+<h2><span id="72-协同过滤cf">7.2. 协同过滤CF</span></h2><p><strong>协同过滤(Collaborative Filtering)的算法思想：物以类聚，人以群分</strong></p>
 <p>协同过滤推荐算法分为2类：</p>
 <ul>
 <li><strong>基于用户的协同过滤</strong>user-based CF：和你喜好相似的人，那他喜欢的东西你也可能喜欢</li>
@@ -1209,20 +1357,20 @@ a_{i}^{(l)}=\operatorname{SoftMax}_{l}\left(e_{i}^{(l)}\right)=\frac{\exp \left(
 </ul>
 <p><strong>缺点：</strong></p>
 <p>召回结果的候选item限定在用户的历史行为类目中，导致推荐结果越推越窄，难以发现长尾商品。</p>
-<h3><span id="621-基于用户的协同过滤">6.2.1. 基于用户的协同过滤</span></h3><p>实现协同过滤的步骤：</p>
+<h3><span id="721-基于用户的协同过滤">7.2.1. 基于用户的协同过滤</span></h3><p>实现协同过滤的步骤：</p>
 <ol>
 <li>首先计算<strong>用户与用户的相似程度</strong><br>比如下图中，我们计算出用户1和用户2，3最相似</li>
 <li>根据相似的人产生推荐结果<br>然后我们根据用户2，3的内容给用户1来推荐，用户3喜欢物品AC，用户2喜欢ADE，则向用户1初始推荐AC+ADE，而用户1已经消费过ACD，过滤掉用户1已经消费过的商品，最终推荐商品E</li>
 </ol>
 <p><img src="/2020/07/25/推荐系统学习/基于用户.jpg" alt=""></p>
-<h3><span id="622-基于物品的协同过滤">6.2.2. 基于物品的协同过滤</span></h3><ol>
+<h3><span id="722-基于物品的协同过滤">7.2.2. 基于物品的协同过滤</span></h3><ol>
 <li>首先计算<strong>物品与物品的相似程度</strong><br>比如物品A和物品B相似</li>
 <li><p>根据相似的物品产生推荐结果<br>用户A原先买过物品A，然后就给推荐物品B</p>
 <p>物品A被4个用户消费过，物品B被2个用户消费过，其中用户5是2个物品共同的消费用户，对物品B来说这个用户5占所有用户的0.5，对物品A来说这个用户5占所有用户的0.25，所以物品A和B之间的相似度为0.5*0.25。按照这样方式计算所有物品之间的相似度，发现物品A和物品C</p>
 <p><img src="/2020/07/25/推荐系统学习/基于物品.jpg" alt=""></p>
 </li>
 </ol>
-<h3><span id="623-基于模型的协同过滤">6.2.3. 基于模型的协同过滤</span></h3><h4><span id="6231-矩阵分解mf">6.2.3.1. 矩阵分解MF</span></h4><p>MF（Matrix Factorization，矩阵分解）是一个简单的Embedding模型。给定用户和物品矩阵$A \in \mathbb{R}^{m \times n}$,然后对其进行分解成用户嵌入矩阵$U \in \mathcal{R}^{m \times d}$和商品矩阵$V \in \mathcal{R}^{n \times d}$。$d &lt;&lt; m和n$</p>
+<h3><span id="723-基于模型的协同过滤">7.2.3. 基于模型的协同过滤</span></h3><h4><span id="7231-矩阵分解mf">7.2.3.1. 矩阵分解MF</span></h4><p>MF（Matrix Factorization，矩阵分解）是一个简单的Embedding模型。给定用户和物品矩阵$A \in \mathbb{R}^{m \times n}$,然后对其进行分解成用户嵌入矩阵$U \in \mathcal{R}^{m \times d}$和商品矩阵$V \in \mathcal{R}^{n \times d}$。$d &lt;&lt; m和n$</p>
 <p>矩阵分解的目标就是让$UV^T$的结果和$A$尽可能的相似。</p>
 <p><img src="/2020/07/25/推荐系统学习/矩阵分解1.jpg" alt=""></p>
 <p>在上面的目标函数中，只对观察到的obs的对$(i,j)$进行误差求和。即只对下图中为1的元素求误差，但是这并不能很好的推荐，泛化性能差。</p>
@@ -1234,13 +1382,13 @@ a_{i}^{(l)}=\operatorname{SoftMax}_{l}\left(e_{i}^{(l)}\right)=\frac{\exp \left(
 <li>随机梯度下降SGD</li>
 <li>加权交替最小二乘法WALS<br>在2个矩阵U和V中，对U和V进行交替更新。（1）固定U求解V，（2）固定V求解U</li>
 </ol>
-<h2><span id="基于内容推荐和协同过滤的区别">基于内容推荐和协同过滤的区别</span></h2><p>基于内容的推荐和用户协同过滤都是计算用户的相似度，但用到的特征却不同。</p>
+<h2><span id="73-基于内容推荐和协同过滤的区别">7.3. 基于内容推荐和协同过滤的区别</span></h2><p>基于内容的推荐和用户协同过滤都是计算用户的相似度，但用到的特征却不同。</p>
 <ol>
 <li>基于内容的推荐使用用户画像特征，即用户的个人信息，例如年龄，性别，教育程度等</li>
 <li>基于用户的协同过滤用的是用户对物品的评分特征，通过计算2个用户对商品的评分向量来计算相似性。</li>
 </ol>
 <p>基于用户的协同过滤需要用到用户对商品的评分来计算相似性，当一个新用户没有对任何商品评分，因此会出现“冷启动”的问题，基于内容的推荐就没有这个问题。</p>
-<h1><span id="7-排序算法">7. 排序算法</span></h1><h2><span id="71-逻辑回归lr">7.1. 逻辑回归LR</span></h2><p>LR最早可以用在点击率预测中，LR是一个二分类，输出的概率表示用户点击的概率。</p>
+<h1><span id="8-排序算法">8. 排序算法</span></h1><h2><span id="81-逻辑回归lr">8.1. 逻辑回归LR</span></h2><p>LR最早可以用在点击率预测中，LR是一个二分类，输出的概率表示用户点击的概率。</p>
 <p>步骤如下：</p>
 <ol>
 <li><p>构造特征<br>将所有特征进行离散化,变成one-hot输入</p>
@@ -1250,7 +1398,7 @@ a_{i}^{(l)}=\operatorname{SoftMax}_{l}\left(e_{i}^{(l)}\right)=\frac{\exp \left(
 <li>模型推荐<br>给定一个用户u，以及一批候选商品，对用户u如何推荐商品。通过上述方法计算用户u对候选商品中每个商品的点击点击得分，然后按照得分从大大小排序，推荐前N个物品。</li>
 </ol>
 <p>LR模型最大的缺陷就是人工特征工程，耗时费力费人力资源，能否将特征组合的能力体现在模型层面呢？就不用人工再去组合特征了。</p>
-<h2><span id="72-fm">7.2. FM</span></h2><p>FM英文全称是“Factorization Machine”，简称FM模型，中文名“因子分解机”。</p>
+<h2><span id="82-fm">8.2. FM</span></h2><p>FM英文全称是“Factorization Machine”，简称FM模型，中文名“因子分解机”。</p>
 <p>FM在2010年提出，核心在于特征组合，以此减少人工参与特征组合工作。FM的优势：</p>
 <ol>
 <li>FM能处理高维稀疏场景</li>
@@ -1258,7 +1406,7 @@ a_{i}^{(l)}=\operatorname{SoftMax}_{l}\left(e_{i}^{(l)}\right)=\frac{\exp \left(
 </ol>
 <p><img src="/2020/07/25/推荐系统学习/FM.jpg" alt=""></p>
 <p>FM在LR的基础上，引入任意2个特征的二阶特征组合，为每个特征，学习一个大小为k的一维向量。于是2个特征$x_i,x_j$的特征组合的权重值，通过特征对应的向量$v_i,v_j$的内积$<v_i,v_j>$来表示。</v_i,v_j></p>
-<h1><span id="8-推荐系统的评价">8. 推荐系统的评价</span></h1><ol>
+<h1><span id="9-推荐系统的评价">9. 推荐系统的评价</span></h1><ol>
 <li><p>准确率</p>
 <ul>
 <li>学术角度：RMSE,MAE,点击预估</li>
@@ -3226,8 +3374,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
       </categories>
       <tags>
         <tag>Mxnet</tag>
-        <tag>GPU</tag>
         <tag>Pytorch</tag>
+        <tag>GPU</tag>
       </tags>
   </entry>
   <entry>
@@ -3899,27 +4047,42 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 </li>
 </ul>
 <p>&ensp;&ensp;&ensp;&ensp;使用stack autoencoder（堆叠自编码器）学习用户隐藏表示。输出是一个用户去过和没去过的POI，一个n维的0/1向量，其中的$l_2,l_4,l_6$表示去过的POI下标，根据去过POI的下标在POI嵌入矩阵$W^{(1)}$中取出对应的POI向量组成矩阵$W^{(1)_{[L_u]}}$，得到用户已经去过区域的POI嵌入，这n个POI有些POI更能表示用户的喜好，用到self-attentive机制，为$W^{(1)_{[L_u]}}$中的每个POI嵌入学习不同的权重，来构成user hidden representation。一般的attention给每个POI嵌入学习一个分数，这个分数只能反映POI在一方面的重要性。例如饭店，在味道方面这个用户喜欢这家饭店，但是在环境方面用户不喜欢，为了从不同方面捕获用户的喜好，使用multiple-dimension attention，分别对不同方面进行打分。</p>
-<p><img src="/2019/08/02/时空论文阅读笔记一/2.png" alt=""><br><img src="/2019/08/02/时空论文阅读笔记一/3.png" alt=""></p>
-<p>这n个POI嵌入向量，从$d_a$个方面进行打分，得到的$A_u \in R^{d_a \times n}$ ,然后把n个POI嵌入乘上分数再相加，得到第u个用户隐藏表示$Z^{(1)}_u \in R^{d_a  times H_1}$，从$d_a$个方面来表示这个用户，为了让这个矩阵输入到encoder中，通过全连接将$d_a$个方面整合成一个方面，从一个矩阵变成一个向量。 然后经过2个encoder得到$z^{(3)}_u$<br><img src="/2019/08/02/时空论文阅读笔记一/4.png" alt=""></p>
-<p>&ensp;&ensp;&ensp;&ensp;用户访问过的POI会对没访问过的POI有影响，影响程度有着2个POI的相似性和距离决定。和已访问过的POI相似或邻近的POI用户访问的概率比较大。使用内积的方式求2个POI的相似性，但是这没有考虑到2个POI之间的距离，我们采用RBF kernel根据2个POI之间的距离计算2个POI之间的相关性，得到一个N*N的矩阵。然后把相似性和距离相关性相乘，得到2个POI的最终区域相关性，<br><img src="/2019/08/02/时空论文阅读笔记一/6.png" alt=""></p>
-<p>解码器阶段：将用户隐藏进行解码。其中$z^{(3)}_u$表示根据用户去过的POI得到的用户表示，$p_u$表示去过的POI对未去过的POI的影响。<br><img src="/2019/08/02/时空论文阅读笔记一/7.png" alt=""></p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/2.png" alt=""></p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/3.png" alt=""></p>
+<p>这n个POI嵌入向量，从$d_a$个方面进行打分，得到的$A_u \in R^{d_a \times n}$ ,然后把n个POI嵌入乘上分数再相加，得到第u个用户隐藏表示$Z^{(1)}_u \in R^{d_a  times H_1}$，从$d_a$个方面来表示这个用户，为了让这个矩阵输入到encoder中，通过全连接将$d_a$个方面整合成一个方面，从一个矩阵变成一个向量。 然后经过2个encoder得到$z^{(3)}_u$</p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/4.png" alt=""></p>
+<p>&ensp;&ensp;&ensp;&ensp;用户访问过的POI会对没访问过的POI有影响，影响程度有着2个POI的相似性和距离决定。和已访问过的POI相似或邻近的POI用户访问的概率比较大。使用内积的方式求2个POI的相似性，但是这没有考虑到2个POI之间的距离，我们采用RBF kernel根据2个POI之间的距离计算2个POI之间的相关性，得到一个N*N的矩阵。然后把相似性和距离相关性相乘，得到2个POI的最终区域相关性，</p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/6.png" alt=""></p>
+<p>解码器阶段：将用户隐藏进行解码。其中$z^{(3)}_u$表示根据用户去过的POI得到的用户表示，$p_u$表示去过的POI对未去过的POI的影响。</p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/7.png" alt=""></p>
 <ul>
 <li>总结<br>根据一个用户之前去过的POI对这个用户进行表示，不同的POI有不同的权重，同一个POI在不同的方面也有不同的权重，得到一个user hidden representation，将用户表示经过2层encoder，然后在解码的时候，用到邻居信息，去过的POI对未去过的POI有影响，影响大小根据这2个POI之间的相似性和距离决定。</li>
 </ul>
-<h2><span id="22-hst-lstm-a-hierarchical-spatial-temporal-long-short-term-memory-network-for-location-prediction2018ijcai">2.2. HST-LSTM: A Hierarchical Spatial-Temporal Long-Short Term Memory Network for Location Prediction（2018IJCAI）</span></h2><p>这篇论文没怎么看懂<br>弱实时预测，向用户推荐下一分钟或小时要去的地点。 在LSTM中使用时空信息。<br><img src="/2019/08/02/时空论文阅读笔记一/8.png" alt=""></p>
+<h2><span id="22-hst-lstm-a-hierarchical-spatial-temporal-long-short-term-memory-network-for-location-prediction2018ijcai">2.2. HST-LSTM: A Hierarchical Spatial-Temporal Long-Short Term Memory Network for Location Prediction（2018IJCAI）</span></h2><p>这篇论文没怎么看懂<br>弱实时预测，向用户推荐下一分钟或小时要去的地点。 在LSTM中使用时空信息。</p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/8.png" alt=""></p>
 <ul>
 <li>贡献<br>提出HST-LSTM结合时空影响到LSTM中，来解决位置预测中数据稀疏的问题。<br>HST-LSTM建模用户的历史访问序列，使用encoder-decoder的方式来提高预测性能。</li>
 <li>模型<br><strong>HST-LSTM model</strong><br>AOI:具有一种功能的区域，例如购物中心，工作区<br>Visit Record：用户在一段时间内（几周或几个月）访问的所有AOIS<br>Visit Session：一个用户在在一个时间段（一天）访问的AOI序列，在一个session中的AOI有强烈的相关性，揭示了用户的运动模式。<br>Visit Session Sequence：一个用户连续的visit sessions，可以作为上下文信息预测下一个AOI。<br>多个AOI组成一个visit session，多个visit session组成visit record，</li>
 <li>目标<br>用户在一段时间内访问了N个AOI，这N个AOI按照时间排序（AOI可能有重复），给定前j个用户去过的AOI，预测接下来用户要去的N-j个AOI，是一个多对多的预测。</li>
 </ul>
-<p><img src="/2019/08/02/时空论文阅读笔记一/9.png" alt=""><br>在LSTM中3个门控机制中，输入门，遗忘门，输出门加入时空因素。其中s和q都是d维的向量，分别表示空间和时间的影响因素。<br><img src="/2019/08/02/时空论文阅读笔记一/10.png" alt=""><br>基于提出的ST-LSTM，对每个visit session建模。使用STLSTM，每一个时间步输入的信息是一个visit session中的AOI嵌入，使用一个STLSTM对一个session进行建模，输出最后一个时间步的隐藏状态$h^i_e$作为第$i$个session的表示。对$n-1$个session进行建模得到n-1个隐藏状态，将这n-1个隐藏状态使用Contextual LSTM建模长期的visit sequence，在global context encoding阶段，每个时间步输入的是上一个STLSTM中session的表示。<br><img src="/2019/08/02/时空论文阅读笔记一/11.png" alt=""><br><img src="/2019/08/02/时空论文阅读笔记一/12.png" alt=""><br>在Decoding阶段，使用前i-1个session的推断接下来要去的AOI。</p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/9.png" alt=""></p>
+<p>在LSTM中3个门控机制中，输入门，遗忘门，输出门加入时空因素。其中s和q都是d维的向量，分别表示空间和时间的影响因素。</p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/10.png" alt="">    </p>
+<p>基于提出的ST-LSTM，对每个visit session建模。使用STLSTM，每一个时间步输入的信息是一个visit session中的AOI嵌入，使用一个STLSTM对一个session进行建模，输出最后一个时间步的隐藏状态$h^i_e$作为第$i$个session的表示。对$n-1$个session进行建模得到n-1个隐藏状态，将这n-1个隐藏状态使用Contextual LSTM建模长期的visit sequence，在global context encoding阶段，每个时间步输入的是上一个STLSTM中session的表示。</p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/11.png" alt=""></p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/12.png" alt=""></p>
+<p>在Decoding阶段，使用前i-1个session的推断接下来要去的AOI。</p>
 <ul>
 <li>总结<br>在LSTM阶段加入时空信息，提出STLSTM。<br>使用encoder-decoder来实现POI推荐，encoder和decoder都是LSTM</li>
 </ul>
-<h1><span id="3-时空数据预测">3. 时空数据预测</span></h1><h2><span id="31-hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">3.1. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting（2019AAAI）</span></h2><p>题目：超时空网络预测<br>以前的方法分别对时间和空间分别建模，没有考虑到时间和空间内在的因果关系。空间的属性（POI或路网）影响空间的特征（工作区或居民区），从而影响时间特征（inflow trend）<br><img src="/2019/08/02/时空论文阅读笔记一/13.png" alt=""></p>
+<h1><span id="3-时空数据预测">3. 时空数据预测</span></h1><h2><span id="31-hyperst-net-hypernetworks-for-spatio-temporal-forecasting2019aaai">3.1. HyperST-Net: Hypernetworks for Spatio-Temporal Forecasting（2019AAAI）</span></h2><p>题目：超时空网络预测<br>以前的方法分别对时间和空间分别建模，没有考虑到时间和空间内在的因果关系。空间的属性（POI或路网）影响空间的特征（工作区或居民区），从而影响时间特征（inflow trend）</p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/13.png" alt=""></p>
 <ul>
-<li>目标<br>预测一个区域。根据这个区域的空间和时间特征，预测ST数据，例如空气质量预测，交通流量预测。<br>本篇论文提出一个框架，包含3部分：空间模块，时间模块，演绎模块（deduction module）。<br><strong>这是第一篇考虑空间和时间特征内在因果关系的框架。</strong><br>使用spatial module从spatial attribute建模spatial characteristic，然后使用deduction module从spatial characteristic建模temporal characteristic.<br><img src="/2019/08/02/时空论文阅读笔记一/14.png" alt=""><br>Spatial module：两阶段模块，在第一阶段，将spatial attribute建模成spatial characteristic。在第二阶段，生成多个独立的因素，deduction module使用它们来建模时间模块中对应神经网络的参数。例如a—》A，b—》B，c—》C。空间模块像一个hypernetwork。<br>Temporal module：应用不同的HyperST层，HyperST层的参数由deduction module计算得到，可以被看做object的时间characteristic。<br>Deduction module：连接空间和时间模块，空间和时间的内在因果关系被考虑进去。<br><img src="/2019/08/02/时空论文阅读笔记一/15.png" alt=""> </li>
+<li>目标<br>预测一个区域。根据这个区域的空间和时间特征，预测ST数据，例如空气质量预测，交通流量预测。<br>本篇论文提出一个框架，包含3部分：空间模块，时间模块，演绎模块（deduction module）。<br><strong>这是第一篇考虑空间和时间特征内在因果关系的框架。</strong><br>使用spatial module从spatial attribute建模spatial characteristic，然后使用deduction module从spatial characteristic建模temporal characteristic.</li>
 </ul>
+<p><img src="/2019/08/02/时空论文阅读笔记一/14.png" alt=""></p>
+<p>Spatial module：两阶段模块，在第一阶段，将spatial attribute建模成spatial characteristic。在第二阶段，生成多个独立的因素，deduction module使用它们来建模时间模块中对应神经网络的参数。例如a—》A，b—》B，c—》C。空间模块像一个hypernetwork。<br>Temporal module：应用不同的HyperST层，HyperST层的参数由deduction module计算得到，可以被看做object的时间characteristic。<br>Deduction module：连接空间和时间模块，空间和时间的内在因果关系被考虑进去。  </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/15.png" alt=""> </p>
 <h2><span id="32-restful-resolution-aware-forecasting-of-behavioral-time-series-data2018cikm">3.2. RESTFul: Resolution-Aware Forecasting of Behavioral Time Series Data（2018CIKM）</span></h2><p>基于不同粒度的行为时间序列数据预测<br>行为数据，例如购买行为，邮件行为。<br>现在的预测方法经常仅仅使用一种时间粒度（天或周），然而现在的行为时间数据经常有多重时间粒度模式，每种时间模式之间相互依赖。本篇论文提出RESolution-aware Time series Forecasting（RESTFul），使用循环神经网络来编码不同粒度的时间模式成一个低维表示。不同时间粒度的表示在融合阶段，使用卷积融合框架。最终学到的conclusive embedding向量输入到MLP中用来预测行为时间序列数据。<br><strong>这是第一篇使用多时间粒度来预测时间序列数据。</strong><br>不同粒度的时间序列长度是一样的，比如为5，就表示最近3天，5周。</p>
 <ul>
 <li>定义<ol>
@@ -3930,8 +4093,9 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <li>限制$\alpha &gt;= \beta$  如果$\alpha=1week,\beta=1day,表示1周测量1次，1次测1天。 \alpha=1week,\beta=1week,表示1周测量1次，1次测1周。其中x_t = g(x_t,x_{t+1}…x_{x+\beta})的聚合值，例如一周的平均值或最大值$ </li>
 </ol>
 </li>
-<li>模型<br>RESTFul有2个阶段，第一个阶段，使用循环神经网络来编码不同时间粒度的时间模式。第2个阶段，使用卷积融合模块来融合不同时间粒度的表示。<br><img src="/2019/08/02/时空论文阅读笔记一/16.png" alt="">  </li>
+<li>模型<br>RESTFul有2个阶段，第一个阶段，使用循环神经网络来编码不同时间粒度的时间模式。第2个阶段，使用卷积融合模块来融合不同时间粒度的表示。  </li>
 </ul>
+<p><img src="/2019/08/02/时空论文阅读笔记一/16.png" alt="">  </p>
 <p>$\alpha,\beta \in {day:1,week:7},这样&lt;\alpha,\beta&gt;就有3种组合，分别是<1,1>,<7,1>,<7,7>$，对于每种组合都有一组行为时间序列数据，对于每组时间序列数据，都使用GRU来这个序列进行时间建模，得到最后一个时间步的隐藏状态向量。将每种组合得到的隐藏状态拼接起来，最终得到一个张量，维度是$R^{|\alpha|\times|\beta|\times d_s}$。然后使用卷积操作，先使用2次2*2的卷积，同时使用padding保证得到的结果大小不变，只改变通道的大小，最终得到的结果是$R^{|\alpha|\times|\beta|\times d_s/4}$,然后展开得到一个$|\alpha|\times|\beta|\times d_s/4$的向量，输入到MLP中，最终可以用来预测回归任务和分类任务。回归任务的损失函数是均方差，分类任务的损失函数是交叉熵。</7,7></7,1></1,1></p>
 <ul>
 <li>总结：<br>考虑不同时间粒度，对不同时间粒度的序列使用GRU建模，将最后一个时间步的隐藏状态拼接起来使用CNN。使用2维卷积对时间数据进行建模，不太合适，可以考虑时间3维卷积。</li>
@@ -3943,27 +4107,70 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <li>模型：Spatial-Temporal Dynamic Network（STDN），流量门控机制学习location之间动态相似性，periodically shifting attention机制捕获长期周期时间shifting。</li>
 <li>将一个城市划分成a*b=n个网格，将一个时间段（eg.一个月）划分成m个长度相等的时间段。<br>traffic volume：区域$i$的start流量$y^s_{i,t}$：在第$t$个时间段离开这个区域的trip个数，区域$i$的end流量$y^e_{i,t}$：在第$t$个时间段到达这个区域的trip个数。<br>traffic flow：从在第$t$个时间段从区域$i$出发，在第$\tau$个时间段到达$j$区域的traffic flow使用$f^{j,\tau}_{i,t}$表示。</li>
 <li>目标：给定时间段t及其之前的traffic volume和traffic flow，预测第$t+1$个时间段的start and end traffic volume。</li>
-<li>模型：使用Local CNN和LSTM捕获时间和空间关系。<br><img src="/2019/08/02/时空论文阅读笔记一/STDN.png" alt=""><br>在提出本文的组件之前，先介绍一下2个base model。</li>
-<li>空间 Local CNN<br>使用traffic volume来获取空间相关性，使用local CNN得到区域表示。<br><img src="/2019/08/02/时空论文阅读笔记一/volume.png" alt=""></li>
-<li>Short-term 时间依赖，短期比如说预测今天9:00~9:30的traffic volume，输入是今天7:00~8:30。<br>使用LSTM来获取短期时间依赖。<br><img src="/2019/08/02/时空论文阅读笔记一/short-term.png" alt="">  </li>
+<li>模型：使用Local CNN和LSTM捕获时间和空间关系。  </li>
+</ul>
+<p><img src="/2019/08/02/时空论文阅读笔记一/STDN.png" alt="">  </p>
+<p>在提出本文的组件之前，先介绍一下2个base model。</p>
+<ul>
+<li><p>空间 Local CNN<br>使用traffic volume来获取空间相关性，使用local CNN得到区域表示。    </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/volume.png" alt=""></p>
+</li>
+<li><p>Short-term 时间依赖，短期比如说预测今天9:00~9:30的traffic volume，输入是今天7:00~8:30。<br>使用LSTM来获取短期时间依赖。 </p>
+</li>
+</ul>
+<p><img src="/2019/08/02/时空论文阅读笔记一/short-term.png" alt="">  </p>
+<ul>
 <li>下面提取本文的改进，<br><strong>Local CNN—》Flow Gate Mechanism<br>Short-term temporal—》Periodically Shifted Attention Mechanism</strong></li>
 </ul>
 <p><strong>Spatial Dynamic Similarity: Flow Gating Mechanism(空间动态相似性)</strong><br>在local CNN中，local spatial dependency主要是traffic volume。Y表示traffic volume。  但是traffic volume是静态的，不能完全反映目标区域和周围邻居的关系，traffic flow可以更加直接的反应区域之间的联系。两个区域之间的flow越多表示2个区域联系越强（eg.这2个区域越相似）。设计Flow Gating Mechanism(FGM)捕获区域间的dynamic spatial dependency。<br>traffic flow分为2种：inflow和outflow。<br>给定一个目标区域$i$，获取该区域历史$l$个时间段的traffic flow(从$t-l+1到t$),将历史$l$个时间段的inflow和outflow拼接在一起，形成一个三维张量$F_{i,t} \in \mathbb{R}^{S \times S \times 2l}$，其中$S$表示邻近区域，使用CNN建模区域之间的空间相关性。其中$F_{i,j}$作为第一层的输入。  </p>
-<p><img src="/2019/08/02/时空论文阅读笔记一/cnn.png" alt=""><br>在每一个卷积层，<strong>使用traffic flow信息来捕获区域之间的动态相似性</strong>，通过一个流量门来限制空间信息。每一层的输出是空间表示$Y^{i,k}_t$，受流量门调整。<br>即对上式的traffic volume，通过traffic flow来控制。 $\sigma$的取值是[0,1]，对traffic volume起到门控机制。  </p>
-<p><img src="/2019/08/02/时空论文阅读笔记一/gate.png" alt=""><br><strong>Temporal Dynamic Similarity：Periodically Shifted Attention Mechanism(时间动态相似性)</strong><br>以前的LSTM没有考虑长期依赖(例如：周期)，比如预测第$t$天9点的volume，考虑昨天或前天这个时间段的数据。但是traffic volume并不是严格周期的，在时间上会有平移，图a显示了在天之间的时间平移，图b显示了在周之间的时间平移。<br><img src="/2019/08/02/时空论文阅读笔记一/shifting.png" alt=""><br>因为时间具有shifting，因此设计了Periodically Shifted Attention Mechanism（PSAM），这里只考虑天周期性，不考虑周周期。从前P天对应时间段的数据来预测，为了解决time shifting，获取每一天的$Q$个时间段,假设预测的时间段是9:00~9:30，$Q=5$,则获取该时间段前后1个小时的数据8:00~10:30。<br>即获取前P天的数据，并且从每天中获取Q个时间段。如模型图所示，对于每一天都有Q个时间段，可以获取每个时间段的traffic volume和traffic flow，然后使用图卷积，即可以得到一个区域每个时间段的表示。每一天都有一个自己的LSTM，每个LSTM都有Q个时间步，每个时间步都会得到一个隐藏状态向量，即会得到Q个隐藏状态，使用Attention，将Q个隐藏状态整合成一个隐藏状态，用$h^p_{i,t}$表示。其中attention中的$\alpha^{p,q}_{i,t}$表示在第$p$天，第$q$个时间段的重要性。$\alpha^{p,q}_{i,t}$根据长期的隐藏状态和被预测天的短期隐藏状态$h_{i,t}$计算得到。 </p>
-<p><img src="/2019/08/02/时空论文阅读笔记一/lstm.png" alt=""><br><img src="/2019/08/02/时空论文阅读笔记一/attention.png" alt=""><br>经过attention之后，P天会得到P个隐藏状态，然后再经过一个LSTM来保存周期的序列信息，最终得到长期依赖表示$\hat{h}^p_{i,t}$。  </p>
-<p><img src="/2019/08/02/时空论文阅读笔记一/periodic.png" alt=""><br><strong>Joint Traning</strong><br>将短期表示$h_{i,t}$和长期依赖$\hat{h}^p_{i,t}$拼接得到$h^c_{i,t}$，送到一个全连接神经网络中，得到最终的输出，表示为$y^i_{s,t+1}$$y^i_{e,t+1}$作为start volume和end volume。<br><img src="/2019/08/02/时空论文阅读笔记一/output.png" alt=""></p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/cnn.png" alt="">  </p>
+<p>在每一个卷积层，<strong>使用traffic flow信息来捕获区域之间的动态相似性</strong>，通过一个流量门来限制空间信息。每一层的输出是空间表示$Y^{i,k}_t$，受流量门调整。<br>即对上式的traffic volume，通过traffic flow来控制。 $\sigma$的取值是[0,1]，对traffic volume起到门控机制。  </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/gate.png" alt="">  </p>
+<p><strong>Temporal Dynamic Similarity：Periodically Shifted Attention Mechanism(时间动态相似性)</strong><br>以前的LSTM没有考虑长期依赖(例如：周期)，比如预测第$t$天9点的volume，考虑昨天或前天这个时间段的数据。但是traffic volume并不是严格周期的，在时间上会有平移，图a显示了在天之间的时间平移，图b显示了在周之间的时间平移。   </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/shifting.png" alt="">   </p>
+<p>因为时间具有shifting，因此设计了Periodically Shifted Attention Mechanism（PSAM），这里只考虑天周期性，不考虑周周期。从前P天对应时间段的数据来预测，为了解决time shifting，获取每一天的$Q$个时间段,假设预测的时间段是9:00~9:30，$Q=5$,则获取该时间段前后1个小时的数据8:00~10:30。<br>即获取前P天的数据，并且从每天中获取Q个时间段。如模型图所示，对于每一天都有Q个时间段，可以获取每个时间段的traffic volume和traffic flow，然后使用图卷积，即可以得到一个区域每个时间段的表示。每一天都有一个自己的LSTM，每个LSTM都有Q个时间步，每个时间步都会得到一个隐藏状态向量，即会得到Q个隐藏状态，使用Attention，将Q个隐藏状态整合成一个隐藏状态，用$h^p_{i,t}$表示。其中attention中的$\alpha^{p,q}_{i,t}$表示在第$p$天，第$q$个时间段的重要性。$\alpha^{p,q}_{i,t}$根据长期的隐藏状态和被预测天的短期隐藏状态$h_{i,t}$计算得到。 </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/lstm.png" alt="">  </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/attention.png" alt="">  </p>
+<p>经过attention之后，P天会得到P个隐藏状态，然后再经过一个LSTM来保存周期的序列信息，最终得到长期依赖表示$\hat{h}^p_{i,t}$。  </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/periodic.png" alt=""></p>
+<p><strong>Joint Traning</strong><br>将短期表示$h_{i,t}$和长期依赖$\hat{h}^p_{i,t}$拼接得到$h^c_{i,t}$，送到一个全连接神经网络中，得到最终的输出，表示为$y^i_{s,t+1}$$y^i_{e,t+1}$作为start volume和end volume。  </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/output.png" alt=""></p>
 <h2><span id="35-deep-spatio-temporal-residual-networks-for-citywide-crowd-flows-predictionaaai2017">3.5. Deep Spatio-Temporal Residual Networks for Citywide Crowd Flows Prediction（AAAI2017）</span></h2><p>预测flow of crowd，提出ST-ResNet，使用残差网络来建模traffic crowd的时间邻近，周期，区域属性，对每一种属性，设计一个残差卷积单元，建模traffic crowd的空间属性。ST-ResNet对3个残差神经网络的输出分配不同的权重，动态地结合3个输出，在整合3个输出的时候同时考虑外部因素，例如天气，day of week。在这篇论文中，预测2种crowd flow：inflow和outflow。inflow是在一个时间段内从其他区域进行到目标区域的crowds。outflow是在一个时间段内离开目标区域的corwds。inflow和outflow是行人数量、车的数据、公共交通系统上的人数量或者3个的总和。</p>
 <ul>
-<li>gloal：给定历史t个时间段所有区域的inflow和outflow，预测第t+1个时间段所有区域的inflow和outflow。<br>将一个city网格划分成$I<em>J$，下面定义inflow和outflow<br><img src="/2019/08/02/时空论文阅读笔记一/inflow.png" alt=""><br>inflow：从其他区域进入到(i,j)<br>outflow：从(i,j)出发到其他区域<br>其中$Tr:g1—&gt;g2…—&gt;g_{|Tr|}$<br><img src="/2019/08/02/时空论文阅读笔记一/X.png" alt=""><br>其中X是所有区域的inflow和outflow矩阵。<br><img src="/2019/08/02/时空论文阅读笔记一/problem.png" alt=""><br><img src="/2019/08/02/时空论文阅读笔记一/ST-ResNet.png" alt=""><br>这个模型由4个组件构成：temporal closeness，period，trend和external。<br>每个时间段内都有一个网格图，2通道，表示所有区域的inflow和outflow。多个时间段按照时间排列会有多个图。在时间段上划分为3部分：recnet、near、distant，分别送到3个模块中：closeness，period，trend，然后对三个模块的输出分配不同的权重融合，再和external信息融合送到Tanh中。<br><strong>Conv-ResNet</strong><br>前3个模块内部是相同的结构，由2部分组成：卷积和残差单元<br><img src="/2019/08/02/时空论文阅读笔记一/conv-resnet.png" alt=""><br>拿closeness模块举例，首先使用Conv来捕获near和distant区域的关系。  将closeness的图拼接在一起，closeness一共有$l_c$个时间段，每个时间段有2个通道，将这$l_c$时间段的图拼接在一起，变成$2</em>l_c <em> I </em> J$的数据送入到第一层卷积层。<br><img src="/2019/08/02/时空论文阅读笔记一/closeness.png" alt=""><br><img src="/2019/08/02/时空论文阅读笔记一/resnet.png" alt=""><br>根据上述结构分别对period和trend进行编码<br><strong>External Component</strong><br>主要考虑以下的外部因素，使用2层全连接提取外部因素。第一层是嵌入层，第二层是转换低维到高维，和$X_t$的维度一样。<br><img src="/2019/08/02/时空论文阅读笔记一/external.png" alt=""><br><strong>Fusion</strong><br>所有的区域都被closeness，period，trend影响，但是不同的区域影响程度不同，<br><img src="/2019/08/02/时空论文阅读笔记一/fusion.png" alt=""><br><strong>Fusion the external component</strong><br>将3个closeness，period，trend的输出融合，然后再和被预测时间段t的外部因素融合。<br><img src="/2019/08/02/时空论文阅读笔记一/fusion-external.png" alt=""> </li>
+<li>gloal：给定历史t个时间段所有区域的inflow和outflow，预测第t+1个时间段所有区域的inflow和outflow。<br>将一个city网格划分成$I*J$，下面定义inflow和outflow </li>
 </ul>
+<p><img src="/2019/08/02/时空论文阅读笔记一/inflow.png" alt="">    </p>
+<p>inflow：从其他区域进入到(i,j)<br>outflow：从(i,j)出发到其他区域<br>其中$Tr:g1—&gt;g2…—&gt;g_{|Tr|}$<br><img src="/2019/08/02/时空论文阅读笔记一/X.png" alt="">  </p>
+<p>其中X是所有区域的inflow和outflow矩阵。  </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/problem.png" alt="">  </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/ST-ResNet.png" alt="">  </p>
+<p>这个模型由4个组件构成：temporal closeness，period，trend和external。<br>每个时间段内都有一个网格图，2通道，表示所有区域的inflow和outflow。多个时间段按照时间排列会有多个图。在时间段上划分为3部分：recnet、near、distant，分别送到3个模块中：closeness，period，trend，然后对三个模块的输出分配不同的权重融合，再和external信息融合送到Tanh中。<br><strong>Conv-ResNet</strong><br>前3个模块内部是相同的结构，由2部分组成：卷积和残差单元  </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/conv-resnet.png" alt="">    </p>
+<p>拿closeness模块举例，首先使用Conv来捕获near和distant区域的关系。  将closeness的图拼接在一起，closeness一共有$l_c$个时间段，每个时间段有2个通道，将这$l_c$时间段的图拼接在一起，变成$2<em>l_c </em> I * J$的数据送入到第一层卷积层。</p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/closeness.png" alt=""></p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/resnet.png" alt="">   </p>
+<p>根据上述结构分别对period和trend进行编码<br><strong>External Component</strong><br>主要考虑以下的外部因素，使用2层全连接提取外部因素。第一层是嵌入层，第二层是转换低维到高维，和$X_t$的维度一样。</p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/external.png" alt=""></p>
+<p><strong>Fusion</strong><br>所有的区域都被closeness，period，trend影响，但是不同的区域影响程度不同，   </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/fusion.png" alt="">   </p>
+<p><strong>Fusion the external component</strong><br>将3个closeness，period，trend的输出融合，然后再和被预测时间段t的外部因素融合。 </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/fusion-external.png" alt=""> </p>
 <h2><span id="36-attention-based-spatial-temporal-graph-convolutional-networks-for-traffic-flow-forecasting2019aaai">3.6. Attention Based Spatial-Temporal Graph Convolutional Networks for Traffic Flow Forecasting（2019AAAI）</span></h2><p>&ensp;&ensp;&ensp;&ensp;使用时空图卷积预测所有节点在未来n个时间步的traffic flow。将traffic flow分为3个时间粒度级别：recent，daily，weekly，3个时间粒度的数据使用3个相同的module来建模，每个module有2个submodule：时空Attention和时空GCN</p>
-<h2><span id="37-urbanfm-inferring-fine-grained-urban-flows2019kdd">3.7. UrbanFM: Inferring Fine-Grained Urban Flows（2019KDD）</span></h2><p>从粗粒度级的flow推断细粒度级的flow。比如给出的是3<em>3区域的flow，需要推断6\</em>6区域的flow.大的区域称为superregion，划分的小区域称为subregion，同时考虑superregion和subregion的flow约束关系，加起来和superregion的flow相等。<br><img src="/2019/08/02/时空论文阅读笔记一/fine-grain.png" alt=""><br>模型的总体框架如下：<br>主要分为2个部分：inference network和external factor subnet。其中推断网络由2个模块组成，特征提取模块和分布上采样模块。<br>在推断网络中，输入是I*J的flow，先经过卷积和M个残差块，捕获空间相关性。在分布上采样模块，每个网格区域需要划分为N<em>N个区域，所以分布上采样主要是改变特征图的大小，从原来的$F</em>I<em>J变成F</em>NI<em>NJ$，对于每个网格区域，经过分布上采样模块，输出的$N</em>N$的flow分布概率。原始的输入$X_c的维度是I<em>J$，经过近邻上采样，会将原始的输入$变成维度为NI</em>NJ$,就是将每个区域的$flow复制N<em>N份$，然后和分布上采样输出的概率相乘，得到每个细粒度区域的flow。<br>**需要注意外部因素，输入是一个向量，经过特征提取模块，输出也是一个向量，为了将外部因素和粗粒度级的flow和细粒度级的flow拼接，也需要将外部因素reshape成$I</em>J或NI<em>NJ$的形状。我原先以为是将外部因素复制$I</em>J或NJ<em>NJ$份，其实并不是，是使用reshape函数。*</em>  </p>
+<h2><span id="37-urbanfm-inferring-fine-grained-urban-flows2019kdd">3.7. UrbanFM: Inferring Fine-Grained Urban Flows（2019KDD）</span></h2><p>从粗粒度级的flow推断细粒度级的flow。比如给出的是3<em>3区域的flow，需要推断6\</em>6区域的flow.大的区域称为superregion，划分的小区域称为subregion，同时考虑superregion和subregion的flow约束关系，加起来和superregion的flow相等。  </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/fine-grain.png" alt="">      </p>
+<p>模型的总体框架如下：<br>主要分为2个部分：inference network和external factor subnet。其中推断网络由2个模块组成，特征提取模块和分布上采样模块。<br>在推断网络中，输入是$I \times J$的flow，先经过卷积和M个残差块，捕获空间相关性。在分布上采样模块，每个网格区域需要划分为$N<em>N$个区域，所以分布上采样主要是改变特征图的大小，从原来的$F</em>I<em>J$变成$F</em>NI<em>NJ$，对于每个网格区域，经过分布上采样模块，输出的$N</em>N$的flow分布概率。原始的输入$X_c$的维度是$I<em>J$，经过近邻上采样，会将原始的输入变成维度为$NI</em>NJ$,就是将每个区域的$flow$复制$N<em>N份$，然后和分布上采样输出的概率相乘，得到每个细粒度区域的flow。<br>**需要注意外部因素，输入是一个向量，经过特征提取模块，输出也是一个向量，为了将外部因素和粗粒度级的flow和细粒度级的flow拼接，也需要将外部因素reshape成$I</em>J或NI<em>NJ$的形状。我原先以为是将外部因素复制$I</em>J或NJ<em>NJ$份，其实并不是，是使用reshape函数。*</em>  </p>
 <p><img src="/2019/08/02/时空论文阅读笔记一/urbanFM.png" alt=""></p>
-<h2><span id="38-deep-multi-view-spatial-temporal-network-for-taxi-demand-prediction2018aaai">3.8. Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction（2018AAAI）</span></h2><p>将一个城市进行网格划分，时间段：30min。预测一个网格区域的taxi demand。<br><strong>注意：根据多个区域，多个时间段，预测一个区域，一个区域的taxi demand</strong><br>根据前$t-h,….t$个时间段的taxi demand和外部因素，预测第$t+1$个时间段的taxi demand。<br><img src="/2019/08/02/时空论文阅读笔记一/taxi-demand.png" alt=""><br>文章的标题是multi-view分别是spatial view、temporal view和semantic view(城市功能)，其中spatial view考虑的是target的邻近区域，但是有些区域离target很远，但是城市功能（居民区、商业区）和target相似，通过semantic view来捕获。<br><strong>1. Spatial view：Local CNN</strong><br>仅考虑空间近邻的区域，邻居区域大小$S<em>S,例如7</em>7$，通道数为1，表示taxi demand，表示为$Y^{i,0}_t \in R^{S \times S \times 1}$，经过K个卷积层，输出变成$Y^{i,K}_t \in R^{S \times S \times \lambda}$，然后reshape成一个向量维度为$S^2\lambda$，输入到全连接$FC中，输出一个d维的向量$。时间段有$t-h,….t$，每个时间段的$S<em>S</em>1$的网格都输入到Conv中，然后再经过全连接$FC$,所以最终输出$t-h,….t$个时间步，每个时间步是$d维。$<br><strong>细节：对于城市的边界区域，使用0来填充邻居。</strong><br><strong>2. Temporal view：LSTM</strong><br>经过spatial view输出每个时间步的表示，再和每个时间步的外部信息(天气，hour of day，day of week)拼接，共同输入到LSTM中，最终输出最后一个时间步的隐藏状态。<br><strong>3. Semantic View：Structural Embedding</strong><br>根据区域之间的城市功能相似性来构建graph，图中的节点是所有的区域，共$L个$，边：2个区域之间的相似性。相似性的计算是通过$Dynamic \quad Time \quad Warping \quad (DTW)$。 下图中给出了2个区域相似性的计算公式。根据区域$i 和 j$在工作日的taxi demand的时间序列，计算2个时间序列的相似性，即2个区域的相似性。根据区域间的相关性构建了一个全连接图$G$,使用$Embed$嵌入层,本文使用$LINE对图中的节点进行嵌入$，得到每个节点的低维特征表示，然后再次送入全连接中。<br><strong>注意：构建的是一个全连接图，即任意2个节点之间都有边，因为任意2个节点都可以达到。</strong><br><img src="/2019/08/02/时空论文阅读笔记一/DTW.png" alt=""><br><strong>4. Prediction Component</strong><br>将LSTM中最后一个时间步的隐藏状态和target区域的节点表示$m^i$拼接，送入到全连接中，经过$sigmoid函数，$最终输出的值在[0,1]之间，然后再反归一化得到真实的taxi demand。<br><img src="/2019/08/02/时空论文阅读笔记一/prediction.png" alt=""></p>
+<h2><span id="38-deep-multi-view-spatial-temporal-network-for-taxi-demand-prediction2018aaai">3.8. Deep Multi-View Spatial-Temporal Network for Taxi Demand Prediction（2018AAAI）</span></h2><p>将一个城市进行网格划分，时间段：30min。预测一个网格区域的taxi demand。<br><strong>注意：根据多个区域，多个时间段，预测一个区域，一个区域的taxi demand</strong><br>根据前$t-h,….t$个时间段的taxi demand和外部因素，预测第$t+1$个时间段的taxi demand。</p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/taxi-demand.png" alt="">    </p>
+<p>文章的标题是multi-view分别是spatial view、temporal view和semantic view(城市功能)，其中spatial view考虑的是target的邻近区域，但是有些区域离target很远，但是城市功能（居民区、商业区）和target相似，通过semantic view来捕获。<br><strong>1. Spatial view：Local CNN</strong><br>仅考虑空间近邻的区域，邻居区域大小$S<em>S,例如7</em>7$，通道数为1，表示taxi demand，表示为$Y^{i,0}_t \in R^{S \times S \times 1}$，经过K个卷积层，输出变成$Y^{i,K}_t \in R^{S \times S \times \lambda}$，然后reshape成一个向量维度为$S^2\lambda$，输入到全连接$FC中，输出一个d维的向量$。时间段有$t-h,….t$，每个时间段的$S<em>S</em>1$的网格都输入到Conv中，然后再经过全连接$FC$,所以最终输出$t-h,….t$个时间步，每个时间步是$d维。$<br><strong>细节：对于城市的边界区域，使用0来填充邻居。</strong><br><strong>2. Temporal view：LSTM</strong><br>经过spatial view输出每个时间步的表示，再和每个时间步的外部信息(天气，hour of day，day of week)拼接，共同输入到LSTM中，最终输出最后一个时间步的隐藏状态。<br><strong>3. Semantic View：Structural Embedding</strong><br>根据区域之间的城市功能相似性来构建graph，图中的节点是所有的区域，共$L个$，边：2个区域之间的相似性。相似性的计算是通过$Dynamic \quad Time \quad Warping \quad (DTW)$。 下图中给出了2个区域相似性的计算公式。根据区域$i 和 j$在工作日的taxi demand的时间序列，计算2个时间序列的相似性，即2个区域的相似性。根据区域间的相关性构建了一个全连接图$G$,使用$Embed$嵌入层,本文使用$LINE对图中的节点进行嵌入$，得到每个节点的低维特征表示，然后再次送入全连接中。<br><strong>注意：构建的是一个全连接图，即任意2个节点之间都有边，因为任意2个节点都可以达到。</strong></p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/DTW.png" alt=""></p>
+<p><strong>4. Prediction Component</strong><br>将LSTM中最后一个时间步的隐藏状态和target区域的节点表示$m^i$拼接，送入到全连接中，经过$sigmoid函数，$最终输出的值在[0,1]之间，然后再反归一化得到真实的taxi demand。   </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/prediction.png" alt=""></p>
 <p><strong>5. Loss Function</strong><br><strong>注意：损失函数有参考意义。</strong>   </p>
-<p>损失函数中包含2部分，一个是输出的taxi demand的均方差，一个是MAPE，前面更关注一些大的值，为了避免模型被一些大的值控制，后面加入MAPE。<br><img src="/2019/08/02/时空论文阅读笔记一/loss.png" alt=""> </p>
-<p><img src="/2019/08/02/时空论文阅读笔记一/DMVST-Net.png" alt=""><br><strong>6. 数据集</strong><br>使用广州2个月的taxi数据，$区域划分20<em>20，每个区域700m</em>700m$，<br>（1）使用$Min-Max归一化为[0,1]之间，同时也对y进行归一化到[0,1]之间。$模型预测的输出也在$[0,1]之间，$然后对$y$使用反归一化得到真实的taxi demand。<br>（2）邻居大小设置为$9*9$<br>（3）时间段：30min，根据前8个时间段(4h)预测下一个时间段<br>（4）最后FC的激活函数是$Sigmoid$，其余FC的激活函数是$Relu$</p>
+<p>损失函数中包含2部分，一个是输出的taxi demand的均方差，一个是MAPE，前面更关注一些大的值，为了避免模型被一些大的值控制，后面加入MAPE。   </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/loss.png" alt=""> </p>
+<p><img src="/2019/08/02/时空论文阅读笔记一/DMVST-Net.png" alt="">   </p>
+<p><strong>6. 数据集</strong><br>使用广州2个月的taxi数据，$区域划分20<em>20，每个区域700m</em>700m$，<br>（1）使用$Min-Max归一化为[0,1]之间，同时也对y进行归一化到[0,1]之间。$模型预测的输出也在$[0,1]之间，$然后对$y$使用反归一化得到真实的taxi demand。<br>（2）邻居大小设置为$9*9$<br>（3）时间段：30min，根据前8个时间段(4h)预测下一个时间段<br>（4）最后FC的激活函数是$Sigmoid$，其余FC的激活函数是$Relu$</p>
 <h2><span id="39-urban-traffic-prediction-from-spatio-temporal-data-using-deep-meta-learning2019kdd郑宇">3.9. Urban Traffic Prediction from Spatio-Temporal Data Using Deep Meta Learning（2019KDD郑宇）</span></h2><p>通过时空数据，使用深度元学习，进行城市交通预测<br>论文代码：<a href="https://github.com/panzheyi/ST-MetaNet" target="_blank" rel="noopener">https://github.com/panzheyi/ST-MetaNet</a><br><strong>Abstract</strong><br>&ensp;&ensp;&ensp;&ensp;预测城市traffic有以下挑战：（1）复杂的时空相关性，（2）时空相关性的多样性，每个location的POI和路网信息都不一样。提出deep-meta-learning模型（深度元学习），叫做ST-MetaNet，同时预测所有location的traffic，使用seq2seq架构，包含encoder来学习历史信息，decoder来一步接一步的预测，encoder和decoder有相同的架构，都包含RNN来编码历史traffic数据，一个meta graph attention来捕获各种的空间关系，一个meta RNN来考虑各种的时间相关性。</p>
 <p><strong>Introduction</strong></p>
 <ol>

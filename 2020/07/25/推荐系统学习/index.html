@@ -83,6 +83,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/推荐系统整体架构.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/lambda.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/流程.png">
 <meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/推荐算法.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/推荐算法2.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/推荐算法3.jpg">
@@ -93,6 +94,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/推荐算法1.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/余弦相似度.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/皮尔逊.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/相似性.png">
 <meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/杰卡德.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/基于用户.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/基于物品.jpg">
@@ -101,7 +103,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/矩阵分解3.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/lr.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/07/25/推荐系统学习/FM.jpg">
-<meta property="og:updated_time" content="2020-10-09T06:47:17.332Z">
+<meta property="og:updated_time" content="2020-10-20T11:08:39.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="推荐系统学习">
 <meta name="twitter:description" content="开始学习推荐系统的相关内容">
@@ -406,7 +408,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4.2k
+                  4.3k
                 </span>
               
 
@@ -449,42 +451,43 @@
 <ul>
 <li><a href="#1-推荐系统和搜索的区别">1. 推荐系统和搜索的区别</a></li>
 <li><a href="#2-推荐系统lambda架构">2. 推荐系统Lambda架构</a></li>
-<li><a href="#3-推荐算法流程">3. 推荐算法流程</a><ul>
-<li><a href="#31-长尾效应和推荐系统">3.1. 长尾效应和推荐系统</a></li>
-<li><a href="#32-召回">3.2. 召回</a></li>
-<li><a href="#33-排序">3.3. 排序</a><ul>
-<li><a href="#331-lr">3.3.1. LR</a></li>
+<li><a href="#3-推荐算法模型历程">3. 推荐算法模型历程</a></li>
+<li><a href="#4-推荐算法流程">4. 推荐算法流程</a><ul>
+<li><a href="#41-长尾效应和推荐系统">4.1. 长尾效应和推荐系统</a></li>
+<li><a href="#42-召回">4.2. 召回</a></li>
+<li><a href="#43-排序">4.3. 排序</a><ul>
+<li><a href="#431-lr">4.3.1. LR</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#4-推荐模型的构建流程">4. 推荐模型的构建流程</a></li>
-<li><a href="#5-相似度计算">5. 相似度计算</a><ul>
-<li><a href="#51-余弦相似度">5.1. 余弦相似度</a></li>
-<li><a href="#52-皮尔逊相关系数">5.2. 皮尔逊相关系数</a></li>
-<li><a href="#53-杰卡德jaccard相似度">5.3. 杰卡德Jaccard相似度</a></li>
+<li><a href="#5-推荐模型的构建流程">5. 推荐模型的构建流程</a></li>
+<li><a href="#6-相似度计算">6. 相似度计算</a><ul>
+<li><a href="#61-余弦相似度">6.1. 余弦相似度</a></li>
+<li><a href="#62-皮尔逊相关系数">6.2. 皮尔逊相关系数</a></li>
+<li><a href="#63-杰卡德jaccard相似度">6.3. 杰卡德Jaccard相似度</a></li>
 </ul>
 </li>
-<li><a href="#6-召回算法">6. 召回算法</a><ul>
-<li><a href="#61-基于内容的召回算法">6.1. 基于内容的召回算法</a></li>
-<li><a href="#62-协同过滤cf">6.2. 协同过滤CF</a><ul>
-<li><a href="#621-基于用户的协同过滤">6.2.1. 基于用户的协同过滤</a></li>
-<li><a href="#622-基于物品的协同过滤">6.2.2. 基于物品的协同过滤</a></li>
-<li><a href="#623-基于模型的协同过滤">6.2.3. 基于模型的协同过滤</a><ul>
-<li><a href="#6231-矩阵分解mf">6.2.3.1. 矩阵分解MF</a></li>
+<li><a href="#7-召回算法">7. 召回算法</a><ul>
+<li><a href="#71-基于内容的召回算法">7.1. 基于内容的召回算法</a></li>
+<li><a href="#72-协同过滤cf">7.2. 协同过滤CF</a><ul>
+<li><a href="#721-基于用户的协同过滤">7.2.1. 基于用户的协同过滤</a></li>
+<li><a href="#722-基于物品的协同过滤">7.2.2. 基于物品的协同过滤</a></li>
+<li><a href="#723-基于模型的协同过滤">7.2.3. 基于模型的协同过滤</a><ul>
+<li><a href="#7231-矩阵分解mf">7.2.3.1. 矩阵分解MF</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#基于内容推荐和协同过滤的区别">基于内容推荐和协同过滤的区别</a></li>
+<li><a href="#73-基于内容推荐和协同过滤的区别">7.3. 基于内容推荐和协同过滤的区别</a></li>
 </ul>
 </li>
-<li><a href="#7-排序算法">7. 排序算法</a><ul>
-<li><a href="#71-逻辑回归lr">7.1. 逻辑回归LR</a></li>
-<li><a href="#72-fm">7.2. FM</a></li>
+<li><a href="#8-排序算法">8. 排序算法</a><ul>
+<li><a href="#81-逻辑回归lr">8.1. 逻辑回归LR</a></li>
+<li><a href="#82-fm">8.2. FM</a></li>
 </ul>
 </li>
-<li><a href="#8-推荐系统的评价">8. 推荐系统的评价</a></li>
+<li><a href="#9-推荐系统的评价">9. 推荐系统的评价</a></li>
 </ul>
 <!-- /TOC -->
 <h1><span id="1-推荐系统和搜索的区别">1. 推荐系统和搜索的区别</span></h1><ul>
@@ -532,7 +535,9 @@
 <p>下面是Lambda的架构图。首先数据源从flume中得到。一部分做批处理，一部分做实时处理。批处理把数据放在数据库上，然后经过MapReduce算出一个阶段，缓存起来。然后实时这部分也会做实时计算，然后将这2部分的计算结果汇总，为推荐系统提供服务。</p>
 <p>这2部分的相辅相成。离线服务算的时间比较长，比如10分钟得出一次结果，那在前端用户看到的结果10分钟都不会变。然后实时计算是基于离线计算的结果做一些微调。这样用户看到的推荐结果就会实时变化。</p>
 <p><img src="/2020/07/25/推荐系统学习/lambda.jpg" alt=""></p>
-<h1><span id="3-推荐算法流程">3. 推荐算法流程</span></h1><p>上面讲了整个推荐系统的架构，下面我们只关注推荐算法。推荐算法只有3个阶段：</p>
+<h1><span id="3-推荐算法模型历程">3. 推荐算法模型历程</span></h1><p><a href="https://mp.weixin.qq.com/s/-e9M_rGaE2oGcxE-p1U5Tw" target="_blank" rel="noopener">推荐系统-传统推荐模型之协同过滤</a></p>
+<p><img src="/2020/07/25/推荐系统学习/流程.png" alt=""></p>
+<h1><span id="4-推荐算法流程">4. 推荐算法流程</span></h1><p>上面讲了整个推荐系统的架构，下面我们只关注推荐算法。推荐算法只有3个阶段：</p>
 <ol>
 <li>召回阶段<ul>
 <li>这里的召回不要和分类问题的召回率混淆，这2者是不同的概念。推荐算法的召回是海选，就是先从很多内容中选出一些内容，作为接下来推荐的候选人。也就是说我们后面推荐的结果都是从这些候选内容中选的。所以召回阶段决定了最终推荐结果的天花板</li>
@@ -562,11 +567,11 @@
 <p><img src="/2020/07/25/推荐系统学习/推荐算法3.jpg" alt=""></p>
 <p>召回目的如上所述；有时候因为每个用户召回环节返回的物品数量还是太多，怕排序环节速度跟不上，所以可以在召回和精排之间加入一个粗排环节，通过少量用户和物品特征，简单模型，来对召回的结果进行个粗略的排序，在保证一定精准的前提下，进一步减少往后传送的物品数量，粗排往往是可选的，可用可不同，跟场景有关。之后，是精排环节，使用你能想到的任何特征，可以上你能承受速度极限的复杂模型，尽量精准地对物品进行个性化排序。排序完成后，传给重排环节，传统地看，这里往往会上各种技术及业务策略，比如去已读、去重、打散、多样性保证、固定类型物品插入等等，主要是技术产品策略主导或者为了改进用户体验的。</p>
 <p><img src="/2020/07/25/推荐系统学习/推荐系统.jpg" alt=""></p>
-<h2><span id="31-长尾效应和推荐系统">3.1. 长尾效应和推荐系统</span></h2><p><a href="https://cloud.tencent.com/developer/ask/68639" target="_blank" rel="noopener">长尾效应与推荐系统的关系？</a></p>
+<h2><span id="41-长尾效应和推荐系统">4.1. 长尾效应和推荐系统</span></h2><p><a href="https://cloud.tencent.com/developer/ask/68639" target="_blank" rel="noopener">长尾效应与推荐系统的关系？</a></p>
 <p><strong>长尾效应</strong>往往用来解释现实生活中的商业理论，将所有非流行的市场累加起来就会形成一个比流行市场还要大的市场。</p>
 <p><strong>长尾效应和推荐系统的关系：</strong><br>目前的推荐系统或推荐算法，很难发现用户的隐性需求，也是目前推荐算法所追求的。目前而言，现在的推荐系统只能发现你的主观需求，比如你在B站上搜索一个关键词后，系统往往会推荐和这个关键词有关的内容，但是却很难发现你目前不知道，但是心里感兴趣的东西。所以这是一个很大的难点。</p>
 <p>在推荐系统中，可以把长尾效应看做是一种目标，即向用户推荐他喜欢，但是不会自己发现的物品。由于长尾中的物品比较肺腑，推荐系统可能会有很大的收益。</p>
-<h2><span id="32-召回">3.2. 召回</span></h2><p>召回是推荐系统的第一步，根据用户和商品的部分特征，从海量的物品中找出用户潜在感兴趣的物品，交给排序阶段。<strong>召回阶段需要快，所以模型不能太复杂</strong>。</p>
+<h2><span id="42-召回">4.2. 召回</span></h2><p>召回是推荐系统的第一步，根据用户和商品的部分特征，从海量的物品中找出用户潜在感兴趣的物品，交给排序阶段。<strong>召回阶段需要快，所以模型不能太复杂</strong>。</p>
 <p>现在召回环节一般采用多路召回，随便想到一个策略就可以做一路召回。</p>
 <p><img src="/2020/07/25/推荐系统学习/召回.jpg" alt=""></p>
 <p><strong>传统的召回思路：</strong></p>
@@ -578,7 +583,7 @@
 <li>图神经网络模型召回<br>上面知识图谱是图神经网络的一个特例，但是知识图谱因为编码的是静态知识，而不是用户比较直接的行为数据，和具体应用距离较远。图中的节点是用户和商品，通过用户行为来建立边，边还可以带上权重，然后使用图神经网络，例如GraphSAGE来获取节点的嵌入。</li>
 </ol>
 <p><img src="/2020/07/25/推荐系统学习/召回模型.jpg" alt=""></p>
-<h2><span id="33-排序">3.3. 排序</span></h2><h3><span id="331-lr">3.3.1. LR</span></h3><p>LR最早可以用在点击率预测中，LR是一个二分类，输出的概率表示用户点击的概率。</p>
+<h2><span id="43-排序">4.3. 排序</span></h2><h3><span id="431-lr">4.3.1. LR</span></h3><p>LR最早可以用在点击率预测中，LR是一个二分类，输出的概率表示用户点击的概率。</p>
 <p>步骤如下：</p>
 <ol>
 <li><p>构造特征<br>将所有特征进行离散化,变成one-hot输入</p>
@@ -587,7 +592,7 @@
 <li>模型训练<br>根据输入的特征和label（用户点击1或者不点击0）来训练LR分类器</li>
 <li>模型推荐<br>给定一个用户u，以及一批候选商品，对用户u如何推荐商品。通过上述方法计算用户u对候选商品中每个商品的点击点击得分，然后按照得分从大大小排序，推荐前N个物品。</li>
 </ol>
-<h1><span id="4-推荐模型的构建流程">4. 推荐模型的构建流程</span></h1><p><img src="/2020/07/25/推荐系统学习/推荐算法1.jpg" alt=""></p>
+<h1><span id="5-推荐模型的构建流程">5. 推荐模型的构建流程</span></h1><p><img src="/2020/07/25/推荐系统学习/推荐算法1.jpg" alt=""></p>
 <ol>
 <li>数据清洗阶段<ul>
 <li>数据来源<ul>
@@ -613,28 +618,30 @@
 </ul>
 </li>
 </ol>
-<h1><span id="5-相似度计算">5. 相似度计算</span></h1><p>相似度计算根据数据来选择。</p>
+<h1><span id="6-相似度计算">6. 相似度计算</span></h1><p>相似度计算根据数据来选择。</p>
 <ul>
 <li>数据是实数值，评分情况</li>
 <li>数据是布尔值，是否消费</li>
 </ul>
-<h2><span id="51-余弦相似度">5.1. 余弦相似度</span></h2><p>余弦相似度就是看2个向量夹角的cos值。余弦相似度范围[-1,1]，从负相关到正相关。</p>
+<h2><span id="61-余弦相似度">6.1. 余弦相似度</span></h2><p>余弦相似度就是看2个向量夹角的cos值。余弦相似度范围[-1,1]，从负相关到正相关。</p>
 <p>缺点：只和夹角有关，不关心向量长度。可能会有误差。对2个电影打分，一个人打分向量(5,8)，另一个人打分向量(0.5,1)，这2个向量虽然夹角很小，但是长度差别很大。</p>
 <p><img src="/2020/07/25/推荐系统学习/余弦相似度.jpg" alt=""></p>
-<h2><span id="52-皮尔逊相关系数">5.2. 皮尔逊相关系数</span></h2><p>对余弦相似度的优化，对向量做中心化，将向量a和b减去向量均值，在计算余弦相似度</p>
+<h2><span id="62-皮尔逊相关系数">6.2. 皮尔逊相关系数</span></h2><p>对余弦相似度的优化，对向量做中心化，将向量a和b减去向量均值，在计算余弦相似度</p>
 <p><img src="/2020/07/25/推荐系统学习/皮尔逊.jpg" alt=""></p>
-<h2><span id="53-杰卡德jaccard相似度">5.3. 杰卡德Jaccard相似度</span></h2><p>Jaccard = 交集/并集</p>
+<p><img src="/2020/07/25/推荐系统学习/相似性.png" alt=""></p>
+<h2><span id="63-杰卡德jaccard相似度">6.3. 杰卡德Jaccard相似度</span></h2><p>Jaccard = 交集/并集</p>
 <p>比如用户2喜欢物品(2,7,10),用户4喜欢物品(2,5,7,9)，2个用户的交集是物品(2,7)，所以交集个数为2，2个用户喜欢用品的并集是(2,5,7,9,10)，所以并集个数为5.则这2个用户的jaccard相似度=0.4</p>
 <p><img src="/2020/07/25/推荐系统学习/杰卡德.jpg" alt=""></p>
 <p>杰卡德相似度适合评分是0/1的情况</p>
-<h1><span id="6-召回算法">6. 召回算法</span></h1><h2><span id="61-基于内容的召回算法">6.1. 基于内容的召回算法</span></h2><p>基于内容的推荐一般是文本类型的特征，需要提取关键词，计算关键词的权重。</p>
+<p>问题：无法反映具体用户的评分喜好信息，所以经常用来评估用户是否会对某商品进行打分，而不是预估用户对某商品打多少分。</p>
+<h1><span id="7-召回算法">7. 召回算法</span></h1><h2><span id="71-基于内容的召回算法">7.1. 基于内容的召回算法</span></h2><p>基于内容的推荐一般是文本类型的特征，需要提取关键词，计算关键词的权重。</p>
 <p>一般步骤是：</p>
 <ol>
 <li>先分词，</li>
 <li>然后计算词的权重(TF-IDF)，即提取关键字</li>
 <li>然后使用word2vec得到词向量，从词向量构建物品向量</li>
 </ol>
-<h2><span id="62-协同过滤cf">6.2. 协同过滤CF</span></h2><p><strong>协同过滤(Collaborative Filtering)的算法思想：物以类聚，人以群分</strong></p>
+<h2><span id="72-协同过滤cf">7.2. 协同过滤CF</span></h2><p><strong>协同过滤(Collaborative Filtering)的算法思想：物以类聚，人以群分</strong></p>
 <p>协同过滤推荐算法分为2类：</p>
 <ul>
 <li><strong>基于用户的协同过滤</strong>user-based CF：和你喜好相似的人，那他喜欢的东西你也可能喜欢</li>
@@ -643,20 +650,20 @@
 </ul>
 <p><strong>缺点：</strong></p>
 <p>召回结果的候选item限定在用户的历史行为类目中，导致推荐结果越推越窄，难以发现长尾商品。</p>
-<h3><span id="621-基于用户的协同过滤">6.2.1. 基于用户的协同过滤</span></h3><p>实现协同过滤的步骤：</p>
+<h3><span id="721-基于用户的协同过滤">7.2.1. 基于用户的协同过滤</span></h3><p>实现协同过滤的步骤：</p>
 <ol>
 <li>首先计算<strong>用户与用户的相似程度</strong><br>比如下图中，我们计算出用户1和用户2，3最相似</li>
 <li>根据相似的人产生推荐结果<br>然后我们根据用户2，3的内容给用户1来推荐，用户3喜欢物品AC，用户2喜欢ADE，则向用户1初始推荐AC+ADE，而用户1已经消费过ACD，过滤掉用户1已经消费过的商品，最终推荐商品E</li>
 </ol>
 <p><img src="/2020/07/25/推荐系统学习/基于用户.jpg" alt=""></p>
-<h3><span id="622-基于物品的协同过滤">6.2.2. 基于物品的协同过滤</span></h3><ol>
+<h3><span id="722-基于物品的协同过滤">7.2.2. 基于物品的协同过滤</span></h3><ol>
 <li>首先计算<strong>物品与物品的相似程度</strong><br>比如物品A和物品B相似</li>
 <li><p>根据相似的物品产生推荐结果<br>用户A原先买过物品A，然后就给推荐物品B</p>
 <p>物品A被4个用户消费过，物品B被2个用户消费过，其中用户5是2个物品共同的消费用户，对物品B来说这个用户5占所有用户的0.5，对物品A来说这个用户5占所有用户的0.25，所以物品A和B之间的相似度为0.5*0.25。按照这样方式计算所有物品之间的相似度，发现物品A和物品C</p>
 <p><img src="/2020/07/25/推荐系统学习/基于物品.jpg" alt=""></p>
 </li>
 </ol>
-<h3><span id="623-基于模型的协同过滤">6.2.3. 基于模型的协同过滤</span></h3><h4><span id="6231-矩阵分解mf">6.2.3.1. 矩阵分解MF</span></h4><p>MF（Matrix Factorization，矩阵分解）是一个简单的Embedding模型。给定用户和物品矩阵$A \in \mathbb{R}^{m \times n}$,然后对其进行分解成用户嵌入矩阵$U \in \mathcal{R}^{m \times d}$和商品矩阵$V \in \mathcal{R}^{n \times d}$。$d &lt;&lt; m和n$</p>
+<h3><span id="723-基于模型的协同过滤">7.2.3. 基于模型的协同过滤</span></h3><h4><span id="7231-矩阵分解mf">7.2.3.1. 矩阵分解MF</span></h4><p>MF（Matrix Factorization，矩阵分解）是一个简单的Embedding模型。给定用户和物品矩阵$A \in \mathbb{R}^{m \times n}$,然后对其进行分解成用户嵌入矩阵$U \in \mathcal{R}^{m \times d}$和商品矩阵$V \in \mathcal{R}^{n \times d}$。$d &lt;&lt; m和n$</p>
 <p>矩阵分解的目标就是让$UV^T$的结果和$A$尽可能的相似。</p>
 <p><img src="/2020/07/25/推荐系统学习/矩阵分解1.jpg" alt=""></p>
 <p>在上面的目标函数中，只对观察到的obs的对$(i,j)$进行误差求和。即只对下图中为1的元素求误差，但是这并不能很好的推荐，泛化性能差。</p>
@@ -668,13 +675,13 @@
 <li>随机梯度下降SGD</li>
 <li>加权交替最小二乘法WALS<br>在2个矩阵U和V中，对U和V进行交替更新。（1）固定U求解V，（2）固定V求解U</li>
 </ol>
-<h2><span id="基于内容推荐和协同过滤的区别">基于内容推荐和协同过滤的区别</span></h2><p>基于内容的推荐和用户协同过滤都是计算用户的相似度，但用到的特征却不同。</p>
+<h2><span id="73-基于内容推荐和协同过滤的区别">7.3. 基于内容推荐和协同过滤的区别</span></h2><p>基于内容的推荐和用户协同过滤都是计算用户的相似度，但用到的特征却不同。</p>
 <ol>
 <li>基于内容的推荐使用用户画像特征，即用户的个人信息，例如年龄，性别，教育程度等</li>
 <li>基于用户的协同过滤用的是用户对物品的评分特征，通过计算2个用户对商品的评分向量来计算相似性。</li>
 </ol>
 <p>基于用户的协同过滤需要用到用户对商品的评分来计算相似性，当一个新用户没有对任何商品评分，因此会出现“冷启动”的问题，基于内容的推荐就没有这个问题。</p>
-<h1><span id="7-排序算法">7. 排序算法</span></h1><h2><span id="71-逻辑回归lr">7.1. 逻辑回归LR</span></h2><p>LR最早可以用在点击率预测中，LR是一个二分类，输出的概率表示用户点击的概率。</p>
+<h1><span id="8-排序算法">8. 排序算法</span></h1><h2><span id="81-逻辑回归lr">8.1. 逻辑回归LR</span></h2><p>LR最早可以用在点击率预测中，LR是一个二分类，输出的概率表示用户点击的概率。</p>
 <p>步骤如下：</p>
 <ol>
 <li><p>构造特征<br>将所有特征进行离散化,变成one-hot输入</p>
@@ -684,7 +691,7 @@
 <li>模型推荐<br>给定一个用户u，以及一批候选商品，对用户u如何推荐商品。通过上述方法计算用户u对候选商品中每个商品的点击点击得分，然后按照得分从大大小排序，推荐前N个物品。</li>
 </ol>
 <p>LR模型最大的缺陷就是人工特征工程，耗时费力费人力资源，能否将特征组合的能力体现在模型层面呢？就不用人工再去组合特征了。</p>
-<h2><span id="72-fm">7.2. FM</span></h2><p>FM英文全称是“Factorization Machine”，简称FM模型，中文名“因子分解机”。</p>
+<h2><span id="82-fm">8.2. FM</span></h2><p>FM英文全称是“Factorization Machine”，简称FM模型，中文名“因子分解机”。</p>
 <p>FM在2010年提出，核心在于特征组合，以此减少人工参与特征组合工作。FM的优势：</p>
 <ol>
 <li>FM能处理高维稀疏场景</li>
@@ -692,7 +699,7 @@
 </ol>
 <p><img src="/2020/07/25/推荐系统学习/FM.jpg" alt=""></p>
 <p>FM在LR的基础上，引入任意2个特征的二阶特征组合，为每个特征，学习一个大小为k的一维向量。于是2个特征$x_i,x_j$的特征组合的权重值，通过特征对应的向量$v_i,v_j$的内积$<v_i,v_j>$来表示。</v_i,v_j></p>
-<h1><span id="8-推荐系统的评价">8. 推荐系统的评价</span></h1><ol>
+<h1><span id="9-推荐系统的评价">9. 推荐系统的评价</span></h1><ol>
 <li><p>准确率</p>
 <ul>
 <li>学术角度：RMSE,MAE,点击预估</li>
@@ -868,7 +875,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -939,7 +946,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 推荐系统和搜索的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 推荐系统Lambda架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 推荐算法流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. 长尾效应和推荐系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. 召回</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. 排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.3.1. LR</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 推荐模型的构建流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 相似度计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.1. 余弦相似度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.2. 皮尔逊相关系数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.3. 杰卡德Jaccard相似度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 召回算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">6.1. 基于内容的召回算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">6.2. 协同过滤CF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">6.2.1. 基于用户的协同过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">6.2.2. 基于物品的协同过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">6.2.3. 基于模型的协同过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">6.2.3.1. 矩阵分解MF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">基于内容推荐和协同过滤的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. 排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">7.1. 逻辑回归LR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">7.2. FM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 推荐系统的评价</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 推荐系统和搜索的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 推荐系统Lambda架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. 推荐算法模型历程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. 推荐算法流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 长尾效应和推荐系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.2. 召回</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.3. 排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.3.1. LR</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">5. 推荐模型的构建流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">6. 相似度计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">6.1. 余弦相似度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">6.2. 皮尔逊相关系数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">6.3. 杰卡德Jaccard相似度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">7. 召回算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">7.1. 基于内容的召回算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">7.2. 协同过滤CF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">7.2.1. 基于用户的协同过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">7.2.2. 基于物品的协同过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">7.2.3. 基于模型的协同过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">7.2.3.1. 矩阵分解MF</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">7.3. 基于内容推荐和协同过滤的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">8. 排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">8.1. 逻辑回归LR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">8.2. FM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">9. 推荐系统的评价</span></a></li></ol></div>
             
 
           </div>

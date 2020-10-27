@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2020/10/20/%E4%BB%8A%E6%97%A5%E5%A4%B4%E6%9D%A1%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D/</loc>
+    
+    <lastmod>2020-10-27T11:23:18.084Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/08/02/%E6%97%B6%E7%A9%BA%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E4%B8%80/</loc>
+    
+    <lastmod>2020-10-23T11:21:43.679Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/10/21/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%86%B7%E5%90%AF%E5%8A%A8%E9%97%AE%E9%A2%98/</loc>
+    
+    <lastmod>2020-10-21T03:18:16.294Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2020/07/25/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2020-10-20T11:08:39.058Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2020/10/07/Matrix-Factorization-Techniques-for-Recommender-Systems/</loc>
     
     <lastmod>2020-10-20T10:27:05.854Z</lastmod>
@@ -30,13 +58,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2020/07/25/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/</loc>
-    
-    <lastmod>2020-10-09T06:47:17.332Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2020/09/28/Tucker%E5%88%86%E8%A7%A3/</loc>
     
     <lastmod>2020-09-28T13:33:49.195Z</lastmod>
@@ -61,13 +82,6 @@
     <loc>http://yoursite.com/2019/03/03/%E5%9B%BE%E5%8D%B7%E7%A7%AF/</loc>
     
     <lastmod>2020-09-12T02:51:48.916Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/08/02/%E6%97%B6%E7%A9%BA%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E4%B8%80/</loc>
-    
-    <lastmod>2020-09-11T13:37:52.486Z</lastmod>
     
   </url>
   
