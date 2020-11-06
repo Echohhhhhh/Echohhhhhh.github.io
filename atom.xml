@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-10-28T12:25:04.870Z</updated>
+  <updated>2020-10-30T05:47:18.017Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,13 +17,88 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>广告领域专业术语</title>
+    <link href="http://yoursite.com/2020/10/29/%E5%B9%BF%E5%91%8A%E9%A2%86%E5%9F%9F%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD/"/>
+    <id>http://yoursite.com/2020/10/29/广告领域专业术语/</id>
+    <published>2020-10-29T08:31:03.000Z</published>
+    <updated>2020-10-30T05:47:18.017Z</updated>
+    
+    <content type="html"><![CDATA[<p>下面介绍一些广告领域的专业术语</p><p><a href="https://www.zhihu.com/question/19662693" target="_blank" rel="noopener">参考资料</a></p><a id="more"></a><p>计算广告涉及到三方的利益</p><ul><li>广告消费者：互联网上的每个人都是消费者。比如打开爱奇艺看视频的时候都会有一段广告</li><li>广告平台：有广告位的一些平台，例如爱奇艺、百度、微信朋友圈等</li><li>广告主：投放广告的人，例如OPPO、VIVO等都是广告主</li></ul><h1><span id="roi">ROI</span></h1><h1><span id="dspdmpsspadx">DSP/DMP/SSP/ADX</span></h1><p><strong>1. DSP (Demand-Side Platform)需求方平台</strong></p><p>为广告主提供一个综合性管理平台，通过同一个界面管理多个数字广告和数据交换的账户。利用DSP，广告主可以在广告交易平台(Ad Exchange)对在线广告进行实时竞价(RTB Real-Time Bidding)，高效管理广告定价。利用DSP也可以根据目标受众数据分析进行理性定价。</p><h1><span id="ctr预测">CTR预测</span></h1><p>CTR （Click Through Rate）预测</p><h1><span id="反作弊">反作弊</span></h1><h1><span id="广告竞价">广告竞价</span></h1>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;下面介绍一些广告领域的专业术语&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.zhihu.com/question/19662693&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;参考资料&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="广告领域" scheme="http://yoursite.com/categories/%E5%B9%BF%E5%91%8A%E9%A2%86%E5%9F%9F/"/>
+    
+    
+      <category term="广告领域" scheme="http://yoursite.com/tags/%E5%B9%BF%E5%91%8A%E9%A2%86%E5%9F%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>计算广告和推荐系统的区别</title>
+    <link href="http://yoursite.com/2020/10/29/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E5%92%8C%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://yoursite.com/2020/10/29/计算广告和推荐系统的区别/</id>
+    <published>2020-10-29T07:56:22.000Z</published>
+    <updated>2020-10-29T08:30:32.972Z</updated>
+    
+    <content type="html"><![CDATA[<p>参考资料：<a href="https://www.zhihu.com/question/19662693" target="_blank" rel="noopener">计算广告与推荐系统有哪些区别？</a></p><a id="more"></a><h1><span id="1-广告和推荐系统的区别">1. 广告和推荐系统的区别</span></h1><p>最根本的区别是解决的问题不同：</p><ul><li>计算广告：要处理三方利益的协调问题，分别是广告主、用户和媒体</li><li>推荐系统：要处理用户体验的问题</li></ul><p>正因为处理问题不同，比如同样构建一个CTR模型时，考虑的方式也不同：</p><ul><li>对于<strong>计算广告</strong>，站的角度更多是用这个CTR模型产生更多的收益，那么在使用的时候更偏向于<strong>将CTR高的广告全都排在前面</strong>。</li><li>对于<strong>推荐系统</strong>，在使用CTR模型时，不适合全都按照CTR来对内容进行排序，而是<strong>要兼顾内容的多样性、新颖性和流行度</strong>。因为推荐系统的核心是用户体验，如果全都按照用户的行为历史来生成推荐内容，容易让用户感觉推荐的内容全是重复的，容易产生疲倦。</li></ul><p>由于计算广告是一个三方利益协调的问题，会涉及到广告主和媒体关于价格的博弈，会有bidding策略。下面是这2个领域分别涉及到的一些问题</p><ul><li>计算广告：CTR模型、Bidding策略、yield optimization（排期优化）、智能预算控制</li><li>推荐系统：CTR模型及其他推荐模型、探索与利用（exploitation&amp;exploration）、冷启动问题、数据有偏问题</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;参考资料：&lt;a href=&quot;https://www.zhihu.com/question/19662693&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;计算广告与推荐系统有哪些区别？&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="广告领域" scheme="http://yoursite.com/categories/%E5%B9%BF%E5%91%8A%E9%A2%86%E5%9F%9F/"/>
+    
+      <category term="推荐系统" scheme="http://yoursite.com/categories/%E5%B9%BF%E5%91%8A%E9%A2%86%E5%9F%9F/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="广告领域" scheme="http://yoursite.com/tags/%E5%B9%BF%E5%91%8A%E9%A2%86%E5%9F%9F/"/>
+    
+      <category term="推荐系统" scheme="http://yoursite.com/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CTR预估-LR</title>
+    <link href="http://yoursite.com/2020/10/29/CTR%E9%A2%84%E4%BC%B0-LR/"/>
+    <id>http://yoursite.com/2020/10/29/CTR预估-LR/</id>
+    <published>2020-10-29T07:47:01.000Z</published>
+    <updated>2020-10-29T07:50:44.392Z</updated>
+    
+    <content type="html"><![CDATA[<p>CTR (Click Through Rate)预测是</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;CTR (Click Through Rate)预测是&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="广告领域" scheme="http://yoursite.com/categories/%E5%B9%BF%E5%91%8A%E9%A2%86%E5%9F%9F/"/>
+    
+    
+      <category term="广告领域" scheme="http://yoursite.com/tags/%E5%B9%BF%E5%91%8A%E9%A2%86%E5%9F%9F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Netflix推荐系统</title>
     <link href="http://yoursite.com/2020/10/27/Netflix%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
     <id>http://yoursite.com/2020/10/27/Netflix推荐系统/</id>
     <published>2020-10-27T11:39:41.000Z</published>
-    <updated>2020-10-28T12:25:04.870Z</updated>
+    <updated>2020-10-29T06:41:02.697Z</updated>
     
-    <content type="html"><![CDATA[<p>Netflix是一家提供在线视频流媒体服务和DVD租赁业务的公司，用户只需要每月支付8,9美元，就可以无限制的观赏视频、电影和电视。</p><p>2006年，Netflix大奖赛开始，Netflix拿出100万美元让开发者为他们优化电影推荐算法。</p><a id="more"></a><p>个性化推荐是Netflix最先开始的，他们从最开始就十分重视数据，开始收集用户数据，他们会在邮寄的信封里附上问卷让用户对电影评分，这些打分是Netflix推荐系统的重要基石之一。</p><p>2012年，Netflix的推荐系统经历一次重大的策略变化，官方技术博客（下面2篇）阐述了这种变化的前因后果。<br>在邮寄租赁DVD的时代，Netflix能够获得用户的评分，但是用户观看电影的过程对平台是隐形的。但是随着<strong>流媒体业务</strong>的开展，Netflix终于有机会看到用户的更多方面，于是他们认识到：一切都是推荐。</p><p>转型流媒体后，用户的所有行为全部在平台内完成，Netflix可以通过平台观察用户，可以知道用户看过什么电影，什么时候看的，看了多长时间，这些行为都可以体现用户的喜好。通过分析这些数据，让Netflix的推荐系统更准确。</p><hr><p>Netflix的牛人Xavier Amatriain写的介绍Netflix推荐系统的一篇博客</p><p>原文链接：</p><p><a href="https://netflixtechblog.com/netflix-recommendations-beyond-the-5-stars-part-1-55838468f429" target="_blank" rel="noopener">Netflix Recommendations: Beyond the 5 stars (Part 1)</a></p><p><a href="https://netflixtechblog.com/netflix-recommendations-beyond-the-5-stars-part-2-d9b96aa399f5" target="_blank" rel="noopener">Netflix Recommendations: Beyond the 5 stars (Part 2)</a></p><p>在这2篇博客中，我们将介绍Netflix最重要资产：推荐系统。</p><!-- TOC --><ul><li><a href="#1-netflix-recommendations-beyond-the-5-stars-part-1">1. Netflix Recommendations: Beyond the 5 stars (Part 1)</a><ul><li><a href="#11-netflix大赛和推荐问题">1.1. Netflix大赛和推荐问题</a></li><li><a href="#12-从dvd到流媒体">1.2. 从DVD到流媒体</a></li><li><a href="#13-一切都是推荐">1.3. 一切都是推荐</a></li></ul></li><li><a href="#2-netflix-recommendations-beyond-the-5-stars-part-2">2. Netflix Recommendations: Beyond the 5 stars (Part 2)</a><ul><li><a href="#21-排序">2.1. 排序</a></li><li><a href="#22-数据和模型">2.2. 数据和模型</a></li></ul></li></ul><!-- /TOC --><h1><span id="1-netflix-recommendations-beyond-the-5-stars-part-1">1. Netflix Recommendations: Beyond the 5 stars (Part 1)</span></h1><h2><span id="11-netflix大赛和推荐问题">1.1. Netflix大赛和推荐问题</span></h2><p>在2006年，我们发起<a href="https://www.netflixprize.com/" target="_blank" rel="noopener">Netflix大赛</a>，是一个电影评分预测的比赛，我们提供1百万奖金给评价指标提升10%的团队。推荐算法是Netflix的关键，我们使用RMSE作为评价指标，我们的系统RMSE=0.9525，获胜的团队需要降低到0.8572或更低。</p><p>第一年，Korbell团队以8.43%的提升获得了大奖，他们融合了107种算法，并把源代码提供给我们，我们发现其中2种最有效的方法：矩阵分解（SVD）和受限玻尔兹曼机（RBM）。为了将这两种方法用到实际中，我们需要克服一些限制，比如他们的算法是基于一亿评分，但我们实际上有50亿评分，并且他们没考虑用户不断产生新评分的情况。最终我们克服了这个挑战，将这2个算法用在实际中，现在仍作为我们推荐系统的一部分。</p><h2><span id="12-从dvd到流媒体">1.2. 从DVD到流媒体</span></h2><p>在推荐算法中，我们的关注点发生转换的一个原因是Netflix在2007年发布了流媒体服务，流媒体服务不仅改变了用户与系统的交互方式，也改变了推荐算法的数据来源。对DVD租赁，我们的目标是帮助用户找到电影，并在接下来的几天或几周中发到他们邮箱，从选择到观看到反馈的时间比较长。然而对于流媒体服务，用户选好一部电影之后就可以马上观看，甚至可以在短时间观看多部电影，同时，我们也直到用户是否完整观看了电影还是只看了一部分。</p><p>另一个巨大的变化是网站从单纯的web端扩展到成百上千的不同设备。</p><p>下面我们将介绍我们使用的推荐算法。</p><h2><span id="13-一切都是推荐">1.3. 一切都是推荐</span></h2><p>我们发现尽可能的集成个性化推荐对我们的订阅者产生巨大的价值。我们主页上有个性化推荐，每一行有个主题，主题揭示了这行视频的内在联系，大多数的个性化都是基于挑选行视频的方法，包括哪些行该放哪些视频，以及如何对视频排序。</p><p>以前10行为例，这是我们猜测你最可能喜欢的10个主题，这里的“你”指的是你和家人。Netflix的个性化推荐需要解决一个家庭中可能有不同的人，有不同的喜好。这也是为什么当你看到top10，可能会发现有针对爸爸，妈妈，小孩的推荐，即使只有一个人的家庭，我们也要兼顾这个用户不同的兴趣和情绪。正因为如此，我们的系统<strong>不仅仅追求准确性，还要保证多样性</strong>。</p><p><img src="/2020/10/27/Netflix推荐系统/推荐.jpg" alt=""></p><p>Netflix个性化系统的另一个重要元素是awareness。我们想让用户直到我们是怎么掌握他们的喜好的。这不仅能使用户信任我们的系统，而且鼓励用户提交更多的反馈来帮助我们更好的推荐。提升用户信任度的一个方式是向用户说明为什么给他推荐这个电影，并不是满足我们的商业需求，而是基于用户的评分，观看记录，朋友的推荐等。</p><p><img src="/2020/10/27/Netflix推荐系统/推荐1.jpg" alt=""></p><p>我们的推荐系统中还有以“风格”为主题的几行推荐结果，每一行都需要考虑三方面：选择哪些风格，这个风格中选择哪些视频，这些视频如何排序。我们发现当把长尾的类别放在前面时，用户停留的时间增加了。个性化系统的另一个元素是：<strong>freshness新颖性</strong></p><p>相似性在个性化系统中是非常重要的。相似性可以是用户之间，或电影之间，也可以是多维数据，例如元数据，评分，观看历史。基于相似性推荐用在多种场景之中，例如当用户搜索一个电影时或把一个电影放在观看列表中时，也可以用来生成动态风格的推荐结果。</p><p>个性化推荐最重要是排序，决定一行中电影排放的顺序。我们排序系统的目标是在一定的上下文中，为用户实时找到物品尽可能好的排序。我们将排序分解为：打分、排序、过滤，将用户最可能喜欢的电影尽可能打高分，排在前面。</p><h1><span id="2-netflix-recommendations-beyond-the-5-stars-part-2">2. Netflix Recommendations: Beyond the 5 stars (Part 2)</span></h1><p>这一节我们将介绍推荐系统的技术细节，我们将讨论当前的模型，数据以及方法。</p><h2><span id="21-排序">2.1. 排序</span></h2><p>推荐系统的目标是为用户展示他可能喜欢的商品。通常是选择一些商品，然后对它们进行排序。</p><p>最简单的排序是根据热门程度，根据热门进行推荐，用户总是倾向于购买大家都喜欢的物品，但是热门推荐是个性化推荐的反义词，为用户生成千篇一律的推荐结果，我们的推荐还要考虑到新颖性、用户兴趣、多样性等。</p><p>排序的目标是为用户推荐他最可能喜欢的物品，最自然的方法是使用用户<br>对物品的评分表示物品的受欢迎程度。这样会导致可能会推荐一些那些评分高的小众电影，但用户可能更想看的是评分不高但更大众的电影。为了解决这个问题，最好的做法是兼顾视频的热门程度和用户的期望评分。</p><script type="math/tex; mode=display">(u,v)=w_1 \times p(v) + w_2 \times r(u,v) + b</script><p>其中$u$表示用户，$v$表示物品，$p$表示热门函数，$r$表示期望评分。等式可以定义为2维空间，如下所示：</p><p><img src="/2020/10/27/Netflix推荐系统/推荐2.jpg" alt=""></p><p>通过上述等式，我们可以得到一个评分，将评分降序排序，对用户进行推荐。其中$b$是偏差，是定值，不影响最终的排序结果。其中$w_1$和$w_2$用来决定在排序函数中，热门程度更重要，还是用户期望评分更重要。有2种方案来解决。你可以对$w_1$和$w_2$选一些候选值，放到线上A/B测试，让用户决定哪个更好。但是这种方法耗时。另一个方法是使用机器学习的方法，从历史数据中选择一些正样本和负样本，设计一个目标函数，让机器学习算法去学习这2个参数。</p><p>很多有监督分类方法可以用来排序。一般的选择有逻辑回归，SVM,GBDT。另一方面，现在也出现一些算法专门用来排序，例如RankSVM，RankBoost。对于一个排序问题，找到效果最好的算法并不容易。通常你的特征越简单，模型就越简单。但是，有时候一个特征不起作用，可能是选的模型不够好。或者一个很好的模型在系统中表现不好，可能是你用的特征和模型不匹配。</p><h2><span id="22-数据和模型">2.2. 数据和模型</span></h2><p>下面是Netflix推荐系统中可以用到的数据：</p><ul><li>我们有几十亿的用户评分数据，并且每天几百万的规模在增长</li><li>我们以视频热度作为算法基准，但是我们可以用多种方式计算视频的热度。可以在不同的时间段内进行统计，例如最近一个小时、一天或者一周。可以将用户按照地域划分，计算视频在某部分用户的热度。</li><li>我们的视频每天有几百万的播放，包括上下问信息，例如看了多久，什么时候开始看，播放设备类型等</li><li>我们的会员每天添加几百万的视频到他们的播放列表中</li><li>每个视频有不同的属性，演员、导演、类别、评分</li><li>视频展现方式：我们知道推荐的视频什么时候，什么地方展示给用户，也可以看到这些因素如何影响用户的选择，也可以看到用户与系统交互的细节，比如滚动鼠标、点击等</li><li>社交数据已经成为我们的数据来源，我们知道用户的好友在看什么视频</li><li>用户每天进行几百万的搜索请求</li><li>外部数据：电影票房、影评家的评论</li><li>以上并不是全部数据，还有人口普查、位置、语言等数据</li></ul><p>有这么多高质量的数据，单一的模型是不够的，我们必须做模型选择，训练和测试。我们用了很多机器学习算法</p><ul><li>线性回归</li><li>逻辑回归</li><li>弹性网络</li><li>SVD</li><li>受限玻尔兹曼机RBM</li><li>马尔科夫链</li><li>LDA</li><li>关联规则</li><li>GBDT</li><li>随机森林</li><li>聚类方法</li><li>矩阵分解</li></ul><p>在实际工作中，我们通过线上A/B测试来验证方法的有效性</p><ol><li>提出假设<ul><li>待检测的算法/特征能够帮助提升视频播放时长，并且提升用户停留时间</li></ul></li><li>设计实验<ul><li>开发解决方案或原型系统</li><li>思考系统依赖和不依赖的变量</li></ul></li><li>进行测试</li><li>让数据说话<br>当我们做了A/B测试时，有很多指标。最信任的还是<strong>视频播放时长和用户停留时间</strong></li></ol><p>一个有趣的问题是我们怎么整合我们的机器学习方法到A/B测试中，我们现在是做离线测试和在线。离线测试用在在线测试之前，用来测试和优化我们的算法。为了评估系统的离线系统，我们有很多指标，例如排序指标NDCG,MRR,分类指标accuracy/precision/recall/F1，回归指标RMSE等。我们跟踪这些离线指标和线上效果的吻合程度，发现他们趋势并不是完全一致，因此线下指标只能作为最终决定的参考。</p><p>一旦离线测试验证了假设，我们就准备做A/B测试，通过用户的反馈做进一步的验证。如果成功了，我们将加入到主要系统中，为所有用户服务。</p><p><img src="/2020/10/27/Netflix推荐系统/推荐3.jpg" alt=""></p>]]></content>
+    <content type="html"><![CDATA[<p>Netflix是一家提供在线视频流媒体服务和DVD租赁业务的公司，用户只需要每月支付8,9美元，就可以无限制的观赏视频、电影和电视。</p><p>2006年，Netflix大奖赛开始，Netflix拿出100万美元让开发者为他们优化电影推荐算法。</p><a id="more"></a><p>个性化推荐是Netflix最先开始的，他们从最开始就十分重视数据，开始收集用户数据，他们会在邮寄的信封里附上问卷让用户对电影评分，这些打分是Netflix推荐系统的重要基石之一。</p><p>2012年，Netflix的推荐系统经历一次重大的策略变化，官方技术博客（下面2篇）阐述了这种变化的前因后果。<br>在邮寄租赁DVD的时代，Netflix能够获得用户的评分，但是用户观看电影的过程对平台是隐形的。但是随着<strong>流媒体业务</strong>的开展，Netflix终于有机会看到用户的更多方面，于是他们认识到：一切都是推荐。</p><p>转型流媒体后，用户的所有行为全部在平台内完成，Netflix可以通过平台观察用户，可以知道用户看过什么电影，什么时候看的，看了多长时间，这些行为都可以体现用户的喜好。通过分析这些数据，让Netflix的推荐系统更准确。</p><hr><p>Netflix的牛人Xavier Amatriain写的介绍Netflix推荐系统的一篇博客</p><p>原文链接：</p><p><a href="https://netflixtechblog.com/netflix-recommendations-beyond-the-5-stars-part-1-55838468f429" target="_blank" rel="noopener">Netflix Recommendations: Beyond the 5 stars (Part 1)</a></p><p><a href="https://netflixtechblog.com/netflix-recommendations-beyond-the-5-stars-part-2-d9b96aa399f5" target="_blank" rel="noopener">Netflix Recommendations: Beyond the 5 stars (Part 2)</a></p><p>在这2篇博客中，我们将介绍Netflix最重要资产：推荐系统。</p><!-- TOC --><ul><li><a href="#1-netflix-recommendations-beyond-the-5-stars-part-1">1. Netflix Recommendations: Beyond the 5 stars (Part 1)</a><ul><li><a href="#11-netflix大赛和推荐问题">1.1. Netflix大赛和推荐问题</a></li><li><a href="#12-从dvd到流媒体">1.2. 从DVD到流媒体</a></li><li><a href="#13-一切都是推荐">1.3. 一切都是推荐</a></li></ul></li><li><a href="#2-netflix-recommendations-beyond-the-5-stars-part-2">2. Netflix Recommendations: Beyond the 5 stars (Part 2)</a><ul><li><a href="#21-排序">2.1. 排序</a></li><li><a href="#22-数据和模型">2.2. 数据和模型</a></li></ul></li></ul><!-- /TOC --><h1><span id="1-netflix-recommendations-beyond-the-5-stars-part-1">1. Netflix Recommendations: Beyond the 5 stars (Part 1)</span></h1><h2><span id="11-netflix大赛和推荐问题">1.1. Netflix大赛和推荐问题</span></h2><p>在2006年，我们发起<a href="https://www.netflixprize.com/" target="_blank" rel="noopener">Netflix大赛</a>，是一个电影评分预测的比赛，我们提供1百万奖金给评价指标提升10%的团队。推荐算法是Netflix的关键，我们使用RMSE作为评价指标，我们的系统RMSE=0.9525，获胜的团队需要降低到0.8572或更低。</p><p>第一年，Korbell团队以8.43%的提升获得了大奖，他们融合了107种算法，并把源代码提供给我们，我们发现其中2种最有效的方法：矩阵分解（SVD）和受限玻尔兹曼机（RBM）。为了将这两种方法用到实际中，我们需要克服一些限制，比如他们的算法是基于一亿评分，但我们实际上有50亿评分，并且他们没考虑用户不断产生新评分的情况。最终我们克服了这个挑战，将这2个算法用在实际中，现在仍作为我们推荐系统的一部分。</p><h2><span id="12-从dvd到流媒体">1.2. 从DVD到流媒体</span></h2><p>在推荐算法中，我们的关注点发生转换的一个原因是Netflix在2007年发布了流媒体服务，流媒体服务不仅改变了用户与系统的交互方式，也改变了推荐算法的数据来源。对DVD租赁，我们的目标是帮助用户找到电影，并在接下来的几天或几周中发到他们邮箱，从选择到观看到反馈的时间比较长。然而对于流媒体服务，用户选好一部电影之后就可以马上观看，甚至可以在短时间观看多部电影，同时，我们也直到用户是否完整观看了电影还是只看了一部分。</p><p>另一个巨大的变化是网站从单纯的web端扩展到成百上千的不同设备。</p><p>下面我们将介绍我们使用的推荐算法。</p><h2><span id="13-一切都是推荐">1.3. 一切都是推荐</span></h2><p>我们发现尽可能的集成个性化推荐对我们的订阅者产生巨大的价值。我们主页上有个性化推荐，每一行有个主题，主题揭示了这行视频的内在联系，大多数的个性化都是基于挑选行视频的方法，包括哪些行该放哪些视频，以及如何对视频排序。</p><p>以前10行为例，这是我们猜测你最可能喜欢的10个主题，这里的“你”指的是你和家人。Netflix的个性化推荐需要解决一个家庭中可能有不同的人，有不同的喜好。这也是为什么当你看到top10，可能会发现有针对爸爸，妈妈，小孩的推荐，即使只有一个人的家庭，我们也要兼顾这个用户不同的兴趣和情绪。正因为如此，我们的系统<strong>不仅仅追求准确性，还要保证多样性</strong>。</p><p><img src="/2020/10/27/Netflix推荐系统/推荐.jpg" alt=""></p><p>Netflix个性化系统的另一个重要元素是awareness。我们想让用户直到我们是怎么掌握他们的喜好的。这不仅能使用户信任我们的系统，而且鼓励用户提交更多的反馈来帮助我们更好的推荐。提升用户信任度的一个方式是向用户说明为什么给他推荐这个电影，并不是满足我们的商业需求，而是基于用户的评分，观看记录，朋友的推荐等。</p><p><img src="/2020/10/27/Netflix推荐系统/推荐1.jpg" alt=""></p><p>我们的推荐系统中还有以“风格”为主题的几行推荐结果，每一行都需要考虑三方面：选择哪些风格，这个风格中选择哪些视频，这些视频如何排序。我们发现当把长尾的类别放在前面时，用户停留的时间增加了。个性化系统的另一个元素是：<strong>freshness新颖性</strong></p><p>相似性在个性化系统中是非常重要的。相似性可以是用户之间，或电影之间，也可以是多维数据，例如元数据，评分，观看历史。基于相似性推荐用在多种场景之中，例如当用户搜索一个电影时或把一个电影放在观看列表中时，也可以用来生成动态风格的推荐结果。</p><p>个性化推荐最重要是排序，决定一行中电影排放的顺序。我们排序系统的目标是在一定的上下文中，为用户实时找到物品尽可能好的排序。我们将排序分解为：打分、排序、过滤，将用户最可能喜欢的电影尽可能打高分，排在前面。</p><h1><span id="2-netflix-recommendations-beyond-the-5-stars-part-2">2. Netflix Recommendations: Beyond the 5 stars (Part 2)</span></h1><p>这一节我们将介绍推荐系统的技术细节，我们将讨论当前的模型，数据以及方法。</p><h2><span id="21-排序">2.1. 排序</span></h2><p>推荐系统的目标是为用户展示他可能喜欢的商品。通常是选择一些商品，然后对它们进行排序。</p><p>最简单的排序是根据热门程度，根据热门进行推荐，用户总是倾向于购买大家都喜欢的物品，但是热门推荐是个性化推荐的反义词，为用户生成千篇一律的推荐结果，我们的推荐还要考虑到新颖性、用户兴趣、多样性等。</p><p>排序的目标是为用户推荐他最可能喜欢的物品，最自然的方法是使用用户<br>对物品的评分表示物品的受欢迎程度。这样会导致可能会推荐一些那些评分高的小众电影，但用户可能更想看的是评分不高但更大众的电影。为了解决这个问题，最好的做法是兼顾视频的热门程度和用户的期望评分。</p><script type="math/tex; mode=display">(u,v)=w_1 \times p(v) + w_2 \times r(u,v) + b</script><p>其中$u$表示用户，$v$表示物品，$p$表示热门函数，$r$表示期望评分。等式可以定义为2维空间，如下所示：</p><p><img src="/2020/10/27/Netflix推荐系统/推荐2.jpg" alt=""></p><p>通过上述等式，我们可以得到一个评分，将评分降序排序，对用户进行推荐。其中$b$是偏差，是定值，不影响最终的排序结果。其中$w_1$和$w_2$用来决定在排序函数中，热门程度更重要，还是用户期望评分更重要。有2种方案来解决。你可以对$w_1$和$w_2$选一些候选值，放到线上A/B测试，让用户决定哪个更好。但是这种方法耗时。另一个方法是使用机器学习的方法，从历史数据中选择一些正样本和负样本，设计一个目标函数，让机器学习算法去学习这2个参数。</p><p>很多有监督分类方法可以用来排序。一般的选择有逻辑回归，SVM,GBDT。另一方面，现在也出现一些算法专门用来排序，例如RankSVM，RankBoost。对于一个排序问题，找到效果最好的算法并不容易。通常你的特征越简单，模型就越简单。但是，有时候一个特征不起作用，可能是选的模型不够好。或者一个很好的模型在系统中表现不好，可能是你用的特征和模型不匹配。</p><h2><span id="22-数据和模型">2.2. 数据和模型</span></h2><p>下面是Netflix推荐系统中可以用到的数据：</p><ul><li>我们有几十亿的用户评分数据，并且每天几百万的规模在增长</li><li>我们以视频热度作为算法基准，但是我们可以用多种方式计算视频的热度。可以在不同的时间段内进行统计，例如最近一个小时、一天或者一周。可以将用户按照地域划分，计算视频在某部分用户的热度。</li><li>我们的视频每天有几百万的播放，包括上下问信息，例如看了多久，什么时候开始看，播放设备类型等</li><li>我们的会员每天添加几百万的视频到他们的播放列表中</li><li>每个视频有不同的属性，演员、导演、类别、评分</li><li>视频展现方式：我们知道推荐的视频什么时候，什么地方展示给用户，也可以看到这些因素如何影响用户的选择，也可以看到用户与系统交互的细节，比如滚动鼠标、点击等</li><li>社交数据已经成为我们的数据来源，我们知道用户的好友在看什么视频</li><li>用户每天进行几百万的搜索请求</li><li>外部数据：电影票房、影评家的评论</li><li>以上并不是全部数据，还有人口普查、位置、语言等数据</li></ul><p>有这么多高质量的数据，单一的模型是不够的，我们必须做模型选择，训练和测试。我们用了很多机器学习算法</p><ul><li>线性回归</li><li>逻辑回归</li><li>弹性网络</li><li>SVD</li><li>受限玻尔兹曼机RBM</li><li>马尔科夫链</li><li>LDA</li><li>关联规则</li><li>GBDT</li><li>随机森林</li><li>聚类方法</li><li>矩阵分解</li></ul><p>在实际工作中，我们通过线上A/B测试来验证方法的有效性</p><ol><li>提出假设<ul><li>待检测的算法/特征能够帮助提升视频播放时长，并且提升用户停留时间</li></ul></li><li>设计实验<ul><li>开发解决方案或原型系统</li><li>思考系统依赖和不依赖的变量</li></ul></li><li>进行测试</li><li>让数据说话<br>当我们做了A/B测试时，有很多指标。最信任的还是<strong>视频播放时长和用户停留时间</strong></li></ol><p>一个有趣的问题是我们怎么整合我们的机器学习方法到A/B测试中，我们现在是做离线测试和在线。离线测试用在在线测试之前，用来测试和优化我们的算法。为了评估系统的离线系统，我们有很多指标，例如排序指标NDCG,MRR,分类指标accuracy/precision/recall/F1，回归指标RMSE等。我们跟踪这些离线指标和线上效果的吻合程度，发现他们趋势并不是完全一致，因此线下指标只能作为最终决定的参考。</p><p>一旦离线测试验证了假设，我们就准备做A/B测试，通过用户的反馈做进一步的验证。如果成功了，我们将加入到主要系统中，为所有用户服务。</p><p><img src="/2020/10/27/Netflix推荐系统/推荐3.jpg" alt=""></p><p><img src="/2020/10/27/Netflix推荐系统/推荐5.jpg" alt=""></p><p><img src="/2020/10/27/Netflix推荐系统/推荐4.jpg" alt=""></p>]]></content>
     
     <summary type="html">
     
@@ -399,73 +474,6 @@
     </summary>
     
       <category term="算法" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>How to Build a Graph-Based Deep Learning Architecture in Traffic Domain: A Survey</title>
-    <link href="http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/"/>
-    <id>http://yoursite.com/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/</id>
-    <published>2020-06-02T01:41:59.000Z</published>
-    <updated>2020-06-18T02:33:30.602Z</updated>
-    
-    <content type="html"><![CDATA[<p>这篇综述性论文介绍图神经网络在交通领域的应用。</p><a id="more"></a><!-- TOC --><ul><li><a href="#1-摘要">1. 摘要</a></li><li><a href="#2-前言">2. 前言</a></li><li><a href="#3-研究方向">3. 研究方向</a></li><li><a href="#4-问题定义">4. 问题定义</a><ul><li><a href="#41-构建图">4.1. 构建图</a></li><li><a href="#42-构造邻接矩阵">4.2. 构造邻接矩阵</a></li></ul></li><li><a href="#5-前人的模型">5. 前人的模型</a><ul><li><a href="#51-gnn">5.1. GNN</a></li><li><a href="#52-rnn">5.2. RNN</a></li><li><a href="#53-tcn">5.3. TCN</a></li><li><a href="#54-seq2seq">5.4. Seq2Seq</a></li><li><a href="#55-gan">5.5. GAN</a></li></ul></li><li><a href="#6-挑战">6. 挑战</a><ul><li><a href="#61-空间依赖">6.1. 空间依赖</a></li><li><a href="#62-时间依赖">6.2. 时间依赖</a></li><li><a href="#63-时空依赖">6.3. 时空依赖</a></li><li><a href="#64-外部因素">6.4. 外部因素</a></li></ul></li><li><a href="#7-未来方向">7. 未来方向</a></li></ul><!-- /TOC --><h1><span id="1-摘要">1. 摘要</span></h1><p>在交通数据中，有很多数据以图的形式存在，为了充分利用其中的空间信息，很多模型使用图神经网络来处理交通图数据。本文针对交通领域的图网络模型进行总结。</p><h1><span id="2-前言">2. 前言</span></h1><p>在交通预测领域，（1）早期采用的方法有：ARIMA,VAR,Kalman过滤器等，然而，这些方法通常需要一些前提假设，例如数据是静态且线性相关，不能应用在实际数据中。（2）机器学习方法例如SVM，K近邻可以建模交通数据中的非线性相关性，但是模型结构较浅，且需要人工构造和选择特征，不能满足大量交通数据的应用需求。（3）深度学习方法，例如RNN无法捕获空间相关性，CNN无法应用在图数据中，并且CNN更关注local相关性，忽略了global相关性。（4）图神经网络，使用图神经网络来解决交通领域的预测问题。<br>贡献总结如下：</p><ul><li>第一篇介绍图神经网络在交通领域应用的综述</li><li>系统地列出交通领域的研究方向和挑战</li><li>针对4种交通领域数据，介绍如何构建图</li><li>分析了5种应用在图交通领域的技术，介绍了它们的优缺点，以及变体</li><li>讨论了基于图网络的交通任务中4种常见的挑战，并总结对应的解决方案</li><li>收集数据集，开源代码</li></ul><h1><span id="3-研究方向">3. 研究方向</span></h1><p>给出了交通领域的一些研究问题<br><img src="/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/1.png" alt=""></p><ol><li>交通拥堵</li><li>交通需求<br>出租车、自行车、公共交通的需求预测，像滴滴，Uber等线上打车平台经常做这一类问题。</li><li>交通安全<br>预测交通事故的风险，严重程度</li><li>交通监控<br>主要通过监控的图像和视频检测车辆，行人检测。</li><li>自动驾驶<br>自动驾驶要求检测树木，道路，行人，一般和CV领域相关。</li></ol><p>图神经网络在交通领域的应用</p><ol><li>交通状态预测<br>交通状态：交通流量、速度、时间ETA、密度等。</li><li>交通需求预测<br>预测将来用户对出租车、自行车的需求</li><li>交通信号预测<br>减低用户在交叉路口的等待时间，避免交通拥堵</li><li>司机行为分类</li></ol><p>交通事故预测还没有用到图模型。</p><h1><span id="4-问题定义">4. 问题定义</span></h1><p>基于图的交通预测问题，首先需要构件图G。</p><ul><li>图：无权图，有权图，无向图，有向图，取决于具体的任务。</li><li>节点：传感器sensor，路段，道路交叉口，GPS交叉点。</li><li>邻接矩阵A：非0即1，浮点数（表示2个节点的关系，例如相似性，距离）</li></ul><p>给定历史P个时间段所有节点的信息，维度是$\left[\mathcal{X}_{1}, \cdots, \mathcal{X}_{i}, \cdots, \mathcal{X}_{\mathbf{P}}\right] \in \mathbb{R}^{\mathbf{P} \times \mathbf{N} \times \mathbf{F}_{1}}$预测未来Q个时间段的$\mathcal{Y}=\left[\mathcal{Y}_{1}, \cdots, \mathcal{Y}_{j}, \cdots, \mathcal{Y}_{\mathrm{Q}}\right] \in \mathbb{R}^{\mathbf{Q} \times \mathbf{N} \times \mathrm{F}_{\mathrm{O}}}$</p><ul><li>预测的特征只有1个，即$F_O=1$，预测特征有多个，即$F_O&gt;1$</li><li>预测未来时间段只有1个，单步预测，即$Q=1$，预测未来时间段有多个，多步预测，即$Q&gt;1$</li><li>多步预测问题中，一般使用FC（将输出reshape成需要的维度，ASTGCN,T-GCN,），Seq2Seq（使用RNN循环输出预测结果,DCRNN,GMAN），空洞技术（WaveNet）</li></ul><h2><span id="41-构建图">4.1. 构建图</span></h2><p>在构建图时，一般使用3类数据：传感器，GPS轨迹，打车订单数据，</p><ol><li>传感器数据<br>最常用的加州PEMS数据，图中的每个节点表示一个传感器，同一条路上的传感器有边相连。</li><li>GPS数据<br>GPS轨迹数据，需要将GPS匹配到最近的路段上，以路段为节点创建图，或者以交叉路口为节点创建图。这里的图可以是有向，也可以无向。</li></ol><p><img src="/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/3.png" alt="">  </p><ol><li>订单数据<br>将城市划分为网格，每个节点表示一个网格，边表示连通性。可以根据不同的特征来构件图，例如下图使用邻近区域、道路连通性、功能相似区域分别构建3个图。</li></ol><p><img src="/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/4.png" alt="">  </p><ol><li>公共交通数据<ul><li>地铁图：每个地铁站表示一个节点，如果一条线上的2个地铁站相邻则有边。图信号矩阵是inflow和outflow</li><li>公交车图：每个公交站是一个节点，如果一条线上的2个公交站相邻则有边。图信号矩阵进站记录</li></ul></li></ol><h2><span id="42-构造邻接矩阵">4.2. 构造邻接矩阵</span></h2><ol><li>静态邻接矩阵<br>邻接矩阵不会随着时间变化。可以根据节点之间的特征构建多个邻接矩阵，例如功能相似，道路相通，时间相似。邻接矩阵中的值可以是非0即1，也可以表示节点间距离或者相似性。一般通过阈值来定义邻接矩阵，通过调整阈值来控制邻接矩阵的稀疏性。<script type="math/tex; mode=display">\mathbf{a}_{i j}=\left\{\begin{array}{l}\exp \left(-\frac{\mathbf{d}_{i j}^{2}}{\sigma^{2}}\right), i \neq j \text { and } \mathbf{d}_{i j} \geq \epsilon \\0 \quad, i=j \text { or } \mathbf{d}_{i j}<\epsilon\end{array}\right.</script></li></ol><ol><li>动态邻接矩阵<br>有2种情况：1. 邻接矩阵不随着时间变化，但是邻接矩阵不是预先定义好的，而是模型先动态学习节点嵌入，然后根据学习到的节点嵌入构造邻接矩阵。2. 邻接矩阵随着时间变化。</li></ol><h1><span id="5-前人的模型">5. 前人的模型</span></h1><p>分析图神经网络在交通领域的应用，发现GNN通常和其他组件一起用，类似RNN,Seq2Seq，TCN等。</p><h2><span id="51-gnn">5.1. GNN</span></h2><p>GNN在交通领域的应用主要有3个：谱图卷积for无向图，扩散卷积for有向图。</p><ol><li><p>谱图卷积</p><script type="math/tex; mode=display">\begin{aligned}Y_{j} &=\rho\left(\Theta_{j} *_{\mathcal{G}} X\right) \\&=\rho\left(\sum_{i=1}^{\mathbf{F}_{\mathrm{I}}} \theta_{i, j} \tilde{\mathbf{D}}^{-\frac{1}{2}} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-\frac{1}{2}} X_{i}\right), 1 \leq j \leq \mathbf{F}_{\mathbf{O}} \\Y &=\rho\left(\tilde{\mathbf{D}}^{-\frac{1}{2}} \tilde{\mathbf{A}} \tilde{\mathbf{D}}^{-\frac{1}{2}} X W\right)\end{aligned}</script><p>谱图卷积要求对称的拉普拉斯矩阵，来实现特征值分解。</p></li><li><p>扩散卷积<br>谱图卷积要求对称的拉普拉斯矩阵，来实现特征值分解。但是对于有向图来说，拉普拉斯矩阵不是对称的。扩散卷积对图的结构，邻接矩阵，拉普拉斯矩阵没有任何限制。扩散卷积可以看做是转移矩阵的幂次，表示从节点i到节点j的转移概率。</p><script type="math/tex; mode=display">y=\Theta *_{\mathcal{G}} x=\sum_{k=0}^{\mathrm{K}-1}\left(\theta_{k, 1}\left(\mathrm{D}_{\mathrm{O}}^{-1} \mathrm{A}\right)^{k}+\theta_{k, 2}\left(\mathrm{D}_{\mathrm{I}}^{-1} \mathrm{A}^{T}\right)^{k}\right) x</script></li></ol><p>总结：谱图卷积和扩散卷积的不同：谱图卷积的邻接矩阵揭示中心节点和它直接邻近的节点更相关。而扩散卷积揭示空间依赖是随机且动态的。扩散卷积比谱图卷积更复杂。扩散卷积可以适用在任何交通网络上，而谱图卷积只能用在对称的图上，即无向图中。</p><p>有些工作在使用SGC和DGC使用以下tricks</p><ul><li>使用SGC时，引入attention机制<br>S表示图信号矩阵，使用切比雪夫多项式计算图卷积时，对S求attention，计算节点之间的影响程度。</li></ul><script type="math/tex; mode=display">\Theta *_{\mathcal{G}} x \approx \sum_{k=0}^{K-1} \theta_{k}\left(T_{k}(\tilde{\mathbf{L}}) \odot \mathbf{S}\right) x$$ $$\mathbf{S} = W_{1} \odot \rho\left(\left(X W_{2}\right) W_{3}(W_{4} X)^{T}+b\right) \in \mathbb{R}^{N \times N}</script><ul><li><p>直接使用邻接矩阵，FFR表示道路特征</p><script type="math/tex; mode=display">\Theta *_{\mathcal{G}} x=\left(W \odot \tilde{\mathbf{A}}^{\mathrm{K}} \odot \mathcal{F} \mathcal{F} \mathcal{R}\right) x</script></li><li><p>在邻接矩阵中引入地理位置信息</p><script type="math/tex; mode=display">\mathbf{S}=\mathbf{A} \odot \omega$$$$Y=\rho\left(\tilde{\mathbf{Q}}^{-\frac{1}{2}} \tilde{\mathbf{S}} \tilde{\mathbf{Q}}^{-\frac{1}{2}} X W\right)</script></li></ul><h2><span id="52-rnn">5.2. RNN</span></h2><p>交通任务预测中很多都是时间序列数据，适用RNN来捕获时间相关性。这里包括三类：RNN,LSTM,GRU</p><ul><li>RNN：输入层，隐藏层，输出层</li><li>LSTM：为了解决RNN的梯度消失和梯度爆炸问题，引入输入门，遗忘门，输出门。</li><li>GRU：LSTM结构复杂，参数更多，用更简单的GRU来代替，只有2个门：重置门</li></ul><p>在交通预测领域中，很少用RNN，大部分都是用GRU，少数用LSTM。在用GRU或LSTM时，有很多小tricks，例如attention，门控机制，残差机制。<br>在使用RNN所用到的tricks</p><ul><li>在RNN中引入空间信息<script type="math/tex; mode=display">\mathbf{H}_{t} = R N N\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] \odot S\right)</script></li><li>引入外部因素<script type="math/tex; mode=display">\mathbf{H}_{t}=G R U\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right], \mathbf{E}_{t}\right)+\mathbf{H}_{t-1} W</script></li><li>使用空洞RNN<script type="math/tex; mode=display">\mathbf{H}_{t}=G R U\left(\mathbf{H}_{t-s}, \mathbf{X}_{t}\right)</script></li><li>RNN和图卷积结合<script type="math/tex; mode=display">\begin{aligned}r_{t} &=\sigma\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *_{\mathcal{G}} W_{r}+b_{r}\right) \\u_{t} &=\boldsymbol{\sigma}\left(\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *_{\mathcal{G}} W_{u}+b_{u}\right) \\\tilde{\mathbf{H}}_{t} &=\tanh \left(r_{t} \odot\left[\mathbf{H}_{t-1}, \mathbf{X}_{t}\right] *_{\mathcal{G}} W_{h}+b_{h}\right) \\\mathbf{H}_{t} &=u_{t} \odot \mathbf{H}_{t-1}+\left(1-u_{t}\right) \odot \tilde{\mathbf{H}}_{t}\end{aligned}</script></li></ul><h2><span id="53-tcn">5.3. TCN</span></h2><p>虽然RNN可以捕获时间的相关性，但是其不能并行计算，耗时。与之对比，1D卷积运行更快，同样也可以捕获时间相关性。然后1D卷积与RNN相比应用更少，由于1D卷积缺少长期建模的memory机制。后来提出空洞卷积，在长期时间建模上，比RNN效果更好。之后，TCN被广泛应用在时间建模上。</p><p><img src="/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/5.png" alt=""> </p><p>在使用TCN时，有一些小traick</p><ul><li><p>堆叠不同的TCN层，每层使用不同的dilation rate</p><script type="math/tex; mode=display">\mathcal{Y}^{(l+1)}=\sigma\left(\Theta^{l} *_{\mathcal{T} \mathrm{d}^{l}} \mathcal{Y}^{(l)}\right)</script></li><li><p>残差，原始输入+TCN的输出</p><script type="math/tex; mode=display">\mathcal{Y}^{(l+1)}=\mathcal{Y}^{(l)}+\boldsymbol{\operatorname { R e }} \boldsymbol{L} \boldsymbol{U}\left(\Theta_{1}^{l} *_{\mathcal{T}^{\mathrm{d}}}\left(\boldsymbol{\operatorname { R e }} \boldsymbol{L} \boldsymbol{U}\left(\Theta_{0}^{l} *_{\mathcal{T}^{\mathrm{d}}} \mathcal{Y}^{(l)}\right)\right)\right)</script></li><li><p>使用门控机制</p><script type="math/tex; mode=display">\mathcal{Y}=\rho\left(\Theta_{1} *_{\mathcal{T}^{\mathrm{d}}} \mathcal{X}+b_{1}\right) \odot \sigma\left(\Theta_{2} *_{\mathcal{T}^{\mathrm{d}}} \mathcal{X}+b_{2}\right)</script></li></ul><h2><span id="54-seq2seq">5.4. Seq2Seq</span></h2><p>原始的Seq2Seq模型为对输入进行建模，得到一个隐变量$C$,然后将$C$输入到解码器中，进行预测。</p><p><img src="/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/6.png" alt=""> </p><p>对Seq2Seq的改进主要有2点：</p><ul><li><p>改变隐变量C<br>原先输入到decoder的C是固定的，对decoder中所有的时间步来说都一样，然后输入中的值对不同的输出影响程度不同，这里引入attention机制，动态改变C</p><script type="math/tex; mode=display">\begin{array}{l}\mathbf{H}_{i}=\operatorname{Encoder}\left(\mathbf{X}_{i}, \mathbf{H}_{i-1}\right) \\\mathbf{C}_{j}=\sum_{i=1}^{\mathbf{P}}\left(\theta_{j i} \mathbf{H}_{i}\right), \mathbf{S}_{0}=\mathbf{H}_{\mathbf{P}} \\\mathbf{S}_{j}=\operatorname{Decoder}\left(\mathbf{C}_{j}, \mathbf{Y}_{j-1}, \mathbf{S}_{j-1}\right) \\\mathbf{Y}_{j}=\mathbf{S}_{j} W\end{array}</script></li><li><p>采样<br>在decoder在训练阶段和测试阶段的输入是不同的。在训练阶段，decoder的不同时间步输入的真实的label，而在测试阶段，因为不知道label，输入的是上一个时间步预测的结果，这样可能会造成错误累积的问题。为了解决这个问题，可以在训练阶段进行采样，即并不总是输入真实的label，以$\epsilon_{j}$输入真实babel，以$1-\epsilon_{j}$输入上个时间步的预测结果。</p></li></ul><p>交通领域中的多步预测通常采用Seq2Seq架构。Seq2Seq中的encoder和decoder架构通常采用RNN，但是也不一定相同。</p><h2><span id="55-gan">5.5. GAN</span></h2><p>这一模块看的论文较少，以后补充</p><h1><span id="6-挑战">6. 挑战</span></h1><p>尽管交通领域有很多研究方向，但它们都有一些共同的挑战，如下所示，主要分为三类：空间依赖，时间依赖，外部因素。</p><p><img src="/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/2.png" alt=""> </p><h2><span id="61-空间依赖">6.1. 空间依赖</span></h2><p>在一个双向的道路中，R1只受R2的影响，R3对R1的影响较小。如果采用网格的形式，R3和R2对R1的影响相同，这不符合实际。如果采用图的形式，R2对R1的影响较大，R3对R1的影响较小，符合实际。</p><p><img src="/2020/06/02/How-to-Build-a-Graph-Based-Deep-Learning-Architecture-in-Traffic-Domain-A-Survey/7.png" alt=""> </p><p>交通网络中空间依赖十分复杂，可以分成三类：空间局部性，多元关系，全局连通性。</p><ol><li>空间局部性<br>空间局部性表示邻近区域比较远的区域更相关。K阶局部谱图卷积SGCN可以聚合0~K-1跳的邻居信息。还有一些其他工作可以捕获空间局部相关性。比如动态计算邻接矩阵</li><li>多元关系<br>目标区域也可能与距离较远的区域相关。例如功能相似的区域，交通连通的区域。根据这些不同的相似性来创建不同的图。</li><li>全局连通性<br>以上2点更关注网络部分，而忽略了整体的结构。全局连通性表示不同区域的交通情况在整个网络上互相影响。使用扩散卷积、pooling层、self-adaptive邻接矩阵可以捕获到这种全局连通性。</li></ol><h2><span id="62-时间依赖">6.2. 时间依赖</span></h2><p>使用RNN或TCN来捕获时间依赖</p><ol><li>多粒度<br>时间有不同的周期性，例如recent，daily，weekly。</li><li>不同的权重<br>历史信息对目标时间段的影响权重不同。使用Attention机制计算权重分数。</li></ol><h2><span id="63-时空依赖">6.3. 时空依赖</span></h2><p>以上对时间和空间依赖分别建模，如果对时空依赖同时建模，预测效果可能会更好。例如STSGCN</p><h2><span id="64-外部因素">6.4. 外部因素</span></h2><p>天气（雨/温度/空气质量），时间（节假日/周几/几点），特殊时间，POI等信息都会影响交通预测。<br>对于外部因素的处理通常有2种方法：</p><ol><li>和其他因素拼接，输入到模型中</li><li>设计外部因素处理模块，对外部因素单独处理。通常是2个FCN，第一个FCN提取重要信息，第二个FCN从低维特征映射到高维特征</li></ol><h1><span id="7-未来方向">7. 未来方向</span></h1><ol><li>在司机行为分类，车辆/人们轨迹预测，交通事故预测使用图模型。</li><li>大多使用SGCN和DGCN，很少使用GAT,GAE,RNN+GCN，可以使用以上模型解决交通问题</li><li>交通问题大多是回归问题，很少有分类问题，可以使用图模型研究分类问题</li><li>现有模型对外部因素处理比较简单，可以设计更复杂的模型捕获外部因素信息。</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这篇综述性论文介绍图神经网络在交通领域的应用。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="论文阅读笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="时空领域" scheme="http://yoursite.com/tags/%E6%97%B6%E7%A9%BA%E9%A2%86%E5%9F%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图神经网络研讨会</title>
-    <link href="http://yoursite.com/2020/03/29/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%A0%94%E8%AE%A8%E4%BC%9A/"/>
-    <id>http://yoursite.com/2020/03/29/图神经网络研讨会/</id>
-    <published>2020-03-29T05:40:52.000Z</published>
-    <updated>2020-03-31T15:15:44.158Z</updated>
-    
-    <content type="html"><![CDATA[<p>在线图神经网络研讨会<br><a id="more"></a><br><img src="/2020/03/29/图神经网络研讨会/intro.png" alt=""></p><h1><span id="网络表示学习">网络表示学习</span></h1><ul><li>网络表示的关键问题：<br>如何定义图中节点的相似性</li></ul><h1><span id="图神经网络及认知推理">图神经网络及认知推理</span></h1><p><strong>网络上的学习任务：</strong></p><ul><li>节点分类：给定一个点，预测其类别</li><li>链接预测：给2个点，预测这2个点是否相连</li><li>community detection：找子图</li><li>网络相似度：2个网络或子网络的相似度</li></ul><h2><span id="回顾网络表示学习">回顾网络表示学习</span></h2><p>给定一个网络，学习节点的低维表示，如果2个节点距离很近，那这2个节点的表示也要相似。<br><strong>挑战：</strong></p><ol><li>CNN只适用于网格(二维)，但是网络是一个拓扑机构</li><li>RNN适用于文本/序列，这种都有先后关系，但是网络没有先后关系</li><li>网络是动态的，节点有属性，并且网络还有结构属性</li></ol><p><strong>网络表示学习发展：</strong></p><ol><li>使用word2vec来做网络表示学习，即DeepWalk</li><li>根据DeepWalk进行扩展：<ul><li>LINE：一阶和二阶相似性</li><li>PTE：异构网络</li><li>Node2vec：biased random walk</li></ul></li></ol><p><strong>网络表示学习的本质：</strong><br>都是在做矩阵分解，SVD分解，只是分解的形式不一样。<br>图表示学习结合的是context信息，用上下文信息来做网络表示学习。</p><p><img src="/2020/03/29/图神经网络研讨会/1.png" alt=""></p><p><strong>问题：</strong></p><h2><span id="gnn">GNN</span></h2><p><img src="/2020/03/29/图神经网络研讨会/2.png" alt=""></p><p><img src="/2020/03/29/图神经网络研讨会/3.png" alt=""></p><h2><span id="异质图">异质图</span></h2><p>同质网络：网络中只有一种类型的节点或边<br>异质网络：网络中有多类节点或边</p><p>首先分解出网络中的对象，以及对象之间的关系。<br>例如：作者-论文-会议，一个网络中有3类节点。<br>其中对象之间的关系（Meta path）有：</p><ul><li>作者1-论文-作者2（2个作者共同合作一篇论文）</li><li>作者1-论文-引用论文1，作者1写论文，引用了其他论文</li><li>……</li></ul><h3><span id="模型">模型</span></h3><ol><li>Metapath2Vec<br>基于meta path的随机游走，</li><li>HERec<br>解决异质图中节点的表示，将异质图变成同质图，在同质图中用DeepWalk或LINE学习节点表示</li><li>HIN2Vec<br>随机游走抽取出点边序列</li><li>MCRec</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在线图神经网络研讨会&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Deep Learning" scheme="http://yoursite.com/categories/Deep-Learning/"/>
-    
-    
-      <category term="Graph" scheme="http://yoursite.com/tags/Graph/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>argparse不支持bool类型</title>
-    <link href="http://yoursite.com/2020/03/09/argparse%E4%B8%8D%E6%94%AF%E6%8C%81bool%E7%B1%BB%E5%9E%8B/"/>
-    <id>http://yoursite.com/2020/03/09/argparse不支持bool类型/</id>
-    <published>2020-03-09T08:28:29.000Z</published>
-    <updated>2020-03-09T08:57:46.605Z</updated>
-    
-    <content type="html"><![CDATA[<p>在Python中通过下列方式向程序传递bool参数时，其中<code>neg</code>参数指定类型为bool，但是无论传入的值是什么，<code>neg</code>始终为<code>True</code></p><p>解决方法：<br><a href="https://blog.csdn.net/yaokai_assultmaster/article/details/77928629" target="_blank" rel="noopener">使用Python中的argparse从命令行接收boolean类型的参数</a><br><a id="more"></a></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">parser = argparse.ArgumentParser()</span><br><span class="line">parser.add_argument(<span class="string">"--config"</span>, type=str, help=<span class="string">'configuration file'</span>)</span><br><span class="line">parser.add_argument(<span class="string">"--gpus"</span>, type=str,help=<span class="string">"test program"</span>)<span class="comment">#如果</span></span><br><span class="line">parser.add_argument(<span class="string">"--neg"</span>, type=bool, help=<span class="string">"test program"</span>)</span><br><span class="line">parser.add_argument(<span class="string">"--test"</span>, action=<span class="string">"store_true"</span>, help=<span class="string">"test program"</span>)</span><br></pre></td></tr></table></figure><p>【注意】类似于上文中<code>gpus</code>这种参数，指定也可以，不指定也可以</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在Python中通过下列方式向程序传递bool参数时，其中&lt;code&gt;neg&lt;/code&gt;参数指定类型为bool，但是无论传入的值是什么，&lt;code&gt;neg&lt;/code&gt;始终为&lt;code&gt;True&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;解决方法：&lt;br&gt;&lt;a href=&quot;https://blog.csdn.net/yaokai_assultmaster/article/details/77928629&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;使用Python中的argparse从命令行接收boolean类型的参数&lt;/a&gt;&lt;br&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
     
     
       <category term="Python" scheme="http://yoursite.com/tags/Python/"/>

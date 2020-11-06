@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/result.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/ablation.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/case.png">
-<meta property="og:updated_time" content="2020-08-23T02:57:54.966Z">
+<meta property="og:updated_time" content="2020-11-02T08:46:39.089Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RiskOracle-A Minute-level Citywide Traffic Accident Forecasting Framework">
 <meta name="twitter:description" content="AAAI2020原文链接：RiskOracle-A Minute-level Citywide Traffic Accident Forecasting Framework中国科大一个团队发表">
@@ -490,10 +490,10 @@ e_{i j}=\left\{\begin{array}{ll}{1} & {\text { if the traffic elements within tw
 </blockquote>
 <p>&ensp;&ensp;&ensp;&ensp;在该论文中，1个节点的<code>traffic element</code>包括2方面，静态的道路特征和动态的traffic特征。$\rho$来控制<code>affinity matrix</code>$\mathcal{A}_s$和$\mathcal{A}^{\Delta t}_o$的稀疏性，表示整个<code>urban graph</code>的连通性，在<code>affinity matrix</code>中的非0值表示subregion之间有很强的相关性。<br>&ensp;&ensp;&ensp;&ensp;在一个时间段$\Delta t$中<code>subregion</code> $v_i$的动态traffic特征包括3部分，(a)人流量，用<code>traffic volume</code>$TV_{v_i}(\Delta t)$表示;(b)交通状况，用平均交通速度$a_{v_i}(\Delta t)$表示;(c)交通事故风险等级$r_{v_i}(\Delta t)$。</p>
 <p><strong>定义2：Static Road Network Features</strong>：一个城市<code>subregion</code>节点$v_i \in \mathcal{V}$,它的静态路网特征包括道路个数，道路类型，道路长度和宽度，除雪等级，红绿灯个数，<code>subregion</code> $v_i$中的所有道路使用一个固定长度的向量$s_i$表示。整个<code>urban graph</code>的静态道路特征使用$S=\{s_1,s_2,…,s_m\}$表示。静态特征，不随着时间变化，没有时间下标。</p>
-<p><strong>定义3：Dynamic Traffic Features</strong>：对一个<code>subregion</code>节点$v_i \in \mathcal{V}$,在时间段$\Delta t$中，它的动态交通特征被表示为$f_{v_i}(\Delta t)=\left\{T V_{v_{i}}(\Delta t), a_{v_{i}}(\Delta t), r_{v_{i}}(\Delta t)\right\}$，即该时间段的车流量，车平均速度，事故风险，$r_{v_i}(\Delta t)$是交通事故的risk求和，将交通事故分为3类：轻度，中度，重度，risk值分别是1,2,3.所有子区域在时间段$\Delta t$的交通事故风险分布表示为$\mathcal{R}(\Delta t)=\left\{r_{v_{1}}(\Delta t), r_{v_{2}}(\Delta t), \cdots, r_{v_{m}}(\Delta t)\right\}$，动态交通特征表示为$\mathcal{F}(\Delta t)=\left\{f_{v_{1}}(\Delta t), f_{v_{2}}(\Delta t), \cdots, f_{v_{m}}(\Delta t)\right\}$。动态交通特征随着时间变化，所以有区域和时间2个变量，动态特征包括：人流量，交通平均速度，事故风险</p>
+<p><strong>定义3：Dynamic Traffic Features</strong>：对一个<code>subregion</code>节点$v_i \in \mathcal{V}$,在时间段$\Delta t$中，它的动态交通特征被表示为$f_{v_i}(\Delta t)=\left\{T V_{v_{i}}(\Delta t), a_{v_{i}}(\Delta t), r_{v_{i}}(\Delta t)\right\}$，即该时间段的<strong>车流量，车平均速度，事故风险</strong>，$r_{v_i}(\Delta t)$是交通事故的risk求和，将交通事故分为3类：轻度，中度，重度，risk值分别是1,2,3.所有子区域在时间段$\Delta t$的交通事故风险分布表示为$\mathcal{R}(\Delta t)=\left\{r_{v_{1}}(\Delta t), r_{v_{2}}(\Delta t), \cdots, r_{v_{m}}(\Delta t)\right\}$，动态交通特征表示为$\mathcal{F}(\Delta t)=\left\{f_{v_{1}}(\Delta t), f_{v_{2}}(\Delta t), \cdots, f_{v_{m}}(\Delta t)\right\}$。动态交通特征随着时间变化，所以有区域和时间2个变量，动态特征包括：人流量，交通平均速度，事故风险</p>
 <p><strong>定义4:Traffic Accident Prediction</strong>：给定所有子区域的静态道路特征$S$和所有子区域历史$T$个时间段的动态交通特征$\mathcal{F}(\Delta t)(\Delta t=1,2,…,T)$,目标是预测下一个时间段全市的事故风险$\mathcal{R}(T+1)$和选出高风险的子区域$\mathcal{V}_{acc}(T+1)$</p>
 <blockquote>
-<p>总结：根据m个子区域构建无向图，节点表示子区域，边表示2个子区域特征之间的相关性。子区域的特征包括2类：静态道路特征和动态交通特征。静态道路特征包括：道路个数，道路类型，长宽，道路除雪等级，红绿灯个数。动态交通特征包括：在该时间段内的车流量，车平均速度，该子区域事故风险。</p>
+<p>总结：根据m个子区域构建无向图，节点表示子区域，边表示2个子区域特征之间的相关性。子区域的特征包括2类：静态道路特征和动态交通特征。<strong>静态道路特征</strong>包括：道路个数，道路类型，长宽，道路除雪等级，红绿灯个数。<strong>动态交通特征</strong>包括：在该时间段内的车流量，车平均速度，该子区域事故风险。</p>
 </blockquote>
 <h1><span id="4-minute-level-real-time-traffic-accident-forecasting">4. Minute-level Real-time Traffic Accident Forecasting</span></h1><p>&ensp;&ensp;&ensp;&ensp;在这一节，先整体看一下我们的<code>RiskOracle</code>框架，然后再详细介绍。</p>
 <p><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/RiskOracle.png" alt=""></p>
@@ -541,16 +541,16 @@ J S\left(s_{i} \| s_{j}\right)=\frac{1}{2} \sum_{k}\left(\begin{array}{c}
 <script type="math/tex; mode=display">
 L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}}</script><blockquote>
 <p>补充：原始GCN中，拉普拉斯矩阵为$\hat{D}^{-\frac{1}{2}}\hat{A}\hat{D}^{-\frac{1}{2}}$，其中$\hat{A}=A+I$</p>
-<p>总结：文中提到的affinity matrix有2类：静态affinity matrix $\mathcal{A}_s$和动态overall affinity matrix $\mathcal{A}_o^{\Delta t}$，这2个矩阵的维度都是$R^{m \times m}$，其中静态affinity matrix不随着时间变化，根据子区域的静态道路特征计算得到。动态overall affinity matrix随着时间变化，由子区域的静态道路特征和上周每一天同时间段的动态交通特征(车流量和车平均速度)计算得来。这里将动态overall affinity matrix看做邻接矩阵，计算拉普拉斯矩阵，每个时间段都有一个拉普拉斯矩阵，用在GCN中。</p>
+<p>总结：文中提到的affinity matrix有2类：静态affinity matrix $\mathcal{A}_s$和动态overall affinity matrix $\mathcal{A}_o^{\Delta t}$，这2个矩阵的维度都是$R^{m \times m}$，其中静态affinity matrix不随着时间变化，根据子区域的静态道路特征计算得到。动态overall affinity matrix随着时间变化，由子区域的静态道路特征和上周每一天同时间段的动态交通特征(车流量和车平均速度)计算得来。这里将动态overall affinity matrix看做邻接矩阵，计算拉普拉斯矩阵，<strong>每个时间段都有一个拉普拉斯矩阵，用在GCN中</strong>。</p>
 </blockquote>
-<p><strong>Differential GCN for extracting spatiotemporal features</strong>和常规的交通状况相比，事故或事件预测和交通状况的异常变化更相关。因此，我们引入了差分特征生成器来计算相邻时间段的差分图片。将差分动态交通特征输入到GCN中，可以对交通状况的异常变化的传播和相互作用进行建模，并且可以学习即时的交通状态变化和事故之间的高层关系，可以更好地用来分钟级的事故预测。给定时间段$\Delta t$,差分向量$\vec{\Theta}^{\Delta t}$计算如下：</p>
+<p><strong>Differential GCN for extracting spatiotemporal features</strong>和常规的交通状况相比，事故或事件预测和交通状况的异常变化更相关。因此，我们引入了<strong>差分特征生成器</strong>来计算相邻时间段的差分图片。将差分动态交通特征输入到GCN中，可以对交通状况的异常变化的传播和相互作用进行建模，并且可以学习即时的交通状态变化和事故之间的高层关系，可以更好地用来分钟级的事故预测。给定时间段$\Delta t$,差分向量$\vec{\Theta}^{\Delta t}$计算如下：</p>
 <script type="math/tex; mode=display">
 \vec{\Theta}^{\Delta t}=\mathcal{D}(\Delta t)-\mathcal{D}(\Delta t-1)</script><p>其中$\mathcal{D}(\Delta t)=\left\{d_{v_{1}}(\Delta t), d_{v_{2}}(\Delta t), \cdots, d_{v_{m}}(\Delta t)\right\}$,$d_{v_{i}}(\Delta t)=\left\{T V_{v_{i}}(\Delta t), a_{v_{i}}(\Delta t)\right\}$，差分不涉及到事故风险的计算。在时间段$\Delta t$中所有的子区域通过结合它们的动态交通特征和对应的差分向量，生成了统一的特征元组$\mathcal{U}(\Delta t)=\left\{\mathcal{F}(\Delta t), \vec{\Theta}^{\Delta t}\right\}$,在郑宇AAAI2017 ST-ResNet文中提到的，城市交通有3个时间周期：小时，天，长期趋势。所以，预测时间段$\Delta t$，我们选取$\mathcal{k}$个统一特征元组，按照ST-ResNet，设置$\mathcal{k}=3$,作为DTGN的输入。具体来说，选取时间段$\Delta t$的前$\mathcal{k}$个时间段作为小时周期，选取连续前$\mathcal{k}$天中相同的时间段作为天周期，至于长期趋势，向前每10天取1天，一共取$\mathcal{k}$天,在这$\mathcal{k}$天种，取相同的时间段作为长期趋势。即hour周期有$\mathcal{k}$个时间段,天周期有$\mathcal{k}$个时间段，长期区域有$\mathcal{k}$个时间段。如图1所示，将这3个时间周期的二元组分别输入到3个DTGN中。其中DTGN的模型细节在图3(a)中。对于每一个时间周期，将它的特征二元组用$\mathbb{U}_{<em>} \Delta t$表示，将$\mathbb{U}_{</em>} \Delta t$输入到FCN中，将特征嵌入成低维特征，然后输入到GCN中。</p>
 <script type="math/tex; mode=display">
 \mathcal{H}^{n+1}=\text{Leaky-ReLU}(L^*  \mathcal{H}^{n} \mathcal{W}^{n}),\text { where } \mathcal{H}^{0}=\mathbb{U}_{*}^{\Delta t}</script><p>其中$\mathcal{H}^{n}$表示第n层GCN输入的特征，$\mathcal{W}^{n}$表示第n层GCN的卷积核参数。因为每个时间周期会输出多个时间段的数据，在做GCN操作时，需要用到拉普拉斯矩阵，这里的$L^*$是输入所有时间段的拉普拉斯矩阵$L^{\Delta t}$的平均。每2个GCN后使用1次BN，防止梯度爆炸。考虑到转换后的risk中有负值，使用Leaky_ReLU激活。同时，对应时间段的外部数据(时间戳和天气)经过嵌入层变成定长的向量，再和GCN的输入融合。因为有3个时间周期，DTGN有3个输出，分别用$\mathcal{O}_{h c}^{\Delta t}, \mathcal{O}_{d p}^{\Delta t}$ and $\mathcal{O}_{d t}^{\Delta t}$表示。</p>
 <p><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/DTGN.png" alt=""></p>
 <blockquote>
-<p>总结：每一个时间段有一个差分向量，是该时间段所有区域的车流量和车平均速度减去上一时间段的值，得到差分向量。然后将该时间段所有子区域的动态交通特征$\mathcal{F}(\Delta t)$和该时间段的差分向量$\vec{\Theta}^{\Delta t}$组成一个统一的特征元组$\mathcal{U}(\Delta t)$。那么每个时间段都有一个特征元组，存储所有子区域的特征。受郑宇2017AAAI ST-ResNet的启发，事故的发生有小时，天，长期的周期性，假设预测时间段是t，为其找出小时，天，长期的时间段。小时周期：[t-1,t-2,t-3]，天周期：[昨天t,前天t,大前天t]，长期周期[10天前t,20天前t,30天前t],然后分别输入到3个DTGN中。这个拿1个DTGN举例。输入的图信号矩阵维度是(batch_size,N,T<em>D)=(batch_size,N,3\</em>5)将时间维度乘到特征上，先经过FCN对特征进行嵌入，变成低维特征。然后输入到GCN中，GCN操作需要使用拉普拉斯矩阵。上节中提到拉普拉斯矩阵是动态的，每一个时间段都有一个L，这里每个周期都有3个时间段，使用的拉普拉斯矩阵是3个时间段拉普拉斯矩阵的平均值。<br>预测第t时间段的risk，输入的图信号矩阵：<br>小时周期：<br>t-1,t-2,t-3时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>天周期：<br>昨天t，前天t，大前天t时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>周周期：<br>10天前t，20天前t，30天前t时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>一共有3个组件，每个组件输入的维度是(batch_size,N,3*5)</p>
+<p>总结：每一个时间段有一个差分向量，是该时间段所有区域的<strong>车流量和车平均速度</strong>减去上一时间段的值，得到差分向量。然后将该时间段所有子区域的动态交通特征$\mathcal{F}(\Delta t)$和该时间段的差分向量$\vec{\Theta}^{\Delta t}$组成一个统一的特征元组$\mathcal{U}(\Delta t)$。那么每个时间段都有一个特征元组，存储所有子区域的特征。受郑宇2017AAAI ST-ResNet的启发，事故的发生有小时，天，长期的周期性，假设预测时间段是t，为其找出小时，天，长期的时间段。小时周期：[t-1,t-2,t-3]，天周期：[昨天t,前天t,大前天t]，长期周期[10天前t,20天前t,30天前t],然后分别输入到3个DTGN中。这个拿1个DTGN举例。输入的图信号矩阵维度是(batch_size,N,T<em>D)=(batch_size,N,3\</em>5)将时间维度乘到特征上，先经过FCN对特征进行嵌入，变成低维特征。然后输入到GCN中，GCN操作需要使用拉普拉斯矩阵。上节中提到拉普拉斯矩阵是动态的，每一个时间段都有一个L，这里每个周期都有3个时间段，使用的拉普拉斯矩阵是3个时间段拉普拉斯矩阵的平均值。<br>预测第t时间段的risk，输入的图信号矩阵：<br>小时周期：<br>t-1,t-2,t-3时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>天周期：<br>昨天t，前天t，大前天t时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>周周期：<br>10天前t，20天前t，30天前t时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>一共有3个组件，每个组件输入的维度是(batch_size,N,3*5)</p>
 </blockquote>
 <p><strong>多任务学习来事故风险预测</strong>设计多任务学习方案，不仅可以增强深度学习的表示能力，还可以学到分层事故分布，为最可能发生事故区域的选取提供指导。为了预测子区域的事故风险，我们首先<strong>将事故风险分布作为主任务</strong>。考虑到交通事故和人类活动强度有关，我们将<strong>区域交通量预测作为第一个辅助任务</strong>，用来提高深度学习的表示能，。为了给分层事故区域的选取提供指导，将<strong>预测中等区域发生的事故总数作为第二个辅助任务</strong>。<br>具体地，我们将DTGN的3个输出$\mathcal{O}_{h c}^{\Delta t}, \mathcal{O}_{d p}^{\Delta t}$ and $\mathcal{O}_{d t}^{\Delta t}$输入到卷积融合模块中，然后进行多任务学习，如图3(b)所示，3个多任务shared是3个DTGN的输出结果。将3个输出结果分别输入到3个融合模块中，3个融合模块的参数是$\mathcal{W}_{risk}^{\Delta t},\mathcal{W}_{vol}^{\Delta t},\mathcal{W}_{count}^{\Delta t}$，首先生成每个子区域的预测风险$\mathcal{O}_{\text {risk}}^{\Delta t}$,使用$Leaky_ReLU$激活是因为label中的risk值有负值，其余都使用$ReLU$激活。然后生成每个子区域的预测流量$\mathcal{O}_{v o l}^{\Delta t}$，然后预测每个中等区域的风险次数，先经过融合模块，再经过全连接，生成$\mathcal{O}_{\text {count}}^{\Delta t}$</p>
 <script type="math/tex; mode=display">
@@ -771,7 +771,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">70</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -782,7 +782,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -793,7 +793,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

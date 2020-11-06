@@ -1,6 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>广告领域专业术语</title>
+    <url>/2020/10/29/%E5%B9%BF%E5%91%8A%E9%A2%86%E5%9F%9F%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD/</url>
+    <content><![CDATA[<p>下面介绍一些广告领域的专业术语</p>
+<p><a href="https://www.zhihu.com/question/19662693" target="_blank" rel="noopener">参考资料</a></p>
+<a id="more"></a>
+<p>计算广告涉及到三方的利益</p>
+<ul>
+<li>广告消费者：互联网上的每个人都是消费者。比如打开爱奇艺看视频的时候都会有一段广告</li>
+<li>广告平台：有广告位的一些平台，例如爱奇艺、百度、微信朋友圈等</li>
+<li>广告主：投放广告的人，例如OPPO、VIVO等都是广告主</li>
+</ul>
+<h1><span id="roi">ROI</span></h1><h1><span id="dspdmpsspadx">DSP/DMP/SSP/ADX</span></h1><p><strong>1. DSP (Demand-Side Platform)需求方平台</strong></p>
+<p>为广告主提供一个综合性管理平台，通过同一个界面管理多个数字广告和数据交换的账户。利用DSP，广告主可以在广告交易平台(Ad Exchange)对在线广告进行实时竞价(RTB Real-Time Bidding)，高效管理广告定价。利用DSP也可以根据目标受众数据分析进行理性定价。</p>
+<h1><span id="ctr预测">CTR预测</span></h1><p>CTR （Click Through Rate）预测</p>
+<h1><span id="反作弊">反作弊</span></h1><h1><span id="广告竞价">广告竞价</span></h1>]]></content>
+      <categories>
+        <category>广告领域</category>
+      </categories>
+      <tags>
+        <tag>广告领域</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算广告和推荐系统的区别</title>
+    <url>/2020/10/29/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E5%92%8C%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>参考资料：<a href="https://www.zhihu.com/question/19662693" target="_blank" rel="noopener">计算广告与推荐系统有哪些区别？</a></p>
+<a id="more"></a>
+<h1><span id="1-广告和推荐系统的区别">1. 广告和推荐系统的区别</span></h1><p>最根本的区别是解决的问题不同：</p>
+<ul>
+<li>计算广告：要处理三方利益的协调问题，分别是广告主、用户和媒体</li>
+<li>推荐系统：要处理用户体验的问题</li>
+</ul>
+<p>正因为处理问题不同，比如同样构建一个CTR模型时，考虑的方式也不同：</p>
+<ul>
+<li>对于<strong>计算广告</strong>，站的角度更多是用这个CTR模型产生更多的收益，那么在使用的时候更偏向于<strong>将CTR高的广告全都排在前面</strong>。</li>
+<li>对于<strong>推荐系统</strong>，在使用CTR模型时，不适合全都按照CTR来对内容进行排序，而是<strong>要兼顾内容的多样性、新颖性和流行度</strong>。因为推荐系统的核心是用户体验，如果全都按照用户的行为历史来生成推荐内容，容易让用户感觉推荐的内容全是重复的，容易产生疲倦。</li>
+</ul>
+<p>由于计算广告是一个三方利益协调的问题，会涉及到广告主和媒体关于价格的博弈，会有bidding策略。下面是这2个领域分别涉及到的一些问题</p>
+<ul>
+<li>计算广告：CTR模型、Bidding策略、yield optimization（排期优化）、智能预算控制</li>
+<li>推荐系统：CTR模型及其他推荐模型、探索与利用（exploitation&amp;exploration）、冷启动问题、数据有偏问题</li>
+</ul>
+]]></content>
+      <categories>
+        <category>广告领域</category>
+        <category>推荐系统</category>
+      </categories>
+      <tags>
+        <tag>广告领域</tag>
+        <tag>推荐系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CTR预估-LR</title>
+    <url>/2020/10/29/CTR%E9%A2%84%E4%BC%B0-LR/</url>
+    <content><![CDATA[<p>CTR (Click Through Rate)预测是</p>
+]]></content>
+      <categories>
+        <category>广告领域</category>
+      </categories>
+      <tags>
+        <tag>广告领域</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Netflix推荐系统</title>
     <url>/2020/10/27/Netflix%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<p>Netflix是一家提供在线视频流媒体服务和DVD租赁业务的公司，用户只需要每月支付8,9美元，就可以无限制的观赏视频、电影和电视。</p>
@@ -96,6 +161,8 @@
 <p>一个有趣的问题是我们怎么整合我们的机器学习方法到A/B测试中，我们现在是做离线测试和在线。离线测试用在在线测试之前，用来测试和优化我们的算法。为了评估系统的离线系统，我们有很多指标，例如排序指标NDCG,MRR,分类指标accuracy/precision/recall/F1，回归指标RMSE等。我们跟踪这些离线指标和线上效果的吻合程度，发现他们趋势并不是完全一致，因此线下指标只能作为最终决定的参考。</p>
 <p>一旦离线测试验证了假设，我们就准备做A/B测试，通过用户的反馈做进一步的验证。如果成功了，我们将加入到主要系统中，为所有用户服务。</p>
 <p><img src="/2020/10/27/Netflix推荐系统/推荐3.jpg" alt=""></p>
+<p><img src="/2020/10/27/Netflix推荐系统/推荐5.jpg" alt=""></p>
+<p><img src="/2020/10/27/Netflix推荐系统/推荐4.jpg" alt=""></p>
 ]]></content>
       <categories>
         <category>推荐系统</category>
@@ -2592,10 +2659,10 @@ e_{i j}=\left\{\begin{array}{ll}{1} & {\text { if the traffic elements within tw
 </blockquote>
 <p>&ensp;&ensp;&ensp;&ensp;在该论文中，1个节点的<code>traffic element</code>包括2方面，静态的道路特征和动态的traffic特征。$\rho$来控制<code>affinity matrix</code>$\mathcal{A}_s$和$\mathcal{A}^{\Delta t}_o$的稀疏性，表示整个<code>urban graph</code>的连通性，在<code>affinity matrix</code>中的非0值表示subregion之间有很强的相关性。<br>&ensp;&ensp;&ensp;&ensp;在一个时间段$\Delta t$中<code>subregion</code> $v_i$的动态traffic特征包括3部分，(a)人流量，用<code>traffic volume</code>$TV_{v_i}(\Delta t)$表示;(b)交通状况，用平均交通速度$a_{v_i}(\Delta t)$表示;(c)交通事故风险等级$r_{v_i}(\Delta t)$。</p>
 <p><strong>定义2：Static Road Network Features</strong>：一个城市<code>subregion</code>节点$v_i \in \mathcal{V}$,它的静态路网特征包括道路个数，道路类型，道路长度和宽度，除雪等级，红绿灯个数，<code>subregion</code> $v_i$中的所有道路使用一个固定长度的向量$s_i$表示。整个<code>urban graph</code>的静态道路特征使用$S=\{s_1,s_2,…,s_m\}$表示。静态特征，不随着时间变化，没有时间下标。</p>
-<p><strong>定义3：Dynamic Traffic Features</strong>：对一个<code>subregion</code>节点$v_i \in \mathcal{V}$,在时间段$\Delta t$中，它的动态交通特征被表示为$f_{v_i}(\Delta t)=\left\{T V_{v_{i}}(\Delta t), a_{v_{i}}(\Delta t), r_{v_{i}}(\Delta t)\right\}$，即该时间段的车流量，车平均速度，事故风险，$r_{v_i}(\Delta t)$是交通事故的risk求和，将交通事故分为3类：轻度，中度，重度，risk值分别是1,2,3.所有子区域在时间段$\Delta t$的交通事故风险分布表示为$\mathcal{R}(\Delta t)=\left\{r_{v_{1}}(\Delta t), r_{v_{2}}(\Delta t), \cdots, r_{v_{m}}(\Delta t)\right\}$，动态交通特征表示为$\mathcal{F}(\Delta t)=\left\{f_{v_{1}}(\Delta t), f_{v_{2}}(\Delta t), \cdots, f_{v_{m}}(\Delta t)\right\}$。动态交通特征随着时间变化，所以有区域和时间2个变量，动态特征包括：人流量，交通平均速度，事故风险</p>
+<p><strong>定义3：Dynamic Traffic Features</strong>：对一个<code>subregion</code>节点$v_i \in \mathcal{V}$,在时间段$\Delta t$中，它的动态交通特征被表示为$f_{v_i}(\Delta t)=\left\{T V_{v_{i}}(\Delta t), a_{v_{i}}(\Delta t), r_{v_{i}}(\Delta t)\right\}$，即该时间段的<strong>车流量，车平均速度，事故风险</strong>，$r_{v_i}(\Delta t)$是交通事故的risk求和，将交通事故分为3类：轻度，中度，重度，risk值分别是1,2,3.所有子区域在时间段$\Delta t$的交通事故风险分布表示为$\mathcal{R}(\Delta t)=\left\{r_{v_{1}}(\Delta t), r_{v_{2}}(\Delta t), \cdots, r_{v_{m}}(\Delta t)\right\}$，动态交通特征表示为$\mathcal{F}(\Delta t)=\left\{f_{v_{1}}(\Delta t), f_{v_{2}}(\Delta t), \cdots, f_{v_{m}}(\Delta t)\right\}$。动态交通特征随着时间变化，所以有区域和时间2个变量，动态特征包括：人流量，交通平均速度，事故风险</p>
 <p><strong>定义4:Traffic Accident Prediction</strong>：给定所有子区域的静态道路特征$S$和所有子区域历史$T$个时间段的动态交通特征$\mathcal{F}(\Delta t)(\Delta t=1,2,…,T)$,目标是预测下一个时间段全市的事故风险$\mathcal{R}(T+1)$和选出高风险的子区域$\mathcal{V}_{acc}(T+1)$</p>
 <blockquote>
-<p>总结：根据m个子区域构建无向图，节点表示子区域，边表示2个子区域特征之间的相关性。子区域的特征包括2类：静态道路特征和动态交通特征。静态道路特征包括：道路个数，道路类型，长宽，道路除雪等级，红绿灯个数。动态交通特征包括：在该时间段内的车流量，车平均速度，该子区域事故风险。</p>
+<p>总结：根据m个子区域构建无向图，节点表示子区域，边表示2个子区域特征之间的相关性。子区域的特征包括2类：静态道路特征和动态交通特征。<strong>静态道路特征</strong>包括：道路个数，道路类型，长宽，道路除雪等级，红绿灯个数。<strong>动态交通特征</strong>包括：在该时间段内的车流量，车平均速度，该子区域事故风险。</p>
 </blockquote>
 <h1><span id="4-minute-level-real-time-traffic-accident-forecasting">4. Minute-level Real-time Traffic Accident Forecasting</span></h1><p>&ensp;&ensp;&ensp;&ensp;在这一节，先整体看一下我们的<code>RiskOracle</code>框架，然后再详细介绍。</p>
 <p><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/RiskOracle.png" alt=""></p>
@@ -2643,16 +2710,16 @@ J S\left(s_{i} \| s_{j}\right)=\frac{1}{2} \sum_{k}\left(\begin{array}{c}
 <script type="math/tex; mode=display">
 L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}}</script><blockquote>
 <p>补充：原始GCN中，拉普拉斯矩阵为$\hat{D}^{-\frac{1}{2}}\hat{A}\hat{D}^{-\frac{1}{2}}$，其中$\hat{A}=A+I$</p>
-<p>总结：文中提到的affinity matrix有2类：静态affinity matrix $\mathcal{A}_s$和动态overall affinity matrix $\mathcal{A}_o^{\Delta t}$，这2个矩阵的维度都是$R^{m \times m}$，其中静态affinity matrix不随着时间变化，根据子区域的静态道路特征计算得到。动态overall affinity matrix随着时间变化，由子区域的静态道路特征和上周每一天同时间段的动态交通特征(车流量和车平均速度)计算得来。这里将动态overall affinity matrix看做邻接矩阵，计算拉普拉斯矩阵，每个时间段都有一个拉普拉斯矩阵，用在GCN中。</p>
+<p>总结：文中提到的affinity matrix有2类：静态affinity matrix $\mathcal{A}_s$和动态overall affinity matrix $\mathcal{A}_o^{\Delta t}$，这2个矩阵的维度都是$R^{m \times m}$，其中静态affinity matrix不随着时间变化，根据子区域的静态道路特征计算得到。动态overall affinity matrix随着时间变化，由子区域的静态道路特征和上周每一天同时间段的动态交通特征(车流量和车平均速度)计算得来。这里将动态overall affinity matrix看做邻接矩阵，计算拉普拉斯矩阵，<strong>每个时间段都有一个拉普拉斯矩阵，用在GCN中</strong>。</p>
 </blockquote>
-<p><strong>Differential GCN for extracting spatiotemporal features</strong>和常规的交通状况相比，事故或事件预测和交通状况的异常变化更相关。因此，我们引入了差分特征生成器来计算相邻时间段的差分图片。将差分动态交通特征输入到GCN中，可以对交通状况的异常变化的传播和相互作用进行建模，并且可以学习即时的交通状态变化和事故之间的高层关系，可以更好地用来分钟级的事故预测。给定时间段$\Delta t$,差分向量$\vec{\Theta}^{\Delta t}$计算如下：</p>
+<p><strong>Differential GCN for extracting spatiotemporal features</strong>和常规的交通状况相比，事故或事件预测和交通状况的异常变化更相关。因此，我们引入了<strong>差分特征生成器</strong>来计算相邻时间段的差分图片。将差分动态交通特征输入到GCN中，可以对交通状况的异常变化的传播和相互作用进行建模，并且可以学习即时的交通状态变化和事故之间的高层关系，可以更好地用来分钟级的事故预测。给定时间段$\Delta t$,差分向量$\vec{\Theta}^{\Delta t}$计算如下：</p>
 <script type="math/tex; mode=display">
 \vec{\Theta}^{\Delta t}=\mathcal{D}(\Delta t)-\mathcal{D}(\Delta t-1)</script><p>其中$\mathcal{D}(\Delta t)=\left\{d_{v_{1}}(\Delta t), d_{v_{2}}(\Delta t), \cdots, d_{v_{m}}(\Delta t)\right\}$,$d_{v_{i}}(\Delta t)=\left\{T V_{v_{i}}(\Delta t), a_{v_{i}}(\Delta t)\right\}$，差分不涉及到事故风险的计算。在时间段$\Delta t$中所有的子区域通过结合它们的动态交通特征和对应的差分向量，生成了统一的特征元组$\mathcal{U}(\Delta t)=\left\{\mathcal{F}(\Delta t), \vec{\Theta}^{\Delta t}\right\}$,在郑宇AAAI2017 ST-ResNet文中提到的，城市交通有3个时间周期：小时，天，长期趋势。所以，预测时间段$\Delta t$，我们选取$\mathcal{k}$个统一特征元组，按照ST-ResNet，设置$\mathcal{k}=3$,作为DTGN的输入。具体来说，选取时间段$\Delta t$的前$\mathcal{k}$个时间段作为小时周期，选取连续前$\mathcal{k}$天中相同的时间段作为天周期，至于长期趋势，向前每10天取1天，一共取$\mathcal{k}$天,在这$\mathcal{k}$天种，取相同的时间段作为长期趋势。即hour周期有$\mathcal{k}$个时间段,天周期有$\mathcal{k}$个时间段，长期区域有$\mathcal{k}$个时间段。如图1所示，将这3个时间周期的二元组分别输入到3个DTGN中。其中DTGN的模型细节在图3(a)中。对于每一个时间周期，将它的特征二元组用$\mathbb{U}_{<em>} \Delta t$表示，将$\mathbb{U}_{</em>} \Delta t$输入到FCN中，将特征嵌入成低维特征，然后输入到GCN中。</p>
 <script type="math/tex; mode=display">
 \mathcal{H}^{n+1}=\text{Leaky-ReLU}(L^*  \mathcal{H}^{n} \mathcal{W}^{n}),\text { where } \mathcal{H}^{0}=\mathbb{U}_{*}^{\Delta t}</script><p>其中$\mathcal{H}^{n}$表示第n层GCN输入的特征，$\mathcal{W}^{n}$表示第n层GCN的卷积核参数。因为每个时间周期会输出多个时间段的数据，在做GCN操作时，需要用到拉普拉斯矩阵，这里的$L^*$是输入所有时间段的拉普拉斯矩阵$L^{\Delta t}$的平均。每2个GCN后使用1次BN，防止梯度爆炸。考虑到转换后的risk中有负值，使用Leaky_ReLU激活。同时，对应时间段的外部数据(时间戳和天气)经过嵌入层变成定长的向量，再和GCN的输入融合。因为有3个时间周期，DTGN有3个输出，分别用$\mathcal{O}_{h c}^{\Delta t}, \mathcal{O}_{d p}^{\Delta t}$ and $\mathcal{O}_{d t}^{\Delta t}$表示。</p>
 <p><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/DTGN.png" alt=""></p>
 <blockquote>
-<p>总结：每一个时间段有一个差分向量，是该时间段所有区域的车流量和车平均速度减去上一时间段的值，得到差分向量。然后将该时间段所有子区域的动态交通特征$\mathcal{F}(\Delta t)$和该时间段的差分向量$\vec{\Theta}^{\Delta t}$组成一个统一的特征元组$\mathcal{U}(\Delta t)$。那么每个时间段都有一个特征元组，存储所有子区域的特征。受郑宇2017AAAI ST-ResNet的启发，事故的发生有小时，天，长期的周期性，假设预测时间段是t，为其找出小时，天，长期的时间段。小时周期：[t-1,t-2,t-3]，天周期：[昨天t,前天t,大前天t]，长期周期[10天前t,20天前t,30天前t],然后分别输入到3个DTGN中。这个拿1个DTGN举例。输入的图信号矩阵维度是(batch_size,N,T<em>D)=(batch_size,N,3\</em>5)将时间维度乘到特征上，先经过FCN对特征进行嵌入，变成低维特征。然后输入到GCN中，GCN操作需要使用拉普拉斯矩阵。上节中提到拉普拉斯矩阵是动态的，每一个时间段都有一个L，这里每个周期都有3个时间段，使用的拉普拉斯矩阵是3个时间段拉普拉斯矩阵的平均值。<br>预测第t时间段的risk，输入的图信号矩阵：<br>小时周期：<br>t-1,t-2,t-3时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>天周期：<br>昨天t，前天t，大前天t时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>周周期：<br>10天前t，20天前t，30天前t时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>一共有3个组件，每个组件输入的维度是(batch_size,N,3*5)</p>
+<p>总结：每一个时间段有一个差分向量，是该时间段所有区域的<strong>车流量和车平均速度</strong>减去上一时间段的值，得到差分向量。然后将该时间段所有子区域的动态交通特征$\mathcal{F}(\Delta t)$和该时间段的差分向量$\vec{\Theta}^{\Delta t}$组成一个统一的特征元组$\mathcal{U}(\Delta t)$。那么每个时间段都有一个特征元组，存储所有子区域的特征。受郑宇2017AAAI ST-ResNet的启发，事故的发生有小时，天，长期的周期性，假设预测时间段是t，为其找出小时，天，长期的时间段。小时周期：[t-1,t-2,t-3]，天周期：[昨天t,前天t,大前天t]，长期周期[10天前t,20天前t,30天前t],然后分别输入到3个DTGN中。这个拿1个DTGN举例。输入的图信号矩阵维度是(batch_size,N,T<em>D)=(batch_size,N,3\</em>5)将时间维度乘到特征上，先经过FCN对特征进行嵌入，变成低维特征。然后输入到GCN中，GCN操作需要使用拉普拉斯矩阵。上节中提到拉普拉斯矩阵是动态的，每一个时间段都有一个L，这里每个周期都有3个时间段，使用的拉普拉斯矩阵是3个时间段拉普拉斯矩阵的平均值。<br>预测第t时间段的risk，输入的图信号矩阵：<br>小时周期：<br>t-1,t-2,t-3时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>天周期：<br>昨天t，前天t，大前天t时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>周周期：<br>10天前t，20天前t，30天前t时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>一共有3个组件，每个组件输入的维度是(batch_size,N,3*5)</p>
 </blockquote>
 <p><strong>多任务学习来事故风险预测</strong>设计多任务学习方案，不仅可以增强深度学习的表示能力，还可以学到分层事故分布，为最可能发生事故区域的选取提供指导。为了预测子区域的事故风险，我们首先<strong>将事故风险分布作为主任务</strong>。考虑到交通事故和人类活动强度有关，我们将<strong>区域交通量预测作为第一个辅助任务</strong>，用来提高深度学习的表示能，。为了给分层事故区域的选取提供指导，将<strong>预测中等区域发生的事故总数作为第二个辅助任务</strong>。<br>具体地，我们将DTGN的3个输出$\mathcal{O}_{h c}^{\Delta t}, \mathcal{O}_{d p}^{\Delta t}$ and $\mathcal{O}_{d t}^{\Delta t}$输入到卷积融合模块中，然后进行多任务学习，如图3(b)所示，3个多任务shared是3个DTGN的输出结果。将3个输出结果分别输入到3个融合模块中，3个融合模块的参数是$\mathcal{W}_{risk}^{\Delta t},\mathcal{W}_{vol}^{\Delta t},\mathcal{W}_{count}^{\Delta t}$，首先生成每个子区域的预测风险$\mathcal{O}_{\text {risk}}^{\Delta t}$,使用$Leaky_ReLU$激活是因为label中的risk值有负值，其余都使用$ReLU$激活。然后生成每个子区域的预测流量$\mathcal{O}_{v o l}^{\Delta t}$，然后预测每个中等区域的风险次数，先经过融合模块，再经过全连接，生成$\mathcal{O}_{\text {count}}^{\Delta t}$</p>
 <script type="math/tex; mode=display">
@@ -2788,24 +2855,24 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <a id="more"></a>  
 <!-- TOC -->
 <ul>
-<li><a href="#1-%e7%ae%80%e4%bb%8b">1. 简介</a></li>
-<li><a href="#2-%e5%88%9b%e5%bb%batensor">2. 创建Tensor</a></li>
-<li><a href="#3-tensor%e7%9a%844%e7%b1%bb%e6%93%8d%e4%bd%9c">3. Tensor的4类操作</a><ul>
-<li><a href="#31-reshape%e6%93%8d%e4%bd%9c">3.1. Reshape操作</a><ul>
+<li><a href="#1-简介">1. 简介</a></li>
+<li><a href="#2-创建tensor">2. 创建Tensor</a></li>
+<li><a href="#3-tensor的4类操作">3. Tensor的4类操作</a><ul>
+<li><a href="#31-reshape操作">3.1. Reshape操作</a><ul>
 <li><a href="#311-reshape">3.1.1. reshape</a></li>
-<li><a href="#312-squeeze%e5%92%8cunsqueeze%e5%87%bd%e6%95%b0">3.1.2. squeeze和unsqueeze函数</a></li>
-<li><a href="#313-cat%e5%87%bd%e6%95%b0">3.1.3. cat函数</a></li>
-<li><a href="#314-stack%e5%87%bd%e6%95%b0">3.1.4. stack函数</a></li>
-<li><a href="#315-cat%e5%92%8cstack%e7%9a%84%e5%8c%ba%e5%88%ab">3.1.5. cat和stack的区别</a></li>
+<li><a href="#312-squeeze和unsqueeze函数">3.1.2. squeeze和unsqueeze函数</a></li>
+<li><a href="#313-cat函数">3.1.3. cat函数</a></li>
+<li><a href="#314-stack函数">3.1.4. stack函数</a></li>
+<li><a href="#315-cat和stack的区别">3.1.5. cat和stack的区别</a></li>
 </ul>
 </li>
-<li><a href="#32-element-wise%e6%93%8d%e4%bd%9c">3.2. Element-wise操作</a></li>
-<li><a href="#33-reduction%e6%93%8d%e4%bd%9c">3.3. Reduction操作</a><ul>
-<li><a href="#331-%e6%b2%bf%e7%9d%80%e6%9f%90%e4%b8%aaaxis%e8%81%9a%e5%90%88">3.3.1. 沿着某个axis聚合</a></li>
-<li><a href="#332-argmax%e5%87%bd%e6%95%b0%e4%bb%8b%e7%bb%8d">3.3.2. Argmax函数介绍</a></li>
+<li><a href="#32-element-wise操作">3.2. Element-wise操作</a></li>
+<li><a href="#33-reduction操作">3.3. Reduction操作</a><ul>
+<li><a href="#331-沿着某个axis聚合">3.3.1. 沿着某个axis聚合</a></li>
+<li><a href="#332-argmax函数介绍">3.3.2. Argmax函数介绍</a></li>
 </ul>
 </li>
-<li><a href="#34-access%e6%93%8d%e4%bd%9c">3.4. Access操作</a></li>
+<li><a href="#34-access操作">3.4. Access操作</a></li>
 </ul>
 </li>
 </ul>
@@ -2820,7 +2887,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 </li>
 <li><p><code>torch.as_tensor()</code>和<code>torch.from_numpy()</code>都是factory function，且都是share data，那这2个函数有什么区别？<code>torch.from_numpy()</code>仅仅接受<code>np.array</code>的参数，然而<code>torch.as_tensor()</code>接受<a href="https://docs.scipy.org/doc/numpy/user/basics.creation.html#converting-python-array-like-objects-to-numpy-arrays" target="_blank" rel="noopener">array-like objects</a>类型的参数</p>
 </li>
-<li>综上所述，下面2个方法是创建Tensor的推荐方法：<ul>
+<li><p>综上所述，下面2个方法是创建Tensor的推荐方法：</p>
+<ul>
 <li><code>torch.tensor()</code></li>
 <li><code>torch.as_tensor()</code></li>
 </ul>
@@ -2836,14 +2904,16 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 <li>输入维度是(A×1×B×C×1×D),不指定dim=1，输出维度(A×B×C×1×D)</li>
 </ul>
 <ol>
-<li><code>torch.unsqueeze(input, dim, out=None) → Tensor</code><br>在指定维度上增加1个维度。<strong>dim是必填项</strong><br><code>torch.unsqueeze(x, 0)</code><h3><span id="313-cat函数">3.1.3. cat函数</span></h3></li>
+<li><code>torch.unsqueeze(input, dim, out=None) → Tensor</code><br>在指定维度上增加1个维度。<strong>dim是必填项</strong><br><code>torch.unsqueeze(x, 0)</code></li>
 </ol>
-<p><code>torch.cat(tensors, dim=0, out=None) → Tensor</code><br>如果要拼接多个Tensor，需要将多个Tensor包装成tuple，例如：</p>
+<h3><span id="313-cat函数">3.1.3. cat函数</span></h3><p><code>torch.cat(tensors, dim=0, out=None) → Tensor</code><br>如果要拼接多个Tensor，需要将多个Tensor包装成tuple，例如：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.cat((t1,t2,t3),dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>cat不改变数据维度个数</strong></p>
+<p>例如<code>t1,t2,t3</code>的维度都是(2,5,7)，上面在<code>dim=0</code>上进行拼接，则得到为维度是(6,5,7)</p>
+<p><strong>cat不改变数据维度个数，例如原先是3维数据，拼接之后还是3维</strong></p>
 <h3><span id="314-stack函数">3.1.4. stack函数</span></h3><p><code>torch.stack(tensors, dim=0, out=None) → Tensor</code></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.stack((t1,t2,t3),dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<p><strong>stack改变数据维度个数,增加一个维度</strong></p>
+<p>例如<code>t1,t2,t3</code>的维度都是(2,5,7)，上面在<code>dim=0</code>上进行拼接，则得到为维度是(3,2,5,7)</p>
+<p><strong>stack改变数据维度个数,增加一个维度。例如原先是3维数据，拼接之后变成4维</strong></p>
 <h3><span id="315-cat和stack的区别">3.1.5. cat和stack的区别</span></h3><p>cat和stack的区别可以用一句话描述：</p>
 <ul>
 <li>cat不会改变数据维度个数，原先是3维数据，n个tensor进行cat之后还是3维数据。</li>
@@ -3478,8 +3548,8 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
       </categories>
       <tags>
         <tag>Mxnet</tag>
-        <tag>Pytorch</tag>
         <tag>GPU</tag>
+        <tag>Pytorch</tag>
       </tags>
   </entry>
   <entry>
@@ -4900,39 +4970,31 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
     <content><![CDATA[<p>&ensp;&ensp;&ensp;&ensp;Docker是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖到一个可移植的镜像中，然后发布到Linux或Window系统中，也可以实现虚拟化。容器是完全使用沙箱机制，相互之前不会有任何接口。<br><a id="more"></a><br><!-- TOC --></p>
 <ul>
 <li><a href="#1-docker">1. Docker</a></li>
-<li><a href="#2-%e9%95%9c%e5%83%8f%e5%ae%b9%e5%99%a8">2. 镜像&amp;容器</a><ul>
-<li><a href="#21-%e9%95%9c%e5%83%8f">2.1. 镜像</a></li>
-<li><a href="#22-%e9%95%9c%e5%83%8f%e5%91%bd%e4%bb%a4">2.2. 镜像命令</a></li>
-<li><a href="#23-%e5%ae%b9%e5%99%a8">2.3. 容器</a></li>
-<li><a href="#24-%e5%ae%b9%e5%99%a8%e5%91%bd%e4%bb%a4">2.4. 容器命令</a></li>
+<li><a href="#2-镜像容器">2. 镜像&amp;容器</a><ul>
+<li><a href="#21-镜像">2.1. 镜像</a></li>
+<li><a href="#22-容器">2.2. 容器</a></li>
+<li><a href="#23-镜像命令">2.3. 镜像命令</a></li>
 </ul>
 </li>
-<li><a href="#3-dockerfile">3. Dockerfile</a><ul>
-<li><a href="#31-%e7%9b%b8%e5%85%b3%e6%8c%87%e4%bb%a4">3.1. 相关指令</a></li>
-<li><a href="#32-%e6%9e%84%e5%bb%ba">3.2. 构建</a></li>
+<li><a href="#3-使用docker运行程序">3. 使用Docker运行程序</a></li>
+<li><a href="#4-在容器中运行jupyter-notebook">4. 在容器中运行jupyter notebook</a></li>
+<li><a href="#5-在容器中启动tensorboard">5. 在容器中启动tensorboard</a></li>
+<li><a href="#6-docker-commit镜像">6. docker commit镜像</a></li>
+<li><a href="#7-构建自己的镜像这个不是必须的">7. 构建自己的镜像(这个不是必须的)</a><ul>
+<li><a href="#71-创建dockerfile">7.1. 创建Dockerfile</a></li>
+<li><a href="#72-构建">7.2. 构建</a></li>
+<li><a href="#73-通过镜像启动容器">7.3. 通过镜像启动容器</a></li>
 </ul>
 </li>
-<li><a href="#4-%e4%bd%bf%e7%94%a8docker%e8%bf%90%e8%a1%8c%e7%a8%8b%e5%ba%8f">4. 使用Docker运行程序</a></li>
-<li><a href="#5-%e6%9e%84%e5%bb%ba%e8%87%aa%e5%b7%b1%e7%9a%84%e9%95%9c%e5%83%8f">5. 构建自己的镜像</a><ul>
-<li><a href="#51-%e5%88%9b%e5%bb%badockerfile">5.1. 创建Dockerfile</a></li>
-<li><a href="#52-%e6%9e%84%e5%bb%ba">5.2. 构建</a></li>
-<li><a href="#53-%e8%bf%90%e8%a1%8c">5.3. 运行</a></li>
-</ul>
-</li>
-<li><a href="#6-docker%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4">6. Docker常用命令</a></li>
-<li><a href="#7-docker%e6%b7%b1%e5%ba%a6%e5%ad%a6%e4%b9%a0%e5%ae%9e%e8%b7%b5">7. Docker深度学习实践</a><ul>
-<li><a href="#71-%e7%ab%af%e5%8f%a3%e6%98%a0%e5%b0%84">7.1. 端口映射</a></li>
-</ul>
-</li>
-<li><a href="#8-%e6%88%91%e7%9a%84%e9%95%9c%e5%83%8f">8. 我的镜像</a><ul>
+<li><a href="#8-我的镜像">8. 我的镜像</a><ul>
 <li><a href="#81-mxnet">8.1. mxnet</a><ul>
-<li><a href="#811-%e6%97%a0hdfs">8.1.1. 无hdfs</a></li>
-<li><a href="#812-%e6%9c%89hdfs">8.1.2. 有hdfs</a></li>
+<li><a href="#811-无hdfs">8.1.1. 无hdfs</a></li>
+<li><a href="#812-有hdfs">8.1.2. 有hdfs</a></li>
 </ul>
 </li>
 <li><a href="#82-pytorch">8.2. pytorch</a><ul>
-<li><a href="#821-%e6%97%a0hdfs">8.2.1. 无hdfs</a></li>
-<li><a href="#822-%e6%9c%89hdfs">8.2.2. 有hdfs</a></li>
+<li><a href="#821-无hdfs">8.2.1. 无hdfs</a></li>
+<li><a href="#822-有hdfs">8.2.2. 有hdfs</a></li>
 </ul>
 </li>
 </ul>
@@ -4943,97 +5005,151 @@ X=\left(X_{1}, \ldots, X_{N_{t}}\right) \in \mathbb{R}^{N_{t} \times N_{l} \time
 <p><a href="https://mp.weixin.qq.com/s?__biz=MjM5ODI5Njc2MA==&amp;mid=2655817429&amp;idx=1&amp;sn=f82daff5e9fad66a0e11cdb92c12715e&amp;chksm=bd74c3028a034a14cadf884d97f2a0fc3372d3baa97fb5ae6724e6d1926520eada090c0ffb16&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">资料2</a></p>
 <p>&ensp;&ensp;&ensp;&ensp;Docker就是一个运行在操作系统上的软件。这个软件上运行很多容器，这些容器相互独立，相互隔离。容器中可以安装很多应用程序。<br>&ensp;&ensp;&ensp;&ensp;我们平时要在Windows上安装Linux系统，都需要先安装一个VMWare，然后在上面安装Linux系统。原理就是虚拟出一套硬件资源，然后在上面运行一个完整的操作系统，再在操作系统上运行所需要的应用程序。在安装虚拟机时，需要先提前给虚拟机分配硬盘，内存等资源。一旦分配，这些资源就被虚拟机全部占用。Docker也可以实现虚拟化。但是Docker没有自己的内核，Docker容器内的应用程序是直接运行在宿主的内核，Docker比传统的虚拟机更轻便。Docker就是一个软件。如果以后在Windows上安装Linux系统，可以先在本地电脑上安装一个Windows版本的Docker。</p>
 <h1><span id="2-镜像amp容器">2. 镜像&amp;容器</span></h1><h2><span id="21-镜像">2.1. 镜像</span></h2><p>&ensp;&ensp;&ensp;&ensp;官方定义：Docker镜像是一个只读模板，可以用来创建Docker容器。镜像是一种轻量级的，可执行的独立软件包，软件和依赖的环境可以打包成一个镜像。这个镜像包含某个软件需要的所有内容，包括代码、库、环境变量、配置文件等。<br>&ensp;&ensp;&ensp;&ensp;比如我们开发的Web应用需要JDK，Tomcat，环境变量等。那我们就可以把这些都打包成一个镜像，包括代码+JDK+Tomcat+CentOS系统+各种配置文件等。打包后的镜像如果可以运行，那么这个镜像就可以在任何安装有Docker的电脑上运行。<br>&ensp;&ensp;&ensp;&ensp;任何镜像的创建会基于其他的父镜像，也就是说镜像是一层套一层的。比如一个Tomcat镜像需要运行在CentOS上面，那我们的Tomcat镜像就会基于CentOS镜像创建。</p>
-<h2><span id="22-镜像命令">2.2. 镜像命令</span></h2><ol>
-<li><p>docker images：查看本地主机上所有的镜像。注意是本地主机的！这里能看到镜像的名称、版本、id、大小等基本信息，注意这里的 imageID 是镜像的唯一标识！</p>
+<h2><span id="22-容器">2.2. 容器</span></h2><p>&ensp;&ensp;&ensp;&ensp;Docker的容器是<strong>用镜像创建的运行实例</strong>，Docker可以利用容器独立运行一个或一组应用。我们可以使用客户端或API控制容器的启动、开始、停止、删除。每个容器都是相互独立的。上一步创建的镜像是一个静态的文件，这个文件想要运行的话，就要先变成容器。我们可以把容器看做是一个简易版的Linux系统和运行在上面的程序。</p>
+<p><strong>镜像和容器的关系</strong> </p>
+<p>类似于Java中的类和对象的关系。镜像可以看做一个类，容器是镜像的一个实例。可以根据一个类new很多个实例，new出来的实例就相当于一个个容器。镜像是静态的文件，容器是有生命的个体。</p>
+<p><strong>容器的状态</strong></p>
+<p>docker容器有几种状态，分别是created、up、exited、paused。</p>
+<ul>
+<li>我们通过<code>run</code>命令运行容器时，其实是将容器从created到up状态的过程。  </li>
+<li><p>当通过<code>stop</code>命令停止容器时，容器进入exited状态。容器退出后，系统仍然保存该容器实例，即退出的容器仍然会占用系统的硬盘资源，需要使用rm删除该容器才能完全清除容器的资源占用。容器stop或Ctrl+D时，会保存当前容器的状态之后退出，下次start时会保存上次的关闭时更改，而且每次attach进去的界面是一样的，和第一次run启动一样。</p>
+ <figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># docker stop e83cf32fbc22</span></span><br><span class="line">e83cf32fbc22</span><br></pre></td></tr></table></figure>
+<p> 重新启动退出的容器<br> 处于exited状态的容器，可以通过start命令重新启动。</p>
+ <figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># docker start e83cf32fbc22</span></span><br><span class="line">e83cf32fbc22</span><br></pre></td></tr></table></figure>
+<p> 重启容器  </p>
+ <figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># docker restart e83cf32fbc22</span></span><br><span class="line">e83cf32fbc22</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>docker rmi：删除本地的镜像，如下图所示，可以加上 -f 参数进行强制删除。<br>这里的 rmi 命令跟 Linux 中的删除命令就很像啦，只是这里加了一个 i 代表 image！</p>
-</li>
-<li><p>docker search：根据镜像名称搜索远程仓库中的镜像！</p>
-</li>
-<li><p>docker pull：搜索到某个镜像之后就可以从远程拉取镜像啦，有点类似咱们 Git 中的 Pull 命令，当然对应的还有个 dockerpush 的命令。</p>
-</li>
-</ol>
-<h2><span id="23-容器">2.3. 容器</span></h2><p>&ensp;&ensp;&ensp;&ensp;Docker的容器是<strong>用镜像创建的运行实例</strong>，Docker可以利用容器独立运行一个或一组应用。我们可以使用客户端或API控制容器的启动、开始、停止、删除。每个容器都是相互独立的。上一步创建的镜像是一个静态的文件，这个文件想要运行的话，就要先变成容器。我们可以把容器看做是一个简易版的Linux系统和运行在上面的程序。<br><strong>镜像和容器的关系</strong><br>类似于Java中的类和对象的关系。镜像可以看做一个类，容器是镜像的一个实例。可以根据一个类new很多个实例，new出来的实例就相当于一个个容器。镜像是静态的文件，容器是有生命的个体。</p>
-<h2><span id="24-容器命令">2.4. 容器命令</span></h2><ul>
-<li>docker pull<br>从远程仓库中拉取镜像</li>
-<li>通过镜像创建容器<br><code>docker run [OPTIONS] IMAGE</code>可以基于某个镜像运行一个容器，如果本地有指定的镜像则使用本地的镜像，如果没有则远程拉取然后启动<br><code>docker run -v $PWD:/root -d -ti --runtime=nvidia --rm --name wbbmxnet -u 1042 mxnet/python:1.4.1_gpu_cu90_mkl_py3</code></li>
 </ul>
-<h1><span id="3-dockerfile">3. Dockerfile</span></h1><h2><span id="31-相关指令">3.1. 相关指令</span></h2><p>镜像可以从远程仓库中拉取，也可以自己创建一个镜像。Dockerfile是一个包含用户能够构建镜像的所有命令的文本文档，它有自己的语法和命令。Docker能够从Dockerfile中读取指令并自动构建镜像。<br>如果想构建自己的镜像，就要自己写Dockerfile。  </p>
-<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> nvidia/cuda:<span class="number">9.0</span>-cudnn7-devel</span><br><span class="line"></span><br><span class="line"><span class="keyword">LABEL</span><span class="bash"> SongChao chaosong@bjtu.edu.cn</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">RUN apt-get update</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">RUN apt-get install -y gcc make build-essential libssl-dev wget curl vim --allow-unauthenticated</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">RUN mkdir /root/python3.6</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">COPY Python-3.6.8 /root/python3.6/</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">WORKDIR /root/python3.6</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">RUN ./configure &amp;&amp; make &amp;&amp; make install</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">RUN wget https://bootstrap.pypa.io/get-pip.py</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">RUN python3 get-pip.py</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">ENV PYTHONIOENCODING=utf-8</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">RUN pip3 install numpy scipy pandas tensorflow-gpu==1.9.0 -i https://pypi.tuna.tsinghua.edu.cn/simple</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">RUN mkdir /workdir</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">WORKDIR /workdir</span></span><br></pre></td></tr></table></figure>
-<p>ENV设置环境变量，或者定义变量<br>在制作dockerfile时，有一些缓存可以删除，可以在RUN里面写相关的操作，这个就只是一层。<br><code>FROM</code>指定基础镜像，当前镜像是基于哪个镜像创建的，有点类似Java中类继承，FROM指令必须是Dockerfile必须是Dockerfile文件的首条命令。<br><code>LABEL</code>给镜像添加元数据，指定作者，邮箱等信息。  </p>
-<h2><span id="32-构建">3.2. 构建</span></h2><p>Dockerfile的执行顺序从上到下顺序执行，编写好Dockerfile文件后，就需要使用docker build命令对镜像进行构建了。<br><code>docker build [OPTIONS] PATH | URL | -</code><br><code>docker build -t chaosong/cuda-10.1-cudnn7-devel:with_cuda_samples .</code><br>-f：指定要使用的 Dockerfile 路径，如果不指定，则在当前工作目录寻找 Dockerfile 文件！<br>-t：镜像的名字及标签，通常 name:tag 或者 name 格式；可以在一次构建中为一个镜像设置多个标签。 注意后面的 . , 用于指定镜像构建过程中的上下文环境的目录，.表示当前目录。</p>
-<h1><span id="4-使用docker运行程序">4. 使用Docker运行程序</span></h1><ol>
-<li>登录上网<br><code>links 10.1.61.1/a30.htm</code><br>登录之后按<code>Ctrl+C</code>退出  </li>
-<li>在dockerhub上查询镜像<br>浏览器进入<a href="https://hub.docker.com/" target="_blank" rel="noopener">docker hub</a>，找到自己需要的镜像，gpu28号服务器Cuda的版本是9.0，下载的镜像需要和服务器上Cuda版本一致。  </li>
-<li>拉取镜像<br>例如镜像的全称为：<br><code>mxnet/python:1.4.1_gpu_cu90_mkl_py3</code><br><code>docker pull mxnet/python:1.4.1_gpu_cu90_mkl_py3</code><br>这条命令会把镜像下载到服务器上，如果本地已经存在该镜像，docker会在佛那个使用本地的镜像，不再下载。</li>
-<li><p>启动镜像<br><code>docker run -v $PWD:/root -d -ti --runtime=nvidia --rm --name wbbmxnet -u 1042 &lt;镜像名:标签&gt;</code><br>例如<br><code>docker run -v $PWD:/root -d -ti --runtime=nvidia --rm --name wbbmxnet -u 1042 mxnet/python:1.4.1_gpu_cu90_mkl_py3</code><br>使用上面的命令可以启动镜像，这里的参数-v通过将宿主机的目录映射到容器内，\$PWD是当前目录，映射目标是容器内的/root目录，这时\$PWD中的目录会全部映射到容器中的/root目录下。<br>启动容器后执行<br><code>cd /root</code><br><code>ls</code><br>可以看到服务器中的目录都映射到容器内，当在容器内创建一个目录时，然后创建一个文件，exit退出容器，可以看到本地服务器也有刚才那个文件。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir docker_test</span><br><span class="line">touch docker_test.txt</span><br><span class="line">exit</span><br><span class="line">ls</span><br><span class="line">ls docker_test</span><br></pre></td></tr></table></figure>
+<h2><span id="23-镜像命令">2.3. 镜像命令</span></h2><ol>
+<li><p><code>docker images</code><br>查看本地主机上所有的镜像。注意是本地主机的！这里能看到镜像的名称、版本、id、大小等基本信息，注意这里的 imageID 是镜像的唯一标识！<br><img src="/2019/06/12/Docker/images.png" alt=""></p>
 </li>
-<li><p>运行GPU程序<br>先不启动容器，在宿主机上使用<br><code>nvidia-smi</code>查看当前空闲的GPU，使用空闲的GPU运行程序。<br>把py程序上传到服务器上，然后启动容器。  </p>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">docker run -v $PWD:/root -d -ti --<span class="keyword">runtime</span>=nvidia --rm --name wbbmxnet -<span class="keyword">u</span> <span class="number">1042</span> mxnet/<span class="keyword">python</span>:<span class="number">1.4</span>.<span class="number">1</span>_gpu_cu90_mkl_py3  </span><br><span class="line"><span class="keyword">cd</span> 进入<span class="keyword">py</span>程序所在的目录  </span><br><span class="line"><span class="keyword">python3</span> xxx.<span class="keyword">py</span></span><br></pre></td></tr></table></figure>
+<li><p><code>docker pull 镜像名:标签</code><br>从镜像官网<a href="https://hub.docker.com/" target="_blank" rel="noopener">docker hub</a>，找到自己需要的镜像，并拉取镜像<br><code>docker pull mxnet/python:1.4.1_gpu_cu90_mkl_py3</code></p>
+</li>
+<li><p><code>docker push 镜像名:标签</code><br>例如<code>docker push lin-ai-27:5000/mxnet:1.41_cu100_py3</code><br>将镜像push到本地服务器中的仓库</p>
+</li>
+<li><p><code>docker ps</code><br>查看容器详细信息</p>
+<ul>
+<li><p><code>docker ps</code>：显示当前正在运行的容器，在 PORTS 一列，如果暴露的端口是连续的，还会被合并在一起，例如一个容器暴露了3个 TCP 端口：100，101，102，则会显示为 100-102/tcp。</p>
+</li>
+<li><p><code>docker ps -a</code>：显示所有的容器，<br>容器的状态共有 7 种：created|restarting|running|removing|paused|exited|dead。</p>
+</li>
+<li><code>docker ps -n 3</code>：显示最后被创建的n个容器</li>
+<li><code>docker ps -q</code>：只显示正在运行容器的id，在清理容器时非常好用。</li>
+<li><code>docker ps -s</code>：显示容器文件大小，该命令很实用，可以获得 2 个数值：一个是容器真实增加的大小，一个是整个容器的虚拟大小。</li>
+</ul>
 </li>
 </ol>
-<h1><span id="5-构建自己的镜像">5. 构建自己的镜像</span></h1><h2><span id="51-创建dockerfile">5.1. 创建Dockerfile</span></h2><p>通过Dockerfile构建自己的镜像。镜像构建时，会一层层的构建，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。比如删除前一层文件的操作，实际不是真的删除前一层的文件，而是仅在当前层标记为该文件已删除。在最终容器运行的时候，虽然不会看到这个文件，但是该文件一直跟随镜像。因此在创建镜像的时候，需要小心，每一层尽量只添加该层需要的东西，任何额外的东西应该在该层构建结束前清理掉。<br>Docker能够从Dockerfile中读取指令自动的构建镜像。</p>
+<ol>
+<li><p><code>docker run</code>：通过镜像创建一个容器<br>案例1：<br><code>docker run -v $PWD:/root -d -ti --runtime=nvidia --name wbbmxnet -u 1042 mxnet/python:1.4.1_gpu_cu90_mkl_py3</code></p>
+<p>案例2：<br><code>docker run -itd --runtime=nvidia -v $PWD:/workdir/ --name wbb -u 1042 songchao/tensorflow:1.9.0_py36_cu90_cudnn7 /bin/bash</code></p>
+<p>下面介绍<code>docker run</code>中的一些参数</p>
+<ul>
+<li><code>-d</code>：启动容器，并且后台运行（Docker 容器后台运行，就必须要有一个前台进程，容器运行的命令如果不是一直挂起的命令，容器启动后就会自动退出）。使用-d不会进入docker的交互界面，只会返回一个长id。使用docker ps可以看到对应的短id，使用docker attach 短id，进入到docker的交互界面。</li>
+<li><code>-i</code>：以交互模式运行容器，通常与 -t 同时使用。</li>
+<li><code>-t</code>：为容器重新分配一个伪输入终端，通常与 -i 同时使用（容器启动后进入到容器内部的命令窗口）。</li>
+<li><code>-P</code>：随机端口映射，容器内部端口随机映射到主机的高端口。</li>
+<li><code>-p</code>：指定端口映射，格式为：主机(宿主)端口：容器端口。</li>
+<li><code>-v</code>：建立宿主机与容器目录的同步。</li>
+<li><code>--name=&quot;myTomcat&quot;</code>：为容器指定一个名称（如果不指定，则有个随机的名字）。</li>
+<li><code>--rm</code>：表示程序运行完，这个容器就删掉了，这和参数不能和<code>-d</code>同时使用</li>
+<li><code>-bash</code>表示打开一个命令行</li>
+</ul>
+</li>
+<li><p><code>docker attach 容器id或name</code><br>当容器在后台运行时，我们使用容器的id和name进入到容器，推荐使用容器名字，更好记。通过容器id进入时，我们需要先使用<code>docker ps</code>先查看容器的<code>id</code>，然后使用这个id进入</p>
+</li>
+<li><p><code>docker tag source des</code><br>镜像重命名</p>
+</li>
+<li><p><code>docker rmi</code><br>删除本地的镜像，如下图所示，可以加上 -f 参数进行强制删除。<br>这里的 rmi 命令跟 Linux 中的删除命令就很像啦，只是这里加了一个 i 代表 image！</p>
+</li>
+<li><p><code>docker rm</code><br>删除容器。删除容器前首先通过<code>stop</code>命令停止容器，容器的相关文件仍然存储在宿主主机中，为了释放这部分空间，需要删除这些容器。<br>（1）先将容器停止<code>docker stop e83cf32fbc22</code><br>（2）<code>docker rm id</code>可以删除已经停止的对应id的容器<br>（3）批量删除除了运行以外的程序<br><code>docker rm $(docker ps -a -q)</code><br>（4）如果要批量删除指定状态的容器<br><code>docker rm $(docker ps -a -q  status=exited)</code></p>
+</li>
+<li><p><code>docker search</code><br>根据镜像名称搜索远程仓库中的镜像！</p>
+</li>
+</ol>
+<ol>
+<li><strong>Ctrl+P+Q把容器挂在后台</strong></li>
+</ol>
+<h1><span id="3-使用docker运行程序">3. 使用Docker运行程序</span></h1><ol>
+<li><p><strong>登录上网</strong><br>上网的目的是能够访问docker镜像官网，我们才可以从官网上拉取镜像<br><code>links 10.1.61.1/a30.htm</code><br>登录之后按<code>Ctrl+C</code>退出  </p>
+</li>
+<li><p><strong>在dockerhub上查询镜像</strong><br>如果你在服务上已经有镜像了，就不需要执行步骤2和3<br>浏览器进入<a href="https://hub.docker.com/" target="_blank" rel="noopener">docker hub</a>，找到自己需要的镜像，gpu28号服务器Cuda的版本是9.0，<strong>下载的镜像需要和服务器上Cuda版本一致</strong>。<br>使用<code>cat /usr/local/cuda/version.txt</code>查看服务器的Cuda版本  </p>
+</li>
+<li><p><strong>拉取镜像</strong><br>例如镜像的全称为：<br><code>mxnet/python:1.4.1_gpu_cu90_mkl_py3</code><br><code>docker pull mxnet/python:1.4.1_gpu_cu90_mkl_py3</code><br>这条命令会把镜像下载到服务器上，如果本地已经存在该镜像，docker会使用本地的镜像已经有的镜像，不再下载，节省空间。</p>
+</li>
+<li><p><strong>将镜像push到个人仓库</strong><br>在上一步从公共仓库拉取了一个镜像<br><code>docker pull mxnet/python:1.1_gpu_cu100_mkl_py3</code><br>现在将镜像push到27号服务器上面的仓库，然后我们就可以在28/29/53等服务器上都可以访问到这个镜像了。<br>首先使用<code>tag</code>对镜像重命名再<code>push</code>。<br>在重命名的时候，注意<code>lin-ai-27:5000/</code>表示push到27服务器上的仓库上，后面可以自定义自己的名字<br><code>docker tag mxnet/python:1.1_gpu_cu100_mkl_py3 lin-ai-27:5000/mxnet:1.41_cu100_py3</code><br>向27号仓库中推送镜像<br><code>docker push lin-ai-27:5000/mxnet:1.41_cu100_py3</code></p>
+</li>
+<li><p><strong>在别的服务器上将刚才的镜像pull下来</strong><br>将镜像push到27号服务器的仓库上，在其他服务器上就可以访问到这个镜像，比如我们要在53号服务器上跑程序，我们就可以在53号服务器上使用<code>docker pull</code>命令把镜像拉取到53号服务器上<br><code>docker pull lin-ai-27:5000/mxnet:1.41_cu100_py3</code></p>
+</li>
+<li><p><strong>镜像重命名</strong><br>在53号服务器拉取到镜像后，可以再给镜像重命名，也可以使用原先的名字<br><code>docker tag 镜像id wangbeibei/mxnetx:latest</code></p>
+</li>
+<li><p><strong>通过镜像启动容器</strong><br>有了镜像之后，我们就可以使用了。通过镜像启动容器，然后在容器里运行自己的代码。</p>
+<p>在启动容器的时候，我们需要使用<code>-u</code>参数来表示这个容器是属于哪个用户的。我们在服务器上使用<code>id</code>命令来查看，输出结果如下所示，则在这台服务器上我的id就是1042</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="attribute">uid</span>=1042(WangBeibei) <span class="attribute">gid</span>=1002(insis) <span class="attribute">groups</span>=1002(insis),999(docker)</span><br></pre></td></tr></table></figure>
+<p>我们通过下面的命令来启动容器</p>
+<p><code>docker run -v $PWD:/root -d -ti --runtime=nvidia --name wbbmxnet -u 1042 &lt;镜像名:标签&gt;</code><br>例如  </p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">docker <span class="builtin-name">run</span> -v <span class="variable">$PWD</span>:/root -d -ti <span class="attribute">--runtime</span>=nvidia --name wbbmxnet -u 1042 mxnet/python:1.4.1_gpu_cu90_mkl_py3</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>docker run</code>：启动容器</li>
+<li><code>-v</code>：建立宿主机与容器目录的同步，例如这里我将当前的目录<code>$PWD</code>和容器中的<code>/root</code>进行同步，也就是当进入容器的<code>/root</code>目录时，就可以看到服务器中<code>$PWD</code>的全部内容。当前这里也可以把服务器中别的目录挂载到<code>/root</code>中，例如<code>-v /data/WangBeibei/test:/root</code>中</li>
+<li><code>-d</code>：使用run命令和<code>-d</code>命令后，会把容器挂到后台运行。如果不指定这个参数，当使用上面的命令启动容器的时候就会直接进入容器。（如果要退出这个容器，使用<code>exit</code>命令，当使用这个命令的时候，退出容器的同时，这个容器也没了）<br><img src="/2019/06/12/Docker/-d命令.jpg" alt=""><br>推荐的方法：使用<code>-d</code>命令让容器在后台运行。使用-d不会进入容器的交互界面，会把容器挂到后台运行，并返回一个长的container id。这里的容器id唯一表示一个容器。此时并没有进入容器，我们需要使用id来<strong>进入容器</strong>。具体方法为：<ul>
+<li>我们首先在服务器上通过<code>docker ps</code>命令查看当前服务器都有哪些容器，这里输出的是容器id的前12位，下图所示，我们通过<code>docker ps</code>命令就可以看到刚才启动的容器，可以看到容器的id和name。</li>
+<li>之后使用<code>docker attach 容器id或name</code>（推荐使用name，因为更好记）进入到刚才的容器。</li>
+<li>然后我们进入容器的<code>/root</code>目录，就可以看到该目录下的文件和服务器本地<code>$PWD</code>下相同的目录。说明服务器本地的<code>$PWD</code>目录已经挂在到容器上了。此时在容器<code>/root</code>目录中的文件操作都会同步到服务器本地<code>$PWD</code>目录下。例如我们运行程序的时候会保存一些内容，当我们即使退出容器的时候，也可以在服务器本地<code>$PWD</code>下看到这些保存的内容。<br><img src="/2019/06/12/Docker/ps.jpg" alt=""></li>
+</ul>
+</li>
+<li><code>-ti</code>：以交互模式运行容器</li>
+<li><code>--name xxx</code>：容器的名字，不同的容器的名字不能一样</li>
+<li><code>-u xxx</code>：标识哪位用户启动了这个容器。如果不指定用户，使用<code>gpustat</code>就会看到当前运行的程序是属于root用户。容器所挂载的目录所属用户也是root用户。那么你在服务器中去操作这个目录就会提示permission denied。例如在使用<code>docker run</code>命令创建一个容器时，将服务器的<code>$PWD</code>这个目录挂在在容器的<code>/root</code>目录下，那么容器中<code>/root</code>目录下面的内容就是服务器中<code>$PWD</code>这个目录下面的内容，在容器中<code>/root</code>中使用<code>-ls -l</code>查看文件或目录，所属的用户是<code>root</code>用户，那么在服务器中的<code>$PWD</code>目录下面，就没有权限操作当前目录，比如在服务器本地执行<code>mkdir dira</code>，就会出现<code>permission denied</code>。所以在启动容器的时候，一定要指定<code>-u 1042</code></li>
+</ul>
+</li>
+<li><p><strong>安装额外的包（可选）</strong><br>如果你用的镜像有些包没有，那么你可以在启动这个容器的使用使用<code>pip install xx</code>安装所需要的包。这种方式安装的话，这个包只存在这个容器中，让你使用<code>exit</code>退出这个容器时，容器没了，这个包也就没了。下次再启动容器的时候，需要再次安装。<br><strong>在容器中install GPU版本的第三方库时，一定要先看一下镜像cuda的版本。第三方库的cuda版本要和镜像的版本一致</strong></p>
+</li>
+<li><p><strong>在容器中运行GPU程序</strong><br>现在容器已经启动了，我们就可以在容器上运行程序了。<br>如果程序需要传入gpus的id，我们可以使用<code>gpustat -i 2</code>查看当前空闲的GPU，使用空闲的GPU运行程序。</p>
+  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#启动容器</span></span><br><span class="line">docker run -v $PWD:/root -d -ti --runtime=nvidia --name wbbmxnet -u <span class="number">1042</span> mxnet/python:<span class="number">1.4</span><span class="number">.1</span>_gpu_cu90_mkl_py3  </span><br><span class="line"><span class="comment">#进入容器</span></span><br><span class="line">docker attach wbbmxnet</span><br><span class="line"><span class="comment">#进入容器的/root目录</span></span><br><span class="line">cd /root</span><br><span class="line"><span class="comment">#进入需要py文件所在的目录</span></span><br><span class="line">cd xxxx</span><br><span class="line"><span class="comment">#运行程序</span></span><br><span class="line">python3 xxx.py --config xx --gpus xx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>让容器在后台运行</strong><br>当使用上面的命令在容器上跑上程序之后，我们按<code>Ctrl+P+Q</code>让容器在后台运行<br>等到我们想再次进入容器的时候，使用<code>docker attach 容器name</code>即可</p>
+</li>
+<li><p><strong>退出容器</strong><br>如果你的程序全都运行完了，不想要这个容器了，直接使用<code>exit</code>退出容器，并且这个容器也被删除了，再次使用<code>docker ps</code>就看不到这个容器了。不过这没关系，下次可以再使用<code>docker run</code>创建另一个容器即可。</p>
+</li>
+</ol>
+<h1><span id="4-在容器中运行jupyter-notebook">4. 在容器中运行jupyter notebook</span></h1><ol>
+<li><p>在服务器上查看用户id<br>在启动容器之前先查看自己在这台服务器上的id，在服务上直接输入<code>id</code>就可以查看。在启动容器的时候需要加上<code>-u 1042</code>表示这个容器是属于哪个用户的。  </p>
+<p> <img src="/2019/06/12/Docker/uid.png" alt=""></p>
+<p> 如果不指定用户，使用<code>gpustat</code>就会看到当前运行的程序是属于root用户。容器所挂载的目录所属用户也是root用户。那么你在服务器中去操作这个目录就会提示permission denied。例如在使用<code>docker run</code>命令创建一个容器时，将服务器的<code>$PWD</code>这个目录挂在在容器的<code>/root</code>目录下，那么容器中<code>/root</code>目录下面的内容就是服务器中<code>$PWD</code>这个目录下面的内容，在容器中<code>/root</code>中使用<code>-ls -l</code>查看文件或目录，所属的用户是<code>root</code>用户，那么在服务器中的<code>$PWD</code>目录下面，就没有权限操作当前目录，比如在服务器本地执行<code>mkdir dira</code>，就会出现<code>permission denied</code>。所以在启动容器的时候，一定要指定<code>-u 1042</code></p>
+<p> <img src="/2019/06/12/Docker/gpustat.png" alt=""></p>
+</li>
+<li><p>启动容器<br><code>docker run -it -p 7000:7000 -v $PWD:/root --runtime=nvidia -u 1042 --name wbbJupyter ufoym/deepo:all-jupyter-py36</code><br> 前面的7000是服务器的端口，后面的7000是容器的端口。由于服务器是所有人共用的，需要找一个没有被占用的端口。容器的端口因为只有你一个人用，所有不会被占用。</p>
+</li>
+<li><p>进入到容器中<br>通过<code>docker attach wbbJupyter</code>进入到容器中<br> <code>cd /root</code>会看到服务器本地的目录</p>
+</li>
+<li>在容器中运行jupyter notebook<br> <code>jupyter notebook --no-browser --ip 0.0.0.0 --port=7000 --allow-root</code></li>
+<li>在putty中添加7000的端口号<br>这里的7000指的是服务器的端口，不是容器的端口<br> 然后再浏览器中输入<a href="http://localhost:7000/tree" target="_blank" rel="noopener">http://localhost:7000/tree</a><br> 或者不用在putty中添加端口映射，直接在浏览器中输入<a href="http://gpu28:7000，这里的7000指的是服务器的端口。" target="_blank" rel="noopener">http://gpu28:7000，这里的7000指的是服务器的端口。</a></li>
+<li>如果想要jupyter notebook在后台运行，按Ctrl+P+Q，会退回到服务器</li>
+<li>使用docker ps会看到你的容器正在后台运行  </li>
+<li>使用docker attach 容器的名字/id再次进入到容器中，按Ctrl+C会看到当前正在有jupyter notebook运行</li>
+</ol>
+<h1><span id="5-在容器中启动tensorboard">5. 在容器中启动tensorboard</span></h1><ol>
+<li><p>启动容器<br>想在网页中查看tensorboard。在上面那个容器中，因为使用了jupyter notebook，不能运行命令。所以需要使用上面那个镜像再开一个容器。tensorboard的端口默认是：6006，使用下面的命令</p>
+<figure class="highlight docker"><figcaption><span>run -it -p 6688:6006 -v $PWD:/root --runtime</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">2</span>. 启动tensorboard</span><br><span class="line">   进入到容器之后，然后使用下面的命令启动tensorboard</span><br><span class="line">   ```tensorboard --logdir=.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>浏览器查看tensorboard<br>然后在浏览器上<a href="http://gpu28:6688，就可以看到在网页上看到" target="_blank" rel="noopener">http://gpu28:6688，就可以看到在网页上看到</a>   </p>
+</li>
+</ol>
+<h1><span id="6-docker-commit镜像">6. docker commit镜像</span></h1><p>上面我们提到发现这个容器中有一个库没有安装，可以在容器中使用pip install在这个容器中安装使用，但是这个容器删除了之后里面安装的东西也没有了。</p>
+<p>有2种方法可以解决这个问题：</p>
+<ul>
+<li>使用commit从容器生成镜像，但是这种方式不推荐，但是省事</li>
+<li>写Dockerfile重新build一个镜像  </li>
+</ul>
+<p>启动一个容器—》在容器中安装环境—》退出容器—》docker commit制作镜像<br><strong>在容器中install GPU版本的第三方库时，一定要先看一下镜像cuda的版本。第三方库的cuda版本要和镜像的版本一致</strong></p>
+<p>先使用<strong>root用户</strong>启动一个容器，因为在构造镜像时，Anaconda是使用root用户操作的，即只有root用户才可以install和uninstall第三方库。使用root用户install方库后，然后使用commit命令导出为镜像，别的用户在用这个镜像启动容器。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#root用户启动镜像  </span></span><br><span class="line">docker run -it -p <span class="number">6688</span>:<span class="number">6006</span> -v $PWD:/roo--runtime=nvidia --name wbbtensorboard ufoydeepo:all-jupyterpy36v</span><br><span class="line"></span><br><span class="line"><span class="comment">#在容器中安装需要的第三方库</span></span><br><span class="line">pip install nni</span><br><span class="line"></span><br><span class="line"><span class="comment">#退出容器</span></span><br><span class="line">Ctrl+P+Q  </span><br><span class="line"></span><br><span class="line"><span class="comment">#查看刚刚启动容器的id</span></span><br><span class="line">docker ps</span><br><span class="line"></span><br><span class="line"><span class="comment">#从容器中commit镜像  </span></span><br><span class="line">docker commit 容器id wangbeibei/mxnet_nni:latest(新镜像的名字)  </span><br><span class="line"></span><br><span class="line"><span class="comment">#删除原来的镜像，镜像id可以通过docker images查看  </span></span><br><span class="line">docker rmi 镜像id</span><br><span class="line"></span><br><span class="line"><span class="comment">#将刚才新的镜像重命名  </span></span><br><span class="line">docker tag 镜像id wangbeibei/mxnet:latest</span><br><span class="line"></span><br><span class="line"><span class="comment">#将新的镜像push到别的服务器上</span></span><br><span class="line">docker tag wangbeibei/mxnet:latest lin-ai<span class="number">-27</span>:<span class="number">500</span>wangbeibei/mxnet:latest</span><br><span class="line">docker push lin-ai<span class="number">-27</span>:<span class="number">5000</span>/wangbeibei/mxnet:latest</span><br><span class="line"></span><br><span class="line"><span class="comment">#从其他服务器上pull镜像</span></span><br><span class="line">docker pull lin-ai<span class="number">-27</span>:<span class="number">5000</span>/wangbeibei/mxnet:latest</span><br></pre></td></tr></table></figure>
+<p>Docker的cuda和服务器的cuda是不冲突的。</p>
+<h1><span id="7-构建自己的镜像这个不是必须的">7. 构建自己的镜像(这个不是必须的)</span></h1><h2><span id="71-创建dockerfile">7.1. 创建Dockerfile</span></h2><p>通过Dockerfile构建自己的镜像。镜像构建时，会一层层的构建，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。比如删除前一层文件的操作，实际不是真的删除前一层的文件，而是仅在当前层标记为该文件已删除。在最终容器运行的时候，虽然不会看到这个文件，但是该文件一直跟随镜像。因此在创建镜像的时候，需要小心，每一层尽量只添加该层需要的东西，任何额外的东西应该在该层构建结束前清理掉。<br>Docker能够从Dockerfile中读取指令自动的构建镜像。</p>
 <p>在服务器上创建一个目录<br><code>mkdir wbb_docker_gcn</code><br><code>cd wbb_docker_gcn</code><br>可以在这个目录下下载一些创建镜像需要的文件<br><code>git clone https://github.com/NVIDIA/cuda-samples.git</code><br>然后编写用于构建镜像的Dockerfile<br><code>vi Dockerfile</code><br>内容如下：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#指定镜像要构建在哪个镜像之上  </span></span><br><span class="line"><span class="comment">#如果程序需要用到GPU，那就一定要构建在nvidia/cuda这个镜像上  </span></span><br><span class="line">FROM nvidia/cuda:<span class="number">9.0</span>-cudnn7-devel</span><br><span class="line"></span><br><span class="line"><span class="comment">#给镜像添加元数据，指定作者邮箱等信息</span></span><br><span class="line">LABEL WangBeibei <span class="number">18120408</span>@bjtu.edu.cn</span><br><span class="line"></span><br><span class="line"><span class="comment">#RUN会在当前镜像的最上面创建一个新层，并且能执行任何的命令，</span></span><br><span class="line"><span class="comment">#然后对执行的结果进行提交，提交后的结果镜像在Dockerfile的后续步骤中使用 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">#更新Ubuntu的索引</span></span><br><span class="line">RUN apt-get update</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装gcc工具</span></span><br><span class="line">RUN apt-get install -y wget python3-dev gcc git vim &amp;&amp; \</span><br><span class="line">    wget https://bootstrap.pypa.io/get-pip.py &amp;&amp; \</span><br><span class="line">    python3 get-pip.py   </span><br><span class="line"></span><br><span class="line"><span class="comment">#在容器上创建一个目录，镜像就安装在该目录下</span></span><br><span class="line">RUN mkdir /root/docker_gcn</span><br><span class="line"></span><br><span class="line"><span class="comment">#关于COPY命令，如果要复制目录的话，COPY命令会把目录里面所有文件赋值到另一个目录下，  </span></span><br><span class="line"><span class="comment">#而不是把这个目录直接复制过去，所以上面先在容器中创建了一个docker_gcn的目录，然后COPY命令将服务器本地的wbb_docker_gcn里面的文件都复制到了/root/docker_gcn/里面</span></span><br><span class="line"><span class="comment">#将服务器本地的文件拷贝到容器中的目录上</span></span><br><span class="line">COPY wbb_docker_gcn /root/docker_gcn/</span><br><span class="line"></span><br><span class="line"><span class="comment">#切换到那个目录，如果该目不存在，则创建。WORKDIR是切换当前工作路径，下面的RUN命令都会在这个WORKDIR下面执行</span></span><br><span class="line">WORKDIR /root/docker_gcn</span><br><span class="line"></span><br><span class="line"><span class="comment">#下载</span></span><br></pre></td></tr></table></figure>
-<h2><span id="52-构建">5.2. 构建</span></h2><p>Dockerfile是执行是从上到下顺序执行的，每条执行都会创建一个新的镜像层，并对镜像进行提交。编写好Dockerfile文件后，就需要使用dockerbuild命令对镜像进行构建了。<br><code>docker build [OPTIONS] PATH | URL | -</code><br><code>docker build -t chaosong/cuda-10.1-cudnn7-devel:with_cuda_samples .</code><br>-f：指定要使用的 Dockerfile 路径，如果不指定，则在当前工作目录寻找 Dockerfile 文件！<br>-t：镜像的名字及标签，通常 name:tag 或者 name 格式；可以在一次构建中为一个镜像设置多个标签。 注意后面的 . , 用于指定镜像构建过程中的上下文环境的目录。</p>
-<h2><span id="53-运行">5.3. 运行</span></h2><p>构建完镜像就可以启动这个容器了，启动完之后就可以运行py脚本<br><code>docker run -itd --rm --runtime=nvidia -v $PWD:/workdir/ --name wbb -u 1042 songchao/tensorflow:1.9.0_py36_cu90_cudnn7 /bin/bash</code><br>由于这个命令非常重要，所以下面列出几个比较重要的参数：</p>
-<p>-d：启动容器，并且后台运行（Docker 容器后台运行，就必须要有一个前台进程，容器运行的命令如果不是一直挂起的命令，容器启动后就会自动退出）。使用-d不会进入docker的交互界面，只会返回一个长id。<br>使用docker ps可以看到对应的短id，使用docker attach 短id，进入到docker的交互界面。</p>
-<p>-i：以交互模式运行容器，通常与 -t 同时使用。</p>
-<p>-t：为容器重新分配一个伪输入终端，通常与 -i 同时使用（容器启动后进入到容器内部的命令窗口）。</p>
-<p>-P：随机端口映射，容器内部端口随机映射到主机的高端口。</p>
-<p>-p：指定端口映射，格式为：主机(宿主)端口：容器端口。</p>
-<p>-v：建立宿主机与容器目录的同步。</p>
-<p>—name=”myTomcat”：为容器指定一个名称（如果不指定，则有个随机的名字）。<br>其中—rm表示程序运行完，这个容器就删掉了。<br>-bash表示打开一个命令行</p>
-<p><strong>Ctrl+P+Q把容器挂在后台</strong></p>
-<h1><span id="6-docker常用命令">6. Docker常用命令</span></h1><ol>
-<li><p>列出机器上的镜像<br><code>docker images</code></p>
-<p><img src="/2019/06/12/Docker/images.png" alt=""></p>
-</li>
-<li><p>拉取镜像<br><code>docker pull mxnet/python:1.4.1_gpu_cu90_mkl_py3</code></p>
-</li>
-<li>将镜像push到个人仓库<br>在上一步从公共仓库拉取了一个镜像<br><code>docker pull mxnet/python:1.1_gpu_cu100_mkl_py3</code><br>将镜像push到27号服务器上面的仓库，先tag再push<br><code>docker tag source des</code><br>例如<br><code>docker tag mxnet/python:1.1_gpu_cu100_mkl_py3 lin-ai-27:5000/mxnet:1.41_cu100_py3</code><br>推送镜像<br><code>docker push lin-ai-27:5000/mxnet:1.41_cu100_py3</code><br>这样镜像就会上传到27号服务器上面。  </li>
-<li>在别的服务器上将刚才的镜像pull下来<br><code>docker pull lin-ai-27:5000/mxnet:1.41_cu100_py3</code></li>
-<li>镜像重命名<br><code>docker tag 镜像id wangbeibei/mxnetx:latest</code></li>
-<li><p>查看容器信息<br>（1）docker ps：显示当前正在运行的容器，在 PORTS 一列，如果暴露的端口是连续的，还会被合并在一起，例如一个容器暴露了3个 TCP 端口：100，101，102，则会显示为 100-102/tcp。</p>
-<p>（2）docker ps -a：显示所有的容器，<br>容器的状态共有 7 种：created|restarting|running|removing|paused|exited|dead。<br>（3）docker ps -n 3：显示最后被创建的n个容器<br>（4）docker ps -q：只显示正在运行容器的id，在清理容器时非常好用。<br>（5）docker ps -s：显示容器文件大小，该命令很实用，可以获得 2 个数值：一个是容器真实增加的大小，一个是整个容器的虚拟大小。</p>
-</li>
-<li><p>以交互式方式启动容器</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">[<span class="symbol">root@</span>localhost ~]# docker run -it --name centos-test centos:<span class="number">7.4</span><span class="number">.1708</span></span><br><span class="line">[<span class="symbol">root@</span>ebd974405f42 /]#</span><br></pre></td></tr></table></figure>
-<p>以交互式方式启动容器后，docker会随机分配一个容器名，并为容器分配一个短id。</p>
-</li>
-<li><p>后台运行容器</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">[<span class="symbol">root@</span>localhost ~]# docker run --name centos-deamon -d centos:<span class="number">7.4</span><span class="number">.1708</span>  </span><br><span class="line"><span class="number">63e5555</span>c9ed35deb7e32c2a16896e0f806dbcf471d0484bdd904724a3cce542d</span><br></pre></td></tr></table></figure>
-<p>其中d表示容器在后台运行，使用run命令之后，会把容器挂到后台运行，并且会输出一个长的container id，通过docker ps查看容器的信息，这里输出的是容器id的前12位。</p>
-</li>
-<li>进入到后台运行的容器<br>通过docker attach ae60c4b64205连接到正在运行的终端，此时使用exit命令退出容器。  </li>
-<li><p>容器的状态<br>docker容器有几种状态，分别是created、up、exited、paused。<br>（1）我们通过run命令运行容器时，其实是将容器从created到up状态的过程。<br>（2）当通过stop命令停止容器时，容器进入exited状态。容器退出后，系统仍然保存该容器实例，即退出的容器仍然会占用系统的硬盘资源，需要使用rm删除该容器才能完全清楚容器的资源占用。容器stop或Ctrl+D时，会保存当前容器的状态之后退出，下次start时会保存上次的关闭时更改，而且每次attach进去的界面是一样的，和第一次run启动一样。</p>
-<figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># docker stop e83cf32fbc22</span></span><br><span class="line">e83cf32fbc22</span><br></pre></td></tr></table></figure>
-<p>（3）重新启动退出的容器<br>处于exited状态的容器，可以通过start命令重新启动。</p>
-<figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># docker start e83cf32fbc22</span></span><br><span class="line">e83cf32fbc22</span><br></pre></td></tr></table></figure>
-<p>（4）重启容器  </p>
-<figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># docker restart e83cf32fbc22</span></span><br><span class="line">e83cf32fbc22</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>删除容器<br>从上面可以看出，通过stop命令停止容器，容器的相关文件仍然存储在宿主主机中，为了释放这部分空间，需要删除这些容器。<br>（1）先将容器停止<code>docker stop e83cf32fbc22</code><br>（2）<code>docker rm id</code>可以删除已经停止的对应id的容器<br>（3）批量删除除了运行以外的程序<br><code>docker rm $(docker ps -a -q)</code><br>（4）如果要批量删除指定状态的容器<br><code>docker rm $(docker ps -a -q  status=exited)</code></p>
-</li>
-<li><p><strong>运行jupyter notebook</strong><br>（1）在启动容器之前先查看自己在这台服务器上的id，在服务上直接输入<figure class="highlight plain"><figcaption><span>1042```表示哪个这个容器是属于哪个用户的。  </span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">![](Docker/uid.png)</span><br><span class="line"></span><br><span class="line">如果不指定用户，使用```gpustat```查看就会看到当前镜像是属于root用户。容器所挂载的目录所属用户也是root用户。那么你在服务器中去操作操作这个目录就会提示permission denied。例如在使用dicker run命令创建一个容器时，将服务器的deepst这个目录挂在在容器的/root目录下，那么容器中/root目录下面的内容就是服务器中/deepst这个目录下面的内容，并且容器中/root中下面的文件和目录使用-ls -l查看，所属的用户是root用户，那么在服务器中的/deepst目录下面，就没有权限操作当前目录，比如mkdir dira，就会出现permission denied。所以在启动容器的时候，一定要指定```-u 1042</span><br></pre></td></tr></table></figure></p>
-<p><img src="/2019/06/12/Docker/gpustat.png" alt=""></p>
-<p>（2）先启动容器<br>前面的7000是服务器的端口，后面的7000是容器的端口。这个服务器是共用的，需要找一个没有被占用的端口。容器的端口因为只有自己一个人用，所有没有被占用。<br><code>docker run -it -p 7000:7000 -v $PWD:/root --runtime=nvidia --rm -u 1042 --name wbbJupyter ufoym/deepo:all-jupyter-py36</code><br>后面的—rm表示这个退出这个容器时，容器就自动删除了。这个参数可以不指定。<br>（2）然后会进入到容器中，<br><code>cd /root</code><br>会看到服务器本地的目录<br>（3）在容器中运行jupyter notebook<br><code>jupyter notebook --no-browser --ip 0.0.0.0 --port=7000 --allow-root</code><br>（4）在putty中添加7000的端口号<br>然后再浏览器中输入<a href="http://localhost:7000/tree" target="_blank" rel="noopener">http://localhost:7000/tree</a><br>或者不用在putty中添加端口映射，直接在浏览器中输入<a href="http://gpu28:7000，这里的7000指的是服务器的端口。" target="_blank" rel="noopener">http://gpu28:7000，这里的7000指的是服务器的端口。</a><br>（5）如果想要jupyter notebook在后台运行，按Ctrl+P+Q，会退回到服务器<br>（6）在网页中查看tensorboard。在上面那个容器中，因为使用了jupyter notebook，不能运行命令。所以需要使用上面那个镜像再开一个容器。tensorboard的端口默认是：6006，使用下面的命令</p>
-<figure class="highlight docker"><figcaption><span>run -it -p 6688:6006 -v $PWD:/root --runtime</span></figcaption><table><tr><td class="code"><pre><span class="line">进入到容器之后，然后使用下面的命令启动tensorboard</span><br><span class="line">```tensorboard --logdir=.</span><br></pre></td></tr></table></figure>
-<p>然后在浏览器上<a href="http://gpu28:6688，就可以看到在网页上看到" target="_blank" rel="noopener">http://gpu28:6688，就可以看到在网页上看到</a><br>（6）使用docker ps会看到你的容器正在后台运行<br>（7）使用docker attach 容器的名字/id再次进入到容器中，按Ctrl+C会看到当前正在有jupyter notebook运行<br>（8）发现这个容器中有一个库没有安装，可以在容器中使用pip install在这个容器中安装使用，但是这个容器删除了之后<br>里面安装的东西也没有了。<br>有2中方法：一是使用commit从容器生成镜像，但是这种方式不推荐，二是写Dockerfile重新build一个镜像<br>（9）在容器中使用exit退出该容器，再次使用docker ps该容器也消失了</p>
-</li>
-<li><p>docker commit制作镜像（强烈不建议操作）<br>启动一个容器—》在容器中安装环境—》退出容器—》docker commit制作镜像<br><strong>在容器中install GPU版本的第三方库时，一定要先看一下镜像cuda的版本。第三方库的cuda版本要和镜像的版本一致</strong></p>
-<figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta">#先使用root用户启动一个容器，因为在构造镜像时，</span></span><br><span class="line"><span class="meta">#Anaconda是使用root用户操作的，即只有root用户</span></span><br><span class="line"><span class="meta">#才可以install和uninstall第三方库。使用root用户install第三方库后，然后使用commit命令导出为</span></span><br><span class="line"><span class="meta">#镜像，别的用户在用这个镜像启动容器。  </span></span><br><span class="line">docker run -it -p <span class="number">6688</span>:<span class="number">6006</span> -v $PWD:/root --runtime=nvidia --rm  --name wbbtensorboard ufoym/deepo:all-jupyter-py36v</span><br><span class="line"><span class="meta">#在容器中安装需要的第三方库</span></span><br><span class="line">pip install nni</span><br><span class="line"><span class="meta">#退出容器</span></span><br><span class="line">Ctrl+P+Q  </span><br><span class="line"><span class="meta">#查看刚刚启动容器的id</span></span><br><span class="line">docker ps</span><br><span class="line"><span class="meta">#从容器中commit镜像  </span></span><br><span class="line">docker commit 容器id wangbeibei/mxnet_nni:latest  </span><br><span class="line"><span class="meta">#删除原来的镜像  </span></span><br><span class="line">docker rmi 镜像id  </span><br><span class="line">镜像id可以通过docker images查看</span><br><span class="line"><span class="meta">#将刚才的镜像重命名  </span></span><br><span class="line">docker tag 镜像id wangbeibei/mxnet:latest</span><br><span class="line"><span class="meta">#将新的镜像push到别的服务器上</span></span><br><span class="line">docker tag wangbeibei/mxnet:latest lin-ai<span class="number">-27</span>:<span class="number">5000</span>/wangbeibei/mxnet:latest</span><br><span class="line">docker push lin-ai<span class="number">-27</span>:<span class="number">5000</span>/wangbeibei/mxnet:latest</span><br><span class="line"><span class="meta">#从其他服务器上pull镜像</span></span><br><span class="line">docker pull lin-ai<span class="number">-27</span>:<span class="number">5000</span>/wangbeibei/mxnet:latest</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>Docker的cuda和服务器的cuda是不冲突的。</p>
-<h1><span id="7-docker深度学习实践">7. Docker深度学习实践</span></h1><p>Nvidia-Docker让容器可以使用GPU，使用nvidia docker run来运行程序就可以使用GPU。或者—runtime nvidia</p>
-<h2><span id="71-端口映射">7.1. 端口映射</span></h2><ul>
-<li><p>在服务器上开一个jupyter notebook，把服务器的8888映射到本地8888，这样在本地访问8888就可以了。<br>把容器的8888映射到服务器，然后服务器映射到本地，这样在本地8888就可以打开容器中的jupyter。<br>在容器任何非正常关闭的时候，docker会自启，容器也会自己启动。<br>-p 9988:8888，把容器的8888映射到服务器的9988。  </p>
-</li>
-<li><p>使用命令<code>id</code>来查看自己的UID。<br>只要UID相同，权限一定是一样的。不能在镜像中创建user<br>在容器中指定user。在启动容器的时候一定要指定-u<br>-u username或者uid：指定使用某用户启动容器</p>
-</li>
-</ul>
+<h2><span id="72-构建">7.2. 构建</span></h2><p>Dockerfile是执行是从上到下顺序执行的，每条执行都会创建一个新的镜像层，并对镜像进行提交。编写好Dockerfile文件后，就需要使用dockerbuild命令对镜像进行构建了。<br><code>docker build [OPTIONS] PATH | URL | -</code><br><code>docker build -t chaosong/cuda-10.1-cudnn7-devel:with_cuda_samples .</code><br>-f：指定要使用的 Dockerfile 路径，如果不指定，则在当前工作目录寻找 Dockerfile 文件！<br>-t：镜像的名字及标签，通常 name:tag 或者 name 格式；可以在一次构建中为一个镜像设置多个标签。 注意后面的 . , 用于指定镜像构建过程中的上下文环境的目录。</p>
+<h2><span id="73-通过镜像启动容器">7.3. 通过镜像启动容器</span></h2><p>构建完镜像就可以启动这个容器了，启动完之后就可以运行py脚本<br><code>docker run -itd --runtime=nvidia -v $PWD:/workdir/ --name wbb -u 1042 songchao/tensorflow:1.9.0_py36_cu90_cudnn7 /bin/bash</code><br>由于这个命令非常重要，所以下面列出几个比较重要的参数：</p>
 <h1><span id="8-我的镜像">8. 我的镜像</span></h1><h2><span id="81-mxnet">8.1. mxnet</span></h2><h3><span id="811-无hdfs">8.1.1. 无hdfs</span></h3><p><code>lin-ai-27:5000/wangbeibei/mxnet:cu_100</code></p>
 <h3><span id="812-有hdfs">8.1.2. 有hdfs</span></h3><p>在OpenPai平台上运行程序，使用该镜像<br><code>lin-ai-27:5000/wangbeibei/mxnet:cu100_hdfs</code></p>
 <h2><span id="82-pytorch">8.2. pytorch</span></h2><h3><span id="821-无hdfs">8.2.1. 无hdfs</span></h3><p><code>lin-ai-27:5000/wangbeibei/pytorch_nni:cu_100</code></p>
