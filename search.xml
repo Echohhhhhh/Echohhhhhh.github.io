@@ -1,6 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Pytorch之Tensor学习</title>
+    <url>/2020/11/26/Pytorch%E4%B9%8BTensor%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1><span id="1-简介">1. 简介</span></h1><p>最近发现一个学习Pytorch的教程，有视频版和文字版<a href="https://deeplizard.com/" target="_blank" rel="noopener">deeplizard</a>,这里面详细介绍了关于Tensor的知识，真的讲得超级好，解决了我很多关于Tensor运算的疑惑，在此记录下。</p>
+<p>参考资料：<a href="https://pytorch.org/docs/stable/tensors.html" target="_blank" rel="noopener">Tensor官方文档</a></p>
+<a id="more"></a>  
+<!-- TOC -->
+<ul>
+<li><a href="#1-简介">1. 简介</a></li>
+<li><a href="#2-创建tensor">2. 创建Tensor</a></li>
+<li><a href="#3-tensor的4类操作">3. Tensor的4类操作</a><ul>
+<li><a href="#31-reshape操作">3.1. Reshape操作</a><ul>
+<li><a href="#311-reshape">3.1.1. reshape</a></li>
+<li><a href="#312-squeeze和unsqueeze函数">3.1.2. squeeze和unsqueeze函数</a></li>
+<li><a href="#313-cat函数">3.1.3. cat函数</a></li>
+<li><a href="#314-stack函数">3.1.4. stack函数</a></li>
+<li><a href="#315-cat和stack的区别">3.1.5. cat和stack的区别</a></li>
+</ul>
+</li>
+<li><a href="#32-rank和shape">3.2. rank和shape</a></li>
+<li><a href="#33-element-wise操作">3.3. Element-wise操作</a></li>
+<li><a href="#34-reduction操作">3.4. Reduction操作</a><ul>
+<li><a href="#341-沿着某个axis聚合">3.4.1. 沿着某个axis聚合</a></li>
+<li><a href="#342-argmax函数介绍">3.4.2. Argmax函数介绍</a></li>
+</ul>
+</li>
+<li><a href="#35-access操作">3.5. Access操作</a></li>
+</ul>
+</li>
+<li><a href="#4-tensor的4种乘法">4. Tensor的4种乘法</a><ul>
+<li><a href="#41-点乘-">4.1. 点乘 *</a></li>
+<li><a href="#42-torchmul">4.2. torch.mul</a></li>
+<li><a href="#43-torchmm">4.3. torch.mm</a></li>
+<li><a href="#torchmatmul">torch.matmul</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1><span id="2-创建tensor">2. 创建Tensor</span></h1><p>创建Tensor有四种方式</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#创建Tensor</span></span><br><span class="line">&gt; data = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">&gt; o1 = torch.Tensor(data)</span><br><span class="line">&gt; o2 = torch.tensor(data)</span><br><span class="line">&gt; o3 = torch.as_tensor(data)</span><br><span class="line">&gt; o4 = torch.from_numpy(data)</span><br><span class="line"></span><br><span class="line">&gt; print(o1)</span><br><span class="line">&gt; print(o2)</span><br><span class="line">&gt; print(o3)</span><br><span class="line">&gt; print(o4)</span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">2.</span>, <span class="number">3.</span>])</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line"></span><br><span class="line">&gt; print(o1.dtype)</span><br><span class="line">&gt; print(o2.dtype)</span><br><span class="line">&gt; print(o3.dtype)</span><br><span class="line">&gt; print(o4.dtype)</span><br><span class="line">torch.float32</span><br><span class="line">torch.int32</span><br><span class="line">torch.int32</span><br><span class="line">torch.int32</span><br><span class="line"></span><br><span class="line"><span class="comment">#内存是否共享</span></span><br><span class="line">&gt; print(<span class="string">'old:'</span>, data)</span><br><span class="line">old: [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">&gt; data[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">&gt; print(<span class="string">'new:'</span>, data)</span><br><span class="line">new: [<span class="number">0</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">&gt; print(o1)</span><br><span class="line">&gt; print(o2)</span><br><span class="line">&gt; print(o3)</span><br><span class="line">&gt; print(o4)</span><br><span class="line"></span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">2.</span>, <span class="number">3.</span>])</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>torch.Tensor()</code>和<code>torch.tensor()</code>区别<br><code>torch.Tensor()</code>是<code>Tensor</code>类的构造函数，<code>torch.tensor()</code>是factory function，该函数将传入的参数构造成一个<code>Tensor</code>对象并返回。<br>以上4个函数中，<code>torch.Tensor()</code>是构造函数，其余都是factory function。</li>
+<li>这4个函数的主要区别是:<code>torch.Tensor()</code>返回的<code>Tensor</code>默认是<code>float32</code>类型，而其他3个函数返回的<code>Tensor</code>数据类型根据传入的数据而定。并且其他3个函数可以传入<code>dtype</code>来指定数据的类型，但是<code>torch.Tensor()</code>不能传入<code>dtype</code>参数。</li>
+<li><p>通过<code>np.array</code>来创建<code>Tensor</code>，然后改变data的值，可以看到，前2个<code>Tensor</code>的值并没有改变，后2个<code>Tensor</code>的值改变。这是因为<code>torch.Tensor()</code>和<code>torch.tensor()</code>是copy输入数据的值，而<code>torch.as_tensor()</code>和<code>torch.from_numpy()</code>是share输入数据的memory</p>
+<p>Shara Data | Copy Data<br>-|-|-|<br>torch.as_tensor() | torch.tensor()|<br>torch.from_numpy() |     torch.Tensor()|</p>
+</li>
+<li><p><code>torch.as_tensor()</code>和<code>torch.from_numpy()</code>都是factory function，且都是share data，那这2个函数有什么区别？<code>torch.from_numpy()</code>仅仅接受<code>np.array</code>的参数，然而<code>torch.as_tensor()</code>接受<a href="https://docs.scipy.org/doc/numpy/user/basics.creation.html#converting-python-array-like-objects-to-numpy-arrays" target="_blank" rel="noopener">array-like objects</a>类型的参数</p>
+</li>
+<li><p>综上所述，下面2个方法是创建Tensor的推荐方法：</p>
+<ul>
+<li><code>torch.tensor()</code></li>
+<li><code>torch.as_tensor()</code></li>
+</ul>
+</li>
+</ul>
+<h1><span id="3-tensor的4类操作">3. Tensor的4类操作</span></h1><h2><span id="31-reshape操作">3.1. Reshape操作</span></h2><h3><span id="311-reshape">3.1.1. reshape</span></h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],</span><br><span class="line">    [<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>]</span><br><span class="line">], dtype=torch.float32)</span><br></pre></td></tr></table></figure>
+<p>有2种方式获取Tensor的shape:<code>t.size()和t.shape</code></p>
+<h3><span id="312-squeeze和unsqueeze函数">3.1.2. squeeze和unsqueeze函数</span></h3><ol>
+<li><code>torch.squeeze(input, dim=None, out=None) → Tensor</code><br>将维度中的1去掉，如果不指定dim，则去掉所有维度上的1；如果指定dim，则只去掉该维度上的1。<strong>dim是可选项</strong></li>
+</ol>
+<ul>
+<li>输入维度是(A×1×B×C×1×D),不指定dim，输出维度(A×B×CxD)</li>
+<li>输入维度是(A×1×B×C×1×D),不指定dim=1，输出维度(A×B×C×1×D)</li>
+</ul>
+<ol>
+<li><code>torch.unsqueeze(input, dim, out=None) → Tensor</code><br>在指定维度上增加1个维度。<strong>dim是必填项</strong><br><code>torch.unsqueeze(x, 0)</code></li>
+</ol>
+<h3><span id="313-cat函数">3.1.3. cat函数</span></h3><p><code>torch.cat(tensors, dim=0, out=None) → Tensor</code><br>如果要拼接多个Tensor，需要将多个Tensor包装成tuple，例如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.cat((t1,t2,t3),dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>例如<code>t1,t2,t3</code>的维度都是(2,5,7)，上面在<code>dim=0</code>上进行拼接，则得到为维度是(6,5,7)</p>
+<p><strong>cat不改变数据维度个数，例如原先是3维数据，拼接之后还是3维</strong></p>
+<h3><span id="314-stack函数">3.1.4. stack函数</span></h3><p><code>torch.stack(tensors, dim=0, out=None) → Tensor</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.stack((t1,t2,t3),dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>例如<code>t1,t2,t3</code>的维度都是(2,5,7)，上面在<code>dim=0</code>上进行拼接，则得到为维度是(3,2,5,7)</p>
+<p><strong>stack改变数据维度个数,增加一个维度。例如原先是3维数据，拼接之后变成4维</strong></p>
+<h3><span id="315-cat和stack的区别">3.1.5. cat和stack的区别</span></h3><p>cat和stack的区别可以用一句话描述：</p>
+<ul>
+<li><strong>cat不会改变数据维度个数</strong>，原先是3维数据，n个tensor进行cat之后还是3维数据。</li>
+<li><strong>stack会增加维度个数</strong>，原先是3维，n个tensor进行stack会变成4维数据</li>
+</ul>
+<h2><span id="32-rank和shape">3.2. rank和shape</span></h2><ul>
+<li>rank就是Tensor的维数</li>
+<li>shape就是Tensor的维度</li>
+</ul>
+<p>例如</p>
+<blockquote>
+<p>m = [<br>  [1, 1, 1],<br>  [2, 2, 2],<br>  [3, 3, 3]<br>]</p>
+</blockquote>
+<p>rank = 2<br>shape = (3,3)</p>
+<p><img src="/2020/11/26/Pytorch之Tensor学习/rank.jpg" alt=""></p>
+<h2><span id="33-element-wise操作">3.3. Element-wise操作</span></h2><p><a href="https://deeplizard.com/learn/video/QscEWm0QTRY" target="_blank" rel="noopener">Broadcasting and Element-wise Operations with PyTorch</a><br><a href="https://deeplizard.com/learn/video/6_33ulFDuCg" target="_blank" rel="noopener">Broadcasting Explained</a></p>
+<p>逐元素有以下4种叫法，意思都一样：</p>
+<ul>
+<li>Element-wise</li>
+<li>Component-wise</li>
+<li>Point-wise</li>
+</ul>
+<p>逐元素操作有以下几种:</p>
+<ol>
+<li><p><strong><code>t1+t2</code>维度相同</strong><br>其中t1和t2维度相同</p>
+</li>
+<li><p><strong><code>t1+2, t1-2, t1*2, t1/2</code></strong><br>实际上是对2进行了<code>broadcasting</code>，然后再和t1运算</p>
+</li>
+<li><p><strong><code>t1+t2</code>，rank相同，维度不同</strong><br>这种情况比较复杂。</p>
+<ul>
+<li><p>首先我们先看这2个Tensor在所有维度上是否兼容。判断2个Tensor在维度上是否兼容有2个条件，只要满足其中的一个条件就兼容，否则不兼容。</p>
+<ul>
+<li>相等</li>
+<li><p>有一个值维1 </p>
+<p>例如：t1维度(1,3)，t2维度(3,1)，<strong>从后往前对比</strong>，我们先看第二个维度的值，分别是3和1，不相等但是满足第二个条件，即第二个维度上兼容。再看第一个维度，分别是1和3，满足第二个条件，即第一个维度上兼容。所以2个Tensor在所有维度上兼容，可以进行下一步的操作。如果不兼容，则这2个Tensor无法进行逐元素运算。</p>
+</li>
+</ul>
+</li>
+<li><p>决定最终结果的输出维度。还是要看2个Tensor的维度。<strong>从后往前对比</strong>, t1维度(1,3)，t2维度(3,1)，先看第二维度是3和1，取最大值作为输出的第一个维度，即3，再看第一维度1和3，也是3作为输出的第二个维度。即输出的维度是(3,3)。</p>
+</li>
+<li>分别将t1维度(1,3)，t2维度(3,1)进行广播成(3,3)，然后再进行相加，得到最终的结果。</li>
+</ul>
+</li>
+<li><p><strong><code>t1+t2</code>，rank不同</strong></p>
+<ul>
+<li>例子1：t1的维度(2,4),t2的维度是(4,)，这2个Tensor也可以进行，实际是先将低rank的t2最后一维和t1的最后一维相等，都等于4，但是t2只有一维，那就在缺失的维度上补1，变成(1,4),然后再广播成(2,4)维度，然后再和t1计算。</li>
+<li>例子2：t1的维度(2,4),t2的维度是(2,)，这2个Tensor不可以进行。因为t1和t2的最后一维分别是4和2，不相等也不等于1，不兼容，无法进行下一步。</li>
+<li>例子3：t1维度(1,2,3)，t2维度(3,3)，这个Tensor就不能做逐元素操作。先看所有维度是否兼容。最后一个维度3和3，相等即兼容，再看前一个维度2和3，既不相等也不等于1，不兼容。则不能进行逐元素操作</li>
+</ul>
+</li>
+</ol>
+<p><strong>以上2，3，4情况都涉及到了broadcasting的知识。</strong>  </p>
+<ol>
+<li><p>比较操作<br>比较也是逐元素操作的一种，</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; torch.tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) &lt; torch.tensor([<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">tensor([<span class="keyword">True</span>, <span class="keyword">False</span>, <span class="keyword">False</span>])</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2><span id="34-reduction操作">3.4. Reduction操作</span></h2><p>聚合操作：减少Tesnor中元素的个数。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>],</span><br><span class="line">    [<span class="number">2</span>,<span class="number">0</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">0</span>,<span class="number">3</span>,<span class="number">0</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line">&gt; t.sum()</span><br><span class="line">tensor(<span class="number">8.</span>)</span><br></pre></td></tr></table></figure>
+<p><code>sum()</code>返回的结果是scalar类型(0维的Tensor)，只包含1个元素</p>
+<h3><span id="341-沿着某个axis聚合">3.4.1. 沿着某个axis聚合</span></h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],</span><br><span class="line">    [<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line">&gt; t.sum(dim=<span class="number">0</span>)</span><br><span class="line">tensor([<span class="number">6.</span>, <span class="number">6.</span>, <span class="number">6.</span>, <span class="number">6.</span>])</span><br></pre></td></tr></table></figure>
+<h3><span id="342-argmax函数介绍">3.4.2. Argmax函数介绍</span></h3><p>当一个Tensor变量a调用<code>argmax()</code>函数时，返回只包含1个元素的Tensor，该元素表示a中最大值的下标。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">0</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">0</span>],</span><br><span class="line">    [<span class="number">4</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">5</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line"></span><br><span class="line">&gt; t.max()</span><br><span class="line">tensor(<span class="number">5.</span>)</span><br><span class="line"></span><br><span class="line">&gt; t.argmax()</span><br><span class="line">tensor(<span class="number">11</span>)</span><br><span class="line"></span><br><span class="line">&gt; t.flatten()</span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">2.</span>, <span class="number">0.</span>, <span class="number">3.</span>, <span class="number">3.</span>, <span class="number">0.</span>, <span class="number">4.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">5.</span>])</span><br></pre></td></tr></table></figure>
+<p>如果<code>argmax()</code>没有指定axis，则返回整个Tensor最大值的下标。如果指定axis，则返回指定轴上最大值下标。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t.max(dim=<span class="number">0</span>)</span><br><span class="line">(tensor([<span class="number">4.</span>, <span class="number">3.</span>, <span class="number">3.</span>, <span class="number">5.</span>]), tensor([<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>]))</span><br><span class="line"></span><br><span class="line">&gt; t.argmax(dim=<span class="number">0</span>)</span><br><span class="line">tensor([<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">&gt; t.max(dim=<span class="number">1</span>)</span><br><span class="line">(tensor([<span class="number">2.</span>, <span class="number">3.</span>, <span class="number">5.</span>]), tensor([<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>]))</span><br><span class="line"></span><br><span class="line">&gt; t.argmax(dim=<span class="number">1</span>)</span><br><span class="line">tensor([<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+<p>当调用<code>max()</code>函数时，返回2个Tensor，第一个Tensor表示返回轴上最大的值，第2个Tensor返回最大值的下标，也就是<code>argmax()</code>的返回值。<br>通常<code>argmax()</code>通常用在分类任务的输出上，决定哪类有最高的预测值。</p>
+<h2><span id="35-access操作">3.5. Access操作</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">    [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],</span><br><span class="line">    [<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line"></span><br><span class="line">&gt; t.mean()</span><br><span class="line">tensor(<span class="number">5.</span>)</span><br><span class="line"></span><br><span class="line">&gt; t.mean().item()</span><br><span class="line"><span class="number">5.0</span></span><br><span class="line"></span><br><span class="line">&gt; t.mean(dim=<span class="number">0</span>).tolist()</span><br><span class="line">[<span class="number">4.0</span>, <span class="number">5.0</span>, <span class="number">6.0</span>]</span><br><span class="line"></span><br><span class="line">&gt; t.mean(dim=<span class="number">0</span>).numpy()</span><br><span class="line">array([<span class="number">4.</span>, <span class="number">5.</span>, <span class="number">6.</span>], dtype=float32)</span><br></pre></td></tr></table></figure>
+<p>如果返回的结果是scalar，只有1个元素，使用item()来获取其中的值。<br>如果返回的结果有多个值，可以将Tensor转换为pyhton中的list和array.</p>
+<h1><span id="4-tensor的4种乘法">4. Tensor的4种乘法</span></h1><p><a href="https://blog.csdn.net/da_kao_la/article/details/87484403" target="_blank" rel="noopener">参考资料</a></p>
+<p>torch.Tensor有4种常见的乘法：<code>*, torch.mul, torch.mm, torch.matmul</code></p>
+<h2><span id="41-点乘">4.1. 点乘 *</span></h2><p>点乘需要满足以下3个条件的任何一个</p>
+<ul>
+<li>2个Tensor维度完全一样</li>
+<li>2个Tensor可以boardcast到相同的维度</li>
+<li>1个Tensor和1个实数的操作</li>
+</ul>
+<p>例如</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = torch.ones(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">a * <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = torch.ones(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">b = torch.Tensor([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line"><span class="comment">#a的维度(3,4)，b的维度(4,)，可以将b进行boardcast成(3,4)的维度，再和a相乘</span></span><br><span class="line">a * b</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = torch.ones(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">b = torch.ones(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">a * b</span><br></pre></td></tr></table></figure>
+<h2><span id="42-torchmul">4.2. torch.mul</span></h2><p><a href="https://pytorch.org/docs/stable/generated/torch.mul.html#torch.mul" target="_blank" rel="noopener">官网关于torch.mul介绍</a></p>
+<p>用法和*相同，也是element-wise的乘法，支持boardcast</p>
+<ol>
+<li><p>乘实数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.randn(<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([ <span class="number">0.2015</span>, <span class="number">-0.4255</span>,  <span class="number">2.6087</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.mul(a, <span class="number">100</span>)</span><br><span class="line">tensor([  <span class="number">20.1494</span>,  <span class="number">-42.5491</span>,  <span class="number">260.8663</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>乘矩阵</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.randn(<span class="number">4</span>, <span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([[ <span class="number">1.1207</span>],</span><br><span class="line">     [<span class="number">-0.3137</span>],</span><br><span class="line">     [ <span class="number">0.0700</span>],</span><br><span class="line">     [ <span class="number">0.8378</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = torch.randn(<span class="number">1</span>, <span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">tensor([[ <span class="number">0.5146</span>,  <span class="number">0.1216</span>, <span class="number">-0.5244</span>,  <span class="number">2.2382</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.mul(a, b)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2><span id="43-torchmm">4.3. torch.mm</span></h2><p><a href="https://pytorch.org/docs/stable/generated/torch.mm.html#torch.mm" target="_blank" rel="noopener">官网关于torch.mm介绍</a></p>
+<p>数学中的矩阵乘法，要求2个矩阵满足矩阵乘法的要求</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.ones(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = torch.ones(<span class="number">4</span>,<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.mm(a, b)</span><br><span class="line">tensor([[<span class="number">4.</span>, <span class="number">4.</span>],</span><br><span class="line">        [<span class="number">4.</span>, <span class="number">4.</span>],</span><br><span class="line">        [<span class="number">4.</span>, <span class="number">4.</span>]])</span><br></pre></td></tr></table></figure>
+<h2><span id="torchmatmul">torch.matmul</span></h2><p><a href="https://pytorch.org/docs/stable/generated/torch.matmul.html#torch.matmul" target="_blank" rel="noopener">官网关于torch.matmul介绍</a>. torch.mm的broadcast版本</p>
+<ol>
+<li><p>当输入都是二维Tensor时，就是普通的矩阵乘法，与<code>tensor.mm</code>用法相同</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.ones(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = torch.ones(<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = torch.matmul(a,b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.shape</span><br><span class="line">torch.Size([<span class="number">3</span>, <span class="number">5</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当输入有多维时，把多出来的一维看做是batch，其他部分做矩阵乘法</p>
+<p><img src="/2020/11/26/Pytorch之Tensor学习/matmul1.jpg" alt=""></p>
+</li>
+<li><p>2个Tensor都是3维<br>将b的第0维先boardcast成2之后，然后提出来作为batch，后两维做矩阵乘法即可</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.ones(<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = torch.ones(<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = torch.matmul(a,b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">5</span>, <span class="number">4</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更复杂</p>
+<ul>
+<li>先将a的第0维的2提出来作为batch</li>
+<li>剩下的a和b都可以看做3维，再将a中1进行boardcast成5，再提出来作为batch</li>
+<li>剩下的(3,4)和(4,2)进行普通矩阵乘法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.ones(<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = torch.ones(<span class="number">5</span>,<span class="number">4</span>,<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = torch.matmul(a,b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>])</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Deep Learning</category>
+      </categories>
+      <tags>
+        <tag>Pytorch</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>广告领域专业术语</title>
     <url>/2020/10/29/%E5%B9%BF%E5%91%8A%E9%A2%86%E5%9F%9F%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD/</url>
     <content><![CDATA[<p>下面介绍一些广告领域的专业术语</p>
@@ -2719,7 +2914,7 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
 \mathcal{H}^{n+1}=\text{Leaky-ReLU}(L^*  \mathcal{H}^{n} \mathcal{W}^{n}),\text { where } \mathcal{H}^{0}=\mathbb{U}_{*}^{\Delta t}</script><p>其中$\mathcal{H}^{n}$表示第n层GCN输入的特征，$\mathcal{W}^{n}$表示第n层GCN的卷积核参数。因为每个时间周期会输出多个时间段的数据，在做GCN操作时，需要用到拉普拉斯矩阵，这里的$L^*$是输入所有时间段的拉普拉斯矩阵$L^{\Delta t}$的平均。每2个GCN后使用1次BN，防止梯度爆炸。考虑到转换后的risk中有负值，使用Leaky_ReLU激活。同时，对应时间段的外部数据(时间戳和天气)经过嵌入层变成定长的向量，再和GCN的输入融合。因为有3个时间周期，DTGN有3个输出，分别用$\mathcal{O}_{h c}^{\Delta t}, \mathcal{O}_{d p}^{\Delta t}$ and $\mathcal{O}_{d t}^{\Delta t}$表示。</p>
 <p><img src="/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/DTGN.png" alt=""></p>
 <blockquote>
-<p>总结：每一个时间段有一个差分向量，是该时间段所有区域的<strong>车流量和车平均速度</strong>减去上一时间段的值，得到差分向量。然后将该时间段所有子区域的动态交通特征$\mathcal{F}(\Delta t)$和该时间段的差分向量$\vec{\Theta}^{\Delta t}$组成一个统一的特征元组$\mathcal{U}(\Delta t)$。那么每个时间段都有一个特征元组，存储所有子区域的特征。受郑宇2017AAAI ST-ResNet的启发，事故的发生有小时，天，长期的周期性，假设预测时间段是t，为其找出小时，天，长期的时间段。小时周期：[t-1,t-2,t-3]，天周期：[昨天t,前天t,大前天t]，长期周期[10天前t,20天前t,30天前t],然后分别输入到3个DTGN中。这个拿1个DTGN举例。输入的图信号矩阵维度是(batch_size,N,T<em>D)=(batch_size,N,3\</em>5)将时间维度乘到特征上，先经过FCN对特征进行嵌入，变成低维特征。然后输入到GCN中，GCN操作需要使用拉普拉斯矩阵。上节中提到拉普拉斯矩阵是动态的，每一个时间段都有一个L，这里每个周期都有3个时间段，使用的拉普拉斯矩阵是3个时间段拉普拉斯矩阵的平均值。<br>预测第t时间段的risk，输入的图信号矩阵：<br>小时周期：<br>t-1,t-2,t-3时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>天周期：<br>昨天t，前天t，大前天t时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>周周期：<br>10天前t，20天前t，30天前t时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>一共有3个组件，每个组件输入的维度是(batch_size,N,3*5)</p>
+<p>总结：每一个时间段有一个差分向量，是该时间段所有区域的<strong>车流量和车平均速度</strong>减去上一时间段的值，得到差分向量。然后将该时间段所有子区域的动态交通特征$\mathcal{F}(\Delta t)$和该时间段的差分向量$\vec{\Theta}^{\Delta t}$组成一个统一的特征元组$\mathcal{U}(\Delta t)$。那么每个时间段都有一个特征元组，存储所有子区域的特征。受郑宇2017AAAI ST-ResNet的启发，事故的发生有小时，天，长期的周期性，假设预测时间段是t，为其找出小时，天，长期的时间段。小时周期：[t-1,t-2,t-3]，天周期：[昨天t,前天t,大前天t]，长期周期[10天前t,20天前t,30天前t],然后分别输入到3个DTGN中。这个拿1个DTGN举例。输入的图信号矩阵维度是(batch_size,N,T<em>D)=(batch_size,N,3\</em>5)将时间维度乘到特征上，先经过FCN对特征进行嵌入，变成低维特征。然后输入到GCN中，GCN操作需要使用拉普拉斯矩阵。上节中提到拉普拉斯矩阵是动态的，每一个时间段都有一个L，这里每个周期都有3个时间段，使用的拉普拉斯矩阵是3个时间段拉普拉斯矩阵的平均值。<br>预测第t时间段的risk，输入的图信号矩阵：<br><strong>小时周期</strong>：<br>t-1,t-2,t-3时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br><strong>天周期：</strong><br>昨天t，前天t，大前天t时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br><strong>周周期：</strong><br>10天前t，20天前t，30天前t时刻：车流，车速，risk，$\Delta$车流，$\Delta$车速<br>一共有3个组件，每个组件输入的维度是(batch_size,N,3*5)<br><strong>外部因素</strong>：被预测时间段的天气等</p>
 </blockquote>
 <p><strong>多任务学习来事故风险预测</strong>设计多任务学习方案，不仅可以增强深度学习的表示能力，还可以学到分层事故分布，为最可能发生事故区域的选取提供指导。为了预测子区域的事故风险，我们首先<strong>将事故风险分布作为主任务</strong>。考虑到交通事故和人类活动强度有关，我们将<strong>区域交通量预测作为第一个辅助任务</strong>，用来提高深度学习的表示能，。为了给分层事故区域的选取提供指导，将<strong>预测中等区域发生的事故总数作为第二个辅助任务</strong>。<br>具体地，我们将DTGN的3个输出$\mathcal{O}_{h c}^{\Delta t}, \mathcal{O}_{d p}^{\Delta t}$ and $\mathcal{O}_{d t}^{\Delta t}$输入到卷积融合模块中，然后进行多任务学习，如图3(b)所示，3个多任务shared是3个DTGN的输出结果。将3个输出结果分别输入到3个融合模块中，3个融合模块的参数是$\mathcal{W}_{risk}^{\Delta t},\mathcal{W}_{vol}^{\Delta t},\mathcal{W}_{count}^{\Delta t}$，首先生成每个子区域的预测风险$\mathcal{O}_{\text {risk}}^{\Delta t}$,使用$Leaky_ReLU$激活是因为label中的risk值有负值，其余都使用$ReLU$激活。然后生成每个子区域的预测流量$\mathcal{O}_{v o l}^{\Delta t}$，然后预测每个中等区域的风险次数，先经过融合模块，再经过全连接，生成$\mathcal{O}_{\text {count}}^{\Delta t}$</p>
 <script type="math/tex; mode=display">
@@ -2846,138 +3041,6 @@ L^{\Delta t}=\left(\Phi^{\Delta t}\right)^{-\frac{1}{2}} \mathcal{B}^{\Delta t}\
       </categories>
       <tags>
         <tag>时空领域</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Pytorch之Tensor学习</title>
-    <url>/2020/02/17/Pytorch%E4%B9%8BTensor%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h1><span id="1-简介">1. 简介</span></h1><p>最近发现一个学习Pytorch的教程，有视频版和文字版<a href="https://deeplizard.com/" target="_blank" rel="noopener">deeplizard</a>,这里面详细介绍了关于Tensor的知识，真的讲得超级好，解决了我很多关于Tensor运算的疑惑，在此记录下。</p>
-<a id="more"></a>  
-<!-- TOC -->
-<ul>
-<li><a href="#1-简介">1. 简介</a></li>
-<li><a href="#2-创建tensor">2. 创建Tensor</a></li>
-<li><a href="#3-tensor的4类操作">3. Tensor的4类操作</a><ul>
-<li><a href="#31-reshape操作">3.1. Reshape操作</a><ul>
-<li><a href="#311-reshape">3.1.1. reshape</a></li>
-<li><a href="#312-squeeze和unsqueeze函数">3.1.2. squeeze和unsqueeze函数</a></li>
-<li><a href="#313-cat函数">3.1.3. cat函数</a></li>
-<li><a href="#314-stack函数">3.1.4. stack函数</a></li>
-<li><a href="#315-cat和stack的区别">3.1.5. cat和stack的区别</a></li>
-</ul>
-</li>
-<li><a href="#32-element-wise操作">3.2. Element-wise操作</a></li>
-<li><a href="#33-reduction操作">3.3. Reduction操作</a><ul>
-<li><a href="#331-沿着某个axis聚合">3.3.1. 沿着某个axis聚合</a></li>
-<li><a href="#332-argmax函数介绍">3.3.2. Argmax函数介绍</a></li>
-</ul>
-</li>
-<li><a href="#34-access操作">3.4. Access操作</a></li>
-</ul>
-</li>
-</ul>
-<!-- /TOC -->
-<h1><span id="2-创建tensor">2. 创建Tensor</span></h1><p>创建Tensor有四种方式</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#创建Tensor</span></span><br><span class="line">&gt; data = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">&gt; o1 = torch.Tensor(data)</span><br><span class="line">&gt; o2 = torch.tensor(data)</span><br><span class="line">&gt; o3 = torch.as_tensor(data)</span><br><span class="line">&gt; o4 = torch.from_numpy(data)</span><br><span class="line"></span><br><span class="line">&gt; print(o1)</span><br><span class="line">&gt; print(o2)</span><br><span class="line">&gt; print(o3)</span><br><span class="line">&gt; print(o4)</span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">2.</span>, <span class="number">3.</span>])</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line"></span><br><span class="line">&gt; print(o1.dtype)</span><br><span class="line">&gt; print(o2.dtype)</span><br><span class="line">&gt; print(o3.dtype)</span><br><span class="line">&gt; print(o4.dtype)</span><br><span class="line">torch.float32</span><br><span class="line">torch.int32</span><br><span class="line">torch.int32</span><br><span class="line">torch.int32</span><br><span class="line"></span><br><span class="line"><span class="comment">#内存是否共享</span></span><br><span class="line">&gt; print(<span class="string">'old:'</span>, data)</span><br><span class="line">old: [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">&gt; data[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">&gt; print(<span class="string">'new:'</span>, data)</span><br><span class="line">new: [<span class="number">0</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">&gt; print(o1)</span><br><span class="line">&gt; print(o2)</span><br><span class="line">&gt; print(o3)</span><br><span class="line">&gt; print(o4)</span><br><span class="line"></span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">2.</span>, <span class="number">3.</span>])</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br><span class="line">tensor([<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>], dtype=torch.int32)</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>torch.Tensor()</code>和<code>torch.tensor()</code>区别<br><code>torch.Tensor()</code>是<code>Tensor</code>类的构造函数，<code>torch.tensor()</code>是factory function，该函数将传入的参数构造成一个<code>Tensor</code>对象并返回。<br>以上4个函数中，<code>torch.Tensor()</code>是构造函数，其余都是factory function。</li>
-<li>这4个函数的主要区别是:<code>torch.Tensor()</code>返回的<code>Tensor</code>默认是<code>float32</code>类型，而其他3个函数返回的<code>Tensor</code>数据类型根据传入的数据而定。并且其他3个函数可以传入<code>dtype</code>来指定数据的类型，但是<code>torch.Tensor()</code>不能传入<code>dtype</code>参数。</li>
-<li><p>通过<code>np.array</code>来创建<code>Tensor</code>，然后改变data的值，可以看到，前2个<code>Tensor</code>的值并没有改变，后2个<code>Tensor</code>的值改变。这是因为<code>torch.Tensor()</code>和<code>torch.tensor()</code>是copy输入数据的值，而<code>torch.as_tensor()</code>和<code>torch.from_numpy()</code>是share输入数据的memory</p>
-<p>Shara Data | Copy Data<br>-|-|-|<br>torch.as_tensor() | torch.tensor()|<br>torch.from_numpy() |     torch.Tensor()|</p>
-</li>
-<li><p><code>torch.as_tensor()</code>和<code>torch.from_numpy()</code>都是factory function，且都是share data，那这2个函数有什么区别？<code>torch.from_numpy()</code>仅仅接受<code>np.array</code>的参数，然而<code>torch.as_tensor()</code>接受<a href="https://docs.scipy.org/doc/numpy/user/basics.creation.html#converting-python-array-like-objects-to-numpy-arrays" target="_blank" rel="noopener">array-like objects</a>类型的参数</p>
-</li>
-<li><p>综上所述，下面2个方法是创建Tensor的推荐方法：</p>
-<ul>
-<li><code>torch.tensor()</code></li>
-<li><code>torch.as_tensor()</code></li>
-</ul>
-</li>
-</ul>
-<h1><span id="3-tensor的4类操作">3. Tensor的4类操作</span></h1><h2><span id="31-reshape操作">3.1. Reshape操作</span></h2><h3><span id="311-reshape">3.1.1. reshape</span></h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],</span><br><span class="line">    [<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>]</span><br><span class="line">], dtype=torch.float32)</span><br></pre></td></tr></table></figure>
-<p>有2种方式获取Tensor的shape:<code>t.size()和t.shape</code></p>
-<h3><span id="312-squeeze和unsqueeze函数">3.1.2. squeeze和unsqueeze函数</span></h3><ol>
-<li><code>torch.squeeze(input, dim=None, out=None) → Tensor</code><br>将维度中的1去掉，如果不指定dim，则去掉所有维度上的1；如果指定dim，则只去掉该维度上的1。<strong>dim是可选项</strong></li>
-</ol>
-<ul>
-<li>输入维度是(A×1×B×C×1×D),不指定dim，输出维度(A×B×CxD)</li>
-<li>输入维度是(A×1×B×C×1×D),不指定dim=1，输出维度(A×B×C×1×D)</li>
-</ul>
-<ol>
-<li><code>torch.unsqueeze(input, dim, out=None) → Tensor</code><br>在指定维度上增加1个维度。<strong>dim是必填项</strong><br><code>torch.unsqueeze(x, 0)</code></li>
-</ol>
-<h3><span id="313-cat函数">3.1.3. cat函数</span></h3><p><code>torch.cat(tensors, dim=0, out=None) → Tensor</code><br>如果要拼接多个Tensor，需要将多个Tensor包装成tuple，例如：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.cat((t1,t2,t3),dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<p>例如<code>t1,t2,t3</code>的维度都是(2,5,7)，上面在<code>dim=0</code>上进行拼接，则得到为维度是(6,5,7)</p>
-<p><strong>cat不改变数据维度个数，例如原先是3维数据，拼接之后还是3维</strong></p>
-<h3><span id="314-stack函数">3.1.4. stack函数</span></h3><p><code>torch.stack(tensors, dim=0, out=None) → Tensor</code></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.stack((t1,t2,t3),dim=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<p>例如<code>t1,t2,t3</code>的维度都是(2,5,7)，上面在<code>dim=0</code>上进行拼接，则得到为维度是(3,2,5,7)</p>
-<p><strong>stack改变数据维度个数,增加一个维度。例如原先是3维数据，拼接之后变成4维</strong></p>
-<h3><span id="315-cat和stack的区别">3.1.5. cat和stack的区别</span></h3><p>cat和stack的区别可以用一句话描述：</p>
-<ul>
-<li>cat不会改变数据维度个数，原先是3维数据，n个tensor进行cat之后还是3维数据。</li>
-<li>stack会增加维度个数，原先是3维，n个tensor进行stack会变成4维数据</li>
-</ul>
-<h2><span id="32-element-wise操作">3.2. Element-wise操作</span></h2><p><a href="https://deeplizard.com/learn/video/QscEWm0QTRY" target="_blank" rel="noopener">Broadcasting and Element-wise Operations with PyTorch</a><br><a href="https://deeplizard.com/learn/video/6_33ulFDuCg" target="_blank" rel="noopener">Broadcasting Explained</a></p>
-<p>逐元素有以下4种叫法，意思都一样：</p>
-<ul>
-<li>Element-wise</li>
-<li>Component-wise</li>
-<li>Point-wise</li>
-</ul>
-<p>逐元素操作有以下几种:</p>
-<ol>
-<li><p><strong><code>t1+t2</code>维度相同</strong><br>其中t1和t2维度相同</p>
-</li>
-<li><p><strong><code>t1+2, t1-2, t1*2, t1/2</code></strong><br>实际上是对2进行了<code>broadcasting</code>，然后再和t1运算</p>
-</li>
-<li><p><strong><code>t1+t2</code>，rank相同，维度不同</strong><br>这种情况比较复杂。</p>
-<ul>
-<li><p>首先我们先看这2个Tensor在所有维度上是否兼容。判断2个Tensor在维度上是否兼容有2个条件，只要满足其中的一个条件就兼容，否则不兼容。</p>
-<ul>
-<li>相等</li>
-<li><p>有一个值维1 </p>
-<p>例如：t1维度(1,3)，t2维度(3,1)，<strong>从后往前对比</strong>，我们先看第二个维度的值，分别是3和1，不相等但是满足第二个条件，即第二个维度上兼容。再看第一个维度，分别是1和3，满足第二个条件，即第一个维度上兼容。所以2个Tensor在所有维度上兼容，可以进行下一步的操作。如果不兼容，则这2个Tensor无法进行逐元素运算。</p>
-</li>
-</ul>
-</li>
-<li><p>决定最终结果的输出维度。还是要看2个Tensor的维度。<strong>从后往前对比</strong>, t1维度(1,3)，t2维度(3,1)，先看第二维度是3和1，取最大值作为输出的第一个维度，即3，再看第一维度1和3，也是3作为输出的第二个维度。即输出的维度是(3,3)。</p>
-</li>
-<li>分别将t1维度(1,3)，t2维度(3,1)进行广播成(3,3)，然后再进行相加，得到最终的结果。</li>
-</ul>
-</li>
-<li><p><strong><code>t1+t2</code>，rank不同</strong></p>
-<ul>
-<li>例子1：t1的维度(2,4),t2的维度是(4,)，这2个Tensor也可以进行，实际是先将低rank的t2最后一维和t1的最后一维相等，都等于4，但是t2只有一维，那就在缺失的维度上补1，变成(1,4),然后再广播成(2,4)维度，然后再和t1计算。</li>
-<li>例子2：t1的维度(2,4),t2的维度是(2,)，这2个Tensor不可以进行。因为t1和t2的最后一维分别是4和2，不相等也不等于1，不兼容，无法进行下一步。</li>
-<li>例子3：t1维度(1,2,3)，t2维度(3,3)，这个Tensor就不能做逐元素操作。先看所有维度是否兼容。最后一个维度3和3，相等即兼容，再看前一个维度2和3，既不相等也不等于1，不兼容。则不能进行逐元素操作</li>
-</ul>
-</li>
-</ol>
-<p><strong>以上2，3，4情况都涉及到了broadcasting的知识。</strong>  </p>
-<ol>
-<li><p>比较操作<br>比较也是逐元素操作的一种，</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; torch.tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) &lt; torch.tensor([<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">tensor([<span class="keyword">True</span>, <span class="keyword">False</span>, <span class="keyword">False</span>])</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2><span id="33-reduction操作">3.3. Reduction操作</span></h2><p>聚合操作：减少Tesnor中元素的个数。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>],</span><br><span class="line">    [<span class="number">2</span>,<span class="number">0</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">0</span>,<span class="number">3</span>,<span class="number">0</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line">&gt; t.sum()</span><br><span class="line">tensor(<span class="number">8.</span>)</span><br></pre></td></tr></table></figure>
-<p><code>sum()</code>返回的结果是scalar类型(0维的Tensor)，只包含1个元素</p>
-<h3><span id="331-沿着某个axis聚合">3.3.1. 沿着某个axis聚合</span></h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],</span><br><span class="line">    [<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line">&gt; t.sum(dim=<span class="number">0</span>)</span><br><span class="line">tensor([<span class="number">6.</span>, <span class="number">6.</span>, <span class="number">6.</span>, <span class="number">6.</span>])</span><br></pre></td></tr></table></figure>
-<h3><span id="332-argmax函数介绍">3.3.2. Argmax函数介绍</span></h3><p>当一个Tensor变量a调用<code>argmax()</code>函数时，返回只包含1个元素的Tensor，该元素表示a中最大值的下标。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">0</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">0</span>],</span><br><span class="line">    [<span class="number">4</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">5</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line"></span><br><span class="line">&gt; t.max()</span><br><span class="line">tensor(<span class="number">5.</span>)</span><br><span class="line"></span><br><span class="line">&gt; t.argmax()</span><br><span class="line">tensor(<span class="number">11</span>)</span><br><span class="line"></span><br><span class="line">&gt; t.flatten()</span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">2.</span>, <span class="number">0.</span>, <span class="number">3.</span>, <span class="number">3.</span>, <span class="number">0.</span>, <span class="number">4.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">5.</span>])</span><br></pre></td></tr></table></figure>
-<p>如果<code>argmax()</code>没有指定axis，则返回整个Tensor最大值的下标。如果指定axis，则返回指定轴上最大值下标。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t.max(dim=<span class="number">0</span>)</span><br><span class="line">(tensor([<span class="number">4.</span>, <span class="number">3.</span>, <span class="number">3.</span>, <span class="number">5.</span>]), tensor([<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>]))</span><br><span class="line"></span><br><span class="line">&gt; t.argmax(dim=<span class="number">0</span>)</span><br><span class="line">tensor([<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">&gt; t.max(dim=<span class="number">1</span>)</span><br><span class="line">(tensor([<span class="number">2.</span>, <span class="number">3.</span>, <span class="number">5.</span>]), tensor([<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>]))</span><br><span class="line"></span><br><span class="line">&gt; t.argmax(dim=<span class="number">1</span>)</span><br><span class="line">tensor([<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
-<p>当调用<code>max()</code>函数时，返回2个Tensor，第一个Tensor表示返回轴上最大的值，第2个Tensor返回最大值的下标，也就是<code>argmax()</code>的返回值。<br>通常<code>argmax()</code>通常用在分类任务的输出上，决定哪类有最高的预测值。</p>
-<h2><span id="34-access操作">3.4. Access操作</span></h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">    [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],</span><br><span class="line">    [<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line"></span><br><span class="line">&gt; t.mean()</span><br><span class="line">tensor(<span class="number">5.</span>)</span><br><span class="line"></span><br><span class="line">&gt; t.mean().item()</span><br><span class="line"><span class="number">5.0</span></span><br><span class="line"></span><br><span class="line">&gt; t.mean(dim=<span class="number">0</span>).tolist()</span><br><span class="line">[<span class="number">4.0</span>, <span class="number">5.0</span>, <span class="number">6.0</span>]</span><br><span class="line"></span><br><span class="line">&gt; t.mean(dim=<span class="number">0</span>).numpy()</span><br><span class="line">array([<span class="number">4.</span>, <span class="number">5.</span>, <span class="number">6.</span>], dtype=float32)</span><br></pre></td></tr></table></figure>
-<p>如果返回的结果是scalar，只有1个元素，使用item()来获取其中的值。<br>如果返回的结果有多个值，可以将Tensor转换为pyhton中的list和array.</p>
-]]></content>
-      <categories>
-        <category>Deep Learning</category>
-      </categories>
-      <tags>
-        <tag>Pytorch</tag>
       </tags>
   </entry>
   <entry>

@@ -73,18 +73,21 @@
 
 
 
-<meta name="description" content="1. 简介最近发现一个学习Pytorch的教程，有视频版和文字版deeplizard,这里面详细介绍了关于Tensor的知识，真的讲得超级好，解决了我很多关于Tensor运算的疑惑，在此记录下。">
+<meta name="description" content="1. 简介最近发现一个学习Pytorch的教程，有视频版和文字版deeplizard,这里面详细介绍了关于Tensor的知识，真的讲得超级好，解决了我很多关于Tensor运算的疑惑，在此记录下。 参考资料：Tensor官方文档">
 <meta name="keywords" content="Pytorch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pytorch之Tensor学习">
-<meta property="og:url" content="http://yoursite.com/2020/02/17/Pytorch之Tensor学习/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/11/26/Pytorch之Tensor学习/index.html">
 <meta property="og:site_name" content="Echo&#39;s blog">
-<meta property="og:description" content="1. 简介最近发现一个学习Pytorch的教程，有视频版和文字版deeplizard,这里面详细介绍了关于Tensor的知识，真的讲得超级好，解决了我很多关于Tensor运算的疑惑，在此记录下。">
+<meta property="og:description" content="1. 简介最近发现一个学习Pytorch的教程，有视频版和文字版deeplizard,这里面详细介绍了关于Tensor的知识，真的讲得超级好，解决了我很多关于Tensor运算的疑惑，在此记录下。 参考资料：Tensor官方文档">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-06T02:05:25.294Z">
+<meta property="og:image" content="http://yoursite.com/2020/11/26/Pytorch之Tensor学习/rank.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/11/26/Pytorch之Tensor学习/matmul1.jpg">
+<meta property="og:updated_time" content="2020-11-26T13:08:01.863Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pytorch之Tensor学习">
-<meta name="twitter:description" content="1. 简介最近发现一个学习Pytorch的教程，有视频版和文字版deeplizard,这里面详细介绍了关于Tensor的知识，真的讲得超级好，解决了我很多关于Tensor运算的疑惑，在此记录下。">
+<meta name="twitter:description" content="1. 简介最近发现一个学习Pytorch的教程，有视频版和文字版deeplizard,这里面详细介绍了关于Tensor的知识，真的讲得超级好，解决了我很多关于Tensor运算的疑惑，在此记录下。 参考资料：Tensor官方文档">
+<meta name="twitter:image" content="http://yoursite.com/2020/11/26/Pytorch之Tensor学习/rank.jpg">
 
 
 
@@ -114,7 +117,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/02/17/Pytorch之Tensor学习/">
+  <link rel="canonical" href="http://yoursite.com/2020/11/26/Pytorch之Tensor学习/">
 
 
 
@@ -299,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/17/Pytorch之Tensor学习/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/26/Pytorch之Tensor学习/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Echo">
@@ -328,8 +331,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-17T22:56:16+08:00">
-                2020-02-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-26T19:56:16+08:00">
+                2020-11-26
               </time>
             
 
@@ -385,7 +388,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.2k
+                  2.8k
                 </span>
               
 
@@ -401,7 +404,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  9
+                  12
                 </span>
               
             </div>
@@ -423,6 +426,7 @@
 
       
         <h1><span id="1-简介">1. 简介</span></h1><p>最近发现一个学习Pytorch的教程，有视频版和文字版<a href="https://deeplizard.com/" target="_blank" rel="noopener">deeplizard</a>,这里面详细介绍了关于Tensor的知识，真的讲得超级好，解决了我很多关于Tensor运算的疑惑，在此记录下。</p>
+<p>参考资料：<a href="https://pytorch.org/docs/stable/tensors.html" target="_blank" rel="noopener">Tensor官方文档</a></p>
 <a id="more"></a>  
 <!-- TOC -->
 <ul>
@@ -437,13 +441,21 @@
 <li><a href="#315-cat和stack的区别">3.1.5. cat和stack的区别</a></li>
 </ul>
 </li>
-<li><a href="#32-element-wise操作">3.2. Element-wise操作</a></li>
-<li><a href="#33-reduction操作">3.3. Reduction操作</a><ul>
-<li><a href="#331-沿着某个axis聚合">3.3.1. 沿着某个axis聚合</a></li>
-<li><a href="#332-argmax函数介绍">3.3.2. Argmax函数介绍</a></li>
+<li><a href="#32-rank和shape">3.2. rank和shape</a></li>
+<li><a href="#33-element-wise操作">3.3. Element-wise操作</a></li>
+<li><a href="#34-reduction操作">3.4. Reduction操作</a><ul>
+<li><a href="#341-沿着某个axis聚合">3.4.1. 沿着某个axis聚合</a></li>
+<li><a href="#342-argmax函数介绍">3.4.2. Argmax函数介绍</a></li>
 </ul>
 </li>
-<li><a href="#34-access操作">3.4. Access操作</a></li>
+<li><a href="#35-access操作">3.5. Access操作</a></li>
+</ul>
+</li>
+<li><a href="#4-tensor的4种乘法">4. Tensor的4种乘法</a><ul>
+<li><a href="#41-点乘-">4.1. 点乘 *</a></li>
+<li><a href="#42-torchmul">4.2. torch.mul</a></li>
+<li><a href="#43-torchmm">4.3. torch.mm</a></li>
+<li><a href="#torchmatmul">torch.matmul</a></li>
 </ul>
 </li>
 </ul>
@@ -487,10 +499,20 @@
 <p><strong>stack改变数据维度个数,增加一个维度。例如原先是3维数据，拼接之后变成4维</strong></p>
 <h3><span id="315-cat和stack的区别">3.1.5. cat和stack的区别</span></h3><p>cat和stack的区别可以用一句话描述：</p>
 <ul>
-<li>cat不会改变数据维度个数，原先是3维数据，n个tensor进行cat之后还是3维数据。</li>
-<li>stack会增加维度个数，原先是3维，n个tensor进行stack会变成4维数据</li>
+<li><strong>cat不会改变数据维度个数</strong>，原先是3维数据，n个tensor进行cat之后还是3维数据。</li>
+<li><strong>stack会增加维度个数</strong>，原先是3维，n个tensor进行stack会变成4维数据</li>
 </ul>
-<h2><span id="32-element-wise操作">3.2. Element-wise操作</span></h2><p><a href="https://deeplizard.com/learn/video/QscEWm0QTRY" target="_blank" rel="noopener">Broadcasting and Element-wise Operations with PyTorch</a><br><a href="https://deeplizard.com/learn/video/6_33ulFDuCg" target="_blank" rel="noopener">Broadcasting Explained</a></p>
+<h2><span id="32-rank和shape">3.2. rank和shape</span></h2><ul>
+<li>rank就是Tensor的维数</li>
+<li>shape就是Tensor的维度</li>
+</ul>
+<p>例如</p>
+<blockquote>
+<p>m = [<br>  [1, 1, 1],<br>  [2, 2, 2],<br>  [3, 3, 3]<br>]</p>
+</blockquote>
+<p>rank = 2<br>shape = (3,3)</p>
+<p><img src="/2020/11/26/Pytorch之Tensor学习/rank.jpg" alt=""></p>
+<h2><span id="33-element-wise操作">3.3. Element-wise操作</span></h2><p><a href="https://deeplizard.com/learn/video/QscEWm0QTRY" target="_blank" rel="noopener">Broadcasting and Element-wise Operations with PyTorch</a><br><a href="https://deeplizard.com/learn/video/6_33ulFDuCg" target="_blank" rel="noopener">Broadcasting Explained</a></p>
 <p>逐元素有以下4种叫法，意思都一样：</p>
 <ul>
 <li>Element-wise</li>
@@ -532,17 +554,61 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; torch.tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) &lt; torch.tensor([<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">tensor([<span class="keyword">True</span>, <span class="keyword">False</span>, <span class="keyword">False</span>])</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2><span id="33-reduction操作">3.3. Reduction操作</span></h2><p>聚合操作：减少Tesnor中元素的个数。</p>
+<h2><span id="34-reduction操作">3.4. Reduction操作</span></h2><p>聚合操作：减少Tesnor中元素的个数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>],</span><br><span class="line">    [<span class="number">2</span>,<span class="number">0</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">0</span>,<span class="number">3</span>,<span class="number">0</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line">&gt; t.sum()</span><br><span class="line">tensor(<span class="number">8.</span>)</span><br></pre></td></tr></table></figure>
 <p><code>sum()</code>返回的结果是scalar类型(0维的Tensor)，只包含1个元素</p>
-<h3><span id="331-沿着某个axis聚合">3.3.1. 沿着某个axis聚合</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],</span><br><span class="line">    [<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line">&gt; t.sum(dim=<span class="number">0</span>)</span><br><span class="line">tensor([<span class="number">6.</span>, <span class="number">6.</span>, <span class="number">6.</span>, <span class="number">6.</span>])</span><br></pre></td></tr></table></figure>
-<h3><span id="332-argmax函数介绍">3.3.2. Argmax函数介绍</span></h3><p>当一个Tensor变量a调用<code>argmax()</code>函数时，返回只包含1个元素的Tensor，该元素表示a中最大值的下标。</p>
+<h3><span id="341-沿着某个axis聚合">3.4.1. 沿着某个axis聚合</span></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],</span><br><span class="line">    [<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line">&gt; t.sum(dim=<span class="number">0</span>)</span><br><span class="line">tensor([<span class="number">6.</span>, <span class="number">6.</span>, <span class="number">6.</span>, <span class="number">6.</span>])</span><br></pre></td></tr></table></figure>
+<h3><span id="342-argmax函数介绍">3.4.2. Argmax函数介绍</span></h3><p>当一个Tensor变量a调用<code>argmax()</code>函数时，返回只包含1个元素的Tensor，该元素表示a中最大值的下标。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>],</span><br><span class="line">    [<span class="number">0</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">0</span>],</span><br><span class="line">    [<span class="number">4</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">5</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line"></span><br><span class="line">&gt; t.max()</span><br><span class="line">tensor(<span class="number">5.</span>)</span><br><span class="line"></span><br><span class="line">&gt; t.argmax()</span><br><span class="line">tensor(<span class="number">11</span>)</span><br><span class="line"></span><br><span class="line">&gt; t.flatten()</span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">2.</span>, <span class="number">0.</span>, <span class="number">3.</span>, <span class="number">3.</span>, <span class="number">0.</span>, <span class="number">4.</span>, <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">5.</span>])</span><br></pre></td></tr></table></figure>
 <p>如果<code>argmax()</code>没有指定axis，则返回整个Tensor最大值的下标。如果指定axis，则返回指定轴上最大值下标。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; t.max(dim=<span class="number">0</span>)</span><br><span class="line">(tensor([<span class="number">4.</span>, <span class="number">3.</span>, <span class="number">3.</span>, <span class="number">5.</span>]), tensor([<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>]))</span><br><span class="line"></span><br><span class="line">&gt; t.argmax(dim=<span class="number">0</span>)</span><br><span class="line">tensor([<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">&gt; t.max(dim=<span class="number">1</span>)</span><br><span class="line">(tensor([<span class="number">2.</span>, <span class="number">3.</span>, <span class="number">5.</span>]), tensor([<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>]))</span><br><span class="line"></span><br><span class="line">&gt; t.argmax(dim=<span class="number">1</span>)</span><br><span class="line">tensor([<span class="number">3</span>, <span class="number">1</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
 <p>当调用<code>max()</code>函数时，返回2个Tensor，第一个Tensor表示返回轴上最大的值，第2个Tensor返回最大值的下标，也就是<code>argmax()</code>的返回值。<br>通常<code>argmax()</code>通常用在分类任务的输出上，决定哪类有最高的预测值。</p>
-<h2><span id="34-access操作">3.4. Access操作</span></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">    [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],</span><br><span class="line">    [<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line"></span><br><span class="line">&gt; t.mean()</span><br><span class="line">tensor(<span class="number">5.</span>)</span><br><span class="line"></span><br><span class="line">&gt; t.mean().item()</span><br><span class="line"><span class="number">5.0</span></span><br><span class="line"></span><br><span class="line">&gt; t.mean(dim=<span class="number">0</span>).tolist()</span><br><span class="line">[<span class="number">4.0</span>, <span class="number">5.0</span>, <span class="number">6.0</span>]</span><br><span class="line"></span><br><span class="line">&gt; t.mean(dim=<span class="number">0</span>).numpy()</span><br><span class="line">array([<span class="number">4.</span>, <span class="number">5.</span>, <span class="number">6.</span>], dtype=float32)</span><br></pre></td></tr></table></figure>
+<h2><span id="35-access操作">3.5. Access操作</span></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt; t = torch.tensor([</span><br><span class="line">    [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">    [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],</span><br><span class="line">    [<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br><span class="line">], dtype=torch.float32)</span><br><span class="line"></span><br><span class="line">&gt; t.mean()</span><br><span class="line">tensor(<span class="number">5.</span>)</span><br><span class="line"></span><br><span class="line">&gt; t.mean().item()</span><br><span class="line"><span class="number">5.0</span></span><br><span class="line"></span><br><span class="line">&gt; t.mean(dim=<span class="number">0</span>).tolist()</span><br><span class="line">[<span class="number">4.0</span>, <span class="number">5.0</span>, <span class="number">6.0</span>]</span><br><span class="line"></span><br><span class="line">&gt; t.mean(dim=<span class="number">0</span>).numpy()</span><br><span class="line">array([<span class="number">4.</span>, <span class="number">5.</span>, <span class="number">6.</span>], dtype=float32)</span><br></pre></td></tr></table></figure>
 <p>如果返回的结果是scalar，只有1个元素，使用item()来获取其中的值。<br>如果返回的结果有多个值，可以将Tensor转换为pyhton中的list和array.</p>
+<h1><span id="4-tensor的4种乘法">4. Tensor的4种乘法</span></h1><p><a href="https://blog.csdn.net/da_kao_la/article/details/87484403" target="_blank" rel="noopener">参考资料</a></p>
+<p>torch.Tensor有4种常见的乘法：<code>*, torch.mul, torch.mm, torch.matmul</code></p>
+<h2><span id="41-点乘">4.1. 点乘 *</span></h2><p>点乘需要满足以下3个条件的任何一个</p>
+<ul>
+<li>2个Tensor维度完全一样</li>
+<li>2个Tensor可以boardcast到相同的维度</li>
+<li>1个Tensor和1个实数的操作</li>
+</ul>
+<p>例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = torch.ones(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">a * <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = torch.ones(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">b = torch.Tensor([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line"><span class="comment">#a的维度(3,4)，b的维度(4,)，可以将b进行boardcast成(3,4)的维度，再和a相乘</span></span><br><span class="line">a * b</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = torch.ones(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">b = torch.ones(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">a * b</span><br></pre></td></tr></table></figure>
+<h2><span id="42-torchmul">4.2. torch.mul</span></h2><p><a href="https://pytorch.org/docs/stable/generated/torch.mul.html#torch.mul" target="_blank" rel="noopener">官网关于torch.mul介绍</a></p>
+<p>用法和*相同，也是element-wise的乘法，支持boardcast</p>
+<ol>
+<li><p>乘实数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.randn(<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([ <span class="number">0.2015</span>, <span class="number">-0.4255</span>,  <span class="number">2.6087</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.mul(a, <span class="number">100</span>)</span><br><span class="line">tensor([  <span class="number">20.1494</span>,  <span class="number">-42.5491</span>,  <span class="number">260.8663</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>乘矩阵</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.randn(<span class="number">4</span>, <span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([[ <span class="number">1.1207</span>],</span><br><span class="line">     [<span class="number">-0.3137</span>],</span><br><span class="line">     [ <span class="number">0.0700</span>],</span><br><span class="line">     [ <span class="number">0.8378</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = torch.randn(<span class="number">1</span>, <span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">tensor([[ <span class="number">0.5146</span>,  <span class="number">0.1216</span>, <span class="number">-0.5244</span>,  <span class="number">2.2382</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.mul(a, b)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2><span id="43-torchmm">4.3. torch.mm</span></h2><p><a href="https://pytorch.org/docs/stable/generated/torch.mm.html#torch.mm" target="_blank" rel="noopener">官网关于torch.mm介绍</a></p>
+<p>数学中的矩阵乘法，要求2个矩阵满足矩阵乘法的要求</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.ones(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = torch.ones(<span class="number">4</span>,<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>torch.mm(a, b)</span><br><span class="line">tensor([[<span class="number">4.</span>, <span class="number">4.</span>],</span><br><span class="line">        [<span class="number">4.</span>, <span class="number">4.</span>],</span><br><span class="line">        [<span class="number">4.</span>, <span class="number">4.</span>]])</span><br></pre></td></tr></table></figure>
+<h2><span id="torchmatmul">torch.matmul</span></h2><p><a href="https://pytorch.org/docs/stable/generated/torch.matmul.html#torch.matmul" target="_blank" rel="noopener">官网关于torch.matmul介绍</a>. torch.mm的broadcast版本</p>
+<ol>
+<li><p>当输入都是二维Tensor时，就是普通的矩阵乘法，与<code>tensor.mm</code>用法相同</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.ones(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = torch.ones(<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = torch.matmul(a,b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.shape</span><br><span class="line">torch.Size([<span class="number">3</span>, <span class="number">5</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当输入有多维时，把多出来的一维看做是batch，其他部分做矩阵乘法</p>
+<p><img src="/2020/11/26/Pytorch之Tensor学习/matmul1.jpg" alt=""></p>
+</li>
+<li><p>2个Tensor都是3维<br>将b的第0维先boardcast成2之后，然后提出来作为batch，后两维做矩阵乘法即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.ones(<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = torch.ones(<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = torch.matmul(a,b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">5</span>, <span class="number">4</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更复杂</p>
+<ul>
+<li>先将a的第0维的2提出来作为batch</li>
+<li>剩下的a和b都可以看做3维，再将a中1进行boardcast成5，再提出来作为batch</li>
+<li>剩下的(3,4)和(4,2)进行普通矩阵乘法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.ones(<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = torch.ones(<span class="number">5</span>,<span class="number">4</span>,<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = torch.matmul(a,b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>])</span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>
@@ -617,8 +683,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/30/Spark/" rel="next" title="Spark">
-                <i class="fa fa-chevron-left"></i> Spark
+              <a href="/2020/10/29/广告领域专业术语/" rel="next" title="广告领域专业术语">
+                <i class="fa fa-chevron-left"></i> 广告领域专业术语
               </a>
             
           </div>
@@ -626,10 +692,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/02/18/AAAI2020时空论文列表/" rel="prev" title="AAAI2020时空论文列表">
-                AAAI2020时空论文列表 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -775,7 +837,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 创建Tensor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. Tensor的4类操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. Reshape操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.1. reshape</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.2. squeeze和unsqueeze函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.3. cat函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.4. stack函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.5. cat和stack的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. Element-wise操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. Reduction操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.3.1. 沿着某个axis聚合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.3.2. Argmax函数介绍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.4. Access操作</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">2. 创建Tensor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">3. Tensor的4类操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.1. Reshape操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.1. reshape</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.2. squeeze和unsqueeze函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.3. cat函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.4. stack函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.5. cat和stack的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.2. rank和shape</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.3. Element-wise操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.4. Reduction操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.4.1. 沿着某个axis聚合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.4.2. Argmax函数介绍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.5. Access操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-text">4. Tensor的4种乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.1. 点乘 *</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.2. torch.mul</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.3. torch.mm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">torch.matmul</span></a></li></ol></li></ol></div>
             
 
           </div>

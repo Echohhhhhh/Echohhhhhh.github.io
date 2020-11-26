@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2019/06/12/Docker/</loc>
+    <loc>http://yoursite.com/2020/11/26/Pytorch%E4%B9%8BTensor%E5%AD%A6%E4%B9%A0/</loc>
     
-    <lastmod>2020-11-06T11:59:44.213Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2020/02/17/Pytorch%E4%B9%8BTensor%E5%AD%A6%E4%B9%A0/</loc>
-    
-    <lastmod>2020-11-06T02:05:25.294Z</lastmod>
+    <lastmod>2020-11-26T13:08:01.863Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2020/02/18/RiskOracle-A-Minute-level-Citywide-Traffic-Accident-Forecasting-Framework/</loc>
     
-    <lastmod>2020-11-02T08:46:39.089Z</lastmod>
+    <lastmod>2020-11-24T12:40:16.562Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/06/12/Docker/</loc>
+    
+    <lastmod>2020-11-11T09:55:05.290Z</lastmod>
     
   </url>
   
